@@ -1,0 +1,51 @@
+ORIG:
+    Agent Train1:
+    LOCAL: [Train1_in, Train1_out, Train1_return]
+    init: wait
+    shared[2] in_Train1: wait -> tunnel [Train1_in:=1]
+    shared[2] out_Train1: tunnel -> away [Train1_out:=1]
+    return: away -> wait [Train1_return:=1]
+
+    Agent Train2:
+    LOCAL: [Train2_in, Train2_out, Train2_return]
+    init: wait
+    shared[2] in_Train2: wait -> tunnel [Train2_in:=1]
+    shared[2] out_Train2: tunnel -> away [Train2_out:=1]
+    return: away -> wait [Train2_return:=1]
+
+    Agent Controller:
+    LOCAL: []
+    init: green
+    shared[2] in_Train1: green -> red
+    shared[2] out_Train1: red -> green
+    shared[2] in_Train2: green -> red
+    shared[2] out_Train2: red -> green
+
+    FORMULA: <<Train1>>F(Train1_return=1)
+
+FOR TESTING:
+    Agent Train1:
+    INITIAL: [Train1_pos := 1]
+    LOCAL: [Train1_pos]
+    init: idle
+    shared[2] in_Train1: idle -> idle [Train1_pos:=2]
+    shared[2] out_Train1: idle -> idle [Train1_pos:=3]
+    return: idle -> idle [Train1_pos:=1]
+
+    Agent Train2:
+    INITIAL: [Train2_pos := 1]
+    LOCAL: [Train2_pos]
+    init: idle
+    shared[2] in_Train2: idle -> idle [Train2_pos:=2]
+    shared[2] out_Train2: idle -> idle [Train2_pos:=3]
+    return: idle -> idle [Train1_pos:=1]
+
+    Agent Controller:
+    LOCAL: []
+    init: green
+    shared[2] in_Train1: green -> red
+    shared[2] out_Train1: red -> green
+    shared[2] in_Train2: green -> red
+    shared[2] out_Train2: red -> green
+
+    FORMULA: <<Train1>>F(Train1_pos=3)
