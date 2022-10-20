@@ -49,26 +49,6 @@ int main() {
         auto tp = new TestParser();
         auto localModels = tp->parse(f);
         agentName = "Coercer1";
-    #elif MODEL_ID == 101
-        string f = "../src/examples/tests/1.txt";
-        auto tp = new TestParser();
-        auto localModels = tp->parse(f);
-        agentName = "Voter1";
-    #elif MODEL_ID == 102
-        string f = "../src/examples/tests/2.txt";
-        auto tp = new TestParser();
-        auto localModels = tp->parse(f);
-        agentName = "Agt";
-    #elif MODEL_ID == 103
-        string f = "../src/examples/tests/3.txt";
-        auto tp = new TestParser();
-        auto localModels = tp->parse(f);
-        agentName = "Agt1";
-    #elif MODEL_ID == 104
-        string f = "../src/examples/tests/4.txt";
-        auto tp = new TestParser();
-        auto localModels = tp->parse(f);
-        agentName = "Agt1";
     #endif
     #if OUTPUT_LOCAL_MODELS
         printf("%s\n", localModelsToString(localModels).c_str());
