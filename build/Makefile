@@ -1,10 +1,10 @@
 CC = g++ --std=c++11
 CFLAGS = -Wall -g
 	
-main: main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Verification.o parser.o scanner.o expressions.o nodes.o
-	$(CC) $(CFLAGS) -lfl -o selene main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Verification.o parser.o scanner.o expressions.o nodes.o
+main: main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
+	$(CC) $(CFLAGS) -lfl -o selene main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Verification.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp
 	$(CC) $(CFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
@@ -18,6 +18,9 @@ TestParser.o: ../src/TestParser.hpp ../src/TestParser.cc
 
 Types.o: ../src/Types.hpp ../src/Types.cc
 	$(CC) $(CFLAGS) -c ../src/Types.cc
+
+Utils.o: ../src/Utils.hpp ../src/Utils.cpp
+	$(CC) $(CFLAGS) -c ../src/Utils.cpp
 
 Verification.o: ../src/Verification.hpp ../src/Verification.cpp
 	$(CC) $(CFLAGS) -c ../src/Verification.cpp

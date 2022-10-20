@@ -11,26 +11,56 @@
 using namespace std;
 
 
-
-
-
 class Agent;
+class LocalState;
 
-struct Var {
-    string name;
-    int currentValue;
-    bool persistent;
-    int initialValue;
-    
-    // Bindings
-    Agent *agent;
-};
+struct Condition;
+struct EpistemicClass;
+struct Formula;
+struct GlobalModel;
+struct GlobalState;
+struct GlobalTransition;
+struct LocalTransition;
+struct LocalModels;
+struct Var;
+struct VarAssignment;
 
 enum ConditionOperator {
     Equals,
     NotEquals,
 };
 
+enum GlobalStateVerificationStatus {
+    UNVERIFIED,
+    PENDING,
+    VERIFIED_OK,
+    VERIFIED_ERR,
+};
+
+enum VarAssignmentType {
+    FromVar,
+    FromValue,
+};
+
+/// @brief Represents variable in the model
+struct Var {
+    /// @brief Variable name
+    string name;
+
+    /// @brief Initial value of the variable
+    int initialValue;
+
+    /// @brief Variable current value
+    int currentValue;
+
+    /// @brief True if variable is persistent, i.e. it should appear in all states in the model, false otherwise
+    bool persistent;
+
+    /// @brief Reference to an agent, to which this variable belongs to
+    Agent *agent;
+};
+
+/// @brief Represents condition
 struct Condition {
     Var* var;
     ConditionOperator conditionOperator;
@@ -40,13 +70,6 @@ struct Condition {
 struct Formula {
     set<Agent*> coalition;
 };
-
-
-
-
-
-class LocalState;
-struct LocalTransition;
 
 class Agent {
     public:
@@ -80,11 +103,6 @@ class LocalState {
         set<LocalTransition*> localTransitions;
 };
 
-enum VarAssignmentType {
-    FromVar,
-    FromValue,
-};
-
 // to jest zbędne
 struct VarAssignment {
     Var* dstVar;
@@ -115,14 +133,6 @@ struct LocalModels {
     map<string, Var*> vars; // vars[str].name == str
 };
 
-
-
-
-
-struct GlobalState;
-struct GlobalTransition;
-struct EpistemicClass;
-
 struct GlobalModel {
     // Data
     vector<Agent*> agents; // agents[i].id == i
@@ -133,13 +143,6 @@ struct GlobalModel {
     vector<GlobalState*> globalStates; // globalStates[i].id == i
     vector<GlobalTransition*> globalTransitions; // globalTransitions[i].id == i
     map<Agent*, map<string, EpistemicClass*>> epistemicClasses; // Agent* => (EpistemicClass->hash => EpistemicClass*)
-};
-
-enum GlobalStateVerificationStatus {
-    UNVERIFIED,
-    PENDING,
-    VERIFIED_OK,
-    VERIFIED_ERR,
 };
 
 struct GlobalState {

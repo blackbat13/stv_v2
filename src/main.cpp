@@ -1,28 +1,12 @@
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
-#include "examples/trains/Trains.cpp"
 #include "TestParser.hpp"
+#include "Utils.hpp"
 #include <iostream>
 #include <fstream>
-#include <unistd.h>
-#include <sys/time.h>
 #include <string>
 
 using namespace std;
-
-inline unsigned long getMemCap() {
-   int pid=getpid();
-
-   std::string fname="/proc/"+std::to_string(pid)+"/statm";
-   std::ifstream status(fname);
-   unsigned long s, r, sh, txt, lib, dat, dt;
-   status >> s >> r >> sh >> txt >> lib >> dat >> dt;
-   status.close();
-
-   return 4*dat;
-}
-
-void outputGlobalModel(GlobalModel* globalModel);
 
 int main() {
 
@@ -32,10 +16,7 @@ int main() {
     
     string agentName = "";
     // Model
-    #if MODEL_ID == 0
-        auto localModels = createTrains();
-        agentName = "Train1";
-    #elif MODEL_ID == 1
+    #if MODEL_ID == 1
         string f = "../src/examples/trains/Trains.txt";
         auto tp = new TestParser();
         auto localModels = tp->parse(f);
@@ -102,68 +83,4 @@ int main() {
     return 0;
 }
 
-void outputGlobalModel(GlobalModel* globalModel) {
-    printf("\n\nGlobal model:\n");
-    for (const auto globalState : globalModel->globalStates) {
-        printf(
-            "%sGlobalState: id=%i; hash=\"%s\"\n",
-            globalModel->initState == globalState ? "(initial) " : "",
-            globalState->id,
-            globalState->hash.c_str()
-        );
-        for (const auto localState : globalState->localStates) {
-            printf("    LocalState %i.%i (%s.%s)", localState->agent->id, localState->id, localState->agent->name.c_str(), localState->name.c_str());
-            for (const auto var : localState->vars) {
-                printf(" [%s=%i]", var.first->name.c_str(), var.second);
-            }
-            #if MODEL_ID != 0
-            for (const auto var : localState->environment) {
-                printf("\n");
-                printf("        Var %s = %i", var.first.c_str(), var.second);
-            }
-            #endif
-            printf("\n");
-        }
-        #if MODEL_ID == 0
-        for (const auto var : globalState->vars) {
-            printf("    Var %s = %i\n", var.first->name.c_str(), var.second);
-        }
-        #endif
-        for (const auto globalTransition : globalState->globalTransitions) {
-            printf("    GlobalTransition id=%i to GlobalState %i\n", globalTransition->id, globalTransition->to->id);
-            for (const auto localTransition : globalTransition->localTransitions) {
-                printf(
-                    "        LocalTransition %i (globalName=%s, localName=%s) of Agent %i (%s);",
-                    localTransition->id,
-                    localTransition->name.c_str(),
-                    localTransition->localName.c_str(),
-                    localTransition->agent->id,
-                    localTransition->agent->name.c_str()
-                );
-                if (localTransition->isShared) {
-                    printf(" #shared=%i;", localTransition->sharedCount);
-                }
-                else {
-                    printf(" not shared;");
-                }
-                for (const auto condition : localTransition->conditions) {
-                    printf(" <if %s%s%i>", condition->var->name.c_str(), condition->conditionOperator == ConditionOperator::Equals ? "==" : "!=", condition->comparedValue);
-                }
-                for (const auto varAssignment : localTransition->varAsssignments) {
-                    printf(" [set %s=%s]", varAssignment->dstVar->name.c_str(), varAssignment->type == VarAssignmentType::FromValue ? to_string(varAssignment->value).c_str() : varAssignment->srcVar->name.c_str());
-                }
-                printf("\n");
-            }
-        }
-    }
-    for (const auto epiClsAgtPair : globalModel->epistemicClasses) {
-        printf("Epistemic classes of Agent %i (%s):\n", epiClsAgtPair.first->id, epiClsAgtPair.first->name.c_str());
-        for (const auto epiClsPair : epiClsAgtPair.second) {
-            auto epiCls = epiClsPair.second;
-            printf("    EpistemicClass: hash=\"%s\"\n", epiCls->hash.c_str());
-            for (const auto member : epiCls->globalStates) {
-                printf("        GlobalState: id=%i; hash=\"%s\"\n", member.second->id, member.second->hash.c_str());
-            }
-        }
-    }
-}
+
