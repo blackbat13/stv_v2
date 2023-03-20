@@ -53,6 +53,7 @@ public:
     HistoryEntry* cloneEntry(HistoryEntry* entry);
 };
 
+// On-the-fly traversal mode
 enum Mode {
     NORMAL,
     REVERT,

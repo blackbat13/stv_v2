@@ -124,7 +124,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
         for (const auto localState : globalState->localStates) {
             printf("    LocalState %i.%i (%s.%s)", localState->agent->id, localState->id, localState->agent->name.c_str(), localState->name.c_str());
             for (const auto var : localState->vars) {
-                printf(" [%s=%i]", var.first->name.c_str(), var.second);
+                printf(" [%s=%i]", var.first->name.c_str(), var.second); // [YK]: what is the use of second (e.g., over Var class `currentValue` member)?
             }
             #if MODEL_ID != 0
             for (const auto var : localState->environment) {

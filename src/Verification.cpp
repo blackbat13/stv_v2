@@ -129,33 +129,6 @@ bool Verification::verifyLocalStates(set<LocalState*>* localStates) {
         bool result = ((Voter1_vote != 2) || (Coercer1_npun1 == 0)) && ((Voter1_vote != 2) || (Coercer1_pun1 == 0));
 	return result;
     #endif
-    #if MODEL_ID == 101
-        auto localState = this->seleneFormula->getLocalStateForAgent("Coercer1", localStates);
-        if (localState == nullptr) {
-            return false;
-        }
-        int Coercer1_pun1 = this->seleneFormula->getLocalStateVar("Coercer1_pun1", localState);
-        bool result = (Coercer1_pun1 != 1);
-        return result;
-    #endif
-    #if MODEL_ID == 102
-        auto localState = this->seleneFormula->getLocalStateForAgent("Agt", localStates);
-        if (localState == nullptr) {
-            return false;
-        }
-        int Agt1_var1 = this->seleneFormula->getLocalStateVar("Agt_fail", localState);
-        bool result = (Agt1_var1 != 1);
-        return result;
-    #endif
-    #if MODEL_ID == 103 || MODEL_ID == 104
-        auto localState = this->seleneFormula->getLocalStateForAgent("Agt2", localStates);
-        if (localState == nullptr) {
-            return false;
-        }
-        int Agt1_var1 = this->seleneFormula->getLocalStateVar("Agt2_fail", localState);
-        bool result = (Agt1_var1 != 1);
-        return result;
-    #endif
     // <<Train1>>G(Train1_pos=3)
     // OR:
     // <<Train1>>G(Train1_pos=1 || Train1_pos=2 || Train1_pos=3)
