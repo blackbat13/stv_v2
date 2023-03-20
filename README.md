@@ -4,7 +4,7 @@ To run:
 cd build
 make clean
 make
-./selene
+./stv
 ```
 
 Configuration file:

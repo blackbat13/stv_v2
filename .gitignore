@@ -34,6 +34,7 @@
 *.out
 *.app
 build/selene
+build/stv
 
 # Flex/bison
 src/reader/parser.c

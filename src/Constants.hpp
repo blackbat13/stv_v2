@@ -10,6 +10,6 @@
 // 1 = src/examples/trains/Trains.txt
 // 2 = src/examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt
 // 3 = src/examples/svote/Simple_voting.txt
-#define MODEL_ID 3
+#define MODEL_ID 2
 
-#endif // SELENE_CONSTANTS
+#endif // STV_CONSTANTS

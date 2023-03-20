@@ -2,7 +2,7 @@ CC = g++ --std=c++11
 CFLAGS = -Wall -g
 	
 main: main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
-	$(CC) $(CFLAGS) -lfl -o selene main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
+	$(CC) $(CFLAGS) -lfl -o stv main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
  
 main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp
 	$(CC) $(CFLAGS) -c ../src/main.cpp
@@ -44,4 +44,4 @@ nodes.o: ../src/reader/nodes.cc
 	flex -I -o ../src/reader/scanner.c ../src/reader/scanner.l
 
 clean:
-	rm -f *.o selene ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c
+	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c
