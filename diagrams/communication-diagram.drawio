@@ -1,0 +1,350 @@
+<mxfile host="65bd71144e">
+    <diagram id="XUpA2YcrQeTTfyWJnvEh" name="Page-1">
+        <mxGraphModel dx="1056" dy="1440" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="135" value="Verify" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="810" y="310" width="1620" height="920" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="Expand All States" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="-30" y="830" width="820" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="91" value="Initialize Model" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="-30" y="460" width="820" height="350" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" value="Parse File" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="-30" y="310" width="680" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="-10" y="350" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value=":TestParser" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="220" y="350" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="83" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="14" target="82">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="14" target="86">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="230" y="750"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="14" value=":GlobalModelGenerator" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="640" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeColor=default;endArrow=none;endFill=0;" edge="1" parent="1" source="13" target="37">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="500" y="390" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="35" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="2" target="13">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="80" y="390" as="sourcePoint"/>
+                        <mxPoint x="200" y="389.5" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="36" value="1: parse()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="35">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="37" value=":LocalModels" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="490" y="350" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="46" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="360" as="sourcePoint"/>
+                        <mxPoint x="480" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="47" value="1.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="46">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="72" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="-10" y="640" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="75" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="72" target="14">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="70" y="600" as="sourcePoint"/>
+                        <mxPoint x="260" y="600" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="76" value="1: initModel()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="75">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="79" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="14" target="14">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="270" y="620"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="80" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="141.25" y="610" as="sourcePoint"/>
+                        <mxPoint x="358.75" y="610" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="81" value="1.2: generateInitState()&lt;br&gt;1.2.1: generateStateFromLocalStates()&lt;br&gt;1.2.1.1 [VERBOSE]: computeGlobalStateHash()&lt;br&gt;1.2.1.2: findOrCreateEpistemicClass()&lt;br&gt;1.2.1.2.1: computeEpistemicClassHash()&lt;br&gt;1.2.1.3: findGlobalStateInEpistemicClass()&lt;br&gt;1.2.1.3.1: computeGlobalStateHash()&lt;br&gt;1.2.1.4: computeGlobalStateHash()&lt;br&gt;1.2.1.5 [at least 1 state and transition]: checkLocalTransitionConditions()&lt;br&gt;1.2.1.6 [at least 1 transition]: generateGlobalTransitions()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="80">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-70" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="82" value=":GlobalModel" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="450" y="640" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="84" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="330" y="650" as="sourcePoint"/>
+                        <mxPoint x="440" y="650" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="85" value="1.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="84">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="86" value=":EpistemicClass" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="720" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370" y="730" as="sourcePoint"/>
+                        <mxPoint x="480" y="730" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="90" value="1.2.1.2.2 [epistemic class hash is the same as the last one in set]: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="89">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="92" value=":GlobalModelGenerator" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="181.25" y="1020" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="-8.75" y="1020" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="94" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="93" target="92">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="71.25" y="980" as="sourcePoint"/>
+                        <mxPoint x="261.25" y="980" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="95" value="1: expandAllStates()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="94">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="96" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="92" target="92">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="231.25" y="1010" as="sourcePoint"/>
+                        <mxPoint x="271.25" y="1010" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="231.25" y="1000"/>
+                            <mxPoint x="271.25" y="1000"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="97" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="142.5" y="990" as="sourcePoint"/>
+                        <mxPoint x="360" y="990" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="98" value="1.1 [there are states to expand]: expandState()&lt;br&gt;1.1.1 [there are global transitions leading somewhere]: generateStateFromLocalStates()&lt;br&gt;1.1.1.1 [VERBOSE]: computeGlobalStateHash()&lt;br&gt;1.1.1.2: findOrCreateEpistemicClass()&lt;br&gt;1.1.1.2.1: computeEpistemicClassHash()&lt;br&gt;1.1.1.3: findGlobalStateInEpistemicClass()&lt;br&gt;1.1.1.3.1: computeGlobalStateHash()&lt;br&gt;1.1.1.4: computeGlobalStateHash()&lt;br&gt;1.1.1.5 [at least 1 state and transition]: checkLocalTransitionConditions()&lt;br&gt;1.1.1.6 [at least 1 transition]: generateGlobalTransitions()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="97">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-70" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="101" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" target="102" source="92">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="229.99999999999977" y="1050" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="230" y="1130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="102" value=":EpistemicClass" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="630" y="1100" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="370.0000000000002" y="1110" as="sourcePoint"/>
+                        <mxPoint x="480.0000000000002" y="1110" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="104" value="1.1.1.2.2 [epistemic class hash is the same as the last one in set]: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="103">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="129" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="106" target="128">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1360" y="1125"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="143" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="106" target="142">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1340" y="1190"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="106" value=":Verification" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="1290" y="895" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="1100" y="895" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="108" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="107" target="106">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1180" y="835" as="sourcePoint"/>
+                        <mxPoint x="1370" y="835" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="109" value="1: verify()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="108">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="110" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="106" target="106">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1340" y="865" as="sourcePoint"/>
+                        <mxPoint x="1380" y="865" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1340" y="870"/>
+                            <mxPoint x="1380" y="870"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="111" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1251.25" y="860" as="sourcePoint"/>
+                        <mxPoint x="1468.75" y="860" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="112" value="1.2: verifyGlobalState()&lt;br&gt;1.2.1 [historyEnd is a STATE_STATUS, it is the same as globalState, prevStatus is PENDING and newStatus is UNVERIFIED]: undoLastHistoryEntry()&lt;br&gt;1.2.1.1 [type of historyEnd is DECISION]: getEpistemicClassForGlobalState()&lt;br&gt;1.2.2 [1.2.1, but negated]: addHistoryStateStatus()&lt;br&gt;1.2.4: verifyLocalStates()&lt;br&gt;1.2.5: getEpistemicClassForGlobalState()&lt;br&gt;1.2.6 [there are global transitions]: isGlobalTransitionControlledByCoalition()&lt;br&gt;1.2.6.1 [there are local transitions]: isAgentInCoalition()&lt;br&gt;1.2.7 [fixedGlobalTransition is not nullptr]: areGlobalStatesInTheSameEpistemicClass()&lt;br&gt;1.2.7.1: getEpistemicClassForGlobalState()&lt;br&gt;1.2.7.2: getEpistemicClassForGlobalState()&lt;br&gt;1.2.8 [there are global transitions, mode is RESTORE and entry is of the type MARKDECISION_AS_INVALID]: addHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.8.1: newHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.9 [there is history to restore and history on top is the type of MARK_DECISION_AS_INVALID]: addHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.9.1: newHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.10 [there is an epistemicClass and fixedGlobalTransition is nullptr]: addHistoryDecision()&lt;br&gt;1.2.11: addHistoryContext()&lt;br&gt;1.2.12: recursion to 1.2&lt;br&gt;1.2.13 [there is an epistemicClass, fixedGlobalTransition is nullptr and there is no hasValidControlledTransition]: undoHistoryUntil()&lt;br&gt;1.2.13.1 [historyEnd is different than historyStart and historyEnd is different than historyEntry]: undoLastHistoryEntry()&lt;br&gt;1.2.13.1.1 [type of historyEnd is DECISION]: getEpistemicClassForGlobalState()&lt;br&gt;1.2.13.2 [if inclusive and historyEnd is historyEntry]: undoLastHistoryEntry()&lt;br&gt;1.2.13.2.1 [type of historyEnd is DECISION]: getEpistemicClassForGlobalState()&lt;br&gt;1.2.14 [there is no valid controlled transition]: addHistoryStateStatus()&lt;br&gt;1.2.15 [there is no valid controlled transition]: revertLastDecision()&lt;br&gt;1.2.15.1 [historyEnd is not historyStart and type of historyEnd is DECISION]: undoLastHistoryEntry()&lt;br&gt;1.2.15.1.1 [type of historyEnd is DECISION]: getEpistemicClassForGlobalState()&lt;br&gt;1.2.15.2 [is not marked as an invalid decision yet]:newHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.15.3 [historyEnd is different than historyStart and globalState of historyEnd is not shallowestGlobalState]: undoLastHistoryEntry()&lt;br&gt;1.2.15.3.1 [type of historyEnd is DECISION]: getEpistemicClassForGlobalState()&lt;br&gt;1.2.16: [there is a uncontrolledGlobalTransitions, mode is RESTORE and entry type is MARK_DECISION_AS_INVALID]: addHistoryDecisionMarkAsInvalid()&lt;br&gt;1.2.16.1: newHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.17: [there is a uncontrolledGlobalTransitions, mode is RESTORE, historyToRestore is not empty and type of the top of the history to restore is MARK_DECISION_AS_INVALID]: addHistoryDecisionMarkAsInvalid()&lt;br&gt;1.2.17.1: newHistoryMarkDecisionAsInvalid()&lt;br&gt;1.2.18: addHistoryContext()&lt;br&gt;1.2.19: recursion to 1.2&lt;br&gt;1.2.20 [mode is REVERT and globalState is revertToGlobalState]: addHistoryStateStatus()&lt;br&gt;1.2.21 [mode is REVERT and globalState is revertToGlobalState]: recursion to 1.2&lt;br&gt;1.2.22 [transition is not valid]: addHistoryStateStatus()&lt;br&gt;1.2.23: addHistoryStateStatus()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="111">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-270" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="115" value=":GlobalModelGenerator" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="180" y="1240" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+                    <mxGeometry x="-10" y="1240" width="30" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="116" target="115">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="70" y="1200" as="sourcePoint"/>
+                        <mxPoint x="260" y="1200" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="118" value="1: getCurentGlobalModel()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="117">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-10" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="120" value="Get Current Global Model" style="shape=umlFrame;whiteSpace=wrap;html=1;width=120;height=30;boundedLbl=1;verticalAlign=middle;align=left;spacingLeft=5;" vertex="1" parent="1">
+                    <mxGeometry x="-30" y="1210" width="370" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="123" style="sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" target="124" source="106">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1430" y="925" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="1550" y="925"/>
+                            <mxPoint x="1550" y="975"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="124" value=":GlobalModelGenerator" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="1957.5" y="945" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="125" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1670" y="965" as="sourcePoint"/>
+                        <mxPoint x="1825" y="965.56" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="126" value="1.1: getCurrentGlobalModel()&lt;br&gt;1.2.1.1.1: getFormula()&lt;br&gt;1.2.3 [globalState isn't expanded]: expandState()&lt;br&gt;1.2.5.1: getFormula()&lt;br&gt;1.2.6.1.1: getFormula()&lt;br&gt;1.2.7.1.1: getFormula()&lt;br&gt;1.2.7.2.1: getFormula()&lt;br&gt;1.2.13.1.1.1: getFormula()&lt;br&gt;1.2.13.2.1.1: getFormula()&lt;br&gt;1.2.15.1.1.1: getFormula()&lt;br&gt;1.2.15.3.1.1: getFormula()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="125">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-80" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="128" value=":HistoryEntry" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="1610" y="1095" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="130" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1430" y="1105" as="sourcePoint"/>
+                        <mxPoint x="1540" y="1105" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="131" value="1.2.2.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.8.1.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.9.1.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.10.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.11.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.14.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.15.2.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.16.1.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.17.1.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.18.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.20.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.22.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;&lt;br&gt;1.2.23.1: &amp;lt;&amp;lt;create&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="130">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint y="-90" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="132" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1918.75" y="915" as="sourcePoint"/>
+                        <mxPoint x="2136.25" y="915" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="133" value="1.2.3.1 [there are global transitions leading somewhere]: generateStateFromLocalStates()&lt;br&gt;1.2.3.1.1 [VERBOSE]: computeGlobalStateHash()&lt;br&gt;1.2.3.1.2: findOrCreateEpistemicClass()&lt;br&gt;1.2.3.1.2.1: computeEpistemicClassHash()&lt;br&gt;1.2.3.1.3: findGlobalStateInEpistemicClass()&lt;br&gt;1.2.3.1.3.1: computeGlobalStateHash()&lt;br&gt;1.2.3.1.4: computeGlobalStateHash()&lt;br&gt;1.2.3.1.5 [at least 1 state and transition]: checkLocalTransitionConditions()&lt;br&gt;1.2.3.1.6 [at least 1 transition]: generateGlobalTransitions()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="132">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2" y="-70" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="134" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="124" target="124">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="2047.5" y="925"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="142" value=":SeleneFormula1" style="html=1;align=center;verticalAlign=middle;rounded=0;absoluteArcSize=1;arcSize=10;dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="2240" y="1150" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="144" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1830" y="1170" as="sourcePoint"/>
+                        <mxPoint x="2047.5" y="1170" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="145" value="1.2.4.1 [MODEL_ID is 2]: verifyLocalStates()&lt;br&gt;1.2.4.2 [MODEL_ID is 3]: getLocalStateForAgent()&lt;br&gt;1.2.4.3 [MODEL_ID is 3]: getLocalStateForAgent()&lt;br&gt;1.2.4.4 [MODEL_ID is 3]: getLocalStateVar()&lt;br&gt;1.2.4.5 [MODEL_ID is 3]:&amp;nbsp;getLocalStateVar()&lt;br&gt;1.2.4.6 [MODEL_ID is 3]:&amp;nbsp;getLocalStateVar()&lt;br&gt;1.2.4.7 [MODEL_ID is 3]:&amp;nbsp;getLocalStateVar()&lt;br&gt;1.2.4.8 [MODEL_ID is 101, 102, 103 or 104]: getLocalStateForAgent()&lt;br&gt;1.2.4.9 [MODEL_ID is 101, 102, 103 or 104]: getLocalStateVar()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="144">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2" y="-70" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="146" value="" style="endArrow=classic;html=1;strokeColor=default;sourcePerimeterSpacing=10;targetPerimeterSpacing=10;" edge="1" parent="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="2200" y="1120" as="sourcePoint"/>
+                        <mxPoint x="2417.5" y="1120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="147" value="1.2.4.1.1: getLocalStateForAgent()&lt;br&gt;1.2.4.1.2: getLocalStateVar()&lt;br&gt;1.2.4.1.3: getLocalStateVar()&lt;br&gt;1.2.4.1.4: getLocalStateVar()&lt;br&gt;1.2.4.1.5: getLocalStateVar()&lt;br&gt;1.2.4.1.6: getLocalStateVar()&lt;br&gt;1.2.4.1.7: implication()&lt;br&gt;1.2.4.1.8: implication()&lt;br&gt;1.2.4.1.9: implication()&lt;br&gt;1.2.4.2.1: getLocalStateVar()&lt;br&gt;1.2.4.2.2: getLocalStateVar()&lt;br&gt;1.2.4.2.3: getLocalStateVar()&lt;br&gt;1.2.4.2.4: getLocalStateVar()&lt;br&gt;1.2.4.2.5: getLocalStateVar()&lt;br&gt;1.2.4.2.6: implication()&lt;br&gt;1.2.4.2.7: implication()&lt;br&gt;1.2.4.2.8: implication()&lt;br&gt;1.2.4.3.1: getLocalStateVar()&lt;br&gt;1.2.4.3.2: getLocalStateVar()&lt;br&gt;1.2.4.3.3: getLocalStateVar()&lt;br&gt;1.2.4.3.4: getLocalStateVar()&lt;br&gt;1.2.4.3.5: getLocalStateVar()&lt;br&gt;1.2.4.3.6: implication()&lt;br&gt;1.2.4.3.7: implication()&lt;br&gt;1.2.4.3.8: implication()&lt;br&gt;1.2.4.8.1: getLocalStateVar()&lt;br&gt;1.2.4.8.2: getLocalStateVar()&lt;br&gt;1.2.4.8.3: getLocalStateVar()&lt;br&gt;1.2.4.8.4: getLocalStateVar()&lt;br&gt;1.2.4.8.5: getLocalStateVar()&lt;br&gt;1.2.4.8.6: implication()&lt;br&gt;1.2.4.8.7: implication()&lt;br&gt;1.2.4.8.8: implication()" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=none;" connectable="0" vertex="1" parent="146">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1" y="-220" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="148" style="edgeStyle=orthogonalEdgeStyle;sketch=1;jumpStyle=none;jumpSize=6;html=1;strokeColor=default;endArrow=none;endFill=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1" source="142" target="142">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="2290" y="1130"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
