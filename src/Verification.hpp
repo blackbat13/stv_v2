@@ -6,6 +6,16 @@
 #include "GlobalModelGenerator.hpp"
 #include "SeleneFormula.hpp"
 
+
+struct Cfg{
+    char* fname;
+    char stv_mode;
+    bool output_local_models;
+    bool output_global_model;
+    int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula)
+};
+
+
 string verStatusToStr(GlobalStateVerificationStatus status);
 
 enum HistoryEntryType {

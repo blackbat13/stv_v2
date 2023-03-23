@@ -8,74 +8,78 @@
 
 using namespace std;
 
+Cfg config;
+
 int main(int argc, char* argv[]) {
     unsigned long mem1 = getMemCap();
     struct timeval tb, te;
     gettimeofday(&tb, NULL);
-
-    char* fname;
     
-    char stv_mode;
-    bool output_local_models = false;
-    bool output_global_model = false;
-
     string agentName = "";
 
-    if(argc<2){ // use default const values
-        printf("No arguments were provided - using the default ones.\n");
-        // Model
-        #if MODEL_ID == 1
-            fname = "../src/examples/trains/Trains.txt";
-        #elif MODEL_ID == 2
-            fname = "../src/examples/ssvr/Selene_Select_Vote_Revoting_2v_1cv_3c_3rev_share.txt";
-            agentName = "Coercer1";
-        #elif MODEL_ID == 3
-            fname = "../src/examples/svote/Simple_voting.txt";
-            agentName = "Coercer1";
-        #endif
-
-        #if OUTPUT_LOCAL_MODELS == 1
-            output_local_models = true;
-        #endif        
-
-        #if OUTPUT_GLOBAL_MODEL == 1
-            output_global_model = true;
-        #endif
-
-        #if MODE == 1
-            stv_mode = '1';
-        #endif
-        #if MODE == 2
-            stv_mode = '2';
-        #endif
+    // read default values from config.txt
+    ifstream ifs("config.txt", ifstream::in);
+    if (ifs.is_open() == true) {
+        string line;
+        while(getline(ifs,line)){
+            if(line.empty() || line[0]==';'){
+                continue;
+            }
+            auto delimPos = line.find("=");
+            auto key = line.substr(0,delimPos);
+            auto val = line.substr(delimPos+1);
+            if(key=="MODEL_ID"){
+                config.model_id=val[0]-'0';
+                if(val=="1"){
+                    config.fname = "../src/examples/trains/Trains.txt";
+                }else if(val=="2"){
+                    config.fname = "../src/examples/ssvr/Selene_Select_Vote_Revoting_2v_1cv_3c_3rev_share.txt";
+                    agentName = "Coercer1";
+                }else if(val=="3"){
+                    config.fname = "../src/examples/svote/Simple_voting.txt";
+                    agentName = "Coercer1";
+                }
+            }else if(key=="OUTPUT_LOCAL_MODELS"){
+                config.output_local_models = (val=="1");
+            }else if(key=="OUTPUT_GLOBAL_MODEL"){
+                config.output_global_model = (val=="1");
+            }else if(key=="MODE"){
+                config.stv_mode = val[0];
+            }
+        }
     }else{
+        printf("Could not open the config file...");
+    }
+
+    
+    if(argc>=2){
+        // overwrite the default config values (if provided on the input)
         for(int i=1;i<argc;i++){
             string arg = argv[i];
             if( (arg == "-f") || (arg == "--file")){
                 if(i+1<argc){
-                    fname = argv[++i];
+                    config.fname = argv[++i];
                 }else{
                     printf("ERR: no filename was specified!\n");
                 }
             }else if((arg == "-m") || (arg == "--mode")){
                 if(i+1<argc){
-                    stv_mode = argv[i++][0];
+                    config.stv_mode = argv[i++][0];
                 }else{
                     printf("ERR: no stv_mode was specified!\n");
                 }
             }else if(arg == "-OUTPUT_GLOBAL_MODEL"){
-                output_global_model =1;
+                config.output_global_model =1;
             }else if(arg == "-OUTPUT_LOCAL_MODELS"){
-                output_local_models = 1;
+                config.output_local_models = 1;
             }
         }
-        // printf("filename = %s\n",fname);
     }
 
     auto tp = new TestParser();
-    auto localModels = tp->parse(fname);
+    auto localModels = tp->parse(config.fname);
     
-    if(output_local_models){
+    if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
     }
     
@@ -94,15 +98,15 @@ int main(int argc, char* argv[]) {
     
 
 
-    if(stv_mode=='0'){ 
+    if(config.stv_mode=='0'){ 
         // do nothing
-    }else if(stv_mode=='1'){ // read and generate
+    }else if(config.stv_mode=='1'){ // read and generate
         generator->expandAllStates();
-        if(output_global_model){
+        if(config.output_global_model){
             outputGlobalModel(generator->getCurrentGlobalModel());
         }
-    }else if(stv_mode=='2'){ // read, generate and verify
-        if(output_global_model){
+    }else if(config.stv_mode=='2'){ // read, generate and verify
+        if(config.output_global_model){
             generator->expandAllStates(); // [YK]: why this was put under the printing-option body?
             outputGlobalModel(generator->getCurrentGlobalModel());
         }
