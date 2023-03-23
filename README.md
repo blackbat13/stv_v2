@@ -10,5 +10,5 @@ make
 Configuration file:
 
 ```
-src/Constants.hpp
+build/config.txt
 ```
