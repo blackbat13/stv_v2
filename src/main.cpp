@@ -52,8 +52,8 @@ int main(int argc, char* argv[]) {
     }
 
     
+    // overwrite the default config values (if provided on the input)
     if(argc>=2){
-        // overwrite the default config values (if provided on the input)
         for(int i=1;i<argc;i++){
             string arg = argv[i];
             if( (arg == "-f") || (arg == "--file")){

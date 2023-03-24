@@ -50,9 +50,6 @@ struct Var {
     /// @brief Initial value of the variable
     int initialValue;
 
-    /// @brief Variable current value
-    int currentValue;
-
     /// @brief True if variable is persistent, i.e. it should appear in all states in the model, false otherwise
     bool persistent;
 
@@ -93,7 +90,7 @@ class LocalState {
         string name;
         map<Var*, int> vars;
         // alternatywna wersja - może wystarczy
-        map<string, int> environment;
+        map<string, int> environment; 
      
         // komparator
         bool compare(LocalState *state);

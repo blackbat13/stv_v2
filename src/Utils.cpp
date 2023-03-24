@@ -1,5 +1,7 @@
 #include "Utils.hpp"
 
+extern Cfg config;
+
 string envToString(map<string, int> env) {
     if (env.size() == 0) {
         return "";
@@ -124,21 +126,21 @@ void outputGlobalModel(GlobalModel* globalModel) {
         for (const auto localState : globalState->localStates) {
             printf("    LocalState %i.%i (%s.%s)", localState->agent->id, localState->id, localState->agent->name.c_str(), localState->name.c_str());
             for (const auto var : localState->vars) {
-                printf(" [%s=%i]", var.first->name.c_str(), var.second); // [YK]: what is the use of second (e.g., over Var class `currentValue` member)?
+                printf(" [%s=%i]", var.first->name.c_str(), var.second);
             }
-            #if MODEL_ID != 0
-            for (const auto var : localState->environment) {
-                printf("\n");
-                printf("        Var %s = %i", var.first.c_str(), var.second);
+            if(config.model_id != 0){
+                for (const auto var : localState->environment) {
+                    printf("\n");
+                    printf("        Var %s = %i", var.first.c_str(), var.second);
+                }
             }
-            #endif
             printf("\n");
         }
-        #if MODEL_ID == 0
-        for (const auto var : globalState->vars) {
-            printf("    Var %s = %i\n", var.first->name.c_str(), var.second);
+        if(config.model_id == 0){
+            for (const auto var : globalState->vars) {
+                printf("    Var %s = %i\n", var.first->name.c_str(), var.second);
+            }
         }
-        #endif
         for (const auto globalTransition : globalState->globalTransitions) {
             printf("    GlobalTransition id=%i to GlobalState %i\n", globalTransition->id, globalTransition->to->id);
             for (const auto localTransition : globalTransition->localTransitions) {
