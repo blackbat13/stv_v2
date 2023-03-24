@@ -12,6 +12,14 @@ bool LocalState::compare(LocalState* state) {
    // nie porównujemy identyfikatora bo nie ma sensu
    // porównaj nazwy (w zasadzie template'y
    if(name != state->name) return false;
+
+   // if(environment.size() != state->environment.size() || vars.size()!=state->vars.size()){
+   //    printf("===========================================\n");
+   //    printf("test on env: %d\n",environment.size()-state->environment.size());
+   //    printf("test on var: %d\n",vars.size()-state->vars.size());
+   //    printf("===========================================\n");
+   // }
+
    // porównaj środowiska na rozmiar
    if(environment.size() != state->environment.size()) return false;
    // porównaj wartości zmiennych
