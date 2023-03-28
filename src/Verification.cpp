@@ -496,6 +496,9 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     return true;
 }
 
+/// @brief Checks if any of the LocalTransition in a given GlobalTransition has an Agent in a coalition in the formula.
+/// @param globalTransition Pointer to a GlobalTransition in a model.
+/// @return Returns true if the Agent is in coalition in the formula, otherwise returns false.
 bool Verification::isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition) {
     bool isControlled = false;
     for (const auto localTransition : globalTransition->localTransitions) {

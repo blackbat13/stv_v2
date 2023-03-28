@@ -1218,6 +1218,7 @@ INPUT struct_condition.tex
 INPUT .\struct_condition.tex
 INPUT .\struct_condition.tex
 INPUT struct_condition.tex
+INPUT C:\Programy\MiKTeX\fonts\tfm\adobe\courier\pcrr8t.tfm
 INPUT .\struct_epistemic_class.tex
 INPUT .\struct_epistemic_class.tex
 INPUT .\struct_epistemic_class.tex
@@ -1225,6 +1226,8 @@ INPUT struct_epistemic_class.tex
 INPUT .\struct_epistemic_class.tex
 INPUT .\struct_epistemic_class.tex
 INPUT struct_epistemic_class.tex
+INPUT C:\Programy\MiKTeX\fonts\vf\adobe\courier\pcrr8t.vf
+INPUT C:\Programy\MiKTeX\fonts\tfm\adobe\courier\pcrr8r.tfm
 INPUT .\class_expr_add.tex
 INPUT .\class_expr_add.tex
 INPUT .\class_expr_add.tex

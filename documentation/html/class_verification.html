@@ -100,59 +100,63 @@ $(document).ready(function(){initNavTree('class_verification.html',''); initResi
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad681454da4b70aa12f853e46fd1e1648"><td class="memItemLeft" align="right" valign="top"><a id="ad681454da4b70aa12f853e46fd1e1648" name="ad681454da4b70aa12f853e46fd1e1648"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Verification</b> (<a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a> *generator)</td></tr>
+<tr class="memitem:ad681454da4b70aa12f853e46fd1e1648"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#ad681454da4b70aa12f853e46fd1e1648">Verification</a> (<a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a> *generator)</td></tr>
+<tr class="memdesc:ad681454da4b70aa12f853e46fd1e1648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="class_verification.html">Verification</a>.  <br /></td></tr>
 <tr class="separator:ad681454da4b70aa12f853e46fd1e1648"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bcca3fd98e67e70b3861773221bbe0f"><td class="memItemLeft" align="right" valign="top"><a id="a2bcca3fd98e67e70b3861773221bbe0f" name="a2bcca3fd98e67e70b3861773221bbe0f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>verify</b> ()</td></tr>
+<tr class="memitem:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="memItemLeft" align="right" valign="top"><a id="a39d8f0c78a0a0e006dc38fa05bc1183e" name="a39d8f0c78a0a0e006dc38fa05bc1183e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>~Verification</b> ()</td></tr>
+<tr class="memdesc:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="class_verification.html">Verification</a>. <br /></td></tr>
+<tr class="separator:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bcca3fd98e67e70b3861773221bbe0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a2bcca3fd98e67e70b3861773221bbe0f">verify</a> ()</td></tr>
+<tr class="memdesc:a2bcca3fd98e67e70b3861773221bbe0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the process of formula verification on a model.  <br /></td></tr>
 <tr class="separator:a2bcca3fd98e67e70b3861773221bbe0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6f050f20797887e631159eb430f02e18"><td class="memItemLeft" align="right" valign="top"><a id="a6f050f20797887e631159eb430f02e18" name="a6f050f20797887e631159eb430f02e18"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>verifyLocalStates</b> (set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt; *localStates)</td></tr>
+<tr class="memitem:a6f050f20797887e631159eb430f02e18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a6f050f20797887e631159eb430f02e18">verifyLocalStates</a> (set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt; *localStates)</td></tr>
+<tr class="memdesc:a6f050f20797887e631159eb430f02e18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies a set of <a class="el" href="class_local_state.html">LocalState</a> that a <a class="el" href="struct_global_state.html">GlobalState</a> is composed of with a hardcoded formula.  <br /></td></tr>
 <tr class="separator:a6f050f20797887e631159eb430f02e18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="memItemLeft" align="right" valign="top"><a id="a4c07b0f4ef0c6de86d1a84399adf344d" name="a4c07b0f4ef0c6de86d1a84399adf344d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>verifyGlobalState</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, int depth)</td></tr>
+<tr class="memitem:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a4c07b0f4ef0c6de86d1a84399adf344d">verifyGlobalState</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, int depth)</td></tr>
+<tr class="memdesc:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively verifies <a class="el" href="struct_global_state.html">GlobalState</a>.  <br /></td></tr>
 <tr class="separator:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a500beadd751b6513289f3916cf3f8501"><td class="memItemLeft" align="right" valign="top"><a id="a500beadd751b6513289f3916cf3f8501" name="a500beadd751b6513289f3916cf3f8501"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isGlobalTransitionControlledByCoalition</b> (<a class="el" href="struct_global_transition.html">GlobalTransition</a> *globalTransition)</td></tr>
+<tr class="memitem:a500beadd751b6513289f3916cf3f8501"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a500beadd751b6513289f3916cf3f8501">isGlobalTransitionControlledByCoalition</a> (<a class="el" href="struct_global_transition.html">GlobalTransition</a> *globalTransition)</td></tr>
+<tr class="memdesc:a500beadd751b6513289f3916cf3f8501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any of the <a class="el" href="struct_local_transition.html">LocalTransition</a> in a given <a class="el" href="struct_global_transition.html">GlobalTransition</a> has an <a class="el" href="class_agent.html">Agent</a> in a coalition in the formula.  <br /></td></tr>
 <tr class="separator:a500beadd751b6513289f3916cf3f8501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ccd4e9d525a868217902a15ed93860b"><td class="memItemLeft" align="right" valign="top"><a id="a2ccd4e9d525a868217902a15ed93860b" name="a2ccd4e9d525a868217902a15ed93860b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isAgentInCoalition</b> (<a class="el" href="class_agent.html">Agent</a> *agent)</td></tr>
+<tr class="memitem:a2ccd4e9d525a868217902a15ed93860b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a2ccd4e9d525a868217902a15ed93860b">isAgentInCoalition</a> (<a class="el" href="class_agent.html">Agent</a> *agent)</td></tr>
+<tr class="memdesc:a2ccd4e9d525a868217902a15ed93860b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="class_agent.html">Agent</a> is in a coalition based on the formula in a <a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a>.  <br /></td></tr>
 <tr class="separator:a2ccd4e9d525a868217902a15ed93860b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7259a1ef834cc71f0bf7586f4fb27ba3"><td class="memItemLeft" align="right" valign="top"><a id="a7259a1ef834cc71f0bf7586f4fb27ba3" name="a7259a1ef834cc71f0bf7586f4fb27ba3"></a>
-<a class="el" href="struct_epistemic_class.html">EpistemicClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getEpistemicClassForGlobalState</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState)</td></tr>
+<tr class="memitem:a7259a1ef834cc71f0bf7586f4fb27ba3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_epistemic_class.html">EpistemicClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a7259a1ef834cc71f0bf7586f4fb27ba3">getEpistemicClassForGlobalState</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState)</td></tr>
+<tr class="memdesc:a7259a1ef834cc71f0bf7586f4fb27ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> for the agent in passed <a class="el" href="struct_global_state.html">GlobalState</a>, i.e. transitions from indistinguishable state from certain other states for an agent to other states.  <br /></td></tr>
 <tr class="separator:a7259a1ef834cc71f0bf7586f4fb27ba3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f4e545ca07343a09466ad9c8d214240"><td class="memItemLeft" align="right" valign="top"><a id="a1f4e545ca07343a09466ad9c8d214240" name="a1f4e545ca07343a09466ad9c8d214240"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>areGlobalStatesInTheSameEpistemicClass</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState1, <a class="el" href="struct_global_state.html">GlobalState</a> *globalState2)</td></tr>
+<tr class="memitem:a1f4e545ca07343a09466ad9c8d214240"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a1f4e545ca07343a09466ad9c8d214240">areGlobalStatesInTheSameEpistemicClass</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState1, <a class="el" href="struct_global_state.html">GlobalState</a> *globalState2)</td></tr>
+<tr class="memdesc:a1f4e545ca07343a09466ad9c8d214240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two <a class="el" href="struct_global_state.html">GlobalState</a> and checks if their <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> is the same.  <br /></td></tr>
 <tr class="separator:a1f4e545ca07343a09466ad9c8d214240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affb58285fe7d8b6f18fa6260acd67d6c"><td class="memItemLeft" align="right" valign="top"><a id="affb58285fe7d8b6f18fa6260acd67d6c" name="affb58285fe7d8b6f18fa6260acd67d6c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addHistoryDecision</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *ecision)</td></tr>
+<tr class="memitem:affb58285fe7d8b6f18fa6260acd67d6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#affb58285fe7d8b6f18fa6260acd67d6c">addHistoryDecision</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *ecision)</td></tr>
+<tr class="memdesc:affb58285fe7d8b6f18fa6260acd67d6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type DECISION and puts it on top of the stack of the decision history.  <br /></td></tr>
 <tr class="separator:affb58285fe7d8b6f18fa6260acd67d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4dcd5bfda3f174b6d69a4e34d1a447d2"><td class="memItemLeft" align="right" valign="top"><a id="a4dcd5bfda3f174b6d69a4e34d1a447d2" name="a4dcd5bfda3f174b6d69a4e34d1a447d2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addHistoryStateStatus</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus)</td></tr>
+<tr class="memitem:a4dcd5bfda3f174b6d69a4e34d1a447d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a4dcd5bfda3f174b6d69a4e34d1a447d2">addHistoryStateStatus</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus)</td></tr>
+<tr class="memdesc:a4dcd5bfda3f174b6d69a4e34d1a447d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type STATE_STATUS and puts it to the top of the decision history.  <br /></td></tr>
 <tr class="separator:a4dcd5bfda3f174b6d69a4e34d1a447d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add0805598d4f6e214a7e99355e34765e"><td class="memItemLeft" align="right" valign="top"><a id="add0805598d4f6e214a7e99355e34765e" name="add0805598d4f6e214a7e99355e34765e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addHistoryContext</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, int depth, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *decision, bool globalTransitionControlled)</td></tr>
+<tr class="memitem:add0805598d4f6e214a7e99355e34765e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#add0805598d4f6e214a7e99355e34765e">addHistoryContext</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, int depth, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *decision, bool globalTransitionControlled)</td></tr>
+<tr class="memdesc:add0805598d4f6e214a7e99355e34765e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type CONTEXT and puts it to the top of the decision history.  <br /></td></tr>
 <tr class="separator:add0805598d4f6e214a7e99355e34765e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abf842d8eff285c5076e714e7636b0cb3"><td class="memItemLeft" align="right" valign="top"><a id="abf842d8eff285c5076e714e7636b0cb3" name="abf842d8eff285c5076e714e7636b0cb3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addHistoryMarkDecisionAsInvalid</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *decision)</td></tr>
+<tr class="memitem:abf842d8eff285c5076e714e7636b0cb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#abf842d8eff285c5076e714e7636b0cb3">addHistoryMarkDecisionAsInvalid</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *decision)</td></tr>
+<tr class="memdesc:abf842d8eff285c5076e714e7636b0cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type MARK_DECISION_AS_INVALID and puts it to the top of the decision history.  <br /></td></tr>
 <tr class="separator:abf842d8eff285c5076e714e7636b0cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92b87e0dc375f1d17160492a4cb82ce5"><td class="memItemLeft" align="right" valign="top"><a id="a92b87e0dc375f1d17160492a4cb82ce5" name="a92b87e0dc375f1d17160492a4cb82ce5"></a>
-<a class="el" href="struct_history_entry.html">HistoryEntry</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>newHistoryMarkDecisionAsInvalid</b> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *decision)</td></tr>
+<tr class="memitem:a92b87e0dc375f1d17160492a4cb82ce5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_history_entry.html">HistoryEntry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a92b87e0dc375f1d17160492a4cb82ce5">newHistoryMarkDecisionAsInvalid</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState, <a class="el" href="struct_global_transition.html">GlobalTransition</a> *decision)</td></tr>
+<tr class="memdesc:a92b87e0dc375f1d17160492a4cb82ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type MARK_DECISION_AS_INVALID and returns it.  <br /></td></tr>
 <tr class="separator:a92b87e0dc375f1d17160492a4cb82ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93f4d9152a29db35e7cee285fd925d83"><td class="memItemLeft" align="right" valign="top"><a id="a93f4d9152a29db35e7cee285fd925d83" name="a93f4d9152a29db35e7cee285fd925d83"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>revertLastDecision</b> (int depth)</td></tr>
+<tr class="memitem:a93f4d9152a29db35e7cee285fd925d83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a93f4d9152a29db35e7cee285fd925d83">revertLastDecision</a> (int depth)</td></tr>
+<tr class="memdesc:a93f4d9152a29db35e7cee285fd925d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverts <a class="el" href="struct_global_state.html">GlobalState</a> and history to the previous decision state.  <br /></td></tr>
 <tr class="separator:a93f4d9152a29db35e7cee285fd925d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35a5a3380e87a9f9a802d16d4d5d49a1"><td class="memItemLeft" align="right" valign="top"><a id="a35a5a3380e87a9f9a802d16d4d5d49a1" name="a35a5a3380e87a9f9a802d16d4d5d49a1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>undoLastHistoryEntry</b> (bool freeMemory)</td></tr>
+<tr class="memitem:a35a5a3380e87a9f9a802d16d4d5d49a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a35a5a3380e87a9f9a802d16d4d5d49a1">undoLastHistoryEntry</a> (bool freeMemory)</td></tr>
+<tr class="memdesc:a35a5a3380e87a9f9a802d16d4d5d49a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the top entry of the history stack.  <br /></td></tr>
 <tr class="separator:a35a5a3380e87a9f9a802d16d4d5d49a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04b9c8350bd9983b59e4e76cfb352927"><td class="memItemLeft" align="right" valign="top"><a id="a04b9c8350bd9983b59e4e76cfb352927" name="a04b9c8350bd9983b59e4e76cfb352927"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>undoHistoryUntil</b> (<a class="el" href="struct_history_entry.html">HistoryEntry</a> *historyEntry, bool inclusive, int depth)</td></tr>
+<tr class="memitem:a04b9c8350bd9983b59e4e76cfb352927"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a04b9c8350bd9983b59e4e76cfb352927">undoHistoryUntil</a> (<a class="el" href="struct_history_entry.html">HistoryEntry</a> *historyEntry, bool inclusive, int depth)</td></tr>
+<tr class="memdesc:a04b9c8350bd9983b59e4e76cfb352927"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rolls back the history entries up to the certain <a class="el" href="struct_history_entry.html">HistoryEntry</a>.  <br /></td></tr>
 <tr class="separator:a04b9c8350bd9983b59e4e76cfb352927"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11bc6802569c498b8b80a6c7723056d8"><td class="memItemLeft" align="right" valign="top"><a id="a11bc6802569c498b8b80a6c7723056d8" name="a11bc6802569c498b8b80a6c7723056d8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>printCurrentHistory</b> (int depth)</td></tr>
+<tr class="memitem:a11bc6802569c498b8b80a6c7723056d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a11bc6802569c498b8b80a6c7723056d8">printCurrentHistory</a> (int depth)</td></tr>
+<tr class="memdesc:a11bc6802569c498b8b80a6c7723056d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints current history to the console.  <br /></td></tr>
 <tr class="separator:a11bc6802569c498b8b80a6c7723056d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -179,6 +183,688 @@ stack&lt; <a class="el" href="struct_history_entry.html">HistoryEntry</a> * &gt;
 <a class="el" href="struct_history_entry.html">HistoryEntry</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>historyEnd</b></td></tr>
 <tr class="separator:accd7b60752d13e14e319544cb6adb2e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad681454da4b70aa12f853e46fd1e1648" name="ad681454da4b70aa12f853e46fd1e1648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad681454da4b70aa12f853e46fd1e1648">&#9670;&#160;</a></span>Verification()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Verification::Verification </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a> *&#160;</td>
+          <td class="paramname"><em>generator</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor for <a class="el" href="class_verification.html">Verification</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">generator</td><td>Pointer to <a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="add0805598d4f6e214a7e99355e34765e" name="add0805598d4f6e214a7e99355e34765e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add0805598d4f6e214a7e99355e34765e">&#9670;&#160;</a></span>addHistoryContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::addHistoryContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_global_transition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>decision</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>globalTransitionControlled</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type CONTEXT and puts it to the top of the decision history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+    <tr><td class="paramname">depth</td><td>Depth of the recursion of the validation algorithm. </td></tr>
+    <tr><td class="paramname">decision</td><td>Pointer to a transition <a class="el" href="struct_global_transition.html">GlobalTransition</a> selected by the algorithm. </td></tr>
+    <tr><td class="paramname">globalTransitionControlled</td><td>True if the <a class="el" href="struct_global_transition.html">GlobalTransition</a> is in the set of global transitions controlled by a coalition and it is not a fixed global transition. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="affb58285fe7d8b6f18fa6260acd67d6c" name="affb58285fe7d8b6f18fa6260acd67d6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affb58285fe7d8b6f18fa6260acd67d6c">&#9670;&#160;</a></span>addHistoryDecision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::addHistoryDecision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_global_transition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>decision</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type DECISION and puts it on top of the stack of the decision history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+    <tr><td class="paramname">decision</td><td>Pointer to a <a class="el" href="struct_global_transition.html">GlobalTransition</a> that is to be recorded in the decision history. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abf842d8eff285c5076e714e7636b0cb3" name="abf842d8eff285c5076e714e7636b0cb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf842d8eff285c5076e714e7636b0cb3">&#9670;&#160;</a></span>addHistoryMarkDecisionAsInvalid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::addHistoryMarkDecisionAsInvalid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_global_transition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>decision</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type MARK_DECISION_AS_INVALID and puts it to the top of the decision history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+    <tr><td class="paramname">decision</td><td>Pointer to a transition <a class="el" href="struct_global_transition.html">GlobalTransition</a> selected by the algorithm. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4dcd5bfda3f174b6d69a4e34d1a447d2" name="a4dcd5bfda3f174b6d69a4e34d1a447d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dcd5bfda3f174b6d69a4e34d1a447d2">&#9670;&#160;</a></span>addHistoryStateStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::addHistoryStateStatus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GlobalStateVerificationStatus&#160;</td>
+          <td class="paramname"><em>prevStatus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GlobalStateVerificationStatus&#160;</td>
+          <td class="paramname"><em>newStatus</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type STATE_STATUS and puts it to the top of the decision history. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+    <tr><td class="paramname">prevStatus</td><td>Previous GlobalStateVerificationStatus to be logged. </td></tr>
+    <tr><td class="paramname">newStatus</td><td>New GlobalStateVerificationStatus to be logged. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1f4e545ca07343a09466ad9c8d214240" name="a1f4e545ca07343a09466ad9c8d214240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f4e545ca07343a09466ad9c8d214240">&#9670;&#160;</a></span>areGlobalStatesInTheSameEpistemicClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::areGlobalStatesInTheSameEpistemicClass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares two <a class="el" href="struct_global_state.html">GlobalState</a> and checks if their <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> is the same. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState1</td><td>Pointer to the first <a class="el" href="struct_global_state.html">GlobalState</a>. </td></tr>
+    <tr><td class="paramname">globalState2</td><td>Pointer to the second <a class="el" href="struct_global_state.html">GlobalState</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> is the same for both of the <a class="el" href="struct_global_state.html">GlobalState</a>. Returns false if they are different or at least one of them has no <a class="el" href="struct_epistemic_class.html">EpistemicClass</a>. </dd></dl>
+
+</div>
+</div>
+<a id="a7259a1ef834cc71f0bf7586f4fb27ba3" name="a7259a1ef834cc71f0bf7586f4fb27ba3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7259a1ef834cc71f0bf7586f4fb27ba3">&#9670;&#160;</a></span>getEpistemicClassForGlobalState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_epistemic_class.html">EpistemicClass</a> * Verification::getEpistemicClassForGlobalState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> for the agent in passed <a class="el" href="struct_global_state.html">GlobalState</a>, i.e. transitions from indistinguishable state from certain other states for an agent to other states. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> that a coalition of agents from the formula belong to. If there is no such <a class="el" href="struct_epistemic_class.html">EpistemicClass</a>, returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a2ccd4e9d525a868217902a15ed93860b" name="a2ccd4e9d525a868217902a15ed93860b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ccd4e9d525a868217902a15ed93860b">&#9670;&#160;</a></span>isAgentInCoalition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::isAgentInCoalition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_agent.html">Agent</a> *&#160;</td>
+          <td class="paramname"><em>agent</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if the <a class="el" href="class_agent.html">Agent</a> is in a coalition based on the formula in a <a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">agent</td><td>Pointer to an <a class="el" href="class_agent.html">Agent</a> that is to be checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the <a class="el" href="class_agent.html">Agent</a> is in a coalition, otherwise returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a500beadd751b6513289f3916cf3f8501" name="a500beadd751b6513289f3916cf3f8501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a500beadd751b6513289f3916cf3f8501">&#9670;&#160;</a></span>isGlobalTransitionControlledByCoalition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::isGlobalTransitionControlledByCoalition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_transition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>globalTransition</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if any of the <a class="el" href="struct_local_transition.html">LocalTransition</a> in a given <a class="el" href="struct_global_transition.html">GlobalTransition</a> has an <a class="el" href="class_agent.html">Agent</a> in a coalition in the formula. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalTransition</td><td>Pointer to a <a class="el" href="struct_global_transition.html">GlobalTransition</a> in a model. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the <a class="el" href="class_agent.html">Agent</a> is in coalition in the formula, otherwise returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a92b87e0dc375f1d17160492a4cb82ce5" name="a92b87e0dc375f1d17160492a4cb82ce5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b87e0dc375f1d17160492a4cb82ce5">&#9670;&#160;</a></span>newHistoryMarkDecisionAsInvalid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_history_entry.html">HistoryEntry</a> * Verification::newHistoryMarkDecisionAsInvalid </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_global_transition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>decision</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="struct_history_entry.html">HistoryEntry</a> of the type MARK_DECISION_AS_INVALID and returns it. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+    <tr><td class="paramname">decision</td><td>Pointer to a transition <a class="el" href="struct_global_transition.html">GlobalTransition</a> selected by the algorithm. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns pointer to a new <a class="el" href="struct_history_entry.html">HistoryEntry</a>. </dd></dl>
+
+</div>
+</div>
+<a id="a11bc6802569c498b8b80a6c7723056d8" name="a11bc6802569c498b8b80a6c7723056d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11bc6802569c498b8b80a6c7723056d8">&#9670;&#160;</a></span>printCurrentHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::printCurrentHistory </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prints current history to the console. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">depth</td><td>Integer that will be multiplied by 4 and appended as a prefix to the optional debug log. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a93f4d9152a29db35e7cee285fd925d83" name="a93f4d9152a29db35e7cee285fd925d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f4d9152a29db35e7cee285fd925d83">&#9670;&#160;</a></span>revertLastDecision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::revertLastDecision </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reverts <a class="el" href="struct_global_state.html">GlobalState</a> and history to the previous decision state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">depth</td><td>Integer that will be multiplied by 4 and appended as a prefix to the optional debug log. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if rollback is successful, otherwise returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a04b9c8350bd9983b59e4e76cfb352927" name="a04b9c8350bd9983b59e4e76cfb352927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04b9c8350bd9983b59e4e76cfb352927">&#9670;&#160;</a></span>undoHistoryUntil()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::undoHistoryUntil </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_history_entry.html">HistoryEntry</a> *&#160;</td>
+          <td class="paramname"><em>historyEntry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>inclusive</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Rolls back the history entries up to the certain <a class="el" href="struct_history_entry.html">HistoryEntry</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">historyEntry</td><td>Pointer to a <a class="el" href="struct_history_entry.html">HistoryEntry</a> that the history has to be rolled back to. </td></tr>
+    <tr><td class="paramname">inclusive</td><td>True if the rollback has to remove the specified entry too. </td></tr>
+    <tr><td class="paramname">depth</td><td>Integer that will be multiplied by 4 and appended as a prefix to the optional debug log. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a35a5a3380e87a9f9a802d16d4d5d49a1" name="a35a5a3380e87a9f9a802d16d4d5d49a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35a5a3380e87a9f9a802d16d4d5d49a1">&#9670;&#160;</a></span>undoLastHistoryEntry()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Verification::undoLastHistoryEntry </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>freeMemory</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Removes the top entry of the history stack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">freeMemory</td><td>True if the entry has to be removed from memory. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2bcca3fd98e67e70b3861773221bbe0f" name="a2bcca3fd98e67e70b3861773221bbe0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bcca3fd98e67e70b3861773221bbe0f">&#9670;&#160;</a></span>verify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::verify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts the process of formula verification on a model. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a4c07b0f4ef0c6de86d1a84399adf344d" name="a4c07b0f4ef0c6de86d1a84399adf344d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c07b0f4ef0c6de86d1a84399adf344d">&#9670;&#160;</a></span>verifyGlobalState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::verifyGlobalState </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively verifies <a class="el" href="struct_global_state.html">GlobalState</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Pointer to a <a class="el" href="struct_global_state.html">GlobalState</a> of the model. </td></tr>
+    <tr><td class="paramname">depth</td><td>Current depth of the recursion. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a6f050f20797887e631159eb430f02e18" name="a6f050f20797887e631159eb430f02e18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f050f20797887e631159eb430f02e18">&#9670;&#160;</a></span>verifyLocalStates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::verifyLocalStates </td>
+          <td>(</td>
+          <td class="paramtype">set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>localStates</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifies a set of <a class="el" href="class_local_state.html">LocalState</a> that a <a class="el" href="struct_global_state.html">GlobalState</a> is composed of with a hardcoded formula. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">localStates</td><td>A pointer to a set of pointers to <a class="el" href="class_local_state.html">LocalState</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if there is a <a class="el" href="class_local_state.html">LocalState</a> with a specific set of values, fulfilling the criteria, otherwise returns false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/<a class="el" href="_verification_8hpp_source.html">Verification.hpp</a></li>
 <li>src/<a class="el" href="_verification_8cpp.html">Verification.cpp</a></li>

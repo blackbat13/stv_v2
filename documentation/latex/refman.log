@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2023.3.27)  28 MAR 2023 14:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2023.3.27)  28 MAR 2023 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -966,9 +966,7 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 174.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 174.
- [1] [2] [3] [4
-
-]
+ [1] [2] [3] [4]
 Package hyperref Info: Option `pageanchor' set `true' on input line 177.
 
 Chapter 1.
@@ -990,6 +988,7 @@ LaTeX Font Info:    Trying to load font information for T1+pcr on input line 4.
  (C:\Programy\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )) [1
+
 
 ]
 [2
@@ -1029,15 +1028,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 23.
 )
-(class_expr_and.tex [11
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.34 s
-      rc/reader/expressions.\+cc\end{DoxyCompactItemize}])
-(class_expr_const.tex
+(class_expr_and.tex [11]) (class_expr_const.tex
 pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
 de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
 
@@ -1051,7 +1042,14 @@ de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.13 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [12]) (class_expr_eq.tex
+                                                   [12
+pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
+de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
+
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \doxysubsubsection
+                       {\texorpdfstring{eval()}{eval()}}]) (class_expr_eq.tex
 pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
 de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
 
@@ -1200,44 +1198,88 @@ nored
                                                   \__shipout_drop_firstpage_...
 l.37 ...reader/nodes.\+hpp\end{DoxyCompactItemize}
                                                   ]) (struct_var.tex)
-(struct_var_assignment.tex) (class_verification.tex [27]) [28]
-Chapter 6.
-(_constants_8hpp_source.tex) (_global_model_generator_8hpp_source.tex [29
-
-])
-(expressions_8hpp_source.tex [30] [31]) (nodes_8hpp_source.tex [32])
-(_selene_formula_8hpp_source.tex [33]) (_test_parser_8hpp_source.tex)
-(_types_8hpp_source.tex [34] [35]) (_utils_8hpp_source.tex)
-(_verification_8cpp.tex [36]
-Overfull \vbox (39.63448pt too high) has occurred while \output is active []
-
-
-[37]
-Underfull \hbox (badness 10000) detected at line 84
+(struct_var_assignment.tex) (class_verification.tex [27] [28] [29] [30]
+Underfull \hbox (badness 10000) detected at line 182
 [][][]
  []
 
-) (_verification_8hpp_source.tex [38]) [39] [40
 
-] (refman.ind [41
+Underfull \hbox (badness 10000) detected at line 200
+[][][]
+ []
+
+[31]
+Underfull \hbox (badness 10000) detected at line 218
+[][][]
+ []
 
 
-] [42
+Underfull \hbox (badness 10000) detected at line 236
+[][][]
+ []
 
-])
+
+Underfull \hbox (badness 10000) detected at line 256
+[][][]
+ []
+
+[32]
+Underfull \hbox (badness 10000) detected at line 289
+[][][]
+ []
+
+[33]
+Underfull \hbox (badness 10000) detected at line 336
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 356
+[][][]
+ []
+
+[34]
+Underfull \hbox (badness 10000) detected at line 374
+[][][]
+ []
+
+) [35] [36
+
+]
+Chapter 6.
+(_constants_8hpp_source.tex) (_global_model_generator_8hpp_source.tex [37])
+(expressions_8hpp_source.tex [38] [39]) (nodes_8hpp_source.tex [40])
+(_selene_formula_8hpp_source.tex [41]) (_test_parser_8hpp_source.tex)
+(_types_8hpp_source.tex [42] [43]) (_utils_8hpp_source.tex)
+(_verification_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[44] [45]
+Underfull \hbox (badness 10000) detected at line 85
+[][][]
+ []
+
+) (_verification_8hpp_source.tex [46]) [47] [48
+
+] (refman.ind [49
+
+
+] [50])
 (refman.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: BE7E2B159960795589FA05920D826933;21165.
+(rerunfilecheck)             Checksum: 70EDE2D6CC58C488F0B9C237909DC9C9;25974.
  ) 
 Here is how much of TeX's memory you used:
- 19045 strings out of 476338
- 322527 string characters out of 5800206
- 1875382 words of memory out of 5000000
- 38573 multiletter control sequences out of 15000+600000
- 569629 words of font info for 100 fonts, out of 8000000 for 9000
+ 19127 strings out of 476338
+ 323829 string characters out of 5800206
+ 1880382 words of memory out of 5000000
+ 38610 multiletter control sequences out of 15000+600000
+ 570250 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  101i,16n,117p,519b,740s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {C:/Programy/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Programy/MiKTeX/fonts/typ
@@ -1250,9 +1292,9 @@ C:/Programy/MiKTeX/fonts/type1/urw/courier/ucrro8a.pfb><C:/Programy/MiKTeX/font
 s/type1/urw/helvetic/uhvb8a.pfb><C:/Programy/MiKTeX/fonts/type1/urw/helvetic/uh
 vb8ac.pfb><C:/Programy/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Programy/
 MiKTeX/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (48 pages, 459923 bytes).
+Output written on refman.pdf (56 pages, 526824 bytes).
 PDF statistics:
- 1917 PDF objects out of 2073 (max. 8388607)
- 452 named destinations out of 1000 (max. 500000)
- 857 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2264 PDF objects out of 2487 (max. 8388607)
+ 496 named destinations out of 1000 (max. 500000)
+ 1009 words of extra memory for PDF output out of 10000 (max. 10000000)
 

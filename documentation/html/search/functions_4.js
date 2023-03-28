@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['markentry_0',['markEntry',['../class_history_dbg.html#a8cb960b3f1275961adc6664b0e2f0700',1,'HistoryDbg']]]
+  ['historydbg_0',['HistoryDbg',['../class_history_dbg.html#a5dd006716d8389df4313ac9b8996f132',1,'HistoryDbg']]]
 ];

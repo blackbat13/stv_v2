@@ -2,8 +2,18 @@
 
   \item {addEntry}
     \subitem {HistoryDbg}, \hyperpage{22}
+  \item {addHistoryContext}
+    \subitem {Verification}, \hyperpage{29}
+  \item {addHistoryDecision}
+    \subitem {Verification}, \hyperpage{30}
+  \item {addHistoryMarkDecisionAsInvalid}
+    \subitem {Verification}, \hyperpage{30}
+  \item {addHistoryStateStatus}
+    \subitem {Verification}, \hyperpage{30}
   \item {Agent}, \hyperpage{9}
   \item {AgentTemplate}, \hyperpage{9}
+  \item {areGlobalStatesInTheSameEpistemicClass}
+    \subitem {Verification}, \hyperpage{30}
   \item {Assignment}, \hyperpage{10}
 
   \indexspace
@@ -16,9 +26,9 @@
   \indexspace
 
   \item {dbgHistEnt}
-    \subitem {Verification.cpp}, \hyperpage{37}
+    \subitem {Verification.cpp}, \hyperpage{45}
   \item {dbgVerifStatus}
-    \subitem {Verification.cpp}, \hyperpage{37}
+    \subitem {Verification.cpp}, \hyperpage{45}
 
   \indexspace
 
@@ -42,7 +52,7 @@
     \subitem {ExprSub}, \hyperpage{19}
   \item {ExprAdd}, \hyperpage{11}
     \subitem {eval}, \hyperpage{11}
-  \item {ExprAnd}, \hyperpage{11}
+  \item {ExprAnd}, \hyperpage{12}
     \subitem {eval}, \hyperpage{12}
   \item {ExprConst}, \hyperpage{12}
     \subitem {eval}, \hyperpage{12}
@@ -80,6 +90,8 @@
 
   \indexspace
 
+  \item {getEpistemicClassForGlobalState}
+    \subitem {Verification}, \hyperpage{31}
   \item {GlobalModel}, \hyperpage{20}
   \item {GlobalModelGenerator}, \hyperpage{20}
   \item {GlobalState}, \hyperpage{21}
@@ -96,6 +108,13 @@
 
   \indexspace
 
+  \item {isAgentInCoalition}
+    \subitem {Verification}, \hyperpage{31}
+  \item {isGlobalTransitionControlledByCoalition}
+    \subitem {Verification}, \hyperpage{32}
+
+  \indexspace
+
   \item {LocalModels}, \hyperpage{24}
   \item {LocalState}, \hyperpage{24}
   \item {LocalStateTemplate}, \hyperpage{25}
@@ -108,24 +127,36 @@
 
   \indexspace
 
+  \item {newHistoryMarkDecisionAsInvalid}
+    \subitem {Verification}, \hyperpage{32}
+
+  \indexspace
+
   \item {print}
     \subitem {HistoryDbg}, \hyperpage{23}
+  \item {printCurrentHistory}
+    \subitem {Verification}, \hyperpage{32}
+
+  \indexspace
+
+  \item {revertLastDecision}
+    \subitem {Verification}, \hyperpage{33}
 
   \indexspace
 
   \item {SeleneFormula}, \hyperpage{25}
   \item {SeleneFormula1}, \hyperpage{26}
     \subitem {verifyLocalStates}, \hyperpage{26}
-  \item {src/Constants.hpp}, \hyperpage{29}
-  \item {src/GlobalModelGenerator.hpp}, \hyperpage{29}
-  \item {src/reader/expressions.hpp}, \hyperpage{30}
-  \item {src/reader/nodes.hpp}, \hyperpage{32}
-  \item {src/SeleneFormula.hpp}, \hyperpage{33}
-  \item {src/TestParser.hpp}, \hyperpage{34}
-  \item {src/Types.hpp}, \hyperpage{34}
-  \item {src/Utils.hpp}, \hyperpage{36}
-  \item {src/Verification.cpp}, \hyperpage{36}
-  \item {src/Verification.hpp}, \hyperpage{38}
+  \item {src/Constants.hpp}, \hyperpage{37}
+  \item {src/GlobalModelGenerator.hpp}, \hyperpage{37}
+  \item {src/reader/expressions.hpp}, \hyperpage{38}
+  \item {src/reader/nodes.hpp}, \hyperpage{40}
+  \item {src/SeleneFormula.hpp}, \hyperpage{41}
+  \item {src/TestParser.hpp}, \hyperpage{42}
+  \item {src/Types.hpp}, \hyperpage{42}
+  \item {src/Utils.hpp}, \hyperpage{44}
+  \item {src/Verification.cpp}, \hyperpage{44}
+  \item {src/Verification.hpp}, \hyperpage{46}
 
   \indexspace
 
@@ -134,16 +165,45 @@
 
   \indexspace
 
+  \item {undoHistoryUntil}
+    \subitem {Verification}, \hyperpage{33}
+  \item {undoLastHistoryEntry}
+    \subitem {Verification}, \hyperpage{33}
+
+  \indexspace
+
   \item {Var}, \hyperpage{27}
   \item {VarAssignment}, \hyperpage{27}
   \item {Verification}, \hyperpage{28}
+    \subitem {addHistoryContext}, \hyperpage{29}
+    \subitem {addHistoryDecision}, \hyperpage{30}
+    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{30}
+    \subitem {addHistoryStateStatus}, \hyperpage{30}
+    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{30}
+    \subitem {getEpistemicClassForGlobalState}, \hyperpage{31}
+    \subitem {isAgentInCoalition}, \hyperpage{31}
+    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{32}
+    \subitem {newHistoryMarkDecisionAsInvalid}, \hyperpage{32}
+    \subitem {printCurrentHistory}, \hyperpage{32}
+    \subitem {revertLastDecision}, \hyperpage{33}
+    \subitem {undoHistoryUntil}, \hyperpage{33}
+    \subitem {undoLastHistoryEntry}, \hyperpage{33}
+    \subitem {Verification}, \hyperpage{29}
+    \subitem {verify}, \hyperpage{34}
+    \subitem {verifyGlobalState}, \hyperpage{34}
+    \subitem {verifyLocalStates}, \hyperpage{34}
   \item {Verification.cpp}
-    \subitem {dbgHistEnt}, \hyperpage{37}
-    \subitem {dbgVerifStatus}, \hyperpage{37}
-    \subitem {verStatusToStr}, \hyperpage{38}
+    \subitem {dbgHistEnt}, \hyperpage{45}
+    \subitem {dbgVerifStatus}, \hyperpage{45}
+    \subitem {verStatusToStr}, \hyperpage{46}
+  \item {verify}
+    \subitem {Verification}, \hyperpage{34}
+  \item {verifyGlobalState}
+    \subitem {Verification}, \hyperpage{34}
   \item {verifyLocalStates}
     \subitem {SeleneFormula1}, \hyperpage{26}
+    \subitem {Verification}, \hyperpage{34}
   \item {verStatusToStr}
-    \subitem {Verification.cpp}, \hyperpage{38}
+    \subitem {Verification.cpp}, \hyperpage{46}
 
 \end{theindex}

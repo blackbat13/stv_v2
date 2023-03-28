@@ -67,8 +67,8 @@
 \DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_verification}{Verification}}\ \{}
 \DoxyCodeLine{00064\ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{class_verification}{Verification}}(\mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}*\ generator);}
-\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_verification}{\string~Verification}}();}
-\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ verify();}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_verification_a39d8f0c78a0a0e006dc38fa05bc1183e}{\string~Verification}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a2bcca3fd98e67e70b3861773221bbe0f}{verify}}();}
 \DoxyCodeLine{00068\ \textcolor{keyword}{protected}:}
 \DoxyCodeLine{00069\ \ \ \ \ Mode\ mode;}
 \DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ revertToGlobalState;}
@@ -77,21 +77,21 @@
 \DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{class_selene_formula}{SeleneFormula}}*\ seleneFormula;}
 \DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ historyStart;}
 \DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ historyEnd;}
-\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ verifyLocalStates(set<LocalState*>*\ localStates);}
-\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ verifyGlobalState(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ isGlobalTransitionControlledByCoalition(\mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ globalTransition);}
-\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ isAgentInCoalition(\mbox{\hyperlink{class_agent}{Agent}}*\ agent);}
-\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}*\ getEpistemicClassForGlobalState(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState);}
-\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ areGlobalStatesInTheSameEpistemicClass(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState1,\ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState2);}
-\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ addHistoryDecision(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ ecision);}
-\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ addHistoryStateStatus(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ GlobalStateVerificationStatus\ prevStatus,\ GlobalStateVerificationStatus\ newStatus);}
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ addHistoryContext(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision,\ \textcolor{keywordtype}{bool}\ globalTransitionControlled);}
-\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ addHistoryMarkDecisionAsInvalid(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
-\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ newHistoryMarkDecisionAsInvalid(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ revertLastDecision(\textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ undoLastHistoryEntry(\textcolor{keywordtype}{bool}\ freeMemory);}
-\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ undoHistoryUntil(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ historyEntry,\ \textcolor{keywordtype}{bool}\ inclusive,\ \textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ printCurrentHistory(\textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a6f050f20797887e631159eb430f02e18}{verifyLocalStates}}(set<LocalState*>*\ localStates);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a4c07b0f4ef0c6de86d1a84399adf344d}{verifyGlobalState}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a500beadd751b6513289f3916cf3f8501}{isGlobalTransitionControlledByCoalition}}(\mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ globalTransition);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a2ccd4e9d525a868217902a15ed93860b}{isAgentInCoalition}}(\mbox{\hyperlink{class_agent}{Agent}}*\ agent);}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}*\ \mbox{\hyperlink{class_verification_a7259a1ef834cc71f0bf7586f4fb27ba3}{getEpistemicClassForGlobalState}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState);}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a1f4e545ca07343a09466ad9c8d214240}{areGlobalStatesInTheSameEpistemicClass}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState1,\ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState2);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_affb58285fe7d8b6f18fa6260acd67d6c}{addHistoryDecision}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ ecision);}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a4dcd5bfda3f174b6d69a4e34d1a447d2}{addHistoryStateStatus}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ GlobalStateVerificationStatus\ prevStatus,\ GlobalStateVerificationStatus\ newStatus);}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_add0805598d4f6e214a7e99355e34765e}{addHistoryContext}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision,\ \textcolor{keywordtype}{bool}\ globalTransitionControlled);}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_abf842d8eff285c5076e714e7636b0cb3}{addHistoryMarkDecisionAsInvalid}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_a92b87e0dc375f1d17160492a4cb82ce5}{newHistoryMarkDecisionAsInvalid}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a93f4d9152a29db35e7cee285fd925d83}{revertLastDecision}}(\textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a35a5a3380e87a9f9a802d16d4d5d49a1}{undoLastHistoryEntry}}(\textcolor{keywordtype}{bool}\ freeMemory);}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a04b9c8350bd9983b59e4e76cfb352927}{undoHistoryUntil}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ historyEntry,\ \textcolor{keywordtype}{bool}\ inclusive,\ \textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a11bc6802569c498b8b80a6c7723056d8}{printCurrentHistory}}(\textcolor{keywordtype}{int}\ depth);}
 \DoxyCodeLine{00091\ \};}
 \DoxyCodeLine{00092\ }
 \DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SELENE\_VERIFICATION}}

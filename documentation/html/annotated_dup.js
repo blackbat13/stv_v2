@@ -40,5 +40,5 @@ var annotated_dup =
     [ "TransitionTemplate", "class_transition_template.html", null ],
     [ "Var", "struct_var.html", "struct_var" ],
     [ "VarAssignment", "struct_var_assignment.html", null ],
-    [ "Verification", "class_verification.html", null ]
+    [ "Verification", "class_verification.html", "class_verification" ]
 ];
