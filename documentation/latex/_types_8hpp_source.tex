@@ -1,0 +1,176 @@
+\hypertarget{_types_8hpp_source}{}\doxysection{Types.\+hpp}
+\label{_types_8hpp_source}\index{src/Types.hpp@{src/Types.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SELENE\_TYPES}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SELENE\_TYPES}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent}{Agent}};}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_local_state}{LocalState}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_condition}{Condition}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}};}
+\DoxyCodeLine{00019\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_formula}{Formula}};}
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_global_model}{GlobalModel}};}
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_global_state}{GlobalState}};}
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_global_transition}{GlobalTransition}};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_local_transition}{LocalTransition}};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_local_models}{LocalModels}};}
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_var}{Var}};}
+\DoxyCodeLine{00026\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_var_assignment}{VarAssignment}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{enum}\ ConditionOperator\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ Equals,}
+\DoxyCodeLine{00030\ \ \ \ \ NotEquals,}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{enum}\ GlobalStateVerificationStatus\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ UNVERIFIED,}
+\DoxyCodeLine{00035\ \ \ \ \ PENDING,}
+\DoxyCodeLine{00036\ \ \ \ \ VERIFIED\_OK,}
+\DoxyCodeLine{00037\ \ \ \ \ VERIFIED\_ERR,}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{enum}\ VarAssignmentType\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ FromVar,}
+\DoxyCodeLine{00042\ \ \ \ \ FromValue,}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_var}{Var}}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{struct_var_a4f203af1d57ced7e80b3c02e2120e7c4}{name}};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_var_a0e10d54a8a5f415596585a5bce72bcae}{initialValue}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{struct_var_aa32055d36c033ef3c9961aed76cb85d6}{persistent}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{class_agent}{Agent}}\ *\mbox{\hyperlink{struct_var_a64fab7d68a7961c69e843742f46b4b85}{agent}};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_condition}{Condition}}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{struct_var}{Var}}*\ var;}
+\DoxyCodeLine{00063\ \ \ \ \ ConditionOperator\ conditionOperator;}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{int}\ comparedValue;}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_formula}{Formula}}\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ set<Agent*>\ coalition;}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent}{Agent}}\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ set<Var*>\ vars;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_agent}{Agent}}(\textcolor{keywordtype}{int}\ \_id,\ \textcolor{keywordtype}{string}\ \_name):id(\_id),\ name(\_name)\ \{\};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_local_state}{LocalState}}*\ initState;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ vector<LocalState*>\ localStates;\ \textcolor{comment}{//\ localStates[i].id\ ==\ i}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ vector<LocalTransition*>\ localTransitions;\ \textcolor{comment}{//\ localTransitions[i].id\ ==\ i}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ sprawdź,\ czy\ stan\ nie\ został\ już\ wygenerowany}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_local_state}{LocalState}}*\ includesState(\mbox{\hyperlink{class_local_state}{LocalState}}\ *state);}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_local_state}{LocalState}}\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ map<Var*,\ int>\ vars;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ alternatywna\ wersja\ -\/\ może\ wystarczy}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ map<string,\ int>\ environment;\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ komparator}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ compare(\mbox{\hyperlink{class_local_state}{LocalState}}\ *state);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_agent}{Agent}}*\ agent;}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ set<LocalTransition*>\ localTransitions;}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ to\ jest\ zbędne}}
+\DoxyCodeLine{00104\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_var_assignment}{VarAssignment}}\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{struct_var}{Var}}*\ dstVar;}
+\DoxyCodeLine{00106\ \ \ \ \ VarAssignmentType\ type;\ \textcolor{comment}{//\ zbędne}}
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{struct_var}{Var}}*\ srcVar;}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{int}\ value;}
+\DoxyCodeLine{00109\ \};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_local_transition}{LocalTransition}}\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{string}\ localName;\ \textcolor{comment}{//\ if\ empty\ =>\ same\ as\ name}}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ isShared;}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{int}\ sharedCount;}
+\DoxyCodeLine{00118\ \ \ \ \ set<Condition*>\ conditions;}
+\DoxyCodeLine{00119\ \ \ \ \ set<VarAssignment*>\ varAsssignments;}
+\DoxyCodeLine{00120\ \ \ \ \ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00122\ \ \ \ \ \mbox{\hyperlink{class_agent}{Agent}}*\ agent;}
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{class_local_state}{LocalState}}*\ from;}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{class_local_state}{LocalState}}*\ to;}
+\DoxyCodeLine{00125\ \ \ \ \ set<LocalTransition*>\ sharedLocalTransitions;}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_local_models}{LocalModels}}\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ vector<Agent*>\ agents;\ \textcolor{comment}{//\ agents[i].id\ ==\ i}}
+\DoxyCodeLine{00130\ \ \ \ \ map<string,\ Var*>\ vars;\ \textcolor{comment}{//\ vars[str].name\ ==\ str}}
+\DoxyCodeLine{00131\ \};}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_global_model}{GlobalModel}}\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00135\ \ \ \ \ vector<Agent*>\ agents;\ \textcolor{comment}{//\ agents[i].id\ ==\ i}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{struct_formula}{Formula}}*\ formula;}
+\DoxyCodeLine{00137\ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ initState;}
+\DoxyCodeLine{00140\ \ \ \ \ vector<GlobalState*>\ globalStates;\ \textcolor{comment}{//\ globalStates[i].id\ ==\ i}}
+\DoxyCodeLine{00141\ \ \ \ \ vector<GlobalTransition*>\ globalTransitions;\ \textcolor{comment}{//\ globalTransitions[i].id\ ==\ i}}
+\DoxyCodeLine{00142\ \ \ \ \ map<Agent*,\ map<string,\ EpistemicClass*>>\ epistemicClasses;\ \textcolor{comment}{//\ Agent*\ =>\ (EpistemicClass-\/>hash\ =>\ EpistemicClass*)}}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_global_state}{GlobalState}}\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{string}\ hash;}
+\DoxyCodeLine{00149\ \ \ \ \ map<Var*,\ int>\ vars;}
+\DoxyCodeLine{00150\ \ \ \ \ map<Agent*,\ EpistemicClass*>\ epistemicClasses;}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{bool}\ isExpanded;}
+\DoxyCodeLine{00152\ \ \ \ \ GlobalStateVerificationStatus\ verificationStatus;}
+\DoxyCodeLine{00153\ \ \ \ \ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00155\ \ \ \ \ set<GlobalTransition*>\ globalTransitions;}
+\DoxyCodeLine{00156\ \ \ \ \ set<LocalState*>\ localStates;}
+\DoxyCodeLine{00157\ \};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_global_transition}{GlobalTransition}}\ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ id;}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{bool}\ isInvalidDecision;}
+\DoxyCodeLine{00163\ \ \ \ \ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00165\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ from;}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ to;}
+\DoxyCodeLine{00167\ \ \ \ \ set<LocalTransition*>\ localTransitions;}
+\DoxyCodeLine{00168\ \};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}\ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{string}\ hash;}
+\DoxyCodeLine{00172\ \ \ \ \ map<string,\ GlobalState*>\ globalStates;\ \textcolor{comment}{//\ GlobalState-\/>hash\ =>\ GlobalState*}}
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ fixedCoalitionTransition;}
+\DoxyCodeLine{00174\ \};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SELENE\_TYPES}}
+
+\end{DoxyCode}

@@ -1,0 +1,39 @@
+\hypertarget{_global_model_generator_8hpp_source}{}\doxysection{Global\+Model\+Generator.\+hpp}
+\label{_global_model_generator_8hpp_source}\index{src/GlobalModelGenerator.hpp@{src/GlobalModelGenerator.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SELENE\_GLOBAL\_MODEL\_GENERATOR}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SELENE\_GLOBAL\_MODEL\_GENERATOR}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Constants.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Types.hpp"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}();}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{class_global_model_generator}{\string~GlobalModelGenerator}}();}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ initModel(\mbox{\hyperlink{struct_local_models}{LocalModels}}*\ localModels,\ \mbox{\hyperlink{struct_formula}{Formula}}*\ formula);}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ expandState(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ state);}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ expandAllStates();}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{struct_global_model}{GlobalModel}}*\ getCurrentGlobalModel();}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{struct_formula}{Formula}}*\ getFormula();}
+\DoxyCodeLine{00018\ \ \ \ \ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{struct_local_models}{LocalModels}}*\ localModels;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{struct_formula}{Formula}}*\ formula;}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{struct_global_model}{GlobalModel}}*\ globalModel;}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ generateInitState();}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ generateStateFromLocalStates(set<LocalState*>*\ localStates,\ set<LocalTransition*>*\ viaLocalTransitions,\ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ prevGlobalState);}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ generateGlobalTransitions(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ fromGlobalState,\ set<LocalTransition*>\ localTransitions,\ map<\mbox{\hyperlink{class_agent}{Agent}}*,\ vector<LocalTransition*>>\ transitionsByAgent);}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ checkLocalTransitionConditions(\mbox{\hyperlink{struct_local_transition}{LocalTransition}}*\ localTransition,\ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{string}\ computeEpistemicClassHash(set<LocalState*>*\ localStates,\ \mbox{\hyperlink{class_agent}{Agent}}*\ agent);}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{string}\ computeGlobalStateHash(set<LocalState*>*\ localStates);}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}*\ findOrCreateEpistemicClass(set<LocalState*>*\ localStates,\ \mbox{\hyperlink{class_agent}{Agent}}*\ agent);}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ findGlobalStateInEpistemicClass(set<LocalState*>*\ localStates,\ \mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}*\ epistemicClass);}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SELENE\_GLOBAL\_MODEL\_GENERATOR}}
+
+\end{DoxyCode}

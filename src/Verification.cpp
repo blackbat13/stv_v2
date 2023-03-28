@@ -1,7 +1,16 @@
+/**
+ * @file Verification.cpp
+ * @brief Class for verification of the formula on a model.
+ * Class for verification of the specified formula on a specified model.
+ */
+
 #include "Verification.hpp"
 
 extern Cfg config;
 
+/// @brief Converts global verification status into a string.
+/// @param status Enum value to be converted.
+/// @return Verification status converted into a string.
 string verStatusToStr(GlobalStateVerificationStatus status) {
     if (status == GlobalStateVerificationStatus::PENDING) {
         return "pending";
@@ -18,6 +27,11 @@ string verStatusToStr(GlobalStateVerificationStatus status) {
     return "unknown";
 }
 
+/// @brief Print a debug message of a verification status to the console.
+/// @param prefix A prefix string to append to the front of every entry.
+/// @param gs Pointer to a GlobalState.
+/// @param st Enum with a verification status of a global state.
+/// @param reason String with a reason why the function was called, e.g. "entered state", "all passed".
 void dbgVerifStatus(string prefix, GlobalState* gs, GlobalStateVerificationStatus st, string reason) {
     #if VERBOSE
         string prevStatus = verStatusToStr(gs->verificationStatus);
@@ -26,15 +40,20 @@ void dbgVerifStatus(string prefix, GlobalState* gs, GlobalStateVerificationStatu
     #endif
 }
 
+/// @brief Print a single debug message with a history entry to the console.
+/// @param prefix A prefix string to append to the front of the entry.
+/// @param h A pointer to the HistoryEntry struct which will be printed out.
 void dbgHistEnt(string prefix, HistoryEntry *h) {
     #if VERBOSE
         printf("%s%s\n", prefix.c_str(), h->toString().c_str());
     #endif
 }
 
+/// @brief A constructor for HistoryDbg.
 HistoryDbg::HistoryDbg() {
 }
 
+/// @brief A destructor for HistoryDbg.
 HistoryDbg::~HistoryDbg() {
     for (auto &kvp : this->entries) {
         if (kvp.second == '-') {
@@ -43,10 +62,15 @@ HistoryDbg::~HistoryDbg() {
     }
 }
 
+/// @brief Adds a HistoryEntry to the debug history.
+/// @param entry A pointer to the HistoryEntry that will be added to the history.
 void HistoryDbg::addEntry(HistoryEntry* entry) {
     this->entries.push_back(make_pair(entry, ' '));
 }
 
+/// @brief Marks an entry in the degug history with a char.
+/// @param entry A pointer to a HistoryEntry that is supposed to be marked.
+/// @param chr A char that will be made into a pair with a HistoryEntry.
 void HistoryDbg::markEntry(HistoryEntry* entry, char chr) {
     // '-' - action that will be undone
     // 'Y' (type=context) - will be undone; corresponding to Y in selene-ver2.png
@@ -63,6 +87,8 @@ void HistoryDbg::markEntry(HistoryEntry* entry, char chr) {
     }
 }
 
+/// @brief Prints every entry from the algorithm's path.
+/// @param prefix A prefix string to append to the front of every entry.
 void HistoryDbg::print(string prefix) {
     printf("%svvvvvvvvvv History:\n", prefix.c_str());
     for (auto pair : this->entries) {
@@ -71,6 +97,9 @@ void HistoryDbg::print(string prefix) {
     printf("%s^^^^^^^^^^\n", prefix.c_str());
 }
 
+/// @brief Checks if the HistoryEntry pointer exists in the debug history.
+/// @param entry A pointer to a HistoryEntry to be checked.
+/// @return Identity function if the entry is in history, otherwise returns nullptr.
 HistoryEntry* HistoryDbg::cloneEntry(HistoryEntry* entry) {
     for (auto &kvp : this->entries) {
         if (kvp.first == entry) {
@@ -84,7 +113,8 @@ HistoryEntry* HistoryDbg::cloneEntry(HistoryEntry* entry) {
 
 
 
-
+/// @brief Constructor for Verification.
+/// @param generator Pointer to GlobalModelGenerator
 Verification::Verification(GlobalModelGenerator* generator) {
     this->generator = generator;
     this->seleneFormula = new SeleneFormula1();
@@ -98,9 +128,12 @@ Verification::Verification(GlobalModelGenerator* generator) {
     this->historyEnd = this->historyStart;
 }
 
+/// @brief Destructor for Verification.
 Verification::~Verification() {
 }
 
+/// @brief Starts the process of formula verification on a model.
+/// @return Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false.
 bool Verification::verify() {
     this->mode = Mode::NORMAL;
     this->revertToGlobalState = nullptr;
@@ -108,13 +141,16 @@ bool Verification::verify() {
     return this->verifyGlobalState(initState, 0);
 }
 
+/// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
+/// @param localStates A pointer to a set of pointers to LocalState.
+/// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.
 bool Verification::verifyLocalStates(set<LocalState*>* localStates) {
 // BEGIN{HARD-CODED-FORMULA}
     if(config.model_id==2){
         return this->seleneFormula->verifyLocalStates(localStates);
     }else if(config.model_id==3){
         auto localState = this->seleneFormula->getLocalStateForAgent("Coercer1", localStates);
-	    auto localState2 = this->seleneFormula->getLocalStateForAgent("Voter1",localStates);
+	    auto localState2 = this->seleneFormula->getLocalStateForAgent("Voter1", localStates);
         if (localState == nullptr) {
             return false;
         }
@@ -158,6 +194,10 @@ bool Verification::verifyLocalStates(set<LocalState*>* localStates) {
     return false;
 }
 
+/// @brief Recursively verifies GlobalState 
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param depth Current depth of the recursion.
+/// @return Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false.
 bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     string prefix = string(depth * 4, ' ');
     #if VERBOSE
@@ -469,11 +509,17 @@ bool Verification::isGlobalTransitionControlledByCoalition(GlobalTransition* glo
     return isControlled;
 }
 
+/// @brief Checks if the Agent is in a coalition based on the formula in a GlobalModelGenerator.
+/// @param agent Pointer to an Agent that is to be checked.
+/// @return Returns true if the Agent is in a coalition, otherwise returns false.
 bool Verification::isAgentInCoalition(Agent* agent) {
     const auto coalition = &this->generator->getFormula()->coalition;
     return coalition->find(agent) != coalition->end();
 }
 
+/// @brief Gets the EpistemicClass for the agent in passed GlobalState, i.e. transitions from indistinguishable state from certain other states for an agent to other states.
+/// @param globalState Pointer to a GlobalState of the model.
+/// @return Pointer to the EpistemicClass that a coalition of agents from the formula belong to. If there is no such EpistemicClass, returns false.
 EpistemicClass* Verification::getEpistemicClassForGlobalState(GlobalState* globalState) {
     const auto coalition = &this->generator->getFormula()->coalition;
     const auto agent = *coalition->begin();
@@ -485,6 +531,10 @@ EpistemicClass* Verification::getEpistemicClassForGlobalState(GlobalState* globa
     return epistemicClass;
 }
 
+/// @brief Compares two GlobalState and checks if their EpistemicClass is the same.
+/// @param globalState1 Pointer to the first GlobalState.
+/// @param globalState2 Pointer to the second GlobalState.
+/// @return Returns true if the EpistemicClass is the same for both of the GlobalState. Returns false if they are different or at least one of them has no EpistemicClass.
 bool Verification::areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2) {
     auto epiCls1 = this->getEpistemicClassForGlobalState(globalState1);
     auto epiCls2 = this->getEpistemicClassForGlobalState(globalState2);
@@ -494,6 +544,9 @@ bool Verification::areGlobalStatesInTheSameEpistemicClass(GlobalState* globalSta
     return epiCls1 == epiCls2;
 }
 
+/// @brief Creates a HistoryEntry of the type DECISION and puts it on top of the stack of the decision history. 
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param decision Pointer to a GlobalTransition that is to be recorded in the decision history.
 void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition* decision) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::DECISION;
@@ -505,6 +558,10 @@ void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition
     this->historyEnd = newHistoryEntry;
 }
 
+/// @brief Creates a HistoryEntry of the type STATE_STATUS and puts it to the top of the decision history.
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param prevStatus Previous GlobalStateVerificationStatus to be logged.
+/// @param newStatus New GlobalStateVerificationStatus to be logged.
 void Verification::addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::STATE_STATUS;
@@ -517,6 +574,11 @@ void Verification::addHistoryStateStatus(GlobalState* globalState, GlobalStateVe
     this->historyEnd = newHistoryEntry;
 }
 
+/// @brief Creates a HistoryEntry of the type CONTEXT and puts it to the top of the decision history.
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param depth Depth of the recursion of the validation algorithm.
+/// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
+/// @param globalTransitionControlled True if the GlobalTransition is in the set of global transitions controlled by a coalition and it is not a fixed global transition.
 void Verification::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::CONTEXT;
@@ -530,6 +592,10 @@ void Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     this->historyEnd = newHistoryEntry;
 }
 
+/// @brief Creates a HistoryEntry of the type MARK_DECISION_AS_INVALID and returns it.
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
+/// @return Returns pointer to a new HistoryEntry.
 HistoryEntry* Verification::newHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::MARK_DECISION_AS_INVALID;
@@ -539,6 +605,9 @@ HistoryEntry* Verification::newHistoryMarkDecisionAsInvalid(GlobalState* globalS
     return newHistoryEntry;
 }
 
+/// @brief Creates a HistoryEntry of the type MARK_DECISION_AS_INVALID and puts it to the top of the decision history.
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
 void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision) {
     auto newHistoryEntry = this->newHistoryMarkDecisionAsInvalid(globalState, decision);
     newHistoryEntry->prev = this->historyEnd;
@@ -546,6 +615,9 @@ void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, Glo
     this->historyEnd = newHistoryEntry;
 }
 
+/// @brief Reverts GlobalState and history to the previous decision state.
+/// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
+/// @return Returns true if rollback is successful, otherwise returns false.
 bool Verification::revertLastDecision(int depth) {
     // History: (based on selene-ver2.png)
     // X -> Y -> T<decision> -> Y -> Z<ERR>
@@ -669,6 +741,8 @@ bool Verification::revertLastDecision(int depth) {
     return true;
 }
 
+/// @brief Removes the top entry of the history stack.
+/// @param freeMemory True if the entry has to be removed from memory.
 void Verification::undoLastHistoryEntry(bool freeMemory) {
     if (this->historyEnd == this->historyStart) {
         return;
@@ -692,6 +766,10 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     }
 }
 
+/// @brief Rolls back the history entries up to the certain HistoryEntry.
+/// @param historyEntry Pointer to a HistoryEntry that the history has to be rolled back to.
+/// @param inclusive True if the rollback has to remove the specified entry too.
+/// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
 void Verification::undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth) {
     #if VERBOSE
         auto prefix = string(depth * 4, ' ');
@@ -719,6 +797,8 @@ void Verification::undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, 
     #endif
 }
 
+/// @brief Prints current history to the console.
+/// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
 void Verification::printCurrentHistory(int depth) {
     auto prefix = string(depth * 4, ' ');
     printf("%sCURRENT HISTORY:\n", prefix.c_str());
