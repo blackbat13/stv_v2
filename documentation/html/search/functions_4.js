@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['historydbg_0',['HistoryDbg',['../class_history_dbg.html#a5dd006716d8389df4313ac9b8996f132',1,'HistoryDbg']]]
+  ['getepistemicclassforglobalstate_0',['getEpistemicClassForGlobalState',['../class_verification.html#a7259a1ef834cc71f0bf7586f4fb27ba3',1,'Verification']]]
 ];

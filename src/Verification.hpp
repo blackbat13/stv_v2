@@ -1,3 +1,7 @@
+/**
+ * @file Verification.hpp
+ */
+
 #ifndef SELENE_VERIFICATION
 #define SELENE_VERIFICATION
 
@@ -8,22 +12,36 @@
 
 string verStatusToStr(GlobalStateVerificationStatus status);
 
+/// @brief HistoryEntry entry type.
 enum HistoryEntryType {
-    DECISION,
-    STATE_STATUS,
-    CONTEXT,
-    MARK_DECISION_AS_INVALID,
+    DECISION, ///< Made the decision to go to a state using a transition.
+    STATE_STATUS, ///< Changed verification status.
+    CONTEXT, ///< Recursion has gone deeper.
+    MARK_DECISION_AS_INVALID, ///< Marking a transition as invalid.
 };
+
+/// @brief Structure used to save model traversal history.
 struct HistoryEntry {
+    /// @brief Type of the history record.
     HistoryEntryType type;
+    /// @brief Saved global state.
     GlobalState* globalState;
+    /// @brief Selected transition.
     GlobalTransition* decision;
+    /// @brief Is the transition controlled by an agent in coalition.
     bool globalTransitionControlled;
+    /// @brief Previous model verification state.
     GlobalStateVerificationStatus prevStatus;
+    /// @brief Next model verification state.
     GlobalStateVerificationStatus newStatus;
+    /// @brief Recursion depth.
     int depth;
+    /// @brief Pointer to the previous HistoryEntry.
     HistoryEntry* prev;
+    /// @brief Pointer to the next HistoryEntry.
     HistoryEntry* next;
+    /// @brief Converts HistoryEntry to string.
+    /// @return A string with the descriprion of this history record.
     string toString() {
         char buff[1024] = { 0 };
         if (this->type == HistoryEntryType::DECISION) {
@@ -44,6 +62,7 @@ struct HistoryEntry {
 
 class HistoryDbg {
 public:
+    /// @brief A pair of history entries and a char marking history type.
     vector<pair<HistoryEntry*, char>> entries;
     HistoryDbg();
     ~HistoryDbg();
@@ -54,10 +73,11 @@ public:
 };
 
 // On-the-fly traversal mode
+/// @brief Current model traversal mode.
 enum Mode {
-    NORMAL,
-    REVERT,
-    RESTORE,
+    NORMAL, ///< Normal model traversal.
+    REVERT, ///< ???
+    RESTORE, ///< ???
 };
 
 class Verification {
@@ -66,12 +86,19 @@ public:
     ~Verification();
     bool verify();
 protected:
+    /// @brief Current mode of model traversal.
     Mode mode;
+    /// @brief Current lowest global state?
     GlobalState* revertToGlobalState;
+    /// @brief ???
     stack<HistoryEntry*> historyToRestore;
+    /// @brief Holds current model and formula.
     GlobalModelGenerator* generator;
+    /// @brief ???
     SeleneFormula* seleneFormula;
+    /// @brief Pointer to the start of model traversal history.
     HistoryEntry* historyStart;
+    /// @brief Pointer to the end of model traversal history.
     HistoryEntry* historyEnd;
     bool verifyLocalStates(set<LocalState*>* localStates);
     bool verifyGlobalState(GlobalState* globalState, int depth);

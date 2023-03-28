@@ -1,7 +1,16 @@
+/**
+ * @file Utils.cpp
+ * @brief Utility functions.
+ * A collection of utility functions to use in the project.
+ */
+
 #include "Utils.hpp"
 
 extern Cfg config;
 
+/// @brief Converts a map of string and int to a string.
+/// @param env Map to be converted into a string.
+/// @return Returns string " (first_name, second_name, ..., last_name=int_value)"
 string envToString(map<string, int> env) {
     if (env.size() == 0) {
         return "";
@@ -21,6 +30,9 @@ string envToString(map<string, int> env) {
     return res;
 }
 
+/// @brief Converts pointer to an Agant into a string containing name of the agent, its initial state, transitions with their local and global names, shared count and conditions. 
+/// @param agt Pointer to an Agent to parse into a string.
+/// @return String containing all of Agent data.
 string agentToString(Agent* agt) {
     string res = "";
     res += "Agent " + agt->name + ":\n";
@@ -73,6 +85,9 @@ string agentToString(Agent* agt) {
     return res;
 }
 
+/// @brief Converts pointer to the LocalModels into a string cointaining all Agent instances from the model, initial values of the variables and names of the persistent values.
+/// @param lm Pointer to the local model to parse into a string.
+/// @return String containing all of LocalModels data.
 string localModelsToString(LocalModels* lm) {
     string res = "";
     for (const auto& agt : lm->agents) {
@@ -114,6 +129,8 @@ string localModelsToString(LocalModels* lm) {
     return res;
 }
 
+/// @brief Prints the whole GlobalModel into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents.
+/// @param globalModel Pointer to a GlobalModel to print into the console.
 void outputGlobalModel(GlobalModel* globalModel) {
     printf("\n\nGlobal model:\n");
     for (const auto globalState : globalModel->globalStates) {

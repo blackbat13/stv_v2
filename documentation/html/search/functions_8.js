@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['print_0',['print',['../class_history_dbg.html#a7c916b56b83969b47037892e2545e613',1,'HistoryDbg']]],
-  ['printcurrenthistory_1',['printCurrentHistory',['../class_verification.html#a11bc6802569c498b8b80a6c7723056d8',1,'Verification']]]
+  ['markentry_0',['markEntry',['../class_history_dbg.html#a8cb960b3f1275961adc6664b0e2f0700',1,'HistoryDbg']]]
 ];

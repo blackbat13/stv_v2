@@ -29,7 +29,7 @@ var annotated_dup =
     [ "GlobalState", "struct_global_state.html", null ],
     [ "GlobalTransition", "struct_global_transition.html", null ],
     [ "HistoryDbg", "class_history_dbg.html", "class_history_dbg" ],
-    [ "HistoryEntry", "struct_history_entry.html", null ],
+    [ "HistoryEntry", "struct_history_entry.html", "struct_history_entry" ],
     [ "LocalModels", "struct_local_models.html", null ],
     [ "LocalState", "class_local_state.html", null ],
     [ "LocalStateTemplate", "class_local_state_template.html", null ],

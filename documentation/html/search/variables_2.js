@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_0',['name',['../struct_var.html#a4f203af1d57ced7e80b3c02e2120e7c4',1,'Var']]]
+  ['entries_0',['entries',['../class_history_dbg.html#ac1c7548a15925754b18b60202a71fba0',1,'HistoryDbg']]]
 ];

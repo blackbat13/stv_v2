@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['revertlastdecision_0',['revertLastDecision',['../class_verification.html#a93f4d9152a29db35e7cee285fd925d83',1,'Verification']]]
+  ['newhistorymarkdecisionasinvalid_0',['newHistoryMarkDecisionAsInvalid',['../class_verification.html#a92b87e0dc375f1d17160492a4cb82ce5',1,'Verification']]]
 ];

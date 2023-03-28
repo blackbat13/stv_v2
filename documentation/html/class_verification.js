@@ -17,5 +17,12 @@ var class_verification =
     [ "undoLastHistoryEntry", "class_verification.html#a35a5a3380e87a9f9a802d16d4d5d49a1", null ],
     [ "verify", "class_verification.html#a2bcca3fd98e67e70b3861773221bbe0f", null ],
     [ "verifyGlobalState", "class_verification.html#a4c07b0f4ef0c6de86d1a84399adf344d", null ],
-    [ "verifyLocalStates", "class_verification.html#a6f050f20797887e631159eb430f02e18", null ]
+    [ "verifyLocalStates", "class_verification.html#a6f050f20797887e631159eb430f02e18", null ],
+    [ "generator", "class_verification.html#ab283068f07ee48981abcaa1787a98d08", null ],
+    [ "historyEnd", "class_verification.html#accd7b60752d13e14e319544cb6adb2e0", null ],
+    [ "historyStart", "class_verification.html#a0c99d888d26d30df16342201fc4b2e75", null ],
+    [ "historyToRestore", "class_verification.html#a0ee06d27394d4a35a23605f3b17a9783", null ],
+    [ "mode", "class_verification.html#a7eb395d7d6204422a426100897e4d9d6", null ],
+    [ "revertToGlobalState", "class_verification.html#a7065922fca10a441a01ae63500a2d529", null ],
+    [ "seleneFormula", "class_verification.html#abd4e5c9f9353ab4248856f29e3df5e7a", null ]
 ];

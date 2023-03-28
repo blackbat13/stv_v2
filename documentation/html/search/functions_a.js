@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['undohistoryuntil_0',['undoHistoryUntil',['../class_verification.html#a04b9c8350bd9983b59e4e76cfb352927',1,'Verification']]],
-  ['undolasthistoryentry_1',['undoLastHistoryEntry',['../class_verification.html#a35a5a3380e87a9f9a802d16d4d5d49a1',1,'Verification']]]
+  ['outputglobalmodel_0',['outputGlobalModel',['../_utils_8cpp.html#ae45accf23ba6404b9b292d148e3eda27',1,'outputGlobalModel(GlobalModel *globalModel):&#160;Utils.cpp'],['../_utils_8hpp.html#ae45accf23ba6404b9b292d148e3eda27',1,'outputGlobalModel(GlobalModel *globalModel):&#160;Utils.cpp']]]
 ];

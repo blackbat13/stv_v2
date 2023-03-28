@@ -108,7 +108,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4babfc0b2bac49fc968ea4c831cbf192"><td class="mdescLeft">&#160;</td><td class="mdescRight">A destructor for <a class="el" href="class_history_dbg.html">HistoryDbg</a>. <br /></td></tr>
 <tr class="separator:a4babfc0b2bac49fc968ea4c831cbf192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71e384214004c96c5837c62d41fd4767"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_history_dbg.html#a71e384214004c96c5837c62d41fd4767">addEntry</a> (<a class="el" href="struct_history_entry.html">HistoryEntry</a> *entry)</td></tr>
-<tr class="memdesc:a71e384214004c96c5837c62d41fd4767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a <a class="el" href="struct_history_entry.html">HistoryEntry</a> to the debug history.  <br /></td></tr>
+<tr class="memdesc:a71e384214004c96c5837c62d41fd4767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> to the debug history.  <br /></td></tr>
 <tr class="separator:a71e384214004c96c5837c62d41fd4767"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cb960b3f1275961adc6664b0e2f0700"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_history_dbg.html#a8cb960b3f1275961adc6664b0e2f0700">markEntry</a> (<a class="el" href="struct_history_entry.html">HistoryEntry</a> *entry, char chr)</td></tr>
 <tr class="memdesc:a8cb960b3f1275961adc6664b0e2f0700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks an entry in the degug history with a char.  <br /></td></tr>
@@ -117,13 +117,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7c916b56b83969b47037892e2545e613"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints every entry from the algorithm's path.  <br /></td></tr>
 <tr class="separator:a7c916b56b83969b47037892e2545e613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26dc59aaa0f58b2c8124853a80766c35"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_history_entry.html">HistoryEntry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_history_dbg.html#a26dc59aaa0f58b2c8124853a80766c35">cloneEntry</a> (<a class="el" href="struct_history_entry.html">HistoryEntry</a> *entry)</td></tr>
-<tr class="memdesc:a26dc59aaa0f58b2c8124853a80766c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="struct_history_entry.html">HistoryEntry</a> pointer exists in the debug history.  <br /></td></tr>
+<tr class="memdesc:a26dc59aaa0f58b2c8124853a80766c35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> pointer exists in the debug history.  <br /></td></tr>
 <tr class="separator:a26dc59aaa0f58b2c8124853a80766c35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac1c7548a15925754b18b60202a71fba0"><td class="memItemLeft" align="right" valign="top"><a id="ac1c7548a15925754b18b60202a71fba0" name="ac1c7548a15925754b18b60202a71fba0"></a>
 vector&lt; pair&lt; <a class="el" href="struct_history_entry.html">HistoryEntry</a> *, char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>entries</b></td></tr>
+<tr class="memdesc:ac1c7548a15925754b18b60202a71fba0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pair of history entries and a char marking history type. <br /></td></tr>
 <tr class="separator:ac1c7548a15925754b18b60202a71fba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -143,10 +144,10 @@ vector&lt; pair&lt; <a class="el" href="struct_history_entry.html">HistoryEntry<
       </table>
 </div><div class="memdoc">
 
-<p>Adds a <a class="el" href="struct_history_entry.html">HistoryEntry</a> to the debug history. </p>
+<p>Adds a <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> to the debug history. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entry</td><td>A pointer to the <a class="el" href="struct_history_entry.html">HistoryEntry</a> that will be added to the history. </td></tr>
+    <tr><td class="paramname">entry</td><td>A pointer to the <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> that will be added to the history. </td></tr>
   </table>
   </dd>
 </dl>
@@ -169,10 +170,10 @@ vector&lt; pair&lt; <a class="el" href="struct_history_entry.html">HistoryEntry<
       </table>
 </div><div class="memdoc">
 
-<p>Checks if the <a class="el" href="struct_history_entry.html">HistoryEntry</a> pointer exists in the debug history. </p>
+<p>Checks if the <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> pointer exists in the debug history. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entry</td><td>A pointer to a <a class="el" href="struct_history_entry.html">HistoryEntry</a> to be checked. </td></tr>
+    <tr><td class="paramname">entry</td><td>A pointer to a <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> to be checked. </td></tr>
   </table>
   </dd>
 </dl>
@@ -209,8 +210,8 @@ vector&lt; pair&lt; <a class="el" href="struct_history_entry.html">HistoryEntry<
 <p>Marks an entry in the degug history with a char. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">entry</td><td>A pointer to a <a class="el" href="struct_history_entry.html">HistoryEntry</a> that is supposed to be marked. </td></tr>
-    <tr><td class="paramname">chr</td><td>A char that will be made into a pair with a <a class="el" href="struct_history_entry.html">HistoryEntry</a>. </td></tr>
+    <tr><td class="paramname">entry</td><td>A pointer to a <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a> that is supposed to be marked. </td></tr>
+    <tr><td class="paramname">chr</td><td>A char that will be made into a pair with a <a class="el" href="struct_history_entry.html" title="Structure used to save model traversal history.">HistoryEntry</a>. </td></tr>
   </table>
   </dd>
 </dl>
