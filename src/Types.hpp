@@ -7,6 +7,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "reader/expressions.hpp"
 
 using namespace std;
 
@@ -64,8 +65,15 @@ struct Condition {
     int comparedValue;
 };
 
+// [YK]: template, as here coalition is just a string
+struct FormulaTemplate{
+   set<string>* coalition;
+   ExprNode* formula;
+};
+
 struct Formula {
     set<Agent*> coalition;
+    ExprNode* p; // [YK]: temporary solution to encode <<coalution>> G p
 };
 
 class Agent {

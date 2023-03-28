@@ -21,3 +21,5 @@ shared[2] in_Train1: green -> red
 shared[2] out_Train1: red -> green
 shared[2] in_Train2: green -> red
 shared[2] out_Train2: red -> green
+
+FORMULA: <<Train1>>[](Train1_pos==1 || Train1_pos==2 || Train1_pos==3)

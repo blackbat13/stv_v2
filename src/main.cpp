@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <tuple>
 
 using namespace std;
 
@@ -15,8 +16,6 @@ int main(int argc, char* argv[]) {
     struct timeval tb, te;
     gettimeofday(&tb, NULL);
     
-    string agentName = "";
-
     // read default values from config.txt
     ifstream ifs("config.txt", ifstream::in);
     if (ifs.is_open() == true) {
@@ -33,11 +32,9 @@ int main(int argc, char* argv[]) {
                 if(val=="1"){
                     config.fname = "../src/examples/trains/Trains.txt";
                 }else if(val=="2"){
-                    config.fname = "../src/examples/ssvr/Selene_Select_Vote_Revoting_2v_1cv_3c_3rev_share.txt";
-                    agentName = "Coercer1";
+                    config.fname = "../src/examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
                 }else if(val=="3"){
                     config.fname = "../src/examples/svote/Simple_voting.txt";
-                    agentName = "Coercer1";
                 }
             }else if(key=="OUTPUT_LOCAL_MODELS"){
                 config.output_local_models = (val=="1");
@@ -77,20 +74,23 @@ int main(int argc, char* argv[]) {
     }
 
     auto tp = new TestParser();
-    auto localModels = tp->parse(config.fname);
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
     
     if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
     }
     
-    // Formula
-    Formula* formula = new Formula();
-    for (const auto agent : localModels->agents) {
-        if (agent->name == agentName) {
-            formula->coalition.insert(agent);
-            break;
-        }
-    }
+    // // Formula
+    // Formula* formula = new Formula();
+    // for (const auto agent : localModels->agents) {
+    //     if (agent->name == agentName) {
+    //         formula->coalition.insert(agent);
+    //         break;
+    //     }
+    // }
 
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
