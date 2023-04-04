@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['undohistoryuntil_0',['undoHistoryUntil',['../class_verification.html#a04b9c8350bd9983b59e4e76cfb352927',1,'Verification']]],
-  ['undolasthistoryentry_1',['undoLastHistoryEntry',['../class_verification.html#a35a5a3380e87a9f9a802d16d4d5d49a1',1,'Verification']]]
+  ['setident_0',['setIdent',['../class_agent_template.html#ac040b408b9bdf0392711ae7a33cde091',1,'AgentTemplate']]],
+  ['setinitstate_1',['setInitState',['../class_agent_template.html#ad83e0b70459e922677acffc59c79c001',1,'AgentTemplate']]]
 ];

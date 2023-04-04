@@ -1,3 +1,9 @@
+/**
+ * @file nodes.hpp
+ * @brief Parser templates.
+ * Class for setting up a new objects from a parser.
+ */
+
 #ifndef __NODES_H
 #define __NODES_H
 
@@ -11,11 +17,20 @@
 using namespace std;
 
 /* Klasa reprezentująca przypisanie */
+/// @brief Represents an assingment.
 class Assignment {
    public:
-      string ident;     // do czego przypisujemy
-      ExprNode *value;   // co przypisujemy
-   
+      /// @brief To what we should assign a value.
+      string ident;
+      // do czego przypisujemy
+
+      /// @brief A value to be assigned.
+      ExprNode *value;
+      // co przypisujemy
+
+      /// @brief Constructor for an Assignment class.
+      /// @param _ident To what we should assign a value.
+      /// @param _exp A value to be assigned.
       Assignment(string _ident, ExprNode *_exp): ident(_ident), value(_exp) {};
       
       // wykonaj przypisanie w danym środowisku
@@ -56,12 +71,16 @@ class LocalStateTemplate {
 /* Klasa reprezentująca pojedynczego agenta po wczytaniu jego opisu z pliku */
 class AgentTemplate {
       // identyfikator agenta
+      /// @brief Agent identifier.
       string ident;
       // stan startowy
+      /// @brief Agent initial state.
       string initState;
       // zbiór zmiennych lokalnych (local)
+      /// @brief A set of local variables.
       set<string>* localVars;
       // zbiór zmiennych trwałych (persistent)
+      /// @brief A set of persistent variables.
       set<string>* persistentVars;
       // początkowa inicjacja
       set<Assignment*>* initialAssignments;

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>stv_v2: src/Verification.hpp File Reference</title>
+<title>stv_v2: Verification.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -97,8 +97,8 @@ $(document).ready(function(){initNavTree('_verification_8hpp.html',''); initResi
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;stack&gt;</code><br />
-<code>#include &quot;Types.hpp&quot;</code><br />
-<code>#include &quot;GlobalModelGenerator.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="_types_8hpp_source.html">Types.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_global_model_generator_8hpp_source.html">GlobalModelGenerator.hpp</a>&quot;</code><br />
 <code>#include &quot;SeleneFormula.hpp&quot;</code><br />
 </div>
 <p><a href="_verification_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -131,7 +131,7 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a359b96afed1805b959d60e2c69b373f5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_verification_8hpp.html#a359b96afed1805b959d60e2c69b373f5">verStatusToStr</a> (GlobalStateVerificationStatus status)</td></tr>
+<tr class="memitem:a359b96afed1805b959d60e2c69b373f5"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_verification_8hpp.html#a359b96afed1805b959d60e2c69b373f5">verStatusToStr</a> (<a class="el" href="_types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048">GlobalStateVerificationStatus</a> status)</td></tr>
 <tr class="memdesc:a359b96afed1805b959d60e2c69b373f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts global verification status into a string.  <br /></td></tr>
 <tr class="separator:a359b96afed1805b959d60e2c69b373f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -178,9 +178,9 @@ Functions</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a50d1448013c6f17125caee18aa418af7" name="a46c8a310cf4c094f8c80e1cb8dc1f911a50d1448013c6f17125caee18aa418af7"></a>NORMAL&#160;</td><td class="fielddoc"><p>Normal model traversal. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf" name="a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf"></a>REVERT&#160;</td><td class="fielddoc"><p>??? </p>
+<tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf" name="a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf"></a>REVERT&#160;</td><td class="fielddoc"><p>Backtracking through recursion with state rollback. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380" name="a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380"></a>RESTORE&#160;</td><td class="fielddoc"><p>??? </p>
+<tr><td class="fieldname"><a id="a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380" name="a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380"></a>RESTORE&#160;</td><td class="fielddoc"><p>Backtracking through recursion. </p>
 </td></tr>
 </table>
 
@@ -196,7 +196,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">string verStatusToStr </td>
           <td>(</td>
-          <td class="paramtype">GlobalStateVerificationStatus&#160;</td>
+          <td class="paramtype"><a class="el" href="_types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048">GlobalStateVerificationStatus</a>&#160;</td>
           <td class="paramname"><em>status</em></td><td>)</td>
           <td></td>
         </tr>

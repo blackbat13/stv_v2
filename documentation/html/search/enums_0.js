@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['historyentrytype_0',['HistoryEntryType',['../_verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4',1,'Verification.hpp']]]
+  ['conditionoperator_0',['ConditionOperator',['../_types_8hpp.html#adab1b2b49825a75bed998dd77963eff9',1,'Types.hpp']]]
 ];

@@ -1,12 +1,24 @@
+/**
+ * @file GlobalModelGenerator.cpp
+ * @brief Generator of a global model.
+ * Class for initializing and generating a global model.
+ */
+
 #include "GlobalModelGenerator.hpp"
 #include <iostream>
 
+/// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
 }
 
+/// @brief Destructor for GlobalModelGenerator class.
 GlobalModelGenerator::~GlobalModelGenerator() {
 }
 
+/// @brief Initializes a global model from local models and a formula.
+/// @param localModels Pointer to LocalModels that will construct a global model.
+/// @param formula Pointer to a Formula to include into the model.
+/// @return Returns a pointer to initial state of the global model.
 GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* formula) {
     this->localModels = localModels;
     this->formula = formula;
@@ -16,6 +28,8 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     return this->globalModel->initState;
 }
 
+/// @brief ???
+/// @param state ???
 void GlobalModelGenerator::expandState(GlobalState* state) {
     if (state->isExpanded) {
         return;
@@ -37,6 +51,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
     state->isExpanded = true;
 }
 
+/// @brief ???
 void GlobalModelGenerator::expandAllStates() {
     set<GlobalState*> statesToExpand;
     statesToExpand.insert(this->globalModel->initState);
@@ -56,14 +71,20 @@ void GlobalModelGenerator::expandAllStates() {
     }
 }
 
+/// @brief Get for a GlobalModel used in initialization.
+/// @return Returns a pointer to a global model.
 GlobalModel* GlobalModelGenerator::getCurrentGlobalModel() {
     return this->globalModel;
 }
 
+/// @brief Get for the Formula used in initialization.
+/// @return 
 Formula* GlobalModelGenerator::getFormula() {
     return this->formula;
 }
 
+/// @brief Generates initial state of the model from GlobalModel in memory.
+/// @return Returns a pointer to an initial GlobalState.
 GlobalState* GlobalModelGenerator::generateInitState() {
     set<LocalState*> localStates;
     for (const auto agt : this->globalModel->agents) {
@@ -81,6 +102,11 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     return initState;
 }
 
+/// @brief ???
+/// @param localStates ???
+/// @param viaLocalTransitions ???
+/// @param prevGlobalState ???
+/// @return ???
 GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {
     #if VERBOSE
         cout << "GMG:genState" << " : ";
@@ -172,6 +198,10 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>
     return globalState;
 }
 
+/// @brief ???
+/// @param fromGlobalState ???
+/// @param localTransitions ???
+/// @param transitionsByAgent ???
 void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent) {
     auto agentWithTransitions = *transitionsByAgent.begin();
     map<Agent*, vector<LocalTransition*>> transitionsByOtherAgents = transitionsByAgent;
@@ -196,6 +226,10 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
     }
 }
 
+/// @brief ???
+/// @param localTransition ???
+/// @param globalState ???
+/// @return ???
 bool GlobalModelGenerator::checkLocalTransitionConditions(LocalTransition* localTransition, GlobalState* globalState) {
     for (const auto condition : localTransition->conditions) {
         auto currentValue = globalState->vars[condition->var];
@@ -213,6 +247,9 @@ bool GlobalModelGenerator::checkLocalTransitionConditions(LocalTransition* local
     return true;
 }
 
+/// @brief Creates a hash from a set of LocalState and an Agent.
+/// @param localStates Pointer to a set of pointers of LocalState and pointer to and Agent to turn into a hash.
+/// @return Returns a string with a hash.
 string GlobalModelGenerator::computeEpistemicClassHash(set<LocalState*>* localStates, Agent* agent) {
     string hash = "";
     for (const auto localState : *localStates) {
@@ -224,6 +261,9 @@ string GlobalModelGenerator::computeEpistemicClassHash(set<LocalState*>* localSt
     return hash;
 }
 
+/// @brief Creates a hash from a set of LocalState.
+/// @param localStates Pointer to a set of pointers of LocalState to turn into a hash.
+/// @return Returns a string with a hash.
 string GlobalModelGenerator::computeGlobalStateHash(set<LocalState*>* localStates) {
     string hash = "";
     for (const auto localState : *localStates) {
@@ -232,6 +272,10 @@ string GlobalModelGenerator::computeGlobalStateHash(set<LocalState*>* localState
     return hash;
 }
 
+/// @brief Checks if a set of LocalState is already an epistemic class for a given Agent, if not, creates a new one.
+/// @param localStates Local states from agent.
+/// @param agent Agent for which to check the existence of an epistemic class.
+/// @return A pointer to a new or existing EpistemicClass.
 EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(set<LocalState*>* localStates, Agent* agent) {
     string hash = this->computeEpistemicClassHash(localStates, agent);
     if (this->globalModel->epistemicClasses.find(agent) == this->globalModel->epistemicClasses.end()) {
@@ -247,6 +291,10 @@ EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(set<LocalState*
     return epistemicClassesForAgent->at(hash);
 }
 
+/// @brief ???
+/// @param localStates ???
+/// @param epistemicClass ???
+/// @return ???
 GlobalState* GlobalModelGenerator::findGlobalStateInEpistemicClass(set<LocalState*>* localStates, EpistemicClass* epistemicClass) {
     string hash = this->computeGlobalStateHash(localStates);
     if (epistemicClass->globalStates.count(hash) == 0) {

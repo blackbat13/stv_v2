@@ -95,36 +95,51 @@ $(document).ready(function(){initNavTree('struct_global_state.html',''); initRes
   <div class="headertitle"><div class="title">GlobalState Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a single global state.  
+ <a href="struct_global_state.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_types_8hpp_source.html">Types.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aa687c3850ec9a843ae3e903ee555e00c"><td class="memItemLeft" align="right" valign="top"><a id="aa687c3850ec9a843ae3e903ee555e00c" name="aa687c3850ec9a843ae3e903ee555e00c"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memdesc:aa687c3850ec9a843ae3e903ee555e00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the global state. <br /></td></tr>
 <tr class="separator:aa687c3850ec9a843ae3e903ee555e00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441ac69c0383abf8feb652daab8b33b7"><td class="memItemLeft" align="right" valign="top"><a id="a441ac69c0383abf8feb652daab8b33b7" name="a441ac69c0383abf8feb652daab8b33b7"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>hash</b></td></tr>
+<tr class="memdesc:a441ac69c0383abf8feb652daab8b33b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash of the global state used in quick checks if the states are in the same epistemic class. <br /></td></tr>
 <tr class="separator:a441ac69c0383abf8feb652daab8b33b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a527373fc0711c77277191a4c9d89dccc"><td class="memItemLeft" align="right" valign="top"><a id="a527373fc0711c77277191a4c9d89dccc" name="a527373fc0711c77277191a4c9d89dccc"></a>
 map&lt; <a class="el" href="struct_var.html">Var</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vars</b></td></tr>
+<tr class="memdesc:a527373fc0711c77277191a4c9d89dccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of model variables and their current values. <br /></td></tr>
 <tr class="separator:a527373fc0711c77277191a4c9d89dccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5d81b1f8e057f2ae62513f1471ba0c1"><td class="memItemLeft" align="right" valign="top"><a id="ae5d81b1f8e057f2ae62513f1471ba0c1" name="ae5d81b1f8e057f2ae62513f1471ba0c1"></a>
 map&lt; <a class="el" href="class_agent.html">Agent</a> *, <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>epistemicClasses</b></td></tr>
+<tr class="memdesc:ae5d81b1f8e057f2ae62513f1471ba0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of agents and the epistemic classes that belongs to the respective agent. <br /></td></tr>
 <tr class="separator:ae5d81b1f8e057f2ae62513f1471ba0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd4eaea4861b96810c9e1de175a0c35a"><td class="memItemLeft" align="right" valign="top"><a id="afd4eaea4861b96810c9e1de175a0c35a" name="afd4eaea4861b96810c9e1de175a0c35a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isExpanded</b></td></tr>
+<tr class="memdesc:afd4eaea4861b96810c9e1de175a0c35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">??? <br /></td></tr>
 <tr class="separator:afd4eaea4861b96810c9e1de175a0c35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7fb8df92923463538071039a0066a6d"><td class="memItemLeft" align="right" valign="top"><a id="ae7fb8df92923463538071039a0066a6d" name="ae7fb8df92923463538071039a0066a6d"></a>
-GlobalStateVerificationStatus&#160;</td><td class="memItemRight" valign="bottom"><b>verificationStatus</b></td></tr>
+<a class="el" href="_types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048">GlobalStateVerificationStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><b>verificationStatus</b></td></tr>
+<tr class="memdesc:ae7fb8df92923463538071039a0066a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current verifivation status of this state. <br /></td></tr>
 <tr class="separator:ae7fb8df92923463538071039a0066a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab82eec24f8aae99faf18d6434487d0d7"><td class="memItemLeft" align="right" valign="top"><a id="ab82eec24f8aae99faf18d6434487d0d7" name="ab82eec24f8aae99faf18d6434487d0d7"></a>
 set&lt; <a class="el" href="struct_global_transition.html">GlobalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>globalTransitions</b></td></tr>
+<tr class="memdesc:ab82eec24f8aae99faf18d6434487d0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every <a class="el" href="struct_global_transition.html" title="Represents a single global transition.">GlobalTransition</a> in the model. <br /></td></tr>
 <tr class="separator:ab82eec24f8aae99faf18d6434487d0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a567d8b2e461ed46b4ec31d51a777efe4"><td class="memItemLeft" align="right" valign="top"><a id="a567d8b2e461ed46b4ec31d51a777efe4" name="a567d8b2e461ed46b4ec31d51a777efe4"></a>
 set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>localStates</b></td></tr>
+<tr class="memdesc:a567d8b2e461ed46b4ec31d51a777efe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">??? <br /></td></tr>
 <tr class="separator:a567d8b2e461ed46b4ec31d51a777efe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/<a class="el" href="_types_8hpp_source.html">Types.hpp</a></li>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a single global state. </p>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="_types_8hpp_source.html">Types.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7ehistorydbg_0',['~HistoryDbg',['../class_history_dbg.html#a4babfc0b2bac49fc968ea4c831cbf192',1,'HistoryDbg']]],
-  ['_7everification_1',['~Verification',['../class_verification.html#a39d8f0c78a0a0e006dc38fa05bc1183e',1,'Verification']]]
+  ['undohistoryuntil_0',['undoHistoryUntil',['../class_verification.html#a04b9c8350bd9983b59e4e76cfb352927',1,'Verification']]],
+  ['undolasthistoryentry_1',['undoLastHistoryEntry',['../class_verification.html#a35a5a3380e87a9f9a802d16d4d5d49a1',1,'Verification']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['state_5fstatus_0',['STATE_STATUS',['../_verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492',1,'Verification.hpp']]]
+  ['normal_0',['NORMAL',['../_verification_8hpp.html#a46c8a310cf4c094f8c80e1cb8dc1f911a50d1448013c6f17125caee18aa418af7',1,'Verification.hpp']]],
+  ['notequals_1',['NotEquals',['../_types_8hpp.html#adab1b2b49825a75bed998dd77963eff9a76f4827b86e898b493aaf637968f0fe8',1,'Types.hpp']]]
 ];

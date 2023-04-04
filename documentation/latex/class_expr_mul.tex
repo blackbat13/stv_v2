@@ -1,26 +1,38 @@
 \hypertarget{class_expr_mul}{}\doxysection{Expr\+Mul Class Reference}
 \label{class_expr_mul}\index{ExprMul@{ExprMul}}
+
+
+Node for multiplication.  
+
+
+
+
+{\ttfamily \#include $<$expressions.\+hpp$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_expr_mul_a3f74e06a3f392ee0c4053ebcc7f967c4}\label{class_expr_mul_a3f74e06a3f392ee0c4053ebcc7f967c4}} 
 {\bfseries Expr\+Mul} (\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+rarg)
 \item 
-virtual int \mbox{\hyperlink{class_expr_mul_a97269387c273426fb3f76cf74618d944}{eval}} (Environment \&env)
+virtual int \mbox{\hyperlink{class_expr_mul_a97269387c273426fb3f76cf74618d944}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
 \end{DoxyCompactItemize}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}\label{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}} 
-virtual int {\bfseries eval} (Environment \&env)=0
+virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Node for multiplication. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_expr_mul_a97269387c273426fb3f76cf74618d944}\label{class_expr_mul_a97269387c273426fb3f76cf74618d944}} 
 \index{ExprMul@{ExprMul}!eval@{eval}}
 \index{eval@{eval}!ExprMul@{ExprMul}}
 \doxysubsubsection{\texorpdfstring{eval()}{eval()}}
-{\footnotesize\ttfamily int Expr\+Mul\+::eval (\begin{DoxyParamCaption}\item[{Environment \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int Expr\+Mul\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -30,5 +42,5 @@ Implements \mbox{\hyperlink{class_expr_node}{Expr\+Node}}.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/reader/expressions.\+hpp\item 
-src/reader/expressions.\+cc\end{DoxyCompactItemize}
+\mbox{\hyperlink{expressions_8hpp}{expressions.\+hpp}}\item 
+\mbox{\hyperlink{expressions_8cc}{expressions.\+cc}}\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mark_5fdecision_5fas_5finvalid_0',['MARK_DECISION_AS_INVALID',['../_verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae',1,'Verification.hpp']]]
+  ['equals_0',['Equals',['../_types_8hpp.html#adab1b2b49825a75bed998dd77963eff9afa6a5ecec423d5155e4bebb7a23442f6',1,'Types.hpp']]]
 ];

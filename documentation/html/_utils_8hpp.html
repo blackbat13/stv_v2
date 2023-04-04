@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>stv_v2: src/Utils.hpp File Reference</title>
+<title>stv_v2: Utils.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('_utils_8hpp.html',''); initResizable()
   <div class="headertitle"><div class="title">Utils.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;Types.hpp&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="_types_8hpp_source.html">Types.hpp</a>&quot;</code><br />
 <code>#include &quot;Constants.hpp&quot;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
@@ -114,10 +114,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:afc39e476fc50026d8b3da7fc9298b001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts pointer to an Agant into a string containing name of the agent, its initial state, transitions with their local and global names, shared count and conditions.  <br /></td></tr>
 <tr class="separator:afc39e476fc50026d8b3da7fc9298b001"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eba8577045f3559f063d6327dcc7f30"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utils_8hpp.html#a7eba8577045f3559f063d6327dcc7f30">localModelsToString</a> (<a class="el" href="struct_local_models.html">LocalModels</a> *lm)</td></tr>
-<tr class="memdesc:a7eba8577045f3559f063d6327dcc7f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts pointer to the <a class="el" href="struct_local_models.html">LocalModels</a> into a string cointaining all <a class="el" href="class_agent.html">Agent</a> instances from the model, initial values of the variables and names of the persistent values.  <br /></td></tr>
+<tr class="memdesc:a7eba8577045f3559f063d6327dcc7f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts pointer to the <a class="el" href="struct_local_models.html" title="Represents a single local model, contains all agents and variables.">LocalModels</a> into a string cointaining all <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> instances from the model, initial values of the variables and names of the persistent values.  <br /></td></tr>
 <tr class="separator:a7eba8577045f3559f063d6327dcc7f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae45accf23ba6404b9b292d148e3eda27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utils_8hpp.html#ae45accf23ba6404b9b292d148e3eda27">outputGlobalModel</a> (<a class="el" href="struct_global_model.html">GlobalModel</a> *globalModel)</td></tr>
-<tr class="memdesc:ae45accf23ba6404b9b292d148e3eda27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the whole <a class="el" href="struct_global_model.html">GlobalModel</a> into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents.  <br /></td></tr>
+<tr class="memdesc:ae45accf23ba6404b9b292d148e3eda27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the whole <a class="el" href="struct_global_model.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents.  <br /></td></tr>
 <tr class="separator:ae45accf23ba6404b9b292d148e3eda27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5cfa822422f5ca06a58b1d0443ac8b8b" name="a5cfa822422f5ca06a58b1d0443ac8b8b"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b> ()</td></tr>
@@ -143,11 +143,11 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b
 <p>Converts pointer to an Agant into a string containing name of the agent, its initial state, transitions with their local and global names, shared count and conditions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">agt</td><td>Pointer to an <a class="el" href="class_agent.html">Agent</a> to parse into a string. </td></tr>
+    <tr><td class="paramname">agt</td><td>Pointer to an <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> to parse into a string. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String containing all of <a class="el" href="class_agent.html">Agent</a> data. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>String containing all of <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> data. </dd></dl>
 
 </div>
 </div>
@@ -194,14 +194,14 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b
       </table>
 </div><div class="memdoc">
 
-<p>Converts pointer to the <a class="el" href="struct_local_models.html">LocalModels</a> into a string cointaining all <a class="el" href="class_agent.html">Agent</a> instances from the model, initial values of the variables and names of the persistent values. </p>
+<p>Converts pointer to the <a class="el" href="struct_local_models.html" title="Represents a single local model, contains all agents and variables.">LocalModels</a> into a string cointaining all <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> instances from the model, initial values of the variables and names of the persistent values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">lm</td><td>Pointer to the local model to parse into a string. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String containing all of <a class="el" href="struct_local_models.html">LocalModels</a> data. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>String containing all of <a class="el" href="struct_local_models.html" title="Represents a single local model, contains all agents and variables.">LocalModels</a> data. </dd></dl>
 
 </div>
 </div>
@@ -221,10 +221,10 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b
       </table>
 </div><div class="memdoc">
 
-<p>Prints the whole <a class="el" href="struct_global_model.html">GlobalModel</a> into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. </p>
+<p>Prints the whole <a class="el" href="struct_global_model.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">globalModel</td><td>Pointer to a <a class="el" href="struct_global_model.html">GlobalModel</a> to print into the console. </td></tr>
+    <tr><td class="paramname">globalModel</td><td>Pointer to a <a class="el" href="struct_global_model.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> to print into the console. </td></tr>
   </table>
   </dd>
 </dl>

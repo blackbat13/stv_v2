@@ -1,34 +1,46 @@
 \hypertarget{struct_global_state}{}\doxysection{Global\+State Struct Reference}
 \label{struct_global_state}\index{GlobalState@{GlobalState}}
+
+
+Represents a single global state.  
+
+
+
+
+{\ttfamily \#include $<$Types.\+hpp$>$}
+
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{struct_global_state_aa687c3850ec9a843ae3e903ee555e00c}\label{struct_global_state_aa687c3850ec9a843ae3e903ee555e00c}} 
 int {\bfseries id}
-\item 
+\begin{DoxyCompactList}\small\item\em Identifier of the global state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_a441ac69c0383abf8feb652daab8b33b7}\label{struct_global_state_a441ac69c0383abf8feb652daab8b33b7}} 
 string {\bfseries hash}
-\item 
+\begin{DoxyCompactList}\small\item\em Hash of the global state used in quick checks if the states are in the same epistemic class. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_a527373fc0711c77277191a4c9d89dccc}\label{struct_global_state_a527373fc0711c77277191a4c9d89dccc}} 
 map$<$ \mbox{\hyperlink{struct_var}{Var}} $\ast$, int $>$ {\bfseries vars}
-\item 
+\begin{DoxyCompactList}\small\item\em Map of model variables and their current values. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_ae5d81b1f8e057f2ae62513f1471ba0c1}\label{struct_global_state_ae5d81b1f8e057f2ae62513f1471ba0c1}} 
 map$<$ \mbox{\hyperlink{class_agent}{Agent}} $\ast$, \mbox{\hyperlink{struct_epistemic_class}{Epistemic\+Class}} $\ast$ $>$ {\bfseries epistemic\+Classes}
-\item 
+\begin{DoxyCompactList}\small\item\em Map of agents and the epistemic classes that belongs to the respective agent. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_afd4eaea4861b96810c9e1de175a0c35a}\label{struct_global_state_afd4eaea4861b96810c9e1de175a0c35a}} 
 bool {\bfseries is\+Expanded}
-\item 
+\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_ae7fb8df92923463538071039a0066a6d}\label{struct_global_state_ae7fb8df92923463538071039a0066a6d}} 
-Global\+State\+Verification\+Status {\bfseries verification\+Status}
-\item 
+\mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} {\bfseries verification\+Status}
+\begin{DoxyCompactList}\small\item\em Current verifivation status of this state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_ab82eec24f8aae99faf18d6434487d0d7}\label{struct_global_state_ab82eec24f8aae99faf18d6434487d0d7}} 
 set$<$ \mbox{\hyperlink{struct_global_transition}{Global\+Transition}} $\ast$ $>$ {\bfseries global\+Transitions}
-\item 
+\begin{DoxyCompactList}\small\item\em Every \mbox{\hyperlink{struct_global_transition}{Global\+Transition}} in the model. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_global_state_a567d8b2e461ed46b4ec31d51a777efe4}\label{struct_global_state_a567d8b2e461ed46b4ec31d51a777efe4}} 
 set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ {\bfseries local\+States}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Represents a single global state. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/Types.\+hpp\end{DoxyCompactItemize}
+\mbox{\hyperlink{_types_8hpp}{Types.\+hpp}}\end{DoxyCompactItemize}

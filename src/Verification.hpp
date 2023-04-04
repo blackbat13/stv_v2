@@ -76,8 +76,8 @@ public:
 /// @brief Current model traversal mode.
 enum Mode {
     NORMAL, ///< Normal model traversal.
-    REVERT, ///< ???
-    RESTORE, ///< ???
+    REVERT, ///< Backtracking through recursion with state rollback.
+    RESTORE, ///< Backtracking through recursion.
 };
 
 class Verification {
@@ -88,13 +88,13 @@ public:
 protected:
     /// @brief Current mode of model traversal.
     Mode mode;
-    /// @brief Current lowest global state?
+    /// @brief Global state to which revert will rollback to.
     GlobalState* revertToGlobalState;
-    /// @brief ???
+    /// @brief A history of decisions to be rolled back.
     stack<HistoryEntry*> historyToRestore;
     /// @brief Holds current model and formula.
     GlobalModelGenerator* generator;
-    /// @brief ???
+    /// @brief Temporary solve for data input.
     SeleneFormula* seleneFormula;
     /// @brief Pointer to the start of model traversal history.
     HistoryEntry* historyStart;

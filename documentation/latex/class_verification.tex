@@ -27,7 +27,7 @@ bool \mbox{\hyperlink{class_verification_a1f4e545ca07343a09466ad9c8d214240}{are\
 \begin{DoxyCompactList}\small\item\em Compares two \mbox{\hyperlink{struct_global_state}{Global\+State}} and checks if their \mbox{\hyperlink{struct_epistemic_class}{Epistemic\+Class}} is the same. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_verification_affb58285fe7d8b6f18fa6260acd67d6c}{add\+History\+Decision}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{struct_global_transition}{Global\+Transition}} $\ast$ecision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} of the type DECISION and puts it on top of the stack of the decision history. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_verification_a4dcd5bfda3f174b6d69a4e34d1a447d2}{add\+History\+State\+Status}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$global\+State, Global\+State\+Verification\+Status prev\+Status, Global\+State\+Verification\+Status new\+Status)
+void \mbox{\hyperlink{class_verification_a4dcd5bfda3f174b6d69a4e34d1a447d2}{add\+History\+State\+Status}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} prev\+Status, \mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} new\+Status)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} of the type STATE\+\_\+\+STATUS and puts it to the top of the decision history. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_verification_add0805598d4f6e214a7e99355e34765e}{add\+History\+Context}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$global\+State, int depth, \mbox{\hyperlink{struct_global_transition}{Global\+Transition}} $\ast$decision, bool global\+Transition\+Controlled)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} of the type CONTEXT and puts it to the top of the decision history. \end{DoxyCompactList}\item 
@@ -51,16 +51,16 @@ void \mbox{\hyperlink{class_verification_a11bc6802569c498b8b80a6c7723056d8}{prin
 \begin{DoxyCompactList}\small\item\em Current mode of model traversal. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_verification_a7065922fca10a441a01ae63500a2d529}\label{class_verification_a7065922fca10a441a01ae63500a2d529}} 
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ {\bfseries revert\+To\+Global\+State}
-\begin{DoxyCompactList}\small\item\em Current lowest global state? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Global state to which revert will rollback to. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_verification_a0ee06d27394d4a35a23605f3b17a9783}\label{class_verification_a0ee06d27394d4a35a23605f3b17a9783}} 
 stack$<$ \mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$ $>$ {\bfseries history\+To\+Restore}
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A history of decisions to be rolled back. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_verification_ab283068f07ee48981abcaa1787a98d08}\label{class_verification_ab283068f07ee48981abcaa1787a98d08}} 
 \mbox{\hyperlink{class_global_model_generator}{Global\+Model\+Generator}} $\ast$ {\bfseries generator}
 \begin{DoxyCompactList}\small\item\em Holds current model and formula. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_verification_abd4e5c9f9353ab4248856f29e3df5e7a}\label{class_verification_abd4e5c9f9353ab4248856f29e3df5e7a}} 
 \mbox{\hyperlink{class_selene_formula}{Selene\+Formula}} $\ast$ {\bfseries selene\+Formula}
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Temporary solve for data input. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_verification_a0c99d888d26d30df16342201fc4b2e75}\label{class_verification_a0c99d888d26d30df16342201fc4b2e75}} 
 \mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$ {\bfseries history\+Start}
 \begin{DoxyCompactList}\small\item\em Pointer to the start of model traversal history. \end{DoxyCompactList}\item 
@@ -147,7 +147,7 @@ Creates a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} of the type MA
 \index{Verification@{Verification}!addHistoryStateStatus@{addHistoryStateStatus}}
 \index{addHistoryStateStatus@{addHistoryStateStatus}!Verification@{Verification}}
 \doxysubsubsection{\texorpdfstring{addHistoryStateStatus()}{addHistoryStateStatus()}}
-{\footnotesize\ttfamily void Verification\+::add\+History\+State\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$}]{global\+State,  }\item[{Global\+State\+Verification\+Status}]{prev\+Status,  }\item[{Global\+State\+Verification\+Status}]{new\+Status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void Verification\+::add\+History\+State\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$}]{global\+State,  }\item[{\mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{prev\+Status,  }\item[{\mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{new\+Status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -378,5 +378,5 @@ Returns true if there is a \mbox{\hyperlink{class_local_state}{Local\+State}} wi
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-src/\mbox{\hyperlink{_verification_8hpp}{Verification.\+hpp}}\item 
-src/\mbox{\hyperlink{_verification_8cpp}{Verification.\+cpp}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{_verification_8hpp}{Verification.\+hpp}}\item 
+\mbox{\hyperlink{_verification_8cpp}{Verification.\+cpp}}\end{DoxyCompactItemize}

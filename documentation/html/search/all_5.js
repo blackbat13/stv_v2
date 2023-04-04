@@ -1,11 +1,23 @@
 var searchData=
 [
-  ['generator_0',['generator',['../class_verification.html#ab283068f07ee48981abcaa1787a98d08',1,'Verification']]],
-  ['getepistemicclassforglobalstate_1',['getEpistemicClassForGlobalState',['../class_verification.html#a7259a1ef834cc71f0bf7586f4fb27ba3',1,'Verification']]],
-  ['globalmodel_2',['GlobalModel',['../struct_global_model.html',1,'']]],
-  ['globalmodelgenerator_3',['GlobalModelGenerator',['../class_global_model_generator.html',1,'']]],
-  ['globalstate_4',['GlobalState',['../struct_global_state.html',1,'']]],
-  ['globalstate_5',['globalState',['../struct_history_entry.html#a40cf881a40a89a6af6cc1783872de7e1',1,'HistoryEntry']]],
-  ['globaltransition_6',['GlobalTransition',['../struct_global_transition.html',1,'']]],
-  ['globaltransitioncontrolled_7',['globalTransitionControlled',['../struct_history_entry.html#a315b7c1c00f62c64f2266a6331df65d6',1,'HistoryEntry']]]
+  ['generateagent_0',['generateAgent',['../class_agent_template.html#aae7682958ba875e773c52a1d51543d84',1,'AgentTemplate']]],
+  ['generateglobaltransitions_1',['generateGlobalTransitions',['../class_global_model_generator.html#ae39a5696671934e19af0c81b1b00bd99',1,'GlobalModelGenerator']]],
+  ['generateinitstate_2',['generateInitState',['../class_global_model_generator.html#a3b233fda6152b674804997ccbbb838ee',1,'GlobalModelGenerator']]],
+  ['generatestatefromlocalstates_3',['generateStateFromLocalStates',['../class_global_model_generator.html#af254ce4e97619dc6e4ff939fb9708b44',1,'GlobalModelGenerator']]],
+  ['generator_4',['generator',['../class_verification.html#ab283068f07ee48981abcaa1787a98d08',1,'Verification']]],
+  ['getcurrentglobalmodel_5',['getCurrentGlobalModel',['../class_global_model_generator.html#a8115d1786015dee46c171e0295c35a4a',1,'GlobalModelGenerator']]],
+  ['getepistemicclassforglobalstate_6',['getEpistemicClassForGlobalState',['../class_verification.html#a7259a1ef834cc71f0bf7586f4fb27ba3',1,'Verification']]],
+  ['getformula_7',['getFormula',['../class_global_model_generator.html#a9bf572d8e168df504b19f14a1833097e',1,'GlobalModelGenerator']]],
+  ['globalmodel_8',['GlobalModel',['../struct_global_model.html',1,'']]],
+  ['globalmodel_9',['globalModel',['../class_global_model_generator.html#a714b963d4b205add73e1bef642ff8477',1,'GlobalModelGenerator']]],
+  ['globalmodelgenerator_10',['GlobalModelGenerator',['../class_global_model_generator.html',1,'GlobalModelGenerator'],['../class_global_model_generator.html#a02e538bcb34f1789e72a6db5eaffdf09',1,'GlobalModelGenerator::GlobalModelGenerator()']]],
+  ['globalmodelgenerator_2ecpp_11',['GlobalModelGenerator.cpp',['../_global_model_generator_8cpp.html',1,'']]],
+  ['globalmodelgenerator_2ehpp_12',['GlobalModelGenerator.hpp',['../_global_model_generator_8hpp.html',1,'']]],
+  ['globalstate_13',['GlobalState',['../struct_global_state.html',1,'']]],
+  ['globalstate_14',['globalState',['../struct_history_entry.html#a40cf881a40a89a6af6cc1783872de7e1',1,'HistoryEntry']]],
+  ['globalstates_15',['globalStates',['../struct_global_model.html#adc5b27422d2f1f31cb1fbe251855ff6e',1,'GlobalModel::globalStates()'],['../struct_epistemic_class.html#a9c472fb5f4678b5145d6b9d66f0d8bfe',1,'EpistemicClass::globalStates()']]],
+  ['globalstateverificationstatus_16',['GlobalStateVerificationStatus',['../_types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048',1,'Types.hpp']]],
+  ['globaltransition_17',['GlobalTransition',['../struct_global_transition.html',1,'']]],
+  ['globaltransitioncontrolled_18',['globalTransitionControlled',['../struct_history_entry.html#a315b7c1c00f62c64f2266a6331df65d6',1,'HistoryEntry']]],
+  ['globaltransitions_19',['globalTransitions',['../struct_global_model.html#acedd39c3f744a0823b8c555e921bd2a2',1,'GlobalModel::globalTransitions()'],['../struct_global_state.html#ab82eec24f8aae99faf18d6434487d0d7',1,'GlobalState::globalTransitions()']]]
 ];

@@ -1,3 +1,9 @@
+/**
+ * @file expressions.hpp
+ * @brief Eval and helper class for expressions.
+ * Eval and helper class for expressions.
+ */
+
 #ifndef __EXPRESSIONS_H
 #define __EXPRESSIONS_H
 
@@ -6,9 +12,12 @@
 
 using namespace std;
 
+/// @brief ???
 typedef map<string, int> Environment;
 
 // węzeł bazowy dla wyrażeń
+
+/// @brief Base node for expressions.
 class ExprNode {
    
    public:
@@ -17,9 +26,13 @@ class ExprNode {
 };
 
 // węzeł dla stałej
+
+/// @brief Node for a constant.
 class ExprConst: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    int val;
    
    public:
@@ -28,9 +41,13 @@ class ExprConst: public ExprNode {
 };
 
 // węzeł dla identyfikatora
+
+/// @brief Node for an identifier.
 class ExprIdent: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    string ident;
    
    public:
@@ -39,9 +56,13 @@ class ExprIdent: public ExprNode {
 };
 
 // węzeł dla dodawań
+
+/// @brief Node for addition.
 class ExprAdd: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -50,9 +71,13 @@ class ExprAdd: public ExprNode {
 };
 
 // węzeł dla odejmowań
+
+/// @brief Node for subtraction.
 class ExprSub: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -61,9 +86,13 @@ class ExprSub: public ExprNode {
 };
 
 // węzeł dla mnożeń
+
+/// @brief Node for multiplication.
 class ExprMul: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -72,9 +101,13 @@ class ExprMul: public ExprNode {
 };
 
 // węzeł dla dzieleń
+
+/// @brief Node for division.
 class ExprDiv: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -83,9 +116,13 @@ class ExprDiv: public ExprNode {
 };
 
 // węzeł dla reszty z dzielenia
+
+/// @brief Node for modulo.
 class ExprRem: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -94,9 +131,13 @@ class ExprRem: public ExprNode {
 };
 
 // węzeł dla operatora AND
+
+/// @brief Node for AND operator.
 class ExprAnd: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -105,9 +146,13 @@ class ExprAnd: public ExprNode {
 };
 
 // węzeł dla operatora OR
+
+/// @brief Node for OR operator.
 class ExprOr: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -116,9 +161,13 @@ class ExprOr: public ExprNode {
 };
 
 // węzeł dla operatora NOT
+
+/// @brief Node for NOT operator.
 class ExprNot: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *arg;
 
    public:
@@ -127,9 +176,13 @@ class ExprNot: public ExprNode {
 };
 
 // węzeł dla operatora "=="
+
+/// @brief Node for "==" operator.
 class ExprEq: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -138,9 +191,13 @@ class ExprEq: public ExprNode {
 };
 
 // węzeł dla operatora "!="
+
+/// @brief Node for "!=" operator.
 class ExprNe: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -149,9 +206,13 @@ class ExprNe: public ExprNode {
 };
 
 // węzeł dla operatora "<"
+
+/// @brief Node for "<" operator.
 class ExprLt: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -160,9 +221,13 @@ class ExprLt: public ExprNode {
 };
 
 // węzeł dla operatora "<="
+
+/// @brief Node for "<=" operator.
 class ExprLe: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -171,9 +236,13 @@ class ExprLe: public ExprNode {
 };
 
 // węzeł dla operatora ">"
+
+/// @brief Node for ">" operator.
 class ExprGt: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:
@@ -182,9 +251,13 @@ class ExprGt: public ExprNode {
 };
 
 // węzeł dla operatora ">="
+
+/// @brief Node for ">=" operator.
 class ExprGe: public ExprNode {
    
    // argumenty
+
+   /// @brief Expression argument.
    ExprNode *larg, *rarg;
 
    public:

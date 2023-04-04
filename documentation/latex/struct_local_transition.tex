@@ -1,43 +1,55 @@
 \hypertarget{struct_local_transition}{}\doxysection{Local\+Transition Struct Reference}
 \label{struct_local_transition}\index{LocalTransition@{LocalTransition}}
+
+
+Represents a single local transition, containing id, global name, local name, is shared and count of the appearances.  
+
+
+
+
+{\ttfamily \#include $<$Types.\+hpp$>$}
+
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{struct_local_transition_af0317d03188c22a2c4ec8189d5da85b5}\label{struct_local_transition_af0317d03188c22a2c4ec8189d5da85b5}} 
 int {\bfseries id}
-\item 
+\begin{DoxyCompactList}\small\item\em Identifier of the transition. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a71d43959302dac3665c1168a7ecc9bcf}\label{struct_local_transition_a71d43959302dac3665c1168a7ecc9bcf}} 
 string {\bfseries name}
-\item 
+\begin{DoxyCompactList}\small\item\em Name of the transition (global). \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_afeabf0f7f88c17046e9c984a1f17c972}\label{struct_local_transition_afeabf0f7f88c17046e9c984a1f17c972}} 
 string {\bfseries local\+Name}
-\item 
+\begin{DoxyCompactList}\small\item\em Name of the transition (local). \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_aaad00680a812ed1671a65015d4e51754}\label{struct_local_transition_aaad00680a812ed1671a65015d4e51754}} 
 bool {\bfseries is\+Shared}
-\item 
+\begin{DoxyCompactList}\small\item\em Is the transition appearing somewhere else, true if yes, false if no. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}\label{struct_local_transition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}} 
 int {\bfseries shared\+Count}
-\item 
+\begin{DoxyCompactList}\small\item\em Count of recurring appearances of this transition. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a4340db4bd83de2e26da7fbb03c5d91b9}\label{struct_local_transition_a4340db4bd83de2e26da7fbb03c5d91b9}} 
 set$<$ \mbox{\hyperlink{struct_condition}{Condition}} $\ast$ $>$ {\bfseries conditions}
-\item 
+\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a76cc56df82e2f612af2f121f0b5fdb9b}\label{struct_local_transition_a76cc56df82e2f612af2f121f0b5fdb9b}} 
 set$<$ \mbox{\hyperlink{struct_var_assignment}{Var\+Assignment}} $\ast$ $>$ {\bfseries var\+Asssignments}
-\item 
+\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_acba4a9838fb8ae0cdfa23b8d581c7a49}\label{struct_local_transition_acba4a9838fb8ae0cdfa23b8d581c7a49}} 
 \mbox{\hyperlink{class_agent}{Agent}} $\ast$ {\bfseries agent}
-\item 
+\begin{DoxyCompactList}\small\item\em Binding to an \mbox{\hyperlink{class_agent}{Agent}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a8db6a207cd85580c50b42d45a28e0471}\label{struct_local_transition_a8db6a207cd85580c50b42d45a28e0471}} 
 \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ {\bfseries from}
-\item 
+\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{class_local_state}{Local\+State}} from which this transition goes from. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a3532810736170bc57a6a25aa09a7ee28}\label{struct_local_transition_a3532810736170bc57a6a25aa09a7ee28}} 
 \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ {\bfseries to}
-\item 
+\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{class_local_state}{Local\+State}} from which this transition goes to. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{struct_local_transition_a4f5ec6416a2f5fe3266eedaefd1578f5}\label{struct_local_transition_a4f5ec6416a2f5fe3266eedaefd1578f5}} 
 set$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ {\bfseries shared\+Local\+Transitions}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Represents a single local transition, containing id, global name, local name, is shared and count of the appearances. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-src/Types.\+hpp\end{DoxyCompactItemize}
+\mbox{\hyperlink{_types_8hpp}{Types.\+hpp}}\end{DoxyCompactItemize}

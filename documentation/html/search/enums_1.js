@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mode_0',['Mode',['../_verification_8hpp.html#a46c8a310cf4c094f8c80e1cb8dc1f911',1,'Verification.hpp']]]
+  ['globalstateverificationstatus_0',['GlobalStateVerificationStatus',['../_types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048',1,'Types.hpp']]]
 ];

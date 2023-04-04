@@ -1,3 +1,9 @@
+/**
+ * @file TextParser.cc
+ * @brief Model parser.
+ * A parser for converting a text file into a model.
+ */
+
 #include "TestParser.hpp"
 #include "reader/nodes.hpp"
 #include <stdio.h>
@@ -9,12 +15,17 @@ extern void yyrestart(FILE*);
 
 set<AgentTemplate*>* modelDescription;
 
+/// @brief TestParser constructor.
 TestParser::TestParser() {
 }
 
+/// @brief TestParser destructor.
 TestParser::~TestParser() {
 }
 
+/// @brief Parses a file with given name into a usable model.
+/// @param fileName Name of the file to be converted into a model.
+/// @return Pointer to a model created from a given file.
 LocalModels * TestParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");

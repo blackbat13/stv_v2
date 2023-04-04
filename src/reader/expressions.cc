@@ -1,5 +1,14 @@
+/**
+ * @file expressions.cc
+ * @brief Eval and helper class for expressions.
+ * Eval and helper class for expressions.
+ */
+
 #include "expressions.hpp"
 
+/// @brief 
+/// @param env 
+/// @return 
 int ExprIdent::eval( Environment& env ) {
    auto res = env.find(ident);
    return res == env.end() ? -1 : (*res).second;

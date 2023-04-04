@@ -1,3 +1,9 @@
+/**
+ * @file GlobalModelGenerator.hpp
+ * @brief Generator of a global model.
+ * Class for initializing and generating a global model.
+ */
+
 #ifndef SELENE_GLOBAL_MODEL_GENERATOR
 #define SELENE_GLOBAL_MODEL_GENERATOR
 
@@ -17,8 +23,11 @@ public:
     Formula* getFormula();
     
 protected:
+    /// @brief LocalModels used in initModel.
     LocalModels* localModels;
+    /// @brief Formula used in initModel.
     Formula* formula;
+    /// @brief GlobalModel created in initModel.
     GlobalModel* globalModel;
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(set<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);

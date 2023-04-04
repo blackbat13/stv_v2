@@ -1,5 +1,5 @@
-\hypertarget{_verification_8hpp}{}\doxysection{src/\+Verification.hpp File Reference}
-\label{_verification_8hpp}\index{src/Verification.hpp@{src/Verification.hpp}}
+\hypertarget{_verification_8hpp}{}\doxysection{Verification.\+hpp File Reference}
+\label{_verification_8hpp}\index{Verification.hpp@{Verification.hpp}}
 {\ttfamily \#include $<$stack$>$}\newline
 {\ttfamily \#include \char`\"{}Types.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Global\+Model\+Generator.\+hpp\char`\"{}}\newline
@@ -30,7 +30,7 @@ enum \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-string \mbox{\hyperlink{_verification_8hpp_a359b96afed1805b959d60e2c69b373f5}{ver\+Status\+To\+Str}} (Global\+State\+Verification\+Status status)
+string \mbox{\hyperlink{_verification_8hpp_a359b96afed1805b959d60e2c69b373f5}{ver\+Status\+To\+Str}} (\mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} status)
 \begin{DoxyCompactList}\small\item\em Converts global verification status into a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -79,11 +79,11 @@ NORMAL&Normal model traversal. \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{REVERT@{REVERT}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!REVERT@{REVERT}}}\mbox{\Hypertarget{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf}\label{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf}} 
-REVERT&??? \\
+REVERT&Backtracking through recursion with state rollback. \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{RESTORE@{RESTORE}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!RESTORE@{RESTORE}}}\mbox{\Hypertarget{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380}\label{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380}} 
-RESTORE&??? \\
+RESTORE&Backtracking through recursion. \\
 \hline
 
 \end{DoxyEnumFields}
@@ -94,7 +94,7 @@ RESTORE&??? \\
 \index{Verification.hpp@{Verification.hpp}!verStatusToStr@{verStatusToStr}}
 \index{verStatusToStr@{verStatusToStr}!Verification.hpp@{Verification.hpp}}
 \doxysubsubsection{\texorpdfstring{verStatusToStr()}{verStatusToStr()}}
-{\footnotesize\ttfamily string ver\+Status\+To\+Str (\begin{DoxyParamCaption}\item[{Global\+State\+Verification\+Status}]{status }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily string ver\+Status\+To\+Str (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{status }\end{DoxyParamCaption})}
 
 
 

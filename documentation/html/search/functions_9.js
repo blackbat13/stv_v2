@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newhistorymarkdecisionasinvalid_0',['newHistoryMarkDecisionAsInvalid',['../class_verification.html#a92b87e0dc375f1d17160492a4cb82ce5',1,'Verification']]]
+  ['markentry_0',['markEntry',['../class_history_dbg.html#a8cb960b3f1275961adc6664b0e2f0700',1,'HistoryDbg']]]
 ];

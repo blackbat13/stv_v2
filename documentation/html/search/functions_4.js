@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getepistemicclassforglobalstate_0',['getEpistemicClassForGlobalState',['../class_verification.html#a7259a1ef834cc71f0bf7586f4fb27ba3',1,'Verification']]]
+  ['findglobalstateinepistemicclass_0',['findGlobalStateInEpistemicClass',['../class_global_model_generator.html#a81969a319955d7db12a6f74b347dc67e',1,'GlobalModelGenerator']]],
+  ['findorcreateepistemicclass_1',['findOrCreateEpistemicClass',['../class_global_model_generator.html#a4c42244f7e8902f95c34915ae69ce8df',1,'GlobalModelGenerator']]]
 ];

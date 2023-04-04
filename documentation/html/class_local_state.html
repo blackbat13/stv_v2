@@ -96,37 +96,78 @@ $(document).ready(function(){initNavTree('class_local_state.html',''); initResiz
   <div class="headertitle"><div class="title">LocalState Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a single <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, containing id, name and internal variables.  
+ <a href="class_local_state.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_types_8hpp_source.html">Types.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afc41e99633f48c66337ece5bc1a70dd4"><td class="memItemLeft" align="right" valign="top"><a id="afc41e99633f48c66337ece5bc1a70dd4" name="afc41e99633f48c66337ece5bc1a70dd4"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>compare</b> (<a class="el" href="class_local_state.html">LocalState</a> *state)</td></tr>
+<tr class="memitem:afc41e99633f48c66337ece5bc1a70dd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_local_state.html#afc41e99633f48c66337ece5bc1a70dd4">compare</a> (<a class="el" href="class_local_state.html">LocalState</a> *state)</td></tr>
+<tr class="memdesc:afc41e99633f48c66337ece5bc1a70dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function comparing two states.  <br /></td></tr>
 <tr class="separator:afc41e99633f48c66337ece5bc1a70dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ae235a01f583577bba291360f829ffac9"><td class="memItemLeft" align="right" valign="top"><a id="ae235a01f583577bba291360f829ffac9" name="ae235a01f583577bba291360f829ffac9"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="memdesc:ae235a01f583577bba291360f829ffac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">State identifier. <br /></td></tr>
 <tr class="separator:ae235a01f583577bba291360f829ffac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f147438a2008244801118ed93009a6d"><td class="memItemLeft" align="right" valign="top"><a id="a8f147438a2008244801118ed93009a6d" name="a8f147438a2008244801118ed93009a6d"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="memdesc:a8f147438a2008244801118ed93009a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">State name. <br /></td></tr>
 <tr class="separator:a8f147438a2008244801118ed93009a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2af4f19b9d5300ba6716a30821f75f51"><td class="memItemLeft" align="right" valign="top"><a id="a2af4f19b9d5300ba6716a30821f75f51" name="a2af4f19b9d5300ba6716a30821f75f51"></a>
 map&lt; <a class="el" href="struct_var.html">Var</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vars</b></td></tr>
+<tr class="memdesc:a2af4f19b9d5300ba6716a30821f75f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">??? <br /></td></tr>
 <tr class="separator:a2af4f19b9d5300ba6716a30821f75f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34bdc2e97427c07b102d81034df14c17"><td class="memItemLeft" align="right" valign="top"><a id="a34bdc2e97427c07b102d81034df14c17" name="a34bdc2e97427c07b102d81034df14c17"></a>
 map&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>environment</b></td></tr>
+<tr class="memdesc:a34bdc2e97427c07b102d81034df14c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">??? <br /></td></tr>
 <tr class="separator:a34bdc2e97427c07b102d81034df14c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab30bcd35d7b42bdea54df7be732f2009"><td class="memItemLeft" align="right" valign="top"><a id="ab30bcd35d7b42bdea54df7be732f2009" name="ab30bcd35d7b42bdea54df7be732f2009"></a>
 <a class="el" href="class_agent.html">Agent</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>agent</b></td></tr>
+<tr class="memdesc:ab30bcd35d7b42bdea54df7be732f2009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding to an <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>. <br /></td></tr>
 <tr class="separator:ab30bcd35d7b42bdea54df7be732f2009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13e96c06cf28959be8e87e4045d33265"><td class="memItemLeft" align="right" valign="top"><a id="a13e96c06cf28959be8e87e4045d33265" name="a13e96c06cf28959be8e87e4045d33265"></a>
 set&lt; <a class="el" href="struct_local_transition.html">LocalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>localTransitions</b></td></tr>
+<tr class="memdesc:a13e96c06cf28959be8e87e4045d33265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding to the set of <a class="el" href="struct_local_transition.html" title="Represents a single local transition, containing id, global name, local name, is shared and count of ...">LocalTransition</a>. <br /></td></tr>
 <tr class="separator:a13e96c06cf28959be8e87e4045d33265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a single <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, containing id, name and internal variables. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="afc41e99633f48c66337ece5bc1a70dd4" name="afc41e99633f48c66337ece5bc1a70dd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc41e99633f48c66337ece5bc1a70dd4">&#9670;&#160;</a></span>compare()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LocalState::compare </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_local_state.html">LocalState</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function comparing two states. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>A pointer to <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> to which this state should be compared to. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the current <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is the same as the passed one, otherwise false. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/<a class="el" href="_types_8hpp_source.html">Types.hpp</a></li>
-<li>src/Types.cc</li>
+<li><a class="el" href="_types_8hpp_source.html">Types.hpp</a></li>
+<li><a class="el" href="_types_8cc.html">Types.cc</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
