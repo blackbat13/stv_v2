@@ -13,7 +13,7 @@ var annotated_dup =
     [ "ExprEq", "class_expr_eq.html", null ],
     [ "ExprGe", "class_expr_ge.html", null ],
     [ "ExprGt", "class_expr_gt.html", null ],
-    [ "ExprIdent", "class_expr_ident.html", null ],
+    [ "ExprIdent", "class_expr_ident.html", "class_expr_ident" ],
     [ "ExprLe", "class_expr_le.html", null ],
     [ "ExprLt", "class_expr_lt.html", null ],
     [ "ExprMul", "class_expr_mul.html", null ],

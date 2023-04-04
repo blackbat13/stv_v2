@@ -112,11 +112,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:af8a60f8b1efcd9eb7615c6ed458d81e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a global model from local models and a formula.  <br /></td></tr>
 <tr class="separator:af8a60f8b1efcd9eb7615c6ed458d81e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9b21fa1580e4dd4479c00d192a97501"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#ad9b21fa1580e4dd4479c00d192a97501">expandState</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *state)</td></tr>
-<tr class="memdesc:ad9b21fa1580e4dd4479c00d192a97501"><td class="mdescLeft">&#160;</td><td class="mdescRight">???  <br /></td></tr>
+<tr class="memdesc:ad9b21fa1580e4dd4479c00d192a97501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goes through all <a class="el" href="struct_global_transition.html" title="Represents a single global transition.">GlobalTransition</a> in a given <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> and creates new GlobalStates connected to the given one.  <br /></td></tr>
 <tr class="separator:ad9b21fa1580e4dd4479c00d192a97501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="memItemLeft" align="right" valign="top"><a id="a8f2f18be55f04da04ad4bcd1c9f0eef2" name="a8f2f18be55f04da04ad4bcd1c9f0eef2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>expandAllStates</b> ()</td></tr>
-<tr class="memdesc:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">??? <br /></td></tr>
+<tr class="memdesc:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands the states starting from the initial <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> and continues until there are no more states to expand. <br /></td></tr>
 <tr class="separator:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8115d1786015dee46c171e0295c35a4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_global_model.html">GlobalModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#a8115d1786015dee46c171e0295c35a4a">getCurrentGlobalModel</a> ()</td></tr>
 <tr class="memdesc:a8115d1786015dee46c171e0295c35a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get for a <a class="el" href="struct_global_model.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> used in initialization.  <br /></td></tr>
@@ -131,13 +131,13 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a3b233fda6152b674804997ccbbb838ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates initial state of the model from <a class="el" href="struct_global_model.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> in memory.  <br /></td></tr>
 <tr class="separator:a3b233fda6152b674804997ccbbb838ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af254ce4e97619dc6e4ff939fb9708b44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#af254ce4e97619dc6e4ff939fb9708b44">generateStateFromLocalStates</a> (set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt; *localStates, set&lt; <a class="el" href="struct_local_transition.html">LocalTransition</a> * &gt; *viaLocalTransitions, <a class="el" href="struct_global_state.html">GlobalState</a> *prevGlobalState)</td></tr>
-<tr class="memdesc:af254ce4e97619dc6e4ff939fb9708b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">???  <br /></td></tr>
+<tr class="memdesc:af254ce4e97619dc6e4ff939fb9708b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ???  <br /></td></tr>
 <tr class="separator:af254ce4e97619dc6e4ff939fb9708b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae39a5696671934e19af0c81b1b00bd99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#ae39a5696671934e19af0c81b1b00bd99">generateGlobalTransitions</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *fromGlobalState, set&lt; <a class="el" href="struct_local_transition.html">LocalTransition</a> * &gt; localTransitions, map&lt; <a class="el" href="class_agent.html">Agent</a> *, vector&lt; <a class="el" href="struct_local_transition.html">LocalTransition</a> * &gt; &gt; transitionsByAgent)</td></tr>
-<tr class="memdesc:ae39a5696671934e19af0c81b1b00bd99"><td class="mdescLeft">&#160;</td><td class="mdescRight">???  <br /></td></tr>
+<tr class="memdesc:ae39a5696671934e19af0c81b1b00bd99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all shared global transitions to a <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a>.  <br /></td></tr>
 <tr class="separator:ae39a5696671934e19af0c81b1b00bd99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abacfe0205b17337d10e2d80b1cd3cec5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#abacfe0205b17337d10e2d80b1cd3cec5">checkLocalTransitionConditions</a> (<a class="el" href="struct_local_transition.html">LocalTransition</a> *localTransition, <a class="el" href="struct_global_state.html">GlobalState</a> *globalState)</td></tr>
-<tr class="memdesc:abacfe0205b17337d10e2d80b1cd3cec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">???  <br /></td></tr>
+<tr class="memdesc:abacfe0205b17337d10e2d80b1cd3cec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if all conditions for a given local transition in a given global state are fulfilled.  <br /></td></tr>
 <tr class="separator:abacfe0205b17337d10e2d80b1cd3cec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73cf40fd36ec61f15cce6d52772c884f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#a73cf40fd36ec61f15cce6d52772c884f">computeEpistemicClassHash</a> (set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt; *localStates, <a class="el" href="class_agent.html">Agent</a> *agent)</td></tr>
 <tr class="memdesc:a73cf40fd36ec61f15cce6d52772c884f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a hash from a set of <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> and an <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>.  <br /></td></tr>
@@ -149,7 +149,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a4c42244f7e8902f95c34915ae69ce8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a set of <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one.  <br /></td></tr>
 <tr class="separator:a4c42244f7e8902f95c34915ae69ce8df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81969a319955d7db12a6f74b347dc67e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_global_state.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_global_model_generator.html#a81969a319955d7db12a6f74b347dc67e">findGlobalStateInEpistemicClass</a> (set&lt; <a class="el" href="class_local_state.html">LocalState</a> * &gt; *localStates, <a class="el" href="struct_epistemic_class.html">EpistemicClass</a> *epistemicClass)</td></tr>
-<tr class="memdesc:a81969a319955d7db12a6f74b347dc67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">???  <br /></td></tr>
+<tr class="memdesc:a81969a319955d7db12a6f74b347dc67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> from an <a class="el" href="struct_epistemic_class.html" title="Represents a single epistemic class.">EpistemicClass</a> if it exists in that episcemic class.  <br /></td></tr>
 <tr class="separator:a81969a319955d7db12a6f74b347dc67e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
@@ -202,15 +202,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>??? </p>
+<p>Checks if all conditions for a given local transition in a given global state are fulfilled. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">localTransition</td><td>??? </td></tr>
-    <tr><td class="paramname">globalState</td><td>??? </td></tr>
+    <tr><td class="paramname">localTransition</td><td>Local transition to traverse. </td></tr>
+    <tr><td class="paramname">globalState</td><td>Current global state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>??? </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if all of the necessary conditions to use that transition are fulfilled, otherwise false. </dd></dl>
 
 </div>
 </div>
@@ -310,10 +310,10 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>??? </p>
+<p>Goes through all <a class="el" href="struct_global_transition.html" title="Represents a single global transition.">GlobalTransition</a> in a given <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> and creates new GlobalStates connected to the given one. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>??? </td></tr>
+    <tr><td class="paramname">state</td><td>A state from which the expansion should start. </td></tr>
   </table>
   </dd>
 </dl>
@@ -354,15 +354,15 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>??? </p>
+<p>Gets a <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> from an <a class="el" href="struct_epistemic_class.html" title="Represents a single epistemic class.">EpistemicClass</a> if it exists in that episcemic class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">localStates</td><td>??? </td></tr>
-    <tr><td class="paramname">epistemicClass</td><td>??? </td></tr>
+    <tr><td class="paramname">localStates</td><td>Pointer to a set of pointers to <a class="el" href="class_local_state.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, from which will be generated a global state hash. </td></tr>
+    <tr><td class="paramname">epistemicClass</td><td>Epistemic class in which to check if a <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> exists. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>??? </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a pointer to a <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> if it exists in given epistemic class, otherwise returns nullptr. </dd></dl>
 
 </div>
 </div>
@@ -452,12 +452,12 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>??? </p>
+<p>Adds all shared global transitions to a <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fromGlobalState</td><td>??? </td></tr>
-    <tr><td class="paramname">localTransitions</td><td>??? </td></tr>
-    <tr><td class="paramname">transitionsByAgent</td><td>??? </td></tr>
+    <tr><td class="paramname">fromGlobalState</td><td>Global state to add transitions to. </td></tr>
+    <tr><td class="paramname">localTransitions</td><td>Initially empty, avaliable local transitions by each agent from transitionsByAgent. </td></tr>
+    <tr><td class="paramname">transitionsByAgent</td><td>Mapped transitions to an agent, only with transitions avaliable for the agent at this moment. </td></tr>
   </table>
   </dd>
 </dl>
@@ -532,16 +532,16 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>??? </p>
+<p>Creates a new <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ??? </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">localStates</td><td>??? </td></tr>
-    <tr><td class="paramname">viaLocalTransitions</td><td>??? </td></tr>
-    <tr><td class="paramname">prevGlobalState</td><td>??? </td></tr>
+    <tr><td class="paramname">localStates</td><td>LocalStates from which the new <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> will be built. </td></tr>
+    <tr><td class="paramname">viaLocalTransitions</td><td>Pointer to a set of pointers to <a class="el" href="struct_local_transition.html" title="Represents a single local transition, containing id, global name, local name, is shared and count of ...">LocalTransition</a> from which the changes in variables, as a result of traversing through the transition, will be made in a new <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a>. ??? </td></tr>
+    <tr><td class="paramname">prevGlobalState</td><td>Pointer to <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a> from which all persistent variables will be copied over from to the new <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a>. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>??? </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a pointer to a new or already existing in the same epistemic class <a class="el" href="struct_global_model.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a>. </dd></dl>
 
 </div>
 </div>
@@ -581,8 +581,7 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get for the <a class="el" href="struct_formula.html" title="Contains a coalition of Agent from the formula.">Formula</a> used in initialization. </p>
-<dl class="section return"><dt>Returns</dt><dd><br  />
- </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a pointer to the formula structure. </dd></dl>
 
 </div>
 </div>

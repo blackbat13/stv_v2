@@ -78,6 +78,7 @@ var NAVTREEINDEX0 =
 "class_expr_ge.html":[1,0,11],
 "class_expr_gt.html":[1,0,12],
 "class_expr_ident.html":[1,0,13],
+"class_expr_ident.html#a24c5b44c7995f80b82a11e4b05eac892":[1,0,13,0],
 "class_expr_le.html":[1,0,14],
 "class_expr_lt.html":[1,0,15],
 "class_expr_mul.html":[1,0,16],

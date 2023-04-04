@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('expressions_8hpp_source.html',''); ini
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>   </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>   <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      <a class="code hl_class" href="class_expr_ident.html">ExprIdent</a>(<span class="keywordtype">string</span> _ident): ident(_ident) {};</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <span class="keyword">virtual</span> <span class="keywordtype">int</span> eval( <a class="code hl_typedef" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a>&amp; env );</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="class_expr_ident.html#a24c5b44c7995f80b82a11e4b05eac892">eval</a>( <a class="code hl_typedef" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a>&amp; env );</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>};</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">// węzeł dla dodawań</span></div>
@@ -330,6 +330,7 @@ $(document).ready(function(){initNavTree('expressions_8hpp_source.html',''); ini
 <div class="ttc" id="aclass_expr_ge_html"><div class="ttname"><a href="class_expr_ge.html">ExprGe</a></div><div class="ttdoc">Node for &quot;&gt;=&quot; operator.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:256</div></div>
 <div class="ttc" id="aclass_expr_gt_html"><div class="ttname"><a href="class_expr_gt.html">ExprGt</a></div><div class="ttdoc">Node for &quot;&gt;&quot; operator.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:241</div></div>
 <div class="ttc" id="aclass_expr_ident_html"><div class="ttname"><a href="class_expr_ident.html">ExprIdent</a></div><div class="ttdoc">Node for an identifier.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:46</div></div>
+<div class="ttc" id="aclass_expr_ident_html_a24c5b44c7995f80b82a11e4b05eac892"><div class="ttname"><a href="class_expr_ident.html#a24c5b44c7995f80b82a11e4b05eac892">ExprIdent::eval</a></div><div class="ttdeci">virtual int eval(Environment &amp;env)</div><div class="ttdef"><b>Definition:</b> expressions.cc:12</div></div>
 <div class="ttc" id="aclass_expr_le_html"><div class="ttname"><a href="class_expr_le.html">ExprLe</a></div><div class="ttdoc">Node for &quot;&lt;=&quot; operator.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:226</div></div>
 <div class="ttc" id="aclass_expr_lt_html"><div class="ttname"><a href="class_expr_lt.html">ExprLt</a></div><div class="ttdoc">Node for &quot;&lt;&quot; operator.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:211</div></div>
 <div class="ttc" id="aclass_expr_mul_html"><div class="ttname"><a href="class_expr_mul.html">ExprMul</a></div><div class="ttdoc">Node for multiplication.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:91</div></div>
@@ -339,7 +340,7 @@ $(document).ready(function(){initNavTree('expressions_8hpp_source.html',''); ini
 <div class="ttc" id="aclass_expr_or_html"><div class="ttname"><a href="class_expr_or.html">ExprOr</a></div><div class="ttdoc">Node for OR operator.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:151</div></div>
 <div class="ttc" id="aclass_expr_rem_html"><div class="ttname"><a href="class_expr_rem.html">ExprRem</a></div><div class="ttdoc">Node for modulo.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:121</div></div>
 <div class="ttc" id="aclass_expr_sub_html"><div class="ttname"><a href="class_expr_sub.html">ExprSub</a></div><div class="ttdoc">Node for subtraction.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:76</div></div>
-<div class="ttc" id="aexpressions_8hpp_html_a8a6f1b2a287c010b90a38b54cc90d3e4"><div class="ttname"><a href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a></div><div class="ttdeci">map&lt; string, int &gt; Environment</div><div class="ttdoc">???</div><div class="ttdef"><b>Definition:</b> expressions.hpp:16</div></div>
+<div class="ttc" id="aexpressions_8hpp_html_a8a6f1b2a287c010b90a38b54cc90d3e4"><div class="ttname"><a href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a></div><div class="ttdeci">map&lt; string, int &gt; Environment</div><div class="ttdoc">Variable names with their values.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

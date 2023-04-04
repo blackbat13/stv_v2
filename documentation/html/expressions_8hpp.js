@@ -2,7 +2,7 @@ var expressions_8hpp =
 [
     [ "ExprNode", "class_expr_node.html", null ],
     [ "ExprConst", "class_expr_const.html", null ],
-    [ "ExprIdent", "class_expr_ident.html", null ],
+    [ "ExprIdent", "class_expr_ident.html", "class_expr_ident" ],
     [ "ExprAdd", "class_expr_add.html", null ],
     [ "ExprSub", "class_expr_sub.html", null ],
     [ "ExprMul", "class_expr_mul.html", null ],

@@ -62,7 +62,7 @@
 \contentsline {section}{\numberline {5.14}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ident Class Reference}{21}{section.5.14}%
 \contentsline {subsection}{\numberline {5.14.1}Detailed Description}{21}{subsection.5.14.1}%
 \contentsline {subsection}{\numberline {5.14.2}Member Function Documentation}{21}{subsection.5.14.2}%
-\contentsline {subsubsection}{\numberline {5.14.2.1}eval()}{22}{subsubsection.5.14.2.1}%
+\contentsline {subsubsection}{\numberline {5.14.2.1}eval()}{21}{subsubsection.5.14.2.1}%
 \contentsline {section}{\numberline {5.15}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Le Class Reference}{22}{section.5.15}%
 \contentsline {subsection}{\numberline {5.15.1}Detailed Description}{22}{subsection.5.15.1}%
 \contentsline {subsection}{\numberline {5.15.2}Member Function Documentation}{22}{subsection.5.15.2}%
@@ -81,13 +81,15 @@
 \contentsline {subsubsection}{\numberline {5.18.2.1}eval()}{25}{subsubsection.5.18.2.1}%
 \contentsline {section}{\numberline {5.19}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{25}{section.5.19}%
 \contentsline {subsection}{\numberline {5.19.1}Detailed Description}{25}{subsection.5.19.1}%
+\contentsline {subsection}{\numberline {5.19.2}Member Function Documentation}{25}{subsection.5.19.2}%
+\contentsline {subsubsection}{\numberline {5.19.2.1}eval()}{25}{subsubsection.5.19.2.1}%
 \contentsline {section}{\numberline {5.20}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Not Class Reference}{25}{section.5.20}%
 \contentsline {subsection}{\numberline {5.20.1}Detailed Description}{26}{subsection.5.20.1}%
 \contentsline {subsection}{\numberline {5.20.2}Member Function Documentation}{26}{subsection.5.20.2}%
 \contentsline {subsubsection}{\numberline {5.20.2.1}eval()}{26}{subsubsection.5.20.2.1}%
 \contentsline {section}{\numberline {5.21}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Or Class Reference}{26}{section.5.21}%
 \contentsline {subsection}{\numberline {5.21.1}Detailed Description}{26}{subsection.5.21.1}%
-\contentsline {subsection}{\numberline {5.21.2}Member Function Documentation}{26}{subsection.5.21.2}%
+\contentsline {subsection}{\numberline {5.21.2}Member Function Documentation}{27}{subsection.5.21.2}%
 \contentsline {subsubsection}{\numberline {5.21.2.1}eval()}{27}{subsubsection.5.21.2.1}%
 \contentsline {section}{\numberline {5.22}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Rem Class Reference}{27}{section.5.22}%
 \contentsline {subsection}{\numberline {5.22.1}Detailed Description}{27}{subsection.5.22.1}%
@@ -112,7 +114,7 @@
 \contentsline {subsubsection}{\numberline {5.26.1.7}generateGlobalTransitions()}{32}{subsubsection.5.26.1.7}%
 \contentsline {subsubsection}{\numberline {5.26.1.8}generateInitState()}{33}{subsubsection.5.26.1.8}%
 \contentsline {subsubsection}{\numberline {5.26.1.9}generateStateFromLocalStates()}{33}{subsubsection.5.26.1.9}%
-\contentsline {subsubsection}{\numberline {5.26.1.10}getCurrentGlobalModel()}{33}{subsubsection.5.26.1.10}%
+\contentsline {subsubsection}{\numberline {5.26.1.10}getCurrentGlobalModel()}{34}{subsubsection.5.26.1.10}%
 \contentsline {subsubsection}{\numberline {5.26.1.11}getFormula()}{34}{subsubsection.5.26.1.11}%
 \contentsline {subsubsection}{\numberline {5.26.1.12}initModel()}{34}{subsubsection.5.26.1.12}%
 \contentsline {section}{\numberline {5.27}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Struct Reference}{34}{section.5.27}%
@@ -202,26 +204,26 @@
 \contentsline {subsection}{\numberline {6.16.2}Function Documentation}{67}{subsection.6.16.2}%
 \contentsline {subsubsection}{\numberline {6.16.2.1}agentToString()}{67}{subsubsection.6.16.2.1}%
 \contentsline {subsubsection}{\numberline {6.16.2.2}envToString()}{67}{subsubsection.6.16.2.2}%
-\contentsline {subsubsection}{\numberline {6.16.2.3}localModelsToString()}{67}{subsubsection.6.16.2.3}%
+\contentsline {subsubsection}{\numberline {6.16.2.3}localModelsToString()}{68}{subsubsection.6.16.2.3}%
 \contentsline {subsubsection}{\numberline {6.16.2.4}outputGlobalModel()}{68}{subsubsection.6.16.2.4}%
 \contentsline {section}{\numberline {6.17}Utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{68}{section.6.17}%
 \contentsline {subsection}{\numberline {6.17.1}Function Documentation}{69}{subsection.6.17.1}%
 \contentsline {subsubsection}{\numberline {6.17.1.1}agentToString()}{69}{subsubsection.6.17.1.1}%
 \contentsline {subsubsection}{\numberline {6.17.1.2}envToString()}{69}{subsubsection.6.17.1.2}%
-\contentsline {subsubsection}{\numberline {6.17.1.3}localModelsToString()}{69}{subsubsection.6.17.1.3}%
+\contentsline {subsubsection}{\numberline {6.17.1.3}localModelsToString()}{70}{subsubsection.6.17.1.3}%
 \contentsline {subsubsection}{\numberline {6.17.1.4}outputGlobalModel()}{70}{subsubsection.6.17.1.4}%
 \contentsline {section}{\numberline {6.18}Utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{70}{section.6.18}%
-\contentsline {section}{\numberline {6.19}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{70}{section.6.19}%
+\contentsline {section}{\numberline {6.19}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{71}{section.6.19}%
 \contentsline {subsection}{\numberline {6.19.1}Detailed Description}{71}{subsection.6.19.1}%
 \contentsline {subsection}{\numberline {6.19.2}Function Documentation}{71}{subsection.6.19.2}%
 \contentsline {subsubsection}{\numberline {6.19.2.1}dbgHistEnt()}{71}{subsubsection.6.19.2.1}%
-\contentsline {subsubsection}{\numberline {6.19.2.2}dbgVerifStatus()}{71}{subsubsection.6.19.2.2}%
+\contentsline {subsubsection}{\numberline {6.19.2.2}dbgVerifStatus()}{72}{subsubsection.6.19.2.2}%
 \contentsline {subsubsection}{\numberline {6.19.2.3}verStatusToStr()}{72}{subsubsection.6.19.2.3}%
 \contentsline {section}{\numberline {6.20}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{72}{section.6.20}%
 \contentsline {subsection}{\numberline {6.20.1}Enumeration Type Documentation}{73}{subsection.6.20.1}%
 \contentsline {subsubsection}{\numberline {6.20.1.1}HistoryEntryType}{73}{subsubsection.6.20.1.1}%
 \contentsline {subsubsection}{\numberline {6.20.1.2}Mode}{73}{subsubsection.6.20.1.2}%
-\contentsline {subsection}{\numberline {6.20.2}Function Documentation}{73}{subsection.6.20.2}%
-\contentsline {subsubsection}{\numberline {6.20.2.1}verStatusToStr()}{73}{subsubsection.6.20.2.1}%
+\contentsline {subsection}{\numberline {6.20.2}Function Documentation}{74}{subsection.6.20.2}%
+\contentsline {subsubsection}{\numberline {6.20.2.1}verStatusToStr()}{74}{subsubsection.6.20.2.1}%
 \contentsline {section}{\numberline {6.21}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp}{74}{section.6.21}%
 \contentsline {chapter}{Index}{77}{section*.67}%

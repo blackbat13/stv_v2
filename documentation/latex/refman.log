@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2023.3.27)  4 APR 2023 14:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2023.3.27)  4 APR 2023 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -762,70 +762,6 @@ File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__pdf_internal_box=\box122
 ) (refman.aux
 
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
-LaTeX Warning: Label `class_expr_node_a5f155835c446271416ed3eb4f1d34f1f' multip
-ly defined.
-
-
 LaTeX Warning: Label `class_selene_formula_a1770deafa72b54a07e4590bdfe9bd17e' m
 ultiply defined.
 
@@ -1079,122 +1015,23 @@ Underfull \hbox (badness 10000) detected at line 149
 
 ) (class_assignment.tex [13]) (struct_cfg.tex [14]) (struct_condition.tex)
 (struct_epistemic_class.tex [15]) (class_expr_add.tex) (class_expr_and.tex
-[16]
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
+[16]) (class_expr_const.tex [17]) (class_expr_div.tex) (class_expr_eq.tex
+[18]) (class_expr_ge.tex [19]) (class_expr_gt.tex [20]) (class_expr_ident.tex
+[21]
+Underfull \hbox (badness 10000) detected at line 41
+[][][]
+ []
 
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_const.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
 
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [17]) (class_expr_div.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
+Underfull \hbox (badness 10000) in paragraph at lines 42--43
 
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_eq.tex [18]
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
+ []
 
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_ge.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [19]) (class_expr_gt.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [20]) (class_expr_ident.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_le.tex [21]
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_lt.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [22]) (class_expr_mul.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [23]) (class_expr_ne.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_node.tex
-[24]
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.15 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_not.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [25]) (class_expr_or.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_rem.tex
-[26]
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                  ) (class_expr_sub.tex
-pdfTeX warning (ext4): destination with the same identifier (name{class_expr_no
-de_a5f155835c446271416ed3eb4f1d34f1f}) has been already used, duplicate ignored
-
-<to be read again> 
-                   \relax 
-l.22 ...r_node_a5f155835c446271416ed3eb4f1d34f1f}}
-                                                   [27]) (struct_formula.tex)
-(struct_global_model.tex [28]) (class_global_model_generator.tex [29]
+) (class_expr_le.tex) (class_expr_lt.tex [22]) (class_expr_mul.tex [23])
+(class_expr_ne.tex) (class_expr_node.tex [24]) (class_expr_not.tex [25])
+(class_expr_or.tex [26]) (class_expr_rem.tex) (class_expr_sub.tex [27])
+(struct_formula.tex) (struct_global_model.tex [28])
+(class_global_model_generator.tex [29]
 Underfull \hbox (badness 2635) in paragraph at lines 40--41
 [][] $\OMS/cmsy/m/n/10 ^^C$ [] \T1/phv/m/n/10 (set$\OML/cmm/m/it/10 <$ [] $\OMS
 /cmsy/m/n/10 ^^C$ $\OML/cmm/m/it/10 >$ $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 loc
@@ -1247,12 +1084,7 @@ Underfull \hbox (badness 10000) detected at line 245
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 246--247
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 266
+Underfull \hbox (badness 10000) detected at line 265
 [][][]
  []
 
@@ -1424,11 +1256,15 @@ Underfull \hbox (badness 10000) detected at line 52
  []
 
 
+Overfull \vbox (10.08374pt too high) has occurred while \output is active []
+
+
+[67]
 Underfull \hbox (badness 10000) detected at line 70
 [][][]
  []
 
-[67]
+
 Underfull \hbox (badness 10000) detected at line 88
 [][][]
  []
@@ -1443,22 +1279,22 @@ Underfull \hbox (badness 10000) detected at line 43
 [][][]
  []
 
-
+[69]
 Underfull \hbox (badness 10000) detected at line 61
 [][][]
  []
 
-[69]
+
 Underfull \hbox (badness 10000) detected at line 79
 [][][]
  []
 
-) (_utils_8hpp_source.tex) (_verification_8cpp.tex
+) (_utils_8hpp_source.tex [70]) (_verification_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-[70] [71]
+[71]
 Underfull \hbox (badness 10000) detected at line 85
 [][][]
  []
@@ -1484,16 +1320,16 @@ Underfull \hbox (badness 10000) detected at line 108
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: A6CC7E1D7C589E99816880861D5A266A;47624.
+(rerunfilecheck)             Checksum: 1F037A18B6AAFBCB0F917E49EA440E67;48037.
  ) 
 Here is how much of TeX's memory you used:
- 19607 strings out of 476338
- 335608 string characters out of 5800206
+ 19613 strings out of 476338
+ 335706 string characters out of 5800206
  1880382 words of memory out of 5000000
- 38833 multiletter control sequences out of 15000+600000
+ 38836 multiletter control sequences out of 15000+600000
  572014 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,117p,729b,740s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,117p,729b,742s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {C:/Programy/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Programy/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmmi10.pfb><C:/Programy/MiKTeX/fonts/type1/public/amsfont
 s/cm/cmmi7.pfb><C:/Programy/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:
@@ -1505,9 +1341,9 @@ onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Programy/MiKTeX/fonts/type1/public
 ic/uhvb8a.pfb><C:/Programy/MiKTeX/fonts/type1/urw/helvetic/uhvb8ac.pfb><C:/Prog
 ramy/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Programy/MiKTeX/fonts/type1
 /urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (87 pages, 823383 bytes).
+Output written on refman.pdf (87 pages, 835847 bytes).
 PDF statistics:
- 3747 PDF objects out of 4296 (max. 8388607)
- 720 named destinations out of 1000 (max. 500000)
- 1809 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3818 PDF objects out of 4296 (max. 8388607)
+ 723 named destinations out of 1000 (max. 500000)
+ 1825 words of extra memory for PDF output out of 10000 (max. 10000000)
 

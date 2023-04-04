@@ -12,7 +12,7 @@
 
 using namespace std;
 
-/// @brief ???
+/// @brief Variable names with their values.
 typedef map<string, int> Environment;
 
 // węzeł bazowy dla wyrażeń

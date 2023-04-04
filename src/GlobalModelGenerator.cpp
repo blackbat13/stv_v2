@@ -28,8 +28,8 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     return this->globalModel->initState;
 }
 
-/// @brief ???
-/// @param state ???
+/// @brief Goes through all GlobalTransition in a given GlobalState and creates new GlobalStates connected to the given one.
+/// @param state A state from which the expansion should start.
 void GlobalModelGenerator::expandState(GlobalState* state) {
     if (state->isExpanded) {
         return;
@@ -51,7 +51,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
     state->isExpanded = true;
 }
 
-/// @brief ???
+/// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
 void GlobalModelGenerator::expandAllStates() {
     set<GlobalState*> statesToExpand;
     statesToExpand.insert(this->globalModel->initState);
@@ -78,7 +78,7 @@ GlobalModel* GlobalModelGenerator::getCurrentGlobalModel() {
 }
 
 /// @brief Get for the Formula used in initialization.
-/// @return 
+/// @return Returns a pointer to the formula structure.
 Formula* GlobalModelGenerator::getFormula() {
     return this->formula;
 }
@@ -102,11 +102,11 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     return initState;
 }
 
-/// @brief ???
-/// @param localStates ???
-/// @param viaLocalTransitions ???
-/// @param prevGlobalState ???
-/// @return ???
+/// @brief Creates a new GlobalState using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ???
+/// @param localStates LocalStates from which the new GlobalState will be built.
+/// @param viaLocalTransitions Pointer to a set of pointers to LocalTransition from which the changes in variables, as a result of traversing through the transition, will be made in a new GlobalState. ???
+/// @param prevGlobalState Pointer to GlobalState from which all persistent variables will be copied over from to the new GlobalState.
+/// @return Returns a pointer to a new or already existing in the same epistemic class GlobalModel.
 GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {
     #if VERBOSE
         cout << "GMG:genState" << " : ";
@@ -198,10 +198,10 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>
     return globalState;
 }
 
-/// @brief ???
-/// @param fromGlobalState ???
-/// @param localTransitions ???
-/// @param transitionsByAgent ???
+/// @brief Adds all shared global transitions to a GlobalState.
+/// @param fromGlobalState Global state to add transitions to.
+/// @param localTransitions Initially empty, avaliable local transitions by each agent from transitionsByAgent.
+/// @param transitionsByAgent Mapped transitions to an agent, only with transitions avaliable for the agent at this moment.
 void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent) {
     auto agentWithTransitions = *transitionsByAgent.begin();
     map<Agent*, vector<LocalTransition*>> transitionsByOtherAgents = transitionsByAgent;
@@ -226,10 +226,10 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
     }
 }
 
-/// @brief ???
-/// @param localTransition ???
-/// @param globalState ???
-/// @return ???
+/// @brief Checks if all conditions for a given local transition in a given global state are fulfilled.
+/// @param localTransition Local transition to traverse.
+/// @param globalState Current global state.
+/// @return Returns true if all of the necessary conditions to use that transition are fulfilled, otherwise false.
 bool GlobalModelGenerator::checkLocalTransitionConditions(LocalTransition* localTransition, GlobalState* globalState) {
     for (const auto condition : localTransition->conditions) {
         auto currentValue = globalState->vars[condition->var];
@@ -291,10 +291,10 @@ EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(set<LocalState*
     return epistemicClassesForAgent->at(hash);
 }
 
-/// @brief ???
-/// @param localStates ???
-/// @param epistemicClass ???
-/// @return ???
+/// @brief Gets a GlobalState from an EpistemicClass if it exists in that episcemic class.
+/// @param localStates Pointer to a set of pointers to LocalState, from which will be generated a global state hash.
+/// @param epistemicClass Epistemic class in which to check if a GlobalState exists.
+/// @return Returns a pointer to a GlobalState if it exists in given epistemic class, otherwise returns nullptr.
 GlobalState* GlobalModelGenerator::findGlobalStateInEpistemicClass(set<LocalState*>* localStates, EpistemicClass* epistemicClass) {
     string hash = this->computeGlobalStateHash(localStates);
     if (epistemicClass->globalStates.count(hash) == 0) {

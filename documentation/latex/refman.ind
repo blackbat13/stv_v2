@@ -62,7 +62,7 @@
   \item {dbgHistEnt}
     \subitem {Verification.cpp}, \hyperpage{71}
   \item {dbgVerifStatus}
-    \subitem {Verification.cpp}, \hyperpage{71}
+    \subitem {Verification.cpp}, \hyperpage{72}
   \item {DECISION}
     \subitem {Verification.hpp}, \hyperpage{73}
 
@@ -87,8 +87,9 @@
     \subitem {ExprLt}, \hyperpage{23}
     \subitem {ExprMul}, \hyperpage{24}
     \subitem {ExprNe}, \hyperpage{24}
+    \subitem {ExprNode}, \hyperpage{25}
     \subitem {ExprNot}, \hyperpage{26}
-    \subitem {ExprOr}, \hyperpage{26}
+    \subitem {ExprOr}, \hyperpage{27}
     \subitem {ExprRem}, \hyperpage{27}
     \subitem {ExprSub}, \hyperpage{28}
   \item {expandState}
@@ -120,10 +121,11 @@
   \item {ExprNe}, \hyperpage{24}
     \subitem {eval}, \hyperpage{24}
   \item {ExprNode}, \hyperpage{25}
+    \subitem {eval}, \hyperpage{25}
   \item {ExprNot}, \hyperpage{25}
     \subitem {eval}, \hyperpage{26}
   \item {ExprOr}, \hyperpage{26}
-    \subitem {eval}, \hyperpage{26}
+    \subitem {eval}, \hyperpage{27}
   \item {ExprRem}, \hyperpage{27}
     \subitem {eval}, \hyperpage{27}
   \item {ExprSub}, \hyperpage{28}
@@ -205,8 +207,8 @@
 
   \item {LocalModels}, \hyperpage{39}
   \item {localModelsToString}
-    \subitem {Utils.cpp}, \hyperpage{67}
-    \subitem {Utils.hpp}, \hyperpage{69}
+    \subitem {Utils.cpp}, \hyperpage{68}
+    \subitem {Utils.hpp}, \hyperpage{70}
   \item {LocalState}, \hyperpage{39}
     \subitem {compare}, \hyperpage{40}
   \item {LocalStateTemplate}, \hyperpage{40}
@@ -228,7 +230,7 @@
   \item {nodes.cc}, \hyperpage{58}
   \item {nodes.hpp}, \hyperpage{59}
   \item {NORMAL}
-    \subitem {Verification.hpp}, \hyperpage{73}
+    \subitem {Verification.hpp}, \hyperpage{74}
   \item {NotEquals}
     \subitem {Types.hpp}, \hyperpage{63}
 
@@ -252,9 +254,9 @@
   \indexspace
 
   \item {RESTORE}
-    \subitem {Verification.hpp}, \hyperpage{73}
+    \subitem {Verification.hpp}, \hyperpage{74}
   \item {REVERT}
-    \subitem {Verification.hpp}, \hyperpage{73}
+    \subitem {Verification.hpp}, \hyperpage{74}
   \item {revertLastDecision}
     \subitem {Verification}, \hyperpage{50}
 
@@ -303,12 +305,12 @@
   \item {Utils.cpp}, \hyperpage{66}
     \subitem {agentToString}, \hyperpage{67}
     \subitem {envToString}, \hyperpage{67}
-    \subitem {localModelsToString}, \hyperpage{67}
+    \subitem {localModelsToString}, \hyperpage{68}
     \subitem {outputGlobalModel}, \hyperpage{68}
   \item {Utils.hpp}, \hyperpage{68}, \hyperpage{70}
     \subitem {agentToString}, \hyperpage{69}
     \subitem {envToString}, \hyperpage{69}
-    \subitem {localModelsToString}, \hyperpage{69}
+    \subitem {localModelsToString}, \hyperpage{70}
     \subitem {outputGlobalModel}, \hyperpage{70}
 
   \indexspace
@@ -335,9 +337,9 @@
     \subitem {verify}, \hyperpage{51}
     \subitem {verifyGlobalState}, \hyperpage{51}
     \subitem {verifyLocalStates}, \hyperpage{51}
-  \item {Verification.cpp}, \hyperpage{70}
+  \item {Verification.cpp}, \hyperpage{71}
     \subitem {dbgHistEnt}, \hyperpage{71}
-    \subitem {dbgVerifStatus}, \hyperpage{71}
+    \subitem {dbgVerifStatus}, \hyperpage{72}
     \subitem {verStatusToStr}, \hyperpage{72}
   \item {Verification.hpp}, \hyperpage{72}, \hyperpage{74}
     \subitem {CONTEXT}, \hyperpage{73}
@@ -345,11 +347,11 @@
     \subitem {HistoryEntryType}, \hyperpage{73}
     \subitem {MARK\_DECISION\_AS\_INVALID}, \hyperpage{73}
     \subitem {Mode}, \hyperpage{73}
-    \subitem {NORMAL}, \hyperpage{73}
-    \subitem {RESTORE}, \hyperpage{73}
-    \subitem {REVERT}, \hyperpage{73}
+    \subitem {NORMAL}, \hyperpage{74}
+    \subitem {RESTORE}, \hyperpage{74}
+    \subitem {REVERT}, \hyperpage{74}
     \subitem {STATE\_STATUS}, \hyperpage{73}
-    \subitem {verStatusToStr}, \hyperpage{73}
+    \subitem {verStatusToStr}, \hyperpage{74}
   \item {VERIFIED\_OK}
     \subitem {Types.hpp}, \hyperpage{63}
   \item {verify}
@@ -361,6 +363,6 @@
     \subitem {Verification}, \hyperpage{51}
   \item {verStatusToStr}
     \subitem {Verification.cpp}, \hyperpage{72}
-    \subitem {Verification.hpp}, \hyperpage{73}
+    \subitem {Verification.hpp}, \hyperpage{74}
 
 \end{theindex}

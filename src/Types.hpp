@@ -112,6 +112,7 @@ class Agent {
         vector<LocalTransition*> localTransitions; // localTransitions[i].id == i
         
         // sprawdź, czy stan nie został już wygenerowany.
+        
         LocalState* includesState(LocalState *state);
 };
 
@@ -119,23 +120,27 @@ class Agent {
 class LocalState {
     public:
         // Data
+
         /// @brief State identifier.
         int id;
 
         /// @brief State name.
         string name;
 
-        /// @brief ???
+        /// @brief Local variables and their values.
         map<Var*, int> vars;
 
         // alternatywna wersja - może wystarczy
-        /// @brief ???
+
+        /// @brief Local variables as a name and their values. ???
         map<string, int> environment; 
      
         // komparator
+        
         bool compare(LocalState *state);
         
         // Bindings
+
         /// @brief Binding to an Agent.
         Agent* agent;
 
@@ -154,6 +159,7 @@ struct VarAssignment {
 /// @brief Represents a single local transition, containing id, global name, local name, is shared and count of the appearances.
 struct LocalTransition {
     // Data
+
     /// @brief Identifier of the transition.
     int id;
 
@@ -161,7 +167,8 @@ struct LocalTransition {
     string name;
 
     /// @brief Name of the transition (local).
-    string localName; // if empty => same as name
+    string localName;
+    // if empty => same as name
 
     /// @brief Is the transition appearing somewhere else, true if yes, false if no.
     bool isShared;
@@ -169,13 +176,14 @@ struct LocalTransition {
     /// @brief Count of recurring appearances of this transition.
     int sharedCount;
 
-    /// @brief ???
+    /// @brief Conditions that have to be fulfilled for the transition to be avaliable.
     set<Condition*> conditions;
 
-    /// @brief ???
+    /// @brief Values to be set as a result of the traversal.
     set<VarAssignment*> varAsssignments;
     
     // Bindings
+
     /// @brief Binding to an Agent.
     Agent* agent;
 
@@ -203,6 +211,7 @@ struct LocalModels {
 /// @brief Represents a global model, containing agents and a formula.
 struct GlobalModel {
     // Data
+
     /// @brief Pointers to all agents in a model.
     vector<Agent*> agents;
     // agents[i].id == i
@@ -211,6 +220,7 @@ struct GlobalModel {
     Formula* formula;
     
     // Bindings
+
     /// @brief Pointer to the initial state of the model.
     GlobalState* initState;
 
@@ -230,6 +240,7 @@ struct GlobalModel {
 /// @brief Represents a single global state.
 struct GlobalState {
     // Data
+
     /// @brief Identifier of the global state.
     int id;
 
@@ -242,37 +253,40 @@ struct GlobalState {
     /// @brief Map of agents and the epistemic classes that belongs to the respective agent.
     map<Agent*, EpistemicClass*> epistemicClasses;
 
-    /// @brief ???
+    /// @brief If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary.
     bool isExpanded;
 
     /// @brief Current verifivation status of this state.
     GlobalStateVerificationStatus verificationStatus;
     
     // Bindings
+
     /// @brief Every GlobalTransition in the model.
     set<GlobalTransition*> globalTransitions;
 
-    /// @brief ???
+    /// @brief Local states that define this global state. ???
     set<LocalState*> localStates;
 };
 
 /// @brief Represents a single global transition.
 struct GlobalTransition {
     // Data
+
     /// @brief Identifier of the transition.
     int id;
 
-    /// @brief ???
+    /// @brief Marks if the transition is invalid, true if there is no point in traversing that transition, otherwise false.
     bool isInvalidDecision;
     
     // Bindings
+
     /// @brief Binding to a GlobalState from which this transition goes from.
     GlobalState* from;
 
     /// @brief Binding to a GlobalState from which this transition goes to.
     GlobalState* to;
 
-    /// @brief ???
+    /// @brief Local transitions that define this global transition. ???
     set<LocalTransition*> localTransitions;
 };
 

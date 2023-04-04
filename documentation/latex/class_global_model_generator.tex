@@ -12,10 +12,10 @@
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ \mbox{\hyperlink{class_global_model_generator_af8a60f8b1efcd9eb7615c6ed458d81e6}{init\+Model}} (\mbox{\hyperlink{struct_local_models}{Local\+Models}} $\ast$\mbox{\hyperlink{class_global_model_generator_a0349c579912afc45e958776118103086}{local\+Models}}, \mbox{\hyperlink{struct_formula}{Formula}} $\ast$\mbox{\hyperlink{class_global_model_generator_af800f446f14a7de7350dc7c3b980872d}{formula}})
 \begin{DoxyCompactList}\small\item\em Initializes a global model from local models and a formula. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_global_model_generator_ad9b21fa1580e4dd4479c00d192a97501}{expand\+State}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$state)
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Goes through all \mbox{\hyperlink{struct_global_transition}{Global\+Transition}} in a given \mbox{\hyperlink{struct_global_state}{Global\+State}} and creates new Global\+States connected to the given one. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_global_model_generator_a8f2f18be55f04da04ad4bcd1c9f0eef2}\label{class_global_model_generator_a8f2f18be55f04da04ad4bcd1c9f0eef2}} 
 void {\bfseries expand\+All\+States} ()
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Expands the states starting from the initial \mbox{\hyperlink{struct_global_state}{Global\+State}} and continues until there are no more states to expand. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_global_model}{Global\+Model}} $\ast$ \mbox{\hyperlink{class_global_model_generator_a8115d1786015dee46c171e0295c35a4a}{get\+Current\+Global\+Model}} ()
 \begin{DoxyCompactList}\small\item\em Get for a \mbox{\hyperlink{struct_global_model}{Global\+Model}} used in initialization. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_formula}{Formula}} $\ast$ \mbox{\hyperlink{class_global_model_generator_a9bf572d8e168df504b19f14a1833097e}{get\+Formula}} ()
@@ -26,11 +26,11 @@ void {\bfseries expand\+All\+States} ()
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ \mbox{\hyperlink{class_global_model_generator_a3b233fda6152b674804997ccbbb838ee}{generate\+Init\+State}} ()
 \begin{DoxyCompactList}\small\item\em Generates initial state of the model from \mbox{\hyperlink{struct_global_model}{Global\+Model}} in memory. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ \mbox{\hyperlink{class_global_model_generator_af254ce4e97619dc6e4ff939fb9708b44}{generate\+State\+From\+Local\+States}} (set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ $\ast$local\+States, set$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ $\ast$via\+Local\+Transitions, \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$prev\+Global\+State)
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{struct_global_state}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ??? \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_global_model_generator_ae39a5696671934e19af0c81b1b00bd99}{generate\+Global\+Transitions}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$from\+Global\+State, set$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ local\+Transitions, map$<$ \mbox{\hyperlink{class_agent}{Agent}} $\ast$, vector$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ $>$ transitions\+By\+Agent)
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Adds all shared global transitions to a \mbox{\hyperlink{struct_global_state}{Global\+State}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_global_model_generator_abacfe0205b17337d10e2d80b1cd3cec5}{check\+Local\+Transition\+Conditions}} (\mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$local\+Transition, \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$global\+State)
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Checks if all conditions for a given local transition in a given global state are fulfilled. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{class_global_model_generator_a73cf40fd36ec61f15cce6d52772c884f}{compute\+Epistemic\+Class\+Hash}} (set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{class_agent}{Agent}} $\ast$agent)
 \begin{DoxyCompactList}\small\item\em Creates a hash from a set of \mbox{\hyperlink{class_local_state}{Local\+State}} and an \mbox{\hyperlink{class_agent}{Agent}}. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{class_global_model_generator_af3616869b74b17af839fdf1bdd354f49}{compute\+Global\+State\+Hash}} (set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
@@ -38,7 +38,7 @@ string \mbox{\hyperlink{class_global_model_generator_af3616869b74b17af839fdf1bdd
 \mbox{\hyperlink{struct_epistemic_class}{Epistemic\+Class}} $\ast$ \mbox{\hyperlink{class_global_model_generator_a4c42244f7e8902f95c34915ae69ce8df}{find\+Or\+Create\+Epistemic\+Class}} (set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{class_agent}{Agent}} $\ast$agent)
 \begin{DoxyCompactList}\small\item\em Checks if a set of \mbox{\hyperlink{class_local_state}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{class_agent}{Agent}}, if not, creates a new one. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ \mbox{\hyperlink{class_global_model_generator_a81969a319955d7db12a6f74b347dc67e}{find\+Global\+State\+In\+Epistemic\+Class}} (set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{struct_epistemic_class}{Epistemic\+Class}} $\ast$epistemic\+Class)
-\begin{DoxyCompactList}\small\item\em ??? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{struct_global_state}{Global\+State}} from an \mbox{\hyperlink{struct_epistemic_class}{Epistemic\+Class}} if it exists in that episcemic class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,17 +62,17 @@ string \mbox{\hyperlink{class_global_model_generator_af3616869b74b17af839fdf1bdd
 
 
 
-??? 
+Checks if all conditions for a given local transition in a given global state are fulfilled. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+Transition} & ??? \\
+{\em local\+Transition} & Local transition to traverse. \\
 \hline
-{\em global\+State} & ??? \\
+{\em global\+State} & Current global state. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-??? 
+Returns true if all of the necessary conditions to use that transition are fulfilled, otherwise false. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_global_model_generator_a73cf40fd36ec61f15cce6d52772c884f}\label{class_global_model_generator_a73cf40fd36ec61f15cce6d52772c884f}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!computeEpistemicClassHash@{computeEpistemicClassHash}}
@@ -118,11 +118,11 @@ Returns a string with a hash.
 
 
 
-??? 
+Goes through all \mbox{\hyperlink{struct_global_transition}{Global\+Transition}} in a given \mbox{\hyperlink{struct_global_state}{Global\+State}} and creates new Global\+States connected to the given one. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em state} & ??? \\
+{\em state} & A state from which the expansion should start. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_global_model_generator_a81969a319955d7db12a6f74b347dc67e}\label{class_global_model_generator_a81969a319955d7db12a6f74b347dc67e}} 
@@ -133,17 +133,17 @@ Returns a string with a hash.
 
 
 
-??? 
+Gets a \mbox{\hyperlink{struct_global_state}{Global\+State}} from an \mbox{\hyperlink{struct_epistemic_class}{Epistemic\+Class}} if it exists in that episcemic class. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+States} & ??? \\
+{\em local\+States} & Pointer to a set of pointers to \mbox{\hyperlink{class_local_state}{Local\+State}}, from which will be generated a global state hash. \\
 \hline
-{\em epistemic\+Class} & ??? \\
+{\em epistemic\+Class} & Epistemic class in which to check if a \mbox{\hyperlink{struct_global_state}{Global\+State}} exists. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-??? 
+Returns a pointer to a \mbox{\hyperlink{struct_global_state}{Global\+State}} if it exists in given epistemic class, otherwise returns nullptr. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_global_model_generator_a4c42244f7e8902f95c34915ae69ce8df}\label{class_global_model_generator_a4c42244f7e8902f95c34915ae69ce8df}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!findOrCreateEpistemicClass@{findOrCreateEpistemicClass}}
@@ -173,15 +173,15 @@ A pointer to a new or existing \mbox{\hyperlink{struct_epistemic_class}{Epistemi
 
 
 
-??? 
+Adds all shared global transitions to a \mbox{\hyperlink{struct_global_state}{Global\+State}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em from\+Global\+State} & ??? \\
+{\em from\+Global\+State} & Global state to add transitions to. \\
 \hline
-{\em local\+Transitions} & ??? \\
+{\em local\+Transitions} & Initially empty, avaliable local transitions by each agent from transitions\+By\+Agent. \\
 \hline
-{\em transitions\+By\+Agent} & ??? \\
+{\em transitions\+By\+Agent} & Mapped transitions to an agent, only with transitions avaliable for the agent at this moment. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_global_model_generator_a3b233fda6152b674804997ccbbb838ee}\label{class_global_model_generator_a3b233fda6152b674804997ccbbb838ee}} 
@@ -205,19 +205,19 @@ Returns a pointer to an initial \mbox{\hyperlink{struct_global_state}{Global\+St
 
 
 
-??? 
+Creates a new \mbox{\hyperlink{struct_global_state}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ??? 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+States} & ??? \\
+{\em local\+States} & Local\+States from which the new \mbox{\hyperlink{struct_global_state}{Global\+State}} will be built. \\
 \hline
-{\em via\+Local\+Transitions} & ??? \\
+{\em via\+Local\+Transitions} & Pointer to a set of pointers to \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} from which the changes in variables, as a result of traversing through the transition, will be made in a new \mbox{\hyperlink{struct_global_state}{Global\+State}}. ??? \\
 \hline
-{\em prev\+Global\+State} & ??? \\
+{\em prev\+Global\+State} & Pointer to \mbox{\hyperlink{struct_global_state}{Global\+State}} from which all persistent variables will be copied over from to the new \mbox{\hyperlink{struct_global_state}{Global\+State}}. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-??? 
+Returns a pointer to a new or already existing in the same epistemic class \mbox{\hyperlink{struct_global_model}{Global\+Model}}. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_global_model_generator_a8115d1786015dee46c171e0295c35a4a}\label{class_global_model_generator_a8115d1786015dee46c171e0295c35a4a}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getCurrentGlobalModel@{getCurrentGlobalModel}}
@@ -243,8 +243,7 @@ Returns a pointer to a global model.
 Get for the \mbox{\hyperlink{struct_formula}{Formula}} used in initialization. 
 
 \begin{DoxyReturn}{Returns}
-~\newline
- 
+Returns a pointer to the formula structure. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_global_model_generator_af8a60f8b1efcd9eb7615c6ed458d81e6}\label{class_global_model_generator_af8a60f8b1efcd9eb7615c6ed458d81e6}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!initModel@{initModel}}
