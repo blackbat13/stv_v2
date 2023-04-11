@@ -60,6 +60,7 @@ struct HistoryEntry {
     };
 };
 
+/// @brief Stores history and allows displaying it to the console.
 class HistoryDbg {
 public:
     /// @brief A pair of history entries and a char marking history type.
@@ -80,6 +81,7 @@ enum Mode {
     RESTORE, ///< Backtracking through recursion.
 };
 
+/// @brief A class that verifies if the model fulfills the formula. Also can do some operations on decision history.
 class Verification {
 public:
     Verification(GlobalModelGenerator* generator);

@@ -11,6 +11,7 @@
 
 using namespace std;
 
+/// @brief A parser for converting a text file into a model.
 class TestParser {
 public:
     TestParser();

@@ -12,19 +12,36 @@ Node for a constant.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_expr_const_ab39620d7be911584979798c9cd63cde5}\label{class_expr_const_ab39620d7be911584979798c9cd63cde5}} 
-{\bfseries Expr\+Const} (int \+\_\+val)
-\item 
+\mbox{\hyperlink{class_expr_const_ab39620d7be911584979798c9cd63cde5}{Expr\+Const}} (int \+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constant expression constructor. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{class_expr_const_a607cf412bc90f263a4c79b9204b9b4d6}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \begin{DoxyCompactItemize}
 \item 
 virtual int \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Node for a constant. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_expr_const_ab39620d7be911584979798c9cd63cde5}\label{class_expr_const_ab39620d7be911584979798c9cd63cde5}} 
+\index{ExprConst@{ExprConst}!ExprConst@{ExprConst}}
+\index{ExprConst@{ExprConst}!ExprConst@{ExprConst}}
+\doxysubsubsection{\texorpdfstring{ExprConst()}{ExprConst()}}
+{\footnotesize\ttfamily Expr\+Const\+::\+Expr\+Const (\begin{DoxyParamCaption}\item[{int}]{\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constant expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+val} & \mbox{\hyperlink{class_expr_const}{Expr\+Const}} value. \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_expr_const_a607cf412bc90f263a4c79b9204b9b4d6}\label{class_expr_const_a607cf412bc90f263a4c79b9204b9b4d6}} 
@@ -35,7 +52,19 @@ Node for a constant.
 
 
 
-Implements \mbox{\hyperlink{class_expr_node}{Expr\+Node}}.
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
 
 
 

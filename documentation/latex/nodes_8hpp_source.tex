@@ -16,92 +16,134 @@
 \DoxyCodeLine{00017\ \textcolor{keyword}{using\ namespace\ }std;}
 \DoxyCodeLine{00018\ }
 \DoxyCodeLine{00019\ \textcolor{comment}{/*\ Klasa\ reprezentująca\ przypisanie\ */}}
-\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_assignment}{Assignment}}\ \{}
-\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_assignment_a621d132a9a8f73a5397cad74c66e24af}{ident}};}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \textcolor{comment}{//\ do\ czego\ przypisujemy}}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00028\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\mbox{\hyperlink{class_assignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}};}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{comment}{//\ co\ przypisujemy}}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \mbox{\hyperlink{class_assignment_a1d1f798145468d43615695a571564568}{Assignment}}(\textcolor{keywordtype}{string}\ \_ident,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_exp):\ \mbox{\hyperlink{class_assignment_a621d132a9a8f73a5397cad74c66e24af}{ident}}(\_ident),\ \mbox{\hyperlink{class_assignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}}(\_exp)\ \{\};}
-\DoxyCodeLine{00035\ \ \ \ \ \ \ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \textcolor{comment}{//\ wykonaj\ przypisanie\ w\ danym\ środowisku}}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ assign(\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\ \&env)\ \{}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ env[\mbox{\hyperlink{class_assignment_a621d132a9a8f73a5397cad74c66e24af}{ident}}]=\mbox{\hyperlink{class_assignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}}-\/>eval(env);}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \};}
-\DoxyCodeLine{00040\ \};}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00042\ \textcolor{comment}{/*\ Klasa\ reprezentująca\ meta-\/tranzycję\ */}}
-\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_transition_template}{TransitionTemplate}}\ \{}
-\DoxyCodeLine{00044\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \textcolor{comment}{//\ jeśli\ -\/1\ to\ nie\ ma\ dzielenia,\ w\ p.p.\ wartość\ określa\ łączną\ liczbę\ wymaganych\ agentów}}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ shared;}
-\DoxyCodeLine{00047\ \ \ \ \ \ \ \textcolor{comment}{//\ nazwa\ wzorca}}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ patternName;}
-\DoxyCodeLine{00049\ \ \ \ \ \ \ \textcolor{comment}{//\ nazwa\ do\ wyszukiwania\ dla\ shared}}
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ matchName;}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{comment}{//\ nazwa\ stanu\ początkowego\ i\ końcowego}}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ startState;}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ endState;}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{comment}{//\ wyrażenie\ warunkowe}}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *condition;}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \textcolor{comment}{//\ lista\ przypisań\ wartości}}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ set<Assignment*>\ *assignments;}
-\DoxyCodeLine{00058\ }
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \mbox{\hyperlink{class_transition_template}{TransitionTemplate}}(\textcolor{keywordtype}{int}\ \_shared,\ \textcolor{keywordtype}{string}\ \_patternName,\ \textcolor{keywordtype}{string}\ \_matchName,\ \textcolor{keywordtype}{string}\ \_startState,\ \textcolor{keywordtype}{string}\ \_endState,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_cond,\ set<Assignment*>\ *\_assign):\ }
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ shared(\_shared),\ patternName(\_patternName),\ matchName(\_matchName),}
-\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ startState(\_startState),\ endState(\_endState),\ condition(\_cond),\ assignments(\_assign)\ \{\};}
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00063\ \};}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00065\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_local_state_template}{LocalStateTemplate}}\ \{}
-\DoxyCodeLine{00066\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
-\DoxyCodeLine{00068\ \ \ \ \ \ \ set<TransitionTemplate*>\ transitions;}
-\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_assignment}{Assignment}}\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_assignment_a621d132a9a8f73a5397cad74c66e24af}{ident}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \textcolor{comment}{//\ do\ czego\ przypisujemy}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\mbox{\hyperlink{class_assignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \textcolor{comment}{//\ co\ przypisujemy}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \mbox{\hyperlink{class_assignment_a1d1f798145468d43615695a571564568}{Assignment}}(\textcolor{keywordtype}{string}\ \_ident,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_exp):\ \mbox{\hyperlink{class_assignment_a621d132a9a8f73a5397cad74c66e24af}{ident}}(\_ident),\ \mbox{\hyperlink{class_assignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}}(\_exp)\ \{\};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \textcolor{comment}{//\ wykonaj\ przypisanie\ w\ danym\ środowisku}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_assignment_afe2932c47e89dac72810398258ed017d}{assign}}(\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\ \&env)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ env[\mbox{\hyperlink{class_assignment_a621d132a9a8f73a5397cad74c66e24af}{ident}}]=\mbox{\hyperlink{class_assignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}}-\/>\mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}}(env);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{/*\ Klasa\ reprezentująca\ meta-\/tranzycję\ */}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_transition_template}{TransitionTemplate}}\ \{}
+\DoxyCodeLine{00050\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \textcolor{comment}{//\ jeśli\ -\/1\ to\ nie\ ma\ dzielenia,\ w\ p.p.\ wartość\ określa\ łączną\ liczbę\ wymaganych\ agentów}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_transition_template_a2a6a312a79b3c0653d71f7937b75a5fd}{shared}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \textcolor{comment}{//\ nazwa\ wzorca}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_transition_template_ac3fc56220e83b1b8f5e1661b3b5d5ab0}{patternName}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \textcolor{comment}{//\ nazwa\ do\ wyszukiwania\ dla\ shared}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_transition_template_ab65f4b99b18c8c006a7d7f6aad45e3a5}{matchName}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \textcolor{comment}{//\ nazwa\ stanu\ początkowego\ i\ końcowego}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_transition_template_a3c6dfa1a9573e08fe3a58b3fc208b0cf}{startState}};}
 \DoxyCodeLine{00070\ }
-\DoxyCodeLine{00071\ \textcolor{comment}{/*\ Klasa\ reprezentująca\ pojedynczego\ agenta\ po\ wczytaniu\ jego\ opisu\ z\ pliku\ */}}
-\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent_template}{AgentTemplate}}\ \{}
-\DoxyCodeLine{00073\ \ \ \ \ \ \ \textcolor{comment}{//\ identyfikator\ agenta}}
-\DoxyCodeLine{00075\ \textcolor{comment}{}\ \ \ \ \ \ \textcolor{keywordtype}{string}\ ident;}
-\DoxyCodeLine{00076\ \ \ \ \ \ \ \textcolor{comment}{//\ stan\ startowy}}
-\DoxyCodeLine{00078\ \textcolor{comment}{}\ \ \ \ \ \ \textcolor{keywordtype}{string}\ initState;}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{comment}{//\ zbiór\ zmiennych\ lokalnych\ (local)}}
-\DoxyCodeLine{00081\ \textcolor{comment}{}\ \ \ \ \ \ set<string>*\ localVars;}
-\DoxyCodeLine{00082\ \ \ \ \ \ \ \textcolor{comment}{//\ zbiór\ zmiennych\ trwałych\ (persistent)}}
-\DoxyCodeLine{00084\ \textcolor{comment}{}\ \ \ \ \ \ set<string>*\ persistentVars;}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \textcolor{comment}{//\ początkowa\ inicjacja}}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ set<Assignment*>*\ initialAssignments;}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \textcolor{comment}{//\ zbiór\ tranzycji}}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ set<TransitionTemplate*>*\ transitions;}
-\DoxyCodeLine{00089\ \ \ \ }
-\DoxyCodeLine{00090\ \ \ \ \ \ \ \textcolor{comment}{//\ mapa\ stanów\ lokalnych\ potrzebna\ do\ wygenerowania\ modelu}}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ map<string,LocalStateTemplate*>\ localStateTemplates;}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00093\ \ \ \ \ \ \ \textcolor{comment}{//\ metoda\ wyznaczająca\ węzeł\ kolejny\ do\ danego,\ zależnie\ od\ tranzycji}}
-\DoxyCodeLine{00094\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_local_state}{LocalState}}*\ genNextState(\mbox{\hyperlink{class_local_state}{LocalState}}\ *state,\ \mbox{\hyperlink{class_transition_template}{TransitionTemplate}}\ *trans);}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ }
-\DoxyCodeLine{00096\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00097\ \ \ \ \ \ \ \mbox{\hyperlink{class_agent_template_ae0a4af9e25d54221ffd5ceb6511e504d}{AgentTemplate}}();}
-\DoxyCodeLine{00098\ \ \ \ \ \ \ }
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \textcolor{comment}{//\ ustaw\ identyfikator\ agenta}}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_ac040b408b9bdf0392711ae7a33cde091}{setIdent}}(\textcolor{keywordtype}{string}\ \_ident);}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \textcolor{comment}{//\ ustaw\ identyfikator\ agenta}}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_ad83e0b70459e922677acffc59c79c001}{setInitState}}(\textcolor{keywordtype}{string}\ \_startState);}
-\DoxyCodeLine{00103\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ zmienną/zmienne\ lokalne}}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_ac5ee90b0bb4549380bba8df5082ad99a}{addLocal}}(set<string>\ *variables);}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ zmienne\ trwałe}}
-\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_a85b032c20e9397191aa49ca5389d4c13}{addPersistent}}(set<string>\ *variables);}
-\DoxyCodeLine{00107\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ początkowe\ inicjacje}}
-\DoxyCodeLine{00108\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_affc9969304f18969ea21fb0d5fea2672}{addInitial}}(set<Assignment*>\ *assigns);}
-\DoxyCodeLine{00109\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ tranzycję}}
-\DoxyCodeLine{00110\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_a73f2c8a769a275d59b9cda735d593098}{addTransition}}(\mbox{\hyperlink{class_transition_template}{TransitionTemplate}}\ *\_transition);}
-\DoxyCodeLine{00111\ \ \ \ \ \ \ }
-\DoxyCodeLine{00112\ \ \ \ \ \ \ \textcolor{comment}{//\ wygeneruj\ agenta\ do\ modelu}}
-\DoxyCodeLine{00113\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent}{Agent}}*\ \mbox{\hyperlink{class_agent_template_aae7682958ba875e773c52a1d51543d84}{generateAgent}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id})\ ;}
-\DoxyCodeLine{00114\ \};}
-\DoxyCodeLine{00115\ }
-\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_transition_template_a4ae48c4bee21b96df2d78e79f7411042}{endState}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \textcolor{comment}{//\ wyrażenie\ warunkowe}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\mbox{\hyperlink{class_transition_template_a9444c53176120158d2a9219b801992a6}{condition}};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \textcolor{comment}{//\ lista\ przypisań\ wartości}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ set<Assignment*>\ *\mbox{\hyperlink{class_transition_template_af0cb55612a1917e5e3ba229794f0842f}{assignments}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \mbox{\hyperlink{class_transition_template_aae4d642b14198edd7c03d72f05ddfb7e}{TransitionTemplate}}(\textcolor{keywordtype}{int}\ \_shared,\ \textcolor{keywordtype}{string}\ \_patternName,\ \textcolor{keywordtype}{string}\ \_matchName,\ \textcolor{keywordtype}{string}\ \_startState,\ \textcolor{keywordtype}{string}\ \_endState,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_cond,\ set<Assignment*>\ *\_assign):\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_transition_template_a2a6a312a79b3c0653d71f7937b75a5fd}{shared}}(\_shared),\ \mbox{\hyperlink{class_transition_template_ac3fc56220e83b1b8f5e1661b3b5d5ab0}{patternName}}(\_patternName),\ \mbox{\hyperlink{class_transition_template_ab65f4b99b18c8c006a7d7f6aad45e3a5}{matchName}}(\_matchName),}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_transition_template_a3c6dfa1a9573e08fe3a58b3fc208b0cf}{startState}}(\_startState),\ \mbox{\hyperlink{class_transition_template_a4ae48c4bee21b96df2d78e79f7411042}{endState}}(\_endState),\ \mbox{\hyperlink{class_transition_template_a9444c53176120158d2a9219b801992a6}{condition}}(\_cond),\ \mbox{\hyperlink{class_transition_template_af0cb55612a1917e5e3ba229794f0842f}{assignments}}(\_assign)\ \{\};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_local_state_template}{LocalStateTemplate}}\ \{}
+\DoxyCodeLine{00100\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_local_state_template_af122ee0580609c5ea3a528acf8b79a52}{name}};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ set<TransitionTemplate*>\ \mbox{\hyperlink{class_local_state_template_a802fe93810f5686670b30fa47b3225bf}{transitions}};}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{comment}{/*\ Klasa\ reprezentująca\ pojedynczego\ agenta\ po\ wczytaniu\ jego\ opisu\ z\ pliku\ */}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00111\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_agent_template}{AgentTemplate}}\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \textcolor{comment}{//\ identyfikator\ agenta}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ ident;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \textcolor{comment}{//\ stan\ startowy}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ initState;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{comment}{//\ zbiór\ zmiennych\ lokalnych\ (local)}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ set<string>*\ localVars;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{comment}{//\ zbiór\ zmiennych\ trwałych\ (persistent)}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ set<string>*\ persistentVars;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \textcolor{comment}{//\ początkowa\ inicjacja}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ set<Assignment*>*\ initialAssignments;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \textcolor{comment}{//\ zbiór\ tranzycji}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ set<TransitionTemplate*>*\ transitions;}
+\DoxyCodeLine{00141\ \ \ \ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \textcolor{comment}{//\ mapa\ stanów\ lokalnych\ potrzebna\ do\ wygenerowania\ modelu}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ map<string,LocalStateTemplate*>\ localStateTemplates;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \textcolor{comment}{//\ metoda\ wyznaczająca\ węzeł\ kolejny\ do\ danego,\ zależnie\ od\ tranzycji}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_local_state}{LocalState}}*\ genNextState(\mbox{\hyperlink{class_local_state}{LocalState}}\ *state,\ \mbox{\hyperlink{class_transition_template}{TransitionTemplate}}\ *trans);}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ }
+\DoxyCodeLine{00151\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \mbox{\hyperlink{class_agent_template_ae0a4af9e25d54221ffd5ceb6511e504d}{AgentTemplate}}();}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \textcolor{comment}{//\ ustaw\ identyfikator\ agenta}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_ac040b408b9bdf0392711ae7a33cde091}{setIdent}}(\textcolor{keywordtype}{string}\ \_ident);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \textcolor{comment}{//\ ustaw\ identyfikator\ agenta}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_ad83e0b70459e922677acffc59c79c001}{setInitState}}(\textcolor{keywordtype}{string}\ \_startState);}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ zmienną/zmienne\ lokalne}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_ac5ee90b0bb4549380bba8df5082ad99a}{addLocal}}(set<string>\ *variables);}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ zmienne\ trwałe}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_a85b032c20e9397191aa49ca5389d4c13}{addPersistent}}(set<string>\ *variables);}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ początkowe\ inicjacje}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_affc9969304f18969ea21fb0d5fea2672}{addInitial}}(set<Assignment*>\ *assigns);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \textcolor{comment}{//\ dodaj\ tranzycję}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent_template}{AgentTemplate}}\&\ \mbox{\hyperlink{class_agent_template_a73f2c8a769a275d59b9cda735d593098}{addTransition}}(\mbox{\hyperlink{class_transition_template}{TransitionTemplate}}\ *\_transition);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \textcolor{comment}{//\ wygeneruj\ agenta\ do\ modelu}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_agent}{Agent}}*\ \mbox{\hyperlink{class_agent_template_aae7682958ba875e773c52a1d51543d84}{generateAgent}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id})\ ;}
+\DoxyCodeLine{00202\ \};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

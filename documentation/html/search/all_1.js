@@ -9,8 +9,9 @@ var searchData=
   ['computeepistemicclasshash_6',['computeEpistemicClassHash',['../class_global_model_generator.html#a73cf40fd36ec61f15cce6d52772c884f',1,'GlobalModelGenerator']]],
   ['computeglobalstatehash_7',['computeGlobalStateHash',['../class_global_model_generator.html#af3616869b74b17af839fdf1bdd354f49',1,'GlobalModelGenerator']]],
   ['condition_8',['Condition',['../struct_condition.html',1,'']]],
-  ['conditionoperator_9',['conditionOperator',['../struct_condition.html#a79a98a26f53ae59130bd0669164a7529',1,'Condition']]],
-  ['conditionoperator_10',['ConditionOperator',['../_types_8hpp.html#adab1b2b49825a75bed998dd77963eff9',1,'Types.hpp']]],
-  ['conditions_11',['conditions',['../struct_local_transition.html#a4340db4bd83de2e26da7fbb03c5d91b9',1,'LocalTransition']]],
-  ['context_12',['CONTEXT',['../_verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11',1,'Verification.hpp']]]
+  ['condition_9',['condition',['../class_transition_template.html#a9444c53176120158d2a9219b801992a6',1,'TransitionTemplate']]],
+  ['conditionoperator_10',['conditionOperator',['../struct_condition.html#a79a98a26f53ae59130bd0669164a7529',1,'Condition']]],
+  ['conditionoperator_11',['ConditionOperator',['../_types_8hpp.html#adab1b2b49825a75bed998dd77963eff9',1,'Types.hpp']]],
+  ['conditions_12',['conditions',['../struct_local_transition.html#a4340db4bd83de2e26da7fbb03c5d91b9',1,'LocalTransition']]],
+  ['context_13',['CONTEXT',['../_verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11',1,'Verification.hpp']]]
 ];

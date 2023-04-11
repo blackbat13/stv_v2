@@ -48,54 +48,54 @@
 \DoxyCodeLine{00060\ \ \ \ \ \};}
 \DoxyCodeLine{00061\ \};}
 \DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_history_dbg}{HistoryDbg}}\ \{}
-\DoxyCodeLine{00064\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00066\ \ \ \ \ vector<pair<HistoryEntry*,\ char>>\ \mbox{\hyperlink{class_history_dbg_ac1c7548a15925754b18b60202a71fba0}{entries}};}
-\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{class_history_dbg_a5dd006716d8389df4313ac9b8996f132}{HistoryDbg}}();}
-\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{class_history_dbg_a4babfc0b2bac49fc968ea4c831cbf192}{\string~HistoryDbg}}();}
-\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_history_dbg_a71e384214004c96c5837c62d41fd4767}{addEntry}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ entry);}
-\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_history_dbg_a8cb960b3f1275961adc6664b0e2f0700}{markEntry}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ entry,\ \textcolor{keywordtype}{char}\ chr);}
-\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_history_dbg_a7c916b56b83969b47037892e2545e613}{print}}(\textcolor{keywordtype}{string}\ prefix);}
-\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_history_dbg_a26dc59aaa0f58b2c8124853a80766c35}{cloneEntry}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ entry);}
-\DoxyCodeLine{00073\ \};}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00075\ \textcolor{comment}{//\ On-\/the-\/fly\ traversal\ mode}}
-\DoxyCodeLine{00077\ \textcolor{comment}{}\textcolor{keyword}{enum}\ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}}\ \{}
-\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a50d1448013c6f17125caee18aa418af7}{NORMAL}},\ }
-\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf}{REVERT}},\ }
-\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380}{RESTORE}},\ }
-\DoxyCodeLine{00081\ \};}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_verification}{Verification}}\ \{}
-\DoxyCodeLine{00084\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{class_verification}{Verification}}(\mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}*\ \mbox{\hyperlink{class_verification_ab283068f07ee48981abcaa1787a98d08}{generator}});}
-\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{class_verification_a39d8f0c78a0a0e006dc38fa05bc1183e}{\string~Verification}}();}
-\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a2bcca3fd98e67e70b3861773221bbe0f}{verify}}();}
-\DoxyCodeLine{00088\ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00090\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}}\ \mbox{\hyperlink{class_verification_a7eb395d7d6204422a426100897e4d9d6}{mode}};}
-\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ \mbox{\hyperlink{class_verification_a7065922fca10a441a01ae63500a2d529}{revertToGlobalState}};}
-\DoxyCodeLine{00094\ \ \ \ \ stack<HistoryEntry*>\ \mbox{\hyperlink{class_verification_a0ee06d27394d4a35a23605f3b17a9783}{historyToRestore}};}
-\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}*\ \mbox{\hyperlink{class_verification_ab283068f07ee48981abcaa1787a98d08}{generator}};}
-\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{class_selene_formula}{SeleneFormula}}*\ \mbox{\hyperlink{class_verification_abd4e5c9f9353ab4248856f29e3df5e7a}{seleneFormula}};}
-\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_a0c99d888d26d30df16342201fc4b2e75}{historyStart}};}
-\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_accd7b60752d13e14e319544cb6adb2e0}{historyEnd}};}
-\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a6f050f20797887e631159eb430f02e18}{verifyLocalStates}}(set<LocalState*>*\ localStates);}
-\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a4c07b0f4ef0c6de86d1a84399adf344d}{verifyGlobalState}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a500beadd751b6513289f3916cf3f8501}{isGlobalTransitionControlledByCoalition}}(\mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ globalTransition);}
-\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a2ccd4e9d525a868217902a15ed93860b}{isAgentInCoalition}}(\mbox{\hyperlink{class_agent}{Agent}}*\ agent);}
-\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}*\ \mbox{\hyperlink{class_verification_a7259a1ef834cc71f0bf7586f4fb27ba3}{getEpistemicClassForGlobalState}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState);}
-\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a1f4e545ca07343a09466ad9c8d214240}{areGlobalStatesInTheSameEpistemicClass}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState1,\ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState2);}
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_affb58285fe7d8b6f18fa6260acd67d6c}{addHistoryDecision}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ ecision);}
-\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a4dcd5bfda3f174b6d69a4e34d1a447d2}{addHistoryStateStatus}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{GlobalStateVerificationStatus}}\ prevStatus,\ \mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{GlobalStateVerificationStatus}}\ newStatus);}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_add0805598d4f6e214a7e99355e34765e}{addHistoryContext}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision,\ \textcolor{keywordtype}{bool}\ globalTransitionControlled);}
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_abf842d8eff285c5076e714e7636b0cb3}{addHistoryMarkDecisionAsInvalid}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
-\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_a92b87e0dc375f1d17160492a4cb82ce5}{newHistoryMarkDecisionAsInvalid}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
-\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a93f4d9152a29db35e7cee285fd925d83}{revertLastDecision}}(\textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a35a5a3380e87a9f9a802d16d4d5d49a1}{undoLastHistoryEntry}}(\textcolor{keywordtype}{bool}\ freeMemory);}
-\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a04b9c8350bd9983b59e4e76cfb352927}{undoHistoryUntil}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ historyEntry,\ \textcolor{keywordtype}{bool}\ inclusive,\ \textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a11bc6802569c498b8b80a6c7723056d8}{printCurrentHistory}}(\textcolor{keywordtype}{int}\ depth);}
-\DoxyCodeLine{00118\ \};}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SELENE\_VERIFICATION}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_history_dbg}{HistoryDbg}}\ \{}
+\DoxyCodeLine{00065\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00067\ \ \ \ \ vector<pair<HistoryEntry*,\ char>>\ \mbox{\hyperlink{class_history_dbg_ac1c7548a15925754b18b60202a71fba0}{entries}};}
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{class_history_dbg_a5dd006716d8389df4313ac9b8996f132}{HistoryDbg}}();}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{class_history_dbg_a4babfc0b2bac49fc968ea4c831cbf192}{\string~HistoryDbg}}();}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_history_dbg_a71e384214004c96c5837c62d41fd4767}{addEntry}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ entry);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_history_dbg_a8cb960b3f1275961adc6664b0e2f0700}{markEntry}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ entry,\ \textcolor{keywordtype}{char}\ chr);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_history_dbg_a7c916b56b83969b47037892e2545e613}{print}}(\textcolor{keywordtype}{string}\ prefix);}
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_history_dbg_a26dc59aaa0f58b2c8124853a80766c35}{cloneEntry}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ entry);}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ On-\/the-\/fly\ traversal\ mode}}
+\DoxyCodeLine{00078\ \textcolor{comment}{}\textcolor{keyword}{enum}\ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a50d1448013c6f17125caee18aa418af7}{NORMAL}},\ }
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a0ad105830a21e547b8f07c8d466b77bf}{REVERT}},\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911a12f3955776faf06252c403542f7ed380}{RESTORE}},\ }
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_verification}{Verification}}\ \{}
+\DoxyCodeLine{00086\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{class_verification}{Verification}}(\mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}*\ \mbox{\hyperlink{class_verification_ab283068f07ee48981abcaa1787a98d08}{generator}});}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{class_verification_a39d8f0c78a0a0e006dc38fa05bc1183e}{\string~Verification}}();}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a2bcca3fd98e67e70b3861773221bbe0f}{verify}}();}
+\DoxyCodeLine{00090\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{_verification_8hpp_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}}\ \mbox{\hyperlink{class_verification_a7eb395d7d6204422a426100897e4d9d6}{mode}};}
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ \mbox{\hyperlink{class_verification_a7065922fca10a441a01ae63500a2d529}{revertToGlobalState}};}
+\DoxyCodeLine{00096\ \ \ \ \ stack<HistoryEntry*>\ \mbox{\hyperlink{class_verification_a0ee06d27394d4a35a23605f3b17a9783}{historyToRestore}};}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{class_global_model_generator}{GlobalModelGenerator}}*\ \mbox{\hyperlink{class_verification_ab283068f07ee48981abcaa1787a98d08}{generator}};}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{class_selene_formula}{SeleneFormula}}*\ \mbox{\hyperlink{class_verification_abd4e5c9f9353ab4248856f29e3df5e7a}{seleneFormula}};}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_a0c99d888d26d30df16342201fc4b2e75}{historyStart}};}
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_accd7b60752d13e14e319544cb6adb2e0}{historyEnd}};}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a6f050f20797887e631159eb430f02e18}{verifyLocalStates}}(set<LocalState*>*\ localStates);}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a4c07b0f4ef0c6de86d1a84399adf344d}{verifyGlobalState}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a500beadd751b6513289f3916cf3f8501}{isGlobalTransitionControlledByCoalition}}(\mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ globalTransition);}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a2ccd4e9d525a868217902a15ed93860b}{isAgentInCoalition}}(\mbox{\hyperlink{class_agent}{Agent}}*\ agent);}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{struct_epistemic_class}{EpistemicClass}}*\ \mbox{\hyperlink{class_verification_a7259a1ef834cc71f0bf7586f4fb27ba3}{getEpistemicClassForGlobalState}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState);}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a1f4e545ca07343a09466ad9c8d214240}{areGlobalStatesInTheSameEpistemicClass}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState1,\ \mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState2);}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_affb58285fe7d8b6f18fa6260acd67d6c}{addHistoryDecision}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ ecision);}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a4dcd5bfda3f174b6d69a4e34d1a447d2}{addHistoryStateStatus}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{GlobalStateVerificationStatus}}\ prevStatus,\ \mbox{\hyperlink{_types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{GlobalStateVerificationStatus}}\ newStatus);}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_add0805598d4f6e214a7e99355e34765e}{addHistoryContext}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \textcolor{keywordtype}{int}\ depth,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision,\ \textcolor{keywordtype}{bool}\ globalTransitionControlled);}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_abf842d8eff285c5076e714e7636b0cb3}{addHistoryMarkDecisionAsInvalid}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ \mbox{\hyperlink{class_verification_a92b87e0dc375f1d17160492a4cb82ce5}{newHistoryMarkDecisionAsInvalid}}(\mbox{\hyperlink{struct_global_state}{GlobalState}}*\ globalState,\ \mbox{\hyperlink{struct_global_transition}{GlobalTransition}}*\ decision);}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_verification_a93f4d9152a29db35e7cee285fd925d83}{revertLastDecision}}(\textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a35a5a3380e87a9f9a802d16d4d5d49a1}{undoLastHistoryEntry}}(\textcolor{keywordtype}{bool}\ freeMemory);}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a04b9c8350bd9983b59e4e76cfb352927}{undoHistoryUntil}}(\mbox{\hyperlink{struct_history_entry}{HistoryEntry}}*\ historyEntry,\ \textcolor{keywordtype}{bool}\ inclusive,\ \textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_verification_a11bc6802569c498b8b80a6c7723056d8}{printCurrentHistory}}(\textcolor{keywordtype}{int}\ depth);}
+\DoxyCodeLine{00120\ \};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SELENE\_VERIFICATION}}
 
 \end{DoxyCode}

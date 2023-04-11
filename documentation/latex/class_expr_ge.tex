@@ -12,19 +12,38 @@ Node for \char`\"{}$>$=\char`\"{} operator.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_expr_ge_a5e2ffd60cf19e6efa6e409a82039ee23}\label{class_expr_ge_a5e2ffd60cf19e6efa6e409a82039ee23}} 
-{\bfseries Expr\+Ge} (\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+rarg)
-\item 
+\mbox{\hyperlink{class_expr_ge_a5e2ffd60cf19e6efa6e409a82039ee23}{Expr\+Ge}} (\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+rarg)
+\begin{DoxyCompactList}\small\item\em Greater or equal expression constructor. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{class_expr_ge_a5d1ac27dc897e8d8e1963b692d0003b8}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \begin{DoxyCompactItemize}
 \item 
 virtual int \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Node for \char`\"{}$>$=\char`\"{} operator. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_expr_ge_a5e2ffd60cf19e6efa6e409a82039ee23}\label{class_expr_ge_a5e2ffd60cf19e6efa6e409a82039ee23}} 
+\index{ExprGe@{ExprGe}!ExprGe@{ExprGe}}
+\index{ExprGe@{ExprGe}!ExprGe@{ExprGe}}
+\doxysubsubsection{\texorpdfstring{ExprGe()}{ExprGe()}}
+{\footnotesize\ttfamily Expr\+Ge\+::\+Expr\+Ge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$}]{\+\_\+larg,  }\item[{\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$}]{\+\_\+rarg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Greater or equal expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+larg} & Left argument of the expression. \\
+\hline
+{\em \+\_\+rarg} & Right argument of the expression. \\
+\hline
+\end{DoxyParams}
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_expr_ge_a5d1ac27dc897e8d8e1963b692d0003b8}\label{class_expr_ge_a5d1ac27dc897e8d8e1963b692d0003b8}} 
@@ -35,7 +54,19 @@ Node for \char`\"{}$>$=\char`\"{} operator.
 
 
 
-Implements \mbox{\hyperlink{class_expr_node}{Expr\+Node}}.
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
 
 
 

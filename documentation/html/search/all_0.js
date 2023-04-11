@@ -15,5 +15,7 @@ var searchData=
   ['agenttemplate_12',['AgentTemplate',['../class_agent_template.html',1,'AgentTemplate'],['../class_agent_template.html#ae0a4af9e25d54221ffd5ceb6511e504d',1,'AgentTemplate::AgentTemplate()']]],
   ['agenttostring_13',['agentToString',['../_utils_8cpp.html#afc39e476fc50026d8b3da7fc9298b001',1,'agentToString(Agent *agt):&#160;Utils.cpp'],['../_utils_8hpp.html#afc39e476fc50026d8b3da7fc9298b001',1,'agentToString(Agent *agt):&#160;Utils.cpp']]],
   ['areglobalstatesinthesameepistemicclass_14',['areGlobalStatesInTheSameEpistemicClass',['../class_verification.html#a1f4e545ca07343a09466ad9c8d214240',1,'Verification']]],
-  ['assignment_15',['Assignment',['../class_assignment.html',1,'Assignment'],['../class_assignment.html#a1d1f798145468d43615695a571564568',1,'Assignment::Assignment()']]]
+  ['assign_15',['assign',['../class_assignment.html#afe2932c47e89dac72810398258ed017d',1,'Assignment']]],
+  ['assignment_16',['Assignment',['../class_assignment.html',1,'Assignment'],['../class_assignment.html#a1d1f798145468d43615695a571564568',1,'Assignment::Assignment()']]],
+  ['assignments_17',['assignments',['../class_transition_template.html#af0cb55612a1917e5e3ba229794f0842f',1,'TransitionTemplate']]]
 ];

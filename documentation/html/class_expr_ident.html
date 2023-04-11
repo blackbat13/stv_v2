@@ -103,17 +103,54 @@ $(document).ready(function(){initNavTree('class_expr_ident.html',''); initResiza
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adee748429a8a7a85374e413d4a534c36"><td class="memItemLeft" align="right" valign="top"><a id="adee748429a8a7a85374e413d4a534c36" name="adee748429a8a7a85374e413d4a534c36"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ExprIdent</b> (string _ident)</td></tr>
+<tr class="memitem:adee748429a8a7a85374e413d4a534c36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_ident.html#adee748429a8a7a85374e413d4a534c36">ExprIdent</a> (string _ident)</td></tr>
+<tr class="memdesc:adee748429a8a7a85374e413d4a534c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier expression constructor.  <br /></td></tr>
 <tr class="separator:adee748429a8a7a85374e413d4a534c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24c5b44c7995f80b82a11e4b05eac892"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_ident.html#a24c5b44c7995f80b82a11e4b05eac892">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)</td></tr>
+<tr class="memdesc:a24c5b44c7995f80b82a11e4b05eac892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <br /></td></tr>
 <tr class="separator:a24c5b44c7995f80b82a11e4b05eac892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f155835c446271416ed3eb4f1d34f1f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_node.html#a5f155835c446271416ed3eb4f1d34f1f">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)=0</td></tr>
+<tr class="memdesc:a5f155835c446271416ed3eb4f1d34f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <br /></td></tr>
 <tr class="separator:a5f155835c446271416ed3eb4f1d34f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Node for an identifier. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="adee748429a8a7a85374e413d4a534c36" name="adee748429a8a7a85374e413d4a534c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adee748429a8a7a85374e413d4a534c36">&#9670;&#160;</a></span>ExprIdent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ExprIdent::ExprIdent </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>_ident</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Identifier expression constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_ident</td><td><a class="el" href="class_expr_ident.html" title="Node for an identifier.">ExprIdent</a> value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a24c5b44c7995f80b82a11e4b05eac892" name="a24c5b44c7995f80b82a11e4b05eac892"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a24c5b44c7995f80b82a11e4b05eac892">&#9670;&#160;</a></span>eval()</h2>
 
@@ -137,6 +174,15 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Calculates the expression value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>Environment values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns an integer.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">env</td><td></td></tr>
@@ -146,7 +192,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><br  />
  </dd></dl>
 
-<p>Implements <a class="el" href="class_expr_node.html">ExprNode</a>.</p>
+<p>Implements <a class="el" href="class_expr_node.html#a5f155835c446271416ed3eb4f1d34f1f">ExprNode</a>.</p>
 
 </div>
 </div>

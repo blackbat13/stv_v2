@@ -12,6 +12,7 @@
 
 using namespace std;
 
+/// @brief Stores the local models, formula and a global model.
 class GlobalModelGenerator {
 public:
     GlobalModelGenerator();

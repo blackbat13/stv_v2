@@ -103,17 +103,65 @@ $(document).ready(function(){initNavTree('class_expr_ne.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6b4e46c21e8e18055b9dce16ebb2f687"><td class="memItemLeft" align="right" valign="top"><a id="a6b4e46c21e8e18055b9dce16ebb2f687" name="a6b4e46c21e8e18055b9dce16ebb2f687"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ExprNe</b> (<a class="el" href="class_expr_node.html">ExprNode</a> *_larg, <a class="el" href="class_expr_node.html">ExprNode</a> *_rarg)</td></tr>
+<tr class="memitem:a6b4e46c21e8e18055b9dce16ebb2f687"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_ne.html#a6b4e46c21e8e18055b9dce16ebb2f687">ExprNe</a> (<a class="el" href="class_expr_node.html">ExprNode</a> *_larg, <a class="el" href="class_expr_node.html">ExprNode</a> *_rarg)</td></tr>
+<tr class="memdesc:a6b4e46c21e8e18055b9dce16ebb2f687"><td class="mdescLeft">&#160;</td><td class="mdescRight">Not equals expression constructor.  <br /></td></tr>
 <tr class="separator:a6b4e46c21e8e18055b9dce16ebb2f687"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a291bc45bc095f7bae4519189dd393d2e"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_ne.html#a291bc45bc095f7bae4519189dd393d2e">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)</td></tr>
+<tr class="memdesc:a291bc45bc095f7bae4519189dd393d2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <br /></td></tr>
 <tr class="separator:a291bc45bc095f7bae4519189dd393d2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f155835c446271416ed3eb4f1d34f1f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_node.html#a5f155835c446271416ed3eb4f1d34f1f">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)=0</td></tr>
+<tr class="memdesc:a5f155835c446271416ed3eb4f1d34f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <br /></td></tr>
 <tr class="separator:a5f155835c446271416ed3eb4f1d34f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Node for "!=" operator. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6b4e46c21e8e18055b9dce16ebb2f687" name="a6b4e46c21e8e18055b9dce16ebb2f687"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4e46c21e8e18055b9dce16ebb2f687">&#9670;&#160;</a></span>ExprNe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ExprNe::ExprNe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_expr_node.html">ExprNode</a> *&#160;</td>
+          <td class="paramname"><em>_larg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_expr_node.html">ExprNode</a> *&#160;</td>
+          <td class="paramname"><em>_rarg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Not equals expression constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_larg</td><td>Left argument of the expression. </td></tr>
+    <tr><td class="paramname">_rarg</td><td>Right argument of the expression. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a291bc45bc095f7bae4519189dd393d2e" name="a291bc45bc095f7bae4519189dd393d2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a291bc45bc095f7bae4519189dd393d2e">&#9670;&#160;</a></span>eval()</h2>
 
@@ -138,7 +186,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="class_expr_node.html">ExprNode</a>.</p>
+<p>Calculates the expression value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>Environment values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns an integer. </dd></dl>
+
+<p>Implements <a class="el" href="class_expr_node.html#a5f155835c446271416ed3eb4f1d34f1f">ExprNode</a>.</p>
 
 </div>
 </div>

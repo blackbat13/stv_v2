@@ -104,6 +104,7 @@ $(document).ready(function(){initNavTree('class_expr_node.html',''); initResizab
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f155835c446271416ed3eb4f1d34f1f"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_expr_node.html#a5f155835c446271416ed3eb4f1d34f1f">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)=0</td></tr>
+<tr class="memdesc:a5f155835c446271416ed3eb4f1d34f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <br /></td></tr>
 <tr class="separator:a5f155835c446271416ed3eb4f1d34f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -133,7 +134,16 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_expr_ident.html#a24c5b44c7995f80b82a11e4b05eac892">ExprIdent</a>.</p>
+<p>Calculates the expression value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>Environment values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns an integer. </dd></dl>
+
+<p>Implemented in <a class="el" href="class_expr_const.html#a607cf412bc90f263a4c79b9204b9b4d6">ExprConst</a>, <a class="el" href="class_expr_ident.html#a24c5b44c7995f80b82a11e4b05eac892">ExprIdent</a>, <a class="el" href="class_expr_add.html#a1b70e42bda6c1ec0b4ed8b5fc20a4d68">ExprAdd</a>, <a class="el" href="class_expr_sub.html#ac01c33e82ab4927825c8d895071d9fb7">ExprSub</a>, <a class="el" href="class_expr_mul.html#a97269387c273426fb3f76cf74618d944">ExprMul</a>, <a class="el" href="class_expr_div.html#abe7f10c7f2dc5e4406c21ba934e45864">ExprDiv</a>, <a class="el" href="class_expr_rem.html#a025389d6cf681c1aa0d73e868f07564d">ExprRem</a>, <a class="el" href="class_expr_and.html#ac53a24af26296a44488a76782a75669d">ExprAnd</a>, <a class="el" href="class_expr_or.html#af5f728674932ef4e7033cd6f625f775c">ExprOr</a>, <a class="el" href="class_expr_not.html#ae662985b83e9bc3b8de58544512fb2bd">ExprNot</a>, <a class="el" href="class_expr_eq.html#a64362fb0c713a9186b339f2984656b3d">ExprEq</a>, <a class="el" href="class_expr_ne.html#a291bc45bc095f7bae4519189dd393d2e">ExprNe</a>, <a class="el" href="class_expr_lt.html#a9f8382215c4cb0f0c69fa65d5b1cd0ce">ExprLt</a>, <a class="el" href="class_expr_le.html#a5361703041959b38a3e2a2fc46b7f812">ExprLe</a>, <a class="el" href="class_expr_gt.html#a3873c15d19713483161495c6731722ad">ExprGt</a>, and <a class="el" href="class_expr_ge.html#a5d1ac27dc897e8d8e1963b692d0003b8">ExprGe</a>.</p>
 
 </div>
 </div>

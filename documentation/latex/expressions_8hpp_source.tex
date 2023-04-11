@@ -19,218 +19,235 @@
 \DoxyCodeLine{00022\ \ \ \ }
 \DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00024\ \ \ \ \ \ \ \textcolor{comment}{//\ metoda\ do\ wyliczenia\ wartości\ wyrażenia\ zależna\ od\ typu\ węzła}}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ )\ =\ 0;}
-\DoxyCodeLine{00026\ \};}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{comment}{//\ węzeł\ dla\ stałej}}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_const}{ExprConst}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00032\ \ \ \ }
-\DoxyCodeLine{00033\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00036\ \ \ \ \textcolor{keywordtype}{int}\ val;}
-\DoxyCodeLine{00037\ \ \ \ }
-\DoxyCodeLine{00038\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_const}{ExprConst}}(\textcolor{keywordtype}{int}\ \_val):\ val(\_val)\ \{\};}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00041\ \};}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00043\ \textcolor{comment}{//\ węzeł\ dla\ identyfikatora}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_ident}{ExprIdent}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00047\ \ \ \ }
-\DoxyCodeLine{00048\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00051\ \ \ \ \textcolor{keywordtype}{string}\ ident;}
-\DoxyCodeLine{00052\ \ \ \ }
-\DoxyCodeLine{00053\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_ident}{ExprIdent}}(\textcolor{keywordtype}{string}\ \_ident):\ ident(\_ident)\ \{\};}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_ident_a24c5b44c7995f80b82a11e4b05eac892}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00056\ \};}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{comment}{//\ węzeł\ dla\ dodawań}}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ )\ =\ 0;}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ węzeł\ dla\ stałej}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_const}{ExprConst}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00036\ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00040\ \ \ \ \textcolor{keywordtype}{int}\ val;}
+\DoxyCodeLine{00041\ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_const_ab39620d7be911584979798c9cd63cde5}{ExprConst}}(\textcolor{keywordtype}{int}\ \_val):\ val(\_val)\ \{\};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_const_a607cf412bc90f263a4c79b9204b9b4d6}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ węzeł\ dla\ identyfikatora}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_ident}{ExprIdent}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00057\ \ \ \ }
+\DoxyCodeLine{00058\ \ \ \ \textcolor{comment}{//\ argumenty}}
 \DoxyCodeLine{00059\ }
-\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_add}{ExprAdd}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00061\ \ \ \ \textcolor{keywordtype}{string}\ ident;}
 \DoxyCodeLine{00062\ \ \ \ }
-\DoxyCodeLine{00063\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00066\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00063\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_ident_adee748429a8a7a85374e413d4a534c36}{ExprIdent}}(\textcolor{keywordtype}{string}\ \_ident):\ ident(\_ident)\ \{\};}
 \DoxyCodeLine{00067\ }
-\DoxyCodeLine{00068\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00069\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_add}{ExprAdd}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00071\ \};}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00073\ \textcolor{comment}{//\ węzeł\ dla\ odejmowań}}
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00076\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_sub}{ExprSub}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00077\ \ \ \ }
-\DoxyCodeLine{00078\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00081\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00082\ }
-\DoxyCodeLine{00083\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00084\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_sub}{ExprSub}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00086\ \};}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \textcolor{comment}{//\ węzeł\ dla\ mnożeń}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_ident_a24c5b44c7995f80b82a11e4b05eac892}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ węzeł\ dla\ dodawań}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_add}{ExprAdd}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00078\ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00082\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_add_aad8ded2d2f6a1e8509c7d1e7e566e74b}{ExprAdd}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
 \DoxyCodeLine{00089\ }
-\DoxyCodeLine{00091\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_mul}{ExprMul}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00092\ \ \ \ }
-\DoxyCodeLine{00093\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00094\ }
-\DoxyCodeLine{00096\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_add_a1b70e42bda6c1ec0b4ed8b5fc20a4d68}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ węzeł\ dla\ odejmowań}}
 \DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_mul}{ExprMul}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00099\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_sub}{ExprSub}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00100\ \ \ \ }
+\DoxyCodeLine{00101\ \ \ \ \textcolor{comment}{//\ argumenty}}
 \DoxyCodeLine{00102\ }
-\DoxyCodeLine{00103\ \textcolor{comment}{//\ węzeł\ dla\ dzieleń}}
-\DoxyCodeLine{00104\ }
-\DoxyCodeLine{00106\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_div}{ExprDiv}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00107\ \ \ \ }
-\DoxyCodeLine{00108\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00109\ }
-\DoxyCodeLine{00111\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_div}{ExprDiv}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00104\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_sub_aa99724be1c62ffd6005abe8d6f243587}{ExprSub}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_sub_ac01c33e82ab4927825c8d895071d9fb7}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
 \DoxyCodeLine{00116\ \};}
 \DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \textcolor{comment}{//\ węzeł\ dla\ reszty\ z\ dzielenia}}
+\DoxyCodeLine{00118\ \textcolor{comment}{//\ węzeł\ dla\ mnożeń}}
 \DoxyCodeLine{00119\ }
-\DoxyCodeLine{00121\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_rem}{ExprRem}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00121\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_mul}{ExprMul}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
 \DoxyCodeLine{00122\ \ \ \ }
 \DoxyCodeLine{00123\ \ \ \ \textcolor{comment}{//\ argumenty}}
 \DoxyCodeLine{00124\ }
 \DoxyCodeLine{00126\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
 \DoxyCodeLine{00127\ }
 \DoxyCodeLine{00128\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_rem}{ExprRem}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00131\ \};}
-\DoxyCodeLine{00132\ }
-\DoxyCodeLine{00133\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ AND}}
-\DoxyCodeLine{00134\ }
-\DoxyCodeLine{00136\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_and}{ExprAnd}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00137\ \ \ \ }
-\DoxyCodeLine{00138\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_mul_a3f74e06a3f392ee0c4053ebcc7f967c4}{ExprMul}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_mul_a97269387c273426fb3f76cf74618d944}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00138\ \};}
 \DoxyCodeLine{00139\ }
-\DoxyCodeLine{00141\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00142\ }
-\DoxyCodeLine{00143\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00144\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_and}{ExprAnd}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00145\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00146\ \};}
-\DoxyCodeLine{00147\ }
-\DoxyCodeLine{00148\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ OR}}
+\DoxyCodeLine{00140\ \textcolor{comment}{//\ węzeł\ dla\ dzieleń}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_div}{ExprDiv}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00144\ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00148\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
 \DoxyCodeLine{00149\ }
-\DoxyCodeLine{00151\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_or}{ExprOr}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00152\ \ \ \ }
-\DoxyCodeLine{00153\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00154\ }
-\DoxyCodeLine{00156\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00157\ }
-\DoxyCodeLine{00158\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_or}{ExprOr}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00161\ \};}
-\DoxyCodeLine{00162\ }
-\DoxyCodeLine{00163\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ NOT}}
-\DoxyCodeLine{00164\ }
-\DoxyCodeLine{00166\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_not}{ExprNot}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00167\ \ \ \ }
-\DoxyCodeLine{00168\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00169\ }
-\DoxyCodeLine{00171\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *arg;}
-\DoxyCodeLine{00172\ }
-\DoxyCodeLine{00173\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_not}{ExprNot}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_arg):\ arg(\_arg)\ \{\};}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00176\ \};}
+\DoxyCodeLine{00150\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_div_ab79c09f0ab48f87ff6c8c3d8cd6f27b7}{ExprDiv}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_div_abe7f10c7f2dc5e4406c21ba934e45864}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00160\ \};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \textcolor{comment}{//\ węzeł\ dla\ reszty\ z\ dzielenia}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00165\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_rem}{ExprRem}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00166\ \ \ \ }
+\DoxyCodeLine{00167\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00170\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_rem_ad929ef11ad576f03aee30751694e758e}{ExprRem}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
 \DoxyCodeLine{00177\ }
-\DoxyCodeLine{00178\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}=="{}}}
-\DoxyCodeLine{00179\ }
-\DoxyCodeLine{00181\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_eq}{ExprEq}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00182\ \ \ \ }
-\DoxyCodeLine{00183\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00184\ }
-\DoxyCodeLine{00186\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00187\ }
-\DoxyCodeLine{00188\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00189\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_eq}{ExprEq}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00190\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00191\ \};}
-\DoxyCodeLine{00192\ }
-\DoxyCodeLine{00193\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}!="{}}}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00196\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_ne}{ExprNe}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00197\ \ \ \ }
-\DoxyCodeLine{00198\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_rem_a025389d6cf681c1aa0d73e868f07564d}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00182\ \};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ AND}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00187\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_and}{ExprAnd}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00188\ \ \ \ }
+\DoxyCodeLine{00189\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00192\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_and_a951554927238bf5a9b19e636a361833e}{ExprAnd}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
 \DoxyCodeLine{00199\ }
-\DoxyCodeLine{00201\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00202\ }
-\DoxyCodeLine{00203\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00204\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_ne}{ExprNe}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00205\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00206\ \};}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_and_ac53a24af26296a44488a76782a75669d}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00204\ \};}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ OR}}
 \DoxyCodeLine{00207\ }
-\DoxyCodeLine{00208\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}<"{}}}
-\DoxyCodeLine{00209\ }
-\DoxyCodeLine{00211\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_lt}{ExprLt}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00212\ \ \ \ }
-\DoxyCodeLine{00213\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00214\ }
-\DoxyCodeLine{00216\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00217\ }
-\DoxyCodeLine{00218\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00219\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_lt}{ExprLt}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00220\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00221\ \};}
-\DoxyCodeLine{00222\ }
-\DoxyCodeLine{00223\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}<="{}}}
-\DoxyCodeLine{00224\ }
-\DoxyCodeLine{00226\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_le}{ExprLe}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00227\ \ \ \ }
-\DoxyCodeLine{00228\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00209\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_or}{ExprOr}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00210\ \ \ \ }
+\DoxyCodeLine{00211\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00214\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_or_ab7b1414ba9c6bd0b95fe48dd6bf957d3}{ExprOr}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_or_af5f728674932ef4e7033cd6f625f775c}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00226\ \};}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ NOT}}
 \DoxyCodeLine{00229\ }
-\DoxyCodeLine{00231\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00232\ }
-\DoxyCodeLine{00233\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00234\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_le}{ExprLe}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00235\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00236\ \};}
+\DoxyCodeLine{00231\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_not}{ExprNot}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00232\ \ \ \ }
+\DoxyCodeLine{00233\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00236\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *arg;}
 \DoxyCodeLine{00237\ }
-\DoxyCodeLine{00238\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}>"{}}}
-\DoxyCodeLine{00239\ }
-\DoxyCodeLine{00241\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_gt}{ExprGt}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00242\ \ \ \ }
-\DoxyCodeLine{00243\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00244\ }
-\DoxyCodeLine{00246\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00247\ }
-\DoxyCodeLine{00248\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00249\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_gt}{ExprGt}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00250\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00251\ \};}
-\DoxyCodeLine{00252\ }
-\DoxyCodeLine{00253\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}>="{}}}
-\DoxyCodeLine{00254\ }
-\DoxyCodeLine{00256\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_ge}{ExprGe}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
-\DoxyCodeLine{00257\ \ \ \ }
-\DoxyCodeLine{00258\ \ \ \ \textcolor{comment}{//\ argumenty}}
-\DoxyCodeLine{00259\ }
-\DoxyCodeLine{00261\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
-\DoxyCodeLine{00262\ }
-\DoxyCodeLine{00263\ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00264\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_ge}{ExprGe}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
-\DoxyCodeLine{00265\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ eval(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
-\DoxyCodeLine{00266\ \};}
-\DoxyCodeLine{00267\ }
-\DoxyCodeLine{00268\ }
-\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00238\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_not_a02682d358e2d05486e06c579511c1666}{ExprNot}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_arg):\ arg(\_arg)\ \{\};}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_not_ae662985b83e9bc3b8de58544512fb2bd}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00247\ \};}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}=="{}}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00252\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_eq}{ExprEq}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00253\ \ \ \ }
+\DoxyCodeLine{00254\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00257\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_eq_afec2d83d8c16c890ebd52af89b46b90b}{ExprEq}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_eq_a64362fb0c713a9186b339f2984656b3d}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00269\ \};}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}!="{}}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00274\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_ne}{ExprNe}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00275\ \ \ \ }
+\DoxyCodeLine{00276\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00279\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_ne_a6b4e46c21e8e18055b9dce16ebb2f687}{ExprNe}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_ne_a291bc45bc095f7bae4519189dd393d2e}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00291\ \};}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}<"{}}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00296\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_lt}{ExprLt}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00297\ \ \ \ }
+\DoxyCodeLine{00298\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00301\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_lt_ad042c036ea3860f70c452b6d1b94c432}{ExprLt}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_lt_a9f8382215c4cb0f0c69fa65d5b1cd0ce}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00313\ \};}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}<="{}}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00318\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_le}{ExprLe}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00319\ \ \ \ }
+\DoxyCodeLine{00320\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00323\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_le_ade10ef1ddba9b4f27028e64f16680035}{ExprLe}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_le_a5361703041959b38a3e2a2fc46b7f812}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00335\ \};}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}>"{}}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00340\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_gt}{ExprGt}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00341\ \ \ \ }
+\DoxyCodeLine{00342\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00345\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_gt_a4c33a1d3db56c94ca9d682b25743a352}{ExprGt}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_gt_a3873c15d19713483161495c6731722ad}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00357\ \};}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \textcolor{comment}{//\ węzeł\ dla\ operatora\ "{}>="{}}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00362\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_expr_ge}{ExprGe}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ \{}
+\DoxyCodeLine{00363\ \ \ \ }
+\DoxyCodeLine{00364\ \ \ \ \textcolor{comment}{//\ argumenty}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00367\ \ \ \ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *larg,\ *rarg;}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \mbox{\hyperlink{class_expr_ge_a5e2ffd60cf19e6efa6e409a82039ee23}{ExprGe}}(\mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_larg,\ \mbox{\hyperlink{class_expr_node}{ExprNode}}\ *\_rarg):\ larg(\_larg),\ rarg(\_rarg)\ \{\};}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_expr_ge_a5d1ac27dc897e8d8e1963b692d0003b8}{eval}}(\ \mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}}\&\ env\ );}
+\DoxyCodeLine{00379\ \};}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

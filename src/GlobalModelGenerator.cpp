@@ -102,9 +102,9 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     return initState;
 }
 
-/// @brief Creates a new GlobalState using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ???
+/// @brief Creates a new GlobalState using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state.
 /// @param localStates LocalStates from which the new GlobalState will be built.
-/// @param viaLocalTransitions Pointer to a set of pointers to LocalTransition from which the changes in variables, as a result of traversing through the transition, will be made in a new GlobalState. ???
+/// @param viaLocalTransitions Pointer to a set of pointers to LocalTransition from which the changes in variables, as a result of traversing through the transition, will be made in a new GlobalState.
 /// @param prevGlobalState Pointer to GlobalState from which all persistent variables will be copied over from to the new GlobalState.
 /// @return Returns a pointer to a new or already existing in the same epistemic class GlobalModel.
 GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {

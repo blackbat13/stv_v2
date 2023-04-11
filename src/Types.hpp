@@ -132,7 +132,7 @@ class LocalState {
 
         // alternatywna wersja - może wystarczy
 
-        /// @brief Local variables as a name and their values. ???
+        /// @brief Local variables as a name and their current values.
         map<string, int> environment; 
      
         // komparator
@@ -193,7 +193,7 @@ struct LocalTransition {
     /// @brief Binding to a LocalState from which this transition goes to.
     LocalState* to;
 
-    /// @brief ???
+    /// @brief Stores shared transitions from different models.
     set<LocalTransition*> sharedLocalTransitions;
 };
 
@@ -264,7 +264,7 @@ struct GlobalState {
     /// @brief Every GlobalTransition in the model.
     set<GlobalTransition*> globalTransitions;
 
-    /// @brief Local states that define this global state. ???
+    /// @brief Local states of each agent that define this global state.
     set<LocalState*> localStates;
 };
 
@@ -286,7 +286,7 @@ struct GlobalTransition {
     /// @brief Binding to a GlobalState from which this transition goes to.
     GlobalState* to;
 
-    /// @brief Local transitions that define this global transition. ???
+    /// @brief Local transitions that define this global transition. A single transition or more in case of shared transitions.
     set<LocalTransition*> localTransitions;
 };
 
@@ -299,7 +299,7 @@ struct EpistemicClass {
     map<string, GlobalState*> globalStates;
     // GlobalState->hash => GlobalState*
 
-    /// @brief ???
+    /// @brief Transition that was already selected in this epistemic class. Model has to choose this transition if it is already set.
     GlobalTransition* fixedCoalitionTransition;
 };
 

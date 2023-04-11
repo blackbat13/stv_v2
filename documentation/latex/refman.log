@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2023.3.27)  4 APR 2023 18:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8) (preloaded format=pdflatex 2023.3.27)  11 APR 2023 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -902,7 +902,9 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 8.99994pt on input line 174.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 6.29996pt on input line 174.
- [1] [2] [3] [4] [5] [6]
+ [1] [2] [3] [4] [5] [6] [7] [8
+
+]
 Package hyperref Info: Option `pageanchor' set `true' on input line 177.
 
 Chapter 1.
@@ -925,7 +927,6 @@ LaTeX Font Info:    Trying to load font information for T1+pcr on input line 4.
 (C:\Programy\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )) [1
-
 
 ] [2
 
@@ -979,205 +980,331 @@ Underfull \hbox (badness 10000) detected at line 81
  []
 
 ) (class_agent_template.tex [10]
-Underfull \hbox (badness 10000) detected at line 41
+Underfull \hbox (badness 10000) detected at line 55
 [][][]
  []
 
 [11]
-Underfull \hbox (badness 10000) detected at line 59
+Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 77
+Underfull \hbox (badness 10000) detected at line 83
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 95
+Underfull \hbox (badness 10000) detected at line 91
 [][][]
  []
 
 [12]
-Underfull \hbox (badness 10000) detected at line 113
+Underfull \hbox (badness 10000) detected at line 111
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 131
+Underfull \hbox (badness 10000) detected at line 119
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 149
-[][][]
- []
-
-) (class_assignment.tex [13]) (struct_cfg.tex [14]) (struct_condition.tex)
-(struct_epistemic_class.tex [15]) (class_expr_add.tex) (class_expr_and.tex
-[16]) (class_expr_const.tex [17]) (class_expr_div.tex) (class_expr_eq.tex
-[18]) (class_expr_ge.tex [19]) (class_expr_gt.tex [20]) (class_expr_ident.tex
-[21]
-Underfull \hbox (badness 10000) detected at line 41
+Underfull \hbox (badness 10000) detected at line 139
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
+Underfull \hbox (badness 10000) detected at line 147
+[][][]
+ []
+
+[13]
+Underfull \hbox (badness 10000) detected at line 167
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 175
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 195
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 203
+[][][]
+ []
+
+[14]
+Underfull \hbox (badness 10000) detected at line 223
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 231
+[][][]
+ []
+
+) (class_assignment.tex [15]) (struct_cfg.tex [16]) (struct_condition.tex)
+(struct_epistemic_class.tex) (class_expr_add.tex [17] [18]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_and.tex [19]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_const.tex [20] [21]
+Underfull \hbox (badness 10000) detected at line 62
+[][][]
+ []
+
+) (class_expr_div.tex [22]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_eq.tex [23]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_ge.tex [24] [25]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_gt.tex [26]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_ident.tex [27]
+Underfull \hbox (badness 10000) detected at line 62
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 70
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
 
-) (class_expr_le.tex) (class_expr_lt.tex [22]) (class_expr_mul.tex [23])
-(class_expr_ne.tex) (class_expr_node.tex [24]) (class_expr_not.tex [25])
-(class_expr_or.tex [26]) (class_expr_rem.tex) (class_expr_sub.tex [27])
-(struct_formula.tex) (struct_global_model.tex [28])
-(class_global_model_generator.tex [29]
-Underfull \hbox (badness 2635) in paragraph at lines 40--41
+[28]) (class_expr_le.tex [29]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_lt.tex [30]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_mul.tex [31] [32]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_ne.tex [33]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_node.tex [34]
+Underfull \hbox (badness 10000) detected at line 38
+[][][]
+ []
+
+) (class_expr_not.tex [35]
+Underfull \hbox (badness 10000) detected at line 62
+[][][]
+ []
+
+) (class_expr_or.tex [36]
+Overfull \vbox (2.22351pt too high) has occurred while \output is active []
+
+
+[37]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_rem.tex [38]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (class_expr_sub.tex [39]
+Underfull \hbox (badness 10000) detected at line 64
+[][][]
+ []
+
+) (struct_formula.tex [40]) (struct_global_model.tex)
+(class_global_model_generator.tex [41]
+Underfull \hbox (badness 2635) in paragraph at lines 49--50
 [][] $\OMS/cmsy/m/n/10 ^^C$ [] \T1/phv/m/n/10 (set$\OML/cmm/m/it/10 <$ [] $\OMS
 /cmsy/m/n/10 ^^C$ $\OML/cmm/m/it/10 >$ $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 loc
 al[]States, []
  []
 
-[30]
-Underfull \hbox (badness 10000) detected at line 74
+[42]
+Underfull \hbox (badness 10000) detected at line 86
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 92
+Overfull \vbox (1.54443pt too high) has occurred while \output is active []
+
+
+[43]
+Underfull \hbox (badness 10000) detected at line 104
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 110
+Underfull \hbox (badness 10000) detected at line 122
 [][][]
  []
 
-[31]
-Underfull \hbox (badness 10000) detected at line 145
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 165
-[][][]
- []
-
-[32]
-Underfull \hbox (badness 10000) detected at line 197
+[44]
+Underfull \hbox (badness 10000) detected at line 157
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 219
-[][][]
- []
-
-[33]
-Underfull \hbox (badness 10000) detected at line 232
+Underfull \hbox (badness 10000) detected at line 177
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 245
+Underfull \hbox (badness 10000) detected at line 209
+[][][]
+ []
+
+[45]
+Underfull \hbox (badness 10000) detected at line 231
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 265
+Underfull \hbox (badness 10000) detected at line 244
 [][][]
  []
 
-) (struct_global_state.tex [34]) (struct_global_transition.tex)
-(class_history_dbg.tex [35]
+
+Underfull \hbox (badness 10000) detected at line 257
+[][][]
+ []
+
+[46]
+Underfull \hbox (badness 10000) detected at line 277
+[][][]
+ []
+
+) (struct_global_state.tex) (struct_global_transition.tex [47])
+(class_history_dbg.tex
 LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 17.
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 26.
 LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 17.
- [36]
-Underfull \hbox (badness 10000) detected at line 59
+(Font)              scaled to size 8.09995pt on input line 26.
+ [48] [49]
+Underfull \hbox (badness 10000) detected at line 71
 [][][]
  []
 
-[37]) (struct_history_entry.tex
+) (struct_history_entry.tex [50]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (struct_local_models.tex [38]) (class_local_state.tex [39]
+) (struct_local_models.tex [51]) (class_local_state.tex [52]
 Underfull \hbox (badness 10000) detected at line 59
 [][][]
  []
 
-) (class_local_state_template.tex [40]) (struct_local_transition.tex)
-(class_selene_formula.tex [41]) (class_selene_formula1.tex)
-(class_test_parser.tex [42
+) (class_local_state_template.tex) (struct_local_transition.tex [53])
+(class_selene_formula.tex) (class_selene_formula1.tex [54]
 pdfTeX warning (ext4): destination with the same identifier (name{class_selene_
 formula_a1770deafa72b54a07e4590bdfe9bd17e}) has been already used, duplicate ig
 nored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.20 \doxysubsubsection
-                       {\texorpdfstring{parse()}{parse()}}
+<to be read again> 
+                   \relax 
+l.11 ...ormula_a1770deafa72b54a07e4590bdfe9bd17e}}
+                                                  
 pdfTeX warning (ext4): destination with the same identifier (name{class_selene_
 formula_a1c2125faa6746e3ab528b8cc1c60bf51}) has been already used, duplicate ig
 nored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.20 \doxysubsubsection
-                       {\texorpdfstring{parse()}{parse()}}
+<to be read again> 
+                   \relax 
+l.14 ...ormula_a1c2125faa6746e3ab528b8cc1c60bf51}}
+                                                  
 pdfTeX warning (ext4): destination with the same identifier (name{class_selene_
 formula_a1703fefe9a8fb38c8a0ec9394d3f22a7}) has been already used, duplicate ig
 nored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.20 \doxysubsubsection
-                       {\texorpdfstring{parse()}{parse()}}
+<to be read again> 
+                   \relax 
+l.17 ...ormula_a1703fefe9a8fb38c8a0ec9394d3f22a7}}
+                                                  
 pdfTeX warning (ext4): destination with the same identifier (name{class_selene_
 formula_a50bc80700ba3310e27ccd371839f5b5b}) has been already used, duplicate ig
 nored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.20 \doxysubsubsection
-                       {\texorpdfstring{parse()}{parse()}}]
-Underfull \hbox (badness 10000) detected at line 32
+<to be read again> 
+                   \relax 
+l.20 ...ormula_a50bc80700ba3310e27ccd371839f5b5b}}
+                                                  ) (class_test_parser.tex
+[55]
+Underfull \hbox (badness 10000) detected at line 44
 [][][]
  []
 
-) (class_transition_template.tex [43]) (struct_var.tex)
-(struct_var_assignment.tex) (class_verification.tex [44]
-Overfull \hbox (67.99445pt too wide) in paragraph at lines 30--31
+) (class_transition_template.tex [56] [57]) (struct_var.tex)
+(struct_var_assignment.tex) (class_verification.tex [58]
+Overfull \hbox (67.99445pt too wide) in paragraph at lines 39--40
 []\T1/phv/m/n/10 void [] ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 global[]State
 , [] prev[]Status, []
  []
 
-[45] [46] [47]
-Underfull \hbox (badness 10000) detected at line 182
+[59] [60] [61]
+Underfull \hbox (badness 10000) detected at line 194
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 200
+Underfull \hbox (badness 10000) detected at line 212
 [][][]
  []
 
-[48]
-Underfull \hbox (badness 10000) detected at line 218
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 236
-[][][]
- []
-
-[49]
-Underfull \hbox (badness 10000) detected at line 256
+[62]
+Underfull \hbox (badness 10000) detected at line 230
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 289
+Underfull \hbox (badness 10000) detected at line 248
+[][][]
+ []
+
+
+Overfull \vbox (3.44945pt too high) has occurred while \output is active []
+
+
+[63]
+Underfull \hbox (badness 10000) detected at line 268
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 301
 [][][]
  []
 
@@ -1185,22 +1312,22 @@ Underfull \hbox (badness 10000) detected at line 289
 Overfull \vbox (20.72966pt too high) has occurred while \output is active []
 
 
-[50]
-Underfull \hbox (badness 10000) detected at line 336
+[64]
+Underfull \hbox (badness 10000) detected at line 348
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 356
+Underfull \hbox (badness 10000) detected at line 368
 [][][]
  []
 
-[51]
-Underfull \hbox (badness 10000) detected at line 374
+[65]
+Underfull \hbox (badness 10000) detected at line 386
 [][][]
  []
 
-) [52]
+) [66]
 Chapter 6.
 (_constants_8hpp_source.tex) (_global_model_generator_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
@@ -1212,7 +1339,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-[53
+[67
 
 ]) (_global_model_generator_8hpp_source.tex) (expressions_8cc.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
@@ -1224,17 +1351,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-[54]) (expressions_8hpp_source.tex [55] [56] [57]) (nodes_8cc.tex
+[68]) (expressions_8hpp_source.tex [69] [70] [71]) (nodes_8cc.tex [72]
 Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-) (nodes_8hpp.tex [58]
+) (nodes_8hpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--13
 
  []
 
-) (nodes_8hpp_source.tex [59]) (_selene_formula_8hpp_source.tex [60])
+) (nodes_8hpp_source.tex [73] [74]) (_selene_formula_8hpp_source.tex [75])
 (_test_parser_8hpp_source.tex) (_types_8cc.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
@@ -1245,26 +1372,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--14
 
  []
 
-[61] [62]) (_types_8hpp_source.tex [63] [64] [65]) (_utils_8cpp.tex
+[76] [77]) (_types_8hpp_source.tex [78] [79] [80]) (_utils_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-[66]
+[81]
 Underfull \hbox (badness 10000) detected at line 52
 [][][]
  []
 
 
-Overfull \vbox (10.08374pt too high) has occurred while \output is active []
-
-
-[67]
 Underfull \hbox (badness 10000) detected at line 70
 [][][]
  []
 
-
+[82]
 Underfull \hbox (badness 10000) detected at line 88
 [][][]
  []
@@ -1274,27 +1397,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[68]
+[83]
 Underfull \hbox (badness 10000) detected at line 43
 [][][]
  []
 
-[69]
+
 Underfull \hbox (badness 10000) detected at line 61
 [][][]
  []
 
-
+[84]
 Underfull \hbox (badness 10000) detected at line 79
 [][][]
  []
 
-) (_utils_8hpp_source.tex [70]) (_verification_8cpp.tex
+) (_utils_8hpp_source.tex) (_verification_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-[71]
+[85] [86]
 Underfull \hbox (badness 10000) detected at line 85
 [][][]
  []
@@ -1304,32 +1427,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
  []
 
-[72] [73]
+[87] [88]
 Underfull \hbox (badness 10000) detected at line 108
 [][][]
  []
 
-) (_verification_8hpp_source.tex [74]) [75] [76
-
-] (refman.ind [77
+) (_verification_8hpp_source.tex [89]) [90] (refman.ind [91
 
 
-] [78] [79])
+
+] [92] [93] [94
+
+])
 (refman.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 1F037A18B6AAFBCB0F917E49EA440E67;48037.
+(rerunfilecheck)             Checksum: 9C9C0042963D9F595C627C39EDF3F1E5;58022.
  ) 
 Here is how much of TeX's memory you used:
- 19613 strings out of 476338
- 335706 string characters out of 5800206
+ 19804 strings out of 476338
+ 338316 string characters out of 5800206
  1880382 words of memory out of 5000000
- 38836 multiletter control sequences out of 15000+600000
+ 38927 multiletter control sequences out of 15000+600000
  572014 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,117p,729b,742s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,117p,1350b,740s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {C:/Programy/MiKTeX/fonts/enc/dvips/base/8r.enc}<C:/Programy/MiKTeX/fonts/typ
 e1/public/amsfonts/cm/cmmi10.pfb><C:/Programy/MiKTeX/fonts/type1/public/amsfont
 s/cm/cmmi7.pfb><C:/Programy/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:
@@ -1341,9 +1465,9 @@ onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Programy/MiKTeX/fonts/type1/public
 ic/uhvb8a.pfb><C:/Programy/MiKTeX/fonts/type1/urw/helvetic/uhvb8ac.pfb><C:/Prog
 ramy/MiKTeX/fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Programy/MiKTeX/fonts/type1
 /urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (87 pages, 835847 bytes).
+Output written on refman.pdf (104 pages, 931072 bytes).
 PDF statistics:
- 3818 PDF objects out of 4296 (max. 8388607)
- 723 named destinations out of 1000 (max. 500000)
- 1825 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4296 PDF objects out of 4296 (max. 8388607)
+ 823 named destinations out of 1000 (max. 500000)
+ 2169 words of extra memory for PDF output out of 10000 (max. 10000000)
 

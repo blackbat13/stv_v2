@@ -1,5 +1,14 @@
 \hypertarget{class_global_model_generator}{}\doxysection{Global\+Model\+Generator Class Reference}
 \label{class_global_model_generator}\index{GlobalModelGenerator@{GlobalModelGenerator}}
+
+
+Stores the local models, formula and a global model.  
+
+
+
+
+{\ttfamily \#include $<$Global\+Model\+Generator.\+hpp$>$}
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,7 +35,7 @@ void {\bfseries expand\+All\+States} ()
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ \mbox{\hyperlink{class_global_model_generator_a3b233fda6152b674804997ccbbb838ee}{generate\+Init\+State}} ()
 \begin{DoxyCompactList}\small\item\em Generates initial state of the model from \mbox{\hyperlink{struct_global_model}{Global\+Model}} in memory. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$ \mbox{\hyperlink{class_global_model_generator_af254ce4e97619dc6e4ff939fb9708b44}{generate\+State\+From\+Local\+States}} (set$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ $\ast$local\+States, set$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ $\ast$via\+Local\+Transitions, \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$prev\+Global\+State)
-\begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{struct_global_state}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ??? \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{struct_global_state}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_global_model_generator_ae39a5696671934e19af0c81b1b00bd99}{generate\+Global\+Transitions}} (\mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$from\+Global\+State, set$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ local\+Transitions, map$<$ \mbox{\hyperlink{class_agent}{Agent}} $\ast$, vector$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ $>$ transitions\+By\+Agent)
 \begin{DoxyCompactList}\small\item\em Adds all shared global transitions to a \mbox{\hyperlink{struct_global_state}{Global\+State}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_global_model_generator_abacfe0205b17337d10e2d80b1cd3cec5}{check\+Local\+Transition\+Conditions}} (\mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$local\+Transition, \mbox{\hyperlink{struct_global_state}{Global\+State}} $\ast$global\+State)
@@ -52,6 +61,9 @@ string \mbox{\hyperlink{class_global_model_generator_af3616869b74b17af839fdf1bdd
 \mbox{\hyperlink{struct_global_model}{Global\+Model}} $\ast$ {\bfseries global\+Model}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{struct_global_model}{Global\+Model}} created in init\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Stores the local models, formula and a global model. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{class_global_model_generator_abacfe0205b17337d10e2d80b1cd3cec5}\label{class_global_model_generator_abacfe0205b17337d10e2d80b1cd3cec5}} 
@@ -205,13 +217,13 @@ Returns a pointer to an initial \mbox{\hyperlink{struct_global_state}{Global\+St
 
 
 
-Creates a new \mbox{\hyperlink{struct_global_state}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. ??? 
+Creates a new \mbox{\hyperlink{struct_global_state}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em local\+States} & Local\+States from which the new \mbox{\hyperlink{struct_global_state}{Global\+State}} will be built. \\
 \hline
-{\em via\+Local\+Transitions} & Pointer to a set of pointers to \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} from which the changes in variables, as a result of traversing through the transition, will be made in a new \mbox{\hyperlink{struct_global_state}{Global\+State}}. ??? \\
+{\em via\+Local\+Transitions} & Pointer to a set of pointers to \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} from which the changes in variables, as a result of traversing through the transition, will be made in a new \mbox{\hyperlink{struct_global_state}{Global\+State}}. \\
 \hline
 {\em prev\+Global\+State} & Pointer to \mbox{\hyperlink{struct_global_state}{Global\+State}} from which all persistent variables will be copied over from to the new \mbox{\hyperlink{struct_global_state}{Global\+State}}. \\
 \hline

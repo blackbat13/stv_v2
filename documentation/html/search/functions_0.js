@@ -13,5 +13,6 @@ var searchData=
   ['agenttemplate_10',['AgentTemplate',['../class_agent_template.html#ae0a4af9e25d54221ffd5ceb6511e504d',1,'AgentTemplate']]],
   ['agenttostring_11',['agentToString',['../_utils_8cpp.html#afc39e476fc50026d8b3da7fc9298b001',1,'agentToString(Agent *agt):&#160;Utils.cpp'],['../_utils_8hpp.html#afc39e476fc50026d8b3da7fc9298b001',1,'agentToString(Agent *agt):&#160;Utils.cpp']]],
   ['areglobalstatesinthesameepistemicclass_12',['areGlobalStatesInTheSameEpistemicClass',['../class_verification.html#a1f4e545ca07343a09466ad9c8d214240',1,'Verification']]],
-  ['assignment_13',['Assignment',['../class_assignment.html#a1d1f798145468d43615695a571564568',1,'Assignment']]]
+  ['assign_13',['assign',['../class_assignment.html#afe2932c47e89dac72810398258ed017d',1,'Assignment']]],
+  ['assignment_14',['Assignment',['../class_assignment.html#a1d1f798145468d43615695a571564568',1,'Assignment']]]
 ];

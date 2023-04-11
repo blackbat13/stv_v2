@@ -80,9 +80,9 @@ AgentTemplate& AgentTemplate::addPersistent(set<string> *variables) {
 /* --------------------------------------------------------------------- */
 // dodaj początkowe inicjacje
 
-/// @brief ???
-/// @param assigns ???
-/// @return ???
+/// @brief Sets initial values of agent's variables.
+/// @param assigns Set of variables to assign.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
    if(assigns != NULL) {
       // pętla po zawartości nowego zbioru
@@ -97,9 +97,9 @@ AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
 /* --------------------------------------------------------------------- */
 // dodaj tranzycję
 
-/// @brief ???
-/// @param _transition ???
-/// @return ???
+/// @brief Adds a transition for the agent.
+/// @param _transition Transition to be added.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    transitions->insert(_transition);
    return *this;
@@ -108,10 +108,10 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
 /* --------------------------------------------------------------------- */
 // wygeneruj kolejny stan zależnie od bieżącego stanu i schematu tranzycji
 
-/// @brief ???
-/// @param state ???
-/// @param trans ???
-/// @return ???
+/// @brief Creates a new state and connects it to existing graph.
+/// @param state Current local state.
+/// @param trans Transitions from a local state to 
+/// @return Returns a pointer to a newly created LocalState.
 LocalState * AgentTemplate::genNextState(LocalState* state, TransitionTemplate* trans) {
    // utwórz obiekt dla nowego stanu
    LocalState *newState = new LocalState;

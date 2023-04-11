@@ -97,15 +97,20 @@ $(document).ready(function(){initNavTree('class_verification.html',''); initResi
   <div class="headertitle"><div class="title">Verification Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class that verifies if the model fulfills the formula. Also can do some operations on decision history.  
+ <a href="class_verification.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_verification_8hpp_source.html">Verification.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ad681454da4b70aa12f853e46fd1e1648"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#ad681454da4b70aa12f853e46fd1e1648">Verification</a> (<a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a> *<a class="el" href="class_verification.html#ab283068f07ee48981abcaa1787a98d08">generator</a>)</td></tr>
-<tr class="memdesc:ad681454da4b70aa12f853e46fd1e1648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="class_verification.html">Verification</a>.  <br /></td></tr>
+<tr class="memdesc:ad681454da4b70aa12f853e46fd1e1648"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="class_verification.html" title="A class that verifies if the model fulfills the formula. Also can do some operations on decision hist...">Verification</a>.  <br /></td></tr>
 <tr class="separator:ad681454da4b70aa12f853e46fd1e1648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="memItemLeft" align="right" valign="top"><a id="a39d8f0c78a0a0e006dc38fa05bc1183e" name="a39d8f0c78a0a0e006dc38fa05bc1183e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Verification</b> ()</td></tr>
-<tr class="memdesc:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="class_verification.html">Verification</a>. <br /></td></tr>
+<tr class="memdesc:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="class_verification.html" title="A class that verifies if the model fulfills the formula. Also can do some operations on decision hist...">Verification</a>. <br /></td></tr>
 <tr class="separator:a39d8f0c78a0a0e006dc38fa05bc1183e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2bcca3fd98e67e70b3861773221bbe0f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a2bcca3fd98e67e70b3861773221bbe0f">verify</a> ()</td></tr>
 <tr class="memdesc:a2bcca3fd98e67e70b3861773221bbe0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the process of formula verification on a model.  <br /></td></tr>
@@ -123,7 +128,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memdesc:a500beadd751b6513289f3916cf3f8501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if any of the <a class="el" href="struct_local_transition.html" title="Represents a single local transition, containing id, global name, local name, is shared and count of ...">LocalTransition</a> in a given <a class="el" href="struct_global_transition.html" title="Represents a single global transition.">GlobalTransition</a> has an <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> in a coalition in the formula.  <br /></td></tr>
 <tr class="separator:a500beadd751b6513289f3916cf3f8501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ccd4e9d525a868217902a15ed93860b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a2ccd4e9d525a868217902a15ed93860b">isAgentInCoalition</a> (<a class="el" href="class_agent.html">Agent</a> *agent)</td></tr>
-<tr class="memdesc:a2ccd4e9d525a868217902a15ed93860b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> is in a coalition based on the formula in a <a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a>.  <br /></td></tr>
+<tr class="memdesc:a2ccd4e9d525a868217902a15ed93860b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> is in a coalition based on the formula in a <a class="el" href="class_global_model_generator.html" title="Stores the local models, formula and a global model.">GlobalModelGenerator</a>.  <br /></td></tr>
 <tr class="separator:a2ccd4e9d525a868217902a15ed93860b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7259a1ef834cc71f0bf7586f4fb27ba3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_epistemic_class.html">EpistemicClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_verification.html#a7259a1ef834cc71f0bf7586f4fb27ba3">getEpistemicClassForGlobalState</a> (<a class="el" href="struct_global_state.html">GlobalState</a> *globalState)</td></tr>
 <tr class="memdesc:a7259a1ef834cc71f0bf7586f4fb27ba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="struct_epistemic_class.html" title="Represents a single epistemic class.">EpistemicClass</a> for the agent in passed <a class="el" href="struct_global_state.html" title="Represents a single global state.">GlobalState</a>, i.e. transitions from indistinguishable state from certain other states for an agent to other states.  <br /></td></tr>
@@ -190,7 +195,9 @@ stack&lt; <a class="el" href="struct_history_entry.html">HistoryEntry</a> * &gt;
 <tr class="memdesc:accd7b60752d13e14e319544cb6adb2e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the end of model traversal history. <br /></td></tr>
 <tr class="separator:accd7b60752d13e14e319544cb6adb2e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A class that verifies if the model fulfills the formula. Also can do some operations on decision history. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad681454da4b70aa12f853e46fd1e1648" name="ad681454da4b70aa12f853e46fd1e1648"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad681454da4b70aa12f853e46fd1e1648">&#9670;&#160;</a></span>Verification()</h2>
 
@@ -207,10 +214,10 @@ stack&lt; <a class="el" href="struct_history_entry.html">HistoryEntry</a> * &gt;
       </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="class_verification.html">Verification</a>. </p>
+<p>Constructor for <a class="el" href="class_verification.html" title="A class that verifies if the model fulfills the formula. Also can do some operations on decision hist...">Verification</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">generator</td><td>Pointer to <a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a> </td></tr>
+    <tr><td class="paramname">generator</td><td>Pointer to <a class="el" href="class_global_model_generator.html" title="Stores the local models, formula and a global model.">GlobalModelGenerator</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -524,7 +531,7 @@ stack&lt; <a class="el" href="struct_history_entry.html">HistoryEntry</a> * &gt;
 </table>
 </div><div class="memdoc">
 
-<p>Checks if the <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> is in a coalition based on the formula in a <a class="el" href="class_global_model_generator.html">GlobalModelGenerator</a>. </p>
+<p>Checks if the <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> is in a coalition based on the formula in a <a class="el" href="class_global_model_generator.html" title="Stores the local models, formula and a global model.">GlobalModelGenerator</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">agent</td><td>Pointer to an <a class="el" href="class_agent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> that is to be checked. </td></tr>

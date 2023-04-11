@@ -22,6 +22,10 @@ class ExprNode {
    
    public:
       // metoda do wyliczenia wartości wyrażenia zależna od typu węzła
+      
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env ) = 0;
 };
 
@@ -36,7 +40,13 @@ class ExprConst: public ExprNode {
    int val;
    
    public:
+      /// @brief Constant expression constructor.
+      /// @param _val ExprConst value.
       ExprConst(int _val): val(_val) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -51,7 +61,13 @@ class ExprIdent: public ExprNode {
    string ident;
    
    public:
+      /// @brief Identifier expression constructor.
+      /// @param _ident ExprIdent value.
       ExprIdent(string _ident): ident(_ident) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -66,7 +82,14 @@ class ExprAdd: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Addition expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprAdd(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -81,7 +104,14 @@ class ExprSub: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Subtraction expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprSub(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -96,7 +126,14 @@ class ExprMul: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Multiplication expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprMul(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -111,7 +148,14 @@ class ExprDiv: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Division expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprDiv(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -126,7 +170,14 @@ class ExprRem: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Modulo expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprRem(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -141,7 +192,14 @@ class ExprAnd: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Logic AND expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprAnd(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -156,7 +214,14 @@ class ExprOr: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Logic OR expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprOr(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -171,7 +236,13 @@ class ExprNot: public ExprNode {
    ExprNode *arg;
 
    public:
+      /// @brief Logic NOT expression constructor.
+      /// @param _arg Calculates the expression value.
       ExprNot(ExprNode *_arg): arg(_arg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -186,7 +257,14 @@ class ExprEq: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Equals expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprEq(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -201,7 +279,14 @@ class ExprNe: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Not equals expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprNe(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -216,7 +301,14 @@ class ExprLt: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Less than expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprLt(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -231,7 +323,14 @@ class ExprLe: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Less or equal expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprLe(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -246,7 +345,14 @@ class ExprGt: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Greater than expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprGt(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
@@ -261,7 +367,14 @@ class ExprGe: public ExprNode {
    ExprNode *larg, *rarg;
 
    public:
+      /// @brief Greater or equal expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
       ExprGe(ExprNode *_larg, ExprNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
       virtual int eval( Environment& env );
 };
 
