@@ -1,0 +1,1 @@
+clear && make clean && make sample_test && clear && ./sample_test

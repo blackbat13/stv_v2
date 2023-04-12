@@ -1,41 +1,44 @@
-CC = g++ --std=c++11
-CFLAGS = -Wall -g
+CC = g++ --std=c++14
+GTEST_DIR = /usr/src/googletest/googletest
+USER_DIR = ../tests
+CPPFLAGS += -isystem $(GTEST_DIR)/include
+CXXFLAGS += -g -Wall -Wextra -pthread
 	
 main: main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
-	$(CC) $(CFLAGS) -lfl -o stv main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
+	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
  
 main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp
-	$(CC) $(CFLAGS) -c ../src/main.cpp
+	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
-	$(CC) $(CFLAGS) -c ../src/GlobalModelGenerator.cpp
+	$(CC) $(CPPFLAGS) -c ../src/GlobalModelGenerator.cpp
 
 SeleneFormula.o: ../src/SeleneFormula.hpp ../src/SeleneFormula.cpp
-	$(CC) $(CFLAGS) -c ../src/SeleneFormula.cpp
+	$(CC) $(CPPFLAGS) -c ../src/SeleneFormula.cpp
 
 TestParser.o: ../src/TestParser.hpp ../src/TestParser.cc
-	$(CC) $(CFLAGS) -c ../src/TestParser.cc
+	$(CC) $(CPPFLAGS) -c ../src/TestParser.cc
 
 Types.o: ../src/Types.hpp ../src/Types.cc
-	$(CC) $(CFLAGS) -c ../src/Types.cc
+	$(CC) $(CPPFLAGS) -c ../src/Types.cc
 
 Utils.o: ../src/Utils.hpp ../src/Utils.cpp
-	$(CC) $(CFLAGS) -c ../src/Utils.cpp
+	$(CC) $(CPPFLAGS) -c ../src/Utils.cpp
 
 Verification.o: ../src/Verification.hpp ../src/Verification.cpp
-	$(CC) $(CFLAGS) -c ../src/Verification.cpp
+	$(CC) $(CPPFLAGS) -c ../src/Verification.cpp
 
 parser.o: ../src/reader/parser.c
-	$(CC) $(CFLAGS) -c ../src/reader/parser.c
+	$(CC) $(CPPFLAGS) -c ../src/reader/parser.c
 
 scanner.o: ../src/reader/scanner.c
-	$(CC) $(CFLAGS) -c ../src/reader/scanner.c
+	$(CC) $(CPPFLAGS) -c ../src/reader/scanner.c
 
 expressions.o: ../src/reader/expressions.cc
-	$(CC) $(CFLAGS) -c ../src/reader/expressions.cc
+	$(CC) $(CPPFLAGS) -c ../src/reader/expressions.cc
 
 nodes.o: ../src/reader/nodes.cc
-	$(CC) $(CFLAGS) -c ../src/reader/nodes.cc
+	$(CC) $(CPPFLAGS) -c ../src/reader/nodes.cc
 
 ../src/reader/parser.c: ../src/reader/parser.y
 	bison -d -o ../src/reader/parser.c ../src/reader/parser.y
@@ -43,5 +46,36 @@ nodes.o: ../src/reader/nodes.cc
 ../src/reader/scanner.c: ../src/reader/scanner.l
 	flex -I -o ../src/reader/scanner.c ../src/reader/scanner.l
 
+# all test names here
+TESTS = sample_test
+
+GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
+                $(GTEST_DIR)/include/gtest/internal/*.h
+GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
+
 clean:
-	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c
+	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c $(TESTS) gtest.a gtest_main.a *.o
+
+all : $(TESTS)
+
+gtest-all.o : $(GTEST_SRCS_)
+	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
+            $(GTEST_DIR)/src/gtest-all.cc
+
+gtest_main.o : $(GTEST_SRCS_)
+	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
+            $(GTEST_DIR)/src/gtest_main.cc
+
+gtest.a : gtest-all.o
+	$(AR) $(ARFLAGS) $@ $^
+
+gtest_main.a : gtest-all.o gtest_main.o
+	$(AR) $(ARFLAGS) $@ $^
+
+# tests here
+
+sample_test : sample_test.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lfl -lpthread $^ -o $@
+
+sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc
