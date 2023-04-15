@@ -1,0 +1,111 @@
+\hypertarget{class_history_dbg}{}\doxysection{History\+Dbg Class Reference}
+\label{class_history_dbg}\index{HistoryDbg@{HistoryDbg}}
+
+
+Stores history and allows displaying it to the console.  
+
+
+
+
+{\ttfamily \#include $<$Verification.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_history_dbg_a5dd006716d8389df4313ac9b8996f132}\label{class_history_dbg_a5dd006716d8389df4313ac9b8996f132}} 
+{\bfseries History\+Dbg} ()
+\begin{DoxyCompactList}\small\item\em A constructor for \mbox{\hyperlink{class_history_dbg}{History\+Dbg}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_history_dbg_a4babfc0b2bac49fc968ea4c831cbf192}\label{class_history_dbg_a4babfc0b2bac49fc968ea4c831cbf192}} 
+{\bfseries $\sim$\+History\+Dbg} ()
+\begin{DoxyCompactList}\small\item\em A destructor for \mbox{\hyperlink{class_history_dbg}{History\+Dbg}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_history_dbg_a71e384214004c96c5837c62d41fd4767}{add\+Entry}} (\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$entry)
+\begin{DoxyCompactList}\small\item\em Adds a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} to the debug history. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_history_dbg_a8cb960b3f1275961adc6664b0e2f0700}{mark\+Entry}} (\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$entry, char chr)
+\begin{DoxyCompactList}\small\item\em Marks an entry in the degug history with a char. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_history_dbg_a7c916b56b83969b47037892e2545e613}{print}} (string prefix)
+\begin{DoxyCompactList}\small\item\em Prints every entry from the algorithm\textquotesingle{}s path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$ \mbox{\hyperlink{class_history_dbg_a26dc59aaa0f58b2c8124853a80766c35}{clone\+Entry}} (\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$entry)
+\begin{DoxyCompactList}\small\item\em Checks if the \mbox{\hyperlink{struct_history_entry}{History\+Entry}} pointer exists in the debug history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_history_dbg_ac1c7548a15925754b18b60202a71fba0}\label{class_history_dbg_ac1c7548a15925754b18b60202a71fba0}} 
+vector$<$ pair$<$ \mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$, char $>$ $>$ {\bfseries entries}
+\begin{DoxyCompactList}\small\item\em A pair of history entries and a char marking history type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stores history and allows displaying it to the console. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_history_dbg_a71e384214004c96c5837c62d41fd4767}\label{class_history_dbg_a71e384214004c96c5837c62d41fd4767}} 
+\index{HistoryDbg@{HistoryDbg}!addEntry@{addEntry}}
+\index{addEntry@{addEntry}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{addEntry()}{addEntry()}}
+{\footnotesize\ttfamily void History\+Dbg\+::add\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$}]{entry }\end{DoxyParamCaption})}
+
+
+
+Adds a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} to the debug history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & A pointer to the \mbox{\hyperlink{struct_history_entry}{History\+Entry}} that will be added to the history. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_history_dbg_a26dc59aaa0f58b2c8124853a80766c35}\label{class_history_dbg_a26dc59aaa0f58b2c8124853a80766c35}} 
+\index{HistoryDbg@{HistoryDbg}!cloneEntry@{cloneEntry}}
+\index{cloneEntry@{cloneEntry}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{cloneEntry()}{cloneEntry()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$ History\+Dbg\+::clone\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$}]{entry }\end{DoxyParamCaption})}
+
+
+
+Checks if the \mbox{\hyperlink{struct_history_entry}{History\+Entry}} pointer exists in the debug history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & A pointer to a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Identity function if the entry is in history, otherwise returns nullptr. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_history_dbg_a8cb960b3f1275961adc6664b0e2f0700}\label{class_history_dbg_a8cb960b3f1275961adc6664b0e2f0700}} 
+\index{HistoryDbg@{HistoryDbg}!markEntry@{markEntry}}
+\index{markEntry@{markEntry}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{markEntry()}{markEntry()}}
+{\footnotesize\ttfamily void History\+Dbg\+::mark\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_history_entry}{History\+Entry}} $\ast$}]{entry,  }\item[{char}]{chr }\end{DoxyParamCaption})}
+
+
+
+Marks an entry in the degug history with a char. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em entry} & A pointer to a \mbox{\hyperlink{struct_history_entry}{History\+Entry}} that is supposed to be marked. \\
+\hline
+{\em chr} & A char that will be made into a pair with a \mbox{\hyperlink{struct_history_entry}{History\+Entry}}. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_history_dbg_a7c916b56b83969b47037892e2545e613}\label{class_history_dbg_a7c916b56b83969b47037892e2545e613}} 
+\index{HistoryDbg@{HistoryDbg}!print@{print}}
+\index{print@{print}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily void History\+Dbg\+::print (\begin{DoxyParamCaption}\item[{string}]{prefix }\end{DoxyParamCaption})}
+
+
+
+Prints every entry from the algorithm\textquotesingle{}s path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & A prefix string to append to the front of every entry. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_verification_8hpp}{Verification.\+hpp}}\item 
+\mbox{\hyperlink{_verification_8cpp}{Verification.\+cpp}}\end{DoxyCompactItemize}

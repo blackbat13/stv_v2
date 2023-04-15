@@ -1,0 +1,76 @@
+\hypertarget{class_expr_le}{}\doxysection{Expr\+Le Class Reference}
+\label{class_expr_le}\index{ExprLe@{ExprLe}}
+
+
+Node for \char`\"{}$<$=\char`\"{} operator.  
+
+
+
+
+{\ttfamily \#include $<$expressions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_expr_le_ade10ef1ddba9b4f27028e64f16680035}{Expr\+Le}} (\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+rarg)
+\begin{DoxyCompactList}\small\item\em Less or equal expression constructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_expr_le_a5361703041959b38a3e2a2fc46b7f812}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node for \char`\"{}$<$=\char`\"{} operator. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_expr_le_ade10ef1ddba9b4f27028e64f16680035}\label{class_expr_le_ade10ef1ddba9b4f27028e64f16680035}} 
+\index{ExprLe@{ExprLe}!ExprLe@{ExprLe}}
+\index{ExprLe@{ExprLe}!ExprLe@{ExprLe}}
+\doxysubsubsection{\texorpdfstring{ExprLe()}{ExprLe()}}
+{\footnotesize\ttfamily Expr\+Le\+::\+Expr\+Le (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$}]{\+\_\+larg,  }\item[{\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$}]{\+\_\+rarg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Less or equal expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+larg} & Left argument of the expression. \\
+\hline
+{\em \+\_\+rarg} & Right argument of the expression. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_expr_le_a5361703041959b38a3e2a2fc46b7f812}\label{class_expr_le_a5361703041959b38a3e2a2fc46b7f812}} 
+\index{ExprLe@{ExprLe}!eval@{eval}}
+\index{eval@{eval}!ExprLe@{ExprLe}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily int Expr\+Le\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{expressions_8hpp}{expressions.\+hpp}}\item 
+\mbox{\hyperlink{expressions_8cc}{expressions.\+cc}}\end{DoxyCompactItemize}

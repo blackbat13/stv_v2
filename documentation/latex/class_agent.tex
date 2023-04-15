@@ -1,0 +1,89 @@
+\hypertarget{class_agent}{}\doxysection{Agent Class Reference}
+\label{class_agent}\index{Agent@{Agent}}
+
+
+Contains all data for a single \mbox{\hyperlink{class_agent}{Agent}}, including id, name and all of the agents\textquotesingle{} variables.  
+
+
+
+
+{\ttfamily \#include $<$Types.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_agent_ac2b5ffeb5790a577807a0b667701e1c2}{Agent}} (int \+\_\+id, string \+\_\+name)
+\begin{DoxyCompactList}\small\item\em Constructor for the \mbox{\hyperlink{class_agent}{Agent}} class, assigning it an id and name. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ \mbox{\hyperlink{class_agent_a6002c6cab389405d351c0e203905728e}{includes\+State}} (\mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Checks if there is an equivalent \mbox{\hyperlink{class_local_state}{Local\+State}} in the model to the one passed as an argment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_agent_ae67c3dc91bafcf4354e1394ec5ba2662}\label{class_agent_ae67c3dc91bafcf4354e1394ec5ba2662}} 
+int {\bfseries id}
+\begin{DoxyCompactList}\small\item\em Identifier of the agent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_agent_a2911bc2cc46bfb796cc5d777239bc7d6}\label{class_agent_a2911bc2cc46bfb796cc5d777239bc7d6}} 
+string {\bfseries name}
+\begin{DoxyCompactList}\small\item\em Name of the agent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_agent_af42ec589c5dd2707f13a6624483ff1ae}\label{class_agent_af42ec589c5dd2707f13a6624483ff1ae}} 
+set$<$ \mbox{\hyperlink{struct_var}{Var}} $\ast$ $>$ {\bfseries vars}
+\begin{DoxyCompactList}\small\item\em Variable names for the agent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_agent_a68852d497fd3ddbfd1a3d007c5ca6b36}\label{class_agent_a68852d497fd3ddbfd1a3d007c5ca6b36}} 
+\mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ {\bfseries init\+State}
+\begin{DoxyCompactList}\small\item\em Initial state of the agent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_agent_a9ca562594fd5f0ced7c9932df04ec7bb}\label{class_agent_a9ca562594fd5f0ced7c9932df04ec7bb}} 
+vector$<$ \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ $>$ {\bfseries local\+States}
+\begin{DoxyCompactList}\small\item\em Local states for this agent. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_agent_a9969e1c4842b3c73395a2d05c97ec760}\label{class_agent_a9969e1c4842b3c73395a2d05c97ec760}} 
+vector$<$ \mbox{\hyperlink{struct_local_transition}{Local\+Transition}} $\ast$ $>$ {\bfseries local\+Transitions}
+\begin{DoxyCompactList}\small\item\em Local transitions for this agent. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contains all data for a single \mbox{\hyperlink{class_agent}{Agent}}, including id, name and all of the agents\textquotesingle{} variables. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_agent_ac2b5ffeb5790a577807a0b667701e1c2}\label{class_agent_ac2b5ffeb5790a577807a0b667701e1c2}} 
+\index{Agent@{Agent}!Agent@{Agent}}
+\index{Agent@{Agent}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{Agent()}{Agent()}}
+{\footnotesize\ttfamily Agent\+::\+Agent (\begin{DoxyParamCaption}\item[{int}]{\+\_\+id,  }\item[{string}]{\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the \mbox{\hyperlink{class_agent}{Agent}} class, assigning it an id and name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+id} & Identifier of the new agent. \\
+\hline
+{\em \+\_\+name} & Name of the new agent. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_agent_a6002c6cab389405d351c0e203905728e}\label{class_agent_a6002c6cab389405d351c0e203905728e}} 
+\index{Agent@{Agent}!includesState@{includesState}}
+\index{includesState@{includesState}!Agent@{Agent}}
+\doxysubsubsection{\texorpdfstring{includesState()}{includesState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$ Agent\+::includes\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_local_state}{Local\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Checks if there is an equivalent \mbox{\hyperlink{class_local_state}{Local\+State}} in the model to the one passed as an argment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & A pointer to \mbox{\hyperlink{class_local_state}{Local\+State}} to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to an equivalent \mbox{\hyperlink{class_local_state}{Local\+State}} if such exists, otherwise returns NULL. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_types_8hpp}{Types.\+hpp}}\item 
+\mbox{\hyperlink{_types_8cc}{Types.\+cc}}\end{DoxyCompactItemize}

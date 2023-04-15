@@ -1,9 +1,17 @@
+/**
+ * @file nodes.cc
+ * @brief Parser templates.
+ * Class for setting up a new objects from a parser.
+ */
+
 #include "expressions.hpp"
 #include "nodes.hpp"
 #include <queue>
 
 /* --------------------------------------------------------------------- */
 // konstruktor bezparametrowy
+
+/// @brief Constructor for an AgentTemplate.
 AgentTemplate::AgentTemplate() {
    ident="";
    initState="";
@@ -15,6 +23,10 @@ AgentTemplate::AgentTemplate() {
       
 /* --------------------------------------------------------------------- */
 // ustaw identyfikator agenta
+
+/// @brief Sets the identifier of an agent.
+/// @param _ident String with a new identifier.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::setIdent(string _ident) {
    ident = _ident;
    return *this;
@@ -22,6 +34,10 @@ AgentTemplate& AgentTemplate::setIdent(string _ident) {
 
 /* --------------------------------------------------------------------- */
 // ustaw identyfikator agenta
+
+/// @brief Sets initial state of an agent.
+/// @param _initState String with a new state.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::setInitState(string _initState) {
    initState = _initState;
    return *this;
@@ -29,6 +45,10 @@ AgentTemplate& AgentTemplate::setInitState(string _initState) {
 
 /* --------------------------------------------------------------------- */
 // dodaj zmienną/zmienne lokalne
+
+/// @brief Adds local variables to the agent.
+/// @param variables A pointer to a set of strings with the variables to be added.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::addLocal(set<string> *variables){
    if(variables != NULL) {
       // pętla po zawartości nowego zbioru
@@ -42,6 +62,10 @@ AgentTemplate& AgentTemplate::addLocal(set<string> *variables){
 
 /* --------------------------------------------------------------------- */
 // dodaj zmienne trwałe
+
+/// @brief Adds persistent variables to the agent.
+/// @param variables A pointer to a set of strings with the variables to be added.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::addPersistent(set<string> *variables) {
    if(variables != NULL) {
       // pętla po zawartości nowego zbioru
@@ -55,6 +79,10 @@ AgentTemplate& AgentTemplate::addPersistent(set<string> *variables) {
 
 /* --------------------------------------------------------------------- */
 // dodaj początkowe inicjacje
+
+/// @brief Sets initial values of agent's variables.
+/// @param assigns Set of variables to assign.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
    if(assigns != NULL) {
       // pętla po zawartości nowego zbioru
@@ -68,6 +96,10 @@ AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
 
 /* --------------------------------------------------------------------- */
 // dodaj tranzycję
+
+/// @brief Adds a transition for the agent.
+/// @param _transition Transition to be added.
+/// @return Returns itself.
 AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    transitions->insert(_transition);
    return *this;
@@ -75,6 +107,11 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
 
 /* --------------------------------------------------------------------- */
 // wygeneruj kolejny stan zależnie od bieżącego stanu i schematu tranzycji
+
+/// @brief Creates a new state and connects it to existing graph.
+/// @param state Current local state.
+/// @param trans Transitions from a local state to 
+/// @return Returns a pointer to a newly created LocalState.
 LocalState * AgentTemplate::genNextState(LocalState* state, TransitionTemplate* trans) {
    // utwórz obiekt dla nowego stanu
    LocalState *newState = new LocalState;
@@ -98,6 +135,10 @@ LocalState * AgentTemplate::genNextState(LocalState* state, TransitionTemplate* 
 
 /* --------------------------------------------------------------------- */
 // wygeneruj agenta do modelu
+
+/// @brief Generates an agent for the model.
+/// @param id Identifier of the new Agent.
+/// @return Returns a pointer to a newly created Agent.
 Agent * AgentTemplate::generateAgent(int id) {
    // zaalokuj obiekt będący wynikiem
    Agent *result = new Agent(id, ident);

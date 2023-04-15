@@ -1,0 +1,76 @@
+\hypertarget{class_expr_or}{}\doxysection{Expr\+Or Class Reference}
+\label{class_expr_or}\index{ExprOr@{ExprOr}}
+
+
+Node for OR operator.  
+
+
+
+
+{\ttfamily \#include $<$expressions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_expr_or_ab7b1414ba9c6bd0b95fe48dd6bf957d3}{Expr\+Or}} (\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$\+\_\+rarg)
+\begin{DoxyCompactList}\small\item\em Logic OR expression constructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_expr_or_af5f728674932ef4e7033cd6f625f775c}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node for OR operator. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_expr_or_ab7b1414ba9c6bd0b95fe48dd6bf957d3}\label{class_expr_or_ab7b1414ba9c6bd0b95fe48dd6bf957d3}} 
+\index{ExprOr@{ExprOr}!ExprOr@{ExprOr}}
+\index{ExprOr@{ExprOr}!ExprOr@{ExprOr}}
+\doxysubsubsection{\texorpdfstring{ExprOr()}{ExprOr()}}
+{\footnotesize\ttfamily Expr\+Or\+::\+Expr\+Or (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$}]{\+\_\+larg,  }\item[{\mbox{\hyperlink{class_expr_node}{Expr\+Node}} $\ast$}]{\+\_\+rarg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Logic OR expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+larg} & Left argument of the expression. \\
+\hline
+{\em \+\_\+rarg} & Right argument of the expression. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_expr_or_af5f728674932ef4e7033cd6f625f775c}\label{class_expr_or_af5f728674932ef4e7033cd6f625f775c}} 
+\index{ExprOr@{ExprOr}!eval@{eval}}
+\index{eval@{eval}!ExprOr@{ExprOr}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily int Expr\+Or\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{expressions_8hpp}{expressions.\+hpp}}\item 
+\mbox{\hyperlink{expressions_8cc}{expressions.\+cc}}\end{DoxyCompactItemize}

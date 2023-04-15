@@ -1,0 +1,83 @@
+\hypertarget{class_expr_ident}{}\doxysection{Expr\+Ident Class Reference}
+\label{class_expr_ident}\index{ExprIdent@{ExprIdent}}
+
+
+Node for an identifier.  
+
+
+
+
+{\ttfamily \#include $<$expressions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_expr_ident_adee748429a8a7a85374e413d4a534c36}{Expr\+Ident}} (string \+\_\+ident)
+\begin{DoxyCompactList}\small\item\em Identifier expression constructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_expr_ident_a24c5b44c7995f80b82a11e4b05eac892}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual int \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node for an identifier. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_expr_ident_adee748429a8a7a85374e413d4a534c36}\label{class_expr_ident_adee748429a8a7a85374e413d4a534c36}} 
+\index{ExprIdent@{ExprIdent}!ExprIdent@{ExprIdent}}
+\index{ExprIdent@{ExprIdent}!ExprIdent@{ExprIdent}}
+\doxysubsubsection{\texorpdfstring{ExprIdent()}{ExprIdent()}}
+{\footnotesize\ttfamily Expr\+Ident\+::\+Expr\+Ident (\begin{DoxyParamCaption}\item[{string}]{\+\_\+ident }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Identifier expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+ident} & \mbox{\hyperlink{class_expr_ident}{Expr\+Ident}} value. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_expr_ident_a24c5b44c7995f80b82a11e4b05eac892}\label{class_expr_ident_a24c5b44c7995f80b82a11e4b05eac892}} 
+\index{ExprIdent@{ExprIdent}!eval@{eval}}
+\index{eval@{eval}!ExprIdent@{ExprIdent}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily int Expr\+Ident\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em env} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_expr_node_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{expressions_8hpp}{expressions.\+hpp}}\item 
+\mbox{\hyperlink{expressions_8cc}{expressions.\+cc}}\end{DoxyCompactItemize}

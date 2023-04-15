@@ -1,3 +1,8 @@
+/**
+ * @file Types.cc
+ * @brief Custom data structures.
+ * Data structures and classes containing model data.
+ */
 #include "Types.hpp"
 
 /* Funkcja porównująca dwa stany.
@@ -5,6 +10,9 @@
  * Wszystko musi się zgadzać, czyli musi być dokładnie ta sama nazwa (wzorca)
  * oraz tyle samo takich samych zmiennych o takich samych wartościach.
  */
+/// @brief Function comparing two states.
+/// @param state A pointer to LocalState to which this state should be compared to.
+/// @return Returns true if the current LocalState is the same as the passed one, otherwise false.
 bool LocalState::compare(LocalState* state) {
    // agent musi być ten sam (sanity check)
    if(agent != state->agent) return false;
@@ -36,6 +44,9 @@ bool LocalState::compare(LocalState* state) {
 /* Sprawdzenie, czy w modelu nie ma juz (równoważnego) stanu.
  * Jeśli jest - zwróć go, w p.p. NULL
  */
+/// @brief Checks if there is an equivalent LocalState in the model to the one passed as an argment.
+/// @param state A pointer to LocalState to be checked.
+/// @return Returns a pointer to an equivalent LocalState if such exists, otherwise returns NULL.
 LocalState* Agent::includesState(LocalState* state) {
    // pętla po stanach już obecnych w modelu
    for(size_t i=0; i<localStates.size(); i++) {

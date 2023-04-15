@@ -1,0 +1,239 @@
+\hypertarget{class_agent_template}{}\doxysection{Agent\+Template Class Reference}
+\label{class_agent_template}\index{AgentTemplate@{AgentTemplate}}
+
+
+Represents a single agent loaded from the description from a file.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_agent_template_ae0a4af9e25d54221ffd5ceb6511e504d}\label{class_agent_template_ae0a4af9e25d54221ffd5ceb6511e504d}} 
+{\bfseries Agent\+Template} ()
+\begin{DoxyCompactList}\small\item\em Constructor for an \mbox{\hyperlink{class_agent_template}{Agent\+Template}}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& \mbox{\hyperlink{class_agent_template_ac040b408b9bdf0392711ae7a33cde091}{set\+Ident}} (string \+\_\+ident)
+\begin{DoxyCompactList}\small\item\em Set the identifier of an agent. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& \mbox{\hyperlink{class_agent_template_ad83e0b70459e922677acffc59c79c001}{set\+Init\+State}} (string \+\_\+start\+State)
+\begin{DoxyCompactList}\small\item\em Set the initial state of the agent. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& \mbox{\hyperlink{class_agent_template_ac5ee90b0bb4549380bba8df5082ad99a}{add\+Local}} (set$<$ string $>$ $\ast$variables)
+\begin{DoxyCompactList}\small\item\em Adds local variables to an agent. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& \mbox{\hyperlink{class_agent_template_a85b032c20e9397191aa49ca5389d4c13}{add\+Persistent}} (set$<$ string $>$ $\ast$variables)
+\begin{DoxyCompactList}\small\item\em Adds persistent variables to an agent. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& \mbox{\hyperlink{class_agent_template_affc9969304f18969ea21fb0d5fea2672}{add\+Initial}} (set$<$ \mbox{\hyperlink{class_assignment}{Assignment}} $\ast$ $>$ $\ast$assigns)
+\begin{DoxyCompactList}\small\item\em Adds initial assignments. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& \mbox{\hyperlink{class_agent_template_a73f2c8a769a275d59b9cda735d593098}{add\+Transition}} (\mbox{\hyperlink{class_transition_template}{Transition\+Template}} $\ast$\+\_\+transition)
+\begin{DoxyCompactList}\small\item\em Adds a transition to the agent. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_agent}{Agent}} $\ast$ \mbox{\hyperlink{class_agent_template_aae7682958ba875e773c52a1d51543d84}{generate\+Agent}} (int id)
+\begin{DoxyCompactList}\small\item\em Generate a new agent for the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single agent loaded from the description from a file. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_agent_template_affc9969304f18969ea21fb0d5fea2672}\label{class_agent_template_affc9969304f18969ea21fb0d5fea2672}} 
+\index{AgentTemplate@{AgentTemplate}!addInitial@{addInitial}}
+\index{addInitial@{addInitial}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{addInitial()}{addInitial()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& Agent\+Template\+::add\+Initial (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{class_assignment}{Assignment}} $\ast$ $>$ $\ast$}]{assigns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds initial assignments. 
+
+Sets initial values of agent\textquotesingle{}s variables.
+
+
+\begin{DoxyParams}{Parameters}
+{\em assigns} & Assignments to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to self.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em assigns} & Set of variables to assign. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns itself. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_agent_template_ac5ee90b0bb4549380bba8df5082ad99a}\label{class_agent_template_ac5ee90b0bb4549380bba8df5082ad99a}} 
+\index{AgentTemplate@{AgentTemplate}!addLocal@{addLocal}}
+\index{addLocal@{addLocal}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{addLocal()}{addLocal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& Agent\+Template\+::add\+Local (\begin{DoxyParamCaption}\item[{set$<$ string $>$ $\ast$}]{variables }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds local variables to an agent. 
+
+Adds local variables to the agent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em variables} & Set of variables to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to self.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em variables} & A pointer to a set of strings with the variables to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns itself. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_agent_template_a85b032c20e9397191aa49ca5389d4c13}\label{class_agent_template_a85b032c20e9397191aa49ca5389d4c13}} 
+\index{AgentTemplate@{AgentTemplate}!addPersistent@{addPersistent}}
+\index{addPersistent@{addPersistent}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{addPersistent()}{addPersistent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& Agent\+Template\+::add\+Persistent (\begin{DoxyParamCaption}\item[{set$<$ string $>$ $\ast$}]{variables }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds persistent variables to an agent. 
+
+Adds persistent variables to the agent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em variables} & Set of variables to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to self.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em variables} & A pointer to a set of strings with the variables to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns itself. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_agent_template_a73f2c8a769a275d59b9cda735d593098}\label{class_agent_template_a73f2c8a769a275d59b9cda735d593098}} 
+\index{AgentTemplate@{AgentTemplate}!addTransition@{addTransition}}
+\index{addTransition@{addTransition}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{addTransition()}{addTransition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& Agent\+Template\+::add\+Transition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_transition_template}{Transition\+Template}} $\ast$}]{\+\_\+transition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds a transition to the agent. 
+
+Adds a transition for the agent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+transition} & Transition to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to self.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+transition} & Transition to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns itself. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_agent_template_aae7682958ba875e773c52a1d51543d84}\label{class_agent_template_aae7682958ba875e773c52a1d51543d84}} 
+\index{AgentTemplate@{AgentTemplate}!generateAgent@{generateAgent}}
+\index{generateAgent@{generateAgent}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{generateAgent()}{generateAgent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent}{Agent}} $\ast$ Agent\+Template\+::generate\+Agent (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Generate a new agent for the model. 
+
+Generates an agent for the model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identification number defining a new \mbox{\hyperlink{class_agent}{Agent}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to a new \mbox{\hyperlink{class_agent}{Agent}}.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Identifier of the new \mbox{\hyperlink{class_agent}{Agent}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to a newly created \mbox{\hyperlink{class_agent}{Agent}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_agent_template_ac040b408b9bdf0392711ae7a33cde091}\label{class_agent_template_ac040b408b9bdf0392711ae7a33cde091}} 
+\index{AgentTemplate@{AgentTemplate}!setIdent@{setIdent}}
+\index{setIdent@{setIdent}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{setIdent()}{setIdent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& Agent\+Template\+::set\+Ident (\begin{DoxyParamCaption}\item[{string}]{\+\_\+ident }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the identifier of an agent. 
+
+Sets the identifier of an agent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+ident} & New agent identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to self.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+ident} & String with a new identifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns itself. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_agent_template_ad83e0b70459e922677acffc59c79c001}\label{class_agent_template_ad83e0b70459e922677acffc59c79c001}} 
+\index{AgentTemplate@{AgentTemplate}!setInitState@{setInitState}}
+\index{setInitState@{setInitState}!AgentTemplate@{AgentTemplate}}
+\doxysubsubsection{\texorpdfstring{setInitState()}{setInitState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_agent_template}{Agent\+Template}} \& Agent\+Template\+::set\+Init\+State (\begin{DoxyParamCaption}\item[{string}]{\+\_\+init\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the initial state of the agent. 
+
+Sets initial state of an agent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+start\+State} & New inital agent state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a pointer to self.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+init\+State} & String with a new state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns itself. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8hpp}{nodes.\+hpp}}\item 
+\mbox{\hyperlink{nodes_8cc}{nodes.\+cc}}\end{DoxyCompactItemize}
