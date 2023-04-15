@@ -23,6 +23,7 @@ blank [ \n\t]
 "LOCAL:"        { return T_LOCAL; }
 "INITIAL:"      { return T_INITIAL; }
 "PERSISTENT:"   { return T_PERSISTENT; }
+"FORMULA:"      { return T_FORMULA; }
 "->"           { return T_TO; }
 ":="           { return T_ASSIGN; }
 "||"           { return T_OR; }

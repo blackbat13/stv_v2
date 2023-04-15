@@ -8,12 +8,15 @@
 #include "reader/nodes.hpp"
 #include <stdio.h>
 
+#include <tuple>
+
 using namespace std;
 
 extern int yyparse();
 extern void yyrestart(FILE*);
 
 set<AgentTemplate*>* modelDescription;
+FormulaTemplate formulaDescription;
 
 /// @brief TestParser constructor.
 TestParser::TestParser() {
@@ -26,7 +29,7 @@ TestParser::~TestParser() {
 /// @brief Parses a file with given name into a usable model.
 /// @param fileName Name of the file to be converted into a model.
 /// @return Pointer to a model created from a given file.
-LocalModels * TestParser::parse(string fileName) {
+tuple<LocalModels*, Formula*> TestParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    // zamapuj go jako wejście dla Fleksa
@@ -46,5 +49,16 @@ LocalModels * TestParser::parse(string fileName) {
          models->vars[(*varit)->name] = *varit;
       }
    }
-   return models;
+   
+   
+   Formula* formula = new Formula();
+   formula->p = formulaDescription.formula;
+   for (const auto agent : models->agents) {
+      if (formulaDescription.coalition->count(agent->name)>0) {
+         formula->coalition.insert(agent);
+         break;
+      }
+   }
+
+   return tuple<LocalModels*, Formula*>{models, formula};
 }

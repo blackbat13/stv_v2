@@ -148,50 +148,17 @@ bool Verification::verifyLocalStates(set<LocalState*>* localStates) {
 // BEGIN{HARD-CODED-FORMULA}
     if(config.model_id==2){
         return this->seleneFormula->verifyLocalStates(localStates);
-    }else if(config.model_id==3){
-        auto localState = this->seleneFormula->getLocalStateForAgent("Coercer1", localStates);
-	    auto localState2 = this->seleneFormula->getLocalStateForAgent("Voter1", localStates);
-        if (localState == nullptr) {
-            return false;
-        }
-        if (localState2 == nullptr) {
-            return false;
-        }
-        int Coercer1_pun1 = this->seleneFormula->getLocalStateVar("Coercer1_pun1", localState);
-        int Coercer1_npun1 = this->seleneFormula->getLocalStateVar("Coercer1_npun1", localState);
-        int Coercer1_Voter1_vote = this->seleneFormula->getLocalStateVar("Coercer1_Voter1_vote", localState);
-        int Voter1_vote = this->seleneFormula->getLocalStateVar("Voter1_vote", localState2);
-        //bool result = (Coercer1_pun1 != 1);
-        //bool result = (Coercer1_Voter1_vote != 1 || Coercer1_pun1 != 1) && (Voter1_vote != 2 || Coercer1_npun1 !=1);
-        //bool result = (Voter1_vote != 1 || Coercer1_pun1 != 1) && (Voter1_vote != 2 || Coercer1_npun1 !=1);
-        bool result = ((Voter1_vote != 2) || (Coercer1_npun1 == 0)) && ((Voter1_vote != 2) || (Coercer1_pun1 == 0));
-	    return result;
-    }
-
-    // <<Train1>>G(Train1_pos=3)
-    // OR:
-    // <<Train1>>G(Train1_pos=1 || Train1_pos=2 || Train1_pos=3)
-    for (const auto localState : *localStates) {
-        if (localState->agent->name == "Train1") {
-            if(config.model_id==0){
-                for (const auto var : localState->vars) {
-                    if (var.first->name == "Train1_pos") {
-                        // return var.second == 3;
-                        return var.second == 1 || var.second == 2 || var.second == 3;
-                    }
-                }
-            }else if(config.model_id==1){
-                for (const auto var : localState->environment) {
-                    if (var.first == "Train1_pos") {
-                        // return var.second == 3;
-                        return var.second == 1 || var.second == 2 || var.second == 3;
-                    }
-                }
-            }
-        }
     }
 // END{HARD-CODED-FORMULA}
-    return false;
+
+    map<string,int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
+
+    for (const auto localState : *localStates) {
+        for(auto it = localState->environment.begin();it!=localState->environment.end();++it){
+            currEnv[it->first] = it->second;
+        }
+    }
+    return this->generator->getFormula()->p->eval(currEnv)==1;
 }
 
 /// @brief Recursively verifies GlobalState 

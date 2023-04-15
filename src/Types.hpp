@@ -14,6 +14,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include "reader/expressions.hpp"
 
 using namespace std;
 
@@ -79,10 +80,18 @@ struct Condition {
     int comparedValue;
 };
 
-/// @brief Contains a coalition of Agent from the formula.
+// [YK]: template, as here coalition is just a string
+
+/// @brief Contains a template for coalition of Agent as string from the formula.
+struct FormulaTemplate{
+   set<string>* coalition;
+   ExprNode* formula;
+};
+
 struct Formula {
     /// @brief Coalition of Agent from the formula.
     set<Agent*> coalition;
+    ExprNode* p; // [YK]: temporary solution to encode <<coalution>> G p
 };
 
 /// @brief Contains all data for a single Agent, including id, name and all of the agents' variables.

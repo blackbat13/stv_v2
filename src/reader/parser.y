@@ -17,7 +17,7 @@ void yyerror( char* );
 extern char* yytext;
 
 extern set<class AgentTemplate*>* modelDescription;
-
+extern FormulaTemplate formulaDescription;
 %}
 
 %union {
@@ -32,7 +32,7 @@ extern set<class AgentTemplate*>* modelDescription;
        int                         val;
 }
 
-%token   T_AGENT T_INIT T_LOCAL T_INITIAL
+%token   T_AGENT T_INIT T_LOCAL T_INITIAL T_FORMULA
 %token   T_PERSISTENT T_TO T_ASSIGN T_OR T_AND T_EQ
 %token   T_NE T_GT T_GE T_LT T_LE 
 %token   <val> T_NUM T_SHARED
@@ -42,7 +42,7 @@ extern set<class AgentTemplate*>* modelDescription;
 %type  <expr> num_exp num_mul num_elem
 %type  <expr> condition cond cond_and cond_elem
 %type  <trans> transition
-%type  <identSet> local persistent ident_list
+%type  <identSet> local persistent ident_list coalition
 %type  <assign> assignment
 %type  <assignSet> initial assign_list assignments
 %type  <agent> description agent
@@ -53,8 +53,19 @@ model: spec { modelDescription = $1; }
      ;
      
 spec: spec agent { $$=$1; $$->insert($2); }
+    | spec query { $$=$1; }
     | { $$=new set<AgentTemplate*>; }
     ;
+
+query: T_FORMULA formula { }
+     ;
+
+formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.formula=$4;} 
+       | coalition '<' '>' cond { formulaDescription.coalition=$1; formulaDescription.formula=$4;} 
+       ;
+
+coalition: T_LT T_LT ident_list T_GT T_GT { $$=$3; }
+         ;
       
 agent: T_AGENT T_IDENT ':' description { $$=$4; $$->setIdent($2); delete $2; }
      ;

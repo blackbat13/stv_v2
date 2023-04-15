@@ -8,6 +8,7 @@
 #define __TESTPARSER_HPP
 
 #include "Types.hpp"
+#include <tuple>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ class TestParser {
 public:
     TestParser();
     ~TestParser();
-    LocalModels* parse(string fileName);
+    tuple<LocalModels*, Formula*> parse(string fileName);
     
 protected:
     // @internal
