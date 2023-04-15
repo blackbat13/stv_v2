@@ -1,0 +1,22 @@
+Agent Train1:
+INITIAL: []
+LOCAL: []
+init q0
+shared[2] a: q0 -> q1
+shared[2] b: q1 -> q2
+shared[2] c: q2 -> q0
+
+Agent Controller:
+INITIAL: [d := 0]
+LOCAL: [d]
+init q0
+shared[2] a: q0 -> q0 [d:=1]
+shared[2] b: q0 [d==1]-> q1  
+shared[2] b: q0 [d==0]-> q2
+shared[2] a: q1 -> q1
+shared[2] b: q1 [d==1]-> q1  
+shared[2] b: q1 [d==0]-> q2
+shared[2] c: q1 -> q0 [d:=0]
+shared[2] a: q2 -> q2
+shared[2] b: q2 -> q2
+shared[2] c: q2 -> q2
