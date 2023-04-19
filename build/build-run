@@ -1,1 +1,1 @@
-clear && make clean && make && ./stv
+clear && make clean && make main && ./stv

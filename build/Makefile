@@ -77,6 +77,5 @@ gtest_main.a : gtest-all.o gtest_main.o
 sample_test : sample_test.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lfl -lpthread $^ -o $@
 
-sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) \
-				$(USER_DIR)/general_test.h $(USER_DIR)/test_test.h # add more tests here
+sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc

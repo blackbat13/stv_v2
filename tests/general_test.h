@@ -9,9 +9,7 @@
 #include <string>
 #include <tuple>
 
-Cfg config;
-
-TEST(GeneralCorrectness, TrainsTest)
+TEST(GeneralCorrectness, Trains)
 {
     config.fname = "../tests/examples/trains/Trains.txt";
     config.output_local_models = false;
@@ -29,18 +27,11 @@ TEST(GeneralCorrectness, TrainsTest)
 
     bool result = false;
 
-    if(config.stv_mode=='0') {}
-    else if(config.stv_mode=='1') {
-        generator->expandAllStates();
-    }
-    else if(config.stv_mode=='2') {
-        if(config.output_global_model) {
-            generator->expandAllStates();
-        }
-        auto verification = new Verification(generator);
-        
-        result = verification->verify();
-    }
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
 
     EXPECT_EQ(result, true);
 
@@ -49,7 +40,7 @@ TEST(GeneralCorrectness, TrainsTest)
 
 TEST(GeneralCorrectness, SelectVoteRevoting)
 {
-    config.fname = "../tests/examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
+    config.fname = "../tests/examples/ssvr/SelectVoteRevoting.txt";
     config.output_local_models = false;
     config.output_global_model = false;
     config.stv_mode = '2';
@@ -65,27 +56,20 @@ TEST(GeneralCorrectness, SelectVoteRevoting)
 
     bool result = false;
 
-    if(config.stv_mode=='0') {}
-    else if(config.stv_mode=='1') {
-        generator->expandAllStates();
-    }
-    else if(config.stv_mode=='2') {
-        if(config.output_global_model) {
-            generator->expandAllStates();
-        }
-        auto verification = new Verification(generator);
-        
-        result = verification->verify();
-    }
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
 
     EXPECT_EQ(result, false);
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 1);
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 38530);
 }
 
 TEST(GeneralCorrectness, SimpleVoting)
 {
-    config.fname = "../tests/examples/svote/Simple_voting.txt";
+    config.fname = "../tests/examples/svote/SimpleVoting.txt";
     config.output_local_models = false;
     config.output_global_model = false;
     config.stv_mode = '2';
@@ -101,20 +85,13 @@ TEST(GeneralCorrectness, SimpleVoting)
 
     bool result = false;
 
-    if(config.stv_mode=='0') {}
-    else if(config.stv_mode=='1') {
-        generator->expandAllStates();
-    }
-    else if(config.stv_mode=='2') {
-        if(config.output_global_model) {
-            generator->expandAllStates();
-        }
-        auto verification = new Verification(generator);
-        
-        result = verification->verify();
-    }
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
 
     EXPECT_EQ(result, false);
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 1);
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 15);
 }
