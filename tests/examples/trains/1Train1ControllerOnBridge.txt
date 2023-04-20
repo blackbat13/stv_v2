@@ -1,0 +1,15 @@
+Agent Train1:
+INITIAL: [Train1_pos := 1]
+LOCAL: [Train1_pos]
+init idle
+shared[2] in_Train1: idle [Train1_pos==1] -> idle [Train1_pos:=2]
+shared[2] out_Train1: idle [Train1_pos==2] -> idle [Train1_pos:=3]
+return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]
+
+Agent Controller:
+LOCAL: []
+init green
+shared[2] in_Train1: green -> red
+shared[2] out_Train1: red -> green
+
+FORMULA: <<Train1>>[](Train1_pos==2)
