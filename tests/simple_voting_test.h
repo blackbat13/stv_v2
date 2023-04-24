@@ -64,10 +64,9 @@ TEST(SimpleVotingTest, 2Voters1Coercer)
 
     EXPECT_EQ(result, false);
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 123);
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 63);
 }
 
-/*
 TEST(SimpleVotingTest, 3Voters1Coercer)
 {
     config.fname = "../tests/examples/svote/3Voters1Coercer.txt";
@@ -94,6 +93,34 @@ TEST(SimpleVotingTest, 3Voters1Coercer)
 
     EXPECT_EQ(result, false);
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 879);
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 255);
 }
-*/
+
+TEST(SimpleVotingTest, 4Voters1Coercer)
+{
+    config.fname = "../tests/examples/svote/4Voters1Coercer.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new TestParser();
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    EXPECT_EQ(result, false);
+
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 1023);
+}

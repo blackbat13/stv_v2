@@ -64,5 +64,5 @@ TEST(TrainsTest, 2Trains1Controller)
 
     EXPECT_EQ(result, false);
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 17);
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 8);
 }
