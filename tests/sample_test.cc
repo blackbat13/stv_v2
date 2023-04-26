@@ -6,6 +6,7 @@
 #include "trains_test.h"
 #include "trains_with_bridge_test.h"
 #include "simple_voting_test.h"
+#include "simple_voting_with_fakes_test.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
