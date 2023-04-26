@@ -227,3 +227,41 @@ unsigned long getMemCap() {
 
    return 4*dat;
 }
+
+
+// [YK]: todo - extract to a separate file as static class with .dot parameters (e.g., font, colours, etc)
+/// @brief Parses the pointed local model to a dot-formatted files for basic visualisation
+/// @return 
+void localModelsToDotString(LocalModels* lm){
+    const int _edgeLabelFontSize = 10;
+
+    ofstream ofs;
+    for(const auto &agt: lm->agents){
+        string fileName = "lts_of_" + agt->name + ".dot";
+        ofs.open(fileName);
+        ofs << "digraph \"" << agt->name << "\"{\n";
+        ofs << "\tlabel=\"" << agt->name << "\"\n";                                 // figure label
+
+        ofs << "\tedge[fontsize=\"" << to_string(_edgeLabelFontSize) << "\"]\n";    // font size for the edge-labels
+        ofs << "\tfontname=Consolas\n";                                             // font-family (will be inherited)
+        ofs << "\tlayout=dot\n";                                                    // layout engine name
+
+        // parse local states
+        for (const auto& s : agt->localStates){
+            ofs << "\t" << to_string(s->id) << "[label=\"" << s->name << "\"]\n";
+        }
+
+        // parse local transitions
+        for (const auto& t : agt->localTransitions) {
+            ofs << "\t" << to_string(t->from->id) << "->" << to_string(t->to->id);
+            ofs << "[label=\"" << t->name << "\"";
+            if (t->isShared) {
+                ofs << ", color=\"blue\"";
+            }
+            ofs << "]\n";
+        }
+
+        ofs << "}";
+        ofs.close();
+    }
+}

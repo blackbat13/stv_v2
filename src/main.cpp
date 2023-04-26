@@ -42,6 +42,8 @@ int main(int argc, char* argv[]) {
                 config.output_global_model = (val=="1");
             }else if(key=="MODE"){
                 config.stv_mode = val[0];
+            }else if(key=="OUTPUT_DOT_FILES"){
+                config.output_dot_files = (val=="1");
             }
         }
     }else{
@@ -69,6 +71,8 @@ int main(int argc, char* argv[]) {
                 config.output_global_model =1;
             }else if(arg == "-OUTPUT_LOCAL_MODELS"){
                 config.output_local_models = 1;
+            }else if(arg == "-OUTPUT_DOT_FILES"){
+                config.output_dot_files = 1;
             }
         }
     }
@@ -82,7 +86,10 @@ int main(int argc, char* argv[]) {
     if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
     }
-    
+
+    if(config.output_dot_files){
+        localModelsToDotString(localModels);
+    }   
     // // Formula
     // Formula* formula = new Formula();
     // for (const auto agent : localModels->agents) {

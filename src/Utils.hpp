@@ -21,5 +21,6 @@ string agentToString(Agent* agt);
 string localModelsToString(LocalModels* lm);
 void outputGlobalModel(GlobalModel* globalModel);
 unsigned long getMemCap();
+void localModelsToDotString(LocalModels* lm);
 
 #endif // STV_TYPES

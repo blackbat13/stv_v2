@@ -17,6 +17,7 @@ struct Cfg{
     char stv_mode;
     bool output_local_models;
     bool output_global_model;
+    bool output_dot_files;
     int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula)
 };
 
