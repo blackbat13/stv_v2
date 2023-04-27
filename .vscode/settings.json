@@ -49,5 +49,17 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp"
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/latex": true,
+        "**/html": true,
+        "**/*.tex": true,
+        "**/*.html": true,
+        "**/*.js": true,
+        "**/*.drawio": true,
+        "**/*.aux": true
     }
 }
