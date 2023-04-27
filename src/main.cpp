@@ -11,11 +11,7 @@ using namespace std;
 
 Cfg config;
 
-int main(int argc, char* argv[]) {
-    unsigned long mem1 = getMemCap();
-    struct timeval tb, te;
-    gettimeofday(&tb, NULL);
-    
+void loadConfig(int argc, char** argv){
     // read default values from config.txt
     ifstream ifs("config.txt", ifstream::in);
     if (ifs.is_open() == true) {
@@ -50,7 +46,6 @@ int main(int argc, char* argv[]) {
         printf("Could not open the config file...");
     }
 
-    
     // overwrite the default config values (if provided on the input)
     if(argc>=2){
         for(int i=1;i<argc;i++){
@@ -76,7 +71,14 @@ int main(int argc, char* argv[]) {
             }
         }
     }
+}
 
+int main(int argc, char* argv[]) {
+    unsigned long mem1 = getMemCap();
+    struct timeval tb, te;
+    gettimeofday(&tb, NULL);
+    
+    loadConfig(argc,argv); 
     auto tp = new TestParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
@@ -109,29 +111,25 @@ int main(int argc, char* argv[]) {
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
-    
 
-
-    if(config.stv_mode=='0'){ 
-        // do nothing
-    }else if(config.stv_mode=='1'){ // read and generate
+    /* NOTE:
+     * with this flag the whole global states gets generated,
+     * whereas in Verification::verifyGlobalState (called by ::verify) those are expanded on demand (!)
+    */
+    if(config.output_global_model){
         generator->expandAllStates();
-        if(config.output_global_model){
-            outputGlobalModel(generator->getCurrentGlobalModel());
-        }
-    }else if(config.stv_mode=='2'){ // read, generate and verify
-        if(config.output_global_model){
-            generator->expandAllStates(); // [YK]: why this was put under the printing-option body?
-            outputGlobalModel(generator->getCurrentGlobalModel());
-        }
+        outputGlobalModel(generator->getCurrentGlobalModel());
+    }
+
+    if(config.stv_mode=='0'){           // 0 - atm redundant (can be used as special, debug mode)
+    }else if(config.stv_mode=='1'){     // 1 - ignore verification
+    }else if(config.stv_mode=='2'){     // 2 - read, generate and verify
         auto verification = new Verification(generator);
-        
         // Show verifications of vars in each global state; to use the following code, make verification->verifyLocalStates public and ensure that generator->expandAllStates() has been called
         // auto gm = generator->getCurrentGlobalModel();
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
-        
         printf("\nVerification result: %s\n", verification->verify() ? "OK" : "ERR");
     }
 
@@ -140,12 +138,12 @@ int main(int argc, char* argv[]) {
     unsigned long czas = (te.tv_sec - tb.tv_sec);
     unsigned long mem2=getMemCap();
 
-    printf("\n\n czas = %lu sec\n\n",czas);
+    printf("\n\nczas = %lu sec\n\n",czas);
 
     printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
     //cout << mem2 << " - " << mem1 << " = " << mem2-mem1 << endl;
 
-    printf("\n\n Number of states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
+    printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
 
     return 0;
 }
