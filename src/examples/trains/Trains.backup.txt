@@ -1,14 +1,16 @@
 Agent Train1:
-INITIAL: [Train1_pos := 1]
 LOCAL: [Train1_pos]
+PERSISTENT: []
+INITIAL: [Train1_pos := 1]
 init idle
 shared[2] in_Train1: idle [Train1_pos==1] -> idle [Train1_pos:=2]
 shared[2] out_Train1: idle [Train1_pos==2] -> idle [Train1_pos:=3]
 return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]
 
 Agent Train2:
-INITIAL: [Train2_pos := 1]
 LOCAL: [Train2_pos]
+PERSISTENT: []
+INITIAL: [Train2_pos := 1]
 init idle
 shared[2] in_Train2: idle [Train2_pos==1] -> idle [Train2_pos:=2]
 shared[2] out_Train2: idle [Train2_pos==2] -> idle [Train2_pos:=3]
@@ -21,3 +23,5 @@ shared[2] in_Train1: green -> red
 shared[2] out_Train1: red -> green
 shared[2] in_Train2: green -> red
 shared[2] out_Train2: red -> green
+
+FORMULA: <<Train1>>[](Train1_pos==2)

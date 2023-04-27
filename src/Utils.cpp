@@ -265,3 +265,66 @@ void localModelsToDotString(LocalModels* lm){
         ofs.close();
     }
 }
+
+/// @brief Utility function for SCC-computatation
+/// @param v - current vertex
+/// @param dindex - vertex.index (alt. vertex.num)
+/// @param lowlink - vertex.lowlink (by df. lowest dindex in the same scc reachable from vertex using tree edges followed by at most one back/cross edge)
+/// @param stack - holds candidates for SCC
+/// @param onstack - used as condition for back/cross-edge case
+/// @param depth - next available (discovery) index
+/// @param comp - result of SCC partitioning
+void tarjanVisit(LocalState* v, map<int,int>* dindex, map<int,int>* lowlink, stack<LocalState*>* stack, map<int,bool>* onstack, int* depth, vector<set<LocalState*>>* comp){
+    (*dindex)[v->id] = (*depth);    // assign current depth
+    (*lowlink)[v->id] = (*depth);   // start with its own dindex
+    (*depth)++;                     // increment the (unused) depth
+    
+    (*stack).push(v);               // push on stack
+    (*onstack)[v->id] = true;     
+
+    for(const auto& t : v->localTransitions){
+        if(dindex->count(t->to->id)<=0){
+            tarjanVisit(t->to, dindex, lowlink, stack, onstack, depth, comp);
+            (*lowlink)[v->id] = min((*lowlink)[v->id],(*lowlink)[t->to->id]);
+        }else if( (*onstack)[t->to->id]) {
+            (*lowlink)[v->id] = min((*lowlink)[v->id],(*dindex)[t->to->id]); 
+        }
+    }
+
+    // if v is a base vertex, then pop the stack to get SCC
+    if( (*lowlink)[v->id] == (*dindex)[v->id] ){ 
+        set<LocalState*> currComp;
+        while(true){
+            LocalState* w = (*stack).top(); // pop w from the stack
+            (*stack).pop();
+            (*onstack)[w->id] = false;
+            currComp.insert(w);             // add w to curr SCC
+            if( v->id == w->id )break;
+        }
+        comp->push_back(currComp);
+    }
+
+}
+
+/// @brief a quick implementation of a Tarjan SCC algorithm (based on DFS)
+/// @param agt - an agent whose local graph will be inspected
+/// @return localStates partition in a form of the vector, where each set correponds to a SCC
+vector<set<LocalState*>> getSCC(Agent* agt){
+    vector<set<LocalState*>> comp;
+    
+    // [YK]: these 3 maps below could be replaced with int array (if localstate ids are always conseq. numbers starting from 0)
+    map<int,int> dindex; // discovered/depth index
+    map<int,int> lowlink;
+    map<int,bool> onstack; 
+
+    stack<LocalState*> stack;
+
+    int depth = 0;
+    for(const auto& v : agt->localStates){
+        if(dindex.count(v->id)<=0){
+            tarjanVisit(v, &dindex, &lowlink, &stack, &onstack, &depth, &comp);
+        }
+    }
+
+    return comp;
+}

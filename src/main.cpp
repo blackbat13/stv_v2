@@ -89,15 +89,22 @@ int main(int argc, char* argv[]) {
 
     if(config.output_dot_files){
         localModelsToDotString(localModels);
-    }   
-    // // Formula
-    // Formula* formula = new Formula();
-    // for (const auto agent : localModels->agents) {
-    //     if (agent->name == agentName) {
-    //         formula->coalition.insert(agent);
-    //         break;
-    //     }
+    }
+
+
+/* ------- Uncomment for the SCC compute test/debug ------- */
+    // for (const auto& agt : localModels->agents) {
+    //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;
+    //     auto res = getSCC(agt);
+    //     for(const auto comp : res) {
+    //         cout << "[ ";
+    //         for(const auto& l: comp){
+    //             cout << l->id << " ";
+    //         }
+    //         cout << "]" << endl;
+    //     }  
     // }
+/*----------------------------------------------------------*/
 
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();

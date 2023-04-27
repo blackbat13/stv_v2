@@ -22,5 +22,6 @@ string localModelsToString(LocalModels* lm);
 void outputGlobalModel(GlobalModel* globalModel);
 unsigned long getMemCap();
 void localModelsToDotString(LocalModels* lm);
+vector<set<LocalState*>> getSCC(Agent* agt);
 
 #endif // STV_TYPES

@@ -42,5 +42,6 @@ src/reader/parser.h
 src/reader/scanner.c
 src/reader/scanner.h
 
-# Graphviz's dot
+# Graphviz related
 *.dot
+*.png
