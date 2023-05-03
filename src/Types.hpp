@@ -80,11 +80,9 @@ struct Condition {
     int comparedValue;
 };
 
-// [YK]: template, as here coalition is just a string
-
-/// @brief Contains a template for coalition of Agent as string from the formula.
+/// @brief Contains a template for coalition of Agent as string from the formula. 
 struct FormulaTemplate{
-   set<string>* coalition;
+   set<string>* coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
    ExprNode* formula;
 };
 

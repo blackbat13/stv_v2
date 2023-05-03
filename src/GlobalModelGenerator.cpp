@@ -5,6 +5,7 @@
  */
 
 #include "GlobalModelGenerator.hpp"
+#include <algorithm>
 #include <iostream>
 
 /// @brief Constructor for GlobalModelGenerator class.
