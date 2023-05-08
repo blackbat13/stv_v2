@@ -1,0 +1,132 @@
+\hypertarget{Types_8hpp}{}\doxysection{Types.\+hpp File Reference}
+\label{Types_8hpp}\index{Types.hpp@{Types.hpp}}
+
+
+Custom data structures. Data structures and classes containing model data.  
+
+
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}reader/expressions.\+hpp\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structVar}{Var}}
+\begin{DoxyCompactList}\small\item\em Represents a variable in the model, containing name, initial value and persistence. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCondition}{Condition}}
+\begin{DoxyCompactList}\small\item\em Represents a condition for \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structFormulaTemplate}{Formula\+Template}}
+\begin{DoxyCompactList}\small\item\em Contains a template for coalition of \mbox{\hyperlink{classAgent}{Agent}} as string from the formula. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structFormula}{Formula}}
+\item 
+class \mbox{\hyperlink{classAgent}{Agent}}
+\begin{DoxyCompactList}\small\item\em Contains all data for a single \mbox{\hyperlink{classAgent}{Agent}}, including id, name and all of the agents\textquotesingle{} variables. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classLocalState}{Local\+State}}
+\begin{DoxyCompactList}\small\item\em Represents a single \mbox{\hyperlink{classLocalState}{Local\+State}}, containing id, name and internal variables. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structVarAssignment}{Var\+Assignment}}
+\item 
+struct \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}
+\begin{DoxyCompactList}\small\item\em Represents a single local transition, containing id, global name, local name, is shared and count of the appearances. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structLocalModels}{Local\+Models}}
+\begin{DoxyCompactList}\small\item\em Represents a single local model, contains all agents and variables. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGlobalModel}{Global\+Model}}
+\begin{DoxyCompactList}\small\item\em Represents a global model, containing agents and a formula. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGlobalState}{Global\+State}}
+\begin{DoxyCompactList}\small\item\em Represents a single global state. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}
+\begin{DoxyCompactList}\small\item\em Represents a single global transition. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}
+\begin{DoxyCompactList}\small\item\em Represents a single epistemic class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{Types_8hpp_adab1b2b49825a75bed998dd77963eff9}{Condition\+Operator}} \{ \mbox{\hyperlink{Types_8hpp_adab1b2b49825a75bed998dd77963eff9afa6a5ecec423d5155e4bebb7a23442f6}{Equals}}
+, \mbox{\hyperlink{Types_8hpp_adab1b2b49825a75bed998dd77963eff9a76f4827b86e898b493aaf637968f0fe8}{Not\+Equals}}
+ \}
+\begin{DoxyCompactList}\small\item\em Conditional operator for the variable. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} \{ \mbox{\hyperlink{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}{UNVERIFIED}}
+, \mbox{\hyperlink{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a1869818fd53ff519eb8e429301bdff73}{PENDING}}
+, \mbox{\hyperlink{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a1fca0382a59d89e978ad095fbe6b1e71}{VERIFIED\+\_\+\+OK}}
+, {\bfseries VERIFIED\+\_\+\+ERR}
+ \}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classVerification}{Verification}} status of a \mbox{\hyperlink{structGlobalState}{Global\+State}}. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbd}{Var\+Assignment\+Type}} \{ \mbox{\hyperlink{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbda59ef514664486b1d457ce91bf991f66c}{From\+Var}}
+, \mbox{\hyperlink{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbdaa7ee41d70d7fc8d6eb853b94edf2451b}{From\+Value}}
+ \}
+\begin{DoxyCompactList}\small\item\em Handles if the \mbox{\hyperlink{structVar}{Var}} value is from src\+Var or from value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Custom data structures. Data structures and classes containing model data. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{Types_8hpp_adab1b2b49825a75bed998dd77963eff9}\label{Types_8hpp_adab1b2b49825a75bed998dd77963eff9}} 
+\index{Types.hpp@{Types.hpp}!ConditionOperator@{ConditionOperator}}
+\index{ConditionOperator@{ConditionOperator}!Types.hpp@{Types.hpp}}
+\doxysubsubsection{\texorpdfstring{ConditionOperator}{ConditionOperator}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{Types_8hpp_adab1b2b49825a75bed998dd77963eff9}{Condition\+Operator}}}
+
+
+
+Conditional operator for the variable. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Equals@{Equals}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!Equals@{Equals}}}\mbox{\Hypertarget{Types_8hpp_adab1b2b49825a75bed998dd77963eff9afa6a5ecec423d5155e4bebb7a23442f6}\label{Types_8hpp_adab1b2b49825a75bed998dd77963eff9afa6a5ecec423d5155e4bebb7a23442f6}} 
+Equals&Variable should be equal to the value. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotEquals@{NotEquals}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!NotEquals@{NotEquals}}}\mbox{\Hypertarget{Types_8hpp_adab1b2b49825a75bed998dd77963eff9a76f4827b86e898b493aaf637968f0fe8}\label{Types_8hpp_adab1b2b49825a75bed998dd77963eff9a76f4827b86e898b493aaf637968f0fe8}} 
+Not\+Equals&Variable should be not equal to the value. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}\label{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}} 
+\index{Types.hpp@{Types.hpp}!GlobalStateVerificationStatus@{GlobalStateVerificationStatus}}
+\index{GlobalStateVerificationStatus@{GlobalStateVerificationStatus}!Types.hpp@{Types.hpp}}
+\doxysubsubsection{\texorpdfstring{GlobalStateVerificationStatus}{GlobalStateVerificationStatus}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}
+
+
+
+\mbox{\hyperlink{classVerification}{Verification}} status of a \mbox{\hyperlink{structGlobalState}{Global\+State}}. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNVERIFIED@{UNVERIFIED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!UNVERIFIED@{UNVERIFIED}}}\mbox{\Hypertarget{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}\label{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}} 
+UNVERIFIED&State is not verified. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PENDING@{PENDING}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!PENDING@{PENDING}}}\mbox{\Hypertarget{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a1869818fd53ff519eb8e429301bdff73}\label{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a1869818fd53ff519eb8e429301bdff73}} 
+PENDING&Entered the state but it is not verified as correct or incorrect yet. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VERIFIED\_OK@{VERIFIED\_OK}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!VERIFIED\_OK@{VERIFIED\_OK}}}\mbox{\Hypertarget{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a1fca0382a59d89e978ad095fbe6b1e71}\label{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048a1fca0382a59d89e978ad095fbe6b1e71}} 
+VERIFIED\+\_\+\+OK&The state has been verified and is correct. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbd}\label{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbd}} 
+\index{Types.hpp@{Types.hpp}!VarAssignmentType@{VarAssignmentType}}
+\index{VarAssignmentType@{VarAssignmentType}!Types.hpp@{Types.hpp}}
+\doxysubsubsection{\texorpdfstring{VarAssignmentType}{VarAssignmentType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbd}{Var\+Assignment\+Type}}}
+
+
+
+Handles if the \mbox{\hyperlink{structVar}{Var}} value is from src\+Var or from value. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FromVar@{FromVar}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!FromVar@{FromVar}}}\mbox{\Hypertarget{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbda59ef514664486b1d457ce91bf991f66c}\label{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbda59ef514664486b1d457ce91bf991f66c}} 
+From\+Var&Take value from src\+Var. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FromValue@{FromValue}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!FromValue@{FromValue}}}\mbox{\Hypertarget{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbdaa7ee41d70d7fc8d6eb853b94edf2451b}\label{Types_8hpp_ae6d1722ec32c3fdc9cb938063d93ccbdaa7ee41d70d7fc8d6eb853b94edf2451b}} 
+From\+Value&Take value from value. \\
+\hline
+
+\end{DoxyEnumFields}
