@@ -1,7 +1,7 @@
 Agent Minutes:
 LOCAL: [TimeMinutes]
 PERSISTENT: [TimeMinutes]
-INITIAL: []
+INITIAL: [TimeMinutes:=0]
 init q0
 mgoto1[mgoto1]: q0 -> q1 [TimeMinutes:=1]
 mgoto2[mgoto2]: q1 -> q2 [TimeMinutes:=2]
@@ -22,13 +22,13 @@ shared[2] mgoto0[mgoto0]: q14 -> q0 [TimeMinutes:=0]
 Agent Hours:
 LOCAL: [TimeHours]
 PERSISTENT: [TimeHours]
-INITIAL: []
+INITIAL: [TimeHours:=0]
 init q0
-hgoto1[mgoto0]: q0 -> q1 [TimeHours:=1]
-hgoto2[mgoto0]: q1 -> q2 [TimeHours:=2]
-hgoto3[mgoto0]: q2 -> q3 [TimeHours:=3]
-hgoto4[mgoto0]: q3 -> q4 [TimeHours:=4]
-hgoto5[mgoto0]: q4 -> q5 [TimeHours:=5]
-hgoto0[mgoto0]: q5 -> q0 [TimeHours:=0]
+shared[2] mgoto0[hgoto1]: q0 -> q1 [TimeHours:=1]
+shared[2] mgoto0[hgoto2]: q1 -> q2 [TimeHours:=2]
+shared[2] mgoto0[hgoto3]: q2 -> q3 [TimeHours:=3]
+shared[2] mgoto0[hgoto4]: q3 -> q4 [TimeHours:=4]
+shared[2] mgoto0[hgoto5]: q4 -> q5 [TimeHours:=5]
+shared[2] mgoto0[hgoto0]: q5 -> q0 [TimeHours:=0]
 
 FORMULA: <<Minutes>>[](TimeHours <= 6)

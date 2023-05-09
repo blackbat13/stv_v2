@@ -64,5 +64,5 @@ TEST(ClockTest, Clock6Hours15MinutesAndDays)
 
     EXPECT_EQ(result, true);
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 90);
+    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 1155);
 }
