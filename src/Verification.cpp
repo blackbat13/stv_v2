@@ -224,7 +224,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             if (fixedGlobalTransition == nullptr) {
                 controlledGlobalTransitions.insert(globalTransition);
             }
-            else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to)) {
+            else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
                 // controlled transition that is fixed should be treated as an uncontrolled transition 
                 #if VERBOSE
                     printf("%streat controlled as uncontrolled: %s -> %s\n", prefix.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
@@ -779,4 +779,26 @@ void Verification::printCurrentHistory(int depth) {
         x = x->next;
     }
     histDbg.print(prefix);
+}
+
+/// @brief Checks if two global transitions are made up of the same local transitions
+/// @param globalTransition1 First global transition to compare.
+/// @param globalTransition2 Second global transition to compare.
+/// @return True if the two global transitions have the same local transitions, false otherwise.
+bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2) {
+    bool isEquivalent = true;
+    bool isMatchFound = false;
+    for (const auto localTransition1 : globalTransition1->localTransitions) {
+        for (const auto localTransition2 : globalTransition2->localTransitions) {
+            if (localTransition1->name == localTransition2->name) {
+                isMatchFound = true;
+                break;
+            }
+        }
+        if (!isMatchFound) {
+            isEquivalent = false;
+            break;
+        }
+    }
+    return isEquivalent;
 }
