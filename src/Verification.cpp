@@ -789,15 +789,17 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
     bool isEquivalent = true;
     bool isMatchFound = false;
     for (const auto localTransition1 : globalTransition1->localTransitions) {
-        for (const auto localTransition2 : globalTransition2->localTransitions) {
-            if (localTransition1->name == localTransition2->name) {
-                isMatchFound = true;
+        if (isAgentInCoalition(localTransition1->agent)) {
+            for (const auto localTransition2 : globalTransition2->localTransitions) {
+                if (isAgentInCoalition(localTransition2->agent) && localTransition1->localName == localTransition2->localName) {
+                    isMatchFound = true;
+                    break;
+                }
+            }
+            if (!isMatchFound) {
+                isEquivalent = false;
                 break;
             }
-        }
-        if (!isMatchFound) {
-            isEquivalent = false;
-            break;
         }
     }
     return isEquivalent;

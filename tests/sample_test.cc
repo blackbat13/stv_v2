@@ -7,6 +7,7 @@
 #include "trains_with_bridge_test.h"
 #include "simple_voting_test.h"
 #include "simple_voting_with_fakes_test.h"
+#include "simple_voting_run_test.h"
 #include "clock_test.h"
 
 int main(int argc, char **argv) {
