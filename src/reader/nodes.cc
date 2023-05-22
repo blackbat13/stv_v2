@@ -7,6 +7,8 @@
 #include "expressions.hpp"
 #include "nodes.hpp"
 #include <queue>
+#include <fstream>
+
 
 /* --------------------------------------------------------------------- */
 // konstruktor bezparametrowy
@@ -102,6 +104,43 @@ AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
 /// @return Returns itself.
 AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    transitions->insert(_transition);
+
+   /* 
+   [YK]: 
+    - moved from `AgentTemplate::generateAgent`;
+    - `AgentTemplate` does not exhibit delete, therefore `localStateTemplates` 
+      can be computed incrementally (without refresh/update);
+    - ideally localStateTemplates should be filled on demand, i.e 
+      upon an instantiation of a new TransitionTemplate (provided parent Agent context);
+      however, the performance difference would likely be insignificant and
+      current "fix" should be sufficient
+   */ 
+  
+   // Z tranzycji trzeba teraz wyciągnąć template'y stanów lokalnych
+
+   // pomocnicze wskaźniki na stan początkowy i końcowy
+   LocalStateTemplate *fromState, *toState;
+   
+   // sprawdź nazwę stanu początkowego, czy już jest w bazie
+   if(localStateTemplates.count(_transition->startState) == 0) {
+      // nie ma - utwórz obiekt stanu
+      fromState = new LocalStateTemplate;
+      fromState->name = _transition->startState;
+      localStateTemplates[_transition->startState] = fromState;
+   } else {
+      fromState = localStateTemplates[_transition->startState];
+   }
+   // zapamietaj, że tranzycja "przynależy" do tego stanu
+   fromState->transitions.insert(_transition);
+   
+   // to samo dla stanu końcowego
+   if(localStateTemplates.count(_transition->endState) == 0) {
+      // nie ma - utwórz obiekt stanu
+      toState = new LocalStateTemplate;
+      toState->name = _transition->endState;
+      localStateTemplates[_transition->endState] = toState;
+   }
+
    return *this;
 }
 
@@ -158,35 +197,7 @@ Agent * AgentTemplate::generateAgent(int id) {
       var->persistent = true;
       result->vars.insert(var);
    }
-   
-   // Z tranzycji trzeba teraz wyciągnąć template'y stanów lokalnych
-   // pętla po tranzycjach
-   for(set<TransitionTemplate*>::iterator it=transitions->begin(); it != transitions->end(); it++) {
-      TransitionTemplate *tr=*it;
-      // pomocnicze wskaźniki na stan początkowy i końcowy
-      LocalStateTemplate *fromState, *toState;
-      
-      // sprawdź nazwę stanu początkowego, czy już jest w bazie
-      if(localStateTemplates.count(tr->startState) == 0) {
-         // nie ma - utwórz obiekt stanu
-         fromState = new LocalStateTemplate;
-         fromState->name = tr->startState;
-         localStateTemplates[tr->startState] = fromState;
-      } else {
-         fromState = localStateTemplates[tr->startState];
-      }
-      // zapamietaj, że tranzycja "przynależy" do tego stanu
-      fromState->transitions.insert(tr);
-      
-      // to samo dla stanu końcowego
-      if(localStateTemplates.count(tr->endState) == 0) {
-         // nie ma - utwórz obiekt stanu
-         toState = new LocalStateTemplate;
-         toState->name = tr->endState;
-         localStateTemplates[tr->endState] = toState;
-      }
-   }
-   
+     
    // na podstawie nazwy utwórz stan startowy
    result->initState = new LocalState;
    result->initState->id = 0;
@@ -260,4 +271,53 @@ Agent * AgentTemplate::generateAgent(int id) {
    return result;
 }
 
+
+// [YK] (todo): refactor as dotStringParser static class + method with parameter of AgentTemplate type
+void AgentTemplate::toDotFile(){
+   const int _edgeLabelFontSize = 10;
+   string s = "";
+   for(const auto& elem : localStateTemplates){
+      s+= elem.first + " " + elem.second->name + "\n";
+      for(const auto& trn: elem.second->transitions){
+         s+= "\t" + trn->startState + "->" + trn->endState + "\n";
+      }
+   }
+
+   ofstream ofs;
+   string fileName = "AgentGraph_of_" + ident + ".dot";
+   ofs.open(fileName);
+   ofs << "digraph \"" << ident << "\"{\n";
+   ofs << "\tlabel=\"AgentGraph of " << ident << "\"\n";                                 // figure label
+
+   ofs << "\tedge[fontsize=\"" << to_string(_edgeLabelFontSize) << "\"]\n";    // font size for the edge-labels
+   ofs << "\tnode [\n"
+         "\t\tshape=circle,\n"
+         "\t\tfixedsize=true,\n"
+         "\t\twidth=auto,\n"
+         "\t\tcolor=\"black\",\n"
+         "\t\tfillcolor=\"#eeeeee\",\n"
+         "\t\tstyle=\"filled,solid\",\n"
+         "\t\tfontsize=8,\n"
+         "\t\tfontname=\"Roboto\"\n"
+         "\t]\n";                                                               // node settings
+   ofs << "\tfontname=Consolas\n";                                             // font-family (will be inherited)
+   ofs << "\tlayout=dot\n";                                                    // layout engine name
+
+   for(const auto& elem : localStateTemplates){
+      ofs << "\t" << elem.first << "[label=\"" << elem.second->name << "\"]\n";
+      for(const auto& trn: elem.second->transitions){
+         s+= "\t" + trn->startState + "->" + trn->endState + "\n";
+
+         ofs << "\t" << trn->startState << "->" << trn->endState;
+         ofs << "[label=\"" << trn->patternName << "\"";
+         if (trn->shared!=-1) {
+               ofs << ", color=\"blue\"";
+         }
+         ofs << "]\n";
+      }
+   }
+
+   ofs << "}";
+   ofs.close();
+}
 

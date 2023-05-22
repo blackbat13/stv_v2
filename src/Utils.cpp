@@ -232,7 +232,7 @@ unsigned long getMemCap() {
 // [YK]: todo - extract to a separate file as static class with .dot parameters (e.g., font, colours, etc)
 /// @brief Parses the pointed local model to a dot-formatted files for basic visualisation
 /// @return 
-void localModelsToDotString(LocalModels* lm){
+void localModelsToDotFile(LocalModels* lm){
     const int _edgeLabelFontSize = 10;
 
     ofstream ofs;
@@ -240,9 +240,19 @@ void localModelsToDotString(LocalModels* lm){
         string fileName = "lts_of_" + agt->name + ".dot";
         ofs.open(fileName);
         ofs << "digraph \"" << agt->name << "\"{\n";
-        ofs << "\tlabel=\"" << agt->name << "\"\n";                                 // figure label
+        ofs << "\tlabel=\"LTS of " << agt->name << "\"\n";                                 // figure label
 
         ofs << "\tedge[fontsize=\"" << to_string(_edgeLabelFontSize) << "\"]\n";    // font size for the edge-labels
+        ofs << "\tnode [\n"
+               "\t\tshape=circle,\n"
+               "\t\tfixedsize=true,\n"
+               "\t\twidth=auto,\n"
+               "\t\tcolor=\"black\",\n"
+               "\t\tfillcolor=\"#eeeeee\",\n"
+               "\t\tstyle=\"filled,solid\",\n"
+               "\t\tfontsize=8,\n"
+               "\t\tfontname=\"Roboto\"\n"
+               "\t]\n";                                                               // node settings
         ofs << "\tfontname=Consolas\n";                                             // font-family (will be inherited)
         ofs << "\tlayout=dot\n";                                                    // layout engine name
 

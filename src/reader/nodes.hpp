@@ -95,14 +95,14 @@ class TransitionTemplate {
             
 };
 
-/// @brief A template for the local state.
-class LocalStateTemplate {
+/// @brief A template for the local state. 
+class LocalStateTemplate { // [YK]: <-- a class implementing Location
    public:
       /// @brief Name of the local state.
       string name;
 
       /// @brief Local transitions going out from this state.
-      set<TransitionTemplate*> transitions;
+      set<TransitionTemplate*> transitions;  // [YK]: <-- adj. list of edges connecting locations
 };
 
 /* Klasa reprezentująca pojedynczego agenta po wczytaniu jego opisu z pliku */
@@ -112,7 +112,7 @@ class AgentTemplate {
       // identyfikator agenta
 
       /// @brief Agent identifier.
-      string ident;
+      string ident; // [YK]: <-- Agent Type/Template Name (e.g., Voter, Train)
       
       // stan startowy
 
@@ -142,7 +142,7 @@ class AgentTemplate {
       // mapa stanów lokalnych potrzebna do wygenerowania modelu
 
       /// @brief Map of local states needed to generate a model.
-      map<string,LocalStateTemplate*> localStateTemplates;
+      map<string,LocalStateTemplate*> localStateTemplates;  // [YK]: maps location name to location obj
             
       // metoda wyznaczająca węzeł kolejny do danego, zależnie od tranzycji
 
@@ -199,6 +199,8 @@ class AgentTemplate {
       /// @param id Identification number defining a new Agent.
       /// @return Returns a pointer to a new Agent.
       virtual Agent* generateAgent(int id) ;
+
+      virtual void toDotFile();
 };
 
 #endif
