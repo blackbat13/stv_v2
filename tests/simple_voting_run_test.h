@@ -68,9 +68,9 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerNotRun)
 }
 
 
-TEST(SimpleVotingRunTest, 2Voters1Coercer)
+TEST(SimpleVotingRunTest, 2Voters1CoercerRun)
 {
-    config.fname = "../tests/examples/svoterun/2Voters1Coercer.txt";
+    config.fname = "../tests/examples/svoterun/2Voters1CoercerNotRun.txt";
     config.output_local_models = false;
     config.output_global_model = false;
     config.stv_mode = '2';
