@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.ejs": "html",
         "xstring": "cpp",
         "fstream": "cpp",
         "string": "cpp",
@@ -48,7 +49,20 @@
         "ostream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "any": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "forward_list": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp",
+        "ranges": "cpp",
+        "sstream": "cpp",
+        "valarray": "cpp",
+        "regex": "cpp"
     },
     "search.exclude": {
         "**/node_modules": true,
