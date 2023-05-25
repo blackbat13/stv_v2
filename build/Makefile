@@ -4,10 +4,10 @@ USER_DIR = ../tests
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 	
-main: main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
-	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o
+main: main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o 
+	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o SeleneFormula.o TestParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/TestParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp
 	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
@@ -27,6 +27,9 @@ Utils.o: ../src/Utils.hpp ../src/Utils.cpp
 
 Verification.o: ../src/Verification.hpp ../src/Verification.cpp
 	$(CC) $(CPPFLAGS) -c ../src/Verification.cpp
+
+DotGraph.o: ../src/DotGraph.hpp ../src/DotGraph.cpp
+	$(CC) $(CPPFLAGS) -c ../src/DotGraph.cpp
 
 parser.o: ../src/reader/parser.c
 	$(CC) $(CPPFLAGS) -c ../src/reader/parser.c

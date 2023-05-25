@@ -228,54 +228,6 @@ unsigned long getMemCap() {
    return 4*dat;
 }
 
-
-// [YK]: todo - extract to a separate file as static class with .dot parameters (e.g., font, colours, etc)
-/// @brief Parses the pointed local model to a dot-formatted files for basic visualisation
-/// @return 
-void localModelsToDotFile(LocalModels* lm){
-    const int _edgeLabelFontSize = 10;
-
-    ofstream ofs;
-    for(const auto &agt: lm->agents){
-        string fileName = "lts_of_" + agt->name + ".dot";
-        ofs.open(fileName);
-        ofs << "digraph \"" << agt->name << "\"{\n";
-        ofs << "\tlabel=\"LTS of " << agt->name << "\"\n";                                 // figure label
-
-        ofs << "\tedge[fontsize=\"" << to_string(_edgeLabelFontSize) << "\"]\n";    // font size for the edge-labels
-        ofs << "\tnode [\n"
-               "\t\tshape=circle,\n"
-               "\t\tfixedsize=true,\n"
-               "\t\twidth=auto,\n"
-               "\t\tcolor=\"black\",\n"
-               "\t\tfillcolor=\"#eeeeee\",\n"
-               "\t\tstyle=\"filled,solid\",\n"
-               "\t\tfontsize=8,\n"
-               "\t\tfontname=\"Roboto\"\n"
-               "\t]\n";                                                               // node settings
-        ofs << "\tfontname=Consolas\n";                                             // font-family (will be inherited)
-        ofs << "\tlayout=dot\n";                                                    // layout engine name
-
-        // parse local states
-        for (const auto& s : agt->localStates){
-            ofs << "\t" << to_string(s->id) << "[label=\"" << s->name << "\"]\n";
-        }
-
-        // parse local transitions
-        for (const auto& t : agt->localTransitions) {
-            ofs << "\t" << to_string(t->from->id) << "->" << to_string(t->to->id);
-            ofs << "[label=\"" << t->name << "\"";
-            if (t->isShared) {
-                ofs << ", color=\"blue\"";
-            }
-            ofs << "]\n";
-        }
-
-        ofs << "}";
-        ofs.close();
-    }
-}
-
 /// @brief Utility function for SCC-computatation
 /// @param v - current vertex
 /// @param dindex - vertex.index (alt. vertex.num)
@@ -319,7 +271,7 @@ void tarjanVisit(LocalState* v, map<int,int>* dindex, map<int,int>* lowlink, sta
 /// @brief a quick implementation of a Tarjan SCC algorithm (based on DFS)
 /// @param agt - an agent whose local graph will be inspected
 /// @return localStates partition in a form of the vector, where each set correponds to a SCC
-vector<set<LocalState*>> getSCC(Agent* agt){
+vector<set<LocalState*>> getLocalStatesSCC(Agent* agt){
     vector<set<LocalState*>> comp;
     
     // [YK]: these 3 maps below could be replaced with int array (if localstate ids are always conseq. numbers starting from 0)

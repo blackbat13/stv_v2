@@ -7,9 +7,15 @@
 #include <string>
 #include <tuple>
 
+#include "reader/nodes.hpp"
+#include "DotGraph.hpp"
+
 using namespace std;
 
 Cfg config;
+
+extern set<AgentTemplate*>* modelDescription;
+extern FormulaTemplate formulaDescription;
 
 void loadConfig(int argc, char** argv){
     // read default values from config.txt
@@ -89,15 +95,11 @@ int main(int argc, char* argv[]) {
         printf("%s\n", localModelsToString(localModels).c_str());
     }
 
-    if(config.output_dot_files){
-        localModelsToDotString(localModels);
-    }
-
 
 /* ------- Uncomment for the SCC compute test/debug ------- */
     // for (const auto& agt : localModels->agents) {
     //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;
-    //     auto res = getSCC(agt);
+    //     auto res = getLocalStatesSCC(agt);
     //     for(const auto comp : res) {
     //         cout << "[ ";
     //         for(const auto& l: comp){
@@ -112,6 +114,17 @@ int main(int argc, char* argv[]) {
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
 
+/* ----------------------- YK tests ----------------------- */
+    // for(const auto& st: generator->getCurrentGlobalModel()->globalStates){
+    //     cout << "Global state id = " << st->id << endl;
+    //     for(const auto& loc: st->localStates){
+    //         cout << "\t" << loc->name << "(" << loc->id <<") of agent " << loc->agent->name << "(" << loc->agent->id <<")" << endl;
+    //     }
+    // }
+    // cout << "Current number of states = " << ((generator->getCurrentGlobalModel())->globalStates).size() << endl;
+    // return 0;
+// /*----------------------------------------------------------*/
+
     /* NOTE:
      * with this flag the whole global states gets generated,
      * whereas in Verification::verifyGlobalState (called by ::verify) those are expanded on demand (!)
@@ -119,6 +132,20 @@ int main(int argc, char* argv[]) {
     if(config.output_global_model){
         generator->expandAllStates();
         outputGlobalModel(generator->getCurrentGlobalModel());
+    }
+
+    if(config.output_dot_files){
+        // save AgentTemplates
+        for(auto it:*modelDescription) {
+            DotGraph(it).saveToFile();
+        }
+        // save LocalModels
+        for (const auto& agt : localModels->agents) {
+            DotGraph(agt).saveToFile();
+        }
+        // save GlobalModel
+        generator->expandAllStates();   // todo: add allExpanded flag?
+        DotGraph(generator->getCurrentGlobalModel()).saveToFile();
     }
 
     if(config.stv_mode=='0'){           // 0 - atm redundant (can be used as special, debug mode)

@@ -156,14 +156,14 @@ class AgentTemplate {
       /// @brief Set the identifier of an agent.
       /// @param _ident New agent identifier.
       /// @return Returns a pointer to self.
-      virtual AgentTemplate& setIdent(string _ident);
+      virtual AgentTemplate& setIdent(string _ident);             // [YK]: <-- sets template Name
 
       // ustaw identyfikator agenta
 
       /// @brief Set the initial state of the agent.
       /// @param _startState New inital agent state.
       /// @return Returns a pointer to self.
-      virtual AgentTemplate& setInitState(string _startState);
+      virtual AgentTemplate& setInitState(string _startState);    // [YK]: <-- sets initial location
       
       // dodaj zmienną/zmienne lokalne
 
@@ -200,7 +200,7 @@ class AgentTemplate {
       /// @return Returns a pointer to a new Agent.
       virtual Agent* generateAgent(int id) ;
 
-      virtual void toDotFile();
+      friend class DotGraph;
 };
 
 #endif

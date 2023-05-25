@@ -45,3 +45,8 @@ src/reader/scanner.h
 # Graphviz related
 *.dot
 *.png
+
+# Other
+notes.md
+f5.sh
+.vscode/settings.json
