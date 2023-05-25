@@ -141,7 +141,7 @@ int main(int argc, char* argv[]) {
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
-            DotGraph(agt).saveToFile();
+            DotGraph(agt, true).saveToFile();
         }
         // save GlobalModel
         generator->expandAllStates();   // todo: add allExpanded flag?

@@ -16,8 +16,8 @@ public:
     std::string caption;
     static string styleString;
     DotGraph();
-    DotGraph(GlobalModel *const gm);
-    DotGraph(Agent *const ag);
+    DotGraph(GlobalModel *const gm, bool extended=false);
+    DotGraph(Agent *const ag, bool extended=false);
     DotGraph(AgentTemplate *const at);
     void saveToFile(std::string filename="");
 protected:

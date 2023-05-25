@@ -6,7 +6,7 @@ std::string DotGraph::styleString =
     "\tedge[fontsize=\"10\"]\n"         // font size for the edge-labels
     "\tnode [\n"                        // node styles
     "\t\tshape=circle,\n"
-    "\t\tfixedsize=true,\n"
+    // "\t\tfixedsize=true,\n"
     "\t\twidth=auto,\n"
     "\t\tcolor=\"black\",\n"
     "\t\tfillcolor=\"#eeeeee\",\n"
@@ -48,13 +48,26 @@ DotGraph::DotGraph(AgentTemplate *const at){
 }
 
 /// @brief parses the local transitions/states templates into nodes/edges
-DotGraph::DotGraph(Agent *const ag){
+DotGraph::DotGraph(Agent *const ag, bool extended){
     nodes.clear();
     edges.clear();
     name = ag->name;
     caption = "LocalModel of " + ag->name;
     for (const auto& s : ag->localStates){
-        this->addNode(to_string(s->id), s->name);
+        if(extended){
+            string tmp = "{{"+s->name+"|"+to_string(s->id)+"}|";
+            // for(const auto v: s->vars){
+            //     tmp+=v.first->name+"="+to_string(v.second)+"\n";
+            // }
+            for(const auto x: s->environment){
+                tmp+=x.first+"="+to_string(x.second)+"\\n";
+            }
+            tmp.resize(tmp.size()-2);
+            tmp+="}\", shape=\"record";
+            this->addNode(to_string(s->id), tmp);
+        }else{
+            this->addNode(to_string(s->id), s->name);
+        }
     }
     for (const auto& t : ag->localTransitions) {
         this->addEdge(
@@ -66,7 +79,7 @@ DotGraph::DotGraph(Agent *const ag){
 }
 
 /// @brief parses the transitions/states templates into nodes/edges
-DotGraph::DotGraph(GlobalModel *const gm){
+DotGraph::DotGraph(GlobalModel *const gm, bool extended){
     nodes.clear();
     edges.clear();
     const std::string sep="||";              // (async) agent names separator
