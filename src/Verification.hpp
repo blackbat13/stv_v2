@@ -117,6 +117,8 @@ protected:
     void undoLastHistoryEntry(bool freeMemory);
     void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
+    bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
+    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
 };
 
 #endif // SELENE_VERIFICATION

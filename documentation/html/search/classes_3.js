@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['formula_0',['Formula',['../struct_formula.html',1,'']]]
+  ['formula_217',['Formula',['../structFormula.html',1,'']]],
+  ['formulatemplate_218',['FormulaTemplate',['../structFormulaTemplate.html',1,'']]]
 ];
