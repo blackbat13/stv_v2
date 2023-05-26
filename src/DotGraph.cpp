@@ -94,6 +94,25 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
             stateLabel+=loc->name+",";
         }
         stateLabel.pop_back();  // truncate sep
+    
+        if(extended){
+            stateLabel="{{"+stateLabel+"|"+to_string(s->id)+"}|";
+            for(const auto& loc: s->localStates){
+                // add var evals
+                stateLabel+="{";
+                // stateLabel+="{"+loc->agent->name+"|"+ loc->name+"}|{";
+                // stateLabel+=""+loc->agent->name+"|{";
+                for(const auto x: loc->environment){
+                    stateLabel+=x.first+"="+to_string(x.second)+"\\n";
+                }
+                stateLabel.pop_back();
+                stateLabel.pop_back();
+                stateLabel+="}|";    
+            }
+            stateLabel.pop_back();
+            stateLabel+="}\", shape=\"record";
+        }
+
         this->addNode(to_string(s->id), stateLabel);
     }
     for (const auto& t : gm->globalTransitions) {

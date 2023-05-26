@@ -145,7 +145,7 @@ int main(int argc, char* argv[]) {
         }
         // save GlobalModel
         generator->expandAllStates();   // todo: add allExpanded flag?
-        DotGraph(generator->getCurrentGlobalModel()).saveToFile();
+        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile();
     }
 
     if(config.stv_mode=='0'){           // 0 - atm redundant (can be used as special, debug mode)
