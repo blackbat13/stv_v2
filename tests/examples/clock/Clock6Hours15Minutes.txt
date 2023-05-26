@@ -1,0 +1,34 @@
+Agent Minutes:
+LOCAL: [TimeMinutes]
+PERSISTENT: [TimeMinutes]
+INITIAL: [TimeMinutes:=0]
+init q0
+mgoto1[mgoto1]: q0 -> q1 [TimeMinutes:=1]
+mgoto2[mgoto2]: q1 -> q2 [TimeMinutes:=2]
+mgoto3[mgoto3]: q2 -> q3 [TimeMinutes:=3]
+mgoto4[mgoto4]: q3 -> q4 [TimeMinutes:=4]
+mgoto5[mgoto5]: q4 -> q5 [TimeMinutes:=5]
+mgoto6[mgoto6]: q5 -> q6 [TimeMinutes:=6]
+mgoto7[mgoto7]: q6 -> q7 [TimeMinutes:=7]
+mgoto8[mgoto8]: q7 -> q8 [TimeMinutes:=8]
+mgoto9[mgoto9]: q8 -> q9 [TimeMinutes:=9]
+mgoto10[mgoto10]: q9 -> q10 [TimeMinutes:=10]
+mgoto11[mgoto11]: q10 -> q11 [TimeMinutes:=11]
+mgoto12[mgoto12]: q11 -> q12 [TimeMinutes:=12]
+mgoto13[mgoto13]: q12 -> q13 [TimeMinutes:=13]
+mgoto14[mgoto14]: q13 -> q14 [TimeMinutes:=14]
+shared[2] mgoto0[mgoto0]: q14 -> q0 [TimeMinutes:=0]
+
+Agent Hours:
+LOCAL: [TimeHours]
+PERSISTENT: [TimeHours]
+INITIAL: [TimeHours:=0]
+init q0
+shared[2] mgoto0[hgoto1]: q0 -> q1 [TimeHours:=1]
+shared[2] mgoto0[hgoto2]: q1 -> q2 [TimeHours:=2]
+shared[2] mgoto0[hgoto3]: q2 -> q3 [TimeHours:=3]
+shared[2] mgoto0[hgoto4]: q3 -> q4 [TimeHours:=4]
+shared[2] mgoto0[hgoto5]: q4 -> q5 [TimeHours:=5]
+shared[2] mgoto0[hgoto0]: q5 -> q0 [TimeHours:=0]
+
+FORMULA: <<Minutes>>[](TimeHours <= 6)

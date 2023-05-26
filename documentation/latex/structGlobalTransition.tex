@@ -1,0 +1,37 @@
+\hypertarget{structGlobalTransition}{}\doxysection{Global\+Transition Struct Reference}
+\label{structGlobalTransition}\index{GlobalTransition@{GlobalTransition}}
+
+
+Represents a single global transition.  
+
+
+
+
+{\ttfamily \#include $<$Types.\+hpp$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structGlobalTransition_a1f32451290b0db18c3066d0cc924d498}\label{structGlobalTransition_a1f32451290b0db18c3066d0cc924d498}} 
+int \mbox{\hyperlink{structGlobalTransition_a1f32451290b0db18c3066d0cc924d498}{id}}
+\begin{DoxyCompactList}\small\item\em Identifier of the transition. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}\label{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}} 
+bool \mbox{\hyperlink{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}{is\+Invalid\+Decision}}
+\begin{DoxyCompactList}\small\item\em Marks if the transition is invalid, true if there is no point in traversing that transition, otherwise false. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}\label{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}} 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}{from}}
+\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{structGlobalState}{Global\+State}} from which this transition goes from. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalTransition_a10d5f899585856e47372c315a4029681}\label{structGlobalTransition_a10d5f899585856e47372c315a4029681}} 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structGlobalTransition_a10d5f899585856e47372c315a4029681}{to}}
+\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{structGlobalState}{Global\+State}} from which this transition goes to. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}\label{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}} 
+set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}{local\+Transitions}}
+\begin{DoxyCompactList}\small\item\em Local transitions that define this global transition. A single transition or more in case of shared transitions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single global transition. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Types_8hpp}{Types.\+hpp}}\end{DoxyCompactItemize}

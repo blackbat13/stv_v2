@@ -1,0 +1,67 @@
+\hypertarget{classLocalState}{}\doxysection{Local\+State Class Reference}
+\label{classLocalState}\index{LocalState@{LocalState}}
+
+
+Represents a single \mbox{\hyperlink{classLocalState}{Local\+State}}, containing id, name and internal variables.  
+
+
+
+
+{\ttfamily \#include $<$Types.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classLocalState_afc41e99633f48c66337ece5bc1a70dd4}{compare}} (\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Function comparing two states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLocalState_ae235a01f583577bba291360f829ffac9}\label{classLocalState_ae235a01f583577bba291360f829ffac9}} 
+int \mbox{\hyperlink{classLocalState_ae235a01f583577bba291360f829ffac9}{id}}
+\begin{DoxyCompactList}\small\item\em State identifier. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLocalState_a8f147438a2008244801118ed93009a6d}\label{classLocalState_a8f147438a2008244801118ed93009a6d}} 
+string \mbox{\hyperlink{classLocalState_a8f147438a2008244801118ed93009a6d}{name}}
+\begin{DoxyCompactList}\small\item\em State name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLocalState_a2af4f19b9d5300ba6716a30821f75f51}\label{classLocalState_a2af4f19b9d5300ba6716a30821f75f51}} 
+map$<$ \mbox{\hyperlink{structVar}{Var}} $\ast$, int $>$ \mbox{\hyperlink{classLocalState_a2af4f19b9d5300ba6716a30821f75f51}{vars}}
+\begin{DoxyCompactList}\small\item\em Local variables and their values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLocalState_a34bdc2e97427c07b102d81034df14c17}\label{classLocalState_a34bdc2e97427c07b102d81034df14c17}} 
+map$<$ string, int $>$ \mbox{\hyperlink{classLocalState_a34bdc2e97427c07b102d81034df14c17}{environment}}
+\begin{DoxyCompactList}\small\item\em Local variables as a name and their current values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}\label{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}} 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}{agent}}
+\begin{DoxyCompactList}\small\item\em Binding to an \mbox{\hyperlink{classAgent}{Agent}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLocalState_a13e96c06cf28959be8e87e4045d33265}\label{classLocalState_a13e96c06cf28959be8e87e4045d33265}} 
+set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ \mbox{\hyperlink{classLocalState_a13e96c06cf28959be8e87e4045d33265}{local\+Transitions}}
+\begin{DoxyCompactList}\small\item\em Binding to the set of \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a single \mbox{\hyperlink{classLocalState}{Local\+State}}, containing id, name and internal variables. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLocalState_afc41e99633f48c66337ece5bc1a70dd4}\label{classLocalState_afc41e99633f48c66337ece5bc1a70dd4}} 
+\index{LocalState@{LocalState}!compare@{compare}}
+\index{compare@{compare}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{compare()}{compare()}}
+{\footnotesize\ttfamily bool Local\+State\+::compare (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Function comparing two states. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & A pointer to \mbox{\hyperlink{classLocalState}{Local\+State}} to which this state should be compared to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the current \mbox{\hyperlink{classLocalState}{Local\+State}} is the same as the passed one, otherwise false. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{Types_8hpp}{Types.\+hpp}}\item 
+\mbox{\hyperlink{Types_8cc}{Types.\+cc}}\end{DoxyCompactItemize}

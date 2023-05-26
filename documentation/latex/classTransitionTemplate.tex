@@ -1,0 +1,78 @@
+\hypertarget{classTransitionTemplate}{}\doxysection{Transition\+Template Class Reference}
+\label{classTransitionTemplate}\index{TransitionTemplate@{TransitionTemplate}}
+
+
+Represents a meta-\/transition.  
+
+
+
+
+{\ttfamily \#include $<$nodes.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classTransitionTemplate_aae4d642b14198edd7c03d72f05ddfb7e}{Transition\+Template}} (int \+\_\+shared, string \+\_\+pattern\+Name, string \+\_\+match\+Name, string \+\_\+start\+State, string \+\_\+end\+State, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+cond, set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$\+\_\+assign)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classTransitionTemplate}{Transition\+Template}} constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classTransitionTemplate_a2a6a312a79b3c0653d71f7937b75a5fd}\label{classTransitionTemplate_a2a6a312a79b3c0653d71f7937b75a5fd}} 
+int \mbox{\hyperlink{classTransitionTemplate_a2a6a312a79b3c0653d71f7937b75a5fd}{shared}}
+\begin{DoxyCompactList}\small\item\em Needed amound of needed agents. -\/1 if not shared. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_ac3fc56220e83b1b8f5e1661b3b5d5ab0}\label{classTransitionTemplate_ac3fc56220e83b1b8f5e1661b3b5d5ab0}} 
+string \mbox{\hyperlink{classTransitionTemplate_ac3fc56220e83b1b8f5e1661b3b5d5ab0}{pattern\+Name}}
+\begin{DoxyCompactList}\small\item\em Name of the pattern. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_ab65f4b99b18c8c006a7d7f6aad45e3a5}\label{classTransitionTemplate_ab65f4b99b18c8c006a7d7f6aad45e3a5}} 
+string \mbox{\hyperlink{classTransitionTemplate_ab65f4b99b18c8c006a7d7f6aad45e3a5}{match\+Name}}
+\begin{DoxyCompactList}\small\item\em Global name for shared transitions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_a3c6dfa1a9573e08fe3a58b3fc208b0cf}\label{classTransitionTemplate_a3c6dfa1a9573e08fe3a58b3fc208b0cf}} 
+string \mbox{\hyperlink{classTransitionTemplate_a3c6dfa1a9573e08fe3a58b3fc208b0cf}{start\+State}}
+\begin{DoxyCompactList}\small\item\em Start state name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_a4ae48c4bee21b96df2d78e79f7411042}\label{classTransitionTemplate_a4ae48c4bee21b96df2d78e79f7411042}} 
+string \mbox{\hyperlink{classTransitionTemplate_a4ae48c4bee21b96df2d78e79f7411042}{end\+State}}
+\begin{DoxyCompactList}\small\item\em End state name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_a9444c53176120158d2a9219b801992a6}\label{classTransitionTemplate_a9444c53176120158d2a9219b801992a6}} 
+\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$ \mbox{\hyperlink{classTransitionTemplate_a9444c53176120158d2a9219b801992a6}{condition}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structCondition}{Condition}} expression that has do be fulfilled in that transition. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_af0cb55612a1917e5e3ba229794f0842f}\label{classTransitionTemplate_af0cb55612a1917e5e3ba229794f0842f}} 
+set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classTransitionTemplate_af0cb55612a1917e5e3ba229794f0842f}{assignments}}
+\begin{DoxyCompactList}\small\item\em Set of assignments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a meta-\/transition. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classTransitionTemplate_aae4d642b14198edd7c03d72f05ddfb7e}\label{classTransitionTemplate_aae4d642b14198edd7c03d72f05ddfb7e}} 
+\index{TransitionTemplate@{TransitionTemplate}!TransitionTemplate@{TransitionTemplate}}
+\index{TransitionTemplate@{TransitionTemplate}!TransitionTemplate@{TransitionTemplate}}
+\doxysubsubsection{\texorpdfstring{TransitionTemplate()}{TransitionTemplate()}}
+{\footnotesize\ttfamily Transition\+Template\+::\+Transition\+Template (\begin{DoxyParamCaption}\item[{int}]{\+\_\+shared,  }\item[{string}]{\+\_\+pattern\+Name,  }\item[{string}]{\+\_\+match\+Name,  }\item[{string}]{\+\_\+start\+State,  }\item[{string}]{\+\_\+end\+State,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+cond,  }\item[{set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$}]{\+\_\+assign }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{\hyperlink{classTransitionTemplate}{Transition\+Template}} constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+shared} & Needed amound of needed agents. -\/1 if not shared. \\
+\hline
+{\em \+\_\+pattern\+Name} & Name of the pattern. \\
+\hline
+{\em \+\_\+match\+Name} & Global name for shared transitions. \\
+\hline
+{\em \+\_\+start\+State} & Start state name. \\
+\hline
+{\em \+\_\+end\+State} & End state name. \\
+\hline
+{\em \+\_\+cond} & \mbox{\hyperlink{structCondition}{Condition}} expression that has do be fulfilled in that transition. \\
+\hline
+{\em \+\_\+assign} & Set of assignments. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{nodes_8hpp}{nodes.\+hpp}}\end{DoxyCompactItemize}
