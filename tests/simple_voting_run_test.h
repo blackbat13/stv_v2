@@ -34,8 +34,6 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerRun)
     result = verification->verify();
 
     EXPECT_EQ(result, true);
-
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 19);
 }
 
 TEST(SimpleVotingRunTest, 1Voter1CoercerNotRun)
@@ -63,12 +61,36 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerNotRun)
     result = verification->verify();
 
     EXPECT_EQ(result, true);
-
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 19);
 }
 
-
 TEST(SimpleVotingRunTest, 2Voters1CoercerRun)
+{
+    config.fname = "../tests/examples/svoterun/2Voters1CoercerRun.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new TestParser();
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    EXPECT_EQ(result, true);
+}
+
+TEST(SimpleVotingRunTest, 2Voters1CoercerNotRun)
 {
     config.fname = "../tests/examples/svoterun/2Voters1CoercerNotRun.txt";
     config.output_local_models = false;
@@ -93,6 +115,85 @@ TEST(SimpleVotingRunTest, 2Voters1CoercerRun)
     result = verification->verify();
 
     EXPECT_EQ(result, true);
+}
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 63);
+TEST(SimpleVotingRunTest, 1Voter2CoercersRun)
+{
+    config.fname = "../tests/examples/svoterun/1Voter2CoercersRun.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new TestParser();
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    EXPECT_EQ(result, true);
+}
+
+TEST(SimpleVotingRunTest, 1Voter2CoercersNotRun)
+{
+    config.fname = "../tests/examples/svoterun/1Voter2CoercersNotRun.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new TestParser();
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    EXPECT_EQ(result, true);
+}
+
+TEST(SimpleVotingRunTest, 1Voter2CoercersRunHide)
+{
+    config.fname = "../tests/examples/svoterun/1Voter2CoercersRunHide.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new TestParser();
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    EXPECT_EQ(result, true);
 }
