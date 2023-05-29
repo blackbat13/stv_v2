@@ -1,3 +1,4 @@
+\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md1}{}\doxysection{Usage}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md1}
 To run\+:
 
 
@@ -17,8 +18,7 @@ Configuration file\+:
 \DoxyCodeLine{build/config.txt}
 
 \end{DoxyCode}
-
-
+\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md2}{}\doxysection{Tests}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md2}
 To run tests\+:
 
 
@@ -29,4 +29,20 @@ To run tests\+:
 \DoxyCodeLine{./sample\_test}
 
 \end{DoxyCode}
- 
+\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md3}{}\doxysection{Misc}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md3}
+With {\ttfamily OUTPUT\+\_\+\+DOT\+\_\+\+FILES} flag the program outputs $\ast$.dot$\ast$ files for templates, local and global models where\+: ~\newline
+
+\begin{DoxyItemize}
+\item nodes are labelled with its location name (comma-\/separated for the global state)
+\item shared transitions are denoted by blue colour
+\end{DoxyItemize}
+
+Use Graphviz \href{https://www.graphviz.org/}{\texttt{ (link)}} to view in other format (eps, pdf, jpeg, etc.)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Analogously for other formats}
+\DoxyCodeLine{dot -\/Tpng lts\_of\_AGENT.dot > lts\_of\_AGENT.png}
+
+\end{DoxyCode}
+
+
+The {\itshape dot2png.\+sh} script converts all $\ast$.dot$\ast$ files from a current folder to $\ast$.png$\ast$. 

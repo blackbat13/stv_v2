@@ -5,6 +5,7 @@ var hierarchy =
     [ "Assignment", "classAssignment.html", null ],
     [ "Cfg", "structCfg.html", null ],
     [ "Condition", "structCondition.html", null ],
+    [ "DotGraph", "classDotGraph.html", null ],
     [ "EpistemicClass", "structEpistemicClass.html", null ],
     [ "ExprNode", "classExprNode.html", [
       [ "ExprAdd", "classExprAdd.html", null ],
@@ -36,12 +37,13 @@ var hierarchy =
     [ "LocalState", "classLocalState.html", null ],
     [ "LocalStateTemplate", "classLocalStateTemplate.html", null ],
     [ "LocalTransition", "structLocalTransition.html", null ],
-    [ "SeleneFormula", "classSeleneFormula.html", [
-      [ "SeleneFormula1", "classSeleneFormula1.html", null ]
-    ] ],
-    [ "TestParser", "classTestParser.html", null ],
+    [ "ModelParser", "classModelParser.html", null ],
     [ "TransitionTemplate", "classTransitionTemplate.html", null ],
     [ "Var", "structVar.html", null ],
     [ "VarAssignment", "structVarAssignment.html", null ],
-    [ "Verification", "classVerification.html", null ]
+    [ "Verification", "classVerification.html", null ],
+    [ "yy_buffer_state", "structyy__buffer__state.html", null ],
+    [ "yy_trans_info", "structyy__trans__info.html", null ],
+    [ "yyalloc", "unionyyalloc.html", null ],
+    [ "YYSTYPE", "unionYYSTYPE.html", null ]
 ];

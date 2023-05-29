@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['historydbg_223',['HistoryDbg',['../classHistoryDbg.html',1,'']]],
-  ['historyentry_224',['HistoryEntry',['../structHistoryEntry.html',1,'']]]
+  ['globalmodel_234',['GlobalModel',['../structGlobalModel.html',1,'']]],
+  ['globalmodelgenerator_235',['GlobalModelGenerator',['../classGlobalModelGenerator.html',1,'']]],
+  ['globalstate_236',['GlobalState',['../structGlobalState.html',1,'']]],
+  ['globaltransition_237',['GlobalTransition',['../structGlobalTransition.html',1,'']]]
 ];

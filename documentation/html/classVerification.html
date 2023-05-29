@@ -159,6 +159,15 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a265b783962885eebe96a4f2182c22577"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a265b783962885eebe96a4f2182c22577">equivalentGlobalTransitions</a> (<a class="el" href="structGlobalTransition.html">GlobalTransition</a> *globalTransition1, <a class="el" href="structGlobalTransition.html">GlobalTransition</a> *globalTransition2)</td></tr>
 <tr class="memdesc:a265b783962885eebe96a4f2182c22577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if two global transitions are made up of the same local transitions.  <a href="classVerification.html#a265b783962885eebe96a4f2182c22577">More...</a><br /></td></tr>
 <tr class="separator:a265b783962885eebe96a4f2182c22577"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a850053a49cc9a539aa664d0100cb59a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a850053a49cc9a539aa664d0100cb59a8">checkUncontrolledSet</a> (set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt; uncontrolledGlobalTransitions, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState, int depth, bool hasOmittedTransitions)</td></tr>
+<tr class="memdesc:a850053a49cc9a539aa664d0100cb59a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if each transition from a given state yields a correct result.  <a href="classVerification.html#a850053a49cc9a539aa664d0100cb59a8">More...</a><br /></td></tr>
+<tr class="separator:a850053a49cc9a539aa664d0100cb59a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe">verifyTransitionSets</a> (set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt; controlledGlobalTransitions, set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt; uncontrolledGlobalTransitions, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState, int depth, bool hasOmittedTransitions)</td></tr>
+<tr class="memdesc:a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if given transition sets are able to fulfill the formula for its given epistemic class.  <a href="classVerification.html#a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe">More...</a><br /></td></tr>
+<tr class="separator:a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8f45302a6b2529f626ae0c7a953b57f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#ad8f45302a6b2529f626ae0c7a953b57f">restoreHistory</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *globalState, <a class="el" href="structGlobalTransition.html">GlobalTransition</a> *globalTransition, int depth, bool controlled)</td></tr>
+<tr class="memdesc:ad8f45302a6b2529f626ae0c7a953b57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores the decisions made for a given global state and transition in current recursion depth.  <a href="classVerification.html#ad8f45302a6b2529f626ae0c7a953b57f">More...</a><br /></td></tr>
+<tr class="separator:ad8f45302a6b2529f626ae0c7a953b57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -178,10 +187,6 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
 <a class="el" href="classGlobalModelGenerator.html">GlobalModelGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#ab283068f07ee48981abcaa1787a98d08">generator</a></td></tr>
 <tr class="memdesc:ab283068f07ee48981abcaa1787a98d08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds current model and formula. <br /></td></tr>
 <tr class="separator:ab283068f07ee48981abcaa1787a98d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd4e5c9f9353ab4248856f29e3df5e7a"><td class="memItemLeft" align="right" valign="top"><a id="abd4e5c9f9353ab4248856f29e3df5e7a"></a>
-<a class="el" href="classSeleneFormula.html">SeleneFormula</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#abd4e5c9f9353ab4248856f29e3df5e7a">seleneFormula</a></td></tr>
-<tr class="memdesc:abd4e5c9f9353ab4248856f29e3df5e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temporary solve for data input. <br /></td></tr>
-<tr class="separator:abd4e5c9f9353ab4248856f29e3df5e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c99d888d26d30df16342201fc4b2e75"><td class="memItemLeft" align="right" valign="top"><a id="a0c99d888d26d30df16342201fc4b2e75"></a>
 <a class="el" href="structHistoryEntry.html">HistoryEntry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a0c99d888d26d30df16342201fc4b2e75">historyStart</a></td></tr>
 <tr class="memdesc:a0c99d888d26d30df16342201fc4b2e75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the start of model traversal history. <br /></td></tr>
@@ -468,6 +473,66 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
 
 </div>
 </div>
+<a id="a850053a49cc9a539aa664d0100cb59a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a850053a49cc9a539aa664d0100cb59a8">&#9670;&nbsp;</a></span>checkUncontrolledSet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::checkUncontrolledSet </td>
+          <td>(</td>
+          <td class="paramtype">set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&#160;</td>
+          <td class="paramname"><em>uncontrolledGlobalTransitions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hasOmittedTransitions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Verifies if each transition from a given state yields a correct result. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uncontrolledGlobalTransitions</td><td>A set of global transitions to be checked. </td></tr>
+    <tr><td class="paramname">globalState</td><td>Currently processed global state. </td></tr>
+    <tr><td class="paramname">depth</td><td>Current recursion depth. </td></tr>
+    <tr><td class="paramname">hasOmittedTransitions</td><td>Flag with the information about skipped unneeded transitions. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if every transition yields a correct result, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="a265b783962885eebe96a4f2182c22577"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a265b783962885eebe96a4f2182c22577">&#9670;&nbsp;</a></span>equivalentGlobalTransitions()</h2>
 
@@ -699,6 +764,67 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
 
 </div>
 </div>
+<a id="ad8f45302a6b2529f626ae0c7a953b57f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8f45302a6b2529f626ae0c7a953b57f">&#9670;&nbsp;</a></span>restoreHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::restoreHistory </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalTransition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>globalTransition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>controlled</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Restores the decisions made for a given global state and transition in current recursion depth. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">globalState</td><td>Currently processed global state. </td></tr>
+    <tr><td class="paramname">globalTransition</td><td>Previously selected global transition from the given state to mark as invalid. </td></tr>
+    <tr><td class="paramname">depth</td><td>Current recursion depth. </td></tr>
+    <tr><td class="paramname">controlled</td><td>Flag with the information about current type of transition. True if controlled, false if uncontrolled. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns true if current top of the history entires matches with <br  />
+ </dd></dl>
+
+</div>
+</div>
 <a id="a93f4d9152a29db35e7cee285fd925d83"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a93f4d9152a29db35e7cee285fd925d83">&#9670;&nbsp;</a></span>revertLastDecision()</h2>
 
@@ -918,6 +1044,73 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns true if there is a <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> with a specific set of values, fulfilling the criteria, otherwise returns false. </dd></dl>
+
+</div>
+</div>
+<a id="a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe">&#9670;&nbsp;</a></span>verifyTransitionSets()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Verification::verifyTransitionSets </td>
+          <td>(</td>
+          <td class="paramtype">set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&#160;</td>
+          <td class="paramname"><em>controlledGlobalTransitions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&#160;</td>
+          <td class="paramname"><em>uncontrolledGlobalTransitions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hasOmittedTransitions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if given transition sets are able to fulfill the formula for its given epistemic class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlledGlobalTransitions</td><td>Set of controlled transitions in the current global state. </td></tr>
+    <tr><td class="paramname">uncontrolledGlobalTransitions</td><td>Set of uncontrolled transitions in the current global state. </td></tr>
+    <tr><td class="paramname">globalState</td><td>Currently processed global state. </td></tr>
+    <tr><td class="paramname">depth</td><td>Current recursion depth. </td></tr>
+    <tr><td class="paramname">hasOmittedTransitions</td><td>Flag with the information about skipped unneeded transitions. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if there is a correct choice for an agent to take, false otherwise. </dd></dl>
 
 </div>
 </div>

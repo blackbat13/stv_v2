@@ -5,6 +5,7 @@ var annotated_dup =
     [ "Assignment", "classAssignment.html", "classAssignment" ],
     [ "Cfg", "structCfg.html", "structCfg" ],
     [ "Condition", "structCondition.html", "structCondition" ],
+    [ "DotGraph", "classDotGraph.html", "classDotGraph" ],
     [ "EpistemicClass", "structEpistemicClass.html", "structEpistemicClass" ],
     [ "ExprAdd", "classExprAdd.html", "classExprAdd" ],
     [ "ExprAnd", "classExprAnd.html", "classExprAnd" ],
@@ -35,11 +36,13 @@ var annotated_dup =
     [ "LocalState", "classLocalState.html", "classLocalState" ],
     [ "LocalStateTemplate", "classLocalStateTemplate.html", "classLocalStateTemplate" ],
     [ "LocalTransition", "structLocalTransition.html", "structLocalTransition" ],
-    [ "SeleneFormula", "classSeleneFormula.html", "classSeleneFormula" ],
-    [ "SeleneFormula1", "classSeleneFormula1.html", "classSeleneFormula1" ],
-    [ "TestParser", "classTestParser.html", "classTestParser" ],
+    [ "ModelParser", "classModelParser.html", "classModelParser" ],
     [ "TransitionTemplate", "classTransitionTemplate.html", "classTransitionTemplate" ],
     [ "Var", "structVar.html", "structVar" ],
     [ "VarAssignment", "structVarAssignment.html", "structVarAssignment" ],
-    [ "Verification", "classVerification.html", "classVerification" ]
+    [ "Verification", "classVerification.html", "classVerification" ],
+    [ "yy_buffer_state", "structyy__buffer__state.html", "structyy__buffer__state" ],
+    [ "yy_trans_info", "structyy__trans__info.html", "structyy__trans__info" ],
+    [ "yyalloc", "unionyyalloc.html", "unionyyalloc" ],
+    [ "YYSTYPE", "unionYYSTYPE.html", "unionYYSTYPE" ]
 ];

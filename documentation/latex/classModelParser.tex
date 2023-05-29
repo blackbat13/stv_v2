@@ -1,0 +1,52 @@
+\hypertarget{classModelParser}{}\doxysection{Model\+Parser Class Reference}
+\label{classModelParser}\index{ModelParser@{ModelParser}}
+
+
+A parser for converting a text file into a model.  
+
+
+
+
+{\ttfamily \#include $<$Model\+Parser.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classModelParser_aed0c59ec370785d4e22702fe42dfa14d}\label{classModelParser_aed0c59ec370785d4e22702fe42dfa14d}} 
+\mbox{\hyperlink{classModelParser_aed0c59ec370785d4e22702fe42dfa14d}{Model\+Parser}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classModelParser}{Model\+Parser}} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classModelParser_ab442719c7d7f8d1408fdb5e366846853}\label{classModelParser_ab442719c7d7f8d1408fdb5e366846853}} 
+\mbox{\hyperlink{classModelParser_ab442719c7d7f8d1408fdb5e366846853}{$\sim$\+Model\+Parser}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classModelParser}{Model\+Parser}} destructor. \end{DoxyCompactList}\item 
+tuple$<$ \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$, \mbox{\hyperlink{structFormula}{Formula}} $\ast$ $>$ \mbox{\hyperlink{classModelParser_a08cd76815c37be2d1faeaa143f192d37}{parse}} (string file\+Name)
+\begin{DoxyCompactList}\small\item\em Parses a file with given name into a usable model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A parser for converting a text file into a model. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classModelParser_a08cd76815c37be2d1faeaa143f192d37}\label{classModelParser_a08cd76815c37be2d1faeaa143f192d37}} 
+\index{ModelParser@{ModelParser}!parse@{parse}}
+\index{parse@{parse}!ModelParser@{ModelParser}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily tuple$<$ \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$, \mbox{\hyperlink{structFormula}{Formula}} $\ast$ $>$ Model\+Parser\+::parse (\begin{DoxyParamCaption}\item[{string}]{file\+Name }\end{DoxyParamCaption})}
+
+
+
+Parses a file with given name into a usable model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & Name of the file to be converted into a model. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to a model created from a given file. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Model\+Parser.\+hpp\item 
+\mbox{\hyperlink{ModelParser_8cc}{Model\+Parser.\+cc}}\end{DoxyCompactItemize}

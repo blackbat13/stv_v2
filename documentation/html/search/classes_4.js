@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['globalmodel_219',['GlobalModel',['../structGlobalModel.html',1,'']]],
-  ['globalmodelgenerator_220',['GlobalModelGenerator',['../classGlobalModelGenerator.html',1,'']]],
-  ['globalstate_221',['GlobalState',['../structGlobalState.html',1,'']]],
-  ['globaltransition_222',['GlobalTransition',['../structGlobalTransition.html',1,'']]]
+  ['formula_232',['Formula',['../structFormula.html',1,'']]],
+  ['formulatemplate_233',['FormulaTemplate',['../structFormulaTemplate.html',1,'']]]
 ];

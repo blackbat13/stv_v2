@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>stv_v2: README</title>
+<title>stv_v2: STV2 - StraTegic Verifier 2</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,22 +82,36 @@ $(document).ready(function(){initNavTree('md__home_mathis_repositories_stv_v2_RE
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">README </div>  </div>
+<div class="title">STV2 - StraTegic Verifier 2 </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>To run:</p>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+Usage</h1>
+<p>To run:</p>
 <div class="fragment"><div class="line">cd build</div>
 <div class="line">make clean</div>
 <div class="line">make</div>
 <div class="line">./stv</div>
 </div><!-- fragment --><p>Configuration file:</p>
 <div class="fragment"><div class="line">build/config.txt</div>
-</div><!-- fragment --><p>To run tests:</p>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+Tests</h1>
+<p>To run tests:</p>
 <div class="fragment"><div class="line">cd build</div>
 <div class="line">make clean</div>
 <div class="line">make sample_test</div>
 <div class="line">./sample_test</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+Misc</h1>
+<p>With <code>OUTPUT_DOT_FILES</code> flag the program outputs *.dot* files for templates, local and global models where: <br  />
+</p><ul>
+<li>nodes are labelled with its location name (comma-separated for the global state)</li>
+<li>shared transitions are denoted by blue colour</li>
+</ul>
+<p>Use Graphviz <a href="https://www.graphviz.org/">(link)</a> to view in other format (eps, pdf, jpeg, etc.): </p><div class="fragment"><div class="line"># Analogously for other formats</div>
+<div class="line">dot -Tpng lts_of_AGENT.dot &gt; lts_of_AGENT.png</div>
+</div><!-- fragment --><p>The <em>dot2png.sh</em> script converts all *.dot* files from a current folder to *.png*. </p>
+</div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 <!-- start footer part -->
