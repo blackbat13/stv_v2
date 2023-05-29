@@ -93,13 +93,6 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
     
-    // vars: use initial values
-    for (const auto varData : this->localModels->vars) {
-        if (varData.second->initialValue != -1) {
-            initState->vars[varData.second] = varData.second->initialValue;
-        }
-    }
-    
     return initState;
 }
 
@@ -138,34 +131,6 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>
     // Bind globalState with epistemicClass
     epistemicClass->globalStates.insert({ globalState->hash, globalState });
     globalState->epistemicClasses[agent] = epistemicClass;
-    
-    // globalState->vars:
-    // 1) copy from prevVars (only persistent vars)
-    if (prevGlobalState != nullptr) {
-        for (const auto varData : prevGlobalState->vars) {
-            if (varData.first->persistent) {
-                globalState->vars[varData.first] = varData.second;
-            }
-        }
-    }
-    // 2) use values from varAssignments in viaLocalTransitions; for var-to-var assignment use values already set in this newly generated state
-    if (viaLocalTransitions != nullptr) {
-        for (const auto localTransition : *viaLocalTransitions) {
-            for (const auto varAssignment : localTransition->varAsssignments) {
-                if (varAssignment->type == VarAssignmentType::FromValue) {
-                    globalState->vars[varAssignment->dstVar] = varAssignment->value;
-                }
-                else {
-                    if (globalState->vars.count(varAssignment->srcVar) > 0) {
-                        globalState->vars[varAssignment->dstVar] = globalState->vars[varAssignment->srcVar];
-                    }
-                    else {
-                        globalState->vars[varAssignment->dstVar] = -1;
-                    }
-                }
-            }
-        }
-    }
     
     // globalState->globalTransitions:
     // 1) group transitions by name from localStates (only those that can be executed (check sharedCount, check conditions))

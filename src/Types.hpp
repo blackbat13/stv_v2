@@ -31,7 +31,6 @@ struct GlobalTransition;
 struct LocalTransition;
 struct LocalModels;
 struct Var;
-struct VarAssignment;
 
 /// @brief Conditional operator for the variable.
 enum ConditionOperator {
@@ -155,14 +154,6 @@ class LocalState {
         set<LocalTransition*> localTransitions;
 };
 
-// to jest zbędne
-struct VarAssignment {
-    Var* dstVar;
-    VarAssignmentType type; // zbędne
-    Var* srcVar;
-    int value;
-};
-
 /// @brief Represents a single local transition, containing id, global name, local name, is shared and count of the appearances.
 struct LocalTransition {
     // Data
@@ -185,9 +176,6 @@ struct LocalTransition {
 
     /// @brief Conditions that have to be fulfilled for the transition to be avaliable.
     set<Condition*> conditions;
-
-    /// @brief Values to be set as a result of the traversal.
-    set<VarAssignment*> varAsssignments;
     
     // Bindings
 
@@ -209,10 +197,6 @@ struct LocalModels {
     /// @brief A vector of agents for the current model.
     vector<Agent*> agents;
     // agents[i].id == i
-
-    /// @brief A map of variable names to Var.
-    map<string, Var*> vars;
-    // vars[str].name == str
 };
 
 /// @brief Represents a global model, containing agents and a formula.

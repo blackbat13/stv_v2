@@ -67,19 +67,19 @@ string agentToString(Agent* agt) {
         }
         res += "> " + t->to->name + " id=" + to_string(t->to->id);
         res += envToString(t->to->environment);
-        if (t->varAsssignments.size() > 0) {
-            res += " [";
-            bool first = true;
-            for (auto _a = t->varAsssignments.begin(); _a != t->varAsssignments.end(); _a++) {
-                if (!first) {
-                    res += ", ";
-                }
-                first = false;
-                auto a = *_a;
-                res += a->dstVar->name + "=" + (a->type == VarAssignmentType::FromValue ? to_string(a->value) : ("?" + a->srcVar->name));
-            }
-            res += "]";
-        }
+        // if (t->varAsssignments.size() > 0) {
+        //     res += " [";
+        //     bool first = true;
+        //     for (auto _a = t->varAsssignments.begin(); _a != t->varAsssignments.end(); _a++) {
+        //         if (!first) {
+        //             res += ", ";
+        //         }
+        //         first = false;
+        //         auto a = *_a;
+        //         res += a->dstVar->name + "=" + (a->type == VarAssignmentType::FromValue ? to_string(a->value) : ("?" + a->srcVar->name));
+        //     }
+        //     res += "]";
+        // }
         res += "\n";
     }
     return res;
@@ -93,38 +93,6 @@ string localModelsToString(LocalModels* lm) {
     for (const auto& agt : lm->agents) {
         res += agentToString(agt);
         res += "\n";
-    }
-    bool isFirst = true;
-    for (const auto& v : lm->vars) {
-        if (v.second->initialValue != -1) {
-            if (isFirst) {
-                res += "INITIAL: [";
-            }
-            else {
-                res += ", ";
-            }
-            isFirst = false;
-            res += v.second->name +  "=" + to_string(v.second->initialValue);
-        }
-    }
-    if (!isFirst) {
-        res += "]\n";
-    }
-    isFirst = true;
-    for (const auto& v : lm->vars) {
-        if (v.second->persistent) {
-            if (isFirst) {
-                res += "PERSISTENT: [";
-            }
-            else {
-                res += ", ";
-            }
-            isFirst = false;
-            res += v.second->name;
-        }
-    }
-    if (!isFirst) {
-        res += "]\n";
     }
     return res;
 }
@@ -178,9 +146,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
                 for (const auto condition : localTransition->conditions) {
                     printf(" <if %s%s%i>", condition->var->name.c_str(), condition->conditionOperator == ConditionOperator::Equals ? "==" : "!=", condition->comparedValue);
                 }
-                for (const auto varAssignment : localTransition->varAsssignments) {
-                    printf(" [set %s=%s]", varAssignment->dstVar->name.c_str(), varAssignment->type == VarAssignmentType::FromValue ? to_string(varAssignment->value).c_str() : varAssignment->srcVar->name.c_str());
-                }
+
                 printf("\n");
             }
         }
