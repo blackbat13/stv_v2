@@ -2,7 +2,7 @@
 
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
-#include "TestParser.hpp"
+#include "ModelParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
 #include <fstream>
@@ -16,7 +16,7 @@ TEST(SimpleVotingTest, 1Voter1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -45,7 +45,7 @@ TEST(SimpleVotingTest, 2Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -74,7 +74,7 @@ TEST(SimpleVotingTest, 3Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -103,7 +103,7 @@ TEST(SimpleVotingTest, 4Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);

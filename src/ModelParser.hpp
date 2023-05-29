@@ -1,5 +1,5 @@
 /**
- * @file TextParser.hpp
+ * @file TextModelParser.hpp
  * @brief Model parser.
  * A parser for converting a text file into a model.
  */
@@ -13,10 +13,10 @@
 using namespace std;
 
 /// @brief A parser for converting a text file into a model.
-class TestParser {
+class ModelParser {
 public:
-    TestParser();
-    ~TestParser();
+    ModelParser();
+    ~ModelParser();
     tuple<LocalModels*, Formula*> parse(string fileName);
     
 protected:

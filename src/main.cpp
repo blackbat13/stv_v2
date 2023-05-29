@@ -1,6 +1,6 @@
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
-#include "TestParser.hpp"
+#include "ModelParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
 #include <fstream>
@@ -69,7 +69,7 @@ void loadConfig(int argc, char** argv){
                     printf("ERR: no stv_mode was specified!\n");
                 }
             }else if(arg == "-OUTPUT_GLOBAL_MODEL"){
-                config.output_global_model =1;
+                config.output_global_model = 1;
             }else if(arg == "-OUTPUT_LOCAL_MODELS"){
                 config.output_local_models = 1;
             }else if(arg == "-OUTPUT_DOT_FILES"){
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
     gettimeofday(&tb, NULL);
     
     loadConfig(argc,argv); 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);

@@ -249,7 +249,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         return false;
     }
     
-    // 6) all passed
+    // 5) all passed
     this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
     dbgVerifStatus(prefix, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
     globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
