@@ -4,17 +4,14 @@ USER_DIR = ../tests
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 	
-main: main.o GlobalModelGenerator.o SeleneFormula.o ModelParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o 
-	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o SeleneFormula.o ModelParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o
+main: main.o GlobalModelGenerator.o ModelParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o 
+	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o ModelParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp
 	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
 	$(CC) $(CPPFLAGS) -c ../src/GlobalModelGenerator.cpp
-
-SeleneFormula.o: ../src/SeleneFormula.hpp ../src/SeleneFormula.cpp
-	$(CC) $(CPPFLAGS) -c ../src/SeleneFormula.cpp
 
 ModelParser.o: ../src/ModelParser.hpp ../src/ModelParser.cc
 	$(CC) $(CPPFLAGS) -c ../src/ModelParser.cc
@@ -77,8 +74,8 @@ gtest_main.a : gtest-all.o gtest_main.o
 
 # tests here
 
-sample_test : sample_test.o GlobalModelGenerator.o SeleneFormula.o ModelParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
+sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lfl -lpthread $^ -o $@
 
-sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/SeleneFormula.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
+sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc

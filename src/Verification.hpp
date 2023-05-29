@@ -8,7 +8,6 @@
 #include <stack>
 #include "Types.hpp"
 #include "GlobalModelGenerator.hpp"
-#include "SeleneFormula.hpp"
 
 string verStatusToStr(GlobalStateVerificationStatus status);
 
@@ -96,8 +95,6 @@ protected:
     stack<HistoryEntry*> historyToRestore;
     /// @brief Holds current model and formula.
     GlobalModelGenerator* generator;
-    /// @brief Temporary solve for data input.
-    SeleneFormula* seleneFormula;
     /// @brief Pointer to the start of model traversal history.
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.

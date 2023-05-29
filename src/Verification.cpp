@@ -117,7 +117,6 @@ HistoryEntry* HistoryDbg::cloneEntry(HistoryEntry* entry) {
 /// @param generator Pointer to GlobalModelGenerator
 Verification::Verification(GlobalModelGenerator* generator) {
     this->generator = generator;
-    this->seleneFormula = new SeleneFormula1();
     
     this->historyStart = new HistoryEntry();
     this->historyStart->globalState = nullptr;
@@ -145,12 +144,6 @@ bool Verification::verify() {
 /// @param localStates A pointer to a set of pointers to LocalState.
 /// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.
 bool Verification::verifyLocalStates(set<LocalState*>* localStates) {
-// BEGIN{HARD-CODED-FORMULA}
-    if(config.model_id==2){
-        return this->seleneFormula->verifyLocalStates(localStates);
-    }
-// END{HARD-CODED-FORMULA}
-
     map<string,int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
 
     for (const auto localState : *localStates) {
