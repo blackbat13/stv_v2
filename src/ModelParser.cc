@@ -44,10 +44,6 @@ tuple<LocalModels*, Formula*> ModelParser::parse(string fileName) {
    int i = 0;
    for(set<AgentTemplate*>::iterator it=modelDescription->begin(); it != modelDescription->end(); it++, i++) {
       models->agents.push_back((*it)->generateAgent(i));
-      // jeszcze wskaźniki do zmiennych - raczej zbędne
-      for(set<Var*>::iterator varit=models->agents[i]->vars.begin(); varit != models->agents[i]->vars.end(); varit++) {
-         models->vars[(*varit)->name] = *varit;
-      }
    }
    
    
