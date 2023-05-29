@@ -219,7 +219,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool hasOmittedTransitions = false;
-    bool isMixedTransitions = false;
+
     for (const auto globalTransition : globalState->globalTransitions) {
         if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
             if (fixedGlobalTransition == nullptr) {
@@ -244,133 +244,8 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             uncontrolledGlobalTransitions.insert(globalTransition);
         }
     }
-    
-    if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
-        isMixedTransitions = true;
-    }
 
-    // 4) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
-    if (controlledGlobalTransitions.size() > 0) {
-        bool hasValidControlledTransition = false;
-        bool hasValidChoiceTransition = false;
-        for (const auto globalTransition : controlledGlobalTransitions) {
-            if (this->mode == Mode::RESTORE) {
-                // Check if top history entry matches this loop iteration
-                auto entry = this->historyToRestore.top();
-                if (entry->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
-                    entry->decision->isInvalidDecision = true;
-                    this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
-                    this->historyToRestore.pop();
-                    if (!this->historyToRestore.empty()) {
-                        delete entry;
-                        entry = this->historyToRestore.top();
-                    }
-                }
-                bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == true;
-                #if VERBOSE
-                    if (matches) {
-                        printf("%srestore: matched %s -> %s (controlled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
-                    }
-                    else {
-                        printf("%srestore: ignoring %s -> %s (controlled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
-                    }
-                #endif
-                
-                // Delete top history entry
-                if (matches) {
-                    this->historyToRestore.pop();
-                    delete entry;
-                }
-                if (!this->historyToRestore.empty() && this->historyToRestore.top()->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
-                    entry = this->historyToRestore.top();
-                    entry->decision->isInvalidDecision = true;
-                    this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
-                    this->historyToRestore.pop();
-                    delete entry;
-                }
-                if (this->historyToRestore.empty()) {
-                    this->mode = Mode::NORMAL;
-                    #if VERBOSE
-                        printf("%sset mode=NORMAL\n", prefix.c_str());
-                    #endif
-                }
-                
-                // Skip loop iterations performed before the one from historyToRestore
-                // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
-                if (!matches) {
-                    continue;
-                }
-            }
-            
-            // Ensure that the transtiion wasn't marked as invalid as a part of the RESTORE-REVERT procedure
-            if (globalTransition->isInvalidDecision) { 
-                #if VERBOSE
-                    printf("%sIGNORE invalidDecision in %s -> %s\n", prefix.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-                #endif
-                continue;
-            }
-            
-            auto prevHistoryEnd = this->historyEnd;
-            
-            if (epistemicClass && fixedGlobalTransition == nullptr) {
-                epistemicClass->fixedCoalitionTransition = globalTransition; 
-                #if VERBOSE
-                    printf("%sDECIDE %s->%s\n", prefix.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-                #endif
-                this->addHistoryDecision(globalState, globalTransition);
-            }
-            
-            // About to go deeper - add history entry with type=CONTEXT
-            this->addHistoryContext(globalState, depth, globalTransition, true);
-            
-            #if VERBOSE
-                printf("%senter controlled %s -> %s\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
-            #endif
-            hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            if (this->mode == Mode::REVERT) {
-                // Recursive verifyGlobalState caused REVERT mode, just exit
-                return false;
-            }
-            if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
-                this->undoHistoryUntil(prevHistoryEnd, false, depth); 
-                #if VERBOSE
-                    printf("%sundoHistoryUntil (inside %s)\n", prefix.c_str(), globalState->hash.c_str());
-                #endif
-            }
-            if (hasValidControlledTransition) {
-                break;
-            }
-        }
-        // Maybe a controlled action is an option too
-        if (uncontrolledGlobalTransitions.size() > 0) {
-            hasValidChoiceTransition = true;
-            if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
-                hasValidChoiceTransition = false;
-            }
-            if (epistemicClass && fixedGlobalTransition == nullptr) {
-                epistemicClass->fixedCoalitionTransition = *uncontrolledGlobalTransitions.begin();
-            }
-        }
-        if (!hasValidControlledTransition && !hasValidChoiceTransition) {
-            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-            dbgVerifStatus(prefix, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!hasValidControlledTransition");
-            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-            // A different decision could've been made above if transition/decision hadn't been fixed somewhere else
-            bool reverted = this->revertLastDecision(depth); 
-            #if VERBOSE
-                if (reverted) {
-                    printf("%srevertLastDecision to %s (inside %s)\n", prefix.c_str(), this->revertToGlobalState->hash.c_str(), globalState->hash.c_str());
-                }
-                else {
-                    printf("%srevertLastDecision failed (inside %s)\n", prefix.c_str(), globalState->hash.c_str());
-                }
-            #endif
-            return false;
-        }
-    }
-    
-    // 5) verify paths not controlled by the coalition (all must be OK)
-    if (!isMixedTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
         return false;
     }
     
@@ -727,56 +602,15 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param uncontrolledGlobalTransitions A set of global transitions to be checked.
 /// @param globalState Currently processed global state.
 /// @param depth Current recursion depth.
-/// @param hasOmittedTransitions 
+/// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
 bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
     string prefix = string(depth * 4, ' ');
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         if (this->mode == Mode::RESTORE) {
-            // Check if top history entry matches this loop iteration
-            auto entry = this->historyToRestore.top();
-            if (entry->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
-                entry->decision->isInvalidDecision = true;
-                this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
-                this->historyToRestore.pop();
-                if (!this->historyToRestore.empty()) {
-                    delete entry;
-                    entry = this->historyToRestore.top();
-                }
-            }
-            bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == false;
-            #if VERBOSE
-                if (matches) {
-                    printf("%srestore: matched %s -> %s (uncontrolled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
-                }
-                else {
-                    printf("%srestore: ignoring %s -> %s (uncontrolled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
-                }
-            #endif
-            
-            // Delete top history entry
-            if (matches) {
-                this->historyToRestore.pop();
-                delete entry;
-            }
-            if (!this->historyToRestore.empty() && this->historyToRestore.top()->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
-                entry = this->historyToRestore.top();
-                entry->decision->isInvalidDecision = true;
-                this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
-                this->historyToRestore.pop();
-                delete entry;
-            }
-            if (this->historyToRestore.empty()) {
-                // Last entry to restore - exit restore mode
-                this->mode = Mode::NORMAL;
-                #if VERBOSE
-                    printf("%sset mode=NORMAL\n", prefix.c_str());
-                #endif
-            }
-            
             // Skip loop iterations performed before the one from historyToRestore
             // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
-            if (!matches) {
+            if (!this->restoreHistory(globalState, globalTransition, depth, false)) {
                 continue;
             }
         }
@@ -833,4 +667,169 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
         }
     }
     return true;
+}
+
+/// @brief Checks if given transition sets are able to fulfill the formula for its given epistemic class.
+/// @param controlledGlobalTransitions Set of controlled transitions in the current global state.
+/// @param uncontrolledGlobalTransitions Set of uncontrolled transitions in the current global state.
+/// @param globalState Currently processed global state.
+/// @param depth Current recursion depth.
+/// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
+/// @return True if there is a correct choice for an agent to take, false otherwise.
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+    auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
+    auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+    string prefix = string(depth * 4, ' ');
+    bool isMixedTransitions = false;
+
+    if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
+        isMixedTransitions = true;
+    }
+
+    // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
+    if (controlledGlobalTransitions.size() > 0) {
+        bool hasValidControlledTransition = false;
+        bool hasValidChoiceTransition = false;
+        for (const auto globalTransition : controlledGlobalTransitions) {
+            if (this->mode == Mode::RESTORE) {
+                // Skip loop iterations performed before the one from historyToRestore
+                // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
+                if (!this->restoreHistory(globalState, globalTransition, depth, true)) {
+                    continue;
+                }
+            }
+            
+            // Ensure that the transtiion wasn't marked as invalid as a part of the RESTORE-REVERT procedure
+            if (globalTransition->isInvalidDecision) { 
+                #if VERBOSE
+                    printf("%sIGNORE invalidDecision in %s -> %s\n", prefix.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+                #endif
+                continue;
+            }
+            
+            auto prevHistoryEnd = this->historyEnd;
+            
+            if (epistemicClass && fixedGlobalTransition == nullptr) {
+                epistemicClass->fixedCoalitionTransition = globalTransition; 
+                #if VERBOSE
+                    printf("%sDECIDE %s->%s\n", prefix.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+                #endif
+                this->addHistoryDecision(globalState, globalTransition);
+            }
+            
+            // About to go deeper - add history entry with type=CONTEXT
+            this->addHistoryContext(globalState, depth, globalTransition, true);
+            
+            #if VERBOSE
+                printf("%senter controlled %s -> %s\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
+            #endif
+            hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
+            if (this->mode == Mode::REVERT) {
+                // Recursive verifyGlobalState caused REVERT mode, just exit
+                return false;
+            }
+            if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
+                this->undoHistoryUntil(prevHistoryEnd, false, depth); 
+                #if VERBOSE
+                    printf("%sundoHistoryUntil (inside %s)\n", prefix.c_str(), globalState->hash.c_str());
+                #endif
+            }
+            if (hasValidControlledTransition) {
+                break;
+            }
+        }
+        // Maybe a controlled action is an option too
+        if (uncontrolledGlobalTransitions.size() > 0) {
+            hasValidChoiceTransition = true;
+            if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+                hasValidChoiceTransition = false;
+            }
+            if (epistemicClass && fixedGlobalTransition == nullptr) {
+                epistemicClass->fixedCoalitionTransition = *uncontrolledGlobalTransitions.begin();
+            }
+        }
+        if (!hasValidControlledTransition && !hasValidChoiceTransition) {
+            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+            dbgVerifStatus(prefix, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!hasValidControlledTransition");
+            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+            // A different decision could've been made above if transition/decision hadn't been fixed somewhere else
+            bool reverted = this->revertLastDecision(depth); 
+            #if VERBOSE
+                if (reverted) {
+                    printf("%srevertLastDecision to %s (inside %s)\n", prefix.c_str(), this->revertToGlobalState->hash.c_str(), globalState->hash.c_str());
+                }
+                else {
+                    printf("%srevertLastDecision failed (inside %s)\n", prefix.c_str(), globalState->hash.c_str());
+                }
+            #endif
+            return false;
+        }
+    }
+    
+    // 2) verify paths not controlled by the coalition (all must be OK)
+    if (!isMixedTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+        return false;
+    }
+    return true;
+}
+
+/// @brief Restores the decisions made for a given global state and transition in current recursion depth.
+/// @param globalState Currently processed global state.
+/// @param globalTransition Previously selected global transition from the given state to mark as invalid.
+/// @param depth Current recursion depth.
+/// @param controlled Flag with the information about current type of transition. True if controlled, false if uncontrolled.
+/// @return Returns true if current top of the history entires matches with 
+bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled) {
+    // Check if top history entry matches this loop iteration
+    auto entry = this->historyToRestore.top();
+    if (entry->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
+        entry->decision->isInvalidDecision = true;
+        this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
+        this->historyToRestore.pop();
+        if (!this->historyToRestore.empty()) {
+            delete entry;
+            entry = this->historyToRestore.top();
+        }
+    }
+    bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == controlled;
+    #if VERBOSE
+        if (matches) {
+            if (controlled) {
+                printf("%srestore: matched %s -> %s (controlled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
+            }
+            else {
+                printf("%srestore: matched %s -> %s (uncontrolled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
+            }
+        }
+        else {
+            if (controlled) {
+                printf("%srestore: ignoring %s -> %s (controlled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
+            }
+            else {
+                printf("%srestore: ignoring %s -> %s (uncontrolled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
+            }
+        }
+    #endif
+    
+    // Delete top history entry
+    if (matches) {
+        this->historyToRestore.pop();
+        delete entry;
+    }
+    if (!this->historyToRestore.empty() && this->historyToRestore.top()->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
+        entry = this->historyToRestore.top();
+        entry->decision->isInvalidDecision = true;
+        this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
+        this->historyToRestore.pop();
+        delete entry;
+    }
+    if (this->historyToRestore.empty()) {
+        // Last entry to restore - exit restore mode
+        this->mode = Mode::NORMAL;
+        #if VERBOSE
+            printf("%sset mode=NORMAL\n", prefix.c_str());
+        #endif
+    }
+
+    return matches;
 }

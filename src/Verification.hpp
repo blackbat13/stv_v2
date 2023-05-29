@@ -119,6 +119,8 @@ protected:
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
     bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
+    bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
 };
 
 #endif // SELENE_VERIFICATION
