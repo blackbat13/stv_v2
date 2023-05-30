@@ -133,11 +133,6 @@ class LocalState {
         /// @brief State name.
         string name;
 
-        /// @brief Local variables and their values.
-        map<Var*, int> vars;
-
-        // alternatywna wersja - może wystarczy
-
         /// @brief Local variables as a name and their current values.
         map<string, int> environment; 
      

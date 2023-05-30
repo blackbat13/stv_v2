@@ -67,19 +67,6 @@ string agentToString(Agent* agt) {
         }
         res += "> " + t->to->name + " id=" + to_string(t->to->id);
         res += envToString(t->to->environment);
-        // if (t->varAsssignments.size() > 0) {
-        //     res += " [";
-        //     bool first = true;
-        //     for (auto _a = t->varAsssignments.begin(); _a != t->varAsssignments.end(); _a++) {
-        //         if (!first) {
-        //             res += ", ";
-        //         }
-        //         first = false;
-        //         auto a = *_a;
-        //         res += a->dstVar->name + "=" + (a->type == VarAssignmentType::FromValue ? to_string(a->value) : ("?" + a->srcVar->name));
-        //     }
-        //     res += "]";
-        // }
         res += "\n";
     }
     return res;
@@ -110,14 +97,8 @@ void outputGlobalModel(GlobalModel* globalModel) {
         );
         for (const auto localState : globalState->localStates) {
             printf("    LocalState %i.%i (%s.%s)", localState->agent->id, localState->id, localState->agent->name.c_str(), localState->name.c_str());
-            for (const auto var : localState->vars) {
-                printf(" [%s=%i]", var.first->name.c_str(), var.second);
-            }
-            if(config.model_id != 0){
-                for (const auto var : localState->environment) {
-                    printf("\n");
-                    printf("        Var %s = %i", var.first.c_str(), var.second);
-                }
+            for (const auto var : localState->environment) {
+                printf(" [%s=%i]", var.first.c_str(), var.second);
             }
             printf("\n");
         }

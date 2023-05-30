@@ -45,8 +45,7 @@ tuple<LocalModels*, Formula*> ModelParser::parse(string fileName) {
    for(set<AgentTemplate*>::iterator it=modelDescription->begin(); it != modelDescription->end(); it++, i++) {
       models->agents.push_back((*it)->generateAgent(i));
    }
-   
-   
+
    Formula* formula = new Formula();
    formula->p = formulaDescription.formula;
    for (const auto agent : models->agents) {
