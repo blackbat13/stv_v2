@@ -101,7 +101,7 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
                 // add var evals
                 stateLabel+="{";
                 // stateLabel+="{"+loc->agent->name+"|"+ loc->name+"}|{";
-                // stateLabel+=""+loc->agent->name+"|{";
+                stateLabel+="/* lid = "+to_string(loc->id)+"*/\\n";
                 for(const auto x: loc->environment){
                     stateLabel+=x.first+"="+to_string(x.second)+"\\n";
                 }
