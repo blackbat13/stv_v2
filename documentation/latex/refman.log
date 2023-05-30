@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.8)  29 MAY 2023 16:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.8)  30 MAY 2023 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1243,7 +1243,7 @@ Underfull \hbox (badness 10000) detected at line 63
  []
 
 ) (./structLocalModels.tex) (./classLocalState.tex [53] [54]
-Underfull \hbox (badness 10000) detected at line 59
+Underfull \hbox (badness 10000) detected at line 56
 [][][]
  []
 
@@ -1254,7 +1254,7 @@ Underfull \hbox (badness 10000) detected at line 44
  []
 
 ) (./classTransitionTemplate.tex [57] [58]) (./structVar.tex)
-(./structVarAssignment.tex) (./classVerification.tex [59]
+(./classVerification.tex [59]
 Overfull \hbox (67.99445pt too wide) in paragraph at lines 39--40
 []\T1/phv/m/n/10 void [] ([] $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 global[]State
 , [] prev[]Status, []
@@ -1265,22 +1265,22 @@ Underfull \hbox (badness 10000) detected at line 199
 [][][]
  []
 
-[63]
+
 Underfull \hbox (badness 10000) detected at line 223
 [][][]
  []
 
-
+[63]
 Underfull \hbox (badness 10000) detected at line 243
 [][][]
  []
 
-[64]
+
 Underfull \hbox (badness 10000) detected at line 261
 [][][]
  []
 
-
+[64]
 Underfull \hbox (badness 10000) detected at line 279
 [][][]
  []
@@ -1290,12 +1290,12 @@ Underfull \hbox (badness 10000) detected at line 297
 [][][]
  []
 
-[65]
+
 Underfull \hbox (badness 10000) detected at line 317
 [][][]
  []
 
-
+[65]
 Underfull \hbox (badness 10000) detected at line 356
 [][][]
  []
@@ -1310,12 +1310,12 @@ Underfull \hbox (badness 10000) detected at line 375
 [][][]
  []
 
-[67]
+
 Underfull \hbox (badness 10000) detected at line 422
 [][][]
  []
 
-
+[67]
 Underfull \hbox (badness 10000) detected at line 442
 [][][]
  []
@@ -1330,7 +1330,7 @@ Underfull \hbox (badness 10000) detected at line 486
 [][][]
  []
 
-) (./structyy__buffer__state.tex [69]) (./structyy__trans__info.tex)
+) (./structyy__buffer__state.tex) (./structyy__trans__info.tex [69])
 (./unionyyalloc.tex) (./unionYYSTYPE.tex) [70]
 Chapter 6.
 (./expressions_8cc.tex
@@ -1466,13 +1466,13 @@ Underfull \hbox (badness 10000) detected at line 107
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: FFCCA69FD24DAFB463630CB5D832FCB9;61307.
+(rerunfilecheck)             Checksum: 2DD27239AAC7A94B712A68CEAF33BEB9;61066.
  ) 
 Here is how much of TeX's memory you used:
- 19182 strings out of 478287
- 327139 string characters out of 5849290
- 674536 words of memory out of 5000000
- 36029 multiletter control sequences out of 15000+600000
+ 19158 strings out of 478287
+ 326177 string characters out of 5849290
+ 675910 words of memory out of 5000000
+ 36017 multiletter control sequences out of 15000+600000
  531357 words of font info for 108 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,16n,117p,1310b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1489,10 +1489,10 @@ msfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 mf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
 /helvetic/uhvro8a.pfb>
-Output written on refman.pdf (100 pages, 372304 bytes).
+Output written on refman.pdf (100 pages, 370346 bytes).
 PDF statistics:
- 4144 PDF objects out of 4296 (max. 8388607)
- 3879 compressed objects within 39 object streams
- 898 named destinations out of 1000 (max. 500000)
- 2281 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4112 PDF objects out of 4296 (max. 8388607)
+ 3847 compressed objects within 39 object streams
+ 888 named destinations out of 1000 (max. 500000)
+ 2273 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,6 +5,5 @@ var classLocalState =
     [ "environment", "classLocalState.html#a34bdc2e97427c07b102d81034df14c17", null ],
     [ "id", "classLocalState.html#ae235a01f583577bba291360f829ffac9", null ],
     [ "localTransitions", "classLocalState.html#a13e96c06cf28959be8e87e4045d33265", null ],
-    [ "name", "classLocalState.html#a8f147438a2008244801118ed93009a6d", null ],
-    [ "vars", "classLocalState.html#a2af4f19b9d5300ba6716a30821f75f51", null ]
+    [ "name", "classLocalState.html#a8f147438a2008244801118ed93009a6d", null ]
 ];

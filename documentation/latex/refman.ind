@@ -5,13 +5,13 @@
   \item {addEntry}
     \subitem {HistoryDbg}, \hyperpage{51}
   \item {addHistoryContext}
-    \subitem {Verification}, \hyperpage{62}
+    \subitem {Verification}, \hyperpage{61}
   \item {addHistoryDecision}
     \subitem {Verification}, \hyperpage{62}
   \item {addHistoryMarkDecisionAsInvalid}
     \subitem {Verification}, \hyperpage{62}
   \item {addHistoryStateStatus}
-    \subitem {Verification}, \hyperpage{63}
+    \subitem {Verification}, \hyperpage{62}
   \item {addInitial}
     \subitem {AgentTemplate}, \hyperpage{11}
   \item {addLocal}
@@ -234,7 +234,7 @@
   \item {initModel}
     \subitem {GlobalModelGenerator}, \hyperpage{48}
   \item {isAgentInCoalition}
-    \subitem {Verification}, \hyperpage{65}
+    \subitem {Verification}, \hyperpage{64}
   \item {isGlobalTransitionControlledByCoalition}
     \subitem {Verification}, \hyperpage{65}
 
@@ -287,7 +287,7 @@
   \item {print}
     \subitem {HistoryDbg}, \hyperpage{52}
   \item {printCurrentHistory}
-    \subitem {Verification}, \hyperpage{66}
+    \subitem {Verification}, \hyperpage{65}
 
   \indexspace
 
@@ -359,29 +359,28 @@
   \indexspace
 
   \item {Var}, \hyperpage{59}
-  \item {VarAssignment}, \hyperpage{59}
   \item {VarAssignmentType}
     \subitem {Types.hpp}, \hyperpage{76}
-  \item {Verification}, \hyperpage{60}
-    \subitem {addHistoryContext}, \hyperpage{62}
+  \item {Verification}, \hyperpage{59}
+    \subitem {addHistoryContext}, \hyperpage{61}
     \subitem {addHistoryDecision}, \hyperpage{62}
     \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{62}
-    \subitem {addHistoryStateStatus}, \hyperpage{63}
+    \subitem {addHistoryStateStatus}, \hyperpage{62}
     \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{63}
     \subitem {checkUncontrolledSet}, \hyperpage{63}
     \subitem {equivalentGlobalTransitions}, \hyperpage{64}
     \subitem {getEpistemicClassForGlobalState}, \hyperpage{64}
-    \subitem {isAgentInCoalition}, \hyperpage{65}
+    \subitem {isAgentInCoalition}, \hyperpage{64}
     \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{65}
     \subitem {newHistoryMarkDecisionAsInvalid}, \hyperpage{65}
-    \subitem {printCurrentHistory}, \hyperpage{66}
+    \subitem {printCurrentHistory}, \hyperpage{65}
     \subitem {restoreHistory}, \hyperpage{66}
     \subitem {revertLastDecision}, \hyperpage{66}
     \subitem {undoHistoryUntil}, \hyperpage{67}
     \subitem {undoLastHistoryEntry}, \hyperpage{67}
     \subitem {Verification}, \hyperpage{61}
     \subitem {verify}, \hyperpage{67}
-    \subitem {verifyGlobalState}, \hyperpage{68}
+    \subitem {verifyGlobalState}, \hyperpage{67}
     \subitem {verifyLocalStates}, \hyperpage{68}
     \subitem {verifyTransitionSets}, \hyperpage{68}
   \item {Verification.cpp}, \hyperpage{82}
@@ -404,7 +403,7 @@
   \item {verify}
     \subitem {Verification}, \hyperpage{67}
   \item {verifyGlobalState}
-    \subitem {Verification}, \hyperpage{68}
+    \subitem {Verification}, \hyperpage{67}
   \item {verifyLocalStates}
     \subitem {Verification}, \hyperpage{68}
   \item {verifyTransitionSets}
@@ -418,10 +417,10 @@
   \item {yy\_bs\_column}
     \subitem {yy\_buffer\_state}, \hyperpage{69}
   \item {yy\_bs\_lineno}
-    \subitem {yy\_buffer\_state}, \hyperpage{70}
+    \subitem {yy\_buffer\_state}, \hyperpage{69}
   \item {yy\_buffer\_state}, \hyperpage{69}
     \subitem {yy\_bs\_column}, \hyperpage{69}
-    \subitem {yy\_bs\_lineno}, \hyperpage{70}
+    \subitem {yy\_bs\_lineno}, \hyperpage{69}
   \item {yy\_trans\_info}, \hyperpage{70}
   \item {yyalloc}, \hyperpage{70}
   \item {YYSTYPE}, \hyperpage{70}

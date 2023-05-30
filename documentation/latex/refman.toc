@@ -199,39 +199,38 @@
 \contentsline {subsubsection}{\numberline {5.38.2.1}TransitionTemplate()}{58}{subsubsection.5.38.2.1}%
 \contentsline {section}{\numberline {5.39}Var Struct Reference}{59}{section.5.39}%
 \contentsline {subsection}{\numberline {5.39.1}Detailed Description}{59}{subsection.5.39.1}%
-\contentsline {section}{\numberline {5.40}Var\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Assignment Struct Reference}{59}{section.5.40}%
-\contentsline {section}{\numberline {5.41}Verification Class Reference}{60}{section.5.41}%
-\contentsline {subsection}{\numberline {5.41.1}Detailed Description}{61}{subsection.5.41.1}%
-\contentsline {subsection}{\numberline {5.41.2}Constructor \& Destructor Documentation}{61}{subsection.5.41.2}%
-\contentsline {subsubsection}{\numberline {5.41.2.1}Verification()}{61}{subsubsection.5.41.2.1}%
-\contentsline {subsection}{\numberline {5.41.3}Member Function Documentation}{62}{subsection.5.41.3}%
-\contentsline {subsubsection}{\numberline {5.41.3.1}addHistoryContext()}{62}{subsubsection.5.41.3.1}%
-\contentsline {subsubsection}{\numberline {5.41.3.2}addHistoryDecision()}{62}{subsubsection.5.41.3.2}%
-\contentsline {subsubsection}{\numberline {5.41.3.3}addHistoryMarkDecisionAsInvalid()}{62}{subsubsection.5.41.3.3}%
-\contentsline {subsubsection}{\numberline {5.41.3.4}addHistoryStateStatus()}{63}{subsubsection.5.41.3.4}%
-\contentsline {subsubsection}{\numberline {5.41.3.5}areGlobalStatesInTheSameEpistemicClass()}{63}{subsubsection.5.41.3.5}%
-\contentsline {subsubsection}{\numberline {5.41.3.6}checkUncontrolledSet()}{63}{subsubsection.5.41.3.6}%
-\contentsline {subsubsection}{\numberline {5.41.3.7}equivalentGlobalTransitions()}{64}{subsubsection.5.41.3.7}%
-\contentsline {subsubsection}{\numberline {5.41.3.8}getEpistemicClassForGlobalState()}{64}{subsubsection.5.41.3.8}%
-\contentsline {subsubsection}{\numberline {5.41.3.9}isAgentInCoalition()}{65}{subsubsection.5.41.3.9}%
-\contentsline {subsubsection}{\numberline {5.41.3.10}isGlobalTransitionControlledByCoalition()}{65}{subsubsection.5.41.3.10}%
-\contentsline {subsubsection}{\numberline {5.41.3.11}newHistoryMarkDecisionAsInvalid()}{65}{subsubsection.5.41.3.11}%
-\contentsline {subsubsection}{\numberline {5.41.3.12}printCurrentHistory()}{66}{subsubsection.5.41.3.12}%
-\contentsline {subsubsection}{\numberline {5.41.3.13}restoreHistory()}{66}{subsubsection.5.41.3.13}%
-\contentsline {subsubsection}{\numberline {5.41.3.14}revertLastDecision()}{67}{subsubsection.5.41.3.14}%
-\contentsline {subsubsection}{\numberline {5.41.3.15}undoHistoryUntil()}{67}{subsubsection.5.41.3.15}%
-\contentsline {subsubsection}{\numberline {5.41.3.16}undoLastHistoryEntry()}{67}{subsubsection.5.41.3.16}%
-\contentsline {subsubsection}{\numberline {5.41.3.17}verify()}{68}{subsubsection.5.41.3.17}%
-\contentsline {subsubsection}{\numberline {5.41.3.18}verifyGlobalState()}{68}{subsubsection.5.41.3.18}%
-\contentsline {subsubsection}{\numberline {5.41.3.19}verifyLocalStates()}{68}{subsubsection.5.41.3.19}%
-\contentsline {subsubsection}{\numberline {5.41.3.20}verifyTransitionSets()}{69}{subsubsection.5.41.3.20}%
-\contentsline {section}{\numberline {5.42}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}buffer\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}state Struct Reference}{69}{section.5.42}%
-\contentsline {subsection}{\numberline {5.42.1}Member Data Documentation}{69}{subsection.5.42.1}%
-\contentsline {subsubsection}{\numberline {5.42.1.1}yy\_bs\_column}{70}{subsubsection.5.42.1.1}%
-\contentsline {subsubsection}{\numberline {5.42.1.2}yy\_bs\_lineno}{70}{subsubsection.5.42.1.2}%
-\contentsline {section}{\numberline {5.43}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}trans\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}info Struct Reference}{70}{section.5.43}%
-\contentsline {section}{\numberline {5.44}yyalloc Union Reference}{70}{section.5.44}%
-\contentsline {section}{\numberline {5.45}YYSTYPE Union Reference}{70}{section.5.45}%
+\contentsline {section}{\numberline {5.40}Verification Class Reference}{59}{section.5.40}%
+\contentsline {subsection}{\numberline {5.40.1}Detailed Description}{61}{subsection.5.40.1}%
+\contentsline {subsection}{\numberline {5.40.2}Constructor \& Destructor Documentation}{61}{subsection.5.40.2}%
+\contentsline {subsubsection}{\numberline {5.40.2.1}Verification()}{61}{subsubsection.5.40.2.1}%
+\contentsline {subsection}{\numberline {5.40.3}Member Function Documentation}{61}{subsection.5.40.3}%
+\contentsline {subsubsection}{\numberline {5.40.3.1}addHistoryContext()}{61}{subsubsection.5.40.3.1}%
+\contentsline {subsubsection}{\numberline {5.40.3.2}addHistoryDecision()}{62}{subsubsection.5.40.3.2}%
+\contentsline {subsubsection}{\numberline {5.40.3.3}addHistoryMarkDecisionAsInvalid()}{62}{subsubsection.5.40.3.3}%
+\contentsline {subsubsection}{\numberline {5.40.3.4}addHistoryStateStatus()}{62}{subsubsection.5.40.3.4}%
+\contentsline {subsubsection}{\numberline {5.40.3.5}areGlobalStatesInTheSameEpistemicClass()}{63}{subsubsection.5.40.3.5}%
+\contentsline {subsubsection}{\numberline {5.40.3.6}checkUncontrolledSet()}{63}{subsubsection.5.40.3.6}%
+\contentsline {subsubsection}{\numberline {5.40.3.7}equivalentGlobalTransitions()}{64}{subsubsection.5.40.3.7}%
+\contentsline {subsubsection}{\numberline {5.40.3.8}getEpistemicClassForGlobalState()}{64}{subsubsection.5.40.3.8}%
+\contentsline {subsubsection}{\numberline {5.40.3.9}isAgentInCoalition()}{64}{subsubsection.5.40.3.9}%
+\contentsline {subsubsection}{\numberline {5.40.3.10}isGlobalTransitionControlledByCoalition()}{65}{subsubsection.5.40.3.10}%
+\contentsline {subsubsection}{\numberline {5.40.3.11}newHistoryMarkDecisionAsInvalid()}{65}{subsubsection.5.40.3.11}%
+\contentsline {subsubsection}{\numberline {5.40.3.12}printCurrentHistory()}{66}{subsubsection.5.40.3.12}%
+\contentsline {subsubsection}{\numberline {5.40.3.13}restoreHistory()}{66}{subsubsection.5.40.3.13}%
+\contentsline {subsubsection}{\numberline {5.40.3.14}revertLastDecision()}{66}{subsubsection.5.40.3.14}%
+\contentsline {subsubsection}{\numberline {5.40.3.15}undoHistoryUntil()}{67}{subsubsection.5.40.3.15}%
+\contentsline {subsubsection}{\numberline {5.40.3.16}undoLastHistoryEntry()}{67}{subsubsection.5.40.3.16}%
+\contentsline {subsubsection}{\numberline {5.40.3.17}verify()}{67}{subsubsection.5.40.3.17}%
+\contentsline {subsubsection}{\numberline {5.40.3.18}verifyGlobalState()}{68}{subsubsection.5.40.3.18}%
+\contentsline {subsubsection}{\numberline {5.40.3.19}verifyLocalStates()}{68}{subsubsection.5.40.3.19}%
+\contentsline {subsubsection}{\numberline {5.40.3.20}verifyTransitionSets()}{68}{subsubsection.5.40.3.20}%
+\contentsline {section}{\numberline {5.41}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}buffer\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}state Struct Reference}{69}{section.5.41}%
+\contentsline {subsection}{\numberline {5.41.1}Member Data Documentation}{69}{subsection.5.41.1}%
+\contentsline {subsubsection}{\numberline {5.41.1.1}yy\_bs\_column}{69}{subsubsection.5.41.1.1}%
+\contentsline {subsubsection}{\numberline {5.41.1.2}yy\_bs\_lineno}{70}{subsubsection.5.41.1.2}%
+\contentsline {section}{\numberline {5.42}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}trans\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}info Struct Reference}{70}{section.5.42}%
+\contentsline {section}{\numberline {5.43}yyalloc Union Reference}{70}{section.5.43}%
+\contentsline {section}{\numberline {5.44}YYSTYPE Union Reference}{70}{section.5.44}%
 \contentsline {chapter}{\numberline {6}File Documentation}{71}{chapter.6}%
 \contentsline {section}{\numberline {6.1}expressions.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{71}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}Detailed Description}{71}{subsection.6.1.1}%
@@ -283,4 +282,4 @@
 \contentsline {subsubsection}{\numberline {6.13.1.2}Mode}{85}{subsubsection.6.13.1.2}%
 \contentsline {subsection}{\numberline {6.13.2}Function Documentation}{85}{subsection.6.13.2}%
 \contentsline {subsubsection}{\numberline {6.13.2.1}verStatusToStr()}{85}{subsubsection.6.13.2.1}%
-\contentsline {chapter}{Index}{87}{section*.76}%
+\contentsline {chapter}{Index}{87}{section*.75}%

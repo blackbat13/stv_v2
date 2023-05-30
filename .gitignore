@@ -51,3 +51,5 @@ src/reader/scanner.h
 notes.md
 f5.sh
 .vscode/settings.json
+build/result.txt
+build/result2.txt

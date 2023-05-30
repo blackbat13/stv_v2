@@ -40,7 +40,6 @@ var hierarchy =
     [ "ModelParser", "classModelParser.html", null ],
     [ "TransitionTemplate", "classTransitionTemplate.html", null ],
     [ "Var", "structVar.html", null ],
-    [ "VarAssignment", "structVarAssignment.html", null ],
     [ "Verification", "classVerification.html", null ],
     [ "yy_buffer_state", "structyy__buffer__state.html", null ],
     [ "yy_trans_info", "structyy__trans__info.html", null ],

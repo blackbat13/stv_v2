@@ -9,6 +9,5 @@ var structLocalTransition =
     [ "name", "structLocalTransition.html#a71d43959302dac3665c1168a7ecc9bcf", null ],
     [ "sharedCount", "structLocalTransition.html#a4bd31c2f99c1ddb41234bf97ab7dfe4a", null ],
     [ "sharedLocalTransitions", "structLocalTransition.html#a4f5ec6416a2f5fe3266eedaefd1578f5", null ],
-    [ "to", "structLocalTransition.html#a3532810736170bc57a6a25aa09a7ee28", null ],
-    [ "varAsssignments", "structLocalTransition.html#a76cc56df82e2f612af2f121f0b5fdb9b", null ]
+    [ "to", "structLocalTransition.html#a3532810736170bc57a6a25aa09a7ee28", null ]
 ];
