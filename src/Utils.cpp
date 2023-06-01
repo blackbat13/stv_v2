@@ -159,7 +159,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
             }
         }
         for (const auto globalTransition : globalState->globalTransitions) {
-            printf("    GlobalTransition id=%i to GlobalState %i\n", globalTransition->id, globalTransition->to->id);
+            printf("    GlobalTransition id=%i to GlobalState %i\n", globalTransition->id, (globalTransition->to ? globalTransition->to->id : -1));
             for (const auto localTransition : globalTransition->localTransitions) {
                 printf(
                     "        LocalTransition %i (globalName=%s, localName=%s) of Agent %i (%s);",
@@ -290,3 +290,4 @@ vector<set<LocalState*>> getLocalStatesSCC(Agent* agt){
 
     return comp;
 }
+

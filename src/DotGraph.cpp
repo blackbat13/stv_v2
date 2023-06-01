@@ -123,6 +123,7 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
             isShared=isShared || e->isShared;
         }
         transitionLabel.pop_back();  // truncate sep
+        if(!t->from || !t->to)continue;
         this->addEdge(
             to_string(t->from->id), 
             to_string(t->to->id), 
