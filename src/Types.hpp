@@ -16,6 +16,8 @@
 #include <vector>
 #include "reader/expressions.hpp"
 
+#include <atomic> //std::atomic_uint32_t
+
 using namespace std;
 
 
@@ -246,8 +248,10 @@ struct GlobalModel {
 
 /// @brief Represents a single global state.
 struct GlobalState {
+    static atomic_uint32_t next_id; // [YK]: ideally it should be a private member (and possibly of a type size_t), but for now this should work just as well
+    GlobalState();
     // Data
-
+    
     /// @brief Identifier of the global state.
     int id;
 
@@ -277,6 +281,8 @@ struct GlobalState {
 
 /// @brief Represents a single global transition.
 struct GlobalTransition {
+    static atomic_uint32_t next_id;
+    GlobalTransition();
     // Data
 
     /// @brief Identifier of the transition.

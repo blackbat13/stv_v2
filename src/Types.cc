@@ -55,3 +55,14 @@ LocalState* Agent::includesState(LocalState* state) {
    }
    return NULL;
 }
+
+atomic_uint32_t GlobalState::next_id;
+atomic_uint32_t GlobalTransition::next_id;
+
+GlobalState::GlobalState(){
+   id = next_id++;
+}
+
+GlobalTransition::GlobalTransition(){
+   id = next_id++;
+}

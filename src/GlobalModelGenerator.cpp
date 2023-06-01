@@ -125,7 +125,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>
     
     // Create a new GlobalState
     auto globalState = new GlobalState();
-    globalState->id = this->globalModel->globalStates.size();
+    // globalState->id = this->globalModel->globalStates.size();
     globalState->isExpanded = false;
     globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
     
@@ -216,7 +216,7 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
         }
         else {
             auto globalTransition = new GlobalTransition();
-            globalTransition->id = this->globalModel->globalTransitions.size();
+            // globalTransition->id = this->globalModel->globalTransitions.size();
             globalTransition->isInvalidDecision = false;
             globalTransition->from = fromGlobalState;
             globalTransition->to = nullptr;
