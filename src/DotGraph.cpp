@@ -112,23 +112,23 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
             stateLabel.pop_back();
             stateLabel+="}\", shape=\"record";
         }
+        for (const auto& t : s->globalTransitions) {
+            std::string transitionLabel = "";
+            bool isShared = false;
+            for(const auto& e: t->localTransitions){
+                transitionLabel+=e->name+",";
+                isShared=isShared || e->isShared;
+            }
+            transitionLabel.pop_back();  // truncate sep
+            if(!t->from || !t->to)continue;
+            this->addEdge(
+                to_string(t->from->id), 
+                to_string(t->to->id), 
+                transitionLabel + (isShared ? "\", color=\"blue" : "")
+            );
+        }
 
         this->addNode(to_string(s->id), stateLabel);
-    }
-    for (const auto& t : gm->globalTransitions) {
-        std::string transitionLabel = "";
-        bool isShared = false;
-        for(const auto& e: t->localTransitions){
-            transitionLabel+=e->name+",";
-            isShared=isShared || e->isShared;
-        }
-        transitionLabel.pop_back();  // truncate sep
-        if(!t->from || !t->to)continue;
-        this->addEdge(
-            to_string(t->from->id), 
-            to_string(t->to->id), 
-            transitionLabel + (isShared ? "\", color=\"blue" : "")
-        );
     }
 }
 

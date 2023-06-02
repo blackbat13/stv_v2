@@ -125,9 +125,6 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>
     
     // Create a new GlobalState
     auto globalState = new GlobalState();
-    // globalState->id = this->globalModel->globalStates.size();
-    globalState->isExpanded = false;
-    globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
     
     // globalState->localStates: copy from localStates argument
     for (const auto localState : *localStates) {
@@ -221,7 +218,6 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
             globalTransition->from = fromGlobalState;
             globalTransition->to = nullptr;
             globalTransition->localTransitions = currentLocalTransitions;
-            this->globalModel->globalTransitions.push_back(globalTransition);
             fromGlobalState->globalTransitions.insert(globalTransition);
         }
     }
