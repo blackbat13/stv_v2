@@ -15,9 +15,6 @@ struct GlobalState {
     /// @brief Hash of the global state used in quick checks if the states are in the same epistemic class.
     string hash;
 
-    /// @brief Map of model variables and their current values.
-    map<Var*, int> vars;
-
     /// @brief Map of agents and the epistemic classes that belongs to the respective agent.
     map<Agent*, EpistemicClass*> epistemicClasses;
 

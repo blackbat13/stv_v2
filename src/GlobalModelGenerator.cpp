@@ -137,9 +137,6 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(set<LocalState*>
     map<string, map<Agent*, vector<LocalTransition*>>> transitionsByName;
     for (const auto localState : *localStates) {
         for (const auto localTransition : localState->localTransitions) {
-            if (!this->checkLocalTransitionConditions(localTransition, globalState)) {
-                continue;
-            }
             if (transitionsByName.count(localTransition->name) == 0) {
                transitionsByName[localTransition->name] = map<Agent*, vector<LocalTransition*>>(); 
             }
@@ -189,27 +186,6 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
             fromGlobalState->globalTransitions.insert(globalTransition);
         }
     }
-}
-
-/// @brief Checks if all conditions for a given local transition in a given global state are fulfilled.
-/// @param localTransition Local transition to traverse.
-/// @param globalState Current global state.
-/// @return Returns true if all of the necessary conditions to use that transition are fulfilled, otherwise false.
-bool GlobalModelGenerator::checkLocalTransitionConditions(LocalTransition* localTransition, GlobalState* globalState) {
-    for (const auto condition : localTransition->conditions) {
-        auto currentValue = globalState->vars[condition->var];
-        if (condition->conditionOperator == ConditionOperator::Equals) {
-            if (currentValue != condition->comparedValue) {
-                return false;
-            }
-        }
-        else if (condition->conditionOperator == ConditionOperator::NotEquals) {
-            if (currentValue == condition->comparedValue) {
-                return false;
-            }
-        }
-    }
-    return true;
 }
 
 /// @brief Creates a hash from a set of LocalState and an Agent.

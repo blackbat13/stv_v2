@@ -35,7 +35,6 @@ protected:
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(set<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
     void generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent);
-    bool checkLocalTransitionConditions(LocalTransition* localTransition, GlobalState* globalState);
     string computeEpistemicClassHash(set<LocalState*>* localStates, Agent* agent);
     string computeGlobalStateHash(set<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(set<LocalState*>* localStates, Agent* agent);
