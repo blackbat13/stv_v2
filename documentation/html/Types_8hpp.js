@@ -6,7 +6,6 @@ var Types_8hpp =
     [ "Formula", "structFormula.html", "structFormula" ],
     [ "Agent", "classAgent.html", "classAgent" ],
     [ "LocalState", "classLocalState.html", "classLocalState" ],
-    [ "VarAssignment", "structVarAssignment.html", "structVarAssignment" ],
     [ "LocalTransition", "structLocalTransition.html", "structLocalTransition" ],
     [ "LocalModels", "structLocalModels.html", "structLocalModels" ],
     [ "GlobalModel", "structGlobalModel.html", "structGlobalModel" ],

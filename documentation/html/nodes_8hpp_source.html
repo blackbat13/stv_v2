@@ -153,11 +153,11 @@ $(document).ready(function(){initNavTree('nodes_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classLocalStateTemplate.html">   99</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLocalStateTemplate.html">LocalStateTemplate</a> {</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="classLocalStateTemplate.html">   99</a></span>&#160;<span class="keyword">class </span><a class="code" href="classLocalStateTemplate.html">LocalStateTemplate</a> { <span class="comment">// [YK]: &lt;-- a class implementing Location</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;   <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="classLocalStateTemplate.html#af122ee0580609c5ea3a528acf8b79a52">  102</a></span>&#160;      <span class="keywordtype">string</span> <a class="code" href="classLocalStateTemplate.html#af122ee0580609c5ea3a528acf8b79a52">name</a>;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classLocalStateTemplate.html#a802fe93810f5686670b30fa47b3225bf">  105</a></span>&#160;      set&lt;TransitionTemplate*&gt; <a class="code" href="classLocalStateTemplate.html#a802fe93810f5686670b30fa47b3225bf">transitions</a>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classLocalStateTemplate.html#a802fe93810f5686670b30fa47b3225bf">  105</a></span>&#160;      set&lt;TransitionTemplate*&gt; <a class="code" href="classLocalStateTemplate.html#a802fe93810f5686670b30fa47b3225bf">transitions</a>;  <span class="comment">// [YK]: &lt;-- adj. list of edges connecting locations</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;};</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">/* Klasa reprezentująca pojedynczego agenta po wczytaniu jego opisu z pliku */</span></div>
@@ -165,7 +165,7 @@ $(document).ready(function(){initNavTree('nodes_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classAgentTemplate.html">  111</a></span>&#160;<span class="keyword">class </span><a class="code" href="classAgentTemplate.html">AgentTemplate</a> {</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      <span class="comment">// identyfikator agenta</span></div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordtype">string</span> ident;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      <span class="keywordtype">string</span> ident; <span class="comment">// [YK]: &lt;-- Agent Type/Template Name (e.g., Voter, Train)</span></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      <span class="comment">// stan startowy</span></div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
@@ -189,7 +189,7 @@ $(document).ready(function(){initNavTree('nodes_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;   </div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;      <span class="comment">// mapa stanów lokalnych potrzebna do wygenerowania modelu</span></div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      map&lt;string,LocalStateTemplate*&gt; localStateTemplates;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;      map&lt;string,LocalStateTemplate*&gt; localStateTemplates;  <span class="comment">// [YK]: maps location name to location obj</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;      <span class="comment">// metoda wyznaczająca węzeł kolejny do danego, zależnie od tranzycji</span></div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
@@ -200,11 +200,11 @@ $(document).ready(function(){initNavTree('nodes_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      </div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;      <span class="comment">// ustaw identyfikator agenta</span></div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="keyword">virtual</span> <a class="code" href="classAgentTemplate.html">AgentTemplate</a>&amp; setIdent(<span class="keywordtype">string</span> _ident);</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      <span class="keyword">virtual</span> <a class="code" href="classAgentTemplate.html">AgentTemplate</a>&amp; setIdent(<span class="keywordtype">string</span> _ident);             <span class="comment">// [YK]: &lt;-- sets template Name</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      <span class="comment">// ustaw identyfikator agenta</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      <span class="keyword">virtual</span> <a class="code" href="classAgentTemplate.html">AgentTemplate</a>&amp; setInitState(<span class="keywordtype">string</span> _startState);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;      <span class="keyword">virtual</span> <a class="code" href="classAgentTemplate.html">AgentTemplate</a>&amp; setInitState(<span class="keywordtype">string</span> _startState);    <span class="comment">// [YK]: &lt;-- sets initial location</span></div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;      </div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;      <span class="comment">// dodaj zmienną/zmienne lokalne</span></div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
@@ -225,22 +225,25 @@ $(document).ready(function(){initNavTree('nodes_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;      <span class="comment">// wygeneruj agenta do modelu</span></div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160; </div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;      <span class="keyword">virtual</span> <a class="code" href="classAgent.html">Agent</a>* generateAgent(<span class="keywordtype">int</span> <span class="keywordtype">id</span>) ;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;};</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;      <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classDotGraph.html">DotGraph</a>;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;};</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassAgentTemplate_html"><div class="ttname"><a href="classAgentTemplate.html">AgentTemplate</a></div><div class="ttdoc">Represents a single agent loaded from the description from a file.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:111</div></div>
-<div class="ttc" id="aclassAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Contains all data for a single Agent, including id, name and all of the agents' variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:98</div></div>
+<div class="ttc" id="aclassAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Contains all data for a single Agent, including id, name and all of the agents' variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:95</div></div>
 <div class="ttc" id="aclassAssignment_html"><div class="ttname"><a href="classAssignment.html">Assignment</a></div><div class="ttdoc">Represents an assingment.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:22</div></div>
 <div class="ttc" id="aclassAssignment_html_a1d1f798145468d43615695a571564568"><div class="ttname"><a href="classAssignment.html#a1d1f798145468d43615695a571564568">Assignment::Assignment</a></div><div class="ttdeci">Assignment(string _ident, ExprNode *_exp)</div><div class="ttdoc">Constructor for an Assignment class.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:35</div></div>
 <div class="ttc" id="aclassAssignment_html_a5fc5bac99d35d4d85a17d6dac036a27a"><div class="ttname"><a href="classAssignment.html#a5fc5bac99d35d4d85a17d6dac036a27a">Assignment::value</a></div><div class="ttdeci">ExprNode * value</div><div class="ttdoc">A value to be assigned.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:29</div></div>
 <div class="ttc" id="aclassAssignment_html_a621d132a9a8f73a5397cad74c66e24af"><div class="ttname"><a href="classAssignment.html#a621d132a9a8f73a5397cad74c66e24af">Assignment::ident</a></div><div class="ttdeci">string ident</div><div class="ttdoc">To what we should assign a value.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:25</div></div>
 <div class="ttc" id="aclassAssignment_html_afe2932c47e89dac72810398258ed017d"><div class="ttname"><a href="classAssignment.html#afe2932c47e89dac72810398258ed017d">Assignment::assign</a></div><div class="ttdeci">virtual void assign(Environment &amp;env)</div><div class="ttdoc">Make an assignment in a given environment.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:41</div></div>
+<div class="ttc" id="aclassDotGraph_html"><div class="ttname"><a href="classDotGraph.html">DotGraph</a></div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:11</div></div>
 <div class="ttc" id="aclassExprNode_html"><div class="ttname"><a href="classExprNode.html">ExprNode</a></div><div class="ttdoc">Base node for expressions.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:21</div></div>
 <div class="ttc" id="aclassExprNode_html_a5f155835c446271416ed3eb4f1d34f1f"><div class="ttname"><a href="classExprNode.html#a5f155835c446271416ed3eb4f1d34f1f">ExprNode::eval</a></div><div class="ttdeci">virtual int eval(Environment &amp;env)=0</div><div class="ttdoc">Calculates the expression value.</div></div>
 <div class="ttc" id="aclassLocalStateTemplate_html"><div class="ttname"><a href="classLocalStateTemplate.html">LocalStateTemplate</a></div><div class="ttdoc">A template for the local state.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:99</div></div>
 <div class="ttc" id="aclassLocalStateTemplate_html_a802fe93810f5686670b30fa47b3225bf"><div class="ttname"><a href="classLocalStateTemplate.html#a802fe93810f5686670b30fa47b3225bf">LocalStateTemplate::transitions</a></div><div class="ttdeci">set&lt; TransitionTemplate * &gt; transitions</div><div class="ttdoc">Local transitions going out from this state.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:105</div></div>
 <div class="ttc" id="aclassLocalStateTemplate_html_af122ee0580609c5ea3a528acf8b79a52"><div class="ttname"><a href="classLocalStateTemplate.html#af122ee0580609c5ea3a528acf8b79a52">LocalStateTemplate::name</a></div><div class="ttdeci">string name</div><div class="ttdoc">Name of the local state.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:102</div></div>
-<div class="ttc" id="aclassLocalState_html"><div class="ttname"><a href="classLocalState.html">LocalState</a></div><div class="ttdoc">Represents a single LocalState, containing id, name and internal variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:129</div></div>
+<div class="ttc" id="aclassLocalState_html"><div class="ttname"><a href="classLocalState.html">LocalState</a></div><div class="ttdoc">Represents a single LocalState, containing id, name and internal variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:126</div></div>
 <div class="ttc" id="aclassTransitionTemplate_html"><div class="ttname"><a href="classTransitionTemplate.html">TransitionTemplate</a></div><div class="ttdoc">Represents a meta-transition.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:49</div></div>
 <div class="ttc" id="aclassTransitionTemplate_html_a2a6a312a79b3c0653d71f7937b75a5fd"><div class="ttname"><a href="classTransitionTemplate.html#a2a6a312a79b3c0653d71f7937b75a5fd">TransitionTemplate::shared</a></div><div class="ttdeci">int shared</div><div class="ttdoc">Needed amound of needed agents. -1 if not shared.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:54</div></div>
 <div class="ttc" id="aclassTransitionTemplate_html_a3c6dfa1a9573e08fe3a58b3fc208b0cf"><div class="ttname"><a href="classTransitionTemplate.html#a3c6dfa1a9573e08fe3a58b3fc208b0cf">TransitionTemplate::startState</a></div><div class="ttdeci">string startState</div><div class="ttdoc">Start state name.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:69</div></div>

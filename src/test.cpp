@@ -3,14 +3,11 @@
 #include <string>
 #include <stdio.h>
 
-
-#include "TestParser.hpp"
+#include "ModelParser.hpp"
 #include "reader/nodes.hpp"
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
 #include "Utils.hpp"
-
-
 
 using namespace std;
 

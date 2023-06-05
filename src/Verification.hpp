@@ -8,7 +8,6 @@
 #include <stack>
 #include "Types.hpp"
 #include "GlobalModelGenerator.hpp"
-#include "SeleneFormula.hpp"
 
 string verStatusToStr(GlobalStateVerificationStatus status);
 
@@ -96,8 +95,6 @@ protected:
     stack<HistoryEntry*> historyToRestore;
     /// @brief Holds current model and formula.
     GlobalModelGenerator* generator;
-    /// @brief Temporary solve for data input.
-    SeleneFormula* seleneFormula;
     /// @brief Pointer to the start of model traversal history.
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.
@@ -119,6 +116,8 @@ protected:
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
     bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
+    bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
 };
 
 #endif // SELENE_VERIFICATION

@@ -115,6 +115,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5cfa822422f5ca06a58b1d0443ac8b8b"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b> ()</td></tr>
 <tr class="separator:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4073ec29a638e918c58e44dfe345e842"><td class="memItemLeft" align="right" valign="top">vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8hpp.html#a4073ec29a638e918c58e44dfe345e842">getLocalStatesSCC</a> (<a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
+<tr class="memdesc:a4073ec29a638e918c58e44dfe345e842"><td class="mdescLeft">&#160;</td><td class="mdescRight">a quick implementation of a Tarjan SCC algorithm (based on DFS)  <a href="Utils_8hpp.html#a4073ec29a638e918c58e44dfe345e842">More...</a><br /></td></tr>
+<tr class="separator:a4073ec29a638e918c58e44dfe345e842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="afc39e476fc50026d8b3da7fc9298b001"></a>
@@ -168,6 +171,33 @@ unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns string " (first_name, second_name, ..., last_name=int_value)" </dd></dl>
+
+</div>
+</div>
+<a id="a4073ec29a638e918c58e44dfe345e842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4073ec29a638e918c58e44dfe345e842">&#9670;&nbsp;</a></span>getLocalStatesSCC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;set&lt;<a class="el" href="classLocalState.html">LocalState</a>*&gt; &gt; getLocalStatesSCC </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAgent.html">Agent</a> *&#160;</td>
+          <td class="paramname"><em>agt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a quick implementation of a Tarjan SCC algorithm (based on DFS) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">agt</td><td>- an agent whose local graph will be inspected </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>localStates partition in a form of the vector, where each set correponds to a SCC </dd></dl>
 
 </div>
 </div>

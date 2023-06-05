@@ -25,7 +25,11 @@
 var NAVTREE =
 [
   [ "stv_v2", "index.html", [
-    [ "README", "md__home_mathis_repositories_stv_v2_README.html", null ],
+    [ "STV2 - StraTegic Verifier 2", "md__home_mathis_repositories_stv_v2_README.html", [
+      [ "Usage", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md1", null ],
+      [ "Tests", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md2", null ],
+      [ "Misc", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md3", null ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -52,7 +56,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Constants_8hpp_source.html",
-"structEpistemicClass.html#a861627f16e0a71ff8a12ede2324be9c1"
+"nodes_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -21,7 +21,9 @@ void \mbox{\hyperlink{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}{output\+Glob
 \begin{DoxyCompactList}\small\item\em Prints the whole \mbox{\hyperlink{structGlobalModel}{Global\+Model}} into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Utils_8hpp_a5cfa822422f5ca06a58b1d0443ac8b8b}\label{Utils_8hpp_a5cfa822422f5ca06a58b1d0443ac8b8b}} 
 unsigned long {\bfseries get\+Mem\+Cap} ()
-\end{DoxyCompactItemize}
+\item 
+vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $>$ \mbox{\hyperlink{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}{get\+Local\+States\+SCC}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+\begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -60,6 +62,24 @@ Converts a map of string and int to a string.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns string \char`\"{} (first\+\_\+name, second\+\_\+name, ..., last\+\_\+name=int\+\_\+value)\char`\"{} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}\label{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}} 
+\index{Utils.hpp@{Utils.hpp}!getLocalStatesSCC@{getLocalStatesSCC}}
+\index{getLocalStatesSCC@{getLocalStatesSCC}!Utils.hpp@{Utils.hpp}}
+\doxysubsubsection{\texorpdfstring{getLocalStatesSCC()}{getLocalStatesSCC()}}
+{\footnotesize\ttfamily vector$<$set$<$\mbox{\hyperlink{classLocalState}{Local\+State}}$\ast$$>$ $>$ get\+Local\+States\+SCC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agt }\end{DoxyParamCaption})}
+
+
+
+a quick implementation of a Tarjan SCC algorithm (based on DFS) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agt} & -\/ an agent whose local graph will be inspected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+local\+States partition in a form of the vector, where each set correponds to a SCC 
 \end{DoxyReturn}
 \mbox{\Hypertarget{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}\label{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}} 
 \index{Utils.hpp@{Utils.hpp}!localModelsToString@{localModelsToString}}

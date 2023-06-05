@@ -1,10 +1,10 @@
 /**
- * @file TextParser.cc
- * @brief Model parser.
+ * @file ModelParser.cc
+ * @brief A model parser.
  * A parser for converting a text file into a model.
  */
 
-#include "TestParser.hpp"
+#include "ModelParser.hpp"
 #include "reader/nodes.hpp"
 #include <stdio.h>
 
@@ -18,18 +18,18 @@ extern void yyrestart(FILE*);
 set<AgentTemplate*>* modelDescription;
 FormulaTemplate formulaDescription;
 
-/// @brief TestParser constructor.
-TestParser::TestParser() {
+/// @brief ModelParser constructor.
+ModelParser::ModelParser() {
 }
 
-/// @brief TestParser destructor.
-TestParser::~TestParser() {
+/// @brief ModelParser destructor.
+ModelParser::~ModelParser() {
 }
 
 /// @brief Parses a file with given name into a usable model.
 /// @param fileName Name of the file to be converted into a model.
 /// @return Pointer to a model created from a given file.
-tuple<LocalModels*, Formula*> TestParser::parse(string fileName) {
+tuple<LocalModels*, Formula*> ModelParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    // zamapuj go jako wejście dla Fleksa
@@ -44,13 +44,8 @@ tuple<LocalModels*, Formula*> TestParser::parse(string fileName) {
    int i = 0;
    for(set<AgentTemplate*>::iterator it=modelDescription->begin(); it != modelDescription->end(); it++, i++) {
       models->agents.push_back((*it)->generateAgent(i));
-      // jeszcze wskaźniki do zmiennych - raczej zbędne
-      for(set<Var*>::iterator varit=models->agents[i]->vars.begin(); varit != models->agents[i]->vars.end(); varit++) {
-         models->vars[(*varit)->name] = *varit;
-      }
    }
-   
-   
+
    Formula* formula = new Formula();
    formula->p = formulaDescription.formula;
    for (const auto agent : models->agents) {

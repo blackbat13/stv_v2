@@ -2,7 +2,7 @@
 
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
-#include "TestParser.hpp"
+#include "ModelParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
 #include <fstream>
@@ -16,7 +16,7 @@ TEST(SimpleVotingWithFakesTest, 1Voter1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -45,7 +45,7 @@ TEST(SimpleVotingWithFakesTest, 2Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -74,7 +74,7 @@ TEST(SimpleVotingWithFakesTest, 3Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -103,7 +103,7 @@ TEST(SimpleVotingWithFakesTest, 4Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -132,7 +132,7 @@ TEST(SimpleVotingWithFakesNotGiveTest, 1Voter1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -161,7 +161,7 @@ TEST(SimpleVotingWithFakesNotGiveTest, 2Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -190,7 +190,7 @@ TEST(SimpleVotingWithFakesNotGiveTest, 3Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);
@@ -219,7 +219,7 @@ TEST(SimpleVotingWithFakesNotGiveTest, 4Voters1Coercer)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new TestParser();
+    auto tp = new ModelParser();
     
     tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
     auto localModels = get<0>(desc);

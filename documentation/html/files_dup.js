@@ -1,7 +1,9 @@
 var files_dup =
 [
+    [ "clock_test.h", "clock__test_8h_source.html", null ],
     [ "config.h", "config_8h_source.html", null ],
     [ "Constants.hpp", "Constants_8hpp_source.html", null ],
+    [ "DotGraph.hpp", "DotGraph_8hpp_source.html", null ],
     [ "expressions.cc", "expressions_8cc.html", null ],
     [ "expressions.hpp", "expressions_8hpp.html", "expressions_8hpp" ],
     [ "general_test.h", "general__test_8h_source.html", null ],
@@ -9,6 +11,8 @@ var files_dup =
     [ "GlobalModelGenerator.hpp", "GlobalModelGenerator_8hpp.html", [
       [ "GlobalModelGenerator", "classGlobalModelGenerator.html", "classGlobalModelGenerator" ]
     ] ],
+    [ "ModelParser.cc", "ModelParser_8cc.html", "ModelParser_8cc" ],
+    [ "ModelParser.hpp", "ModelParser_8hpp_source.html", null ],
     [ "nodes.cc", "nodes_8cc.html", null ],
     [ "nodes.hpp", "nodes_8hpp.html", [
       [ "Assignment", "classAssignment.html", "classAssignment" ],
@@ -16,11 +20,11 @@ var files_dup =
       [ "LocalStateTemplate", "classLocalStateTemplate.html", "classLocalStateTemplate" ],
       [ "AgentTemplate", "classAgentTemplate.html", "classAgentTemplate" ]
     ] ],
-    [ "SeleneFormula.hpp", "SeleneFormula_8hpp_source.html", null ],
+    [ "parser.h", "parser_8h_source.html", null ],
+    [ "simple_voting_run_test.h", "simple__voting__run__test_8h_source.html", null ],
     [ "simple_voting_test.h", "simple__voting__test_8h_source.html", null ],
     [ "simple_voting_with_fakes_test.h", "simple__voting__with__fakes__test_8h_source.html", null ],
     [ "test_test.h", "test__test_8h_source.html", null ],
-    [ "TestParser.hpp", "TestParser_8hpp_source.html", null ],
     [ "trains_test.h", "trains__test_8h_source.html", null ],
     [ "trains_with_bridge_test.h", "trains__with__bridge__test_8h_source.html", null ],
     [ "Types.cc", "Types_8cc.html", null ],

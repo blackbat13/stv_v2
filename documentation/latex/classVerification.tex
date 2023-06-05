@@ -53,7 +53,13 @@ void \mbox{\hyperlink{classVerification_a04b9c8350bd9983b59e4e76cfb352927}{undo\
 void \mbox{\hyperlink{classVerification_a11bc6802569c498b8b80a6c7723056d8}{print\+Current\+History}} (int depth)
 \begin{DoxyCompactList}\small\item\em Prints current history to the console. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_a265b783962885eebe96a4f2182c22577}{equivalent\+Global\+Transitions}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition1, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition2)
-\begin{DoxyCompactList}\small\item\em Checks if two global transitions are made up of the same local transitions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Checks if two global transitions are made up of the same local transitions. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerification_a850053a49cc9a539aa664d0100cb59a8}{check\+Uncontrolled\+Set}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions)
+\begin{DoxyCompactList}\small\item\em Verifies if each transition from a given state yields a correct result. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerification_a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe}{verify\+Transition\+Sets}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ controlled\+Global\+Transitions, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions)
+\begin{DoxyCompactList}\small\item\em Checks if given transition sets are able to fulfill the formula for its given epistemic class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}{restore\+History}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition, int depth, bool controlled)
+\begin{DoxyCompactList}\small\item\em Restores the decisions made for a given global state and transition in current recursion depth. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -69,9 +75,6 @@ stack$<$ \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ $>$ \mbox{
 \mbox{\Hypertarget{classVerification_ab283068f07ee48981abcaa1787a98d08}\label{classVerification_ab283068f07ee48981abcaa1787a98d08}} 
 \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$ \mbox{\hyperlink{classVerification_ab283068f07ee48981abcaa1787a98d08}{generator}}
 \begin{DoxyCompactList}\small\item\em Holds current model and formula. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerification_abd4e5c9f9353ab4248856f29e3df5e7a}\label{classVerification_abd4e5c9f9353ab4248856f29e3df5e7a}} 
-\mbox{\hyperlink{classSeleneFormula}{Selene\+Formula}} $\ast$ \mbox{\hyperlink{classVerification_abd4e5c9f9353ab4248856f29e3df5e7a}{selene\+Formula}}
-\begin{DoxyCompactList}\small\item\em Temporary solve for data input. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classVerification_a0c99d888d26d30df16342201fc4b2e75}\label{classVerification_a0c99d888d26d30df16342201fc4b2e75}} 
 \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ \mbox{\hyperlink{classVerification_a0c99d888d26d30df16342201fc4b2e75}{history\+Start}}
 \begin{DoxyCompactList}\small\item\em Pointer to the start of model traversal history. \end{DoxyCompactList}\item 
@@ -196,6 +199,30 @@ Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if t
 \begin{DoxyReturn}{Returns}
 Returns true if the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same for both of the \mbox{\hyperlink{structGlobalState}{Global\+State}}. Returns false if they are different or at least one of them has no \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a850053a49cc9a539aa664d0100cb59a8}\label{classVerification_a850053a49cc9a539aa664d0100cb59a8}} 
+\index{Verification@{Verification}!checkUncontrolledSet@{checkUncontrolledSet}}
+\index{checkUncontrolledSet@{checkUncontrolledSet}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{checkUncontrolledSet()}{checkUncontrolledSet()}}
+{\footnotesize\ttfamily bool Verification\+::check\+Uncontrolled\+Set (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{uncontrolled\+Global\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{bool}]{has\+Omitted\+Transitions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Verifies if each transition from a given state yields a correct result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uncontrolled\+Global\+Transitions} & A set of global transitions to be checked. \\
+\hline
+{\em global\+State} & Currently processed global state. \\
+\hline
+{\em depth} & Current recursion depth. \\
+\hline
+{\em has\+Omitted\+Transitions} & Flag with the information about skipped unneeded transitions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if every transition yields a correct result, false otherwise. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classVerification_a265b783962885eebe96a4f2182c22577}\label{classVerification_a265b783962885eebe96a4f2182c22577}} 
 \index{Verification@{Verification}!equivalentGlobalTransitions@{equivalentGlobalTransitions}}
 \index{equivalentGlobalTransitions@{equivalentGlobalTransitions}!Verification@{Verification}}
@@ -305,6 +332,31 @@ Prints current history to the console.
 {\em depth} & Integer that will be multiplied by 4 and appended as a prefix to the optional debug log. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}\label{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}} 
+\index{Verification@{Verification}!restoreHistory@{restoreHistory}}
+\index{restoreHistory@{restoreHistory}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{restoreHistory()}{restoreHistory()}}
+{\footnotesize\ttfamily bool Verification\+::restore\+History (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{global\+Transition,  }\item[{int}]{depth,  }\item[{bool}]{controlled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Restores the decisions made for a given global state and transition in current recursion depth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Currently processed global state. \\
+\hline
+{\em global\+Transition} & Previously selected global transition from the given state to mark as invalid. \\
+\hline
+{\em depth} & Current recursion depth. \\
+\hline
+{\em controlled} & Flag with the information about current type of transition. True if controlled, false if uncontrolled. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if current top of the history entires matches with ~\newline
+ 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classVerification_a93f4d9152a29db35e7cee285fd925d83}\label{classVerification_a93f4d9152a29db35e7cee285fd925d83}} 
 \index{Verification@{Verification}!revertLastDecision@{revertLastDecision}}
 \index{revertLastDecision@{revertLastDecision}!Verification@{Verification}}
@@ -407,6 +459,32 @@ Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with a specific set of values, fulfilling the criteria, otherwise returns false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe}\label{classVerification_a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe}} 
+\index{Verification@{Verification}!verifyTransitionSets@{verifyTransitionSets}}
+\index{verifyTransitionSets@{verifyTransitionSets}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{verifyTransitionSets()}{verifyTransitionSets()}}
+{\footnotesize\ttfamily bool Verification\+::verify\+Transition\+Sets (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{controlled\+Global\+Transitions,  }\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{uncontrolled\+Global\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{bool}]{has\+Omitted\+Transitions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Checks if given transition sets are able to fulfill the formula for its given epistemic class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em controlled\+Global\+Transitions} & Set of controlled transitions in the current global state. \\
+\hline
+{\em uncontrolled\+Global\+Transitions} & Set of uncontrolled transitions in the current global state. \\
+\hline
+{\em global\+State} & Currently processed global state. \\
+\hline
+{\em depth} & Current recursion depth. \\
+\hline
+{\em has\+Omitted\+Transitions} & Flag with the information about skipped unneeded transitions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there is a correct choice for an agent to take, false otherwise. 
 \end{DoxyReturn}
 
 

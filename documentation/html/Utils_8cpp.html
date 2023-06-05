@@ -110,6 +110,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5cfa822422f5ca06a58b1d0443ac8b8b"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b> ()</td></tr>
 <tr class="separator:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31d4dbc4222c0740fc9b6911e129ea05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a31d4dbc4222c0740fc9b6911e129ea05">tarjanVisit</a> (<a class="el" href="classLocalState.html">LocalState</a> *v, map&lt; int, int &gt; *dindex, map&lt; int, int &gt; *lowlink, stack&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *stack, map&lt; int, bool &gt; *onstack, int *depth, vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&gt; *comp)</td></tr>
+<tr class="memdesc:a31d4dbc4222c0740fc9b6911e129ea05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function for SCC-computatation.  <a href="Utils_8cpp.html#a31d4dbc4222c0740fc9b6911e129ea05">More...</a><br /></td></tr>
+<tr class="separator:a31d4dbc4222c0740fc9b6911e129ea05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4073ec29a638e918c58e44dfe345e842"><td class="memItemLeft" align="right" valign="top">vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a4073ec29a638e918c58e44dfe345e842">getLocalStatesSCC</a> (<a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
+<tr class="memdesc:a4073ec29a638e918c58e44dfe345e842"><td class="mdescLeft">&#160;</td><td class="mdescRight">a quick implementation of a Tarjan SCC algorithm (based on DFS)  <a href="Utils_8cpp.html#a4073ec29a638e918c58e44dfe345e842">More...</a><br /></td></tr>
+<tr class="separator:a4073ec29a638e918c58e44dfe345e842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -174,6 +180,33 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a4073ec29a638e918c58e44dfe345e842"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4073ec29a638e918c58e44dfe345e842">&#9670;&nbsp;</a></span>getLocalStatesSCC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;set&lt;<a class="el" href="classLocalState.html">LocalState</a>*&gt; &gt; getLocalStatesSCC </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAgent.html">Agent</a> *&#160;</td>
+          <td class="paramname"><em>agt</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a quick implementation of a Tarjan SCC algorithm (based on DFS) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">agt</td><td>- an agent whose local graph will be inspected </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>localStates partition in a form of the vector, where each set correponds to a SCC </dd></dl>
+
+</div>
+</div>
 <a id="a7eba8577045f3559f063d6327dcc7f30"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7eba8577045f3559f063d6327dcc7f30">&#9670;&nbsp;</a></span>localModelsToString()</h2>
 
@@ -221,6 +254,78 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">globalModel</td><td>Pointer to a <a class="el" href="structGlobalModel.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> to print into the console. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a31d4dbc4222c0740fc9b6911e129ea05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31d4dbc4222c0740fc9b6911e129ea05">&#9670;&nbsp;</a></span>tarjanVisit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tarjanVisit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classLocalState.html">LocalState</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">map&lt; int, int &gt; *&#160;</td>
+          <td class="paramname"><em>dindex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">map&lt; int, int &gt; *&#160;</td>
+          <td class="paramname"><em>lowlink</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">stack&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>stack</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">map&lt; int, bool &gt; *&#160;</td>
+          <td class="paramname"><em>onstack</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&gt; *&#160;</td>
+          <td class="paramname"><em>comp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Utility function for SCC-computatation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>- current vertex </td></tr>
+    <tr><td class="paramname">dindex</td><td>- vertex.index (alt. vertex.num) </td></tr>
+    <tr><td class="paramname">lowlink</td><td>- vertex.lowlink (by df. lowest dindex in the same scc reachable from vertex using tree edges followed by at most one back/cross edge) </td></tr>
+    <tr><td class="paramname">stack</td><td>- holds candidates for SCC </td></tr>
+    <tr><td class="paramname">onstack</td><td>- used as condition for back/cross-edge case </td></tr>
+    <tr><td class="paramname">depth</td><td>- next available (discovery) index </td></tr>
+    <tr><td class="paramname">comp</td><td>- result of SCC partitioning </td></tr>
   </table>
   </dd>
 </dl>
