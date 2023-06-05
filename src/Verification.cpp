@@ -134,7 +134,7 @@ Verification::~Verification() {
 /// @brief Starts the process of formula verification on a model.
 /// @return Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false.
 bool Verification::verify() {
-    this->mode = Mode::NORMAL;
+    this->mode = TraversalMode::NORMAL;
     this->revertToGlobalState = nullptr;
     const auto initState = this->generator->getCurrentGlobalModel()->initState;
     return this->verifyGlobalState(initState, 0);
@@ -486,7 +486,7 @@ bool Verification::revertLastDecision(int depth) {
     #if VERBOSE
         printf("%sset mode=REVERT\n", prefix.c_str());
     #endif
-    this->mode = Mode::REVERT;
+    this->mode = TraversalMode::REVERT;
     #if VERBOSE
         histDbg.print(prefix);
         for (auto he : dbgHEsToDelete) {
@@ -600,7 +600,7 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
     string prefix = string(depth * 4, ' ');
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
-        if (this->mode == Mode::RESTORE) {
+        if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
             // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
             if (!this->restoreHistory(globalState, globalTransition, depth, false)) {
@@ -615,19 +615,19 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
             printf("%senter UNcontrolled %s -> %s\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
         #endif
         auto isTransitionValid = this->verifyGlobalState(globalTransition->to, depth + 1);
-        if (this->mode == Mode::REVERT) {
+        if (this->mode == TraversalMode::REVERT) {
             // Recursive verifyGlobalState caused REVERT mode
             if (globalState == this->revertToGlobalState) {
                 // This is the "top" state (first Y in selene-ver2.png) from which recursion should be rebuilt
                 this->revertToGlobalState = nullptr;
                 if (this->historyToRestore.empty()) {
-                    this->mode = Mode::NORMAL;
+                    this->mode = TraversalMode::NORMAL;
                     #if VERBOSE
                         printf("%sset mode=NORMAL\n", prefix.c_str());
                     #endif
                 }
                 else {
-                    this->mode = Mode::RESTORE;
+                    this->mode = TraversalMode::RESTORE;
                     #if VERBOSE
                         printf("%sset mode=RESTORE\n", prefix.c_str());
                     #endif
@@ -684,7 +684,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         bool hasValidControlledTransition = false;
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
-            if (this->mode == Mode::RESTORE) {
+            if (this->mode == TraversalMode::RESTORE) {
                 // Skip loop iterations performed before the one from historyToRestore
                 // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
                 if (!this->restoreHistory(globalState, globalTransition, depth, true)) {
@@ -717,7 +717,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 printf("%senter controlled %s -> %s\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            if (this->mode == Mode::REVERT) {
+            if (this->mode == TraversalMode::REVERT) {
                 // Recursive verifyGlobalState caused REVERT mode, just exit
                 return false;
             }
@@ -818,7 +818,7 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
     if (this->historyToRestore.empty()) {
         // Last entry to restore - exit restore mode
-        this->mode = Mode::NORMAL;
+        this->mode = TraversalMode::NORMAL;
         #if VERBOSE
             printf("%sset mode=NORMAL\n", prefix.c_str());
         #endif

@@ -1,9 +1,5 @@
-/**
- * @file Types.cc
- * @brief Custom data structures.
- * Data structures and classes containing model data.
- */
-#include "Types.hpp"
+#include "LocalState.hpp"
+
 
 /* Funkcja porównująca dwa stany.
  * Pod uwagę brana jest nazwa oraz wartości zmiennych.
@@ -41,30 +37,3 @@ bool LocalState::compare(LocalState* state) {
    return true;
 }
 
-/* Sprawdzenie, czy w modelu nie ma juz (równoważnego) stanu.
- * Jeśli jest - zwróć go, w p.p. NULL
- */
-/// @brief Checks if there is an equivalent LocalState in the model to the one passed as an argment.
-/// @param state A pointer to LocalState to be checked.
-/// @return Returns a pointer to an equivalent LocalState if such exists, otherwise returns NULL.
-LocalState* Agent::includesState(LocalState* state) {
-   // pętla po stanach już obecnych w modelu
-   for(size_t i=0; i<localStates.size(); i++) {
-      // jeśli jest zgodność, zwróć fałsz
-      if(localStates[i]->compare(state)) return localStates[i];
-   }
-   return NULL;
-}
-
-atomic_uint32_t GlobalState::next_id;
-atomic_uint32_t GlobalTransition::next_id;
-
-GlobalState::GlobalState(){
-   id = next_id++;
-   isExpanded = false;
-   verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
-}
-
-GlobalTransition::GlobalTransition(){
-   id = next_id++;
-}

@@ -5,6 +5,9 @@
  */
 
 #include "GlobalModelGenerator.hpp"
+#include "Types.hpp"
+
+
 #include <algorithm>
 #include <iostream>
 

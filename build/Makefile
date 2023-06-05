@@ -4,20 +4,29 @@ USER_DIR = ../tests
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 	
-main: main.o GlobalModelGenerator.o ModelParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o 
-	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o ModelParser.o Types.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o
+main: main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o 
+	$(CC) $(CPPFLAGS) -lfl -o stv main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
 	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
 	$(CC) $(CPPFLAGS) -c ../src/GlobalModelGenerator.cpp
 
+LocalState.o: ../src/LocalState.hpp ../src/LocalState.cpp
+	$(CC) $(CPPFLAGS) -c ../src/LocalState.cpp
+
+GlobalState.o: ../src/GlobalState.hpp ../src/GlobalState.cpp
+	$(CC) $(CPPFLAGS) -c ../src/GlobalState.cpp
+
+GlobalTransition.o: ../src/GlobalTransition.hpp ../src/GlobalTransition.cpp
+	$(CC) $(CPPFLAGS) -c ../src/GlobalTransition.cpp
+
+Agent.o: ../src/Agent.hpp ../src/Agent.cpp
+	$(CC) $(CPPFLAGS) -c ../src/Agent.cpp
+
 ModelParser.o: ../src/ModelParser.hpp ../src/ModelParser.cc
 	$(CC) $(CPPFLAGS) -c ../src/ModelParser.cc
-
-Types.o: ../src/Types.hpp ../src/Types.cc
-	$(CC) $(CPPFLAGS) -c ../src/Types.cc
 
 Utils.o: ../src/Utils.hpp ../src/Utils.cpp
 	$(CC) $(CPPFLAGS) -c ../src/Utils.cpp
@@ -74,8 +83,8 @@ gtest_main.a : gtest-all.o gtest_main.o
 
 # tests here
 
-sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o Types.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
+sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lfl -lpthread $^ -o $@
 
-sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
+sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc

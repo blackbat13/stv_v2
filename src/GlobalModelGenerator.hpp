@@ -8,7 +8,9 @@
 #define SELENE_GLOBAL_MODEL_GENERATOR
 
 #include "Constants.hpp"
-#include "Types.hpp"
+#include "GlobalState.hpp"
+#include "GlobalTransition.hpp"
+#include "Agent.hpp"
 
 using namespace std;
 

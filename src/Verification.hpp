@@ -9,8 +9,6 @@
 #include "Types.hpp"
 #include "GlobalModelGenerator.hpp"
 
-string verStatusToStr(GlobalStateVerificationStatus status);
-
 /// @brief HistoryEntry entry type.
 enum HistoryEntryType {
     DECISION, ///< Made the decision to go to a state using a transition.
@@ -18,6 +16,8 @@ enum HistoryEntryType {
     CONTEXT, ///< Recursion has gone deeper.
     MARK_DECISION_AS_INVALID, ///< Marking a transition as invalid.
 };
+
+string verStatusToStr(GlobalStateVerificationStatus status);
 
 /// @brief Structure used to save model traversal history.
 struct HistoryEntry {
@@ -74,7 +74,7 @@ public:
 
 // On-the-fly traversal mode
 /// @brief Current model traversal mode.
-enum Mode {
+enum TraversalMode {
     NORMAL, ///< Normal model traversal.
     REVERT, ///< Backtracking through recursion with state rollback.
     RESTORE, ///< Backtracking through recursion.
@@ -88,7 +88,7 @@ public:
     bool verify();
 protected:
     /// @brief Current mode of model traversal.
-    Mode mode;
+    TraversalMode mode;
     /// @brief Global state to which revert will rollback to.
     GlobalState* revertToGlobalState;
     /// @brief A history of decisions to be rolled back.

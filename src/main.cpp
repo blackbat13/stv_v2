@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <tuple>
+#include <algorithm>
 
 #include "reader/nodes.hpp"
 #include "DotGraph.hpp"
@@ -78,6 +79,94 @@ void loadConfig(int argc, char** argv){
         }
     }
 }
+
+// GlobalModel getContextModel(Formula* formula, LocalModels* localModels, Agent* agt){
+//     // partition local states into SCC
+//     vector<set<LocalState*>> scc = getLocalStatesSCC(agt);
+//     vector<LocalState*> res;                    // St_i
+
+//     vector<const set<LocalState*>*> openComp;   // components that should be processed
+//     GlobalModel * gm;                           // pointer to a current global model
+
+//     // find SCC of initial local state
+//     for(auto const &c : scc){
+//         if(c.count(agt->initState)){
+//             openComp.push_back(&c);             // push initial component pointer 
+//             break;
+//         }
+//     }
+
+//     // global model will store St - current subset of global states 
+//     GlobalModelGenerator* generator = new GlobalModelGenerator();
+//     // compute s_0 in St
+//     GlobalState * initState = generator->initModel(localModels, formula);
+
+//     const set<LocalState*> * currComp;          // pointer to a const set<LocalState*>
+
+//     while(!openComp.empty()){
+//         currComp = openComp.back();             // component C
+//         openComp.pop_back();
+        
+//         // Take the restriction St|C
+//         gm = generator->getCurrentGlobalModel();
+//         vector<GlobalState*> st = gm->globalStates; // a carbon copy of existing global state pointers (needed due to expand running in-place)
+        
+//         // expand the states that contain an appropriate projection to currComp
+//         for(const auto& s : st){
+//             for(const auto& l : *currComp){     
+//                 if(s->localStates.count(l)){
+//                     generator->expandState(s);
+//                     break;                      // goto/continue outer loop
+//                 }
+//             }
+//         }
+
+//         // remove St|C from St
+//         gm = generator->getCurrentGlobalModel();
+//         gm->globalStates.erase(
+//             std::remove_if(
+//                 gm->globalStates.begin(), 
+//                 gm->globalStates.end(), 
+//                 [&](auto s){
+//                     for(const auto& l : *currComp){     
+//                         if(s->localStates.count(l)){
+//                             generator->expandState(s);
+//                             return true;
+//                         }
+//                     };
+//                     return false;
+//                 }
+//             ),
+//             gm->globalStates.end()
+//         );// todo: add filter/remove of GlobalStates in "other" places with refs to that...
+
+//         for(const auto& s : gm->globalStates){
+//             for(auto it = s->globalTransitions.begin(); it!=s->globalTransitions.end();){
+//                 // if trn target is not occuring in the globalStates list, then delete the transition
+//                 if ( find(gm->globalStates.begin(), gm->globalStates.end(), (*it)->from) == gm->globalStates.end() )
+//                     it = s->globalTransitions.erase(it);
+//                 else
+//                     it++;
+//             }
+//         }// todo: add filter/remove of GlobalTransitions in "other" places with refs to that...
+
+//         openComp.clear();
+//         for(const auto& s : gm->globalStates){
+//             for(const auto& l : s->localStates){
+//                 if(l->agent == agt){
+//                     for(auto const &c : scc){
+//                         if(c.count(l)){
+//                             openComp.push_back(&c);             // push initial component pointer 
+//                             break;
+//                         }
+//                     }
+//                     break;
+//                 }
+//             }
+//         }
+//     }
+//     return *generator->getCurrentGlobalModel();
+// }
 
 int main(int argc, char* argv[]) {
     unsigned long mem1 = getMemCap();
