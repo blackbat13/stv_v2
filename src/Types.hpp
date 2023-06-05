@@ -228,7 +228,7 @@ struct GlobalState {
     // Data
     
     /// @brief Identifier of the global state.
-    int id;
+    uint32_t id;
 
     /// @brief Hash of the global state used in quick checks if the states are in the same epistemic class.
     string hash;
@@ -261,7 +261,7 @@ struct GlobalTransition {
     // Data
 
     /// @brief Identifier of the transition.
-    int id;
+    uint32_t id;
 
     /// @brief Marks if the transition is invalid, true if there is no point in traversing that transition, otherwise false.
     bool isInvalidDecision;
