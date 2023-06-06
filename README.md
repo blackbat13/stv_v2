@@ -40,4 +40,5 @@ Use Graphviz [(link)](https://www.graphviz.org/) to view in other format (eps, p
 dot -Tpng lts_of_AGENT.dot > lts_of_AGENT.png
 ```
 
-The *dot2png.sh* script converts all *.dot* files from a current folder to *.png*.
+For the smaller graphs use *dot2png.sh* script, which converts all *.dot* files from a current folder to *.png*.  
+For bigger ones use `svg` format (may be viewed in Inkscape) and *dot2svg.sh*.

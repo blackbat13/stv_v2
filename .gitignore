@@ -46,6 +46,7 @@ src/reader/scanner.h
 # Graphviz related
 *.dot
 *.png
+*.svg
 
 # Other
 notes.md
@@ -53,3 +54,5 @@ f5.sh
 .vscode/settings.json
 build/result.txt
 build/result2.txt
+mojlog.txt
+wyniki.csv
