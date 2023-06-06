@@ -1,0 +1,11 @@
+Suite	time_1	time_2	time_3	time_4	time_5	time_6	time_7	time_8	time_9	time_10
+TestTest	0	0	0	0	0	0	0	0	0	0
+GeneralCorrectness	2619	3307	3492	2488	2503	2681	2527	2480	2450	2475
+TrainsTest	0	0	0	0	0	0	0	0	0	0
+TrainsWithBridgeTest	0	1	0	0	0	0	0	0	0	0
+SimpleVotingTest	884	1583	895	886	942	902	889	879	876	884
+SimpleVotingWithFakesTest	1050	1729	1057	1052	1054	1210	1055	1058	1093	1075
+SimpleVotingWithFakesNotGiveTest	1050	1093	1056	1053	1058	1050	1069	1078	1059	1053
+SimpleVotingRunTest	16	16	16	16	16	16	20	16	16	16
+ClockTest	22	21	22	22	22	22	36	22	22	22
+Total	5644	7754	6541	5521	5599	5884	5600	5537	5519	5529
