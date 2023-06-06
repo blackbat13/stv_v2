@@ -1,3 +1,9 @@
+/**
+ * @file Agent.hpp
+ * @brief Class of an agent.
+ * Class of an agent.
+ */
+
 #ifndef AGENT_H
 #define AGENT_H
 

@@ -1,3 +1,9 @@
+/**
+ * @file EpistemicClass.hpp
+ * @brief Struct of an epistemic class.
+ * Struct of an epistemic class.
+ */
+
 #ifndef EPISTEMICCLASS_H
 #define EPISTEMICCLASS_H
 

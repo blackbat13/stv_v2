@@ -1,3 +1,9 @@
+/**
+ * @file Common.hpp
+ * @brief Contains all commonly used classes and structs.
+ * Contains all commonly used classes and structs.
+ */
+
 #ifndef COMMON
 #define COMMON
 

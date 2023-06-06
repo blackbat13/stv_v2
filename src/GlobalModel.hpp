@@ -1,3 +1,9 @@
+/**
+ * @file GlobalModel.hpp
+ * @brief Struct of a global model.
+ * Struct of a global model.
+ */
+
 #ifndef GLOBALMODEL_H
 #define GLOBALMODEL_H
 

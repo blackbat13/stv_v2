@@ -1,3 +1,9 @@
+/**
+ * @file Agent.cpp
+ * @brief Class of an agent.
+ * Class of an agent.
+ */
+
 #include "Agent.hpp"
 #include "LocalState.hpp"
 

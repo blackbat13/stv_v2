@@ -1,3 +1,9 @@
+/**
+ * @file GlobalState.hpp
+ * @brief Struct representing a global state.
+ * Struct representing a global state.
+ */
+
 #ifndef GLOBAL_STATE
 #define GLOBAL_STATE
 

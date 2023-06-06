@@ -1,3 +1,9 @@
+/**
+ * @file DotGraph.cpp
+ * @brief Class for drawing graphs of input models.
+ * Class used for making graph files of input models created by parsing the data and adding graphviz syntax.
+ */
+
 #include "DotGraph.hpp"
 #include <algorithm>
 
