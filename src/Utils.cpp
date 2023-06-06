@@ -102,11 +102,6 @@ void outputGlobalModel(GlobalModel* globalModel) {
             }
             printf("\n");
         }
-        if(config.model_id == 0){
-            for (const auto var : globalState->vars) {
-                printf("    Var %s = %i\n", var.first->name.c_str(), var.second);
-            }
-        }
         for (const auto globalTransition : globalState->globalTransitions) {
             printf("    GlobalTransition id=%i to GlobalState %i\n", globalTransition->id, (globalTransition->to ? globalTransition->to->id : -1));
             for (const auto localTransition : globalTransition->localTransitions) {
