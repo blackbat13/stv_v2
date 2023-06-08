@@ -1,5 +1,10 @@
-#include "LocalState.hpp"
+/**
+ * @file LocalState.cpp
+ * @brief Class representing a local state.
+ * Class representing a local state.
+ */
 
+#include "LocalState.hpp"
 
 /* Funkcja porównująca dwa stany.
  * Pod uwagę brana jest nazwa oraz wartości zmiennych.

@@ -36,9 +36,6 @@ struct LocalTransition {
 
     /// @brief Binding to a LocalState from which this transition goes to.
     LocalState* to;
-
-    /// @brief Stores shared transitions from different models.
-    set<LocalTransition*> sharedLocalTransitions;
 };
 
 

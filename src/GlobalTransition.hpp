@@ -1,3 +1,9 @@
+/**
+ * @file GlobalTransition.hpp
+ * @brief Struct representing a global transition.
+ * Struct representing a global transition.
+ */
+
 #ifndef GLOBALTRANSITION_H
 #define GLOBALTRANSITION_H
 

@@ -1,3 +1,9 @@
+/**
+ * @file LocalState.hpp
+ * @brief Class representing a local state.
+ * Class representing a local state.
+ */
+
 #ifndef LOCALSTATE_H
 #define LOCALSTATE_H
 
