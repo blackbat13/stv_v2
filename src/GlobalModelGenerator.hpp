@@ -21,6 +21,7 @@ public:
     ~GlobalModelGenerator();
     GlobalState* initModel(LocalModels* localModels, Formula* formula);
     void expandState(GlobalState* state);
+    vector<GlobalState*> expandStateAndReturn(GlobalState* state);
     void expandAllStates();
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();

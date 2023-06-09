@@ -55,6 +55,35 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
     state->isExpanded = true;
 }
 
+/// @brief GlobalModelGenerator::expandState that also additionally returns a vector of newly created states
+/// @param state A state from which the expansion should start.
+vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* state) {
+    size_t cardinalityBefore;
+    vector<GlobalState*> res;
+    if (state->isExpanded) {
+        return res;
+    }
+    for (const auto globalTransition : state->globalTransitions) {
+        if (globalTransition->to == nullptr) {
+            set<LocalState*> localStates = state->localStates;
+            for (const auto localTransition : globalTransition->localTransitions) {
+                localStates.erase(localTransition->from);
+                localStates.insert(localTransition->to);
+            }
+            cardinalityBefore = this->globalModel->globalStates.size();
+            // either returns a new state OR an existing one
+            auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
+            // when new state was indeed created - append that to result
+            if(cardinalityBefore!=this->globalModel->globalStates.size()){   
+                res.push_back(targetState);
+            }
+            globalTransition->to = targetState;
+        }
+    }
+    state->isExpanded = true;
+    return res;
+}
+
 /// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
 void GlobalModelGenerator::expandAllStates() {
     set<GlobalState*> statesToExpand;
@@ -63,7 +92,7 @@ void GlobalModelGenerator::expandAllStates() {
         auto globalState = *statesToExpand.begin();
         statesToExpand.erase(globalState);
         #if VERBOSE
-            printf("\nExpanding %i (%s)\n", globalState->id, globalState->hash.c_str());
+            printf("\nExpanding %s (%s)\n", globalState->hash, globalState->hash.c_str());
         #endif
         this->expandState(globalState);
         for (auto transition : globalState->globalTransitions) {

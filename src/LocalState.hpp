@@ -34,6 +34,11 @@ class LocalState {
 
         /// @brief Binding to the set of LocalTransition.
         set<LocalTransition*> localTransitions;
+
+        /// @brief Debug information on the given LocalState
+        /// @param indent - optional indentation string 
+        /// @return LocalState data
+        string toString(string indent="");
 };
 
 #endif // LOCALSTATE_H

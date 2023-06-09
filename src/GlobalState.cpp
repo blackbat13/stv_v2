@@ -5,11 +5,25 @@
  */
 
 #include "GlobalState.hpp"
+#include "LocalState.hpp"
 
-atomic_uint32_t GlobalState::next_id;
+// atomic_uint32_t GlobalState::next_id;
 
 GlobalState::GlobalState(){
-   id = next_id++;
    isExpanded = false;
    verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+}
+
+/// @brief Debug information on the given GlobalState
+/// @return GlobalState data
+std::string GlobalState::toString(string indent){
+   string res = 
+   indent + "hash:\"" + this->hash + "\",\n" +
+   indent + "localStates:[";
+   for(const auto &l : localStates){
+      res += "\n" + l->toString(indent + "\t") + ",";
+   }
+   res.pop_back();
+   res+="\n" + indent + "]";
+   return res;
 }
