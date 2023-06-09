@@ -33,8 +33,8 @@ TEST(ClockTest, 2Counters11States)
     
     result = verification->verify();
 
-    free(tp);
-    free(generator);
+    delete(tp);
+    delete(generator);
 
     EXPECT_EQ(result, true);
 }
@@ -63,8 +63,8 @@ TEST(ClockTest, 4Counters11States)
     
     result = verification->verify();
 
-    free(tp);
-    free(generator);
+    delete(tp);
+    delete(generator);
 
     EXPECT_EQ(result, true);
 }
@@ -93,8 +93,8 @@ TEST(ClockTest, 5Counters11States)
     
     result = verification->verify();
 
-    free(tp);
-    free(generator);
+    delete(tp);
+    delete(generator);
 
     EXPECT_EQ(result, true);
 }
