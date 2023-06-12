@@ -28,6 +28,29 @@ make sample_test
 ./sample_test
 ```
 
+## Performance estimation
+
+Ubuntu/WSL:  
+
+```sh
+# Minimal
+> /usr/bin/time -f "%M\t%e" ./stv
+# %M - maximum resident set size in KB
+# %e - elapsed real time (wall clock) in seconds
+
+# More detailed
+> /usr/bin/time -f "time result\ncmd:%C\nreal %es\nuser %Us \nsys  %Ss \nmemory:%MKB \ncpu %P" ./stv
+# %C   command line and arguments
+# %e   elapsed real time (wall clock) in seconds
+# %U   user time in seconds
+# %S   system (kernel) time in seconds
+# %M   maximum resident set size in KB
+# %P   percent of CPU this job got
+
+# Full (verbose)
+> /usr/bin/time -v ./stv
+```
+
 ## Misc
 
 With `OUTPUT_DOT_FILES` flag the program outputs *.dot* files for templates, local and global models where:  
