@@ -20,7 +20,7 @@ std::string GlobalState::toString(string indent){
    string res = 
    indent + "hash:\"" + this->hash + "\",\n" +
    indent + "localStates:[";
-   for(const auto &l : localStates){
+   for(const auto &l : localStatesProjection){
       res += "\n" + l->toString(indent + "\t") + ",";
    }
    res.pop_back();

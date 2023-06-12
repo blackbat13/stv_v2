@@ -25,7 +25,10 @@ public:
     void expandAllStates();
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();
-    
+
+    /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
+    map<Agent*,size_t> agentIndex;
+
 protected:
     /// @brief LocalModels used in initModel.
     LocalModels* localModels;
@@ -34,12 +37,12 @@ protected:
     /// @brief GlobalModel created in initModel.
     GlobalModel* globalModel;
     GlobalState* generateInitState();
-    GlobalState* generateStateFromLocalStates(set<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
+    GlobalState* generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
     void generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent);
-    string computeEpistemicClassHash(set<LocalState*>* localStates, Agent* agent);
-    string computeGlobalStateHash(set<LocalState*>* localStates);
-    EpistemicClass* findOrCreateEpistemicClass(set<LocalState*>* localStates, Agent* agent);
-    GlobalState* findGlobalStateInEpistemicClass(set<LocalState*>* localStates, EpistemicClass* epistemicClass);
+    string computeEpistemicClassHash(vector<LocalState*>* localStates, Agent* agent);
+    string computeGlobalStateHash(vector<LocalState*>* localStates);
+    EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
+    GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
 };
 
 #endif // SELENE_GLOBAL_MODEL_GENERATOR

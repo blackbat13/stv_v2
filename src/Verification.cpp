@@ -143,7 +143,7 @@ bool Verification::verify() {
 /// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
 /// @param localStates A pointer to a set of pointers to LocalState.
 /// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.
-bool Verification::verifyLocalStates(set<LocalState*>* localStates) {
+bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
     map<string,int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
 
     for (const auto localState : *localStates) {
@@ -194,7 +194,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 1) verify localStates that the globalState is composed of
-    if (!this->verifyLocalStates(&globalState->localStates)) {
+    if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
         dbgVerifStatus(prefix, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
         globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;

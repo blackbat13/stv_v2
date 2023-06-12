@@ -32,7 +32,7 @@ struct GlobalState {
     set<GlobalTransition*> globalTransitions;
 
     /// @brief Local states of each agent that define this global state.
-    set<LocalState*> localStates;
+    vector<LocalState*> localStatesProjection;
 
     /// @brief Debug information on the given GlobalState
     /// @param indent - optional indentation string 

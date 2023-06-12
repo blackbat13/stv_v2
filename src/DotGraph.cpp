@@ -96,14 +96,14 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
 
     for (const auto& s : gm->globalStates){
         std::string stateLabel = "";
-        for(const auto& loc: s->localStates){
+        for(const auto& loc: s->localStatesProjection){
             stateLabel+=loc->name+",";
         }
         stateLabel.pop_back();  // truncate sep
     
         if(extended){
             stateLabel="{{"+stateLabel+"|"+(s->hash)+"}|";
-            for(const auto& loc: s->localStates){
+            for(const auto& loc: s->localStatesProjection){
                 // add var evals
                 stateLabel+="{";
                 // stateLabel+="{"+loc->agent->name+"|"+ loc->name+"}|{";

@@ -94,7 +94,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
             globalModel->initState == globalState ? "(initial) " : "",
             globalState->hash.c_str()
         );
-        for (const auto localState : globalState->localStates) {
+        for (const auto localState : globalState->localStatesProjection) {
             printf("    LocalState %i.%i (%s.%s)", localState->agent->id, localState->id, localState->agent->name.c_str(), localState->name.c_str());
             for (const auto var : localState->environment) {
                 printf(" [%s=%i]", var.first.c_str(), var.second);
