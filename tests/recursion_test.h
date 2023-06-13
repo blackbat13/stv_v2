@@ -9,9 +9,9 @@
 #include <string>
 #include <tuple>
 
-TEST(ClockTest, 2Counters11States)
+TEST(RecursionTest, 2Counters11States)
 {
-    config.fname = "../tests/big_examples/2Counters11States.txt";
+    config.fname = "../tests/big_examples/recursion/2Counters11States.txt";
     config.output_local_models = false;
     config.output_global_model = false;
     config.stv_mode = '2';
@@ -42,9 +42,9 @@ TEST(ClockTest, 2Counters11States)
     EXPECT_EQ(result, true);
 }
 
-TEST(ClockTest, 3Counters11States)
+TEST(RecursionTest, 3Counters11States)
 {
-    config.fname = "../tests/big_examples/3Counters11States.txt";
+    config.fname = "../tests/big_examples/recursion/3Counters11States.txt";
     config.output_local_models = false;
     config.output_global_model = false;
     config.stv_mode = '2';
@@ -75,9 +75,9 @@ TEST(ClockTest, 3Counters11States)
     EXPECT_EQ(result, true);
 }
 
-TEST(ClockTest, 4Counters11States)
+TEST(RecursionTest, 4Counters11States)
 {
-    config.fname = "../tests/big_examples/4Counters11States.txt";
+    config.fname = "../tests/big_examples/recursion/4Counters11States.txt";
     config.output_local_models = false;
     config.output_global_model = false;
     config.stv_mode = '2';
