@@ -33,8 +33,6 @@ TEST(ClockTest, 2Counters11States)
     
     result = verification->verify();
 
-    printf("%d\n", (generator->getCurrentGlobalModel())->globalStates.size());
-
     delete(tp);
     delete(generator);
     delete(localModels);
@@ -68,8 +66,6 @@ TEST(ClockTest, 3Counters11States)
     
     result = verification->verify();
 
-    printf("%d\n", (generator->getCurrentGlobalModel())->globalStates.size());
-
     delete(tp);
     delete(generator);
     delete(localModels);
@@ -102,8 +98,6 @@ TEST(ClockTest, 4Counters11States)
     auto verification = new Verification(generator);
     
     result = verification->verify();
-
-    printf("%d\n", (generator->getCurrentGlobalModel())->globalStates.size());
 
     delete(tp);
     delete(generator);
