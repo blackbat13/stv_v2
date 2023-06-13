@@ -1,5 +1,5 @@
 # ide config
-.vscode
+.vscode/*
 
 # Prerequisites
 *.d
@@ -52,7 +52,8 @@ src/reader/scanner.h
 notes.md
 f5.sh
 .vscode/settings.json
-build/result.txt
-build/result2.txt
-mojlog.txt
-wyniki.csv
+build/*.txt
+build/*.csv
+
+# IDE snippets
+!.vscode/cpp.code-snippets

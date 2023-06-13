@@ -96,14 +96,14 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
 
     for (const auto& s : gm->globalStates){
         std::string stateLabel = "";
-        for(const auto& loc: s->localStates){
+        for(const auto& loc: s->localStatesProjection){
             stateLabel+=loc->name+",";
         }
         stateLabel.pop_back();  // truncate sep
     
         if(extended){
-            stateLabel="{{"+stateLabel+"|"+to_string(s->id)+"}|";
-            for(const auto& loc: s->localStates){
+            stateLabel="{{"+stateLabel+"|"+(s->hash)+"}|";
+            for(const auto& loc: s->localStatesProjection){
                 // add var evals
                 stateLabel+="{";
                 // stateLabel+="{"+loc->agent->name+"|"+ loc->name+"}|{";
@@ -128,13 +128,13 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
             transitionLabel.pop_back();  // truncate sep
             if(!t->from || !t->to)continue;
             this->addEdge(
-                to_string(t->from->id), 
-                to_string(t->to->id), 
+                '"'+t->from->hash+'"', 
+                '"'+t->to->hash+'"', 
                 transitionLabel + (isShared ? "\", color=\"blue" : "")
             );
         }
 
-        this->addNode(to_string(s->id), stateLabel);
+        this->addNode('"'+s->hash+'"', stateLabel);
     }
 }
 

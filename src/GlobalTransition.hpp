@@ -11,7 +11,7 @@
 
 /// @brief Represents a single global transition.
 struct GlobalTransition {
-    static atomic_uint32_t next_id;
+    static atomic_uint32_t next_id; // [YK]: ideally it should be a private member (and possibly of a type size_t), but for now this should work just as well
     GlobalTransition();
     // Data
 

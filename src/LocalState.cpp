@@ -5,6 +5,7 @@
  */
 
 #include "LocalState.hpp"
+#include "Agent.hpp"
 
 /* Funkcja porównująca dwa stany.
  * Pod uwagę brana jest nazwa oraz wartości zmiennych.
@@ -42,3 +43,18 @@ bool LocalState::compare(LocalState* state) {
    return true;
 }
 
+/// @brief Debug information on the given LocalState
+/// @return LocalState data
+string LocalState::toString(string indent){
+   string res = 
+   indent + "id:" + to_string(this->id) + ",\n" +
+   indent + "name:\"" + this->name + "\",\n" + 
+   indent + "agent:" + this->agent->name + ",\n" +
+   indent + "vars:[";
+   for(const auto x : this->environment){
+      res += "\n\t" + indent + x.first + "=" + to_string(x.second) + ",";
+   }
+   res.pop_back();
+   res+= + "\n" + indent + "]";
+   return res;
+}

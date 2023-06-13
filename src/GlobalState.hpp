@@ -11,12 +11,8 @@
 
 /// @brief Represents a single global state.
 struct GlobalState {
-    static atomic_uint32_t next_id; // [YK]: ideally it should be a private member (and possibly of a type size_t), but for now this should work just as well
     GlobalState();
     // Data
-    
-    /// @brief Identifier of the global state.
-    uint32_t id;
 
     /// @brief Hash of the global state used in quick checks if the states are in the same epistemic class.
     string hash;
@@ -36,7 +32,12 @@ struct GlobalState {
     set<GlobalTransition*> globalTransitions;
 
     /// @brief Local states of each agent that define this global state.
-    set<LocalState*> localStates;
+    vector<LocalState*> localStatesProjection;
+
+    /// @brief Debug information on the given GlobalState
+    /// @param indent - optional indentation string 
+    /// @return GlobalState data
+    std::string toString(string indent="");
 };
 
 #endif

@@ -90,12 +90,11 @@ void outputGlobalModel(GlobalModel* globalModel) {
     printf("\n\nGlobal model:\n");
     for (const auto globalState : globalModel->globalStates) {
         printf(
-            "%sGlobalState: id=%i; hash=\"%s\"\n",
+            "%sGlobalState: hash=\"%s\"\n",
             globalModel->initState == globalState ? "(initial) " : "",
-            globalState->id,
             globalState->hash.c_str()
         );
-        for (const auto localState : globalState->localStates) {
+        for (const auto localState : globalState->localStatesProjection) {
             printf("    LocalState %i.%i (%s.%s)", localState->agent->id, localState->id, localState->agent->name.c_str(), localState->name.c_str());
             for (const auto var : localState->environment) {
                 printf(" [%s=%i]", var.first.c_str(), var.second);
@@ -103,7 +102,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
             printf("\n");
         }
         for (const auto globalTransition : globalState->globalTransitions) {
-            printf("    GlobalTransition id=%i to GlobalState %i\n", globalTransition->id, (globalTransition->to ? globalTransition->to->id : -1));
+            printf("    GlobalTransition hash=%s to GlobalState %i\n", globalTransition->id, (globalTransition->to ? globalTransition->to->hash : "-1"));
             for (const auto localTransition : globalTransition->localTransitions) {
                 printf(
                     "        LocalTransition %i (globalName=%s, localName=%s) of Agent %i (%s);",
@@ -133,7 +132,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
             auto epiCls = epiClsPair.second;
             printf("    EpistemicClass: hash=\"%s\"\n", epiCls->hash.c_str());
             for (const auto member : epiCls->globalStates) {
-                printf("        GlobalState: id=%i; hash=\"%s\"\n", member.second->id, member.second->hash.c_str());
+                printf("        GlobalState: hash=\"%s\"\n", member.second->hash.c_str());
             }
         }
     }

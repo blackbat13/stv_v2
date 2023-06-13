@@ -99,7 +99,7 @@ protected:
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.
     HistoryEntry* historyEnd;
-    bool verifyLocalStates(set<LocalState*>* localStates);
+    bool verifyLocalStates(vector<LocalState*>* localStates);
     bool verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
     bool isAgentInCoalition(Agent* agent);
