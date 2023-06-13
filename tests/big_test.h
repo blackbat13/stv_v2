@@ -33,8 +33,48 @@ TEST(ClockTest, 2Counters11States)
     
     result = verification->verify();
 
+    printf("%d\n", (generator->getCurrentGlobalModel())->globalStates.size());
+
     delete(tp);
     delete(generator);
+    delete(localModels);
+    delete(formula);
+    delete(verification);
+
+    EXPECT_EQ(result, true);
+}
+
+TEST(ClockTest, 3Counters11States)
+{
+    config.fname = "../tests/big_examples/3Counters11States.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new ModelParser();
+    
+    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
+    auto localModels = get<0>(desc);
+    auto formula = get<1>(desc);
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    printf("%d\n", (generator->getCurrentGlobalModel())->globalStates.size());
+
+    delete(tp);
+    delete(generator);
+    delete(localModels);
+    delete(formula);
+    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -63,38 +103,13 @@ TEST(ClockTest, 4Counters11States)
     
     result = verification->verify();
 
-    delete(tp);
-    delete(generator);
-
-    EXPECT_EQ(result, true);
-}
-
-TEST(ClockTest, 5Counters11States)
-{
-    config.fname = "../tests/big_examples/5Counters11States.txt";
-    config.output_local_models = false;
-    config.output_global_model = false;
-    config.stv_mode = '2';
-
-    auto tp = new ModelParser();
-    
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
-
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
-
-    bool result = false;
-
-    generator->expandAllStates();
-
-    auto verification = new Verification(generator);
-    
-    result = verification->verify();
+    printf("%d\n", (generator->getCurrentGlobalModel())->globalStates.size());
 
     delete(tp);
     delete(generator);
+    delete(localModels);
+    delete(formula);
+    delete(verification);
 
     EXPECT_EQ(result, true);
 }

@@ -1,5 +1,3 @@
-
-
 Agent Timer0:
 LOCAL: [Time0]
 PERSISTENT: [Time0]
@@ -51,42 +49,6 @@ shared[2] Timer1goto0[Timer2goto8]: q7 -> q8 [Time2:=8]
 shared[2] Timer1goto0[Timer2goto9]: q8 -> q9 [Time2:=9]
 shared[2] Timer1goto0[Timer2goto10]: q9 -> q10 [Time2:=10]
 shared[2] Timer1goto0[Timer2reset]: q10 -> q11 [Time2:=0]
-shared[2] Timer2goto0[Timer2goto0]: q11 -> q0
+Timer2goto0[Timer2goto0]: q11 -> q0
 
-Agent Timer3:
-LOCAL: [Time3]
-PERSISTENT: [Time3]
-INITIAL: [Time3:=0]
-init q0
-shared[2] Timer2goto0[Timer3goto1]: q0 -> q1 [Time3:=1]
-shared[2] Timer2goto0[Timer3goto2]: q1 -> q2 [Time3:=2]
-shared[2] Timer2goto0[Timer3goto3]: q2 -> q3 [Time3:=3]
-shared[2] Timer2goto0[Timer3goto4]: q3 -> q4 [Time3:=4]
-shared[2] Timer2goto0[Timer3goto5]: q4 -> q5 [Time3:=5]
-shared[2] Timer2goto0[Timer3goto6]: q5 -> q6 [Time3:=6]
-shared[2] Timer2goto0[Timer3goto7]: q6 -> q7 [Time3:=7]
-shared[2] Timer2goto0[Timer3goto8]: q7 -> q8 [Time3:=8]
-shared[2] Timer2goto0[Timer3goto9]: q8 -> q9 [Time3:=9]
-shared[2] Timer2goto0[Timer3goto10]: q9 -> q10 [Time3:=10]
-shared[2] Timer2goto0[Timer3reset]: q10 -> q11 [Time3:=0]
-shared[2] Timer3goto0[Timer3goto0]: q11 -> q0
-
-Agent Timer4:
-LOCAL: [Time4]
-PERSISTENT: [Time4]
-INITIAL: [Time4:=0]
-init q0
-shared[2] Timer3goto0[Timer4goto1]: q0 -> q1 [Time4:=1]
-shared[2] Timer3goto0[Timer4goto2]: q1 -> q2 [Time4:=2]
-shared[2] Timer3goto0[Timer4goto3]: q2 -> q3 [Time4:=3]
-shared[2] Timer3goto0[Timer4goto4]: q3 -> q4 [Time4:=4]
-shared[2] Timer3goto0[Timer4goto5]: q4 -> q5 [Time4:=5]
-shared[2] Timer3goto0[Timer4goto6]: q5 -> q6 [Time4:=6]
-shared[2] Timer3goto0[Timer4goto7]: q6 -> q7 [Time4:=7]
-shared[2] Timer3goto0[Timer4goto8]: q7 -> q8 [Time4:=8]
-shared[2] Timer3goto0[Timer4goto9]: q8 -> q9 [Time4:=9]
-shared[2] Timer3goto0[Timer4goto10]: q9 -> q10 [Time4:=10]
-shared[2] Timer3goto0[Timer4reset]: q10 -> q11 [Time4:=0]
-Timer4goto0[Timer4goto0]: q11 -> q0
-
-FORMULA: <<Timer4>>[](Time4 <= 10)
+FORMULA: <<Timer0>>[](Time2 <= 10)

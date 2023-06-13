@@ -1,5 +1,3 @@
-
-
 Agent Timer0:
 LOCAL: [Time0]
 PERSISTENT: [Time0]

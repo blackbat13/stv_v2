@@ -786,6 +786,7 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
     bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == controlled;
     #if VERBOSE
+        string prefix = string(depth * 4, ' ');
         if (matches) {
             if (controlled) {
                 printf("%srestore: matched %s -> %s (controlled)\n", prefix.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
