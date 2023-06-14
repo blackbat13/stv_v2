@@ -5,6 +5,9 @@
  */
 
 #include "Utils.hpp"
+#include "GlobalModelGenerator.hpp"
+#include <map>
+#include <algorithm>
 
 extern Cfg config;
 
@@ -232,3 +235,146 @@ vector<set<LocalState*>> getLocalStatesSCC(Agent* agt){
     return comp;
 }
 
+
+map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalModels* localModels, Agent* agt){
+    // partition local states into SCC
+    vector<set<LocalState*>> scc = getLocalStatesSCC(agt);        // Set of 
+    map<LocalState*,vector<GlobalState*>> res;                    // Loc_i -> St_i
+
+    vector<const set<LocalState*>*> openComp;   // components that should be processed
+
+    // find SCC of initial local state
+    for(auto const &c : scc){
+        if(c.count(agt->initState)){
+            openComp.push_back(&c);             // push initial component pointer 
+            break;
+        }
+    }
+
+    // global model will store St - current subset of global states 
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    // compute s_0 in St
+    GlobalState * initState = generator->initModel(localModels, formula);
+    GlobalModel * gm = generator->getCurrentGlobalModel();      // pointer to a current global model
+
+    const set<LocalState*> * currComp;          // pointer to a const set<LocalState*>
+    auto agtInd = generator->agentIndex[agt];
+
+    while(!openComp.empty()){
+        currComp = openComp.back();             // component C
+        openComp.pop_back();
+        
+        // expand the states while contain an appropriate projection to currComp and within oneStepClosure
+        stack<GlobalState*> q;
+        for(const auto& s : gm->globalStates){
+            if(currComp->count(s->localStatesProjection[agtInd])){
+                q.push(s);
+            }
+        }
+
+        while(!q.empty()){
+            GlobalState* state = q.top();
+            q.pop(); 
+            #if VERBOSE  
+            cout << "expanding state " << state->hash << endl;  
+            #endif
+
+            vector<GlobalState*> newStates = generator->expandStateAndReturn(state);
+            for(auto targetState : newStates){
+                for(const auto& l : *currComp){     
+                    // if(targetState->localStates.count(l)){
+                    if(targetState->localStatesProjection[agtInd]==l){
+                        q.push(targetState);
+                        break;
+                    }
+                }
+            }
+        }
+        // 
+
+        // gm = generator->getCurrentGlobalModel();   
+        // cout << "St = { ";
+        // for(const auto& s : gm->globalStates){
+        //     cout << s->hash << " ";
+        // }
+        // cout << "}" <<endl;
+
+        for(const auto& s : gm->globalStates){
+            for(const auto& l : s->localStatesProjection){
+                if(l->agent == agt && currComp->count(l)){
+                    // res[l].insert(s);
+                    res[l].push_back(s);
+                    break;
+                }
+            }
+        }
+
+        // remove St|C from St
+        gm->globalStates.erase( // [YK]: does not call destructor... (TOFIX)
+            std::remove_if(
+                gm->globalStates.begin(), 
+                gm->globalStates.end(), 
+                [&](auto s){
+                    for(const auto& l : *currComp){     
+                        if(s->localStatesProjection[agtInd]==l){
+                            #if VERBOSE  
+                            cout << "will remove " << s->hash << " which has local " << l->id << endl;
+                            #endif
+                            // generator->expandState(s);
+                            return true;
+                        }
+                    };
+                    return false;
+                }
+            ),
+            gm->globalStates.end()
+        );// todo: add filter/remove of GlobalStates in "other" places with refs to that...
+
+
+        // gm = generator->getCurrentGlobalModel();   
+        // cout << "St = { ";
+        // for(const auto& s : gm->globalStates){
+        //     cout << s->hash << " ";
+        // }
+        // cout << "}" <<endl;
+
+        // redundant chunk {begin}
+        for(const auto& s : gm->globalStates){
+            for(auto it = s->globalTransitions.begin(); it!=s->globalTransitions.end();){
+                // if trn target is not occuring in the globalStates list, then delete the transition
+                if ( find(gm->globalStates.begin(), gm->globalStates.end(), (*it)->from) != gm->globalStates.end() ){
+                    it++;
+                }else{
+                    cout << "remove: " << (*it)->from->hash << " -> " << "smth" << endl;
+                    it = s->globalTransitions.erase(it);
+                }
+            }
+        }// todo: add filter/remove of GlobalTransitions in "other" places with refs to that...
+        // redundant chunk {end}
+
+        // cout << openComp.size() << endl;
+        openComp.clear();
+        for(auto const &c : scc){
+            for(const auto& s : gm->globalStates){
+                if(c.count(s->localStatesProjection[agtInd])){
+                    openComp.push_back(&c);
+                    break;
+                }
+            }   
+        }
+    }
+
+    // TODO: fix transitions filterring
+
+    cout << "List of local states approximation as <locationId> : [<stateId>...]" << endl;
+    for(const auto& x : res){
+        cout << x.first->id << ": \n";
+        for(const auto& s : x.second){
+            cout << s->toString("\t") << endl;
+        }
+        cout << endl;
+    }
+    cout << "==================================" << endl;
+
+    return res;
+}
