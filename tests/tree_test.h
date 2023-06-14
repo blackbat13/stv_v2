@@ -18,9 +18,9 @@ TEST(TreeTest, 5Choices3Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -33,11 +33,7 @@ TEST(TreeTest, 5Choices3Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -51,9 +47,9 @@ TEST(TreeTest, 5Choices4Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -66,11 +62,7 @@ TEST(TreeTest, 5Choices4Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -84,9 +76,9 @@ TEST(TreeTest, 5Choices5Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -99,11 +91,7 @@ TEST(TreeTest, 5Choices5Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -117,9 +105,9 @@ TEST(TreeTest, 5Choices6Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -132,11 +120,7 @@ TEST(TreeTest, 5Choices6Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -150,9 +134,9 @@ TEST(TreeTest, 6Choices3Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -165,11 +149,7 @@ TEST(TreeTest, 6Choices3Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -183,9 +163,9 @@ TEST(TreeTest, 7Choices3Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -198,11 +178,7 @@ TEST(TreeTest, 7Choices3Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -216,9 +192,9 @@ TEST(TreeTest, 8Choices3Options)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -231,11 +207,7 @@ TEST(TreeTest, 8Choices3Options)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }

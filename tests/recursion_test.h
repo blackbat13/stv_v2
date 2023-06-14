@@ -18,9 +18,9 @@ TEST(RecursionTest, 2Counters11States)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -33,11 +33,7 @@ TEST(RecursionTest, 2Counters11States)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -51,9 +47,9 @@ TEST(RecursionTest, 3Counters11States)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -66,11 +62,7 @@ TEST(RecursionTest, 3Counters11States)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
@@ -84,9 +76,9 @@ TEST(RecursionTest, 4Counters11States)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -99,11 +91,7 @@ TEST(RecursionTest, 4Counters11States)
     
     result = verification->verify();
 
-    delete(tp);
     delete(generator);
-    delete(localModels);
-    delete(formula);
-    delete(verification);
 
     EXPECT_EQ(result, true);
 }
