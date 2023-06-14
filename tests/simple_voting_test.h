@@ -18,9 +18,9 @@ TEST(SimpleVotingTest, 1Voter1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -47,9 +47,9 @@ TEST(SimpleVotingTest, 2Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -76,9 +76,9 @@ TEST(SimpleVotingTest, 3Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -105,9 +105,9 @@ TEST(SimpleVotingTest, 4Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);

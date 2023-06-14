@@ -17,6 +17,7 @@ GlobalModelGenerator::GlobalModelGenerator() {
 
 /// @brief Destructor for GlobalModelGenerator class.
 GlobalModelGenerator::~GlobalModelGenerator() {
+    delete(this->globalModel);
 }
 
 /// @brief Initializes a global model from local models and a formula.

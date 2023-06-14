@@ -18,9 +18,9 @@ TEST(TrainsWithBridgeTest, 1Train1ControllerOnBridge)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -47,9 +47,9 @@ TEST(TrainsWithBridgeTest, 2Trains1ControllerOnBridge)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);

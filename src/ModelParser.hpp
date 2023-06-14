@@ -17,7 +17,7 @@ class ModelParser {
 public:
     ModelParser();
     ~ModelParser();
-    tuple<LocalModels*, Formula*> parse(string fileName);
+    tuple<LocalModels, Formula> parse(string fileName);
     
 protected:
     // @internal

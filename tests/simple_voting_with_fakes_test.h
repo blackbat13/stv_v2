@@ -18,9 +18,9 @@ TEST(SimpleVotingWithFakesTest, 1Voter1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -47,9 +47,9 @@ TEST(SimpleVotingWithFakesTest, 2Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -76,9 +76,9 @@ TEST(SimpleVotingWithFakesTest, 3Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -105,9 +105,9 @@ TEST(SimpleVotingWithFakesTest, 4Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -134,9 +134,9 @@ TEST(SimpleVotingWithFakesNotGiveTest, 1Voter1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -163,9 +163,9 @@ TEST(SimpleVotingWithFakesNotGiveTest, 2Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -192,9 +192,9 @@ TEST(SimpleVotingWithFakesNotGiveTest, 3Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -221,9 +221,9 @@ TEST(SimpleVotingWithFakesNotGiveTest, 4Voters1Coercer)
 
     auto tp = new ModelParser();
     
-    tuple<LocalModels*, Formula*> desc = tp->parse(config.fname);
-    auto localModels = get<0>(desc);
-    auto formula = get<1>(desc);
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
 
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);

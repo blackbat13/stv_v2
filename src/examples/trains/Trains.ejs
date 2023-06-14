@@ -1,0 +1,21 @@
+<%_ for( let i = 1; i <= N_TRAINS; i++ ) { _%>
+Agent Train<%=i%>:
+LOCAL: [Train<%=i%>_pos]
+INITIAL: [Train<%=i%>_pos:=1]
+init idle
+shared[2] in_Train<%=i%>: idle [Train<%=i%>_pos==1] -> idle [Train<%=i%>_pos:=2]
+shared[2] out_Train<%=i%>: idle [Train<%=i%>_pos==2] -> idle [Train<%=i%>_pos:=3]
+return_<%=i%>: idle [Train<%=i%>_pos==3] -> idle [Train<%=i%>_pos:=1]    
+
+<% }_%>
+Agent Controller:
+LOCAL: []
+init green
+<% for( let i = 1; i <= N_TRAINS; i++ ) { _%>
+shared[2] in_Train<%=i%>: green -> red
+shared[2] out_Train<%=i%>: red -> green
+<%_ } _%>
+
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { -%>
+FORMULA: <<Train1>>[](Train1_pos==1 || Train1_pos==2 || Train1_pos==3)
+<%_ } _%>
