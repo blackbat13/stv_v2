@@ -10,6 +10,11 @@ make clean
 make
 ./stv
 ```
+or
+```
+cd build
+./build-run
+```
 
 Configuration file:
 
@@ -27,6 +32,31 @@ make clean
 make sample_test
 ./sample_test
 ```
+or
+```
+cd build
+./build-test
+```
+
+To run larger tests:
+
+```
+cd build
+make clean
+make sample_test
+./sample_test
+```
+or
+```
+cd build
+./build-big-test
+```
+
+You might need to run
+```
+ulimit -s unlimited
+```
+beforehand
 
 ## Performance estimation
 
