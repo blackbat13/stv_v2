@@ -43,7 +43,7 @@ DotGraph::DotGraph(shared_ptr<AgentTemplate const> at){
     caption = "AgentTemplate of " + at->ident; 
     for (const auto& st : at->localStateTemplates){
         this->addNode(st.first, st.second->name);
-        for(const auto* trn: st.second->transitions){
+        for(const shared_ptr<TransitionTemplate> trn: st.second->transitions){
             this->addEdge(
                 trn->startState,
                 trn->endState, 
