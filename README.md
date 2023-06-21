@@ -51,6 +51,37 @@ Ubuntu/WSL:
 > /usr/bin/time -v ./stv
 ```
 
+## Specification
+
+The specification language was inspired by ISPL (Interpreted Systems Programming Language) from [MCMAS](https://vas.doc.ic.ac.uk/software/mcmas/).   
+The detailed syntax for the input format can be derived from *./src/reader/{parser.y,scanner.l}*, which intrinsically make up an EBNF grammar.  
+For the most parts, it is simple enough to get intuition just from looking at example's source code and the program's output.
+
+
+## Examples and templates
+
+In *./src/examples* and *./tests/examples* there are several ready-to-use MAS specification files together with a proposed property (captured by ATL formula) for verification.
+
+Often, we would want to reason about different (data-)configurations of the same system.  
+Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behaviour.  
+A template can be fed with a configuration data to generate a concrete instance of a system.  
+Moreover, their use is independent from the tool: one can choose any templating engine (of the myriads available) or even write a custom one from the scratch.
+
+Here, we utilize the [EJS](https://ejs.co/) templating engine.   
+It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations. 
+
+```sh
+# EJS feeds the data (as a list of key:val pairs) to the template file to generate the output:
+> npm exec -- ejs TEMPLATE_FILE.ejs -i "{PARAM1:VAL1,PARAM2:VAL2,...}" -o OUTPUT_FILE.txt
+
+
+# Possible generation query for the "trains":
+> npm exec -- ejs Trains.ejs -i '{"N_TRAINS":3,"WITH_FORMULA":1}' -o 3Trains1Controller.txt
+
+# Possible generation query for the "simple voting":
+> npm exec -- ejs Simple_voting.ejs -i '{"N_VOTERS":2,"N_CANDIDATES":1,"WITH_FORMULA":0}' -o 2Voters1Coercer1Candidate.txt
+```
+
 ## Misc
 
 With `OUTPUT_DOT_FILES` flag the program outputs *.dot* files for templates, local and global models where:  

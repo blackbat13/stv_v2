@@ -1,3 +1,8 @@
+<%#
+PARAMETERS:
+    N_TRAINS - denotes the number of trains
+    WITH_FORMULA - flag denoting if formula should be included
+_%>
 <%_ for( let i = 1; i <= N_TRAINS; i++ ) { _%>
 Agent Train<%=i%>:
 LOCAL: [Train<%=i%>_pos]

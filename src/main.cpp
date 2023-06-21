@@ -93,6 +93,11 @@ int main(int argc, char* argv[]) {
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
+
+    for (const auto agent : localModels->agents) {
+        cout << agent->name << " local states: " << agent->localStates.size() << endl;
+        cout << agent->name << " local transitions: " << agent->localTransitions.size() << endl;
+    }
 /* ------- Uncomment for the SCC compute test/debug ------- */
     // for (const auto& agt : localModels->agents) {
     //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;

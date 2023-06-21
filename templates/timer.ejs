@@ -1,0 +1,34 @@
+<%#
+PARAMETERS:
+    N_TIMERS - denotes the number of timers
+    N_TICKS - denotes the number of ticks a timer will have before the reset
+    WITH_FORMULA - flag denoting if formula should be included
+_%>
+Agent Timer0:
+LOCAL: [Time0]
+PERSISTENT: [Time0]
+INITIAL: [Time0:=0]
+init q0
+<%_ for( let j = 1; j <= N_TICKS; j++ ) { _%>
+Timer0goto<%=j%>[Timer0goto<%=j%>]: q<%=j-1%> -> q<%=j%> [Time0:=<%=j%>]
+<%_ } _%>
+<%_ if (N_TIMERS>1) { _%>shared[2] <% }_%>
+<%_ %>Timer0goto0[Timer0goto0]: q<%=N_TICKS%> -> q0 [Time0:=0]
+
+<%_ for( let i = 1; i < N_TIMERS; i++ ) { _%>
+Agent Timer<%=i%>:
+LOCAL: [Time<%=i%>]
+PERSISTENT: [Time<%=i%>]
+INITIAL: [Time<%=i%>:=0]
+init q0
+<%_ for( let j = 1; j <= N_TICKS; j++ ) { _%>
+shared[2] Timer<%=i-1%>goto0[Timer<%=i%>goto<%=j%>]: q<%=j-1%> -> q<%=j%> [Time<%=i%>:=<%=j%>]
+<%_ } _%>
+shared[2] Timer<%=i%>goto0[Timer<%=i%>reset]: q<%=N_TICKS%> -> q<%=N_TICKS+1%> [Time<%=i%>:=0]
+<%_ if (i+1!=N_TIMERS) { _%>shared[2] <% }_%>
+<%_ %>Timer<%=i%>goto0[Timer<%=i%>goto0]: q<%=N_TICKS+1%> -> q0
+
+<%_ } _%>
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { _%>
+FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    
+<%_ } _%>
