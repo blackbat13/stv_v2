@@ -18,7 +18,7 @@ struct GlobalState {
     string hash;
 
     /// @brief Map of agents and the epistemic classes that belongs to the respective agent.
-    map<Agent*, EpistemicClass*> epistemicClasses;
+    map<shared_ptr<Agent>, shared_ptr<EpistemicClass>> epistemicClasses;
 
     /// @brief If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary.
     bool isExpanded;
@@ -29,10 +29,10 @@ struct GlobalState {
     // Bindings
 
     /// @brief Every GlobalTransition in the model.
-    set<GlobalTransition*> globalTransitions;
+    set<shared_ptr<GlobalTransition>> globalTransitions;
 
     /// @brief Local states of each agent that define this global state.
-    vector<LocalState*> localStatesProjection;
+    vector<shared_ptr<LocalState>> localStatesProjection;
 
     /// @brief Debug information on the given GlobalState
     /// @param indent - optional indentation string 

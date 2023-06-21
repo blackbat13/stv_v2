@@ -24,13 +24,13 @@ struct GlobalTransition {
     // Bindings
 
     /// @brief Binding to a GlobalState from which this transition goes from.
-    GlobalState* from;
+    shared_ptr<GlobalState> from;
 
     /// @brief Binding to a GlobalState from which this transition goes to.
-    GlobalState* to;
+    shared_ptr<GlobalState> to;
 
     /// @brief Local transitions that define this global transition. A single transition or more in case of shared transitions.
-    set<LocalTransition*> localTransitions;
+    set<shared_ptr<LocalTransition>> localTransitions;
 };
 
 #endif // GLOBALTRANSITION_H

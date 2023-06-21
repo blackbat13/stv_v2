@@ -24,18 +24,18 @@ struct LocalTransition {
     int sharedCount;
 
     /// @brief Conditions that have to be fulfilled for the transition to be avaliable.
-    set<Condition*> conditions;
+    set<shared_ptr<Condition>> conditions;
     
     // Bindings
 
     /// @brief Binding to an Agent.
-    Agent* agent;
+    shared_ptr<Agent> agent;
 
     /// @brief Binding to a LocalState from which this transition goes from.
-    LocalState* from;
+    shared_ptr<LocalState> from;
 
     /// @brief Binding to a LocalState from which this transition goes to.
-    LocalState* to;
+    shared_ptr<LocalState> to;
 };
 
 

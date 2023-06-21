@@ -45,13 +45,13 @@ struct Var {
     bool persistent;
 
     /// @brief Reference to an agent, to which this variable belongs to.
-    Agent *agent;
+    shared_ptr<Agent> agent;
 };
 
 /// @brief Represents a condition for LocalTransition.
 struct Condition {
     /// @brief Pointer to a variable.
-    Var* var;
+    shared_ptr<Var> var;
 
     /// @brief Conditional operator for the variable.
     ConditionOperator conditionOperator;
@@ -62,20 +62,20 @@ struct Condition {
 
 /// @brief Contains a template for coalition of Agent as string from the formula. 
 struct FormulaTemplate{
-   set<string>* coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
-   ExprNode* formula;
+   shared_ptr<set<string>> coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
+   shared_ptr<ExprNode> formula;
 };
 
 struct Formula {
     /// @brief Coalition of Agent from the formula.
-    set<Agent*> coalition;
-    ExprNode* p; // [YK]: temporary solution to encode <<coalution>> G p
+    set<shared_ptr<Agent>> coalition;
+    shared_ptr<ExprNode> p; // [YK]: temporary solution to encode <<coalution>> G p
 };
 
 /// @brief Represents a single local model, contains all agents and variables.
 struct LocalModels {
     /// @brief A vector of agents for the current model.
-    vector<Agent*> agents;
+    vector<shared_ptr<Agent>> agents;
     // agents[i].id == i
 };
 

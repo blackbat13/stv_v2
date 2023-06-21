@@ -16,20 +16,20 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerRun)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 
@@ -43,20 +43,20 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerNotRun)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 
@@ -70,20 +70,20 @@ TEST(SimpleVotingRunTest, 2Voters1CoercerRun)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 
@@ -97,20 +97,20 @@ TEST(SimpleVotingRunTest, 2Voters1CoercerNotRun)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 
@@ -124,20 +124,20 @@ TEST(SimpleVotingRunTest, 1Voter2CoercersRun)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 
@@ -151,20 +151,20 @@ TEST(SimpleVotingRunTest, 1Voter2CoercersNotRun)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 
@@ -178,20 +178,20 @@ TEST(SimpleVotingRunTest, 1Voter2CoercersRunHide)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
 

@@ -32,7 +32,7 @@ string verStatusToStr(GlobalStateVerificationStatus status) {
 /// @param gs Pointer to a GlobalState.
 /// @param st Enum with a verification status of a global state.
 /// @param reason String with a reason why the function was called, e.g. "entered state", "all passed".
-void dbgVerifStatus(string prefix, GlobalState* gs, GlobalStateVerificationStatus st, string reason) {
+void dbgVerifStatus(string prefix, shared_ptr<GlobalState> gs, GlobalStateVerificationStatus st, string reason) {
     #if VERBOSE
         string prevStatus = verStatusToStr(gs->verificationStatus);
         string newStatus = verStatusToStr(st);
@@ -57,21 +57,21 @@ HistoryDbg::HistoryDbg() {
 HistoryDbg::~HistoryDbg() {
     for (auto &kvp : this->entries) {
         if (kvp.second == '-') {
-            delete kvp.first;
+            delete &kvp.first;
         }
     }
 }
 
 /// @brief Adds a HistoryEntry to the debug history.
 /// @param entry A pointer to the HistoryEntry that will be added to the history.
-void HistoryDbg::addEntry(HistoryEntry* entry) {
+void HistoryDbg::addEntry(shared_ptr<HistoryEntry> entry) {
     this->entries.push_back(make_pair(entry, ' '));
 }
 
 /// @brief Marks an entry in the degug history with a char.
 /// @param entry A pointer to a HistoryEntry that is supposed to be marked.
 /// @param chr A char that will be made into a pair with a HistoryEntry.
-void HistoryDbg::markEntry(HistoryEntry* entry, char chr) {
+void HistoryDbg::markEntry(shared_ptr<HistoryEntry> entry, char chr) {
     // '-' - action that will be undone
     // 'Y' (type=context) - will be undone; corresponding to Y in selene-ver2.png
     // 'T' (type=decision) - will be undone; corresponding to T in selene-ver2.png
@@ -81,7 +81,7 @@ void HistoryDbg::markEntry(HistoryEntry* entry, char chr) {
         if (kvp.first == entry) {
             kvp.second = chr;
             if (chr == '-') {
-                kvp.first = new HistoryEntry(*entry);
+                kvp.first = make_shared<HistoryEntry>(*entry);
             }
         }
     }
@@ -100,10 +100,10 @@ void HistoryDbg::print(string prefix) {
 /// @brief Checks if the HistoryEntry pointer exists in the debug history.
 /// @param entry A pointer to a HistoryEntry to be checked.
 /// @return Identity function if the entry is in history, otherwise returns nullptr.
-HistoryEntry* HistoryDbg::cloneEntry(HistoryEntry* entry) {
+shared_ptr<HistoryEntry> HistoryDbg::cloneEntry(shared_ptr<HistoryEntry> entry) {
     for (auto &kvp : this->entries) {
         if (kvp.first == entry) {
-            kvp.first = new HistoryEntry(*entry);
+            kvp.first = make_shared<HistoryEntry>(*entry);
             return kvp.first;
         }
     }
@@ -115,10 +115,10 @@ HistoryEntry* HistoryDbg::cloneEntry(HistoryEntry* entry) {
 
 /// @brief Constructor for Verification.
 /// @param generator Pointer to GlobalModelGenerator
-Verification::Verification(GlobalModelGenerator* generator) {
+Verification::Verification(shared_ptr<GlobalModelGenerator> generator) {
     this->generator = generator;
     
-    this->historyStart = new HistoryEntry();
+    this->historyStart = make_shared<HistoryEntry>();
     this->historyStart->globalState = nullptr;
     this->historyStart->decision = nullptr;
     this->historyStart->prev = nullptr;
@@ -143,7 +143,7 @@ bool Verification::verify() {
 /// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
 /// @param localStates A pointer to a set of pointers to LocalState.
 /// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.
-bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
+bool Verification::verifyLocalStates(shared_ptr<vector<shared_ptr<LocalState>>> localStates) {
     map<string,int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
 
     for (const auto localState : *localStates) {
@@ -158,7 +158,7 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param depth Current depth of the recursion.
 /// @return Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false.
-bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
+bool Verification::verifyGlobalState(shared_ptr<GlobalState> globalState, int depth) {
     string prefix = string(depth * 4, ' ');
     #if VERBOSE
         if (globalState->verificationStatus == GlobalStateVerificationStatus::UNVERIFIED) {
@@ -194,7 +194,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 1) verify localStates that the globalState is composed of
-    if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+    if (!this->verifyLocalStates(make_shared<vector<shared_ptr<LocalState>>>(&globalState->localStatesProjection))) {
         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
         dbgVerifStatus(prefix, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
         globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
@@ -207,8 +207,8 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 3) group transitions: controlled and uncontrolled by the coalition
-    set<GlobalTransition*> controlledGlobalTransitions;
-    set<GlobalTransition*> uncontrolledGlobalTransitions;
+    set<shared_ptr<GlobalTransition>> controlledGlobalTransitions;
+    set<shared_ptr<GlobalTransition>> uncontrolledGlobalTransitions;
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool hasOmittedTransitions = false;
@@ -252,7 +252,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
 /// @brief Checks if any of the LocalTransition in a given GlobalTransition has an Agent in a coalition in the formula.
 /// @param globalTransition Pointer to a GlobalTransition in a model.
 /// @return Returns true if the Agent is in coalition in the formula, otherwise returns false.
-bool Verification::isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition) {
+bool Verification::isGlobalTransitionControlledByCoalition(shared_ptr<GlobalTransition> globalTransition) {
     bool isControlled = false;
     for (const auto localTransition : globalTransition->localTransitions) {
         if (this->isAgentInCoalition(localTransition->agent)) {
@@ -268,7 +268,7 @@ bool Verification::isGlobalTransitionControlledByCoalition(GlobalTransition* glo
 /// @brief Checks if the Agent is in a coalition based on the formula in a GlobalModelGenerator.
 /// @param agent Pointer to an Agent that is to be checked.
 /// @return Returns true if the Agent is in a coalition, otherwise returns false.
-bool Verification::isAgentInCoalition(Agent* agent) {
+bool Verification::isAgentInCoalition(shared_ptr<Agent> agent) {
     const auto coalition = &this->generator->getFormula()->coalition;
     return coalition->find(agent) != coalition->end();
 }
@@ -276,7 +276,7 @@ bool Verification::isAgentInCoalition(Agent* agent) {
 /// @brief Gets the EpistemicClass for the agent in passed GlobalState, i.e. transitions from indistinguishable state from certain other states for an agent to other states.
 /// @param globalState Pointer to a GlobalState of the model.
 /// @return Pointer to the EpistemicClass that a coalition of agents from the formula belong to. If there is no such EpistemicClass, returns false.
-EpistemicClass* Verification::getEpistemicClassForGlobalState(GlobalState* globalState) {
+shared_ptr<EpistemicClass> Verification::getEpistemicClassForGlobalState(shared_ptr<GlobalState> globalState) {
     const auto coalition = &this->generator->getFormula()->coalition;
     const auto agent = *coalition->begin();
     const auto findResult = globalState->epistemicClasses.find(agent);
@@ -291,7 +291,7 @@ EpistemicClass* Verification::getEpistemicClassForGlobalState(GlobalState* globa
 /// @param globalState1 Pointer to the first GlobalState.
 /// @param globalState2 Pointer to the second GlobalState.
 /// @return Returns true if the EpistemicClass is the same for both of the GlobalState. Returns false if they are different or at least one of them has no EpistemicClass.
-bool Verification::areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2) {
+bool Verification::areGlobalStatesInTheSameEpistemicClass(shared_ptr<GlobalState> globalState1, shared_ptr<GlobalState> globalState2) {
     auto epiCls1 = this->getEpistemicClassForGlobalState(globalState1);
     auto epiCls2 = this->getEpistemicClassForGlobalState(globalState2);
     if (epiCls1 == nullptr || epiCls2 == nullptr) {
@@ -303,8 +303,8 @@ bool Verification::areGlobalStatesInTheSameEpistemicClass(GlobalState* globalSta
 /// @brief Creates a HistoryEntry of the type DECISION and puts it on top of the stack of the decision history. 
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param decision Pointer to a GlobalTransition that is to be recorded in the decision history.
-void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition* decision) {
-    auto newHistoryEntry = new HistoryEntry();
+void Verification::addHistoryDecision(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> decision) {
+    auto newHistoryEntry = make_shared<HistoryEntry>();
     newHistoryEntry->type = HistoryEntryType::DECISION;
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->decision = decision;
@@ -318,8 +318,8 @@ void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param prevStatus Previous GlobalStateVerificationStatus to be logged.
 /// @param newStatus New GlobalStateVerificationStatus to be logged.
-void Verification::addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus) {
-    auto newHistoryEntry = new HistoryEntry();
+void Verification::addHistoryStateStatus(shared_ptr<GlobalState> globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus) {
+    auto newHistoryEntry = make_shared<HistoryEntry>();
     newHistoryEntry->type = HistoryEntryType::STATE_STATUS;
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->prevStatus = prevStatus;
@@ -335,8 +335,8 @@ void Verification::addHistoryStateStatus(GlobalState* globalState, GlobalStateVe
 /// @param depth Depth of the recursion of the validation algorithm.
 /// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
 /// @param globalTransitionControlled True if the GlobalTransition is in the set of global transitions controlled by a coalition and it is not a fixed global transition.
-void Verification::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
-    auto newHistoryEntry = new HistoryEntry();
+void Verification::addHistoryContext(shared_ptr<GlobalState> globalState, int depth, shared_ptr<GlobalTransition> decision, bool globalTransitionControlled) {
+    auto newHistoryEntry = make_shared<HistoryEntry>();
     newHistoryEntry->type = HistoryEntryType::CONTEXT;
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->depth = depth;
@@ -352,8 +352,8 @@ void Verification::addHistoryContext(GlobalState* globalState, int depth, Global
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
 /// @return Returns pointer to a new HistoryEntry.
-HistoryEntry* Verification::newHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision) {
-    auto newHistoryEntry = new HistoryEntry();
+shared_ptr<HistoryEntry> Verification::newHistoryMarkDecisionAsInvalid(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> decision) {
+    auto newHistoryEntry = make_shared<HistoryEntry>();
     newHistoryEntry->type = HistoryEntryType::MARK_DECISION_AS_INVALID;
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->decision = decision;
@@ -364,7 +364,7 @@ HistoryEntry* Verification::newHistoryMarkDecisionAsInvalid(GlobalState* globalS
 /// @brief Creates a HistoryEntry of the type MARK_DECISION_AS_INVALID and puts it to the top of the decision history.
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
-void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision) {
+void Verification::addHistoryMarkDecisionAsInvalid(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> decision) {
     auto newHistoryEntry = this->newHistoryMarkDecisionAsInvalid(globalState, decision);
     newHistoryEntry->prev = this->historyEnd;
     this->historyEnd->next = newHistoryEntry;
@@ -392,7 +392,7 @@ bool Verification::revertLastDecision(int depth) {
     
     // Undo Z->T (including Z, excluding T); find Y while doing that
     int shallowestDepth = 99999999;
-    GlobalState* shallowestGlobalState = nullptr;
+    shared_ptr<GlobalState> shallowestGlobalState = nullptr;
     while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION) {
         auto entry = this->historyEnd;
         if (entry->type == HistoryEntryType::CONTEXT && entry->depth < shallowestDepth) {
@@ -425,7 +425,7 @@ bool Verification::revertLastDecision(int depth) {
     auto invalidDecision = this->historyEnd->decision;
     auto invalidDecisionHistoryEntry = this->historyEnd;
     while (!this->historyToRestore.empty()) {
-        delete this->historyToRestore.top();
+        delete &this->historyToRestore.top();
         this->historyToRestore.pop();
     }
     if (!invalidDecision->isInvalidDecision) {
@@ -461,14 +461,14 @@ bool Verification::revertLastDecision(int depth) {
                     histDbg.markEntry(entry, '-');
                 }
             #endif
-            delete entry;
+            delete &entry;
         }
     }
     
     // Ensure all ok
     if (this->historyEnd == this->historyStart || this->historyEnd->globalState != shallowestGlobalState) {
         while (!this->historyToRestore.empty()) {
-            delete this->historyToRestore.top();
+            delete &this->historyToRestore.top();
             this->historyToRestore.pop();
         }
         return false;
@@ -518,7 +518,7 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     this->historyEnd = this->historyEnd->prev;
     this->historyEnd->next = nullptr;
     if (freeMemory) {
-        delete entry;
+        delete &entry;
     }
 }
 
@@ -526,7 +526,7 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
 /// @param historyEntry Pointer to a HistoryEntry that the history has to be rolled back to.
 /// @param inclusive True if the rollback has to remove the specified entry too.
 /// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
-void Verification::undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth) {
+void Verification::undoHistoryUntil(shared_ptr<HistoryEntry> historyEntry, bool inclusive, int depth) {
     #if VERBOSE
         auto prefix = string(depth * 4, ' ');
         auto histDbg = HistoryDbg();
@@ -571,7 +571,7 @@ void Verification::printCurrentHistory(int depth) {
 /// @param globalTransition1 First global transition to compare.
 /// @param globalTransition2 Second global transition to compare.
 /// @return True if the two global transitions have the same local transitions, false otherwise.
-bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2) {
+bool Verification::equivalentGlobalTransitions(shared_ptr<GlobalTransition> globalTransition1, shared_ptr<GlobalTransition> globalTransition2) {
     bool isEquivalent = true;
     bool isMatchFound = false;
     for (const auto localTransition1 : globalTransition1->localTransitions) {
@@ -597,7 +597,7 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
-bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+bool Verification::checkUncontrolledSet(set<shared_ptr<GlobalTransition>> uncontrolledGlobalTransitions, shared_ptr<GlobalState> globalState, int depth, bool hasOmittedTransitions) {
     string prefix = string(depth * 4, ' ');
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         if (this->mode == TraversalMode::RESTORE) {
@@ -669,7 +669,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+bool Verification::verifyTransitionSets(set<shared_ptr<GlobalTransition>> controlledGlobalTransitions, set<shared_ptr<GlobalTransition>> uncontrolledGlobalTransitions, shared_ptr<GlobalState> globalState, int depth, bool hasOmittedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     string prefix = string(depth * 4, ' ');
@@ -772,7 +772,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
 /// @param depth Current recursion depth.
 /// @param controlled Flag with the information about current type of transition. True if controlled, false if uncontrolled.
 /// @return Returns true if current top of the history entires matches with 
-bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled) {
+bool Verification::restoreHistory(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> globalTransition, int depth, bool controlled) {
     // Check if top history entry matches this loop iteration
     auto entry = this->historyToRestore.top();
     if (entry->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
@@ -780,7 +780,7 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
         this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
         this->historyToRestore.pop();
         if (!this->historyToRestore.empty()) {
-            delete entry;
+            delete &entry;
             entry = this->historyToRestore.top();
         }
     }
@@ -808,14 +808,14 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     // Delete top history entry
     if (matches) {
         this->historyToRestore.pop();
-        delete entry;
+        delete &entry;
     }
     if (!this->historyToRestore.empty() && this->historyToRestore.top()->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
         entry = this->historyToRestore.top();
         entry->decision->isInvalidDecision = true;
         this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
         this->historyToRestore.pop();
-        delete entry;
+        delete &entry;
     }
     if (this->historyToRestore.empty()) {
         // Last entry to restore - exit restore mode

@@ -25,15 +25,15 @@ class LocalState {
      
         // komparator
         
-        bool compare(LocalState *state);
+        bool compare(shared_ptr<LocalState> state);
         
         // Bindings
 
         /// @brief Binding to an Agent.
-        Agent* agent;
+        shared_ptr<Agent> agent;
 
         /// @brief Binding to the set of LocalTransition.
-        set<LocalTransition*> localTransitions;
+        set<shared_ptr<LocalTransition>> localTransitions;
 
         /// @brief Debug information on the given LocalState
         /// @param indent - optional indentation string 

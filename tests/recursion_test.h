@@ -16,24 +16,22 @@ TEST(RecursionTest, 2Counters11States)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
-
-    delete(generator);
 
     EXPECT_EQ(result, true);
 }
@@ -45,24 +43,22 @@ TEST(RecursionTest, 3Counters11States)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
-
-    delete(generator);
 
     EXPECT_EQ(result, true);
 }
@@ -74,24 +70,22 @@ TEST(RecursionTest, 4Counters11States)
     config.output_global_model = false;
     config.stv_mode = '2';
 
-    auto tp = new ModelParser();
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
+    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
 
     bool result = false;
 
     generator->expandAllStates();
 
-    auto verification = new Verification(generator);
+    auto verification = make_shared<Verification>(generator);
     
     result = verification->verify();
-
-    delete(generator);
 
     EXPECT_EQ(result, true);
 }

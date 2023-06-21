@@ -15,7 +15,7 @@
 /// @brief Function comparing two states.
 /// @param state A pointer to LocalState to which this state should be compared to.
 /// @return Returns true if the current LocalState is the same as the passed one, otherwise false.
-bool LocalState::compare(LocalState* state) {
+bool LocalState::compare(shared_ptr<LocalState> state) {
    // agent musi być ten sam (sanity check)
    if(agent != state->agent) return false;
 

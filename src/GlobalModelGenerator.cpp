@@ -15,19 +15,14 @@
 GlobalModelGenerator::GlobalModelGenerator() {
 }
 
-/// @brief Destructor for GlobalModelGenerator class.
-GlobalModelGenerator::~GlobalModelGenerator() {
-    delete(this->globalModel);
-}
-
 /// @brief Initializes a global model from local models and a formula.
 /// @param localModels Pointer to LocalModels that will construct a global model.
 /// @param formula Pointer to a Formula to include into the model.
 /// @return Returns a pointer to initial state of the global model.
-GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* formula) {
+shared_ptr<GlobalState> GlobalModelGenerator::initModel(shared_ptr<LocalModels> localModels, shared_ptr<Formula> formula) {
     this->localModels = localModels;
     this->formula = formula;
-    this->globalModel = new GlobalModel();
+    this->globalModel = make_shared<GlobalModel>();
     this->globalModel->agents = localModels->agents;
     this->globalModel->initState = this->generateInitState();
 
@@ -39,13 +34,13 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
 
 /// @brief Goes through all GlobalTransition in a given GlobalState and creates new GlobalStates connected to the given one.
 /// @param state A state from which the expansion should start.
-void GlobalModelGenerator::expandState(GlobalState* state) {
+void GlobalModelGenerator::expandState(shared_ptr<GlobalState> state) {
     if (state->isExpanded) {
         return;
     }
     for (const auto globalTransition : state->globalTransitions) {
         if (globalTransition->to == nullptr) {
-            vector<LocalState*> localStates = state->localStatesProjection;
+            vector<shared_ptr<LocalState>> localStates = state->localStatesProjection;
             for (const auto localTransition : globalTransition->localTransitions) {
                 #if VERBOSE
                     cout << "expandState: " << localTransition->name << " : " << localTransition->from << " -> " << localTransition->to << endl;
@@ -57,7 +52,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
                 // localStates.erase(localTransition->from);
                 // localStates.insert(localTransition->to);
             }            
-            auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
+            auto targetState = this->generateStateFromLocalStates(make_shared<vector<shared_ptr<LocalState>>>(&localStates), make_shared<set<shared_ptr<LocalTransition>>>(&globalTransition->localTransitions), state);
             globalTransition->to = targetState;
         }
     }
@@ -66,15 +61,15 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
 
 /// @brief GlobalModelGenerator::expandState that also additionally returns a vector of newly created states
 /// @param state A state from which the expansion should start.
-vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* state) {
+vector<shared_ptr<GlobalState>> GlobalModelGenerator::expandStateAndReturn(shared_ptr<GlobalState> state) {
     size_t cardinalityBefore;
-    vector<GlobalState*> res;
+    vector<shared_ptr<GlobalState>> res;
     if (state->isExpanded) {
         return res;
     }
     for (const auto globalTransition : state->globalTransitions) {
         if (globalTransition->to == nullptr) {
-            vector<LocalState*> localStates = state->localStatesProjection;
+            vector<shared_ptr<LocalState>> localStates = state->localStatesProjection;
             for (const auto localTransition : globalTransition->localTransitions) {
                 localStates[agentIndex[localTransition->from->agent]]=localTransition->to;
                 // localStates.erase(localTransition->from);
@@ -82,7 +77,7 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
             }
             cardinalityBefore = this->globalModel->globalStates.size();
             // either returns a new state OR an existing one
-            auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
+            auto targetState = this->generateStateFromLocalStates(make_shared<vector<shared_ptr<LocalState>>>(&localStates), make_shared<set<shared_ptr<LocalTransition>>>(globalTransition->localTransitions), state);
             // when new state was indeed created - append that to result
             if(cardinalityBefore!=this->globalModel->globalStates.size()){   
                 res.push_back(targetState);
@@ -96,7 +91,7 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
 
 /// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
 void GlobalModelGenerator::expandAllStates() {
-    set<GlobalState*> statesToExpand;
+    set<shared_ptr<GlobalState>> statesToExpand;
     statesToExpand.insert(this->globalModel->initState);
     while (!statesToExpand.empty()) {
         auto globalState = *statesToExpand.begin();
@@ -116,24 +111,24 @@ void GlobalModelGenerator::expandAllStates() {
 
 /// @brief Get for a GlobalModel used in initialization.
 /// @return Returns a pointer to a global model.
-GlobalModel* GlobalModelGenerator::getCurrentGlobalModel() {
+shared_ptr<GlobalModel> GlobalModelGenerator::getCurrentGlobalModel() {
     return this->globalModel;
 }
 
 /// @brief Get for the Formula used in initialization.
 /// @return Returns a pointer to the formula structure.
-Formula* GlobalModelGenerator::getFormula() {
+shared_ptr<Formula> GlobalModelGenerator::getFormula() {
     return this->formula;
 }
 
 /// @brief Generates initial state of the model from GlobalModel in memory.
 /// @return Returns a pointer to an initial GlobalState.
-GlobalState* GlobalModelGenerator::generateInitState() {
-    vector<LocalState*> localStates;
+shared_ptr<GlobalState> GlobalModelGenerator::generateInitState() {
+    vector<shared_ptr<LocalState>> localStates;
     for (const auto agt : this->globalModel->agents) {
         localStates.push_back(agt->initState);
     }
-    auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
+    auto initState = this->generateStateFromLocalStates(make_shared<vector<shared_ptr<LocalState>>>(&localStates), nullptr, nullptr);
     
     return initState;
 }
@@ -143,7 +138,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
 /// @param viaLocalTransitions Pointer to a set of pointers to LocalTransition from which the changes in variables, as a result of traversing through the transition, will be made in a new GlobalState.
 /// @param prevGlobalState Pointer to GlobalState from which all persistent variables will be copied over from to the new GlobalState.
 /// @return Returns a pointer to a new or already existing in the same epistemic class GlobalModel.
-GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {
+shared_ptr<GlobalState> GlobalModelGenerator::generateStateFromLocalStates(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<set<shared_ptr<LocalTransition>>> viaLocalTransitions, shared_ptr<GlobalState> prevGlobalState) {
     #if VERBOSE
         cout << "GMG:genState" << " : ";
         cout << this->computeGlobalStateHash(localStates) << endl;
@@ -159,7 +154,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     }
     
     // Create a new GlobalState
-    auto globalState = new GlobalState();
+    auto globalState = make_shared<GlobalState>();
     // Reserve vector capacity
     globalState->localStatesProjection.reserve(localStates->size());
     
@@ -175,15 +170,15 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     
     // globalState->globalTransitions:
     // 1) group transitions by name from localStates (only those that can be executed (check sharedCount, check conditions))
-    map<string, map<Agent*, vector<LocalTransition*>>> transitionsByName;
+    map<string, map<shared_ptr<Agent>, vector<shared_ptr<LocalTransition>>>> transitionsByName;
     for (const auto localState : *localStates) {
         for (const auto localTransition : localState->localTransitions) {
             if (transitionsByName.count(localTransition->name) == 0) {
-               transitionsByName[localTransition->name] = map<Agent*, vector<LocalTransition*>>(); 
+               transitionsByName[localTransition->name] = map<shared_ptr<Agent>, vector<shared_ptr<LocalTransition>>>(); 
             }
             auto transitionsByAgent = &transitionsByName[localTransition->name];
             if (transitionsByAgent->count(localTransition->agent) == 0) {
-                transitionsByAgent->insert({ localTransition->agent, vector<LocalTransition*>() });
+                transitionsByAgent->insert({ localTransition->agent, vector<shared_ptr<LocalTransition>>() });
             }
             transitionsByAgent->at(localTransition->agent).push_back(localTransition);
         }
@@ -195,7 +190,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
             continue;
         }
         auto transitionsByAgent = trPair.second;
-        this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
+        this->generateGlobalTransitions(globalState, set<shared_ptr<LocalTransition>>(), transitionsByAgent);
     }
     
     this->globalModel->globalStates.push_back(globalState);
@@ -206,9 +201,9 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
 /// @param fromGlobalState Global state to add transitions to.
 /// @param localTransitions Initially empty, avaliable local transitions by each agent from transitionsByAgent.
 /// @param transitionsByAgent Mapped transitions to an agent, only with transitions avaliable for the agent at this moment.
-void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent) {
+void GlobalModelGenerator::generateGlobalTransitions(shared_ptr<GlobalState> fromGlobalState, set<shared_ptr<LocalTransition>> localTransitions, map<shared_ptr<Agent>, vector<shared_ptr<LocalTransition>>> transitionsByAgent) {
     auto agentWithTransitions = *transitionsByAgent.begin();
-    map<Agent*, vector<LocalTransition*>> transitionsByOtherAgents = transitionsByAgent;
+    map<shared_ptr<Agent>, vector<shared_ptr<LocalTransition>>> transitionsByOtherAgents = transitionsByAgent;
     transitionsByOtherAgents.erase(agentWithTransitions.first);
     bool hasOtherAgents = transitionsByOtherAgents.size() > 0;
     for (const auto transition : agentWithTransitions.second) {
@@ -218,7 +213,7 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
             this->generateGlobalTransitions(fromGlobalState, currentLocalTransitions, transitionsByOtherAgents);
         }
         else {
-            auto globalTransition = new GlobalTransition();
+            auto globalTransition = make_shared<GlobalTransition>();
             // globalTransition->id = this->globalModel->globalTransitions.size();
             globalTransition->isInvalidDecision = false;
             globalTransition->from = fromGlobalState;
@@ -232,7 +227,7 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
 /// @brief Creates a hash from a set of LocalState and an Agent.
 /// @param localStates Pointer to a vector of pointers of LocalState and pointer to and Agent to turn into a hash.
 /// @return Returns a string with a hash.
-string GlobalModelGenerator::computeEpistemicClassHash(vector<LocalState*>* localStates, Agent* agent) {
+string GlobalModelGenerator::computeEpistemicClassHash(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<Agent> agent) {
     string hash = "";
     for (const auto localState : *localStates) {
         if (localState->agent == agent) {
@@ -246,7 +241,7 @@ string GlobalModelGenerator::computeEpistemicClassHash(vector<LocalState*>* loca
 /// @brief Creates a hash from a set of LocalState.
 /// @param localStates Pointer to a vector of pointers of LocalState to turn into a hash.
 /// @return Returns a string with a hash.
-string GlobalModelGenerator::computeGlobalStateHash(vector<LocalState*>* localStates) {
+string GlobalModelGenerator::computeGlobalStateHash(shared_ptr<vector<shared_ptr<LocalState>>> localStates) {
     string hash = "";
     for (const auto localState : *localStates) {
         hash.append(to_string(localState->id) + ";");
@@ -258,14 +253,14 @@ string GlobalModelGenerator::computeGlobalStateHash(vector<LocalState*>* localSt
 /// @param localStates Local states from agent.
 /// @param agent Agent for which to check the existence of an epistemic class.
 /// @return A pointer to a new or existing EpistemicClass.
-EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent) {
+shared_ptr<EpistemicClass> GlobalModelGenerator::findOrCreateEpistemicClass(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<Agent> agent) {
     string hash = this->computeEpistemicClassHash(localStates, agent);
     if (this->globalModel->epistemicClasses.find(agent) == this->globalModel->epistemicClasses.end()) {
-        this->globalModel->epistemicClasses.insert({ agent, map<string, EpistemicClass*>() });
+        this->globalModel->epistemicClasses.insert({ agent, map<string, shared_ptr<EpistemicClass>>() });
     }
     auto epistemicClassesForAgent = &this->globalModel->epistemicClasses[agent];
     if (epistemicClassesForAgent->find(hash) == epistemicClassesForAgent->end()) {
-        EpistemicClass* epistemicClass = new EpistemicClass();
+        shared_ptr<EpistemicClass> epistemicClass = make_shared<EpistemicClass>();
         epistemicClass->hash = hash;
         epistemicClass->fixedCoalitionTransition = nullptr;
         epistemicClassesForAgent->insert({ hash, epistemicClass });
@@ -277,7 +272,7 @@ EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(vector<LocalSta
 /// @param localStates Pointer to a vector of pointers to LocalState, from which will be generated a global state hash.
 /// @param epistemicClass Epistemic class in which to check if a GlobalState exists.
 /// @return Returns a pointer to a GlobalState if it exists in given epistemic class, otherwise returns nullptr.
-GlobalState* GlobalModelGenerator::findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass) {
+shared_ptr<GlobalState> GlobalModelGenerator::findGlobalStateInEpistemicClass(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<EpistemicClass> epistemicClass) {
     string hash = this->computeGlobalStateHash(localStates);
     if (epistemicClass->globalStates.count(hash) == 0) {
         return nullptr;

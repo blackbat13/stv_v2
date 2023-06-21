@@ -15,6 +15,7 @@
 #include <utility>
 #include <vector>
 #include <atomic> //std::atomic_uint32_t
+#include <memory>
 
 #include "reader/expressions.hpp"
 

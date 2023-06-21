@@ -36,7 +36,7 @@ string envToString(map<string, int> env) {
 /// @brief Converts pointer to an Agant into a string containing name of the agent, its initial state, transitions with their local and global names, shared count and conditions. 
 /// @param agt Pointer to an Agent to parse into a string.
 /// @return String containing all of Agent data.
-string agentToString(Agent* agt) {
+string agentToString(shared_ptr<Agent> agt) {
     string res = "";
     res += "Agent " + agt->name + ":\n";
     res += "init " + agt->initState->name + "\n";
@@ -180,7 +180,7 @@ unsigned long getMemCap() {
 /// @param onstack - used as condition for back/cross-edge case
 /// @param depth - next available (discovery) index
 /// @param comp - result of SCC partitioning
-void tarjanVisit(LocalState* v, map<int,int>* dindex, map<int,int>* lowlink, stack<LocalState*>* stack, map<int,bool>* onstack, int* depth, vector<set<LocalState*>>* comp){
+void tarjanVisit(shared_ptr<LocalState> v, shared_ptr<map<int, int>> dindex, shared_ptr<map<int,int>> lowlink, shared_ptr<stack<shared_ptr<LocalState>>> stack, shared_ptr<map<int,bool>> onstack, shared_ptr<int> depth, shared_ptr<vector<set<shared_ptr<LocalState>>>> comp){
     (*dindex)[v->id] = (*depth);    // assign current depth
     (*lowlink)[v->id] = (*depth);   // start with its own dindex
     (*depth)++;                     // increment the (unused) depth
@@ -199,9 +199,9 @@ void tarjanVisit(LocalState* v, map<int,int>* dindex, map<int,int>* lowlink, sta
 
     // if v is a base vertex, then pop the stack to get SCC
     if( (*lowlink)[v->id] == (*dindex)[v->id] ){ 
-        set<LocalState*> currComp;
+        set<shared_ptr<LocalState>> currComp;
         while(true){
-            LocalState* w = (*stack).top(); // pop w from the stack
+            shared_ptr<LocalState> w = (*stack).top(); // pop w from the stack
             (*stack).pop();
             (*onstack)[w->id] = false;
             currComp.insert(w);             // add w to curr SCC
@@ -215,20 +215,20 @@ void tarjanVisit(LocalState* v, map<int,int>* dindex, map<int,int>* lowlink, sta
 /// @brief a quick implementation of a Tarjan SCC algorithm (based on DFS)
 /// @param agt - an agent whose local graph will be inspected
 /// @return localStates partition in a form of the vector, where each set correponds to a SCC
-vector<set<LocalState*>> getLocalStatesSCC(Agent* agt){
-    vector<set<LocalState*>> comp;
+vector<set<shared_ptr<LocalState>>> getLocalStatesSCC(shared_ptr<Agent> agt){
+    vector<set<shared_ptr<LocalState>>> comp;
     
     // [YK]: these 3 maps below could be replaced with int array (if localstate ids are always conseq. numbers starting from 0)
     map<int,int> dindex; // discovered/depth index
     map<int,int> lowlink;
     map<int,bool> onstack; 
 
-    stack<LocalState*> stack;
+    shared_ptr<stack<shared_ptr<LocalState>>> stack;
 
     int depth = 0;
     for(const auto& v : agt->localStates){
         if(dindex.count(v->id)<=0){
-            tarjanVisit(v, &dindex, &lowlink, &stack, &onstack, &depth, &comp);
+            tarjanVisit(v, make_shared<map<int, int>>(&dindex), make_shared<map<int, int>>(&lowlink), stack, make_shared<map<int, bool>>(&onstack), make_shared<int>(&depth), make_shared<vector<set<shared_ptr<LocalState>>>>(&comp));
         }
     }
 
@@ -236,28 +236,28 @@ vector<set<LocalState*>> getLocalStatesSCC(Agent* agt){
 }
 
 
-map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalModels* localModels, Agent* agt){
+map<shared_ptr<LocalState>,vector<shared_ptr<GlobalState>>> getContextModel(shared_ptr<Formula> formula, shared_ptr<LocalModels> localModels, shared_ptr<Agent> agt){
     // partition local states into SCC
-    vector<set<LocalState*>> scc = getLocalStatesSCC(agt);        // Set of 
-    map<LocalState*,vector<GlobalState*>> res;                    // Loc_i -> St_i
+    vector<set<shared_ptr<LocalState>>> scc = getLocalStatesSCC(agt);        // Set of 
+    map<shared_ptr<LocalState>,vector<shared_ptr<GlobalState>>> res;                    // Loc_i -> St_i
 
-    vector<const set<LocalState*>*> openComp;   // components that should be processed
+    vector<shared_ptr<const set<shared_ptr<LocalState>>>> openComp;   // components that should be processed
 
     // find SCC of initial local state
     for(auto const &c : scc){
         if(c.count(agt->initState)){
-            openComp.push_back(&c);             // push initial component pointer 
+            openComp.push_back(make_shared<set<shared_ptr<LocalState>>>(&c));             // push initial component pointer 
             break;
         }
     }
 
     // global model will store St - current subset of global states 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
     // compute s_0 in St
-    GlobalState * initState = generator->initModel(localModels, formula);
-    GlobalModel * gm = generator->getCurrentGlobalModel();      // pointer to a current global model
+    shared_ptr<GlobalState> initState = generator->initModel(localModels, formula);
+    shared_ptr<GlobalModel> gm = generator->getCurrentGlobalModel();      // pointer to a current global model
 
-    const set<LocalState*> * currComp;          // pointer to a const set<LocalState*>
+    shared_ptr<const set<shared_ptr<LocalState>>> currComp;          // pointer to a const set<LocalState*>
     auto agtInd = generator->agentIndex[agt];
 
     while(!openComp.empty()){
@@ -265,7 +265,7 @@ map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalMod
         openComp.pop_back();
         
         // expand the states while contain an appropriate projection to currComp and within oneStepClosure
-        stack<GlobalState*> q;
+        stack<shared_ptr<GlobalState>> q;
         for(const auto& s : gm->globalStates){
             if(currComp->count(s->localStatesProjection[agtInd])){
                 q.push(s);
@@ -273,13 +273,13 @@ map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalMod
         }
 
         while(!q.empty()){
-            GlobalState* state = q.top();
+            shared_ptr<GlobalState> state = q.top();
             q.pop(); 
             #if VERBOSE  
             cout << "expanding state " << state->hash << endl;  
             #endif
 
-            vector<GlobalState*> newStates = generator->expandStateAndReturn(state);
+            vector<shared_ptr<GlobalState>> newStates = generator->expandStateAndReturn(state);
             for(auto targetState : newStates){
                 for(const auto& l : *currComp){     
                     // if(targetState->localStates.count(l)){
@@ -357,7 +357,7 @@ map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalMod
         for(auto const &c : scc){
             for(const auto& s : gm->globalStates){
                 if(c.count(s->localStatesProjection[agtInd])){
-                    openComp.push_back(&c);
+                    openComp.push_back(make_shared<set<shared_ptr<LocalState>>>(&c));
                     break;
                 }
             }   

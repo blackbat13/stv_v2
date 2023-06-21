@@ -19,7 +19,7 @@ class Agent {
         string name;
 
         /// @brief Variable names for the agent.
-        set<Var*> vars;
+        set<shared_ptr<Var>> vars;
 
         /// @brief Constructor for the Agent class, assigning it an id and name.
         /// @param _id Identifier of the new agent.
@@ -27,17 +27,17 @@ class Agent {
         Agent(int _id, string _name):id(_id), name(_name) {};
         
         /// @brief Initial state of the agent.
-        LocalState* initState;
+        shared_ptr<LocalState> initState;
 
         /// @brief Local states for this agent.
-        vector<LocalState*> localStates; // localStates[i].id == i
+        vector<shared_ptr<LocalState>> localStates; // localStates[i].id == i
 
         /// @brief Local transitions for this agent.
-        vector<LocalTransition*> localTransitions; // localTransitions[i].id == i
+        vector<shared_ptr<LocalTransition>> localTransitions; // localTransitions[i].id == i
         
         // sprawdź, czy stan nie został już wygenerowany.
         
-        LocalState* includesState(LocalState *state);
+        shared_ptr<LocalState> includesState(shared_ptr<LocalState> state);
 };
 
 #endif // AGENT_H

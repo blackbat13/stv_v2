@@ -17,11 +17,11 @@
 using namespace std;
 
 string envToString(map<string, int> env);
-string agentToString(Agent* agt);
-string localModelsToString(LocalModels* lm);
-void outputGlobalModel(GlobalModel* globalModel);
+string agentToString(shared_ptr<Agent> agt);
+string localModelsToString(shared_ptr<LocalModels> lm);
+void outputGlobalModel(shared_ptr<GlobalModel> globalModel);
 unsigned long getMemCap();
-vector<set<LocalState*>> getLocalStatesSCC(Agent* agt);
-map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalModels* localModels, Agent* agt);
+vector<set<shared_ptr<LocalState>>> getLocalStatesSCC(shared_ptr<Agent> agt);
+map<shared_ptr<LocalState>, vector<shared_ptr<GlobalState>>> getContextModel(shared_ptr<Formula> formula, shared_ptr<LocalModels> localModels, shared_ptr<Agent> agt);
 
 #endif // STV_TYPES

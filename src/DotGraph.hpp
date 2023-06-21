@@ -22,9 +22,9 @@ public:
     std::string caption;
     static string styleString;
     DotGraph();
-    DotGraph(GlobalModel *const gm, bool extended=false);
-    DotGraph(Agent *const ag, bool extended=false);
-    DotGraph(AgentTemplate *const at);
+    DotGraph(shared_ptr<GlobalModel const> gm, bool extended=false);
+    DotGraph(shared_ptr<Agent const> ag, bool extended=false);
+    DotGraph(shared_ptr<AgentTemplate const> at);
     void saveToFile(std::string filename="");
 protected:
     void addNode(std::string id, std::string name);

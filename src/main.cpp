@@ -87,12 +87,12 @@ int main(int argc, char* argv[]) {
     struct timeval tb, te;
     gettimeofday(&tb, NULL);
     
-    loadConfig(argc,argv); 
-    auto tp = new ModelParser();
+    loadConfig(argc,argv);
+    auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = &(get<0>(desc));
-    auto formula = &(get<1>(desc));
+    auto localModels = make_shared<LocalModels>(&(get<0>(desc)));
+    auto formula = make_shared<Formula>(&(get<1>(desc)));
 /* ------- Uncomment for the SCC compute test/debug ------- */
     // for (const auto& agt : localModels->agents) {
     //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;
@@ -163,7 +163,7 @@ int main(int argc, char* argv[]) {
 
 
     // Generate and output global model
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
     generator->initModel(localModels, formula);
     if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
@@ -180,7 +180,7 @@ int main(int argc, char* argv[]) {
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
-            DotGraph(it).saveToFile();
+            DotGraph(make_shared<AgentTemplate>(it)).saveToFile();
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
@@ -196,7 +196,7 @@ int main(int argc, char* argv[]) {
         generator->expandAllStates();
     }else if(config.stv_mode=='2'){     // 2 - read, generate and verify
         // generator->expandAllStates();
-        auto verification = new Verification(generator);
+        auto verification = make_shared<Verification>(generator);
         // Show verifications of vars in each global state; to use the following code, make verification->verifyLocalStates public and ensure that generator->expandAllStates() has been called
         // auto gm = generator->getCurrentGlobalModel();
         // for (auto state : gm->globalStates) {

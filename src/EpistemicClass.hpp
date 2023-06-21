@@ -15,11 +15,11 @@ struct EpistemicClass {
     string hash;
 
     /// @brief Map of GlobalState hashes to according GlobalState pointers bound to this epistemic class.
-    map<string, GlobalState*> globalStates;
+    map<string, shared_ptr<GlobalState>> globalStates;
     // GlobalState->hash => GlobalState*
 
     /// @brief Transition that was already selected in this epistemic class. Model has to choose this transition if it is already set.
-    GlobalTransition* fixedCoalitionTransition;
+    shared_ptr<GlobalTransition> fixedCoalitionTransition;
 };
 
 #endif // EPISTEMICCLASS_H
