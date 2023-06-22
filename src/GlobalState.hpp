@@ -18,7 +18,7 @@ struct GlobalState {
     string hash;
 
     /// @brief Map of agents and the epistemic classes that belongs to the respective agent.
-    map<shared_ptr<Agent>, shared_ptr<EpistemicClass>> epistemicClasses;
+    map<Agent*, shared_ptr<EpistemicClass>> epistemicClasses;
 
     /// @brief If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary.
     bool isExpanded;

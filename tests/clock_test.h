@@ -19,11 +19,11 @@ TEST(ClockTest, Clock6Hours15Minutes)
     auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = &(get<0>(desc));
-    auto formula = &(get<1>(desc));
+    auto localModels = make_shared<LocalModels>((get<0>(desc)));
+    auto formula = make_shared<Formula>((get<1>(desc)));
 
     shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
-    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
+    generator->initModel(localModels, formula);
 
     bool result = false;
 
@@ -48,11 +48,11 @@ TEST(ClockTest, Clock6Hours15MinutesAndDays)
     auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = &(get<0>(desc));
-    auto formula = &(get<1>(desc));
+    auto localModels = make_shared<LocalModels>((get<0>(desc)));
+    auto formula = make_shared<Formula>((get<1>(desc)));
 
     shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
-    generator->initModel(make_shared<LocalModels>(localModels), make_shared<Formula>(formula));
+    generator->initModel(localModels, formula);
 
     bool result = false;
 

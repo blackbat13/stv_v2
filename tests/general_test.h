@@ -19,8 +19,8 @@ TEST(GeneralCorrectness, Trains)
     auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = make_shared<LocalModels>(&(get<0>(desc)));
-    auto formula = make_shared<Formula>(&(get<1>(desc)));
+    auto localModels = make_shared<LocalModels>((get<0>(desc)));
+    auto formula = make_shared<Formula>((get<1>(desc)));
 
     shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
     generator->initModel(localModels, formula);
@@ -48,8 +48,8 @@ TEST(GeneralCorrectness, SelectVoteRevoting)
     auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = make_shared<LocalModels>(&(get<0>(desc)));
-    auto formula = make_shared<Formula>(&(get<1>(desc)));
+    auto localModels = make_shared<LocalModels>((get<0>(desc)));
+    auto formula = make_shared<Formula>((get<1>(desc)));
 
     shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
     generator->initModel(localModels, formula);
@@ -77,8 +77,8 @@ TEST(GeneralCorrectness, SimpleVoting)
     auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = make_shared<LocalModels>(&(get<0>(desc)));
-    auto formula = make_shared<Formula>(&(get<1>(desc)));
+    auto localModels = make_shared<LocalModels>((get<0>(desc)));
+    auto formula = make_shared<Formula>((get<1>(desc)));
 
     shared_ptr<GlobalModelGenerator> generator = make_shared<GlobalModelGenerator>();
     generator->initModel(localModels, formula);

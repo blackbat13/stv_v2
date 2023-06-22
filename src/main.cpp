@@ -91,8 +91,8 @@ int main(int argc, char* argv[]) {
     auto tp = make_shared<ModelParser>();
     
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = make_shared<LocalModels>(&(get<0>(desc)));
-    auto formula = make_shared<Formula>(&(get<1>(desc)));
+    auto localModels = make_shared<LocalModels>((get<0>(desc)));
+    auto formula = make_shared<Formula>((get<1>(desc)));
 /* ------- Uncomment for the SCC compute test/debug ------- */
     // for (const auto& agt : localModels->agents) {
     //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;
@@ -180,7 +180,7 @@ int main(int argc, char* argv[]) {
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
-            DotGraph(make_shared<AgentTemplate>(it)).saveToFile();
+            DotGraph(it).saveToFile();
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
@@ -188,7 +188,7 @@ int main(int argc, char* argv[]) {
         }
         // save GlobalModel
         generator->expandAllStates();   // todo: add allExpanded flag?
-        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile();
+        DotGraph(generator->getCurrentGlobalModel().get(), true).saveToFile();
     }
 
     if(config.stv_mode=='0'){           // 0 - atm redundant (can be used as special, debug mode)

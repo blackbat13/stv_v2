@@ -13,7 +13,7 @@
 /// @brief Checks if there is an equivalent LocalState in the model to the one passed as an argment.
 /// @param state A pointer to LocalState to be checked.
 /// @return Returns a pointer to an equivalent LocalState if such exists, otherwise returns NULL.
-LocalState* Agent::includesState(LocalState* state) {
+shared_ptr<LocalState> Agent::includesState(shared_ptr<LocalState> state) {
    // pętla po stanach już obecnych w modelu
    for(size_t i=0; i<localStates.size(); i++) {
       // jeśli jest zgodność, zwróć fałsz

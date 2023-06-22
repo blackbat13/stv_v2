@@ -29,7 +29,7 @@ struct LocalTransition {
     // Bindings
 
     /// @brief Binding to an Agent.
-    shared_ptr<Agent> agent;
+    Agent* agent;
 
     /// @brief Binding to a LocalState from which this transition goes from.
     shared_ptr<LocalState> from;

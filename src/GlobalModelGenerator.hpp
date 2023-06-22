@@ -18,7 +18,6 @@ using namespace std;
 class GlobalModelGenerator {
 public:
     GlobalModelGenerator();
-    ~GlobalModelGenerator();
     shared_ptr<GlobalState> initModel(shared_ptr<LocalModels> localModels, shared_ptr<Formula> formula);
     void expandState(shared_ptr<GlobalState> state);
     vector<shared_ptr<GlobalState>> expandStateAndReturn(shared_ptr<GlobalState> state);
@@ -27,7 +26,7 @@ public:
     shared_ptr<Formula> getFormula();
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
-    map<shared_ptr<Agent>, size_t> agentIndex;
+    map<Agent*, size_t> agentIndex;
 
 protected:
     /// @brief LocalModels used in initModel.
@@ -37,12 +36,12 @@ protected:
     /// @brief GlobalModel created in initModel.
     shared_ptr<GlobalModel> globalModel;
     shared_ptr<GlobalState> generateInitState();
-    shared_ptr<GlobalState> generateStateFromLocalStates(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<set<shared_ptr<LocalTransition>>> viaLocalTransitions, shared_ptr<GlobalState> prevGlobalState);
-    void generateGlobalTransitions(shared_ptr<GlobalState> fromGlobalState, set<shared_ptr<LocalTransition>> localTransitions, map<shared_ptr<Agent>, vector<shared_ptr<LocalTransition>>> transitionsByAgent);
-    string computeEpistemicClassHash(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<Agent> agent);
-    string computeGlobalStateHash(shared_ptr<vector<shared_ptr<LocalState>>> localStates);
-    shared_ptr<EpistemicClass> findOrCreateEpistemicClass(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<Agent> agent);
-    shared_ptr<GlobalState> findGlobalStateInEpistemicClass(shared_ptr<vector<shared_ptr<LocalState>>> localStates, shared_ptr<EpistemicClass> epistemicClass);
+    shared_ptr<GlobalState> generateStateFromLocalStates(vector<shared_ptr<LocalState>>* localStates, shared_ptr<set<shared_ptr<LocalTransition>>> viaLocalTransitions, shared_ptr<GlobalState> prevGlobalState);
+    void generateGlobalTransitions(shared_ptr<GlobalState> fromGlobalState, set<shared_ptr<LocalTransition>> localTransitions, map<Agent*, vector<shared_ptr<LocalTransition>>> transitionsByAgent);
+    string computeEpistemicClassHash(vector<shared_ptr<LocalState>>* localStates, Agent* agent);
+    string computeGlobalStateHash(vector<shared_ptr<LocalState>>* localStates);
+    shared_ptr<EpistemicClass> findOrCreateEpistemicClass(vector<shared_ptr<LocalState>>* localStates, Agent* agent);
+    shared_ptr<GlobalState> findGlobalStateInEpistemicClass(vector<shared_ptr<LocalState>>* localStates, shared_ptr<EpistemicClass> epistemicClass);
 };
 
 #endif // SELENE_GLOBAL_MODEL_GENERATOR

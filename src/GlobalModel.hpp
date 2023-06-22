@@ -18,19 +18,19 @@ struct GlobalModel {
     // agents[i].id == i
 
     /// @brief A pointer to a Formula.
-    Formula* formula;
+    shared_ptr<Formula> formula;
     
     // Bindings
 
     /// @brief Pointer to the initial state of the model.
-    GlobalState* initState;
+    shared_ptr<GlobalState> initState;
 
     /// @brief Every GlobalState in the model.
-    vector<GlobalState*> globalStates;
+    vector<shared_ptr<GlobalState>> globalStates;
     // globalStates[i].id == i
 
     /// @brief Map of Agent pointers to a map of EpistemicClass.
-    map<Agent*, map<string, EpistemicClass*>> epistemicClasses;
+    map<Agent*, map<string, shared_ptr<EpistemicClass>>> epistemicClasses;
     // Agent* => (EpistemicClass->hash => EpistemicClass*)
 };
 

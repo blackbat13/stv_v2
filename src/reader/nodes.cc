@@ -17,10 +17,10 @@
 AgentTemplate::AgentTemplate() {
    ident="";
    initState="";
-   localVars = make_shared<set<string>>();
-   persistentVars = make_shared<set<string>>();
-   initialAssignments= make_shared<set<shared_ptr<Assignment>>>();
-   transitions= make_shared<set<shared_ptr<TransitionTemplate>>>();
+   localVars = new set<string>();
+   persistentVars = new set<string>();
+   initialAssignments= new set<Assignment*>();
+   transitions= new set<TransitionTemplate*>();
 }
       
 /* --------------------------------------------------------------------- */
@@ -51,7 +51,7 @@ AgentTemplate& AgentTemplate::setInitState(string _initState) {
 /// @brief Adds local variables to the agent.
 /// @param variables A pointer to a set of strings with the variables to be added.
 /// @return Returns itself.
-AgentTemplate& AgentTemplate::addLocal(shared_ptr<set<string>> variables){
+AgentTemplate& AgentTemplate::addLocal(set<string>* variables){
    if(variables != NULL) {
       // pętla po zawartości nowego zbioru
       for(set<string>::iterator it=variables->begin(); it != variables->end(); it++) {
@@ -68,7 +68,7 @@ AgentTemplate& AgentTemplate::addLocal(shared_ptr<set<string>> variables){
 /// @brief Adds persistent variables to the agent.
 /// @param variables A pointer to a set of strings with the variables to be added.
 /// @return Returns itself.
-AgentTemplate& AgentTemplate::addPersistent(shared_ptr<set<string>> variables) {
+AgentTemplate& AgentTemplate::addPersistent(set<string>* variables) {
    if(variables != NULL) {
       // pętla po zawartości nowego zbioru
       for(set<string>::iterator it=variables->begin(); it != variables->end(); it++) {
@@ -85,10 +85,10 @@ AgentTemplate& AgentTemplate::addPersistent(shared_ptr<set<string>> variables) {
 /// @brief Sets initial values of agent's variables.
 /// @param assigns Set of variables to assign.
 /// @return Returns itself.
-AgentTemplate& AgentTemplate::addInitial(shared_ptr<set<shared_ptr<Assignment>>> assigns) {
+AgentTemplate& AgentTemplate::addInitial(set<Assignment*>* assigns) {
    if(assigns != NULL) {
       // pętla po zawartości nowego zbioru
-      for(set<shared_ptr<Assignment>>::iterator it=assigns->begin(); it != assigns->end(); it++) {
+      for(set<Assignment*>::iterator it=assigns->begin(); it != assigns->end(); it++) {
          // każdą kolejną 
          initialAssignments->insert(*it);
       }
@@ -102,7 +102,7 @@ AgentTemplate& AgentTemplate::addInitial(shared_ptr<set<shared_ptr<Assignment>>>
 /// @brief Adds a transition for the agent.
 /// @param _transition Transition to be added.
 /// @return Returns itself.
-AgentTemplate& AgentTemplate::addTransition(shared_ptr<TransitionTemplate> _transition) {
+AgentTemplate& AgentTemplate::addTransition(TransitionTemplate* _transition) {
    transitions->insert(_transition);
 
    /* 
@@ -119,12 +119,12 @@ AgentTemplate& AgentTemplate::addTransition(shared_ptr<TransitionTemplate> _tran
    // Z tranzycji trzeba teraz wyciągnąć template'y stanów lokalnych
 
    // pomocnicze wskaźniki na stan początkowy i końcowy
-   shared_ptr<LocalStateTemplate> fromState, toState;
+   LocalStateTemplate *fromState, *toState;
    
    // sprawdź nazwę stanu początkowego, czy już jest w bazie
    if(localStateTemplates.count(_transition->startState) == 0) {
       // nie ma - utwórz obiekt stanu
-      fromState = make_shared<LocalStateTemplate>();
+      fromState = new LocalStateTemplate();
       fromState->name = _transition->startState;
       localStateTemplates[_transition->startState] = fromState;
    } else {
@@ -136,7 +136,7 @@ AgentTemplate& AgentTemplate::addTransition(shared_ptr<TransitionTemplate> _tran
    // to samo dla stanu końcowego
    if(localStateTemplates.count(_transition->endState) == 0) {
       // nie ma - utwórz obiekt stanu
-      toState = make_shared<LocalStateTemplate>();
+      toState = new LocalStateTemplate();
       toState->name = _transition->endState;
       localStateTemplates[_transition->endState] = toState;
    }
@@ -151,7 +151,7 @@ AgentTemplate& AgentTemplate::addTransition(shared_ptr<TransitionTemplate> _tran
 /// @param state Current local state.
 /// @param trans Transitions from a local state to 
 /// @return Returns a pointer to a newly created LocalState.
-shared_ptr<LocalState> AgentTemplate::genNextState(shared_ptr<LocalState> state, shared_ptr<TransitionTemplate> trans) {
+shared_ptr<LocalState> AgentTemplate::genNextState(shared_ptr<LocalState> state, TransitionTemplate* trans) {
    // utwórz obiekt dla nowego stanu
    shared_ptr<LocalState> newState = make_shared<LocalState>();
    newState->name = trans->endState;
@@ -163,7 +163,7 @@ shared_ptr<LocalState> AgentTemplate::genNextState(shared_ptr<LocalState> state,
    }
    // teraz wykonaj przypisania
    if (trans->assignments != nullptr) {
-        for(set<shared_ptr<Assignment>>::iterator it=trans->assignments->begin(); it != trans->assignments->end(); it++) {
+        for(set<Assignment*>::iterator it=trans->assignments->begin(); it != trans->assignments->end(); it++) {
             newState->environment[(*it)->ident] = (*it)->value->eval(state->environment);
         }
    }
@@ -178,9 +178,9 @@ shared_ptr<LocalState> AgentTemplate::genNextState(shared_ptr<LocalState> state,
 /// @brief Generates an agent for the model.
 /// @param id Identifier of the new Agent.
 /// @return Returns a pointer to a newly created Agent.
-shared_ptr<Agent> AgentTemplate::generateAgent(int id) {
+Agent* AgentTemplate::generateAgent(int id) {
    // zaalokuj obiekt będący wynikiem
-   shared_ptr<Agent> result = make_shared<Agent>(id, ident);
+   Agent* result = new Agent(id, ident);
    
    // utwórz zbiór zmiennych - aczkolwiek to wydaje mi się zbędne
    for(set<string>::iterator it=localVars->begin(); it != localVars->end(); it++) {
@@ -206,7 +206,7 @@ shared_ptr<Agent> AgentTemplate::generateAgent(int id) {
    result->localStates.push_back(result->initState);
    result->initState->agent = result;
    // wylicz mu wartości zmiennych na podstawie inicjalnego przypisania
-   for(set<shared_ptr<Assignment>>::iterator it = initialAssignments->begin(); it != initialAssignments->end(); it++) {
+   for(set<Assignment*>::iterator it = initialAssignments->begin(); it != initialAssignments->end(); it++) {
       // wylicz wartość i wstaw do środowiska. Posiłkuj się tym samym środowiskiem (zaślepka)
       result->initState->environment[(*it)->ident] = (*it)->value->eval(result->initState->environment);
    }
@@ -222,9 +222,9 @@ shared_ptr<Agent> AgentTemplate::generateAgent(int id) {
       pendingStates.pop();
 
       // wyciągnij template stanu
-      shared_ptr<LocalStateTemplate> temp=localStateTemplates[state->name];
+      LocalStateTemplate* temp=localStateTemplates[state->name];
       // dla każdej możliwej tranzycji
-      for(set<shared_ptr<TransitionTemplate>>::iterator it=temp->transitions.begin(); it != temp->transitions.end(); it++) {
+      for(set<TransitionTemplate*>::iterator it=temp->transitions.begin(); it != temp->transitions.end(); it++) {
          // sprawdź, czy tranzycja może zajść na podstawie warunku
          if((*it)->condition != nullptr && (*it)->condition->eval(state->environment) == 0) {
             // warunek jest fałszywy, przejdź do następnej tranzycji
@@ -237,7 +237,7 @@ shared_ptr<Agent> AgentTemplate::generateAgent(int id) {
          if(foundState != NULL) {
             // owszem, zawiera
             // usuń nowy
-            delete &newState;
+            //delete &newState;
             // przepisz "stary" na "nowy"
             newState=foundState;
          } else {

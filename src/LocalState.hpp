@@ -30,7 +30,7 @@ class LocalState {
         // Bindings
 
         /// @brief Binding to an Agent.
-        shared_ptr<Agent> agent;
+        Agent* agent;
 
         /// @brief Binding to the set of LocalTransition.
         set<shared_ptr<LocalTransition>> localTransitions;

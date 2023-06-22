@@ -36,14 +36,14 @@ DotGraph::DotGraph(){
  */
 
 /// @brief parses the edge/state templates into nodes/edges
-DotGraph::DotGraph(shared_ptr<AgentTemplate const> at){
+DotGraph::DotGraph(AgentTemplate *const at){
     nodes.clear();
     edges.clear();
     name = at->ident;
     caption = "AgentTemplate of " + at->ident; 
     for (const auto& st : at->localStateTemplates){
         this->addNode(st.first, st.second->name);
-        for(const shared_ptr<TransitionTemplate> trn: st.second->transitions){
+        for(const auto* trn: st.second->transitions){
             this->addEdge(
                 trn->startState,
                 trn->endState, 
@@ -54,7 +54,7 @@ DotGraph::DotGraph(shared_ptr<AgentTemplate const> at){
 }
 
 /// @brief parses the local transitions/states templates into nodes/edges
-DotGraph::DotGraph(shared_ptr<Agent const> ag, bool extended){
+DotGraph::DotGraph(Agent *const ag, bool extended){
     nodes.clear();
     edges.clear();
     name = ag->name;
@@ -85,7 +85,7 @@ DotGraph::DotGraph(shared_ptr<Agent const> ag, bool extended){
 }
 
 /// @brief parses the transitions/states templates into nodes/edges
-DotGraph::DotGraph(shared_ptr<GlobalModel const> gm, bool extended){
+DotGraph::DotGraph(GlobalModel *const gm, bool extended){
     nodes.clear();
     edges.clear();
     const std::string sep="||";              // (async) agent names separator
@@ -178,4 +178,3 @@ void DotGraph::saveToFile(std::string filename /*= ""*/){
     ofs << "}";
     ofs.close();
 };
-

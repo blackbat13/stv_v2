@@ -36,9 +36,9 @@ struct HistoryEntry {
     /// @brief Recursion depth.
     int depth;
     /// @brief Pointer to the previous HistoryEntry.
-    shared_ptr<HistoryEntry> prev;
+    HistoryEntry* prev;
     /// @brief Pointer to the next HistoryEntry.
-    shared_ptr<HistoryEntry> next;
+    HistoryEntry* next;
     /// @brief Converts HistoryEntry to string.
     /// @return A string with the descriprion of this history record.
     string toString() {
@@ -63,13 +63,13 @@ struct HistoryEntry {
 class HistoryDbg {
 public:
     /// @brief A pair of history entries and a char marking history type.
-    vector<pair<shared_ptr<HistoryEntry>, char>> entries;
+    vector<pair<HistoryEntry*, char>> entries;
     HistoryDbg();
     ~HistoryDbg();
-    void addEntry(shared_ptr<HistoryEntry> entry);
-    void markEntry(shared_ptr<HistoryEntry> entry, char chr);
+    void addEntry(HistoryEntry* entry);
+    void markEntry(HistoryEntry* entry, char chr);
     void print(string prefix);
-    shared_ptr<HistoryEntry> cloneEntry(shared_ptr<HistoryEntry> entry);
+    HistoryEntry* cloneEntry(HistoryEntry* entry);
 };
 
 // On-the-fly traversal mode
@@ -92,27 +92,27 @@ protected:
     /// @brief Global state to which revert will rollback to.
     shared_ptr<GlobalState> revertToGlobalState;
     /// @brief A history of decisions to be rolled back.
-    stack<shared_ptr<HistoryEntry>> historyToRestore;
+    stack<HistoryEntry*> historyToRestore;
     /// @brief Holds current model and formula.
     shared_ptr<GlobalModelGenerator> generator;
     /// @brief Pointer to the start of model traversal history.
-    shared_ptr<HistoryEntry> historyStart;
+    HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.
-    shared_ptr<HistoryEntry> historyEnd;
-    bool verifyLocalStates(shared_ptr<vector<shared_ptr<LocalState>>> localStates);
+    HistoryEntry* historyEnd;
+    bool verifyLocalStates(vector<shared_ptr<LocalState>>* localStates);
     bool verifyGlobalState(shared_ptr<GlobalState> globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(shared_ptr<GlobalTransition> globalTransition);
-    bool isAgentInCoalition(shared_ptr<Agent> agent);
+    bool isAgentInCoalition(Agent* agent);
     shared_ptr<EpistemicClass> getEpistemicClassForGlobalState(shared_ptr<GlobalState> globalState);
     bool areGlobalStatesInTheSameEpistemicClass(shared_ptr<GlobalState> globalState1, shared_ptr<GlobalState> globalState2);
     void addHistoryDecision(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> ecision);
     void addHistoryStateStatus(shared_ptr<GlobalState> globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
     void addHistoryContext(shared_ptr<GlobalState> globalState, int depth, shared_ptr<GlobalTransition> decision, bool globalTransitionControlled);
     void addHistoryMarkDecisionAsInvalid(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> decision);
-    shared_ptr<HistoryEntry> newHistoryMarkDecisionAsInvalid(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> decision);
+    HistoryEntry* newHistoryMarkDecisionAsInvalid(shared_ptr<GlobalState> globalState, shared_ptr<GlobalTransition> decision);
     bool revertLastDecision(int depth);
     void undoLastHistoryEntry(bool freeMemory);
-    void undoHistoryUntil(shared_ptr<HistoryEntry> historyEntry, bool inclusive, int depth);
+    void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(shared_ptr<GlobalTransition> globalTransition1, shared_ptr<GlobalTransition> globalTransition2);
     bool checkUncontrolledSet(set<shared_ptr<GlobalTransition>> uncontrolledGlobalTransitions, shared_ptr<GlobalState> globalState, int depth, bool hasOmittedTransitions);

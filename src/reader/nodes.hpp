@@ -26,13 +26,13 @@ class Assignment {
       // do czego przypisujemy
 
       /// @brief A value to be assigned.
-      shared_ptr<ExprNode> value;
+      ExprNode *value;
       // co przypisujemy
 
       /// @brief Constructor for an Assignment class.
       /// @param _ident To what we should assign a value.
       /// @param _exp A value to be assigned.
-      Assignment(string _ident, shared_ptr<ExprNode> _exp): ident(_ident), value(_exp) {};
+      Assignment(string _ident, ExprNode *_exp): ident(_ident), value(_exp) {};
       
       // wykonaj przypisanie w danym środowisku
 
@@ -74,12 +74,12 @@ class TransitionTemplate {
       // wyrażenie warunkowe
 
       /// @brief Condition expression that has do be fulfilled in that transition.
-      shared_ptr<ExprNode> condition;
+      ExprNode *condition;
 
       // lista przypisań wartości
 
       /// @brief Set of assignments.
-      shared_ptr<set<shared_ptr<Assignment>>> assignments;
+      set<Assignment*> *assignments;
 
       /// @brief TransitionTemplate constructor.
       /// @param _shared Needed amound of needed agents. -1 if not shared.
@@ -89,7 +89,7 @@ class TransitionTemplate {
       /// @param _endState End state name.
       /// @param _cond Condition expression that has do be fulfilled in that transition.
       /// @param _assign Set of assignments.
-      TransitionTemplate(int _shared, string _patternName, string _matchName, string _startState, string _endState, shared_ptr<ExprNode> _cond, shared_ptr<set<shared_ptr<Assignment>>> _assign): 
+      TransitionTemplate(int _shared, string _patternName, string _matchName, string _startState, string _endState, ExprNode *_cond, set<Assignment*> *_assign): 
             shared(_shared), patternName(_patternName), matchName(_matchName),
             startState(_startState), endState(_endState), condition(_cond), assignments(_assign) {};
             
@@ -102,7 +102,7 @@ class LocalStateTemplate { // [YK]: <-- a class implementing Location
       string name;
 
       /// @brief Local transitions going out from this state.
-      set<shared_ptr<TransitionTemplate>> transitions;  // [YK]: <-- adj. list of edges connecting locations
+      set<TransitionTemplate*> transitions;  // [YK]: <-- adj. list of edges connecting locations
 };
 
 /* Klasa reprezentująca pojedynczego agenta po wczytaniu jego opisu z pliku */
@@ -122,31 +122,31 @@ class AgentTemplate {
       // zbiór zmiennych lokalnych (local)
       
       /// @brief A set of local variables.
-      shared_ptr<set<string>> localVars;
+      set<string>* localVars;
       
       // zbiór zmiennych trwałych (persistent)
       
       /// @brief A set of persistent variables.
-      shared_ptr<set<string>> persistentVars;
+      set<string>* persistentVars;
       
       // początkowa inicjacja
       
       /// @brief Initial initialization.
-      shared_ptr<set<shared_ptr<Assignment>>> initialAssignments;
+      set<Assignment*>* initialAssignments;
       
       // zbiór tranzycji
       
       /// @brief A set of transitions.
-      shared_ptr<set<shared_ptr<TransitionTemplate>>> transitions;
+      set<TransitionTemplate*>* transitions;
    
       // mapa stanów lokalnych potrzebna do wygenerowania modelu
 
       /// @brief Map of local states needed to generate a model.
-      map<string,shared_ptr<LocalStateTemplate>> localStateTemplates;  // [YK]: maps location name to location obj
+      map<string,LocalStateTemplate*> localStateTemplates;  // [YK]: maps location name to location obj
             
       // metoda wyznaczająca węzeł kolejny do danego, zależnie od tranzycji
 
-      virtual shared_ptr<LocalState> genNextState(shared_ptr<LocalState> state, shared_ptr<TransitionTemplate> trans);
+      virtual shared_ptr<LocalState> genNextState(shared_ptr<LocalState> state, TransitionTemplate *trans);
       
    public:
       AgentTemplate();
@@ -170,35 +170,35 @@ class AgentTemplate {
       /// @brief Adds local variables to an agent.
       /// @param variables Set of variables to be added.
       /// @return Returns a pointer to self.
-      virtual AgentTemplate& addLocal(shared_ptr<set<string>> variables);
+      virtual AgentTemplate& addLocal(set<string> *variables);
 
       // dodaj zmienne trwałe
 
       /// @brief Adds persistent variables to an agent.
       /// @param variables Set of variables to be added.
       /// @return Returns a pointer to self.
-      virtual AgentTemplate& addPersistent(shared_ptr<set<string>> variables);
+      virtual AgentTemplate& addPersistent(set<string> *variables);
 
       // dodaj początkowe inicjacje
 
       /// @brief Adds initial assignments.
       /// @param assigns Assignments to be added.
       /// @return Returns a pointer to self.
-      virtual AgentTemplate& addInitial(shared_ptr<set<shared_ptr<Assignment>>> assigns);
+      virtual AgentTemplate& addInitial(set<Assignment*> *assigns);
       
       // dodaj tranzycję
 
       /// @brief Adds a transition to the agent.
       /// @param _transition Transition to be added.
       /// @return Returns a pointer to self.
-      virtual AgentTemplate& addTransition(shared_ptr<TransitionTemplate> _transition);
+      virtual AgentTemplate& addTransition(TransitionTemplate *_transition);
       
       // wygeneruj agenta do modelu
 
       /// @brief Generate a new agent for the model.
       /// @param id Identification number defining a new Agent.
       /// @return Returns a pointer to a new Agent.
-      virtual shared_ptr<Agent> generateAgent(int id) ;
+      virtual Agent* generateAgent(int id) ;
 
       friend class DotGraph;
 };

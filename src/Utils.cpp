@@ -36,7 +36,7 @@ string envToString(map<string, int> env) {
 /// @brief Converts pointer to an Agant into a string containing name of the agent, its initial state, transitions with their local and global names, shared count and conditions. 
 /// @param agt Pointer to an Agent to parse into a string.
 /// @return String containing all of Agent data.
-string agentToString(shared_ptr<Agent> agt) {
+string agentToString(Agent* agt) {
     string res = "";
     res += "Agent " + agt->name + ":\n";
     res += "init " + agt->initState->name + "\n";
@@ -78,7 +78,7 @@ string agentToString(shared_ptr<Agent> agt) {
 /// @brief Converts pointer to the LocalModels into a string cointaining all Agent instances from the model, initial values of the variables and names of the persistent values.
 /// @param lm Pointer to the local model to parse into a string.
 /// @return String containing all of LocalModels data.
-string localModelsToString(LocalModels* lm) {
+string localModelsToString(shared_ptr<LocalModels> lm) {
     string res = "";
     for (const auto& agt : lm->agents) {
         res += agentToString(agt);
@@ -89,7 +89,7 @@ string localModelsToString(LocalModels* lm) {
 
 /// @brief Prints the whole GlobalModel into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents.
 /// @param globalModel Pointer to a GlobalModel to print into the console.
-void outputGlobalModel(GlobalModel* globalModel) {
+void outputGlobalModel(shared_ptr<GlobalModel> globalModel) {
     printf("\n\nGlobal model:\n");
     for (const auto globalState : globalModel->globalStates) {
         printf(
@@ -180,7 +180,7 @@ unsigned long getMemCap() {
 /// @param onstack - used as condition for back/cross-edge case
 /// @param depth - next available (discovery) index
 /// @param comp - result of SCC partitioning
-void tarjanVisit(shared_ptr<LocalState> v, shared_ptr<map<int, int>> dindex, shared_ptr<map<int,int>> lowlink, shared_ptr<stack<shared_ptr<LocalState>>> stack, shared_ptr<map<int,bool>> onstack, shared_ptr<int> depth, shared_ptr<vector<set<shared_ptr<LocalState>>>> comp){
+void tarjanVisit(shared_ptr<LocalState> v, map<int, int>* dindex, map<int,int>* lowlink, stack<shared_ptr<LocalState>>* stack, map<int,bool>* onstack, int* depth, vector<set<shared_ptr<LocalState>>>* comp){
     (*dindex)[v->id] = (*depth);    // assign current depth
     (*lowlink)[v->id] = (*depth);   // start with its own dindex
     (*depth)++;                     // increment the (unused) depth
@@ -215,7 +215,7 @@ void tarjanVisit(shared_ptr<LocalState> v, shared_ptr<map<int, int>> dindex, sha
 /// @brief a quick implementation of a Tarjan SCC algorithm (based on DFS)
 /// @param agt - an agent whose local graph will be inspected
 /// @return localStates partition in a form of the vector, where each set correponds to a SCC
-vector<set<shared_ptr<LocalState>>> getLocalStatesSCC(shared_ptr<Agent> agt){
+vector<set<shared_ptr<LocalState>>> getLocalStatesSCC(Agent* agt){
     vector<set<shared_ptr<LocalState>>> comp;
     
     // [YK]: these 3 maps below could be replaced with int array (if localstate ids are always conseq. numbers starting from 0)
@@ -223,12 +223,12 @@ vector<set<shared_ptr<LocalState>>> getLocalStatesSCC(shared_ptr<Agent> agt){
     map<int,int> lowlink;
     map<int,bool> onstack; 
 
-    shared_ptr<stack<shared_ptr<LocalState>>> stack;
+    stack<shared_ptr<LocalState>>* stack;
 
     int depth = 0;
     for(const auto& v : agt->localStates){
         if(dindex.count(v->id)<=0){
-            tarjanVisit(v, make_shared<map<int, int>>(&dindex), make_shared<map<int, int>>(&lowlink), stack, make_shared<map<int, bool>>(&onstack), make_shared<int>(&depth), make_shared<vector<set<shared_ptr<LocalState>>>>(&comp));
+            tarjanVisit(v, &dindex, &lowlink, stack, &onstack, &depth, &comp);
         }
     }
 
@@ -236,17 +236,17 @@ vector<set<shared_ptr<LocalState>>> getLocalStatesSCC(shared_ptr<Agent> agt){
 }
 
 
-map<shared_ptr<LocalState>,vector<shared_ptr<GlobalState>>> getContextModel(shared_ptr<Formula> formula, shared_ptr<LocalModels> localModels, shared_ptr<Agent> agt){
+map<shared_ptr<LocalState>, vector<shared_ptr<GlobalState>>> getContextModel(shared_ptr<Formula> formula, shared_ptr<LocalModels> localModels, Agent* agt){
     // partition local states into SCC
     vector<set<shared_ptr<LocalState>>> scc = getLocalStatesSCC(agt);        // Set of 
     map<shared_ptr<LocalState>,vector<shared_ptr<GlobalState>>> res;                    // Loc_i -> St_i
 
-    vector<shared_ptr<const set<shared_ptr<LocalState>>>> openComp;   // components that should be processed
+    vector<const set<shared_ptr<LocalState>>*> openComp;   // components that should be processed
 
     // find SCC of initial local state
     for(auto const &c : scc){
         if(c.count(agt->initState)){
-            openComp.push_back(make_shared<set<shared_ptr<LocalState>>>(&c));             // push initial component pointer 
+            openComp.push_back(&c);             // push initial component pointer 
             break;
         }
     }
@@ -257,7 +257,7 @@ map<shared_ptr<LocalState>,vector<shared_ptr<GlobalState>>> getContextModel(shar
     shared_ptr<GlobalState> initState = generator->initModel(localModels, formula);
     shared_ptr<GlobalModel> gm = generator->getCurrentGlobalModel();      // pointer to a current global model
 
-    shared_ptr<const set<shared_ptr<LocalState>>> currComp;          // pointer to a const set<LocalState*>
+    const set<shared_ptr<LocalState>>* currComp;          // pointer to a const set<LocalState*>
     auto agtInd = generator->agentIndex[agt];
 
     while(!openComp.empty()){
@@ -357,7 +357,7 @@ map<shared_ptr<LocalState>,vector<shared_ptr<GlobalState>>> getContextModel(shar
         for(auto const &c : scc){
             for(const auto& s : gm->globalStates){
                 if(c.count(s->localStatesProjection[agtInd])){
-                    openComp.push_back(make_shared<set<shared_ptr<LocalState>>>(&c));
+                    openComp.push_back(&c);
                     break;
                 }
             }   
