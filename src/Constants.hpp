@@ -7,9 +7,9 @@
 // #define MODE 2 // 1 = only generate; 2 = verify
 
 // Model id
-// 1 = /examples/trains/Trains.txt
+// 1 = /examples/trains/Trains2Controller1.txt
 // 2 = /examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt
-// 3 = /examples/svote/Simple_voting.txt
+// 3 = /examples/svote/Voters2Candidates2.txt
 // #define MODEL_ID 1
 
 struct Cfg{

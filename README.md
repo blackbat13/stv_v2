@@ -22,6 +22,20 @@ Configuration file:
 build/config.txt
 ```
 
+CLI configuration overwrite:  
+```sh
+# Input model
+./stv --file PATH_TO_MODEL 
+./stv -f PATH_TO_MODEL 
+# Mode
+./stv -m 1  # omit verification
+./stv -m 2  # run verification
+# Flags
+# --OUTPUT_GLOBAL_MODEL     stdout data on global model (after expandAllStates)
+# --OUTPUT_LOCAL_MODELS     stdout data on local models () 
+# --OUTPUT_DOT_FILES        generate .dot files for agent templates, local and global models
+```
+
 ## Tests
 
 To run tests:

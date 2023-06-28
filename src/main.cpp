@@ -33,11 +33,11 @@ void loadConfig(int argc, char** argv){
             if(key=="MODEL_ID"){
                 config.model_id=val[0]-'0';
                 if(val=="1"){
-                    config.fname = "../examples/trains/Trains.txt";
+                    config.fname = "../examples/trains/Trains2Controller1.txt";
                 }else if(val=="2"){
                     config.fname = "../examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
                 }else if(val=="3"){
-                    config.fname = "../examples/svote/Simple_voting.txt";
+                    config.fname = "../examples/svote/Voters2Candidates2.txt";
                 }
             }else if(key=="OUTPUT_LOCAL_MODELS"){
                 config.output_local_models = (val=="1");
@@ -69,11 +69,11 @@ void loadConfig(int argc, char** argv){
                 }else{
                     printf("ERR: no stv_mode was specified!\n");
                 }
-            }else if(arg == "-OUTPUT_GLOBAL_MODEL"){
+            }else if(arg == "-OUTPUT_GLOBAL_MODEL" || arg == "--OUTPUT_GLOBAL_MODEL"){
                 config.output_global_model = 1;
-            }else if(arg == "-OUTPUT_LOCAL_MODELS"){
+            }else if(arg == "-OUTPUT_LOCAL_MODELS" || arg == "--OUTPUT_LOCAL_MODELS"){
                 config.output_local_models = 1;
-            }else if(arg == "-OUTPUT_DOT_FILES"){
+            }else if(arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES"){
                 config.output_dot_files = 1;
             }
         }

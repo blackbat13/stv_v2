@@ -48,6 +48,8 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
 
    Formula formula;
    formula.p = formulaDescription.formula;
+   formula.isF = formulaDescription.isF;
+   
    for (const auto agent : models.agents) {
       if (formulaDescription.coalition->count(agent->name)>0) {
          formula.coalition.insert(agent);
