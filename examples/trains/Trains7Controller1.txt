@@ -1,0 +1,75 @@
+Agent Train1:
+LOCAL: [Train1_pos]
+INITIAL: [Train1_pos:=1]
+init idle
+shared[2] in_Train1: idle [Train1_pos==1] -> idle [Train1_pos:=2]
+shared[2] out_Train1: idle [Train1_pos==2] -> idle [Train1_pos:=3]
+return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]    
+
+Agent Train2:
+LOCAL: [Train2_pos]
+INITIAL: [Train2_pos:=1]
+init idle
+shared[2] in_Train2: idle [Train2_pos==1] -> idle [Train2_pos:=2]
+shared[2] out_Train2: idle [Train2_pos==2] -> idle [Train2_pos:=3]
+return_2: idle [Train2_pos==3] -> idle [Train2_pos:=1]    
+
+Agent Train3:
+LOCAL: [Train3_pos]
+INITIAL: [Train3_pos:=1]
+init idle
+shared[2] in_Train3: idle [Train3_pos==1] -> idle [Train3_pos:=2]
+shared[2] out_Train3: idle [Train3_pos==2] -> idle [Train3_pos:=3]
+return_3: idle [Train3_pos==3] -> idle [Train3_pos:=1]    
+
+Agent Train4:
+LOCAL: [Train4_pos]
+INITIAL: [Train4_pos:=1]
+init idle
+shared[2] in_Train4: idle [Train4_pos==1] -> idle [Train4_pos:=2]
+shared[2] out_Train4: idle [Train4_pos==2] -> idle [Train4_pos:=3]
+return_4: idle [Train4_pos==3] -> idle [Train4_pos:=1]    
+
+Agent Train5:
+LOCAL: [Train5_pos]
+INITIAL: [Train5_pos:=1]
+init idle
+shared[2] in_Train5: idle [Train5_pos==1] -> idle [Train5_pos:=2]
+shared[2] out_Train5: idle [Train5_pos==2] -> idle [Train5_pos:=3]
+return_5: idle [Train5_pos==3] -> idle [Train5_pos:=1]    
+
+Agent Train6:
+LOCAL: [Train6_pos]
+INITIAL: [Train6_pos:=1]
+init idle
+shared[2] in_Train6: idle [Train6_pos==1] -> idle [Train6_pos:=2]
+shared[2] out_Train6: idle [Train6_pos==2] -> idle [Train6_pos:=3]
+return_6: idle [Train6_pos==3] -> idle [Train6_pos:=1]    
+
+Agent Train7:
+LOCAL: [Train7_pos]
+INITIAL: [Train7_pos:=1]
+init idle
+shared[2] in_Train7: idle [Train7_pos==1] -> idle [Train7_pos:=2]
+shared[2] out_Train7: idle [Train7_pos==2] -> idle [Train7_pos:=3]
+return_7: idle [Train7_pos==3] -> idle [Train7_pos:=1]    
+
+Agent Controller:
+LOCAL: []
+init green
+shared[2] in_Train1: green -> red
+shared[2] out_Train1: red -> green
+shared[2] in_Train2: green -> red
+shared[2] out_Train2: red -> green
+shared[2] in_Train3: green -> red
+shared[2] out_Train3: red -> green
+shared[2] in_Train4: green -> red
+shared[2] out_Train4: red -> green
+shared[2] in_Train5: green -> red
+shared[2] out_Train5: red -> green
+shared[2] in_Train6: green -> red
+shared[2] out_Train6: red -> green
+shared[2] in_Train7: green -> red
+shared[2] out_Train7: red -> green
+
+FORMULA: <<Train1>>[](Train1_pos==1 || Train1_pos==2 || Train1_pos==3)

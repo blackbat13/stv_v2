@@ -33,11 +33,11 @@ void loadConfig(int argc, char** argv){
             if(key=="MODEL_ID"){
                 config.model_id=val[0]-'0';
                 if(val=="1"){
-                    config.fname = "../src/examples/trains/Trains.txt";
+                    config.fname = "../examples/trains/Trains.txt";
                 }else if(val=="2"){
-                    config.fname = "../src/examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
+                    config.fname = "../examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
                 }else if(val=="3"){
-                    config.fname = "../src/examples/svote/Simple_voting.txt";
+                    config.fname = "../examples/svote/Simple_voting.txt";
                 }
             }else if(key=="OUTPUT_LOCAL_MODELS"){
                 config.output_local_models = (val=="1");

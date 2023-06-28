@@ -1,0 +1,102 @@
+Agent Timer0:
+LOCAL: [Time0]
+PERSISTENT: [Time0]
+INITIAL: [Time0:=0]
+init q0
+Timer0goto1[Timer0goto1]: q0 -> q1 [Time0:=1]
+Timer0goto2[Timer0goto2]: q1 -> q2 [Time0:=2]
+Timer0goto3[Timer0goto3]: q2 -> q3 [Time0:=3]
+Timer0goto4[Timer0goto4]: q3 -> q4 [Time0:=4]
+Timer0goto5[Timer0goto5]: q4 -> q5 [Time0:=5]
+Timer0goto6[Timer0goto6]: q5 -> q6 [Time0:=6]
+Timer0goto7[Timer0goto7]: q6 -> q7 [Time0:=7]
+Timer0goto8[Timer0goto8]: q7 -> q8 [Time0:=8]
+Timer0goto9[Timer0goto9]: q8 -> q9 [Time0:=9]
+shared[2] Timer0goto0[Timer0goto0]: q9 -> q0 [Time0:=0]
+
+Agent Timer1:
+LOCAL: [Time1]
+PERSISTENT: [Time1]
+INITIAL: [Time1:=0]
+init q0
+shared[2] Timer0goto0[Timer1goto1]: q0 -> q1 [Time1:=1]
+shared[2] Timer0goto0[Timer1goto2]: q1 -> q2 [Time1:=2]
+shared[2] Timer0goto0[Timer1goto3]: q2 -> q3 [Time1:=3]
+shared[2] Timer0goto0[Timer1goto4]: q3 -> q4 [Time1:=4]
+shared[2] Timer0goto0[Timer1goto5]: q4 -> q5 [Time1:=5]
+shared[2] Timer0goto0[Timer1goto6]: q5 -> q6 [Time1:=6]
+shared[2] Timer0goto0[Timer1goto7]: q6 -> q7 [Time1:=7]
+shared[2] Timer0goto0[Timer1goto8]: q7 -> q8 [Time1:=8]
+shared[2] Timer0goto0[Timer1goto9]: q8 -> q9 [Time1:=9]
+shared[2] Timer1goto0[Timer1reset]: q9 -> q10 [Time1:=0]
+shared[2] Timer1goto0[Timer1goto0]: q10 -> q0
+
+Agent Timer2:
+LOCAL: [Time2]
+PERSISTENT: [Time2]
+INITIAL: [Time2:=0]
+init q0
+shared[2] Timer1goto0[Timer2goto1]: q0 -> q1 [Time2:=1]
+shared[2] Timer1goto0[Timer2goto2]: q1 -> q2 [Time2:=2]
+shared[2] Timer1goto0[Timer2goto3]: q2 -> q3 [Time2:=3]
+shared[2] Timer1goto0[Timer2goto4]: q3 -> q4 [Time2:=4]
+shared[2] Timer1goto0[Timer2goto5]: q4 -> q5 [Time2:=5]
+shared[2] Timer1goto0[Timer2goto6]: q5 -> q6 [Time2:=6]
+shared[2] Timer1goto0[Timer2goto7]: q6 -> q7 [Time2:=7]
+shared[2] Timer1goto0[Timer2goto8]: q7 -> q8 [Time2:=8]
+shared[2] Timer1goto0[Timer2goto9]: q8 -> q9 [Time2:=9]
+shared[2] Timer2goto0[Timer2reset]: q9 -> q10 [Time2:=0]
+shared[2] Timer2goto0[Timer2goto0]: q10 -> q0
+
+Agent Timer3:
+LOCAL: [Time3]
+PERSISTENT: [Time3]
+INITIAL: [Time3:=0]
+init q0
+shared[2] Timer2goto0[Timer3goto1]: q0 -> q1 [Time3:=1]
+shared[2] Timer2goto0[Timer3goto2]: q1 -> q2 [Time3:=2]
+shared[2] Timer2goto0[Timer3goto3]: q2 -> q3 [Time3:=3]
+shared[2] Timer2goto0[Timer3goto4]: q3 -> q4 [Time3:=4]
+shared[2] Timer2goto0[Timer3goto5]: q4 -> q5 [Time3:=5]
+shared[2] Timer2goto0[Timer3goto6]: q5 -> q6 [Time3:=6]
+shared[2] Timer2goto0[Timer3goto7]: q6 -> q7 [Time3:=7]
+shared[2] Timer2goto0[Timer3goto8]: q7 -> q8 [Time3:=8]
+shared[2] Timer2goto0[Timer3goto9]: q8 -> q9 [Time3:=9]
+shared[2] Timer3goto0[Timer3reset]: q9 -> q10 [Time3:=0]
+shared[2] Timer3goto0[Timer3goto0]: q10 -> q0
+
+Agent Timer4:
+LOCAL: [Time4]
+PERSISTENT: [Time4]
+INITIAL: [Time4:=0]
+init q0
+shared[2] Timer3goto0[Timer4goto1]: q0 -> q1 [Time4:=1]
+shared[2] Timer3goto0[Timer4goto2]: q1 -> q2 [Time4:=2]
+shared[2] Timer3goto0[Timer4goto3]: q2 -> q3 [Time4:=3]
+shared[2] Timer3goto0[Timer4goto4]: q3 -> q4 [Time4:=4]
+shared[2] Timer3goto0[Timer4goto5]: q4 -> q5 [Time4:=5]
+shared[2] Timer3goto0[Timer4goto6]: q5 -> q6 [Time4:=6]
+shared[2] Timer3goto0[Timer4goto7]: q6 -> q7 [Time4:=7]
+shared[2] Timer3goto0[Timer4goto8]: q7 -> q8 [Time4:=8]
+shared[2] Timer3goto0[Timer4goto9]: q8 -> q9 [Time4:=9]
+shared[2] Timer4goto0[Timer4reset]: q9 -> q10 [Time4:=0]
+shared[2] Timer4goto0[Timer4goto0]: q10 -> q0
+
+Agent Timer5:
+LOCAL: [Time5]
+PERSISTENT: [Time5]
+INITIAL: [Time5:=0]
+init q0
+shared[2] Timer4goto0[Timer5goto1]: q0 -> q1 [Time5:=1]
+shared[2] Timer4goto0[Timer5goto2]: q1 -> q2 [Time5:=2]
+shared[2] Timer4goto0[Timer5goto3]: q2 -> q3 [Time5:=3]
+shared[2] Timer4goto0[Timer5goto4]: q3 -> q4 [Time5:=4]
+shared[2] Timer4goto0[Timer5goto5]: q4 -> q5 [Time5:=5]
+shared[2] Timer4goto0[Timer5goto6]: q5 -> q6 [Time5:=6]
+shared[2] Timer4goto0[Timer5goto7]: q6 -> q7 [Time5:=7]
+shared[2] Timer4goto0[Timer5goto8]: q7 -> q8 [Time5:=8]
+shared[2] Timer4goto0[Timer5goto9]: q8 -> q9 [Time5:=9]
+shared[2] Timer5goto0[Timer5reset]: q9 -> q10 [Time5:=0]
+Timer5goto0[Timer5goto0]: q10 -> q0
+
+FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    

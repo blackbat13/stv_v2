@@ -1,0 +1,15 @@
+Agent Timer0:
+LOCAL: [Time0]
+PERSISTENT: [Time0]
+INITIAL: [Time0:=0]
+init q0
+Timer0goto1[Timer0goto1]: q0 -> q1 [Time0:=1]
+Timer0goto2[Timer0goto2]: q1 -> q2 [Time0:=2]
+Timer0goto3[Timer0goto3]: q2 -> q3 [Time0:=3]
+Timer0goto4[Timer0goto4]: q3 -> q4 [Time0:=4]
+Timer0goto5[Timer0goto5]: q4 -> q5 [Time0:=5]
+Timer0goto6[Timer0goto6]: q5 -> q6 [Time0:=6]
+Timer0goto7[Timer0goto7]: q6 -> q7 [Time0:=7]
+Timer0goto0[Timer0goto0]: q7 -> q0 [Time0:=0]
+
+FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    

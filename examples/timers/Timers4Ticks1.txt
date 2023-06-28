@@ -1,0 +1,36 @@
+Agent Timer0:
+LOCAL: [Time0]
+PERSISTENT: [Time0]
+INITIAL: [Time0:=0]
+init q0
+Timer0goto1[Timer0goto1]: q0 -> q1 [Time0:=1]
+shared[2] Timer0goto0[Timer0goto0]: q1 -> q0 [Time0:=0]
+
+Agent Timer1:
+LOCAL: [Time1]
+PERSISTENT: [Time1]
+INITIAL: [Time1:=0]
+init q0
+shared[2] Timer0goto0[Timer1goto1]: q0 -> q1 [Time1:=1]
+shared[2] Timer1goto0[Timer1reset]: q1 -> q2 [Time1:=0]
+shared[2] Timer1goto0[Timer1goto0]: q2 -> q0
+
+Agent Timer2:
+LOCAL: [Time2]
+PERSISTENT: [Time2]
+INITIAL: [Time2:=0]
+init q0
+shared[2] Timer1goto0[Timer2goto1]: q0 -> q1 [Time2:=1]
+shared[2] Timer2goto0[Timer2reset]: q1 -> q2 [Time2:=0]
+shared[2] Timer2goto0[Timer2goto0]: q2 -> q0
+
+Agent Timer3:
+LOCAL: [Time3]
+PERSISTENT: [Time3]
+INITIAL: [Time3:=0]
+init q0
+shared[2] Timer2goto0[Timer3goto1]: q0 -> q1 [Time3:=1]
+shared[2] Timer3goto0[Timer3reset]: q1 -> q2 [Time3:=0]
+Timer3goto0[Timer3goto0]: q2 -> q0
+
+FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    
