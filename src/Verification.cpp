@@ -145,10 +145,10 @@ bool Verification::verify() {
 /// @param localStates A pointer to a set of pointers to LocalState.
 /// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.
 bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
-    map<string,int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
+    map<string, int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
 
     for (const auto localState : *localStates) {
-        for(auto it = localState->environment.begin();it!=localState->environment.end();++it){
+        for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
             currEnv[it->first] = it->second;
         }
     }
@@ -175,6 +175,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             printf("%s> skipping verification of globalState: hash=%s (verified ERR)\n", prefix.c_str(), globalState->hash.c_str());
         }
     #endif
+
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
     }
@@ -197,9 +198,9 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     // 1) verify localStates that the globalState is composed of
     if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "localStates verification");
         globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-        return false;
+        return true;
     }
     
     // 2) ensure that the state is expanded

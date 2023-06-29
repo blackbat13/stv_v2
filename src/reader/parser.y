@@ -60,8 +60,8 @@ spec: spec agent { $$=$1; $$->insert($2); }
 query: T_FORMULA formula { }
      ;
 
-formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=0; formulaDescription.formula=$4;} 
-       | coalition '<' '>' cond { formulaDescription.coalition=$1; formulaDescription.isF=1; formulaDescription.formula=$4;} 
+formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4;} 
+       | coalition T_LT T_GT cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4;} 
        ;
 
 coalition: T_LT T_LT ident_list T_GT T_GT { $$=$3; }
