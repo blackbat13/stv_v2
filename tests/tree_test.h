@@ -211,3 +211,32 @@ TEST(TreeTest, 8Choices3Options)
 
     EXPECT_EQ(result, true);
 }
+
+TEST(TreeTestF, 5Choices3Options)
+{
+    config.fname = "../tests/big_examples/tree/5Choices3OptionsF.txt";
+    config.output_local_models = false;
+    config.output_global_model = false;
+    config.stv_mode = '2';
+
+    auto tp = new ModelParser();
+    
+    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    auto localModels = &(get<0>(desc));
+    auto formula = &(get<1>(desc));
+
+    GlobalModelGenerator* generator = new GlobalModelGenerator();
+    generator->initModel(localModels, formula);
+
+    bool result = false;
+
+    generator->expandAllStates();
+
+    auto verification = new Verification(generator);
+    
+    result = verification->verify();
+
+    delete(generator);
+
+    EXPECT_EQ(result, true);
+}
