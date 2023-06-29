@@ -176,6 +176,8 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
     #endif
 
+    bool isFMode = this->generator->getFormula()->isF;
+
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
     }
@@ -183,7 +185,12 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         return true;
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
-        return true;
+        if (isFMode) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
     if (this->historyEnd != nullptr && this->historyEnd->type == HistoryEntryType::STATE_STATUS && this->historyEnd->globalState == globalState && this->historyEnd->prevStatus == GlobalStateVerificationStatus::PENDING && this->historyEnd->newStatus == GlobalStateVerificationStatus::UNVERIFIED) {
         dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::PENDING, "entered state w/ undo");
@@ -196,11 +203,21 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 1) verify localStates that the globalState is composed of
-    if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
-        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "localStates verification");
-        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-        return true;
+    if (isFMode) {
+        if (this->verifyLocalStates(&globalState->localStatesProjection)) {
+            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+            return true;
+        }
+    }
+    else {
+        if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+            return false;
+        }
     }
     
     // 2) ensure that the state is expanded
