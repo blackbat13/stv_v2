@@ -1,0 +1,13 @@
+Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share: [Verification result: OK
+EA1:  [100, 565]
+Voter1:  [38, 40]
+VoterC1:  [796, 897]
+Coercer1:  [1284, 7176]
+Global:  [3999, 11471]]
+Selene_Select_Vote_Revoting_2v_1cv_3c_3rev_share: [Verification result: OK
+EA1:  [1160, 9997]
+Voter1:  [50, 55]
+Voter2:  [50, 55]
+VoterC1:  [730, 1194]
+Coercer1:  [2164, 17736]
+Global:  [209126, 959681]]

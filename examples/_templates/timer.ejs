@@ -30,5 +30,5 @@ shared[2] Timer<%=i%>goto0[Timer<%=i%>reset]: q<%=N_TICKS%> -> q<%=N_TICKS+1%> [
 
 <%_ } _%>
 <%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { _%>
-FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    
+FORMULA: <<Timer0>>[](Time0 != <%=N_TICKS%>+1)    
 <%_ } _%>

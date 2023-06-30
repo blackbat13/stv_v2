@@ -12,4 +12,4 @@ Timer0goto6[Timer0goto6]: q5 -> q6 [Time0:=6]
 Timer0goto7[Timer0goto7]: q6 -> q7 [Time0:=7]
 Timer0goto0[Timer0goto0]: q7 -> q0 [Time0:=0]
 
-FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    
+FORMULA: <<Timer0>>[](Time0 != 7+1)    

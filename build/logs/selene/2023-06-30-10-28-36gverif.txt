@@ -1,0 +1,2 @@
+Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share: [41116	2.39	2.36	0.02]
+Selene_Select_Vote_Revoting_2v_1cv_3c_3rev_share: [2778672	179.94	178.55	1.35]

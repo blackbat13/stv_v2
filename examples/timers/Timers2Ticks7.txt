@@ -27,4 +27,4 @@ shared[2] Timer0goto0[Timer1goto7]: q6 -> q7 [Time1:=7]
 shared[2] Timer1goto0[Timer1reset]: q7 -> q8 [Time1:=0]
 Timer1goto0[Timer1goto0]: q8 -> q0
 
-FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    
+FORMULA: <<Timer0>>[](Time0 != 7+1)    

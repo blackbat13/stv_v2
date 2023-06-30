@@ -30,10 +30,10 @@ blank [ \n\t]
 "&&"           { return T_AND; }
 "=="           { return T_EQ; }
 "!="           { return T_NE; }
-">"            { return T_GT; }
 ">="           { return T_GE; }
-"<"            { return T_LT; }
+">"            { return T_GT; }
 "<="           { return T_LE; }
+"<"            { return T_LT; }
 -?[0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }

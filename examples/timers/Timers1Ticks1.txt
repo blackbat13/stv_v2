@@ -6,4 +6,4 @@ init q0
 Timer0goto1[Timer0goto1]: q0 -> q1 [Time0:=1]
 Timer0goto0[Timer0goto0]: q1 -> q0 [Time0:=0]
 
-FORMULA: <<Timer0>>[](Time0 <= N_TICKS)    
+FORMULA: <<Timer0>>[](Time0 != 1+1)    
