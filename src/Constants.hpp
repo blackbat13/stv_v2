@@ -14,7 +14,7 @@
 
 struct Cfg{
     char* fname;
-    char stv_mode;
+    int stv_mode;
     bool output_local_models;
     bool output_global_model;
     bool output_dot_files;

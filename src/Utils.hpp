@@ -23,5 +23,7 @@ void outputGlobalModel(GlobalModel* globalModel);
 unsigned long getMemCap();
 vector<set<LocalState*>> getLocalStatesSCC(Agent* agt);
 map<LocalState*,vector<GlobalState*>> getContextModel(Formula* formula, LocalModels* localModels, Agent* agt);
+void loadConfigFromFile(string filename="config.txt");
+void loadConfigFromArgs(int argc, char** argv);
 
 #endif // STV_TYPES

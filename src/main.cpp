@@ -18,86 +18,18 @@ Cfg config;
 extern set<AgentTemplate*>* modelDescription;
 extern FormulaTemplate formulaDescription;
 
-void loadConfig(int argc, char** argv){
-    // read default values from config.txt
-    ifstream ifs("config.txt", ifstream::in);
-    if (ifs.is_open() == true) {
-        string line;
-        while(getline(ifs,line)){
-            if(line.empty() || line[0]==';'){
-                continue;
-            }
-            auto delimPos = line.find("=");
-            auto key = line.substr(0,delimPos);
-            auto val = line.substr(delimPos+1);
-            if(key=="MODEL_ID"){
-                config.model_id=val[0]-'0';
-                if(val=="1"){
-                    config.fname = "../examples/trains/Trains2Controller1.txt";
-                }else if(val=="2"){
-                    config.fname = "../examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
-                }else if(val=="3"){
-                    config.fname = "../examples/svote/Voters2Candidates2.txt";
-                }
-            }else if(key=="OUTPUT_LOCAL_MODELS"){
-                config.output_local_models = (val=="1");
-            }else if(key=="OUTPUT_GLOBAL_MODEL"){
-                config.output_global_model = (val=="1");
-            }else if(key=="MODE"){
-                config.stv_mode = val[0];
-            }else if(key=="OUTPUT_DOT_FILES"){
-                config.output_dot_files = (val=="1");
-            }
-        }
-    }else{
-        printf("Could not open the config file...");
-    }
-
-    // overwrite the default config values (if provided on the input)
-    if(argc>=2){
-        for(int i=1;i<argc;i++){
-            string arg = argv[i];
-            if( (arg == "-f") || (arg == "--file")){
-                if(i+1<argc){
-                    config.fname = argv[++i];
-                }else{
-                    printf("ERR: no filename was specified!\n");
-                }
-            }else if((arg == "-m") || (arg == "--mode")){
-                if(i+1<argc){
-                    config.stv_mode = argv[i++][0];
-                }else{
-                    printf("ERR: no stv_mode was specified!\n");
-                }
-            }else if(arg == "-OUTPUT_GLOBAL_MODEL" || arg == "--OUTPUT_GLOBAL_MODEL"){
-                config.output_global_model = 1;
-            }else if(arg == "-OUTPUT_LOCAL_MODELS" || arg == "--OUTPUT_LOCAL_MODELS"){
-                config.output_local_models = 1;
-            }else if(arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES"){
-                config.output_dot_files = 1;
-            }
-        }
-    }
-}
-
-
-
 int main(int argc, char* argv[]) {
     unsigned long mem1 = getMemCap();
     struct timeval tb, te;
     gettimeofday(&tb, NULL);
-    
-    loadConfig(argc,argv); 
+    loadConfigFromFile("config.txt");
+    loadConfigFromArgs(argc,argv);
+
     auto tp = new ModelParser();
-    
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-    for (const auto agent : localModels->agents) {
-        cout << agent->name << " local states: " << agent->localStates.size() << endl;
-        cout << agent->name << " local transitions: " << agent->localTransitions.size() << endl;
-    }
 /* ------- Uncomment for the SCC compute test/debug ------- */
     // for (const auto& agt : localModels->agents) {
     //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;
@@ -196,31 +128,48 @@ int main(int argc, char* argv[]) {
         DotGraph(generator->getCurrentGlobalModel(), true).saveToFile();
     }
 
-    if(config.stv_mode=='0'){           // 0 - atm redundant (can be used as special, debug mode)
-    }else if(config.stv_mode=='1'){     // 1 - ignore verification
+
+    if(config.stv_mode & (1 << 0)){     // mode.binary = [0,1]*1 (generate)
         generator->expandAllStates();
-    }else if(config.stv_mode=='2'){     // 2 - read, generate and verify
-        // generator->expandAllStates();
+    }
+    
+    if(config.stv_mode & (1 << 1)){     // mode.binary = [0,1]*1[0,1] (verify)
         auto verification = new Verification(generator);
         // Show verifications of vars in each global state; to use the following code, make verification->verifyLocalStates public and ensure that generator->expandAllStates() has been called
         // auto gm = generator->getCurrentGlobalModel();
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
-        printf("\nVerification result: %s\n", verification->verify() ? "OK" : "ERR");
+        printf("Verification result: %s\n", verification->verify() ? "OK" : "ERR");
     }
 
-    gettimeofday(&te, NULL);
-    //unsigned long long czas = 1000000 * (te.tv_sec - tb.tv_sec) + (te.tv_usec - tb.tv_usec);
-    unsigned long czas = (te.tv_sec - tb.tv_sec);
-    unsigned long mem2=getMemCap();
+    if(config.stv_mode & (1 << 2)){     // mode.binary = [0,1]*1[0,1]{2} (print metadata)
+        // Print out model metadata
+        for (const auto agent : localModels->agents) {
+            // name: [states, transitions]
+            cout << agent->name << ":  [" << agent->localStates.size() << ", " << agent->localTransitions.size() <<  "]"<< endl;
+        }
+        
+        set<GlobalTransition*> globTrn;
+        for(auto const st : (generator->getCurrentGlobalModel())->globalStates){
+            for(auto tr: st->globalTransitions){
+                globTrn.insert(tr);
+            }
+        }
+        cout <<"Global:  [" << (generator->getCurrentGlobalModel())->globalStates.size() << ", " << (globTrn.size()) << "]" << endl;
+        //
+    }
+    
 
-    printf("\n\nczas = %lu sec\n\n",czas);
-
-    printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
-    //cout << mem2 << " - " << mem1 << " = " << mem2-mem1 << endl;
-
-    printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
+    if(false){
+        gettimeofday(&te, NULL);
+        //unsigned long long czas = 1000000 * (te.tv_sec - tb.tv_sec) + (te.tv_usec - tb.tv_usec);
+        unsigned long czas = (te.tv_sec - tb.tv_sec);
+        unsigned long mem2=getMemCap();
+        printf("\n\nczas = %lu sec\n\n",czas);
+        printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
+        printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
+    }
 
     return 0;
 }

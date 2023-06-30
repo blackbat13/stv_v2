@@ -245,3 +245,5 @@ to_interact_Coercer1: check -> interact
 shared[2] punish_VoterC1[punish_VoterC1]: interact -> interact
 shared[2] not_punish_VoterC1[not_punish_VoterC1]: interact -> interact
 finish_Coercer1: interact -> end [Coercer1_finish:=1]
+
+FORMULA: <<Coercer1>>[](Coercer1_finish==0 || VoterC1_vote != -1)

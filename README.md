@@ -28,8 +28,10 @@ CLI configuration overwrite:
 ./stv --file PATH_TO_MODEL 
 ./stv -f PATH_TO_MODEL 
 # Mode
-./stv -m 1  # omit verification
+./stv -m 0  # 
+./stv -m 1  # generate GlobalModel
 ./stv -m 2  # run verification
+./stv -m 3  # same as 1 && 2
 # Flags
 # --OUTPUT_GLOBAL_MODEL     stdout data on global model (after expandAllStates)
 # --OUTPUT_LOCAL_MODELS     stdout data on local models () 
