@@ -3,9 +3,9 @@ LOCAL: [Voter1_vote]
 PERSISTENT: [Voter1_vote]
 INITIAL: []
 init q0
-vote1: q0 -> q1 [Voter1_vote:=1]
+voter1vote1: q0 -> q1 [Voter1_vote:=1]
 shared[2] gv_1_Voter1[gv_1_Voter1]: q1 [Voter1_vote==1] -> q2
-vote2: q0 -> q1 [Voter1_vote:=2]
+voter1vote2: q0 -> q1 [Voter1_vote:=2]
 shared[2] gv_2_Voter1[gv_2_Voter1]: q1 [Voter1_vote==2] -> q2
 shared[2] ng_Voter1[ng_Voter1]: q1 -> q2
 shared[2] pun_Voter1[pn_Voter1]: q2 -> q3
@@ -17,9 +17,9 @@ LOCAL: [Voter2_vote]
 PERSISTENT: [Voter2_vote]
 INITIAL: []
 init q0
-vote1: q0 -> q1 [Voter2_vote:=1]
+voter2vote1: q0 -> q1 [Voter2_vote:=1]
 shared[2] gv_1_Voter2[gv_1_Voter2]: q1 [Voter2_vote==1] -> q2
-vote2: q0 -> q1 [Voter2_vote:=2]
+voter2vote2: q0 -> q1 [Voter2_vote:=2]
 shared[2] gv_2_Voter2[gv_2_Voter2]: q1 [Voter2_vote==2] -> q2
 shared[2] ng_Voter2[ng_Voter2]: q1 -> q2
 shared[2] pun_Voter2[pn_Voter2]: q2 -> q3
@@ -31,9 +31,9 @@ LOCAL: [Voter3_vote]
 PERSISTENT: [Voter3_vote]
 INITIAL: []
 init q0
-vote1: q0 -> q1 [Voter3_vote:=1]
+voter3vote1: q0 -> q1 [Voter3_vote:=1]
 shared[2] gv_1_Voter3[gv_1_Voter3]: q1 [Voter3_vote==1] -> q2
-vote2: q0 -> q1 [Voter3_vote:=2]
+voter3vote2: q0 -> q1 [Voter3_vote:=2]
 shared[2] gv_2_Voter3[gv_2_Voter3]: q1 [Voter3_vote==2] -> q2
 shared[2] ng_Voter3[ng_Voter3]: q1 -> q2
 shared[2] pun_Voter3[pun_Voter3]: q2 -> q3
