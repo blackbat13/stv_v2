@@ -203,6 +203,8 @@ void loadConfigFromFile(string filename){
                 config.stv_mode = (val[0]-'0');
             }else if(key=="OUTPUT_DOT_FILES"){
                 config.output_dot_files = (val=="1");
+            }else if(key=="DOT_DIR"){
+                config.dotdir = val;
             }
         }
     }else{

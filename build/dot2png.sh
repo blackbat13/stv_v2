@@ -1,4 +1,9 @@
 #!/bin/bash
-for f in *.dot; do
+
+TARGET_DIR=${1:-'.'}
+
+cd $TARGET_DIR
+for f in $(ls | grep -P '.dot$'); do
     dot -Tpng "$f" > "${f%.dot}.png"
 done
+cd $OLDPWD

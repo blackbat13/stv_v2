@@ -12,13 +12,4 @@
 // 3 = /examples/svote/Voters2Candidates2.txt
 // #define MODEL_ID 1
 
-struct Cfg{
-    char* fname;
-    int stv_mode;
-    bool output_local_models;
-    bool output_global_model;
-    bool output_dot_files;
-    int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula)
-};
-
 #endif // SELENE_CONSTANTS

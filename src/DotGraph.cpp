@@ -25,8 +25,7 @@ std::string DotGraph::styleString =
 
 /// @brief empty graph
 DotGraph::DotGraph(){
-    name="";
-    caption="";
+    graphName="";
 }
 
 /* 
@@ -39,8 +38,10 @@ DotGraph::DotGraph(){
 DotGraph::DotGraph(AgentTemplate *const at){
     nodes.clear();
     edges.clear();
-    name = at->ident;
-    caption = "AgentTemplate of " + at->ident; 
+    graphName = at->ident;
+    graphBase = DotGraphBase::AGENT_TEMPLATE;
+    // caption = "AgentTemplate of " + at->ident; 
+    // fileName = "AgentTemplate_" + at->ident;
     for (const auto& st : at->localStateTemplates){
         this->addNode(st.first, st.second->name);
         for(const auto* trn: st.second->transitions){
@@ -57,8 +58,8 @@ DotGraph::DotGraph(AgentTemplate *const at){
 DotGraph::DotGraph(Agent *const ag, bool extended){
     nodes.clear();
     edges.clear();
-    name = ag->name;
-    caption = "LocalModel of " + ag->name;
+    graphName = ag->name;
+    graphBase = DotGraphBase::LOCAL_MODEL;
     for (const auto& s : ag->localStates){
         if(extended){
             string tmp = "{{"+s->name+"|"+to_string(s->id)+"}|";
@@ -89,10 +90,12 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
     nodes.clear();
     edges.clear();
     const std::string sep="||";              // (async) agent names separator
-    name = "";
-    for (const auto &agt : gm->agents) name += agt->name + sep;
-    name.resize(name.size()-sep.size());     // truncate last (extra) sep
-    caption = "GlobalModel of " + name;
+    graphName = "";
+    for (const auto &agt : gm->agents) graphName += agt->name + sep;
+    graphName.resize(graphName.size()-sep.size());     // truncate last (extra) sep
+    graphBase = DotGraphBase::GLOBAL_MODEL;
+    // caption = "GlobalModel of " + graphName;
+    // fileName = "GlobalModel";
 
     for (const auto& s : gm->globalStates){
         std::string stateLabel = "";
@@ -154,28 +157,54 @@ void DotGraph::addEdge(std::string src, std::string trg, std::string label){
 };
 
 /// @brief creates a `.dot` file
-/// @param filename name of file (parent graph name if blank)
-void DotGraph::saveToFile(std::string filename /*= ""*/){
-    if(name.length()==0 && caption.length()==0)return;
-    if(filename.length()==0){
-        filename = caption.substr(0, caption.find(" "));
-        if(filename!="GlobalModel"){
-            filename+="_"+name;
-        }
-        filename+=".dot";
+/// @param basename name of file (parent graph name if blank)
+void DotGraph::saveToFile(std::string pathprefix, std::string basename){
+    if(graphName.length()==0)return;
+
+    
+    string dgName;
+    switch (this->graphBase){
+        case DotGraphBase::AGENT_TEMPLATE: 
+            dgName = "AgentTemplate";
+            break;
+        case DotGraphBase::LOCAL_MODEL:
+            dgName = "LocalModel";
+            break;
+        case DotGraphBase::GLOBAL_MODEL:
+            dgName = "GlobalModel";
+            break;
+        default:
+            dgName = "UNDEFINED";
+            break;
+    }    
+    if(basename.length()==0){
+        basename=(graphBase==DotGraphBase::GLOBAL_MODEL) ? dgName : dgName+"_"+graphName;
+        basename+=".dot";
     }
+
     ofstream ofs;
-    ofs.open(filename);
-    ofs << "digraph \"" << name << "\"{\n";
-    ofs << "\tlabel=\"" << caption << "\"\n";
-    ofs << styleString;
-    for(const auto n: this->nodes){
-        ofs << "\t" + n + "\n";
+    if(pathprefix.length()==0){
+        pathprefix='.';
+    }else if(pathprefix[pathprefix.length()-1]=='/'){
+        pathprefix.pop_back();
     }
-    for(const auto e: this->edges){
-        ofs << "\t" + e + "\n";
+    
+    ofs.open(pathprefix+'/'+basename);
+
+    if(ofs.is_open()){
+        ofs << "digraph \"" << graphName << "\"{\n";
+        ofs << "\tlabel=\"" << dgName + " of " + graphName << "\"\n";
+        ofs << styleString;
+        for(const auto n: this->nodes){
+            ofs << "\t" + n + "\n";
+        }
+        for(const auto e: this->edges){
+            ofs << "\t" + e + "\n";
+        }
+        ofs << "}";
+        ofs.close();
+    }else{
+        cout << "Could not open the file: " << pathprefix+'/'+basename <<  endl;
     }
-    ofs << "}";
-    ofs.close();
 };
 

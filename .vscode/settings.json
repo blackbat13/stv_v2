@@ -62,7 +62,11 @@
         "ranges": "cpp",
         "sstream": "cpp",
         "valarray": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "bitset": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "variant": "cpp"
     },
     "search.exclude": {
         "**/node_modules": true,
