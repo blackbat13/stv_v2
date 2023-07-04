@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     //     }  
     // }
 /*----------------------------------------------------------*/
-// /* ----------------------- YK tests ----------------------- */
+/* ----------------------- YK tests ----------------------- */
     // map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
     // // return 0;
 
@@ -58,45 +58,45 @@ int main(int argc, char* argv[]) {
     //     ofs << endl;
     // }
     // ofs.close();
-    // return 0;
-//     GlobalModelGenerator* generator1 = new GlobalModelGenerator();
-//     generator1->initModel(localModels, formula);
-//     generator1->expandAllStates();
-//     // stack<GlobalState*> q;
-//     // q.push(generator1->initModel(localModels, formula));
-//     // int upperBound = 0;
-//     // // while(!q.empty() && upperBound<200){
-//     // while(!q.empty()){
-//     //     GlobalState* state = q.top();
-//     //     q.pop();   
-//     //     // cout << "expanding state " << state->hash << endl;  
-//     //     vector<GlobalState*> newStates = generator1->expandStateAndReturn(state);
-//     //     for(auto targetState : newStates){
-//     //         q.push(targetState);
-//     //         upperBound++;
-//     //     }
-//     // }
-//     // cout << "total number of states = "  << generator1->getCurrentGlobalModel()->globalStates.size() << endl;
-//     DotGraph dg = DotGraph(generator1->getCurrentGlobalModel(), true);
-//     dg.saveToFile();
-//     return 0;
-
-//     // Generate and output global model
-//     GlobalModelGenerator* generator = new GlobalModelGenerator();
-//     generator->initModel(localModels, formula);
-//     if(config.output_local_models){
-//         printf("%s\n", localModelsToString(localModels).c_str());
-//     }
     
-//     // for(const auto& st: generator->getCurrentGlobalModel()->globalStates){
-//     //     cout << "Global state id = " << st->id << endl;
-//     //     for(const auto& loc: st->localStates){
-//     //         cout << "\t" << loc->name << "(" << loc->id <<") of agent " << loc->agent->name << "(" << loc->agent->id <<")" << endl;
-//     //     }
-//     // }
-//     // cout << "Current number of states = " << ((generator->getCurrentGlobalModel())->globalStates).size() << endl;
-//     // return 0;
-// // /*----------------------------------------------------------*/
+    // GlobalModelGenerator* generator1 = new GlobalModelGenerator();
+    // generator1->initModel(localModels, formula);
+    // generator1->expandAllStates();
+    // // stack<GlobalState*> q;
+    // // q.push(generator1->initModel(localModels, formula));
+    // // int upperBound = 0;
+    // // // while(!q.empty() && upperBound<200){
+    // // while(!q.empty()){
+    // //     GlobalState* state = q.top();
+    // //     q.pop();   
+    // //     // cout << "expanding state " << state->hash << endl;  
+    // //     vector<GlobalState*> newStates = generator1->expandStateAndReturn(state);
+    // //     for(auto targetState : newStates){
+    // //         q.push(targetState);
+    // //         upperBound++;
+    // //     }
+    // // }
+    // // cout << "total number of states = "  << generator1->getCurrentGlobalModel()->globalStates.size() << endl;
+    // DotGraph dg = DotGraph(generator1->getCurrentGlobalModel(), true);
+    // dg.saveToFile(config.dotdir);
+    // return 0;
+
+    // // Generate and output global model
+    // GlobalModelGenerator* generator = new GlobalModelGenerator();
+    // generator->initModel(localModels, formula);
+    // if(config.output_local_models){
+    //     printf("%s\n", localModelsToString(localModels).c_str());
+    // }
+    
+    // for(const auto& st: generator->getCurrentGlobalModel()->globalStates){
+    //     cout << "Global state id = " << st->id << endl;
+    //     for(const auto& loc: st->localStates){
+    //         cout << "\t" << loc->name << "(" << loc->id <<") of agent " << loc->agent->name << "(" << loc->agent->id <<")" << endl;
+    //     }
+    // }
+    // cout << "Current number of states = " << ((generator->getCurrentGlobalModel())->globalStates).size() << endl;
+    // return 0;
+// /*----------------------------------------------------------*/
 
 
     // Generate and output global model
@@ -117,23 +117,23 @@ int main(int argc, char* argv[]) {
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
-            DotGraph(it).saveToFile();
+            DotGraph(it).saveToFile(config.dotdir);
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
-            DotGraph(agt, true).saveToFile();
+            DotGraph(agt, true).saveToFile(config.dotdir);
         }
         // save GlobalModel
         generator->expandAllStates();   // todo: add allExpanded flag?
-        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile();
+        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir);
     }
 
 
-    if(config.stv_mode & (1 << 0)){     // mode.binary = [0,1]*1 (generate)
+    if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
         generator->expandAllStates();
     }
     
-    if(config.stv_mode & (1 << 1)){     // mode.binary = [0,1]*1[0,1] (verify)
+    if(config.stv_mode & (1 << 1)){     // mode.binary = /[0,1]*1[0,1]/ (verify)
         auto verification = new Verification(generator);
         // Show verifications of vars in each global state; to use the following code, make verification->verifyLocalStates public and ensure that generator->expandAllStates() has been called
         // auto gm = generator->getCurrentGlobalModel();
@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
         printf("Verification result: %s\n", verification->verify() ? "OK" : "ERR");
     }
 
-    if(config.stv_mode & (1 << 2)){     // mode.binary = [0,1]*1[0,1]{2} (print metadata)
+    if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
         // Print out model metadata
         for (const auto agent : localModels->agents) {
             // name: [states, transitions]
