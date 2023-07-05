@@ -56,43 +56,6 @@ nodes.o: ../src/reader/nodes.cc
 	flex -I -o ../src/reader/scanner.c ../src/reader/scanner.l
 
 # all test names here
-TESTS = sample_test
-
-BIG_TESTS = big_tests
-
-GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
-                $(GTEST_DIR)/include/gtest/internal/*.h
-GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
-
 clean:
-	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c $(TESTS) gtest.a gtest_main.a *.o
+	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c gtest.a gtest_main.a *.o
 
-all : $(TESTS) $(BIG_TESTS)
-
-gtest-all.o : $(GTEST_SRCS_)
-	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
-            $(GTEST_DIR)/src/gtest-all.cc
-
-gtest_main.o : $(GTEST_SRCS_)
-	$(CXX) $(CPPFLAGS) -I$(GTEST_DIR) $(CXXFLAGS) -c \
-            $(GTEST_DIR)/src/gtest_main.cc
-
-gtest.a : gtest-all.o
-	$(AR) $(ARFLAGS) $@ $^
-
-gtest_main.a : gtest-all.o gtest_main.o
-	$(AR) $(ARFLAGS) $@ $^
-
-# tests here
-
-sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lfl -lpthread $^ -o $@
-
-sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc
-
-big_tests : big_tests.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lfl -lpthread $^ -o $@
-
-big_tests.o : $(USER_DIR)/big_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/big_tests.cc
