@@ -5,7 +5,7 @@ ulimit -s 'unlimited'
 EXEC_TIME='/usr/bin/time -f %M\t%e\t%U\t%S'
 EXEC_FILE='./stv'
 
-LOG_FILE="./output.log"     
+LOG_FILE="../output.log"     
 
 date +"%c" > $LOG_FILE
 

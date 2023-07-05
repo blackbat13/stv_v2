@@ -19,7 +19,9 @@ jobs:
         make clean
         make
     - name: run script
-      run: ./build/actiontest.sh
+      run: |
+        cd build
+        ./build/actiontest.sh
       shell: bash
     - name: upload output log
       uses: actions/upload-artifact@v3
