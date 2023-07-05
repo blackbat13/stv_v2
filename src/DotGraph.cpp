@@ -40,8 +40,6 @@ DotGraph::DotGraph(AgentTemplate *const at){
     edges.clear();
     graphName = at->ident;
     graphBase = DotGraphBase::AGENT_TEMPLATE;
-    // caption = "AgentTemplate of " + at->ident; 
-    // fileName = "AgentTemplate_" + at->ident;
     for (const auto& st : at->localStateTemplates){
         this->addNode(st.first, st.second->name);
         for(const auto* trn: st.second->transitions){
@@ -63,9 +61,6 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
     for (const auto& s : ag->localStates){
         if(extended){
             string tmp = "{{"+s->name+"|"+to_string(s->id)+"}|";
-            // for(const auto v: s->vars){
-            //     tmp+=v.first->name+"="+to_string(v.second)+"\n";
-            // }
             for(const auto x: s->environment){
                 tmp+=x.first+"="+to_string(x.second)+"\\n";
             }
@@ -94,8 +89,6 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
     for (const auto &agt : gm->agents) graphName += agt->name + sep;
     graphName.resize(graphName.size()-sep.size());     // truncate last (extra) sep
     graphBase = DotGraphBase::GLOBAL_MODEL;
-    // caption = "GlobalModel of " + graphName;
-    // fileName = "GlobalModel";
 
     for (const auto& s : gm->globalStates){
         std::string stateLabel = "";
@@ -160,7 +153,6 @@ void DotGraph::addEdge(std::string src, std::string trg, std::string label){
 /// @param basename name of file (parent graph name if blank)
 void DotGraph::saveToFile(std::string pathprefix, std::string basename){
     if(graphName.length()==0)return;
-
     
     string dgName;
     switch (this->graphBase){

@@ -2,6 +2,7 @@
 #define SELENE_CONSTANTS
 
 #define VERBOSE 0
+#define DEBUG_ON 1
 // #define OUTPUT_LOCAL_MODELS 1
 // #define OUTPUT_GLOBAL_MODEL 0 // warning: it will call expandAllStates()
 // #define MODE 2 // 1 = only generate; 2 = verify
