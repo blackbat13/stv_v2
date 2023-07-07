@@ -1,31 +1,43 @@
-name: test-action
+name: simple-action
 
-on:
-  push:
-    branches: [ "dev" ]
-  pull_request:
-    branches: [ "dev" ]
-
+on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: install flex and bison
+    - name: install dependencies
       run: sudo apt-get install -y flex bison
-    - name: go to ./build and exec make
-      run: |
-        cd build
-        make clean
-        make
-    - name: go to ./build and run custom script
-      run: |
-        cd build
-        ./actiontest.sh
-      shell: bash
-    - name: upload output log
+    - name: build binary
+      run: make -C build/
+    - name: upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: output-log-file
-        path: output.log
-
+        name: stv
+        path: ./build/stv
+  other:
+    continue-on-error: true
+    needs: build
+    strategy:
+      matrix:
+        mode: [0,1,2,3]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: stv
+          path: ./build/
+      - name: run stv with matrix val
+        run: |
+          cd build
+          chmod +x ./stv
+          ./stv --mode ${{ matrix.mode }}
+  clean:
+    needs: [build, other]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: geekyeggo/delete-artifact@v2
+      with:
+          name: stv

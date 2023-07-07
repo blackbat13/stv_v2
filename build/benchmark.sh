@@ -21,8 +21,11 @@
 # slightly modifying the code below)
 # ================================================
 
+# set current working directory to script location
+cd "${0%/*}"
+
 # save prev stack limit
-prevStackLim=$(ulimit - s)
+prevStackLim=$(ulimit -s)
 ulimit -s 'unlimited'
 
 EXEC_TIME='/usr/bin/time -f %M\t%e\t%U\t%S'
@@ -90,4 +93,4 @@ for entry in $(ls -d ../examples/*);do
 done
 
 # restore previous value of stack limit
-ulimit -s $prevStackLim
+ulimit -s "$prevStackLim"

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# set current working directory to script location
+cd "${0%/*}"
+
 ulimit -s 'unlimited'
 
 EXEC_TIME='/usr/bin/time -f %M\t%e\t%U\t%S'
