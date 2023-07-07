@@ -35,13 +35,13 @@ struct LocalModels;
 struct Var;
 
 struct Cfg{
-    char* fname;
-    int stv_mode;
-    bool output_local_models;
-    bool output_global_model;
-    bool output_dot_files;
-    int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula)
-    std::string dotdir;
+    std::string fname;          ///< path to input file with system specification
+    int stv_mode;               ///< stv_code as sum/combination of (1 - expandAllStates, 2 - verify, 4 - print metadata, 8 - run experiments)
+    bool output_local_models;   ///< (obsolete) print data on local model
+    bool output_global_model;   ///< (obsolete) print data on local model
+    bool output_dot_files;      ///< flag for .dot export (by default exports templates and local/global models)
+    std::string dotdir;         ///< pathprefix for .dot files export
+    int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula); has lower priority than `fname`
 };
 
 #endif 

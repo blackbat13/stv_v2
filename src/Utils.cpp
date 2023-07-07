@@ -109,7 +109,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
             printf("\n");
         }
         for (const auto globalTransition : globalState->globalTransitions) {
-            printf("    GlobalTransition hash=%s to GlobalState %i\n", globalTransition->id, (globalTransition->to ? globalTransition->to->hash : "-1"));
+            printf("    GlobalTransition id=%s to GlobalState %s\n", globalTransition->id, (globalTransition->to ? globalTransition->to->hash : "-1"));
             for (const auto localTransition : globalTransition->localTransitions) {
                 printf(
                     "        LocalTransition %i (globalName=%s, localName=%s) of Agent %i (%s);",
@@ -210,7 +210,7 @@ void loadConfigFromFile(string filename) {
             }
         }
     } else {
-        printf("Could not open the config file \"%s\"...", filename);
+        printf("Could not open the config file \"%s\"...", filename.c_str());
     }
 };
 
@@ -399,6 +399,7 @@ map<LocalState*, vector<GlobalState*>> getContextModel(Formula* formula, LocalMo
         for (const auto& s : gm->globalStates) {
             if (currComp->count(s->localStatesProjection[agtInd])) {
                 res[s->localStatesProjection[agtInd]].push_back(s);     // for debug
+                // todo: extend (local) env with observable (global) variables (if possible)
                 St_i.insert(s->localStatesProjection[agtInd]);          // from pseudocde
             }
         }

@@ -1,0 +1,55 @@
+<%#
+PARAMETERS:
+    N_AGENTS - denotes the number of AI modules
+    WITH_FORMULA - flag denoting if formula should be included
+_%>
+<%_ 
+for( let i = 1; i <= N_AGENTS; i++ ) { 
+    let li = N_AGENTS-(N_AGENTS-i+1)%N_AGENTS; 
+    let ri = 1+(i)%N_AGENTS; 
+    let varPrefix = `AI${i}`;
+    let localVars = [
+        'data',
+        'data_completion',
+        'information',
+        'model_status',
+        'model_quality',
+    ];
+_%>
+Agent AI<%=i%>:
+init start
+LOCAL: [<%=localVars.map(x=>varPrefix+'_'+x).join(',')%>]
+PERSISTENT: [<%=localVars.map(x=>varPrefix+'_'+x).join(',')%>]
+INITIAL: [<%=localVars.map(x=>varPrefix+'_'+x+":=0").join(',')%>]
+start_gathering_data: start -> gather
+gather_data: gather [AI<%=i%>_data < 2] -> gather [AI<%=i%>_data:=AI<%=i%>_data+1]
+stop_gathering_data: gather [AI<%=i%>_data == 0] -> data_ready [AI<%=i%>_data:=1]
+stop_gathering_data: gather [AI<%=i%>_data == 1] -> data_ready [AI<%=i%>_data:=2]
+stop_gathering_data: gather [AI<%=i%>_data >= 2] -> data_ready [AI<%=i%>_data:=3]
+skip_gathering_data: start -> data_ready
+start_learning: data_ready -> learn
+keep_learning: learn [AI<%=i%>_information < 2] -> learn [AI<%=i%>_information:=AI<%=i%>_information+AI<%=i%>_data_completion]
+stop_learning: learn [AI<%=i%>_information < 1 && AI<%=i%>_model_quality > 0] -> educated [AI<%=i%>_information:=0, AI<%=i%>_model_status:=1, AI<%=i%>_model_quality:=AI<%=i%>_model_quality+-1]
+stop_learning: learn [AI<%=i%>_information < 1 && AI<%=i%>_model_quality <= 0] -> educated [AI<%=i%>_information:=0, AI<%=i%>_model_status:=1]
+stop_learning: learn [AI<%=i%>_information ==1 && AI<%=i%>_model_quality < 2] -> educated [AI<%=i%>_information:=0, AI<%=i%>_model_status:=2, AI<%=i%>_model_quality:=AI<%=i%>_model_quality+1]
+stop_learning: learn [AI<%=i%>_information ==1  && AI<%=i%>_model_quality >= 2] -> educated [AI<%=i%>_information:=0, AI<%=i%>_model_status:=2]
+stop_learning: learn [2 <= AI<%=i%>_information && AI<%=i%>_model_quality > 0] -> educated [AI<%=i%>_information:=0, AI<%=i%>_model_status:=3, AI<%=i%>_model_quality:=AI<%=i%>_model_quality+-1]
+stop_learning: learn [2 <= AI<%=i%>_information && AI<%=i%>_model_quality <= 0] -> educated [AI<%=i%>_information:=0, AI<%=i%>_model_status:=3]
+skip_learning: data_ready -> sharing
+start_sharing: educated -> sharing
+    <%_ if(i%2) { _%>
+        <%_ %>shared[2] share_<%=i%>_with_<%=ri%>: sharing -> sharing2
+        <%_ %>shared[2] share_<%=li%>_with_<%=i%>: sharing2 -> sharing3 [AI<%=i%>_model_quality:=AI<%=li%>_model_quality]
+    <%_ }else{ _%>
+        <%_ %>shared[2] share_<%=li%>_with_<%=i%>: sharing -> sharing2 [AI<%=i%>_model_quality:=AI<%=li%>_model_quality]
+        <%_ %>shared[2] share_<%=i%>_with_<%=ri%>: sharing2 -> sharing3
+    <%_ }_%>
+end_sharing: sharing3 -> end
+wait: end -> end
+repeat: end -> learn
+
+<% }_%>
+
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { _%>
+FORMULA: <<AI1>>[](<%- Array.from({length:N_AGENTS}, (k,v)=>v+1).map(x=>`AI${x}_model_quality\<1`).join(' && ') %>)
+<%_ } _%>

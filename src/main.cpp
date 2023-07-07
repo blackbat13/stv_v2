@@ -30,75 +30,6 @@ int main(int argc, char* argv[]) {
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
-/* ------- Uncomment for the SCC compute test/debug ------- */
-    // for (const auto& agt : localModels->agents) {
-    //     cout << "SCC for agent " << agt->name << " are as follows:" << endl;
-    //     auto res = getLocalStatesSCC(agt);
-    //     for(const auto comp : res) {
-    //         cout << "[ ";
-    //         for(const auto& l: comp){
-    //             cout << l->id << " ";
-    //         }
-    //         cout << "]" << endl;
-    //     }  
-    // }
-/*----------------------------------------------------------*/
-/* ----------------------- YK tests ----------------------- */
-    // map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
-    // // return 0;
-
-    // ofstream ofs;
-    // ofs.open("temp.txt");
-
-    // for(const auto& x : ctxmodel){
-    //     ofs << x.first->id << ": ";
-    //     for(const auto& s : x.second){
-    //         ofs << s->hash << " ";
-    //     }
-    //     ofs << endl;
-    // }
-    // ofs.close();
-    
-    // GlobalModelGenerator* generator1 = new GlobalModelGenerator();
-    // generator1->initModel(localModels, formula);
-    // generator1->expandAllStates();
-    // // stack<GlobalState*> q;
-    // // q.push(generator1->initModel(localModels, formula));
-    // // int upperBound = 0;
-    // // // while(!q.empty() && upperBound<200){
-    // // while(!q.empty()){
-    // //     GlobalState* state = q.top();
-    // //     q.pop();   
-    // //     // cout << "expanding state " << state->hash << endl;  
-    // //     vector<GlobalState*> newStates = generator1->expandStateAndReturn(state);
-    // //     for(auto targetState : newStates){
-    // //         q.push(targetState);
-    // //         upperBound++;
-    // //     }
-    // // }
-    // // cout << "total number of states = "  << generator1->getCurrentGlobalModel()->globalStates.size() << endl;
-    // DotGraph dg = DotGraph(generator1->getCurrentGlobalModel(), true);
-    // dg.saveToFile(config.dotdir);
-    // return 0;
-
-    // // Generate and output global model
-    // GlobalModelGenerator* generator = new GlobalModelGenerator();
-    // generator->initModel(localModels, formula);
-    // if(config.output_local_models){
-    //     printf("%s\n", localModelsToString(localModels).c_str());
-    // }
-    
-    // for(const auto& st: generator->getCurrentGlobalModel()->globalStates){
-    //     cout << "Global state id = " << st->id << endl;
-    //     for(const auto& loc: st->localStates){
-    //         cout << "\t" << loc->name << "(" << loc->id <<") of agent " << loc->agent->name << "(" << loc->agent->id <<")" << endl;
-    //     }
-    // }
-    // cout << "Current number of states = " << ((generator->getCurrentGlobalModel())->globalStates).size() << endl;
-    // return 0;
-// /*----------------------------------------------------------*/
-
-
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
@@ -158,6 +89,35 @@ int main(int argc, char* argv[]) {
         }
         cout <<"Global:  [" << (generator->getCurrentGlobalModel())->globalStates.size() << ", " << (globTrn.size()) << "]" << endl;
         //
+    }
+
+    if(config.stv_mode & (1 << 3)){
+/* ------- Uncomment for the SCC compute test/debug ------- */
+    for (const auto& agt : localModels->agents) {
+        cout << "SCC for agent " << agt->name << " are as follows:" << endl;
+        auto res = getLocalStatesSCC(agt);
+        for(const auto comp : res) {
+            cout << "[ ";
+            for(const auto& l: comp){
+                cout << l->id << " ";
+            }
+            cout << "]" << endl;
+        }  
+    }
+/*----------------------------------------------------------*/
+        map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
+
+        ofstream ofs;
+        ofs.open("temp.txt");
+
+        for(const auto& x : ctxmodel){
+            ofs << x.first->id << ": ";
+            for(const auto& s : x.second){
+                ofs << s->hash << " ";
+            }
+            ofs << endl;
+        }
+        ofs.close();
     }
     
 

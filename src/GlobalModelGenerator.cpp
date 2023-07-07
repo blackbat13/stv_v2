@@ -96,13 +96,19 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
 
 /// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
 void GlobalModelGenerator::expandAllStates() {
+    if(this->globalModel->initState->isExpanded){
+        #if VERBOSE
+            printf("\nInitial state %s was already expanded\n", this->globalModel->initState->hash.c_str());
+        #endif
+        return;
+    }
     set<GlobalState*> statesToExpand;
     statesToExpand.insert(this->globalModel->initState);
     while (!statesToExpand.empty()) {
         auto globalState = *statesToExpand.begin();
         statesToExpand.erase(globalState);
         #if VERBOSE
-            printf("\nExpanding %s (%s)\n", globalState->hash, globalState->hash.c_str());
+            printf("\nExpanding %s\n", globalState->hash.c_str());
         #endif
         this->expandState(globalState);
         for (auto transition : globalState->globalTransitions) {
