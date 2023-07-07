@@ -1,68 +1,45 @@
 #include "gtest/gtest.h"
 
-#include "GlobalModelGenerator.hpp"
-#include "Verification.hpp"
-#include "ModelParser.hpp"
-#include "Utils.hpp"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <tuple>
+#ifndef CONFIG
+#define CONFIG
+#include "config.h"
+#endif
 
 TEST(ClockTest, Clock6Hours15Minutes)
 {
-    config.fname = "../tests/examples/clock/Clock6Hours15Minutes.txt";
-    config.output_local_models = false;
-    config.output_global_model = false;
-    config.stv_mode = '2';
+    TestVerif verify("../tests/examples/clock/Clock6Hours15Minutes.txt");
 
-    auto tp = new ModelParser();
-    
-    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = &(get<0>(desc));
-    auto formula = &(get<1>(desc));
+    EXPECT_EQ(verify.result, true);
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
-
-    bool result = false;
-
-    generator->expandAllStates();
-
-    auto verification = new Verification(generator);
-    
-    result = verification->verify();
-
-    EXPECT_EQ(result, true);
-
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 90);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 90);
 }
 
 TEST(ClockTest, Clock6Hours15MinutesAndDays)
 {
-    config.fname = "../tests/examples/clock/Clock6Hours15MinutesAndDays.txt";
-    config.output_local_models = false;
-    config.output_global_model = false;
-    config.stv_mode = '2';
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDays.txt");
 
-    auto tp = new ModelParser();
-    
-    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
-    auto localModels = &(get<0>(desc));
-    auto formula = &(get<1>(desc));
+    EXPECT_EQ(verify.result, true);
 
-    GlobalModelGenerator* generator = new GlobalModelGenerator();
-    generator->initModel(localModels, formula);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 1155);
+}
 
-    bool result = false;
+TEST(ClockTestF, Clock6Hours15Minutes)
+{
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesF.txt");
 
-    generator->expandAllStates();
+    EXPECT_EQ(verify.result, true);
+}
 
-    auto verification = new Verification(generator);
-    
-    result = verification->verify();
+TEST(ClockTestF, Clock6Hours15MinutesAndDays)
+{
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDaysF.txt");
 
-    EXPECT_EQ(result, true);
+    EXPECT_EQ(verify.result, true);
+}
 
-    EXPECT_EQ((generator->getCurrentGlobalModel())->globalStates.size(), 1155);
+TEST(ClockTestF, Clock6Hours15MinutesAndDays2)
+{
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDaysFFalse.txt");
+
+    EXPECT_EQ(verify.result, false);
 }
