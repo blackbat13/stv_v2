@@ -103,6 +103,8 @@ The specification language was inspired by ISPL (Interpreted Systems Programming
 The detailed syntax for the input format can be derived from *./src/reader/{parser.y,scanner.l}*, which intrinsically make up an EBNF grammar.  
 For the most parts, it is simple enough to get intuition just from looking at example's source code and the program's output.
 
+NOTE that (local) action names must be unique.
+
 
 ## Examples and templates
 
