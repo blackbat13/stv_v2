@@ -44,4 +44,4 @@ shared[2] ng_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_gv:=2]
 shared[2] pun_Voter2[pun_Voter2]: q3 -> q4 [Coercer1_pun2:=1]
 shared[2] npun_Voter2[npun_Voter2]: q3 -> q4 [Coercer1_npun2:=1]
 
-FORMULA: <<Voter2>><>(Voter2_run == 0)
+FORMULA: <<Voter2>><>(Voter2_run == 1)

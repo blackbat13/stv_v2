@@ -1,0 +1,19 @@
+
+Agent Adventurer1:
+LOCAL: [Items1]
+PERSISTENT: [Items1]
+INITIAL: [Items1:=0]
+init q1
+Adventurer1Crossroads1GoLeft: q1 -> q2
+Adventurer1Crossroads1GoRight: q1 -> q3 [Items1:=0]
+
+Agent Adventurer2:
+LOCAL: [Items2]
+PERSISTENT: [Items2]
+INITIAL: [Items2:=0]
+init q1
+Adventurer2Crossroads1GoLeft: q1 -> q2
+Adventurer2Crossroads1GoRight: q1 -> q3 [Items2:=0]
+
+
+FORMULA: <<Adventurer1>><>(Items1 == 1)    

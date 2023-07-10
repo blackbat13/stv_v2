@@ -162,6 +162,7 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
 bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     // string prefix = string(depth * 4, ' ');
     #if VERBOSE
+        string prefix = string(depth * 4, ' ');
         if (globalState->verificationStatus == GlobalStateVerificationStatus::UNVERIFIED) {
             printf("%s> verify globalState: hash=%s (unverified)\n", prefix.c_str(), globalState->hash.c_str());
         }
@@ -257,7 +258,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode)) {
         return false;
     }
     
@@ -688,7 +689,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     // string prefix = string(depth * 4, ' ');

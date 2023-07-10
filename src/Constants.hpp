@@ -1,7 +1,7 @@
 #ifndef SELENE_CONSTANTS
 #define SELENE_CONSTANTS
 
-#define VERBOSE 0
+#define VERBOSE 1
 #define DEBUG_ON 1
 // #define OUTPUT_LOCAL_MODELS 1
 // #define OUTPUT_GLOBAL_MODEL 0 // warning: it will call expandAllStates()

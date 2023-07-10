@@ -65,5 +65,5 @@ TEST(SimpleVotingRunTestF, 2Voters1CoercerNotRun)
 {
     TestVerif verify("../tests/examples/svoterun/2Voters1CoercerNotRunF.txt");
 
-    EXPECT_EQ(verify.result, false);
+    EXPECT_EQ(verify.result, true);
 }
