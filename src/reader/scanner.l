@@ -35,7 +35,7 @@ blank [ \n\t]
 ">"            { return T_GT; }
 "<="           { return T_LE; }
 "<"            { return T_LT; }
--?[0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
+[0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }
 {blank}        { /* puste - pomiń */ }
