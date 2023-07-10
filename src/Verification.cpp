@@ -37,7 +37,7 @@ void dbgVerifStatus(string prefix, GlobalState* gs, GlobalStateVerificationStatu
     #if VERBOSE
         string prevStatus = verStatusToStr(gs->verificationStatus);
         string newStatus = verStatusToStr(st);
-        printf("%sset verifStatus of %s: %s -> %s (%s)\n", prefix.c_str(), gs->hash.c_str(), prevStatus.c_str(), newStatus.c_str(), reason.c_str());
+        printf("%schange verifStatus of (%s): %s -> %s (%s)\n", prefix.c_str(), gs->hash.c_str(), prevStatus.c_str(), newStatus.c_str(), reason.c_str());
     #endif
 }
 
@@ -163,16 +163,16 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     // string prefix = string(depth * 4, ' ');
     #if VERBOSE
         if (globalState->verificationStatus == GlobalStateVerificationStatus::UNVERIFIED) {
-            printf("%s> verify globalState: hash=%s (unverified)\n", prefix.c_str(), globalState->hash.c_str());
+            printf("%s> verify globalState: hash=%s (unverified)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
         }
         else if (globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
-            printf("%s> skipping verification of globalState: hash=%s (verification pending)\n", prefix.c_str(), globalState->hash.c_str());
+            printf("%s> skipping verification of globalState: hash=%s (verification pending)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
         }
         else if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
-            printf("%s> skipping verification of globalState: hash=%s (verified OK)\n", prefix.c_str(), globalState->hash.c_str());
+            printf("%s> skipping verification of globalState: hash=%s (verified OK)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
         }
         else if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
-            printf("%s> skipping verification of globalState: hash=%s (verified ERR)\n", prefix.c_str(), globalState->hash.c_str());
+            printf("%s> skipping verification of globalState: hash=%s (verified ERR)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
         }
     #endif
 
@@ -617,7 +617,6 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
 bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
-    // string prefix = string(depth * 4, ' ');
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
@@ -691,11 +690,10 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
-    // string prefix = string(depth * 4, ' ');
-    bool isMixedTransitions = false;
+    bool isMixedControlTransitions = false;
 
     if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
-        isMixedTransitions = true;
+        isMixedControlTransitions = true;
     }
 
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
@@ -724,7 +722,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             if (epistemicClass && fixedGlobalTransition == nullptr) {
                 epistemicClass->fixedCoalitionTransition = globalTransition; 
                 #if VERBOSE
-                    printf("%sDECIDE %s->%s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+                    printf("%sDECIDE %s -[%s]-> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->joinLocalTransitionNames().c_str(),globalTransition->to->hash.c_str());
                 #endif
                 this->addHistoryDecision(globalState, globalTransition);
             }
@@ -779,7 +777,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     }
     
     // 2) verify paths not controlled by the coalition (all must be OK)
-    if (!isMixedTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+    if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
         return false;
     }
     return true;
