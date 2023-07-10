@@ -48,3 +48,14 @@ for ((i=${N_TIMERS_DOMAIN[0]};i<=${N_TIMERS_DOMAIN[1]};i++)); do
         npm exec -- ejs timer.ejs -i "{\"N_TIMERS\":${i},\"N_TICKS\":${j},\"WITH_FORMULA\":1}" -o $ofile
     done
 done
+
+#-----------#
+#  sai.ejs  #
+#-----------#
+N_AGENTS_DOMAIN=(1 10)
+OUTDIR='../sai'
+mkdir -p $OUTDIR
+for ((i=${N_AGENTS_DOMAIN[0]};i<=${N_AGENTS_DOMAIN[1]};i++)); do
+    ofile="$OUTDIR/AI${i}.txt"
+    npm exec -- ejs sai.ejs -i "{\"N_AGENTS\":${i},\"WITH_FORMULA\":1}" -o $ofile
+done
