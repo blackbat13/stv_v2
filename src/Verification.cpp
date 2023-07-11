@@ -737,7 +737,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            if (this->mode == TraversalMode::REVERT) {
+            if (this->mode == TraversalMode::REVERT && !isFMode) {
                 // Recursive verifyGlobalState caused REVERT mode, just exit
                 return false;
             }
