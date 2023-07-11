@@ -151,7 +151,7 @@ void DotGraph::addEdge(std::string src, std::string trg, std::string label){
 
 /// @brief creates a `.dot` file
 /// @param basename name of file (parent graph name if blank)
-void DotGraph::saveToFile(std::string pathprefix, std::string basename){
+void DotGraph::saveToFile(std::string pathprefix, std::string nameprefix, std::string basename){
     if(graphName.length()==0)return;
     
     string dgName;
@@ -181,7 +181,7 @@ void DotGraph::saveToFile(std::string pathprefix, std::string basename){
         pathprefix.pop_back();
     }
     
-    ofs.open(pathprefix+'/'+basename);
+    ofs.open(pathprefix+'/'+nameprefix+basename);
 
     if(ofs.is_open()){
         ofs << "digraph \"" << graphName << "\"{\n";

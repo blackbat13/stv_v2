@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
     loadConfigFromArgs(argc,argv);
 
     auto tp = new ModelParser();
+    string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
@@ -48,15 +49,15 @@ int main(int argc, char* argv[]) {
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
-            DotGraph(it).saveToFile(config.dotdir);
+            DotGraph(it).saveToFile(config.dotdir, fbasename+"-");
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
-            DotGraph(agt, true).saveToFile(config.dotdir);
+            DotGraph(agt, true).saveToFile(config.dotdir, fbasename+"-");
         }
         // save GlobalModel
         generator->expandAllStates();   // todo: add allExpanded flag?
-        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir);
+        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
 
 

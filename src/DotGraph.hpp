@@ -31,7 +31,7 @@ public:
     DotGraph(GlobalModel *const gm, bool extended=false);
     DotGraph(Agent *const ag, bool extended=false);
     DotGraph(AgentTemplate *const at);
-    void saveToFile(std::string pathprefix, std::string basename="");
+    void saveToFile(std::string pathprefix, std::string nameprefix, std::string basename="");
 protected:
     void addNode(std::string id, std::string name);
     void addEdge(std::string src, std::string trg, std::string label);
