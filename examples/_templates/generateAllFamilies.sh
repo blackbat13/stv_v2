@@ -52,7 +52,7 @@ done
 #---------#
 # sai.ejs #
 #---------#
-N_AGENTS=(1 4)
+N_AGENTS=(1 15)
 OUTDIR='../sai'
 mkdir -p $OUTDIR
 for ((i=${N_AGENTS[0]};i<=${N_AGENTS[1]};i++)); do
@@ -63,8 +63,8 @@ done
 #----------------#
 # fetchQuest.ejs #
 #----------------#
-N_ADVENTURERS=(1 4)
-N_DEPTH=(1 3)
+N_ADVENTURERS=(1 3)
+N_DEPTH=(1 6)
 OUTDIR='../fetchQuest'
 mkdir -p $OUTDIR
 for ((i=${N_ADVENTURERS[0]};i<=${N_ADVENTURERS[1]};i++)); do

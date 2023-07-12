@@ -63,6 +63,12 @@ for entry in $(ls -d ../examples/*);do
     if [ "$familyName" = "svote" ]; then
         continue
     fi
+    if [ "$familyName" = "timers" ]; then
+        continue
+    fi
+    if [ "$familyName" = "trains" ]; then
+        continue
+    fi
 
     # ignore the templates directory
     if [ "$familyName" = "_templates" ]; then

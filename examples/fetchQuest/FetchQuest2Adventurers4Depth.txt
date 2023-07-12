@@ -1,0 +1,103 @@
+
+Agent Adventurer1:
+LOCAL: [Items1]
+PERSISTENT: [Items1]
+INITIAL: [Items1:=0]
+init q1
+Adventurer1Crossroads1GoLeft: q1 -> q2
+Adventurer1Crossroads1GoRight: q1 -> q3 [Items1:=0]
+
+Adventurer1Crossroads2GoLeft: q2 -> q4
+Adventurer1Crossroads2GoRight: q2 -> q5 [Items1:=1]
+
+Adventurer1Crossroads2GoLeft: q3 -> q6
+Adventurer1Crossroads2GoRight: q3 -> q7 [Items1:=1]
+
+Adventurer1Crossroads3GoLeft: q4 -> q8
+Adventurer1Crossroads3GoRight: q4 -> q9 [Items1:=0]
+
+Adventurer1Crossroads3GoLeft: q5 -> q10
+Adventurer1Crossroads3GoRight: q5 -> q11 [Items1:=0]
+
+Adventurer1Crossroads3GoLeft: q6 -> q12
+Adventurer1Crossroads3GoRight: q6 -> q13 [Items1:=0]
+
+Adventurer1Crossroads3GoLeft: q7 -> q14
+Adventurer1Crossroads3GoRight: q7 -> q15 [Items1:=0]
+
+Adventurer1Crossroads4GoLeft: q8 -> q16
+Adventurer1Crossroads4GoRight: q8 -> q17 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q9 -> q18
+Adventurer1Crossroads4GoRight: q9 -> q19 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q10 -> q20
+Adventurer1Crossroads4GoRight: q10 -> q21 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q11 -> q22
+Adventurer1Crossroads4GoRight: q11 -> q23 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q12 -> q24
+Adventurer1Crossroads4GoRight: q12 -> q25 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q13 -> q26
+Adventurer1Crossroads4GoRight: q13 -> q27 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q14 -> q28
+Adventurer1Crossroads4GoRight: q14 -> q29 [Items1:=1]
+
+Adventurer1Crossroads4GoLeft: q15 -> q30
+Adventurer1Crossroads4GoRight: q15 -> q31 [Items1:=1]
+
+Agent Adventurer2:
+LOCAL: [Items2]
+PERSISTENT: [Items2]
+INITIAL: [Items2:=0]
+init q1
+Adventurer2Crossroads1GoLeft: q1 -> q2
+Adventurer2Crossroads1GoRight: q1 -> q3 [Items2:=0]
+
+Adventurer2Crossroads2GoLeft: q2 -> q4
+Adventurer2Crossroads2GoRight: q2 -> q5 [Items2:=1]
+
+Adventurer2Crossroads2GoLeft: q3 -> q6
+Adventurer2Crossroads2GoRight: q3 -> q7 [Items2:=1]
+
+Adventurer2Crossroads3GoLeft: q4 -> q8
+Adventurer2Crossroads3GoRight: q4 -> q9 [Items2:=0]
+
+Adventurer2Crossroads3GoLeft: q5 -> q10
+Adventurer2Crossroads3GoRight: q5 -> q11 [Items2:=0]
+
+Adventurer2Crossroads3GoLeft: q6 -> q12
+Adventurer2Crossroads3GoRight: q6 -> q13 [Items2:=0]
+
+Adventurer2Crossroads3GoLeft: q7 -> q14
+Adventurer2Crossroads3GoRight: q7 -> q15 [Items2:=0]
+
+Adventurer2Crossroads4GoLeft: q8 -> q16
+Adventurer2Crossroads4GoRight: q8 -> q17 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q9 -> q18
+Adventurer2Crossroads4GoRight: q9 -> q19 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q10 -> q20
+Adventurer2Crossroads4GoRight: q10 -> q21 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q11 -> q22
+Adventurer2Crossroads4GoRight: q11 -> q23 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q12 -> q24
+Adventurer2Crossroads4GoRight: q12 -> q25 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q13 -> q26
+Adventurer2Crossroads4GoRight: q13 -> q27 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q14 -> q28
+Adventurer2Crossroads4GoRight: q14 -> q29 [Items2:=1]
+
+Adventurer2Crossroads4GoLeft: q15 -> q30
+Adventurer2Crossroads4GoRight: q15 -> q31 [Items2:=1]
+
+
+FORMULA: <<Adventurer1>><>(Items1 == 1)

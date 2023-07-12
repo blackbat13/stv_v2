@@ -14,4 +14,4 @@ Adventurer1Crossroads2GoLeft: q3 -> q6
 Adventurer1Crossroads2GoRight: q3 -> q7 [Items1:=0]
 
 
-FORMULA: <<Adventurer1>><>(Items1 == 1)    
+FORMULA: <<Adventurer1>><>(Items1 == 0)

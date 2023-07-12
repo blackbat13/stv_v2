@@ -14,12 +14,12 @@ init q1
 <%_ for( let j = 1; j <= N_DEPTH; j++ ) { _%>
 <%_ for( let k = Math.pow(2, j-1); k < Math.pow(2, j); k++ ) { _%>
 Adventurer<%=i%>Crossroads<%=j%>GoLeft: q<%=k%> -> q<%=k*2%>
-Adventurer<%=i%>Crossroads<%=j%>GoRight: q<%=k%> -> q<%=k*2+1%> [Items<%=i%>:=<%=j%Math.round(N_DEPTH/2)%>]
+Adventurer<%=i%>Crossroads<%=j%>GoRight: q<%=k%> -> q<%=k*2+1%> [Items<%=i%>:=<%=(j-1)%Math.round(N_DEPTH/2)%>]
 
 <%_ } _%>
 <%_ } _%>
 <%_ } _%>
 
 <%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { _%>
-FORMULA: <<Adventurer1>><>(Items1 == 1)    
+FORMULA: <<Adventurer1>><>(Items1 == <%=Math.round(N_DEPTH/2)-1%>)
 <%_ } _%>
