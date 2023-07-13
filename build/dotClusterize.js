@@ -6,8 +6,6 @@
  * `arg2` - mapping file (optional, by default reads from mapping in *scc.txt*);
  */
 
-
-
 /*
 Example *scc.txt* content:
 [ 17 20 22 23 ]
@@ -33,7 +31,7 @@ if(!args?.length>=1){
 }
 
 const dotSourceFile = args[0];
-const mappingFile = args[1] || `scc.txt`;
+const mappingFile = args[1];
 
 let dot = fs.readFileSync(dotSourceFile,'utf-8');
 let str = fs.readFileSync(mappingFile, 'utf-8');

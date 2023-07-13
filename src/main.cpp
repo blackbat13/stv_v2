@@ -93,23 +93,26 @@ int main(int argc, char* argv[]) {
     }
 
     if(config.stv_mode & (1 << 3)){
-/* ------- Uncomment for the SCC compute test/debug ------- */
-    for (const auto& agt : localModels->agents) {
-        cout << "SCC for agent " << agt->name << " are as follows:" << endl;
-        auto res = getLocalStatesSCC(agt);
-        for(const auto comp : res) {
-            cout << "[ ";
-            for(const auto& l: comp){
-                cout << l->id << " ";
-            }
-            cout << "]" << endl;
-        }  
-    }
-/*----------------------------------------------------------*/
-        map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
-
         ofstream ofs;
-        ofs.open("temp.txt");
+
+/* ------- Uncomment for the SCC compute test/debug ------- */
+        ofs.open(fbasename+"-scc.txt");
+        for (const auto& agt : localModels->agents) {
+            // cout << "SCC for agent " << agt->name << " are as follows:" << endl;
+            auto res = getLocalStatesSCC(agt);
+            for(const auto comp : res) {
+                ofs << "[ ";
+                for(const auto& l: comp){
+                    ofs << l->id << " ";
+                }
+                ofs << "]" << endl;
+            }  
+        }
+        ofs.close();
+/*----------------------------------------------------------*/
+
+        map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
+        ofs.open(fbasename+"-"+localModels->agents[1]->name+"-LocalContext.txt");
 
         for(const auto& x : ctxmodel){
             ofs << x.first->id << ": ";
