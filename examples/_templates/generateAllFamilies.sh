@@ -49,13 +49,27 @@ for ((i=${N_TIMERS_DOMAIN[0]};i<=${N_TIMERS_DOMAIN[1]};i++)); do
     done
 done
 
-#-----------#
-#  sai.ejs  #
-#-----------#
-N_AGENTS_DOMAIN=(1 10)
+#---------#
+# sai.ejs #
+#---------#
+N_AGENTS=(1 15)
 OUTDIR='../sai'
 mkdir -p $OUTDIR
-for ((i=${N_AGENTS_DOMAIN[0]};i<=${N_AGENTS_DOMAIN[1]};i++)); do
-    ofile="$OUTDIR/AI${i}.txt"
+for ((i=${N_AGENTS[0]};i<=${N_AGENTS[1]};i++)); do
+    ofile="$OUTDIR/SAI${i}Agents.txt"
     npm exec -- ejs sai.ejs -i "{\"N_AGENTS\":${i},\"WITH_FORMULA\":1}" -o $ofile
+done
+
+#----------------#
+# fetchQuest.ejs #
+#----------------#
+N_ADVENTURERS=(1 3)
+N_DEPTH=(1 6)
+OUTDIR='../fetchQuest'
+mkdir -p $OUTDIR
+for ((i=${N_ADVENTURERS[0]};i<=${N_ADVENTURERS[1]};i++)); do
+    for ((j=${N_DEPTH[0]};j<=${N_DEPTH[1]};j++)); do
+        ofile="$OUTDIR/FetchQuest${i}Adventurers${j}Depth.txt"
+        npm exec -- ejs fetchQuest.ejs -i "{\"N_ADVENTURERS\":${i},\"N_DEPTH\":${j},\"WITH_FORMULA\":1}" -o $ofile
+    done
 done
