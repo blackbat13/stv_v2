@@ -160,7 +160,6 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
 /// @param depth Current depth of the recursion.
 /// @return Returns true if the verification is PENDING or VERIFIED_OK, otherwise returns false.
 bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
-    // string prefix = string(depth * 4, ' ');
     #if VERBOSE
         if (globalState->verificationStatus == GlobalStateVerificationStatus::UNVERIFIED) {
             printf("%s> verify globalState: hash=%s (unverified)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
@@ -257,7 +256,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode)) {
         return false;
     }
     
@@ -575,7 +574,6 @@ void Verification::undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, 
 /// @brief Prints current history to the console.
 /// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
 void Verification::printCurrentHistory(int depth) {
-    // auto prefix = string(depth * 4, ' ');
     printf("%sCURRENT HISTORY:\n", DEPTH_PREFIX.c_str());
     auto histDbg = HistoryDbg();
     auto x = this->historyStart->next;
@@ -687,7 +685,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool isMixedControlTransitions = false;
@@ -734,7 +732,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            if (this->mode == TraversalMode::REVERT) {
+            if (this->mode == TraversalMode::REVERT && !isFMode) {
                 // Recursive verifyGlobalState caused REVERT mode, just exit
                 return false;
             }
@@ -803,7 +801,6 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
     bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == controlled;
     #if VERBOSE
-        // string prefix = string(depth * 4, ' ');
         if (matches) {
             if (controlled) {
                 printf("%srestore: matched %s -> %s (controlled)\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
