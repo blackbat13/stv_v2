@@ -76,7 +76,8 @@ for ((i=${N_G[0]};i<=${N_G[1]};i+=2)); do
     for ((j=i/2;j<=${N_G[1]};j++)); do
         ofile="$OUTDIR/cards${i}suit${j}.txt"
         npm exec -- ejs cards.ejs -i "{\"N_G\":${i},\"N_S\":${j},\"WITH_FORMULA\":1}" -o $ofile
-
+    done
+done
 
 #----------------#
 # fetchQuest.ejs #
