@@ -31,6 +31,8 @@ struct GlobalTransition {
 
     /// @brief Local transitions that define this global transition. A single transition or more in case of shared transitions.
     set<LocalTransition*> localTransitions;
+
+    string joinLocalTransitionNames(char sep=';');
 };
 
 #endif // GLOBALTRANSITION_H

@@ -47,7 +47,7 @@ struct HistoryEntry {
             snprintf(buff, sizeof(buff), "decision in %s: to %s", this->globalState->hash.c_str(), this->decision->to->hash.c_str());
         }
         else if (this->type == HistoryEntryType::STATE_STATUS) {
-            snprintf(buff, sizeof(buff), "stateVerStatus of %s: %s -> %s", this->globalState->hash.c_str(), verStatusToStr(this->prevStatus).c_str(), verStatusToStr(this->newStatus).c_str());
+            snprintf(buff, sizeof(buff), "stateVerifStatus of %s: %s -> %s", this->globalState->hash.c_str(), verStatusToStr(this->prevStatus).c_str(), verStatusToStr(this->newStatus).c_str());
         }
         else if (this->type == HistoryEntryType::CONTEXT) {
             snprintf(buff, sizeof(buff), "context in %s at depth %i: to %s (%s)", this->globalState->hash.c_str(), this->depth, this->decision->to->hash.c_str(), this->globalTransitionControlled ? "controlled" : "uncontrolled");

@@ -15,14 +15,14 @@ if(!args?.length>=1){
 }
 
 const dotSourceFile = args[0];
-const ctxMappingFile = `temp.txt`;
+const ctxMappingFile = args[1];
 
 // console.log(`Reading ${dotSourceFile}...`);
 let dot = fs.readFileSync(dotSourceFile,'utf-8');
 
 let obj = {};
 
-if(args.length<2 || typeof args[1] === 'undefined'){
+if(args.length<=2 || typeof args[1] === 'undefined'){
     // console.log(`Reading ${ctxMappingFile}...`);
     let str = fs.readFileSync(ctxMappingFile, 'utf-8');    
     str.split('\n').filter(x=>x).forEach((e,i) => {

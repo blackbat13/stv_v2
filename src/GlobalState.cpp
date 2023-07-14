@@ -7,8 +7,6 @@
 #include "GlobalState.hpp"
 #include "LocalState.hpp"
 
-// atomic_uint32_t GlobalState::next_id;
-
 GlobalState::GlobalState(){
    isExpanded = false;
    verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;

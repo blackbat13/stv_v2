@@ -97,56 +97,5 @@ for(const fname of arr){
 
    
 }
-console.log(util.inspect(obj["Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share"], false, null, true /* enable colors */))
 
 fs.writeFileSync('results.json', JSON.stringify(obj), 'utf-8')
-// console.log(obj);
-
-// for(const familyName in modelFamilies){
-//     // restore proper (lexicographical order wrt configuration values)
-//     modelFamilies[familyName].sort( (x,y)=>{
-//         let a=x.match(/\d+/g).map(j=>Number(j));
-//         let b=y.match(/\d+/g).map(j=>Number(j));        
-//         for(let ii=0; ii<a.length; ii++){
-//             if(a[ii]<b[ii])return -1;
-//             if(a[ii]>b[ii])return 1;
-//         }
-//         return 0;
-//     })
-    
-//     if(familyName==='ssvr')continue;
-
-//     for(const modelPath of modelFamilies[familyName]){
-//         // console.log(modelPath);
-//         let arr = computeAvgMeasurements(modelPath);
-//         console.log(`${path.basename(modelPath)}\t${arr.join(';')}`);
-//         // console.log(modelPath.match(/\d+/g));
-//     }
-// }
-
-function computeAvgMeasurements(modelPath){
-    // console.log(`Running computation for ${modelPath}`);
-    let res;
-    for(let irep = 0; irep < N_REPS; irep++){
-        let curr = computeMeasurements(modelPath);
-
-        if(typeof res ==='undefined'){
-            res = curr;
-        }else{
-            for(let i=0;i<res.length;i++){
-                res[i]+=curr[i];
-            }
-        }
-    }
-    for(let i=0;i<res.length;i++){
-        res[i]=res[i]/N_REPS;
-    }
-    return res;
-}
-
-function computeMeasurements(modelPath){
-    return execSync(
-            `/usr/bin/time -f "%M %e %U %S" ./stv --file ${modelPath} 2>&1 >/dev/null`
-            ,{shell: true}
-        ).toString().split(' ').map(x=>Number(x));
-}

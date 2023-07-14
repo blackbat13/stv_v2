@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
     loadConfigFromArgs(argc,argv);
 
     auto tp = new ModelParser();
+    string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
     tuple<LocalModels, Formula> desc = tp->parse(config.fname);
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
@@ -48,15 +49,15 @@ int main(int argc, char* argv[]) {
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
-            DotGraph(it).saveToFile(config.dotdir);
+            DotGraph(it).saveToFile(config.dotdir, fbasename+"-");
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
-            DotGraph(agt, true).saveToFile(config.dotdir);
+            DotGraph(agt, true).saveToFile(config.dotdir, fbasename+"-");
         }
         // save GlobalModel
         generator->expandAllStates();   // todo: add allExpanded flag?
-        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir);
+        DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
 
 
@@ -92,23 +93,26 @@ int main(int argc, char* argv[]) {
     }
 
     if(config.stv_mode & (1 << 3)){
-/* ------- Uncomment for the SCC compute test/debug ------- */
-    for (const auto& agt : localModels->agents) {
-        cout << "SCC for agent " << agt->name << " are as follows:" << endl;
-        auto res = getLocalStatesSCC(agt);
-        for(const auto comp : res) {
-            cout << "[ ";
-            for(const auto& l: comp){
-                cout << l->id << " ";
-            }
-            cout << "]" << endl;
-        }  
-    }
-/*----------------------------------------------------------*/
-        map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
-
         ofstream ofs;
-        ofs.open("temp.txt");
+
+/* ------- Uncomment for the SCC compute test/debug ------- */
+        ofs.open(fbasename+"-scc.txt");
+        for (const auto& agt : localModels->agents) {
+            // cout << "SCC for agent " << agt->name << " are as follows:" << endl;
+            auto res = getLocalStatesSCC(agt);
+            for(const auto comp : res) {
+                ofs << "[ ";
+                for(const auto& l: comp){
+                    ofs << l->id << " ";
+                }
+                ofs << "]" << endl;
+            }  
+        }
+        ofs.close();
+/*----------------------------------------------------------*/
+
+        map<LocalState*,vector<GlobalState*>> ctxmodel = getContextModel(formula, localModels, localModels->agents[1]);
+        ofs.open(fbasename+"-"+localModels->agents[1]->name+"-LocalContext.txt");
 
         for(const auto& x : ctxmodel){
             ofs << x.first->id << ": ";

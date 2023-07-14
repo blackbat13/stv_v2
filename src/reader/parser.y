@@ -123,8 +123,8 @@ assignments: '[' assign_list ']' { $$=$2; }
            | { $$=NULL; }
            ;
 
-num_exp: num_exp '+' num_mul { $$=new ExprAdd($1, $3);}
-       | num_exp '-' num_mul { $$=new ExprSub($1, $3);}
+num_exp: num_exp '-' num_mul { $$=new ExprSub($1, $3);}
+       | num_exp '+' num_mul { $$=new ExprAdd($1, $3);}
        | num_mul { $$=$1; }
        ;
 num_mul: num_mul '*' num_elem { $$=new ExprMul($1, $3);}
@@ -133,6 +133,7 @@ num_mul: num_mul '*' num_elem { $$=new ExprMul($1, $3);}
        | num_elem { $$=$1; }
        ;
 num_elem: T_IDENT { $$=new ExprIdent($1); delete $1; }
+        | '-'T_NUM { $$=new ExprConst(-$2); }
         | T_NUM { $$=new ExprConst($1); }
         | '(' num_exp ')' {$$ = $2; }
         ;

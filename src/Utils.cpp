@@ -109,7 +109,7 @@ void outputGlobalModel(GlobalModel* globalModel) {
             printf("\n");
         }
         for (const auto globalTransition : globalState->globalTransitions) {
-            printf("    GlobalTransition id=%s to GlobalState %s\n", globalTransition->id, (globalTransition->to ? globalTransition->to->hash : "-1"));
+            printf("    GlobalTransition id=%u to GlobalState %s\n", globalTransition->id, (globalTransition->to ? globalTransition->to->hash.c_str() : "-1"));
             for (const auto localTransition : globalTransition->localTransitions) {
                 printf(
                     "        LocalTransition %i (globalName=%s, localName=%s) of Agent %i (%s);",
