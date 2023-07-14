@@ -1,0 +1,30 @@
+Agent P1:
+LOCAL: [P1_has_r0,P1_has_b0]
+PERSISTENT: [P1_has_r0,P1_has_b0]
+INITIAL: [P1_has_r0:=0,P1_has_b0:=0]
+init idle
+shared[2] serving_0_0[serving]: idle -> served [P1_has_r0:=1]
+shared[2] serving_0_1[serving]: idle -> served [P1_has_b0:=1]
+shared[3] play_r0_b0[play1_r0]: served [P1_has_r0==1 && P1_has_b0!=1] -> served [P1_has_r0:=0]
+shared[3] play_b0_r0[play1_b0]: served [P1_has_b0==1 && P1_has_r0!=1] -> served [P1_has_b0:=0]
+
+Agent P2:
+LOCAL: [P2_has_r0,P2_has_b0]
+PERSISTENT: [P2_has_r0,P2_has_b0]
+INITIAL: [P2_has_r0:=0,P2_has_b0:=0]
+init idle
+shared[2] serving_0_0[serving]: idle -> served [P2_has_b0:=1]
+shared[2] serving_0_1[serving]: idle -> served [P2_has_r0:=1]
+shared[3] play_r0_b0[play2_b0]: served [P2_has_b0==1 && P2_has_r0!=1] -> served [P2_has_b0:=0]
+shared[3] play_b0_r0[play2_r0]: served [P2_has_r0==1 && P2_has_b0!=1] -> served [P2_has_r0:=0]
+
+Agent Score:
+LOCAL: [P1_score, P2_score]
+PERSISTENT: [P1_score, P2_score, round]
+INITIAL: [P1_score:=0, P2_score:=0, round:=0]
+init count
+shared[3] play_r0_b0: count [round<1] -> count [P1_score:=P1_score+1, round:=round+1]
+shared[3] play_b0_r0: count [round<1] -> count [P2_score:=P2_score+1, round:=round+1]
+
+
+FORMULA: <<P1>>[]( round<1 || P1_score>P2_score)

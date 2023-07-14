@@ -6,6 +6,7 @@
 
 #include "GlobalModelGenerator.hpp"
 #include "Types.hpp"
+#include "Constants.hpp"
 
 
 #include <algorithm>
@@ -41,6 +42,9 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
 /// @param state A state from which the expansion should start.
 void GlobalModelGenerator::expandState(GlobalState* state) {
     if (state->isExpanded) {
+        #if VERBOSE
+            printf("\nState %s was already expanded\n", state->hash.c_str());
+        #endif
         return;
     }
     for (const auto globalTransition : state->globalTransitions) {
@@ -70,6 +74,9 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
     size_t cardinalityBefore;
     vector<GlobalState*> res;
     if (state->isExpanded) {
+        #if VERBOSE
+            printf("\nState %s was already expanded\n", state->hash.c_str());
+        #endif
         return res;
     }
     for (const auto globalTransition : state->globalTransitions) {

@@ -1,0 +1,72 @@
+FetchQuest1Adventurers1Depth: [Verification result: OK
+Adventurer1:  [3, 2]
+Global:  [1, 2]]
+FetchQuest1Adventurers2Depth: [Verification result: OK
+Adventurer1:  [7, 6]
+Global:  [1, 2]]
+FetchQuest1Adventurers3Depth: [Verification result: OK
+Adventurer1:  [15, 14]
+Global:  [7, 10]]
+FetchQuest1Adventurers4Depth: [Verification result: OK
+Adventurer1:  [31, 30]
+Global:  [9, 14]]
+FetchQuest1Adventurers5Depth: [Verification result: OK
+Adventurer1:  [63, 62]
+Global:  [11, 18]]
+FetchQuest1Adventurers6Depth: [Verification result: OK
+Adventurer1:  [127, 126]
+Global:  [13, 22]]
+FetchQuest2Adventurers1Depth: [Verification result: OK
+Adventurer1:  [3, 2]
+Adventurer2:  [3, 2]
+Global:  [1, 4]]
+FetchQuest2Adventurers2Depth: [Verification result: OK
+Adventurer1:  [7, 6]
+Adventurer2:  [7, 6]
+Global:  [1, 4]]
+FetchQuest2Adventurers3Depth: [Verification result: OK
+Adventurer1:  [15, 14]
+Adventurer2:  [15, 14]
+Global:  [105, 248]]
+FetchQuest2Adventurers4Depth: [Verification result: OK
+Adventurer1:  [31, 30]
+Adventurer2:  [31, 30]
+Global:  [279, 704]]
+FetchQuest2Adventurers5Depth: [Verification result: OK
+Adventurer1:  [63, 62]
+Adventurer2:  [63, 62]
+Global:  [693, 1816]]
+FetchQuest2Adventurers6Depth: [Verification result: OK
+Adventurer1:  [127, 126]
+Adventurer2:  [127, 126]
+Global:  [1651, 4432]]
+FetchQuest3Adventurers1Depth: [Verification result: OK
+Adventurer1:  [3, 2]
+Adventurer2:  [3, 2]
+Adventurer3:  [3, 2]
+Global:  [1, 6]]
+FetchQuest3Adventurers2Depth: [Verification result: OK
+Adventurer1:  [7, 6]
+Adventurer2:  [7, 6]
+Adventurer3:  [7, 6]
+Global:  [1, 6]]
+FetchQuest3Adventurers3Depth: [Verification result: OK
+Adventurer1:  [15, 14]
+Adventurer2:  [15, 14]
+Adventurer3:  [15, 14]
+Global:  [1575, 5190]]
+FetchQuest3Adventurers4Depth: [Verification result: OK
+Adventurer1:  [31, 30]
+Adventurer2:  [31, 30]
+Adventurer3:  [31, 30]
+Global:  [8649, 30194]]
+FetchQuest3Adventurers5Depth: [Verification result: OK
+Adventurer1:  [63, 62]
+Adventurer2:  [63, 62]
+Adventurer3:  [63, 62]
+Global:  [43659, 157374]]
+FetchQuest3Adventurers6Depth: [Verification result: OK
+Adventurer1:  [127, 126]
+Adventurer2:  [127, 126]
+Adventurer3:  [127, 126]
+Global:  [209677, 770890]]

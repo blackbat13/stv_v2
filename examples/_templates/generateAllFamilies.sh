@@ -13,6 +13,7 @@
 #------------#
 # trains.ejs #
 #------------#
+echo -e "Generating family of Trains..."
 N_TRAINS_DOMAIN=(1 15) 
 OUTDIR='../trains'
 mkdir -p $OUTDIR
@@ -24,6 +25,7 @@ done
 #-------------------------#
 # simpleVoting--optim.ejs #
 #-------------------------#
+echo -e "Generating family of SimpleVoting..."
 N_VOTERS_DOMAIN=(1 5) 
 N_CANDIDATES_DOMAIN=(1 3) 
 OUTDIR='../svote'
@@ -38,6 +40,7 @@ done
 #-----------#
 # timer.ejs #
 #-----------#
+echo -e "Generating family of Timers..."
 N_TIMERS_DOMAIN=(1 7)
 N_TICKS_DOMAIN=(1 10)
 OUTDIR='../timers'
@@ -52,10 +55,26 @@ done
 #-----------#
 #  sai.ejs  #
 #-----------#
+echo -e "Generating family of SAI..."
 N_AGENTS_DOMAIN=(1 10)
 OUTDIR='../sai'
 mkdir -p $OUTDIR
 for ((i=${N_AGENTS_DOMAIN[0]};i<=${N_AGENTS_DOMAIN[1]};i++)); do
     ofile="$OUTDIR/AI${i}.txt"
     npm exec -- ejs sai.ejs -i "{\"N_AGENTS\":${i},\"WITH_FORMULA\":1}" -o $ofile
+done
+
+
+#-------------#
+#  cards.ejs  #
+#-------------#
+echo -e "Generating family of Cards..."
+N_G=(2 6)
+OUTDIR='../cards'
+mkdir -p $OUTDIR
+for ((i=${N_G[0]};i<=${N_G[1]};i+=2)); do
+    for ((j=i/2;j<=${N_G[1]};j++)); do
+        ofile="$OUTDIR/cards${i}suit${j}.txt"
+        npm exec -- ejs cards.ejs -i "{\"N_G\":${i},\"N_S\":${j},\"WITH_FORMULA\":1}" -o $ofile
+    done
 done

@@ -1,0 +1,186 @@
+<%# 
+    A simple game of cards:
+    * each player gets N_G/2 cards
+    * cards are served from a deck with 2 suits (red and black)
+    * each suit has N_S cards with values starting from 0
+    * each player selects a card to play (without foreseeing opponent's choice)
+    * after each round the score is updated
+    * "win condition": 
+        - red card always "beats" black card,
+        - if both cards are of the same suit, the higher value wins
+
+NOTE: in this varint players do not "memorize", what cards were already played !!!
+
+refs: 
+    * card game scenario taken from the https://www.csc.kth.se/~mfd/Papers/AAMAS09.pdf
+    * combinations encoding taken from https://www.farside.org.uk/201311/encoding_n_choose_k
+_%>
+<%_ 
+
+let dict={};
+
+function binom(n,k){
+    if(k>n)return 0;
+    if(n==k || k==0)return 1;
+    if(!dict[`${n}-${k}`]){
+        dict[`${n}-${k}`]=binom(n-1,k-1)+binom(n-1,k)
+    }
+    return dict[`${n}-${k}`];
+}
+
+function enc(ch){
+    let j=ch.length;
+
+    for(i of ch){
+        res += binom(i, j--)
+    }
+}
+
+function dec(n, k){
+    let i=k-1;
+    while(binom(i,k)<n){
+        i++;
+    }
+    let res = [];
+    for(;i>=0;i--){
+        if(binom(i,k)<=n){
+            n-=binom(i,k--);
+            res.push(i)
+        }
+    }
+    return res;
+}
+
+// 
+let p1Spec = "Agent P1:\n";
+let p2Spec = "Agent P2:\n";
+let scSpec = "Agent Score:\n";
+// 
+
+/*
+For N suits add iteration over possible solutions for
+x_1 + ... + x_n = N
+where x_i will denote the number of i-suit cards in the game
+*/
+
+let cardsInGame = typeof N_G == 'undefined' ? 4 : N_G;
+let cardsInSuit = typeof N_S == 'undefined' ? 2 : N_S;    
+let cardsPerPlayer = cardsInGame/2;
+
+
+let p1Vars = [];
+let p2Vars = [];
+
+for(let ci=0;ci<cardsInSuit;ci++){
+    p1Vars.push(`P1_has_r${ci}`);
+    p1Vars.push(`P1_has_b${ci}`);
+    p2Vars.push(`P2_has_r${ci}`);
+    p2Vars.push(`P2_has_b${ci}`);
+}
+p1Spec+=`LOCAL: [${p1Vars.join(',')}]\n`
+p2Spec+=`LOCAL: [${p2Vars.join(',')}]\n`
+scSpec+=`LOCAL: [P1_score, P2_score]\n`;
+
+p1Spec+=`PERSISTENT: [${p1Vars.join(',')}]\n`
+p2Spec+=`PERSISTENT: [${p2Vars.join(',')}]\n`
+scSpec+=`PERSISTENT: [P1_score, P2_score, round]\n`;
+
+p1Spec+=`INITIAL: [${p1Vars.map(x=>x+":=0").join(',')}]\n`
+p2Spec+=`INITIAL: [${p2Vars.map(x=>x+":=0").join(',')}]\n`
+scSpec+=`INITIAL: [P1_score:=0, P2_score:=0, round:=0]\n`;
+
+p1Spec+=`init idle\n`
+p2Spec+=`init idle\n`
+scSpec+=`init count\n`
+// console.log({cardsInGame, cardsInSuit});
+
+let initCode = 0;
+let gameCode = 0;
+let partCode;
+
+let rBound = cardsInSuit < cardsInGame ? cardsInSuit : cardsInGame;
+let bBound = cardsInSuit < cardsInGame ? cardsInSuit : cardsInGame;
+for(let rGame=0; rGame<=rBound; rGame++){
+    let bGame = cardsInGame - rGame;
+    if(bGame>bBound)continue;
+    
+    let maxRC = binom(cardsInSuit, rGame);  // max number of combinations for choosing rGame-cards from red suit
+    let maxBC = binom(cardsInSuit, bGame);  // max number of combinations for choosing bGame-cards from black suit
+    // console.log({maxBC,bGame,bBound});
+    
+    for(let rci=0;rci<maxRC;rci++){
+        for(let bci=0;bci<maxBC;bci++){
+            let rServed = dec(rci, rGame);
+            let bServed = dec(bci, bGame);
+            
+            // console.log(`Ingame [${rGame} red, ${bGame} black]: ${rServed.map(x=>'r'+x).concat(bServed.map(x=>'b'+x)).join(', ')}`);
+            
+            partCode = 0;
+            // use `binom(cardsInGame, cardsPerPlayer)/2` to remove symmetry (i.e., P1 and P2 can be swapped)
+            for(let si=0;si<binom(cardsInGame, cardsPerPlayer);si++){
+                let sfunc = dec(si, cardsPerPlayer);
+                // console.log(sfunc);
+                let rHas1 = rServed.filter((x,i)=>sfunc.indexOf(i)!=-1)
+                let rHas2 = rServed.filter((x,i)=>sfunc.indexOf(i)==-1)
+
+                let bHas1 = bServed.filter((x,i)=>sfunc.indexOf(i+rGame)!=-1)
+                let bHas2 = bServed.filter((x,i)=>sfunc.indexOf(i+rGame)==-1)
+
+                // console.log(`\tPossible serving: `);
+                // console.log(`\t\tP1 has: ${rHas1.map(x=>"r"+x).concat(bHas1.map(x=>"b"+x)).join(' ')}`);
+                // console.log(`\t\tP2 has: ${rHas2.map(x=>"r"+x).concat(bHas2.map(x=>"b"+x)).join(' ')}`);
+
+                p1Spec += `shared[2] serving_${gameCode}_${partCode}[serving]: idle -> served [${
+                    rHas1.map(x=>`P1_has_r${x}:=1`).concat(bHas1.map(x=>`P1_has_b${x}:=1`)).join(',')
+                }]\n`;
+                p2Spec += `shared[2] serving_${gameCode}_${partCode}[serving]: idle -> served [${
+                    rHas2.map(x=>`P2_has_r${x}:=1`).concat(bHas2.map(x=>`P2_has_b${x}:=1`)).join(',')
+                }]\n`;
+
+                initCode++;
+                partCode++;
+            }
+            gameCode++;
+        }        
+    }
+}
+
+
+// all possible actions
+for(let ci=0;ci<cardsInSuit;ci++){
+    for(let cj=0;cj<cardsInSuit;cj++){
+        // todo: add P{1,2}_seen
+        if(ci!=cj){
+            p1Spec += `shared[3] play_r${ci}_r${cj}[play1_r${ci}]: served [P1_has_r${ci}==1 && P1_has_r${cj}!=1] -> served [P1_has_r${ci}:=0]\n`    
+            p1Spec += `shared[3] play_b${ci}_b${cj}[play1_b${ci}]: served [P1_has_b${ci}==1 && P1_has_b${cj}!=1] -> served [P1_has_b${ci}:=0]\n`
+
+            p2Spec += `shared[3] play_r${ci}_r${cj}[play2_r${cj}]: served [P2_has_r${cj}==1 && P2_has_r${ci}!=1] -> served [P2_has_r${cj}:=0]\n`
+            p2Spec += `shared[3] play_b${ci}_b${cj}[play2_b${cj}]: served [P2_has_b${cj}==1 && P2_has_b${ci}!=1] -> served [P2_has_b${cj}:=0]\n`
+        }
+        p1Spec += `shared[3] play_r${ci}_b${cj}[play1_r${ci}]: served [P1_has_r${ci}==1 && P1_has_b${cj}!=1] -> served [P1_has_r${ci}:=0]\n`
+        p1Spec += `shared[3] play_b${ci}_r${cj}[play1_b${ci}]: served [P1_has_b${ci}==1 && P1_has_r${cj}!=1] -> served [P1_has_b${ci}:=0]\n`
+
+        p2Spec += `shared[3] play_r${ci}_b${cj}[play2_b${cj}]: served [P2_has_b${cj}==1 && P2_has_r${ci}!=1] -> served [P2_has_b${cj}:=0]\n`
+        p2Spec += `shared[3] play_b${ci}_r${cj}[play2_r${cj}]: served [P2_has_r${cj}==1 && P2_has_b${ci}!=1] -> served [P2_has_r${cj}:=0]\n`
+
+        if(ci>cj){
+            scSpec += `shared[3] play_r${ci}_r${cj}: count [round<${cardsPerPlayer}] -> count [P1_score:=P1_score+1, round:=round+1]\n`
+            scSpec += `shared[3] play_b${ci}_b${cj}: count [round<${cardsPerPlayer}] -> count [P1_score:=P1_score+1, round:=round+1]\n`
+        }
+        if(ci<cj){
+            scSpec += `shared[3] play_b${ci}_b${cj}: count [round<${cardsPerPlayer}] -> count [P2_score:=P2_score+1, round:=round+1]\n`
+            scSpec += `shared[3] play_r${ci}_r${cj}: count [round<${cardsPerPlayer}] -> count [P2_score:=P2_score+1, round:=round+1]\n`
+        }
+        
+        scSpec += `shared[3] play_r${ci}_b${cj}: count [round<${cardsPerPlayer}] -> count [P1_score:=P1_score+1, round:=round+1]\n`
+        scSpec += `shared[3] play_b${ci}_r${cj}: count [round<${cardsPerPlayer}] -> count [P2_score:=P2_score+1, round:=round+1]\n`
+    }
+}
+_%>
+<%- p1Spec %>
+<%- p2Spec %>
+<%- scSpec %>
+
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { _%>
+FORMULA: <<P1>>[]( round<<%= cardsPerPlayer %> || P1_score>P2_score)
+<%_ } _%>
