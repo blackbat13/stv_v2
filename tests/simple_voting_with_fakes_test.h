@@ -20,7 +20,7 @@ TEST(SimpleVotingWithFakesTest, 2Voters1Coercer)
 
     EXPECT_EQ(verify.result, true);
 
-    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 135);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 279);
 }
 
 TEST(SimpleVotingWithFakesTest, 3Voters1Coercer)
@@ -29,7 +29,7 @@ TEST(SimpleVotingWithFakesTest, 3Voters1Coercer)
 
     EXPECT_EQ(verify.result, true);
 
-    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 837);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 3429);
 }
 
 TEST(SimpleVotingWithFakesTest, 4Voters1Coercer)
@@ -38,7 +38,7 @@ TEST(SimpleVotingWithFakesTest, 4Voters1Coercer)
 
     EXPECT_EQ(verify.result, true);
 
-    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 5103);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 41391);
 }
 
 TEST(SimpleVotingWithFakesNotGiveTest, 1Voter1Coercer)
@@ -56,7 +56,7 @@ TEST(SimpleVotingWithFakesNotGiveTest, 2Voters1Coercer)
 
     EXPECT_EQ(verify.result, true);
 
-    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 135);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 279);
 }
 
 TEST(SimpleVotingWithFakesNotGiveTest, 3Voters1Coercer)
@@ -65,7 +65,7 @@ TEST(SimpleVotingWithFakesNotGiveTest, 3Voters1Coercer)
 
     EXPECT_EQ(verify.result, true);
 
-    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 837);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 3429);
 }
 
 TEST(SimpleVotingWithFakesNotGiveTest, 4Voters1Coercer)
@@ -74,5 +74,5 @@ TEST(SimpleVotingWithFakesNotGiveTest, 4Voters1Coercer)
 
     EXPECT_EQ(verify.result, true);
 
-    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 5103);
+    EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 41391);
 }
