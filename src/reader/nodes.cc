@@ -254,9 +254,9 @@ Agent * AgentTemplate::generateAgent(int id) {
          transition->id = result->localTransitions.size();
         //  result->localTransitions[transition->id] = transition;
          result->localTransitions.push_back(transition);
-         transition->name = (*it)->patternName;
-         transition->localName = (*it)->matchName;
          transition->isShared = ((*it)->shared > 0);
+         transition->name = transition->isShared ? (*it)->patternName : "[" + to_string(result->id) + "]_" + (*it)->patternName;
+         transition->localName = transition->isShared ? (*it)->matchName : "[" + to_string(result->id) + "]_" + (*it)->matchName;
          transition->sharedCount = (*it)->shared;
          transition->agent = result;
          transition->from = state;
