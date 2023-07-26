@@ -1,0 +1,67 @@
+Agent AI1:
+LOCAL: [AI1_data_completion, AI1_model_quality, AI1_received_data, AI1_working]
+PERSISTENT: [AI1_data_completion, AI1_model_quality, AI1_received_data, AI1_working]
+INITIAL: [AI1_data_completion:=0, AI1_model_quality:=30, AI1_received_data:=-1, AI1_working:=1]
+init start
+AI1_learn: start -> learn [AI1_data_completion:=AI1_data_completion+50]
+shared[2] share_AI1_to_AI2_quality_0[share_AI1_to_AI2]: learn [AI1_model_quality==0] -> sent
+shared[2] share_AI1_to_AI2_quality_10[share_AI1_to_AI2]: learn [AI1_model_quality==10] -> sent
+shared[2] share_AI1_to_AI2_quality_20[share_AI1_to_AI2]: learn [AI1_model_quality==20] -> sent
+shared[2] share_AI1_to_AI2_quality_30[share_AI1_to_AI2]: learn [AI1_model_quality==30] -> sent
+shared[2] share_AI1_to_AI2_quality_40[share_AI1_to_AI2]: learn [AI1_model_quality==40] -> sent
+shared[2] share_AI1_to_AI2_quality_50[share_AI1_to_AI2]: learn [AI1_model_quality==50] -> sent
+shared[2] share_AI1_to_AI2_quality_60[share_AI1_to_AI2]: learn [AI1_model_quality==60] -> sent
+shared[2] share_AI1_to_AI2_quality_70[share_AI1_to_AI2]: learn [AI1_model_quality==70] -> sent
+shared[2] share_AI1_to_AI2_quality_80[share_AI1_to_AI2]: learn [AI1_model_quality==80] -> sent
+shared[2] share_AI1_to_AI2_quality_90[share_AI1_to_AI2]: learn [AI1_model_quality==90] -> sent
+shared[2] share_AI1_to_AI2_quality_100[share_AI1_to_AI2]: learn [AI1_model_quality==100] -> sent
+shared[2] share_AI2_to_AI1_quality_0[recieve_AI2]: learn -> AI2_data [AI1_received_data:=0]
+shared[2] share_AI2_to_AI1_quality_10[recieve_AI2]: learn -> AI2_data [AI1_received_data:=10]
+shared[2] share_AI2_to_AI1_quality_20[recieve_AI2]: learn -> AI2_data [AI1_received_data:=20]
+shared[2] share_AI2_to_AI1_quality_30[recieve_AI2]: learn -> AI2_data [AI1_received_data:=30]
+shared[2] share_AI2_to_AI1_quality_40[recieve_AI2]: learn -> AI2_data [AI1_received_data:=40]
+shared[2] share_AI2_to_AI1_quality_50[recieve_AI2]: learn -> AI2_data [AI1_received_data:=50]
+shared[2] share_AI2_to_AI1_quality_60[recieve_AI2]: learn -> AI2_data [AI1_received_data:=60]
+shared[2] share_AI2_to_AI1_quality_70[recieve_AI2]: learn -> AI2_data [AI1_received_data:=70]
+shared[2] share_AI2_to_AI1_quality_80[recieve_AI2]: learn -> AI2_data [AI1_received_data:=80]
+shared[2] share_AI2_to_AI1_quality_90[recieve_AI2]: learn -> AI2_data [AI1_received_data:=90]
+shared[2] share_AI2_to_AI1_quality_100[recieve_AI2]: learn -> AI2_data [AI1_received_data:=100]
+AI1_merge: AI2_data -> learn [AI1_model_quality:=AI1_received_data]
+AI1_repeat: sent [AI1_data_completion < 100] -> start [AI1_received_data:=-1]
+AI1_finish: sent [AI1_data_completion >= 100] -> finish [AI1_working:=0, AI1_received_data:=-1]
+AI1_wait: finish -> finish
+
+Agent AI2:
+LOCAL: [AI2_data_completion, AI2_model_quality, AI2_received_data, AI2_working]
+PERSISTENT: [AI2_data_completion, AI2_model_quality, AI2_received_data, AI2_working]
+INITIAL: [AI2_data_completion:=0, AI2_model_quality:=60, AI2_received_data:=-1, AI2_working:=1]
+init start
+AI2_learn: start -> learn [AI2_data_completion:=AI2_data_completion+50]
+shared[2] share_AI2_to_AI1_quality_0[share_AI2_to_AI1]: learn [AI2_model_quality==0] -> sent
+shared[2] share_AI2_to_AI1_quality_10[share_AI2_to_AI1]: learn [AI2_model_quality==10] -> sent
+shared[2] share_AI2_to_AI1_quality_20[share_AI2_to_AI1]: learn [AI2_model_quality==20] -> sent
+shared[2] share_AI2_to_AI1_quality_30[share_AI2_to_AI1]: learn [AI2_model_quality==30] -> sent
+shared[2] share_AI2_to_AI1_quality_40[share_AI2_to_AI1]: learn [AI2_model_quality==40] -> sent
+shared[2] share_AI2_to_AI1_quality_50[share_AI2_to_AI1]: learn [AI2_model_quality==50] -> sent
+shared[2] share_AI2_to_AI1_quality_60[share_AI2_to_AI1]: learn [AI2_model_quality==60] -> sent
+shared[2] share_AI2_to_AI1_quality_70[share_AI2_to_AI1]: learn [AI2_model_quality==70] -> sent
+shared[2] share_AI2_to_AI1_quality_80[share_AI2_to_AI1]: learn [AI2_model_quality==80] -> sent
+shared[2] share_AI2_to_AI1_quality_90[share_AI2_to_AI1]: learn [AI2_model_quality==90] -> sent
+shared[2] share_AI2_to_AI1_quality_100[share_AI2_to_AI1]: learn [AI2_model_quality==100] -> sent
+shared[2] share_AI1_to_AI2_quality_0[recieve_AI1]: learn -> AI1_data [AI2_received_data:=0]
+shared[2] share_AI1_to_AI2_quality_10[recieve_AI1]: learn -> AI1_data [AI2_received_data:=10]
+shared[2] share_AI1_to_AI2_quality_20[recieve_AI1]: learn -> AI1_data [AI2_received_data:=20]
+shared[2] share_AI1_to_AI2_quality_30[recieve_AI1]: learn -> AI1_data [AI2_received_data:=30]
+shared[2] share_AI1_to_AI2_quality_40[recieve_AI1]: learn -> AI1_data [AI2_received_data:=40]
+shared[2] share_AI1_to_AI2_quality_50[recieve_AI1]: learn -> AI1_data [AI2_received_data:=50]
+shared[2] share_AI1_to_AI2_quality_60[recieve_AI1]: learn -> AI1_data [AI2_received_data:=60]
+shared[2] share_AI1_to_AI2_quality_70[recieve_AI1]: learn -> AI1_data [AI2_received_data:=70]
+shared[2] share_AI1_to_AI2_quality_80[recieve_AI1]: learn -> AI1_data [AI2_received_data:=80]
+shared[2] share_AI1_to_AI2_quality_90[recieve_AI1]: learn -> AI1_data [AI2_received_data:=90]
+shared[2] share_AI1_to_AI2_quality_100[recieve_AI1]: learn -> AI1_data [AI2_received_data:=100]
+AI2_merge: AI1_data -> learn [AI2_model_quality:=AI2_received_data]
+AI2_repeat: sent [AI2_data_completion < 100] -> start [AI2_received_data:=-1]
+AI2_finish: sent [AI2_data_completion >= 100] -> finish [AI2_working:=0, AI2_received_data:=-1]
+AI2_wait: finish -> finish
+
+FORMULA: <<AI1>>[](AI1_model_quality > 10 && AI2_model_quality > 10)

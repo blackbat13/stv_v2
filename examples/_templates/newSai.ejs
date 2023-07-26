@@ -1,0 +1,72 @@
+<%#
+PARAMETERS:
+    N_AGENTS - denotes the number of AI modules
+    K - learning progress per step
+    QUALITY - array of quality of a model for each agent
+    A_TRUSTS_B - array of 
+    WITH_FORMULA - flag denoting if formula should be included
+_%>
+<%_
+for(let i = 1; i <= N_AGENTS; i++) {
+    let varPrefix = `AI${i}`;
+    let localVars = [
+        'data_completion',
+        'model_quality',
+        'received_data',
+        'working',
+    ];
+_%>
+Agent AI<%=i%>:
+LOCAL: [<%=localVars.map(x=>varPrefix+'_'+x).join(', ')%>]
+PERSISTENT: [<%=localVars.map(x=>varPrefix+'_'+x).join(', ')%>]
+INITIAL: [<%=varPrefix%>_data_completion:=0, <%=varPrefix%>_model_quality:=<%=QUALITY[i-1]%>, <%=varPrefix%>_received_data:=-1, <%=varPrefix%>_working:=1]
+init start
+<%=varPrefix%>_learn: start -> learn [<%=varPrefix%>_data_completion:=<%=varPrefix%>_data_completion+<%=K%>]
+<%_
+for(let j = 1; j <= N_AGENTS; j++) {
+    if(j != i) {
+_%>
+<%_
+for(let qual = 0; qual <= 100; qual+=10) {
+_%>
+shared[2] share_<%=varPrefix%>_to_<%="AI"+j%>_quality_<%=qual%>[share_<%=varPrefix%>_to_<%="AI"+j%>]: learn [<%=varPrefix%>_model_quality==<%=qual%>] -> sent
+<% }_%>
+<% }_%>
+<% }_%>
+<%_
+for(let j = 1; j <= N_AGENTS; j++) {
+    if(j != i) {
+_%>
+<%_
+for(let qual = 0; qual <= 100; qual+=10) {
+_%>
+shared[2] share_<%="AI"+j%>_to_<%=varPrefix%>_quality_<%=qual%>[recieve_<%="AI"+j%>]: learn -> <%="AI"+j+"_data"%> [<%=varPrefix%>_received_data:=<%=qual%>]
+<% }_%>
+<% }_%>
+<% }_%>
+<%_
+let id = 0
+for(let j = 1; j <= N_AGENTS; j++) {
+    if(j != i) {
+        if(id >= A_TRUSTS_B[i-1] || A_TRUSTS_B[i-1][id] != j) {
+_%>
+<%=varPrefix%>_ignore: AI<%=j%>_data -> learn
+<%_
+}
+else {
+_%>
+<%=varPrefix%>_merge: AI<%=A_TRUSTS_B[i-1][id]%>_data -> learn [<%=varPrefix%>_model_quality:=<%=varPrefix%>_received_data]
+<%_
+id++
+}
+_%>
+<% }_%>
+<% }_%>
+<%=varPrefix%>_repeat: sent [<%=varPrefix%>_data_completion < 100] -> start [<%=varPrefix%>_received_data:=-1]
+<%=varPrefix%>_finish: sent [<%=varPrefix%>_data_completion >= 100] -> finish [<%=varPrefix%>_working:=0, <%=varPrefix%>_received_data:=-1]
+<%=varPrefix%>_wait: finish -> finish
+
+<% }_%>
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { _%>
+FORMULA: <<AI1>>[](<%- Array.from({length:N_AGENTS}, (k,v)=>v+1).map(x=>`AI${x}_model_quality\ > 10`).join(' && ') %>)
+<%_ } _%>
