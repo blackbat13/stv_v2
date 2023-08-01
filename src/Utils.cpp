@@ -207,7 +207,9 @@ void loadConfigFromFile(string filename) {
                 config.output_dot_files = (val == "1");
             } else if (key == "DOT_DIR") {
                 config.dotdir = val;
-            }
+            } else if (key == "KBC_ENABLED"){
+				config.kbc = (val == "1");
+			}
         }
     } else {
         printf("Could not open the config file \"%s\"...", filename.c_str());
@@ -237,6 +239,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.output_local_models = 1;
             } else if (arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES") {
                 config.output_dot_files = 1;
+            } else if (arg == "-KBC_ENABLED" || arg == "--KBC_ENABLED") {
+                config.kbc = 1;
             }
         }
     }

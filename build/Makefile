@@ -67,6 +67,9 @@ GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 clean:
 	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c $(TESTS) gtest.a gtest_main.a *.o
 
+wipe:
+	rm -f *.o
+
 all : $(TESTS) $(BIG_TESTS)
 
 gtest-all.o : $(GTEST_SRCS_)

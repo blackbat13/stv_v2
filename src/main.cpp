@@ -124,6 +124,9 @@ int main(int argc, char* argv[]) {
         ofs.close();
     }
     
+	if(config.kbc){//run Filip Jamroga's code (location to be changed)
+		printf("Plop from the inside!\n");
+	}
 
     if(false){
         gettimeofday(&te, NULL);
