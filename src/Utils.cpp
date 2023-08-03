@@ -198,17 +198,17 @@ void loadConfigFromFile(string filename) {
                     config.fname = "../examples/svote/Voters2Candidates2.txt";
                 }
             } else if (key == "OUTPUT_LOCAL_MODELS") {
-                config.output_local_models = (val == "1");
+                config.output_local_models = (val[0] == '1');
             } else if (key == "OUTPUT_GLOBAL_MODEL") {
-                config.output_global_model = (val == "1");
+                config.output_global_model = (val[0] == '1');
             } else if (key == "MODE") {
                 config.stv_mode = (val[0] - '0');
             } else if (key == "OUTPUT_DOT_FILES") {
-                config.output_dot_files = (val == "1");
+                config.output_dot_files = (val[0] == '1');
             } else if (key == "DOT_DIR") {
                 config.dotdir = val;
             } else if (key == "KBC_ENABLED"){
-				config.kbc = (val == "1");
+				config.kbc = (val[0] == '1');
 			}
         }
     } else {

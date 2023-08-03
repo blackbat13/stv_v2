@@ -7,6 +7,7 @@
 #include <string>
 #include <tuple>
 #include <algorithm>
+#include <sys/stat.h>
 
 #include "reader/nodes.hpp"
 #include "DotGraph.hpp"
@@ -21,9 +22,15 @@ extern FormulaTemplate formulaDescription;
 int main(int argc, char* argv[]) {
     unsigned long mem1 = getMemCap();
     struct timeval tb, te;
+	struct stat buffer;
     gettimeofday(&tb, NULL);
     loadConfigFromFile("config.txt");
     loadConfigFromArgs(argc,argv);
+	
+	if(!(stat (config.fname.c_str(), &buffer) == 0)){
+		std::cout << "ERROR: File " << config.fname << " not found!" << endl;
+		return -1;
+	}
 
     auto tp = new ModelParser();
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
