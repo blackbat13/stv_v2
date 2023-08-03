@@ -190,11 +190,11 @@ void loadConfigFromFile(string filename) {
             auto val = line.substr(delimPos + 1);
             if (key == "MODEL_ID") {
                 config.model_id = val[0] - '0';
-                if (val == "1") {
+                if (config.model_id == 1) {
                     config.fname = "../examples/trains/Trains2Controller1.txt";
-                } else if (val == "2") {
+                } else if (config.model_id == 2) {
                     config.fname = "../examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
-                } else if (val == "3") {
+                } else if (config.model_id == 3) {
                     config.fname = "../examples/svote/Voters2Candidates2.txt";
                 }
             } else if (key == "OUTPUT_LOCAL_MODELS") {
