@@ -11,6 +11,7 @@
 
 #include "reader/nodes.hpp"
 #include "DotGraph.hpp"
+#include "KnowledgeBasedConstruction.hpp"
 
 using namespace std;
 
@@ -132,7 +133,9 @@ int main(int argc, char* argv[]) {
     }
     
 	if(config.kbc){//run Filip Jamroga's code (location to be changed)
-		printf("Plop from the inside!\n");
+		printf("%d total states\n", totalStates(generator->getCurrentGlobalModel()));
+		mockKBC(generator->getCurrentGlobalModel());
+		printf("%d total states\n", totalStates(generator->getCurrentGlobalModel()));
 	}
 
     if(false){

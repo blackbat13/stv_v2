@@ -4,10 +4,10 @@ USER_DIR = ../tests
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 	
-main: main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o 
-	$(CC) $(CPPFLAGS)    -o stv main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o
+main: main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o KnowledgeBasedConstruction.o parser.o scanner.o expressions.o nodes.o 
+	$(CC) $(CPPFLAGS)    -o stv main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o KnowledgeBasedConstruction.o parser.o scanner.o expressions.o nodes.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp ../src/KnowledgeBasedConstruction.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
 	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
@@ -36,6 +36,9 @@ Verification.o: ../src/Verification.hpp ../src/Verification.cpp
 
 DotGraph.o: ../src/DotGraph.hpp ../src/DotGraph.cpp
 	$(CC) $(CPPFLAGS) -c ../src/DotGraph.cpp
+
+KnowledgeBasedConstruction.o: ../src/KnowledgeBasedConstruction.hpp ../src/KnowledgeBasedConstruction.cpp
+	$(CC) $(CPPFLAGS) -c ../src/KnowledgeBasedConstruction.cpp
 
 parser.o: ../src/reader/parser.c
 	$(CC) $(CPPFLAGS) -c ../src/reader/parser.c
