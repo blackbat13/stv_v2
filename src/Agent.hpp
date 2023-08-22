@@ -40,7 +40,7 @@ class Agent {
         LocalState* includesState(LocalState *state);
 		
 		/// @brief Creates a complete, independent copy of the current Agent and its resources, including the ones located at pointers
-		Agent clone();
+		Agent* clone();
 };
 
 #endif // AGENT_H
