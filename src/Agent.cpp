@@ -24,7 +24,7 @@ LocalState* Agent::includesState(LocalState* state) {
 }
 
 Agent* Agent::clone(){
-	Agent* a = this;
+	Agent* a = new Agent(*this);
 	for(int i=0; i<a->localStates.size(); i++){
 		a->localStates[i] = new LocalState(*a->localStates[i]);
 		a->localStates[i]->agent = a;
