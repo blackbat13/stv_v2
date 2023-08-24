@@ -7,6 +7,8 @@
 #ifndef COMMON
 #define COMMON
 
+#define EPSILON "STV KBC RESERVED CONST 'Epsilon'"
+
 #include <map>
 #include <set>
 
