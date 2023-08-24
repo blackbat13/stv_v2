@@ -133,9 +133,10 @@ int main(int argc, char* argv[]) {
     }
     
 	if(config.kbc){//run Filip Jamroga's code (location to be changed)
-		printf("%d total states\n", totalStates(generator->getCurrentGlobalModel()));
-		mockKBC(generator->getCurrentGlobalModel());
-		printf("%d total states\n", totalStates(generator->getCurrentGlobalModel()));
+		for(int i=0; i<generator->getCurrentGlobalModel()->agents.size(); i++){
+			GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
+			KBCprojection(cloneModel, i);
+		}
 	}
 
     if(false){
