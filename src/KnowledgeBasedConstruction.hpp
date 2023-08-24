@@ -8,11 +8,14 @@
 #include "Utils.hpp"
 #include "Common.hpp"
 #include "reader/nodes.hpp"
+#include "GlobalModelGenerator.hpp"
 #include <string>
-#include<cmath>
+#include <cmath>
 
 using namespace std;
 
-int totalStates(GlobalModel *const gm);
-void mockKBC(GlobalModel *const gm);
-void mockLocalKBC(Agent *const a);
+//void mockKBC(GlobalModel *const gm);
+//void mockLocalKBC(Agent *const a);
+void KBCprojection(GlobalModel *const gm, int agent_id);
+bool checkAgent(GlobalState* s, int agent_id);
+GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula);

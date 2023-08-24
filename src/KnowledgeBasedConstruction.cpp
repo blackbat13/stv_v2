@@ -10,17 +10,7 @@ using namespace::std;
 
 const bool kbc_debug = true;
 
-int totalStates(GlobalModel *const gm){
-	long int gms=gm->agents.size();
-	long int total=0;
-	
-	for(long int i=0; i<gms; i++){
-		total+=gm->agents[i]->localStates.size();
-	}
-	
-	return total;
-}
-
+/*
 void mockKBC(GlobalModel *const gm){
 	for(int i=0; i<(gm->agents.size()); i++) mockLocalKBC(gm->agents[i]);
 }
@@ -51,7 +41,7 @@ void mockLocalKBC(Agent *const a){//A fake KBC-esque function
 		 * This might not be an issue anyone could run into, however:
 		 * Given a very generous (and unrealistic) 256 bits per LocalState object, it would mean that the local model takes up more than 128GiB of RAM, and it's resulting "powersetted" equivalent more than 512EiB
 		 * While one might find a workstation in which such an unexpanded model would fit into memory, as of the time of this writing (2023) the biggest supercomputer in the world only has 32PiB of RAM
-		 */
+		 *\/
 		LocalState* t = new LocalState();
 		t->id = counter;
 		t->name = "";
@@ -101,4 +91,59 @@ void mockLocalKBC(Agent *const a){//A fake KBC-esque function
 		cout << endl;
 		cout << "---" << endl;
 	}
+}
+*/
+
+void KBCprojection(GlobalModel *const gm, int agent_id){
+	LocalTransition et;//epsilon transition
+	et.id=-1;
+	et.name = EPSILON;
+	et.localName = EPSILON;
+	et.isShared = false;
+	et.sharedCount = -1;
+	
+	set<GlobalTransition*> globalTransitionsProjected;
+	
+	int c = 0;
+	for(GlobalTransition* gt : gm->initState->globalTransitions){
+		int relevance = 0;
+		for(LocalTransition* lt : gt->localTransitions)
+			if(lt->agent->id == agent_id) relevance++;
+		if(relevance){
+			c++;
+			gt->localTransitions.clear();
+			gt->localTransitions.insert(&et);
+		}
+		globalTransitionsProjected.insert(gt);
+	}
+	gm->initState->globalTransitions.clear();
+	for(GlobalTransition* gt : globalTransitionsProjected)
+		gm->initState->globalTransitions.insert(gt);
+	cout << "Epsilon:" << c << endl;
+}
+
+GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
+	LocalModels clonedLM;
+	Formula clonedF;
+	vector<Agent*> clonedAgents;
+	for(int i=0; i<localModels->agents.size(); i++){
+		clonedAgents.push_back(localModels->agents[i]->clone());
+	}
+	clonedLM.agents = clonedAgents;
+	
+	clonedF.isF = formula->isF;
+	vector<Agent*> coalitionset(formula->coalition.begin(), formula->coalition.end());
+	for(int i=0; i<coalitionset.size(); i++){
+		clonedF.coalition.insert(clonedAgents[coalitionset[i]->id]);
+	}
+	clonedF.p = formula->p;
+	
+	GlobalModelGenerator* cloneGenerator = new GlobalModelGenerator();
+	cloneGenerator->initModel(&clonedLM, &clonedF);
+	cloneGenerator->expandAllStates();
+	
+	GlobalModel *out = cloneGenerator->getCurrentGlobalModel();
+	delete cloneGenerator;
+	
+	return out;
 }
