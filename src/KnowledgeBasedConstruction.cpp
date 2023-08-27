@@ -105,14 +105,19 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 	set<GlobalTransition*> globalTransitionsProjected;
 	
 	int c = 0;
-	for(GlobalTransition* gt : gm->initState->globalTransitions){
+	for(GlobalTransition* gt : gm->initState->globalTransitions){//identify epsilon transitions
 		int relevance = 0;
 		for(LocalTransition* lt : gt->localTransitions)
 			if(lt->agent->id == agent_id) relevance++;
-		if(relevance){
+		if(relevance==0){
 			c++;
 			gt->localTransitions.clear();
 			gt->localTransitions.insert(&et);
+			
+			bool isDuplicate = false;//if current element is a duplicate, don't insert it
+			for(GlobalTransition* gtc : globalTransitionsProjected)
+				if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions) isDuplicate = true;
+			if(isDuplicate) continue;
 		}
 		globalTransitionsProjected.insert(gt);
 	}
