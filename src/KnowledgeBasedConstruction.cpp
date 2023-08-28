@@ -116,35 +116,29 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 			
 			bool isDuplicate = false;//if current element is a duplicate, don't insert it
 			for(GlobalTransition* gtc : globalTransitionsProjected)
-				if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions) isDuplicate = true;
+				if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions){
+					isDuplicate = true;
+					break;
+				}
 			if(isDuplicate) continue;
 		}
 		globalTransitionsProjected.insert(gt);
 	}
 	gm->initState->globalTransitions.clear();
-	for(GlobalTransition* gt : globalTransitionsProjected)
-		gm->initState->globalTransitions.insert(gt);
+	gm->initState->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
 	cout << "Epsilon:" << c << endl;
 }
 
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
 	LocalModels clonedLM;
-	Formula clonedF;
 	vector<Agent*> clonedAgents;
 	for(int i=0; i<localModels->agents.size(); i++){
 		clonedAgents.push_back(localModels->agents[i]->clone());
 	}
 	clonedLM.agents = clonedAgents;
 	
-	clonedF.isF = formula->isF;
-	vector<Agent*> coalitionset(formula->coalition.begin(), formula->coalition.end());
-	for(int i=0; i<coalitionset.size(); i++){
-		clonedF.coalition.insert(clonedAgents[coalitionset[i]->id]);
-	}
-	clonedF.p = formula->p;
-	
 	GlobalModelGenerator* cloneGenerator = new GlobalModelGenerator();
-	cloneGenerator->initModel(&clonedLM, &clonedF);
+	cloneGenerator->initModel(&clonedLM, formula);
 	cloneGenerator->expandAllStates();
 	
 	GlobalModel *out = cloneGenerator->getCurrentGlobalModel();
