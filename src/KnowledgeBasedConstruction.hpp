@@ -11,11 +11,13 @@
 #include "GlobalModelGenerator.hpp"
 #include <string>
 #include <cmath>
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
 //void mockKBC(GlobalModel *const gm);
 //void mockLocalKBC(Agent *const a);
 void KBCprojection(GlobalModel *const gm, int agent_id);
-bool checkAgent(GlobalState* s, int agent_id);
+void KBCexpansion(GlobalModel *const gm, int agent_id);
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula);

@@ -102,31 +102,109 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 	et.isShared = false;
 	et.sharedCount = -1;
 	
-	set<GlobalTransition*> globalTransitionsProjected;
-	
 	int c = 0;
-	for(GlobalTransition* gt : gm->initState->globalTransitions){//identify epsilon transitions
-		int relevance = 0;
-		for(LocalTransition* lt : gt->localTransitions)
-			if(lt->agent->id == agent_id) relevance++;
-		if(relevance==0){
-			c++;
-			gt->localTransitions.clear();
-			gt->localTransitions.insert(&et);
-			
-			bool isDuplicate = false;//if current element is a duplicate, don't insert it
-			for(GlobalTransition* gtc : globalTransitionsProjected)
-				if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions){
-					isDuplicate = true;
-					break;
-				}
-			if(isDuplicate) continue;
+	for(GlobalState* gs : gm->globalStates){
+		set<GlobalTransition*> globalTransitionsProjected;
+		
+		for(auto gt : gs->globalTransitions){//identify epsilon transitions
+			int relevance = 0;
+			for(LocalTransition* lt : gt->localTransitions)
+				if(lt->agent->id == agent_id) relevance++;
+			if(relevance==0){
+				c++;
+				gt->localTransitions.clear();
+				gt->localTransitions.insert(&et);
+				
+				bool isDuplicate = false;//if current element is a duplicate, don't insert it
+				for(GlobalTransition* gtc : globalTransitionsProjected)
+					if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions){
+						isDuplicate = true;
+						break;
+					}
+				if(isDuplicate) continue;
+			}
+			globalTransitionsProjected.insert(gt);
 		}
-		globalTransitionsProjected.insert(gt);
+		gs->globalTransitions.clear();
+		gs->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
 	}
-	gm->initState->globalTransitions.clear();
-	gm->initState->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
+	
 	cout << "Epsilon:" << c << endl;
+}
+
+void KBCexpansion(GlobalModel *const gm, int agent_id){
+	queue<set<GlobalState*>*> observationQueue;
+	set<set<GlobalState*>*> searchedObservations;
+	set<pair<set<GlobalState*>*,set<GlobalState*>*>*> transitions;
+	
+	//initial state observation -> queue
+	set<GlobalState*> initialObservation;
+	for(pair<Agent*, EpistemicClass*> ee : gm->initState->epistemicClasses){
+		cout << "plop";
+		if(ee.first->id == agent_id){
+			for(pair<string, GlobalState*> ecs : ee.second->globalStates){
+				cout << "plip";
+				initialObservation.insert(ecs.second);
+			}
+		}
+		cout << "!" << endl;
+	}
+	observationQueue.push(&initialObservation);
+	
+	
+	while(observationQueue.size() > 0){//process all observations in the queue
+		set<GlobalState*> observation = *observationQueue.front();	//Get the next element of the queue,...
+		observationQueue.pop();										//...remove it from it,...
+		if(searchedObservations.count(&observation)==0){				//...check if observation has already been searched...
+			searchedObservations.insert(&observation);				//...and add it to the list of searched observations if not.
+			
+			//find all global states succeeding the states in our current observation
+			set<GlobalState*> succeedingRaw;
+			for(GlobalState* gs : observation) for(GlobalTransition* gt : gs->globalTransitions)
+				succeedingRaw.insert(gt->to);
+			
+			set<set<GlobalState*>*> succeedingObservations;
+			while(succeedingRaw.size()>0){
+				auto element = succeedingRaw.begin();
+				GlobalState* gs = *element;
+				set<GlobalState*> nextObservation;
+				
+				cout << ":";
+				for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
+					cout << "plop";
+					if(ee.first->id == agent_id){
+						for(pair<string, GlobalState*> ecs : ee.second->globalStates){
+							cout << "plip";
+							if(succeedingRaw.count(ecs.second)>0){
+								cout << "plap";
+								nextObservation.insert(ecs.second);
+								succeedingRaw.erase(ecs.second);
+							}
+						}
+					}
+					cout << "!" << endl;
+				}
+				
+				
+				succeedingRaw.erase(gs);
+				succeedingObservations.insert(&nextObservation);
+			}
+			
+			set<set<GlobalState*>*> unsearchedObservations;
+			set_difference(succeedingObservations.begin(), succeedingObservations.end(), searchedObservations.begin(), searchedObservations.end(),
+				inserter(unsearchedObservations, unsearchedObservations.end()));
+			
+			for(set<GlobalState*>* obs : unsearchedObservations){
+				pair<set<GlobalState*>*,set<GlobalState*>*> tr;
+				tr.first = &observation;
+				tr.second = obs;
+				transitions.insert(&tr);
+				observationQueue.push(obs);
+			}
+		}
+	}
+	
+	cout << "E: " << searchedObservations.size() << "|" << transitions.size() << endl;
 }
 
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
@@ -142,7 +220,6 @@ GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
 	cloneGenerator->expandAllStates();
 	
 	GlobalModel *out = cloneGenerator->getCurrentGlobalModel();
-	delete cloneGenerator;
 	
 	return out;
 }

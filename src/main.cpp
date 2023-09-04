@@ -133,9 +133,15 @@ int main(int argc, char* argv[]) {
     }
     
 	if(config.kbc){//run Filip Jamroga's code (location to be changed)
+		GlobalState* s0 = generator->getCurrentGlobalModel()->globalStates[0];
+		std::pair<Agent*, EpistemicClass*> firstEntry = *s0->epistemicClasses.begin();
+		// GlobalState* s1 = generator->getCurrentGlobalModel()->globalStates[1];
+		// GlobalState* s2 = generator->getCurrentGlobalModel()->globalStates[2];
+		//asm("INT3");
 		for(int i=0; i<generator->getCurrentGlobalModel()->agents.size(); i++){
 			GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
 			KBCprojection(cloneModel, i);
+			KBCexpansion(cloneModel, i);
 		}
 	}
 
