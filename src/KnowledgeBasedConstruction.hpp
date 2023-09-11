@@ -9,6 +9,7 @@
 #include "Common.hpp"
 #include "reader/nodes.hpp"
 #include "GlobalModelGenerator.hpp"
+#include "Verification.hpp"
 #include <string>
 #include <cmath>
 #include <queue>

@@ -95,12 +95,12 @@ void mockLocalKBC(Agent *const a){//A fake KBC-esque function
 */
 
 void KBCprojection(GlobalModel *const gm, int agent_id){
-	LocalTransition et;//epsilon transition
-	et.id=-1;
-	et.name = EPSILON;
-	et.localName = EPSILON;
-	et.isShared = false;
-	et.sharedCount = -1;
+	// LocalTransition et;//epsilon transition
+	// et.id=-1;
+	// et.name = EPSILON;
+	// et.localName = EPSILON;
+	// et.isShared = false;
+	// et.sharedCount = -1;
 	
 	int c = 0;
 	for(GlobalState* gs : gm->globalStates){
@@ -112,8 +112,12 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 				if(lt->agent->id == agent_id) relevance++;
 			if(relevance==0){
 				c++;
-				gt->localTransitions.clear();
-				gt->localTransitions.insert(&et);
+				for(LocalTransition* lt : gt->localTransitions){
+					lt->name = EPSILON;
+					lt->localName = EPSILON;
+				}
+				// gt->localTransitions.clear();
+				// gt->localTransitions.insert(&et);
 				
 				bool isDuplicate = false;//if current element is a duplicate, don't insert it
 				for(GlobalTransition* gtc : globalTransitionsProjected)
@@ -137,17 +141,15 @@ void KBCexpansion(GlobalModel *const gm, int agent_id){
 	set<set<GlobalState*>*> searchedObservations;
 	set<pair<set<GlobalState*>*,set<GlobalState*>*>*> transitions;
 	
+	cout << gm->globalStates.size() << endl;
 	//initial state observation -> queue
 	set<GlobalState*> initialObservation;
 	for(pair<Agent*, EpistemicClass*> ee : gm->initState->epistemicClasses){
-		cout << "plop";
 		if(ee.first->id == agent_id){
 			for(pair<string, GlobalState*> ecs : ee.second->globalStates){
-				cout << "plip";
 				initialObservation.insert(ecs.second);
 			}
 		}
-		cout << "!" << endl;
 	}
 	observationQueue.push(&initialObservation);
 	
@@ -155,7 +157,7 @@ void KBCexpansion(GlobalModel *const gm, int agent_id){
 	while(observationQueue.size() > 0){//process all observations in the queue
 		set<GlobalState*> observation = *observationQueue.front();	//Get the next element of the queue,...
 		observationQueue.pop();										//...remove it from it,...
-		if(searchedObservations.count(&observation)==0){				//...check if observation has already been searched...
+		if(searchedObservations.count(&observation)==0){			//...check if observation has already been searched...
 			searchedObservations.insert(&observation);				//...and add it to the list of searched observations if not.
 			
 			//find all global states succeeding the states in our current observation
@@ -171,18 +173,14 @@ void KBCexpansion(GlobalModel *const gm, int agent_id){
 				
 				cout << ":";
 				for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
-					cout << "plop";
 					if(ee.first->id == agent_id){
 						for(pair<string, GlobalState*> ecs : ee.second->globalStates){
-							cout << "plip";
 							if(succeedingRaw.count(ecs.second)>0){
-								cout << "plap";
 								nextObservation.insert(ecs.second);
 								succeedingRaw.erase(ecs.second);
 							}
 						}
 					}
-					cout << "!" << endl;
 				}
 				
 				
@@ -209,15 +207,14 @@ void KBCexpansion(GlobalModel *const gm, int agent_id){
 
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
 	LocalModels clonedLM;
-	vector<Agent*> clonedAgents;
-	for(int i=0; i<localModels->agents.size(); i++){
-		clonedAgents.push_back(localModels->agents[i]->clone());
+	for(Agent* a : localModels->agents){
+		clonedLM.agents.push_back(a->clone());
 	}
-	clonedLM.agents = clonedAgents;
-	
 	GlobalModelGenerator* cloneGenerator = new GlobalModelGenerator();
 	cloneGenerator->initModel(&clonedLM, formula);
 	cloneGenerator->expandAllStates();
+	auto verification = new Verification(cloneGenerator);
+	verification->verify();
 	
 	GlobalModel *out = cloneGenerator->getCurrentGlobalModel();
 	
