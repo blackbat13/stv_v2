@@ -7,6 +7,9 @@
 #include "Agent.hpp"
 #include "LocalState.hpp"
 #include "LocalTransition.hpp"
+#include <iostream>
+
+using namespace::std;
 
 /* Sprawdzenie, czy w modelu nie ma juz (równoważnego) stanu.
  * Jeśli jest - zwróć go, w p.p. NULL
@@ -24,26 +27,46 @@ LocalState* Agent::includesState(LocalState* state) {
 }
 
 Agent* Agent::clone(){
-	Agent* a = new Agent(*this);
-	for(int i=0; i<a->localStates.size(); i++){
-		a->localStates[i] = new LocalState(*a->localStates[i]);
+	Agent* a = new Agent(id, name);
+	
+	for(int i=0; i<localStates.size(); i++){
+		a->localStates.push_back(new LocalState(*localStates[i]));
 		a->localStates[i]->agent = a;
 	}
-	for(int i=0; i<a->localTransitions.size(); i++){
-		LocalTransition t = *this->localTransitions[i];
-		a->localTransitions[i] = &t;
-		a->localTransitions[i]->agent = a;
-		a->localTransitions[i]->from = a->localStates[a->localTransitions[i]->from->id];
-		a->localTransitions[i]->to = a->localStates[a->localTransitions[i]->to->id];
-	}
-	for(int i=0; i<a->localStates.size(); i++){
-		vector<LocalTransition*> lsltset(a->localStates[i]->localTransitions.begin(), a->localStates[i]->localTransitions.end());
-		a->localStates[i]->localTransitions.clear();
-		for(int j=0; j<lsltset.size(); j++){
-			LocalTransition tls = *a->localTransitions[lsltset[j]->id];
-			a->localStates[i]->localTransitions.insert(&tls);
+	a->initState = a->localStates[initState->id];
+	//asm("INT3");
+	a->localTransitions.clear();
+	for(int i=0; i<localTransitions.size(); i++){
+		LocalTransition t;
+		t.id = i;
+		//cout << i << "|" << localTransitions.size() << "|" << localTransitions[i]->name << endl;
+		t.name.assign(localTransitions[i]->name);
+		t.localName.assign(localTransitions[i]->localName);
+		t.isShared = localTransitions[i]->isShared;
+		t.sharedCount = localTransitions[i]->sharedCount;
+		for(Condition* c : localTransitions[i]->conditions){
+			Condition* cc;
+			cc->var->name = c->var->name;
+			cc->var->initialValue = c->var->initialValue;
+			cc->var->persistent = c->var->persistent;
+			cc->var->agent = a;
+			cc->conditionOperator = c->conditionOperator;
+			cc->comparedValue = c->comparedValue;
+			t.conditions.insert(cc);
 		}
+		t.agent = a;
+		t.from = a->localStates[localTransitions[i]->from->id];
+		t.to = a->localStates[localTransitions[i]->to->id];
+		a->localTransitions.push_back(&t);
 	}
-	
+	for(LocalState* ls : a->localStates){
+		set<LocalTransition*> clt;
+		for(LocalTransition* lt : ls->localTransitions){
+			int loc_id = lt->id;
+			LocalTransition tls = *a->localTransitions[loc_id];
+			clt.insert(&tls);
+		}
+		ls->localTransitions.clear();
+	}
 	return a;
 }

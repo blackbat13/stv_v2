@@ -8,6 +8,7 @@
 #define AGENT_H
 
 #include "Common.hpp"
+#include "Types.hpp"
 
 /// @brief Contains all data for a single Agent, including id, name and all of the agents' variables.
 class Agent {
