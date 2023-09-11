@@ -29,21 +29,23 @@ LocalState* Agent::includesState(LocalState* state) {
 Agent* Agent::clone(){
 	Agent* a = new Agent(id, name);
 	
-	for(int i=0; i<localStates.size(); i++){
-		a->localStates.push_back(new LocalState(*localStates[i]));
-		a->localStates[i]->agent = a;
+	for(LocalState* l : localStates){
+		LocalState* lc = new LocalState();
+		lc->id = l->id;
+		lc->name.assign(l->name);
+		lc->agent = a;
+		a->localStates.push_back(lc);
 	}
 	a->initState = a->localStates[initState->id];
 	//asm("INT3");
-	a->localTransitions.clear();
+	//a->localTransitions.clear();
 	for(int i=0; i<localTransitions.size(); i++){
-		LocalTransition t;
-		t.id = i;
-		//cout << i << "|" << localTransitions.size() << "|" << localTransitions[i]->name << endl;
-		t.name.assign(localTransitions[i]->name);
-		t.localName.assign(localTransitions[i]->localName);
-		t.isShared = localTransitions[i]->isShared;
-		t.sharedCount = localTransitions[i]->sharedCount;
+		LocalTransition* t = new LocalTransition();
+		t->id = i;
+		t->name.assign(localTransitions[i]->name);
+		t->localName.assign(localTransitions[i]->localName);
+		t->isShared = localTransitions[i]->isShared;
+		t->sharedCount = localTransitions[i]->sharedCount;
 		for(Condition* c : localTransitions[i]->conditions){
 			Condition* cc;
 			cc->var->name = c->var->name;
@@ -52,21 +54,13 @@ Agent* Agent::clone(){
 			cc->var->agent = a;
 			cc->conditionOperator = c->conditionOperator;
 			cc->comparedValue = c->comparedValue;
-			t.conditions.insert(cc);
+			t->conditions.insert(cc);
 		}
-		t.agent = a;
-		t.from = a->localStates[localTransitions[i]->from->id];
-		t.to = a->localStates[localTransitions[i]->to->id];
-		a->localTransitions.push_back(&t);
-	}
-	for(LocalState* ls : a->localStates){
-		set<LocalTransition*> clt;
-		for(LocalTransition* lt : ls->localTransitions){
-			int loc_id = lt->id;
-			LocalTransition tls = *a->localTransitions[loc_id];
-			clt.insert(&tls);
-		}
-		ls->localTransitions.clear();
+		t->agent = a;
+		t->from = a->localStates[localTransitions[i]->from->id];
+		t->to = a->localStates[localTransitions[i]->to->id];
+		a->localTransitions.push_back(t);
+		a->localStates[t->from->id]->localTransitions.insert(t);
 	}
 	return a;
 }
