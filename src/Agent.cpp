@@ -33,6 +33,7 @@ Agent* Agent::clone(){
 		LocalState* lc = new LocalState();
 		lc->id = l->id;
 		lc->name.assign(l->name);
+		lc->environment = l->environment;
 		lc->agent = a;
 		a->localStates.push_back(lc);
 	}
