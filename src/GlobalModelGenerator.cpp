@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <iostream>
 
+extern Cfg config;
+
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
 }
@@ -64,6 +66,37 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
             auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
             globalTransition->to = targetState;
         }
+    }
+    // add optional epsilon transition if no more states to expand to
+    if (config.add_epsilon_transitions && state->globalTransitions.size() == 0) {
+        set<LocalTransition*> epsilon;
+        Agent* agent = *this->getFormula()->coalition.begin();
+        LocalState* localState;
+        for (auto state : state->localStatesProjection) {
+            if (state->agent->name == agent->name) {
+                localState = state;
+            }
+        }
+
+        LocalTransition* transition = new LocalTransition;
+        transition->id = -1;
+        transition->isShared = 0;
+        transition->name = "ɛ";
+        transition->localName = "ɛ";
+        transition->sharedCount = 0;
+        transition->agent = agent;
+        transition->from = localState;
+        transition->to = localState;
+        epsilon.insert(transition);
+
+        auto globalTransition = new GlobalTransition();
+        // globalTransition->id = this->globalModel->globalTransitions.size();
+        globalTransition->isInvalidDecision = false;
+        globalTransition->from = state;
+        globalTransition->to = state;
+        globalTransition->localTransitions = epsilon;
+        state->globalTransitions.insert(globalTransition);
+        // printf("added a state!\n");
     }
     state->isExpanded = true;
 }

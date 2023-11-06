@@ -217,7 +217,7 @@ void loadConfigFromFile(string filename) {
 void loadConfigFromArgs(int argc, char** argv) {
     // overwrite the default config values (if provided on the input)
     if (argc >= 2) {
-        for (int i = 1;i < argc;i++) {
+        for (int i = 1; i < argc; i++) {
             string arg = argv[i];
             if ((arg == "-f") || (arg == "--file")) {
                 if (i + 1 < argc) {
@@ -237,6 +237,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.output_local_models = 1;
             } else if (arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES") {
                 config.output_dot_files = 1;
+            } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
+                config.add_epsilon_transitions = 1;
             }
         }
     }
