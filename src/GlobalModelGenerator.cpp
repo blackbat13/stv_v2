@@ -224,9 +224,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     // 1) group transitions by name from localStates (only those that can be executed (check sharedCount, check conditions))
     map<string, map<Agent*, vector<LocalTransition*>>> transitionsByName;
     for (const auto localState : *localStates) {
-        // printf("[%s [%s]]\n", localState->agent->name.c_str(), localState->name.c_str());
         for (const auto localTransition : localState->localTransitions) {
-            // printf("%s\n", localTransition->name.c_str());
             if (transitionsByName.count(localTransition->name) == 0) {
                transitionsByName[localTransition->name] = map<Agent*, vector<LocalTransition*>>(); 
             }
@@ -237,18 +235,16 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
             transitionsByAgent->at(localTransition->agent).push_back(localTransition);
         }
     }
-
     // 2) add transitions to globalState if 'shared' conditions are met (!shared or sharedCount ok)
     for (const auto trPair : transitionsByName) {
         const auto sampleTransition = (*trPair.second.begin()).second.at(0);
         if (sampleTransition->isShared && sampleTransition->sharedCount > static_cast<int>(trPair.second.size())) {
             continue;
         }
-        // printf("[%s][%s]\n", sampleTransition->agent->name.c_str(), sampleTransition->name.c_str());
         auto transitionsByAgent = trPair.second;
         this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
     }
-
+    
     this->globalModel->globalStates.push_back(globalState);
     return globalState;
 }
@@ -258,13 +254,6 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
 /// @param localTransitions Initially empty, avaliable local transitions by each agent from transitionsByAgent.
 /// @param transitionsByAgent Mapped transitions to an agent, only with transitions avaliable for the agent at this moment.
 void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent) {
-    // for (auto item : transitionsByAgent) {
-    //     printf("[%s]\n", item.first->name.c_str());
-    //     for (auto transition : item.second) {
-    //         printf("& %s (%s -> %s)\n", transition->name.c_str(), transition->from->name.c_str(), transition->to->name.c_str());
-    //     }
-    // }
-    // printf("\n");
     auto agentWithTransitions = *transitionsByAgent.begin();
     map<Agent*, vector<LocalTransition*>> transitionsByOtherAgents = transitionsByAgent;
     transitionsByOtherAgents.erase(agentWithTransitions.first);
@@ -291,10 +280,6 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
                             }
                         }
                     }
-                    // printf("[%s [%s]]\n", state.agent->name.c_str(), state.name.c_str());
-                    // for (auto item : state.localTransitions) {
-                    //     printf("%s\n", item->name.c_str());
-                    // }
                 }
             }
             this->generateGlobalTransitions(fromGlobalState, currentLocalTransitions, transitionsByOtherAgents);
