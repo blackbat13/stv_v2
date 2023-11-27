@@ -12,6 +12,8 @@
 #include <algorithm>
 #include <iostream>
 
+extern Cfg config;
+
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
 }
@@ -64,6 +66,37 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
             auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
             globalTransition->to = targetState;
         }
+    }
+    // add optional epsilon transition if no more states to expand to
+    if (config.add_epsilon_transitions && state->globalTransitions.size() == 0) {
+        set<LocalTransition*> epsilon;
+        Agent* agent = *this->getFormula()->coalition.begin();
+        LocalState* localState;
+        for (auto state : state->localStatesProjection) {
+            if (state->agent->name == agent->name) {
+                localState = state;
+            }
+        }
+
+        LocalTransition* transition = new LocalTransition;
+        transition->id = -1;
+        transition->isShared = 0;
+        transition->name = "ɛ";
+        transition->localName = "ɛ";
+        transition->sharedCount = 0;
+        transition->agent = agent;
+        transition->from = localState;
+        transition->to = localState;
+        epsilon.insert(transition);
+
+        auto globalTransition = new GlobalTransition();
+        // globalTransition->id = this->globalModel->globalTransitions.size();
+        globalTransition->isInvalidDecision = false;
+        globalTransition->from = state;
+        globalTransition->to = state;
+        globalTransition->localTransitions = epsilon;
+        state->globalTransitions.insert(globalTransition);
+        // printf("added a state!\n");
     }
     state->isExpanded = true;
 }
@@ -229,6 +262,26 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
         auto currentLocalTransitions = localTransitions;
         currentLocalTransitions.insert(transition);
         if (hasOtherAgents) {
+            if (config.add_epsilon_transitions == 1) {
+                for (auto agentCheck : transitionsByOtherAgents) {
+                    auto state = **find(agentCheck.first->localStates.begin(), agentCheck.first->localStates.end(), agentCheck.second[0]->from);
+                    if (state.localTransitions.size() > 1) {
+                        for (auto possibility : state.localTransitions) {
+                            if (transition->name != possibility->name) {
+                                set<LocalTransition*> sumTransitions = currentLocalTransitions;
+                                sumTransitions.insert(possibility);
+                                auto globalTransition = new GlobalTransition();
+                                // globalTransition->id = this->globalModel->globalTransitions.size();
+                                globalTransition->isInvalidDecision = false;
+                                globalTransition->from = fromGlobalState;
+                                globalTransition->to = fromGlobalState;
+                                globalTransition->localTransitions = sumTransitions;
+                                fromGlobalState->globalTransitions.insert(globalTransition);
+                            }
+                        }
+                    }
+                }
+            }
             this->generateGlobalTransitions(fromGlobalState, currentLocalTransitions, transitionsByOtherAgents);
         }
         else {
