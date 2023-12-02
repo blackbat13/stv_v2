@@ -136,12 +136,18 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 	cout << "Epsilon:" << c << endl;
 }
 
-void KBCexpansion(GlobalModel *const gm, int agent_id){
+Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
+	Agent* o = new Agent(agent_id, gm->agents[agent_id]->name);
+	
 	queue<set<GlobalState*>*> observationQueue;
 	set<set<GlobalState*>*> searchedObservations;
-	set<pair<set<GlobalState*>*,set<GlobalState*>*>*> transitions;
+	set<tuple<
+		set<GlobalState*>*,
+		set<GlobalState*>*,
+		string
+		>*> transitions;
 	
-	cout << gm->globalStates.size() << endl;
+	
 	//initial state observation -> queue
 	set<GlobalState*> initialObservation;
 	for(pair<Agent*, EpistemicClass*> ee : gm->initState->epistemicClasses){
@@ -160,49 +166,83 @@ void KBCexpansion(GlobalModel *const gm, int agent_id){
 		if(searchedObservations.count(&observation)==0){			//...check if observation has already been searched...
 			searchedObservations.insert(&observation);				//...and add it to the list of searched observations if not.
 			
-			//find all global states succeeding the states in our current observation
-			set<GlobalState*> succeedingRaw;
-			for(GlobalState* gs : observation) for(GlobalTransition* gt : gs->globalTransitions)
-				succeedingRaw.insert(gt->to);
+			//get all action labels
+			set<string> labels;
+			for(GlobalState* gs : observation) for(GlobalTransition* gt : gs->globalTransitions) for(LocalTransition* lt : gt->localTransitions)
+				labels.insert(lt->name);
 			
-			set<set<GlobalState*>*> succeedingObservations;
-			while(succeedingRaw.size()>0){
-				auto element = succeedingRaw.begin();
-				GlobalState* gs = *element;
-				set<GlobalState*> nextObservation;
+			//search results of each action separately
+			for(string label : labels){
+				//find all global states succeeding the states in our current observation
+				set<GlobalState*> succeedingRaw;
+				for(GlobalState* gs : observation) for(GlobalTransition* gt : gs->globalTransitions){
+					bool relevant = false;
+					for(LocalTransition* lt : gt->localTransitions) if(lt->agent->id==agent_id && lt->name==label){
+						//a local transition is only relevant if it belongs to both the agent in question, and represents the currently searched action
+						relevant = true;
+						break;
+					}
+					if(relevant) succeedingRaw.insert(gt->to);
+				}
 				
-				cout << ":";
-				for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
-					if(ee.first->id == agent_id){
-						for(pair<string, GlobalState*> ecs : ee.second->globalStates){
-							if(succeedingRaw.count(ecs.second)>0){
-								nextObservation.insert(ecs.second);
-								succeedingRaw.erase(ecs.second);
+				//find all subsets of globalstates, which are indistinguishable from the point of view of the relevant agent
+				set<set<GlobalState*>*> succeedingObservations;
+				while(succeedingRaw.size()>0){
+					auto element = succeedingRaw.begin();
+					GlobalState* gs = *element;
+					set<GlobalState*> nextObservation;
+					
+					for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
+						if(ee.first->id == agent_id){
+							for(pair<string, GlobalState*> ecs : ee.second->globalStates){
+								if(succeedingRaw.count(ecs.second)>0){
+									nextObservation.insert(ecs.second);
+									succeedingRaw.erase(ecs.second);
+								}
 							}
 						}
 					}
+					
+					
+					succeedingRaw.erase(gs);
+					succeedingObservations.insert(&nextObservation);
 				}
 				
+				//register all found transitions
+				for(set<GlobalState*>* obs : succeedingObservations){
+					tuple<
+						set<GlobalState*>*,
+						set<GlobalState*>*,
+						string
+						> tr;
+					get<0>(tr) = &observation;
+					get<1>(tr) = obs;
+					get<2>(tr) = label;
+					transitions.insert(&tr);
+				}
 				
-				succeedingRaw.erase(gs);
-				succeedingObservations.insert(&nextObservation);
-			}
-			
-			set<set<GlobalState*>*> unsearchedObservations;
-			set_difference(succeedingObservations.begin(), succeedingObservations.end(), searchedObservations.begin(), searchedObservations.end(),
-				inserter(unsearchedObservations, unsearchedObservations.end()));
-			
-			for(set<GlobalState*>* obs : unsearchedObservations){
-				pair<set<GlobalState*>*,set<GlobalState*>*> tr;
-				tr.first = &observation;
-				tr.second = obs;
-				transitions.insert(&tr);
-				observationQueue.push(obs);
+				set<set<GlobalState*>*> unsearchedObservations;
+				set_difference(succeedingObservations.begin(), succeedingObservations.end(), searchedObservations.begin(), searchedObservations.end(),
+					inserter(unsearchedObservations, unsearchedObservations.end()));
+				
+				for(set<GlobalState*>* obs : unsearchedObservations){
+					observationQueue.push(obs);
+				}
 			}
 		}
 	}
 	
+	o->initState = new LocalState();
+	o->initState->id = 0;
+	o->initState->name = "";
+	for(GlobalState* gs : initialObservation) o->initState->name+=gs->hash+"|"; //for(LocalState* ls : gs->localStatesProjection) s+=ls->name+"|";
+	if(o->initState->name.size()>0) o->initState->name.pop_back();
+	cout << o->initState->name << endl;
+	o->initState->agent = o;
+	o->localStates.push_back(o->initState);
+	
 	cout << "E: " << searchedObservations.size() << "|" << transitions.size() << endl;
+	return o;
 }
 
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){

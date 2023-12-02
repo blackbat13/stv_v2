@@ -1,44 +1,23 @@
 CC = g++ --std=c++14
 GTEST_DIR = /usr/src/googletest/googletest
 USER_DIR = ../tests
-CPPFLAGS += -g -isystem $(GTEST_DIR)/include
+CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
+
+CPPFILES = $(wildcard ../src/*.cpp)
+HPPFILES = $(wildcard ../src/*.hpp)
+OBJFILES = $(wildcard ./*.o)
+
+EXECNAME = stv
 	
-main: main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o KnowledgeBasedConstruction.o parser.o scanner.o expressions.o nodes.o 
-	$(CC) $(CPPFLAGS)    -o stv main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o KnowledgeBasedConstruction.o parser.o scanner.o expressions.o nodes.o
+main: $(OBJFILES) 
+	$(CC) $(CPPFLAGS)    -o $(EXECNAME) $(OBJFILES)
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp ../src/KnowledgeBasedConstruction.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
+main.o: ../src/main.cpp $(HPPFILES)
 	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
-GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
-	$(CC) $(CPPFLAGS) -c ../src/GlobalModelGenerator.cpp
-
-LocalState.o: ../src/LocalState.hpp ../src/LocalState.cpp
-	$(CC) $(CPPFLAGS) -c ../src/LocalState.cpp
-
-GlobalState.o: ../src/GlobalState.hpp ../src/GlobalState.cpp
-	$(CC) $(CPPFLAGS) -c ../src/GlobalState.cpp
-
-GlobalTransition.o: ../src/GlobalTransition.hpp ../src/GlobalTransition.cpp
-	$(CC) $(CPPFLAGS) -c ../src/GlobalTransition.cpp
-
-Agent.o: ../src/Agent.hpp ../src/Agent.cpp
-	$(CC) $(CPPFLAGS) -c ../src/Agent.cpp
-
-ModelParser.o: ../src/ModelParser.hpp ../src/ModelParser.cc
-	$(CC) $(CPPFLAGS) -c ../src/ModelParser.cc
-
-Utils.o: ../src/Utils.hpp ../src/Utils.cpp
-	$(CC) $(CPPFLAGS) -c ../src/Utils.cpp
-
-Verification.o: ../src/Verification.hpp ../src/Verification.cpp
-	$(CC) $(CPPFLAGS) -c ../src/Verification.cpp
-
-DotGraph.o: ../src/DotGraph.hpp ../src/DotGraph.cpp
-	$(CC) $(CPPFLAGS) -c ../src/DotGraph.cpp
-
-KnowledgeBasedConstruction.o: ../src/KnowledgeBasedConstruction.hpp ../src/KnowledgeBasedConstruction.cpp
-	$(CC) $(CPPFLAGS) -c ../src/KnowledgeBasedConstruction.cpp
+%.o: ../src/%.hpp ../src/%.cpp
+	$(CC) $(CPPFLAGS) -c ../src/@.cpp
 
 parser.o: ../src/reader/parser.c
 	$(CC) $(CPPFLAGS) -c ../src/reader/parser.c

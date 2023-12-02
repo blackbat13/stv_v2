@@ -28,6 +28,8 @@ int main(int argc, char* argv[]) {
     loadConfigFromFile("config.txt");
     loadConfigFromArgs(argc,argv);
 	
+	LocalModels* clonableLM;
+	
 	if(!(stat (config.fname.c_str(), &buffer) == 0)){
 		std::cout << "ERROR: File " << config.fname << " not found!" << endl;
 		return -1;
@@ -42,6 +44,8 @@ int main(int argc, char* argv[]) {
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
+	//clonableLM->agents = cloneGlobalModel(localModels, formula)->agents;
+	
     if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
     }
@@ -133,16 +137,29 @@ int main(int argc, char* argv[]) {
     }
     
 	if(config.kbc){//run Filip Jamroga's code (location to be changed)
-		GlobalState* s0 = generator->getCurrentGlobalModel()->globalStates[0];
-		std::pair<Agent*, EpistemicClass*> firstEntry = *s0->epistemicClasses.begin();
+		// GlobalState* s0 = generator->getCurrentGlobalModel()->globalStates[0];
+		// std::pair<Agent*, EpistemicClass*> firstEntry = *s0->epistemicClasses.begin();
 		// GlobalState* s1 = generator->getCurrentGlobalModel()->globalStates[1];
 		// GlobalState* s2 = generator->getCurrentGlobalModel()->globalStates[2];
 		//asm("INT3");
+		// DotGraph(generator->getCurrentGlobalModel(), true).saveToFile("", "base-");
+		// GlobalModel* clonedGM = cloneGlobalModel(localModels, formula);
+		// DotGraph(clonedGM, true).saveToFile("", "clone-");
+		// KBCprojection(clonedGM, 0);
+		// DotGraph(clonedGM, true).saveToFile("", "projected-");
+		// KBCexpansion(clonedGM, 0);
+		cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
 		for(int i=0; i<generator->getCurrentGlobalModel()->agents.size(); i++){
 			GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
+			cout << cloneModel->globalStates.size() << endl;
 			KBCprojection(cloneModel, i);
 			KBCexpansion(cloneModel, i);
 		}
+		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
+		// KBCprojection(generator->getCurrentGlobalModel(), 0);
+		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
+		// KBCexpansion(generator->getCurrentGlobalModel(), 0);
+		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
 	}
 
     if(false){
