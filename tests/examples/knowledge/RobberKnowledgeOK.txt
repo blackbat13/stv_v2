@@ -1,0 +1,22 @@
+Agent Robber:
+init q0
+input1: q0 -> q1
+input2: q0 -> q2
+shared[2] selectA[wait]: q1 -> q3
+shared[2] selectB[wait]: q2 -> q3
+
+Agent Bank:
+LOCAL: [Access]
+PERSISTENT: [Access]
+INITIAL: [Access:=0]
+init q0
+shared[2] selectA[selectA]: q0 -> q1
+shared[2] selectB[selectB]: q0 -> q1
+shared[2] selectA[selectA]: q0 -> q2 [Access:=1]
+shared[2] selectB[selectB]: q0 -> q2 [Access:=1]
+alarm: q1 -> q1
+open: q2 -> q2
+
+FORMULA: <<Robber>><>&K_Robber(Access==1)
+
+

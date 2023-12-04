@@ -39,6 +39,7 @@ blank [ \n\t]
 [0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }
+"&K_"           { return T_KNOW; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
 %%

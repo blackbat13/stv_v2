@@ -18,6 +18,7 @@ class TestVerif
     public:
         GlobalModelGenerator* generator = new GlobalModelGenerator();
         bool result;
+        string knowledge;
 
     TestVerif(string path) {
         result = verify(path, generator);
@@ -49,6 +50,8 @@ class TestVerif
         auto verification = new Verification(generator);
         
         result = verification->verify();
+
+        knowledge = generator->getFormula()->knowledge.c_str();
         
         return result;
     }

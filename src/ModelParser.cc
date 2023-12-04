@@ -49,6 +49,12 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
+   if (formulaDescription.knowledge->size() > 0) {
+      formula.knowledge = formulaDescription.knowledge;
+   }
+   else {
+      formula.knowledge = new set<string>();
+   }
    
    for (const auto agent : models.agents) {
       if (formulaDescription.coalition->count(agent->name)>0) {

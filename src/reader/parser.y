@@ -37,6 +37,7 @@ extern FormulaTemplate formulaDescription;
 %token   T_NE T_GT T_GE T_LT T_LE 
 %token   <val> T_NUM T_SHARED
 %token   <ident> T_IDENT
+%token   T_KNOW
 
 %type  <val>  shared
 %type  <expr> num_exp num_mul num_elem
@@ -47,6 +48,7 @@ extern FormulaTemplate formulaDescription;
 %type  <assignSet> initial assign_list assignments
 %type  <agent> description agent
 %type  <model> spec model
+%type  <ident> know
 
 %%
 model: spec { modelDescription = $1; }
@@ -60,8 +62,10 @@ spec: spec agent { $$=$1; $$->insert($2); }
 query: T_FORMULA formula { }
      ;
 
-formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4;} 
-       | coalition T_LT T_GT cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4;} 
+formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; formulaDescription.knowledge=new set<string>;} 
+       | coalition T_LT T_GT cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; formulaDescription.knowledge=new set<string>;} 
+       | coalition '[' ']' know cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$5;}
+       | coalition T_LT T_GT know cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$5;}
        ;
 
 coalition: T_LT T_LT ident_list T_GT T_GT { $$=$3; }
@@ -85,6 +89,9 @@ local: T_LOCAL '[' ident_list ']' { $$=$3; }
 persistent: T_PERSISTENT '[' ident_list ']' { $$=$3; }
           | T_PERSISTENT '[' ']'  { $$=NULL; }
           ;
+
+know: T_KNOW ident_list { formulaDescription.knowledge=$2; }
+    ;
 
 ident_list: ident_list ',' T_IDENT { $$=$1; $$->insert($3); delete $3; }
           | T_IDENT { $$=new set<string>; $$->insert($1); delete $1; }
