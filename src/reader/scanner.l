@@ -15,6 +15,7 @@ extern "C" int yylex();
 
 ident [a-zA-Z][_a-zA-Z0-9]*
 single [\[\]():!,+\-*/%]
+comment #([ \t]*[a-zA-Z][_a-zA-Z0-9]*)*
 blank [ \n\t]
 %%
 
@@ -38,6 +39,7 @@ blank [ \n\t]
 [0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }
+{comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
 %%
 

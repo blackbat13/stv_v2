@@ -186,6 +186,15 @@ To change the variable after the action fires, we have to add the change between
   action1: q0 -> q1 [someLocalValue:=7777]
 \end{lstlisting}
 
+\subsubsection{Comments}
+To add a comment, put a $\#$ in a text line. Every alphanumeric character, including spaces and tabs from this point on will be treated as a comment, until a new line begins.
+\begin{lstlisting}[title={Example comments in a file.}]
+  action1: q0 -> q1 #this is a comment
+  action2: q0 -> q1 # this is also a comment
+  action3: q0 -> q1 #   this   is   a   comment   too
+  # this also works
+\end{lstlisting}
+
 \subsection{Formula description}
 Formula description starts in a new line with a keyword $FORMULA$. After a colon, you enter the agent coalition in double angle brackets, for which you want to verify the formula. Then, you use one of the symbols used for verification:
 \begin{itemize}
@@ -196,6 +205,8 @@ Lastly, you write the formula that you want to check in round brackets.
 \begin{lstlisting}[title={A formula that checks if there is a strategy that globally Agent1 could take such actions that the value will be always equal to 1 or 7777.}]
   FORMULA: <<Agent1>>[](value==1 || value==7777)
 \end{lstlisting}
+
+\newpage
 
 \subsection{Avaliable operators}
 List of avaliable operators for conditions, variable changes and formula description:
