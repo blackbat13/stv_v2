@@ -214,8 +214,10 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
             bool allEpistemicOk = true;
             for (auto knowledgeAgent : *knowledgeSet) {
+                // cout << knowledgeAgent.c_str() << endl;
                 Agent* knowledgeAgentInstance;
                 for (auto globalAgent : globalModelAgents) {
+                    // cout << globalAgent->name << " " << knowledgeAgent << " " << (globalAgent->name == knowledgeAgent) << endl;
                     if (globalAgent->name == knowledgeAgent) {
                         knowledgeAgentInstance = globalAgent;
                         break;
@@ -225,19 +227,32 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                 vector<LocalState*> globalProjection = globalState->localStatesProjection;
                 set<GlobalState*> epistemicGlobalStates;
                 for (auto local : globalProjection) {
+                    // cout << local->agent->name.c_str() << " " << knowledgeAgentInstance->name.c_str() << " " << (local->agent->name.c_str() == knowledgeAgentInstance->name.c_str()) << endl;
                     if (local->agent->name.c_str() == knowledgeAgentInstance->name.c_str()) {
                         epistemicGlobalStates = local->epistemicGlobalStates;
                         break;
                     }
                 }
-                for (auto global : epistemicGlobalStates) {
-                    if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
-                        allEpistemicOk = false;
+                if (epistemicGlobalStates.size() > 0) {
+                    for (auto global : epistemicGlobalStates) {
+                        // cout << global->hash.c_str() << endl;
+                        if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+                            allEpistemicOk = false;
+                            break;
+                        }
+                    }
+                    if (allEpistemicOk == false) {
                         break;
                     }
                 }
-                if (allEpistemicOk == false) {
-                    break;
+                else {
+                    allEpistemicOk = false;
+                    if (this->verifyLocalStates(&globalState->localStatesProjection)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                        return true;
+                    }
                 }
             }
             if (allEpistemicOk) {
@@ -280,10 +295,20 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                         break;
                     }
                 }
+                if (epistemicGlobalStates.size() > 0) {
                 // printf("--> %d\n", epistemicGlobalStates.size());
-                for (auto global : epistemicGlobalStates) {
-                    // printf("# %s\n", global->hash.c_str());
-                    if (!this->verifyLocalStates(&global->localStatesProjection)) {
+                    for (auto global : epistemicGlobalStates) {
+                        // printf("# %s\n", global->hash.c_str());
+                        if (!this->verifyLocalStates(&global->localStatesProjection)) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                            return false;
+                        }
+                    }
+                }
+                else {
+                    if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
                         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
                         dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
                         globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;

@@ -67,6 +67,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
                     auto knowledgeVal = *knowledgeIt;
                     // printf("%s\n", knowledgeVal.c_str());
                     if (strcmp(knowledgeVal.c_str(), localStates[it]->agent->name.c_str()) == 0) {
+                        // cout << state->toString() << endl;
                         localStates[it]->epistemicGlobalStates.insert(state);
                     }
                 }
