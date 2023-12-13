@@ -363,6 +363,65 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             uncontrolledGlobalTransitions.insert(globalTransition);
         }
     }
+    // solve the uncontrolled transition blocking the controlled transition, miaking it uncontrolled
+    if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
+        set<Agent*> agents = generator->getFormula()->coalition;
+        set<Agent*> brokenAgents;
+        set<Agent*> potentiallyBrokenAgents;
+        // find if there are uncontrolled actions with only agents that are not in coalition, if yes, then they can block the controlled actions if they are a participants
+        for (const auto globalTransition : uncontrolledGlobalTransitions) {
+            bool agentTest = false;
+            for (auto glob : globalTransition->localTransitions) {
+                for (auto agt : agents) {
+                    if (glob->agent->name.c_str() == agt->name.c_str()) {
+                        agentTest = true;
+                        break;
+                    }
+                }
+                if(agentTest) {
+                    potentiallyBrokenAgents.clear();
+                    break;
+                }
+                else {
+                    potentiallyBrokenAgents.insert(glob->agent);
+                }
+            }
+            // if the global transition can fire without any of the coalition agents, mark the agents participating as a definitely faulty ones
+            if (!agentTest) {
+                brokenAgents.insert(potentiallyBrokenAgents.begin(), potentiallyBrokenAgents.end());
+                potentiallyBrokenAgents.clear();
+            }
+        }
+        // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
+        if (brokenAgents.size() > 0) {
+            stack<GlobalTransition*> transitionsToBeMoved;
+            // mark bad controlled global transition as uncontrolled
+            for (const auto globalTransition : controlledGlobalTransitions) {
+                bool agentTest = true;
+                for (auto localTrans : globalTransition->localTransitions) {
+                    bool brokenAgentFound = false;
+                    for (auto agt : brokenAgents) {
+                        if(localTrans->agent->name.c_str() == agt->name.c_str()) {
+                            brokenAgentFound = true;
+                            break;
+                        }
+                    }
+                    if(brokenAgentFound) {
+                        agentTest = false;
+                    }
+                }
+                if (!agentTest) {
+                    transitionsToBeMoved.push(globalTransition);
+                }
+            }
+            while (!transitionsToBeMoved.empty()) {
+                GlobalTransition* tr = transitionsToBeMoved.top();
+                transitionsToBeMoved.pop();
+                uncontrolledGlobalTransitions.insert(tr);
+                controlledGlobalTransitions.erase(tr);
+            }
+        }
+    }
 
     if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode)) {
         return false;
@@ -857,6 +916,16 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         // Maybe a controlled action is an option too
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
+            // for (const auto globalTransition : uncontrolledGlobalTransitions) {
+            //     set<Agent*> agents = generator->getFormula()->coalition;
+            //     for (auto agt : agents) {
+            //         cout << (*globalTransition->localTransitions.begin())->name << " " << (*globalTransition->localTransitions.begin())->agent->name.c_str() << " ? " << agt->name << endl;
+            //         if ((*globalTransition->localTransitions.begin())->agent->name.c_str() != agt->name.c_str()) {
+            //             cout << "uh oh" << endl;
+            //             hasValidChoiceTransition = false;
+            //         }
+            //     }
+            // }
             if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
                 hasValidChoiceTransition = false;
             }
