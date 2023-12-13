@@ -5,17 +5,33 @@
 #include "config.h"
 #endif
 
-TEST(KnowledgeTest, KnowledgeDetectionTestOK)
+TEST(KnowledgeTest, KnowledgeDetectionTestFOK)
 {
-    TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestOK.txt");
+    TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestFOK.txt");
 
     EXPECT_EQ(verify.result, true);
     EXPECT_EQ(verify.knowledge, "Coercer1");
 }
 
-TEST(KnowledgeTest, KnowledgeDetectionTestERR)
+TEST(KnowledgeTest, KnowledgeDetectionTestFERR)
 {
-    TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestERR.txt");
+    TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestFERR.txt");
+
+    EXPECT_EQ(verify.result, false);
+    EXPECT_EQ(verify.knowledge, "Coercer1");
+}
+
+TEST(KnowledgeTest, KnowledgeDetectionTestGOK)
+{
+    TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestGOK.txt");
+
+    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.knowledge, "Coercer1");
+}
+
+TEST(KnowledgeTest, KnowledgeDetectionTestGERR)
+{
+    TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestGERR.txt");
 
     EXPECT_EQ(verify.result, false);
     EXPECT_EQ(verify.knowledge, "Coercer1");
