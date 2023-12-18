@@ -62,8 +62,8 @@ spec: spec agent { $$=$1; $$->insert($2); }
 query: T_FORMULA formula { }
      ;
 
-formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; formulaDescription.knowledge=new set<string>;} 
-       | coalition T_LT T_GT cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; formulaDescription.knowledge=new set<string>;} 
+formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; formulaDescription.knowledge="";} 
+       | coalition T_LT T_GT cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; formulaDescription.knowledge="";} 
        | coalition '[' ']' know cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$5;}
        | coalition T_LT T_GT know cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$5;}
        ;
@@ -90,7 +90,7 @@ persistent: T_PERSISTENT '[' ident_list ']' { $$=$3; }
           | T_PERSISTENT '[' ']'  { $$=NULL; }
           ;
 
-know: T_KNOW ident_list { formulaDescription.knowledge=$2; }
+know: T_KNOW T_IDENT { formulaDescription.knowledge=$2; }
     ;
 
 ident_list: ident_list ',' T_IDENT { $$=$1; $$->insert($3); delete $3; }

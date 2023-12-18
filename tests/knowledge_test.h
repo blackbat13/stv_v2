@@ -5,7 +5,7 @@
 #include "config.h"
 #endif
 
-TEST(KnowledgeTest, KnowledgeDetectionTestFOK)
+TEST(KnowledgeTestSVOTING, KnowledgeDetectionTestFOK)
 {
     TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestFOK.txt");
 
@@ -13,7 +13,7 @@ TEST(KnowledgeTest, KnowledgeDetectionTestFOK)
     EXPECT_EQ(verify.knowledge, "Coercer1");
 }
 
-TEST(KnowledgeTest, KnowledgeDetectionTestFERR)
+TEST(KnowledgeTestSVOTING, KnowledgeDetectionTestFERR)
 {
     TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestFERR.txt");
 
@@ -21,7 +21,7 @@ TEST(KnowledgeTest, KnowledgeDetectionTestFERR)
     EXPECT_EQ(verify.knowledge, "Coercer1");
 }
 
-TEST(KnowledgeTest, KnowledgeDetectionTestGOK)
+TEST(KnowledgeTestSVOTING, KnowledgeDetectionTestGOK)
 {
     TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestGOK.txt");
 
@@ -29,7 +29,7 @@ TEST(KnowledgeTest, KnowledgeDetectionTestGOK)
     EXPECT_EQ(verify.knowledge, "Coercer1");
 }
 
-TEST(KnowledgeTest, KnowledgeDetectionTestGERR)
+TEST(KnowledgeTestSVOTING, KnowledgeDetectionTestGERR)
 {
     TestVerif verify("../tests/examples/knowledge/KnowledgeDetectionTestGERR.txt");
 
@@ -37,10 +37,18 @@ TEST(KnowledgeTest, KnowledgeDetectionTestGERR)
     EXPECT_EQ(verify.knowledge, "Coercer1");
 }
 
-TEST(KnowledgeTest, MultipleKnowledge)
+TEST(KnowledgeTestSAI, 2Agents)
 {
-    TestVerif verify("../tests/examples/knowledge/MultipleKnowledge.txt");
+    TestVerif verify("../tests/examples/knowledge/KnowledgeSAI2Agents.txt");
 
     EXPECT_EQ(verify.result, true);
-    EXPECT_EQ(verify.knowledge, "Coercer1Voter1");
+    EXPECT_EQ(verify.knowledge, "AI1");
+}
+
+TEST(KnowledgeTestSAI, 3Agents)
+{
+    TestVerif verify("../tests/examples/knowledge/KnowledgeSAI3Agents.txt");
+
+    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.knowledge, "AI2");
 }

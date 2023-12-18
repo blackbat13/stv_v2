@@ -51,10 +51,7 @@ class TestVerif
         
         result = verification->verify();
 
-        knowledge = "";
-        for(auto item : *generator->getFormula()->knowledge) {
-            knowledge += item.c_str();
-        }
+        knowledge = generator->getFormula()->knowledge;
         
         return result;
     }

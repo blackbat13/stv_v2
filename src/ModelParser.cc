@@ -49,11 +49,11 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
-   if (formulaDescription.knowledge->size() > 0) {
+   if (formulaDescription.knowledge != "") {
       formula.knowledge = formulaDescription.knowledge;
    }
    else {
-      formula.knowledge = new set<string>();
+      formula.knowledge = "";
    }
    
    for (const auto agent : models.agents) {

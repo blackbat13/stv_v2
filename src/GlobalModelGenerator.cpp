@@ -62,14 +62,10 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
                 // if(it<0)cout << "ERR" << endl;
                 localStates[it]=localTransition->to;
                 // printf("%s %s\n", formula->knowledge.c_str(), localStates[it]->agent->name.c_str());
-                auto knowledgeIt = formula->knowledge->find(localStates[it]->agent->name.c_str());
-                if (knowledgeIt != formula->knowledge->end()) {
-                    auto knowledgeVal = *knowledgeIt;
-                    // printf("%s\n", knowledgeVal.c_str());
-                    if (strcmp(knowledgeVal.c_str(), localStates[it]->agent->name.c_str()) == 0) {
-                        // cout << state->toString() << endl;
-                        localStates[it]->epistemicGlobalStates.insert(state);
-                    }
+                // printf("%s\n", knowledgeVal.c_str());
+                if (strcmp(formula->knowledge.c_str(), localStates[it]->agent->name.c_str()) == 0) {
+                    // cout << state->toString() << endl;
+                    localStates[it]->epistemicGlobalStates.insert(state);
                 }
                 
                 // localStates.erase(localTransition->from);

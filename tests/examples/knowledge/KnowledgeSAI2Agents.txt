@@ -1,0 +1,56 @@
+Agent AI1:
+init start
+LOCAL: [AI1_data,AI1_data_completion,AI1_information,AI1_model_status,AI1_model_quality]
+PERSISTENT: [AI1_data,AI1_data_completion,AI1_information,AI1_model_status,AI1_model_quality]
+INITIAL: [AI1_data:=0,AI1_data_completion:=0,AI1_information:=0,AI1_model_status:=0,AI1_model_quality:=0]
+start_gathering_data: start -> gather
+gather_data: gather [AI1_data < 2] -> gather [AI1_data:=AI1_data+1]
+stop_gathering_data: gather [AI1_data == 0] -> data_ready [AI1_data:=1]
+stop_gathering_data: gather [AI1_data == 1] -> data_ready [AI1_data:=2]
+stop_gathering_data: gather [AI1_data >= 2] -> data_ready [AI1_data:=3]
+skip_gathering_data: start -> data_ready
+start_learning: data_ready -> learn
+keep_learning: learn [AI1_information < 2] -> learn [AI1_information:=AI1_information+AI1_data_completion]
+stop_learning: learn [AI1_information < 1 && AI1_model_quality > 0] -> educated [AI1_information:=0, AI1_model_status:=1, AI1_model_quality:=AI1_model_quality+-1]
+stop_learning: learn [AI1_information < 1 && AI1_model_quality <= 0] -> educated [AI1_information:=0, AI1_model_status:=1]
+stop_learning: learn [AI1_information ==1 && AI1_model_quality < 2] -> educated [AI1_information:=0, AI1_model_status:=2, AI1_model_quality:=AI1_model_quality+1]
+stop_learning: learn [AI1_information ==1  && AI1_model_quality >= 2] -> educated [AI1_information:=0, AI1_model_status:=2]
+stop_learning: learn [2 <= AI1_information && AI1_model_quality > 0] -> educated [AI1_information:=0, AI1_model_status:=3, AI1_model_quality:=AI1_model_quality+-1]
+stop_learning: learn [2 <= AI1_information && AI1_model_quality <= 0] -> educated [AI1_information:=0, AI1_model_status:=3]
+skip_learning: data_ready -> sharing
+start_sharing: educated -> sharing
+shared[2] share_1_with_2: sharing -> sharing2
+shared[2] share_2_with_1: sharing2 -> sharing3 [AI1_model_quality:=AI2_model_quality]
+end_sharing: sharing3 -> end
+wait: end -> end
+repeat: end -> learn
+
+Agent AI2:
+init start
+LOCAL: [AI2_data,AI2_data_completion,AI2_information,AI2_model_status,AI2_model_quality]
+PERSISTENT: [AI2_data,AI2_data_completion,AI2_information,AI2_model_status,AI2_model_quality]
+INITIAL: [AI2_data:=0,AI2_data_completion:=0,AI2_information:=0,AI2_model_status:=0,AI2_model_quality:=0]
+start_gathering_data: start -> gather
+gather_data: gather [AI2_data < 2] -> gather [AI2_data:=AI2_data+1]
+stop_gathering_data: gather [AI2_data == 0] -> data_ready [AI2_data:=1]
+stop_gathering_data: gather [AI2_data == 1] -> data_ready [AI2_data:=2]
+stop_gathering_data: gather [AI2_data >= 2] -> data_ready [AI2_data:=3]
+skip_gathering_data: start -> data_ready
+start_learning: data_ready -> learn
+keep_learning: learn [AI2_information < 2] -> learn [AI2_information:=AI2_information+AI2_data_completion]
+stop_learning: learn [AI2_information < 1 && AI2_model_quality > 0] -> educated [AI2_information:=0, AI2_model_status:=1, AI2_model_quality:=AI2_model_quality+-1]
+stop_learning: learn [AI2_information < 1 && AI2_model_quality <= 0] -> educated [AI2_information:=0, AI2_model_status:=1]
+stop_learning: learn [AI2_information ==1 && AI2_model_quality < 2] -> educated [AI2_information:=0, AI2_model_status:=2, AI2_model_quality:=AI2_model_quality+1]
+stop_learning: learn [AI2_information ==1  && AI2_model_quality >= 2] -> educated [AI2_information:=0, AI2_model_status:=2]
+stop_learning: learn [2 <= AI2_information && AI2_model_quality > 0] -> educated [AI2_information:=0, AI2_model_status:=3, AI2_model_quality:=AI2_model_quality+-1]
+stop_learning: learn [2 <= AI2_information && AI2_model_quality <= 0] -> educated [AI2_information:=0, AI2_model_status:=3]
+skip_learning: data_ready -> sharing
+start_sharing: educated -> sharing
+shared[2] share_1_with_2: sharing -> sharing2 [AI2_model_quality:=AI1_model_quality]
+shared[2] share_2_with_1: sharing2 -> sharing3
+end_sharing: sharing3 -> end
+wait: end -> end
+repeat: end -> learn
+
+
+FORMULA: <<AI1>>[]&K_AI1(AI1_model_quality<1 && AI2_model_quality<1)
