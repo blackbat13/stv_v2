@@ -67,6 +67,8 @@ struct FormulaTemplate{
     bool isF;
     string knowledge;
     string hartley;
+    int hCoeff;
+    bool le;
 };
 
 struct Formula {
@@ -76,6 +78,8 @@ struct Formula {
     bool isF;
     string knowledge;
     string hartley;
+    int hCoeff;
+    bool le;
 };
 
 /// @brief Represents a single local model, contains all agents and variables.

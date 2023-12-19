@@ -119,6 +119,7 @@ protected:
     bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
     bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
+    bool calcHartley(set<int64_t>* nums, bool le, float k);
 };
 
 #endif // SELENE_VERIFICATION

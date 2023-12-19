@@ -7,7 +7,7 @@
 
 TEST(TrainsWithBridgeTest, 1Train1ControllerOnBridge)
 {
-    TestVerif verify("../tests/examples/trains/1Train1ControllerOnBridge.txt");
+    TestVerif verify("../tests/examples/trains/1Train1ControllerOnBridge.txt", true);
 
     EXPECT_EQ(verify.result, false);
 
@@ -16,7 +16,7 @@ TEST(TrainsWithBridgeTest, 1Train1ControllerOnBridge)
 
 TEST(TrainsWithBridgeTest, 2Trains1ControllerOnBridge)
 {
-    TestVerif verify("../tests/examples/trains/2Trains1ControllerOnBridge.txt");
+    TestVerif verify("../tests/examples/trains/2Trains1ControllerOnBridge.txt", true);
 
     EXPECT_EQ(verify.result, false);
 

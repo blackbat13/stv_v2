@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['historydbg_237',['HistoryDbg',['../classHistoryDbg.html',1,'']]],
-  ['historyentry_238',['HistoryEntry',['../structHistoryEntry.html',1,'']]]
+  ['historydbg_256',['HistoryDbg',['../classHistoryDbg.html',1,'']]],
+  ['historyentry_257',['HistoryEntry',['../structHistoryEntry.html',1,'']]]
 ];

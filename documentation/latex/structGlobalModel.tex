@@ -7,7 +7,7 @@ Represents a global model, containing agents and a formula.
 
 
 
-{\ttfamily \#include $<$Types.\+hpp$>$}
+{\ttfamily \#include $<$Global\+Model.\+hpp$>$}
 
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -24,12 +24,12 @@ vector$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$ $>$ \mbox{\hyperlink{struc
 \mbox{\Hypertarget{structGlobalModel_adc5b27422d2f1f31cb1fbe251855ff6e}\label{structGlobalModel_adc5b27422d2f1f31cb1fbe251855ff6e}} 
 vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{structGlobalModel_adc5b27422d2f1f31cb1fbe251855ff6e}{global\+States}}
 \begin{DoxyCompactList}\small\item\em Every \mbox{\hyperlink{structGlobalState}{Global\+State}} in the model. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalModel_acedd39c3f744a0823b8c555e921bd2a2}\label{structGlobalModel_acedd39c3f744a0823b8c555e921bd2a2}} 
-vector$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structGlobalModel_acedd39c3f744a0823b8c555e921bd2a2}{global\+Transitions}}
-\begin{DoxyCompactList}\small\item\em Every \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in the model. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalModel_a60eb7ac94bb32e1b2deeb9b19a4b61f3}\label{structGlobalModel_a60eb7ac94bb32e1b2deeb9b19a4b61f3}} 
 map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, map$<$ string, \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$ $>$ $>$ \mbox{\hyperlink{structGlobalModel_a60eb7ac94bb32e1b2deeb9b19a4b61f3}{epistemic\+Classes}}
-\begin{DoxyCompactList}\small\item\em Map of \mbox{\hyperlink{classAgent}{Agent}} pointers to a map of \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Map of \mbox{\hyperlink{classAgent}{Agent}} pointers to a map of \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} for graph traversal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalModel_abe331c17cec932b9bc8b29ade4624eaa}\label{structGlobalModel_abe331c17cec932b9bc8b29ade4624eaa}} 
+map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, map$<$ string, set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{structGlobalModel_abe331c17cec932b9bc8b29ade4624eaa}{epistemic\+Classes\+Knowledge}}
+\begin{DoxyCompactList}\small\item\em Map of \mbox{\hyperlink{classAgent}{Agent}} pointers to a map of \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} for knowledge checks. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -37,4 +37,4 @@ Represents a global model, containing agents and a formula.
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{Types_8hpp}{Types.\+hpp}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{GlobalModel_8hpp}{Global\+Model.\+hpp}}\end{DoxyCompactItemize}

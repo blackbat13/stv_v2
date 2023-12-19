@@ -29,8 +29,11 @@ struct GlobalModel {
     vector<GlobalState*> globalStates;
     // globalStates[i].id == i
 
-    /// @brief Map of Agent pointers to a map of EpistemicClass.
+    /// @brief Map of Agent pointers to a map of EpistemicClass for graph traversal.
     map<Agent*, map<string, EpistemicClass*>> epistemicClasses;
+
+    /// @brief Map of Agent pointers to a map of EpistemicClass for knowledge checks.
+    map<Agent*, map<string, set<GlobalState*>>> epistemicClassesKnowledge;
     // Agent* => (EpistemicClass->hash => EpistemicClass*)
 };
 

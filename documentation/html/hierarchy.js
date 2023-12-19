@@ -38,6 +38,7 @@ var hierarchy =
     [ "LocalStateTemplate", "classLocalStateTemplate.html", null ],
     [ "LocalTransition", "structLocalTransition.html", null ],
     [ "ModelParser", "classModelParser.html", null ],
+    [ "TestVerif", "classTestVerif.html", null ],
     [ "TransitionTemplate", "classTransitionTemplate.html", null ],
     [ "Var", "structVar.html", null ],
     [ "Verification", "classVerification.html", null ],

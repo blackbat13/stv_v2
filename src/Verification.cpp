@@ -178,6 +178,7 @@ int64_t Verification::verifyLocalStatesWithMultipleFormulas(vector<LocalState*>*
         }
         add *= 2;
     }
+    // cout << values << endl;
     return values;
 }
 
@@ -202,7 +203,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     #endif
 
     bool isFMode = this->generator->getFormula()->isF;
-    bool hasKnowledge = this->generator->getFormula()->knowledge != "";
+    bool hasKnowledge = this->generator->getFormula()->knowledge != "" || this->generator->getFormula()->hartley != "";
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
@@ -229,42 +230,43 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 1) verify localStates that the globalState is composed of
-    if (isFMode) {
-        if (hasKnowledge) {
-            string knowledgeAgent = this->generator->getFormula()->knowledge;
-            auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
+    if (isFMode) { // F
+        if (hasKnowledge) { // K&H
+            string knowledgeAgent;
+            if (this->generator->getFormula()->knowledge != "") {
+                knowledgeAgent = this->generator->getFormula()->knowledge;
+            }
+            else if (this->generator->getFormula()->hartley != "") {
+                knowledgeAgent = this->generator->getFormula()->hartley;
+            }
+
             bool allEpistemicOk = true;
             Agent* knowledgeAgentInstance;
+            auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
             for (auto globalAgent : globalModelAgents) {
                 if (globalAgent->name == knowledgeAgent) {
                     knowledgeAgentInstance = globalAgent;
                     break;
                 }
             }
-            vector<LocalState*> globalProjection = globalState->localStatesProjection;
-            set<GlobalState*> epistemicGlobalStates;
-            for (auto local : globalProjection) {
-                if (local->agent->name.c_str() == knowledgeAgentInstance->name.c_str()) {
-                    epistemicGlobalStates = local->epistemicGlobalStates;
-                    break;
-                }
-            }
-            if (epistemicGlobalStates.size() > 0) {
-                for (auto global : epistemicGlobalStates) {
+            auto epistemicClassesForAgent = this->generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
+            if (this->generator->getFormula()->knowledge != "") { // K
+                for (auto global : *epistemicClassesForAgent) {
                     if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
                         allEpistemicOk = false;
                         break;
                     }
                 }
             }
-            else {
-                allEpistemicOk = false;
-                if (this->verifyLocalStates(&globalState->localStatesProjection)) {
-                    this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
-                    dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
-                    globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
-                    return true;
+            else { // H
+                set<int64_t>* foundClasses = new set<int64_t>();
+                for (auto global : *epistemicClassesForAgent) {
+                    foundClasses->insert(this->verifyLocalStatesWithMultipleFormulas(&global->localStatesProjection));
                 }
+                if (!calcHartley(foundClasses, generator->getFormula()->le, generator->getFormula()->hCoeff)) {
+                    allEpistemicOk = false;
+                }
+                free(foundClasses);
             }
             if (allEpistemicOk) {
                 this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
@@ -273,7 +275,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                 return true;
             }
         }
-        else {
+        else { // !K
             if (this->verifyLocalStates(&globalState->localStatesProjection)) {
                 this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
                 dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
@@ -282,45 +284,53 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             }
         }
     }
-    else {
-        if (hasKnowledge) {
-            string knowledgeAgent = this->generator->getFormula()->knowledge;
-            auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
+    else { // G
+        if (hasKnowledge) { // K&H
+            string knowledgeAgent;
+            if (this->generator->getFormula()->knowledge != "") {
+                knowledgeAgent = this->generator->getFormula()->knowledge;
+            }
+            else if (this->generator->getFormula()->hartley != "") {
+                knowledgeAgent = this->generator->getFormula()->hartley;
+            }
+            bool allEpistemicOk = true;
             Agent* knowledgeAgentInstance;
+            auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
             for (auto globalAgent : globalModelAgents) {
                 if (globalAgent->name == knowledgeAgent) {
                     knowledgeAgentInstance = globalAgent;
                     break;
                 }
             }
-            vector<LocalState*> globalProjection = globalState->localStatesProjection;
-            set<GlobalState*> epistemicGlobalStates;
-            for (auto local : globalProjection) {
-                if (local->agent->name.c_str() == knowledgeAgentInstance->name.c_str()) {
-                    epistemicGlobalStates = local->epistemicGlobalStates;
-                    break;
-                }
-            }
-            if (epistemicGlobalStates.size() > 0) {
-                for (auto global : epistemicGlobalStates) {
+            auto epistemicClassesForAgent = this->generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
+            if (this->generator->getFormula()->knowledge != "") { // K
+                for (auto global : *epistemicClassesForAgent) {
                     if (!this->verifyLocalStates(&global->localStatesProjection)) {
-                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
-                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        for (auto global2 : *epistemicClassesForAgent) {
+                            this->addHistoryStateStatus(global2, global2->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                            dbgVerifStatus(DEPTH_PREFIX, global2, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                            global2->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        }
                         return false;
                     }
                 }
             }
-            else {
-                if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+            else { // H
+                set<int64_t>* foundClasses = new set<int64_t>();
+                for (auto global : *epistemicClassesForAgent) {
+                    foundClasses->insert(this->verifyLocalStatesWithMultipleFormulas(&global->localStatesProjection));
+                }
+                if (!calcHartley(foundClasses, generator->getFormula()->le, generator->getFormula()->hCoeff)) {
                     this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
                     dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
                     globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                    free(foundClasses);
                     return false;
                 }
+                free(foundClasses);
             }
         }
-        else {
+        else { // !K
             if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
                 this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
                 dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
@@ -1020,4 +1030,18 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
 
     return matches;
+}
+
+/// @brief Calculates a Hartley coefficient and compares it to a number.
+/// @param nums Set of binary encoded results.
+/// @param le Less equal flag. If true, less equal. If false, greater equal.
+/// @param k A set number to compare a coefficient to.
+/// @return Returns a log2(#nums) <= k or log2(#nums) >= k.
+bool Verification::calcHartley(set<int64_t>* nums, bool le, float k) {
+    // cout << log2f((float)nums->size()) << (le ? " <= " : " >= ") << k << endl;
+    // cout << (log2f((float)nums->size()) <= k) << endl;
+    if (le) {
+        return log2f((float)nums->size()) <= k;
+    }
+    return log2f((float)nums->size()) >= k;
 }

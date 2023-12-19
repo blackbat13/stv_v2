@@ -1,0 +1,52 @@
+\hypertarget{DotGraph_8hpp}{}\doxysection{Dot\+Graph.\+hpp File Reference}
+\label{DotGraph_8hpp}\index{DotGraph.hpp@{DotGraph.hpp}}
+
+
+Class for drawing graphs of input models. Class used for making graph files of input models created by parsing the data and adding graphviz syntax.  
+
+
+{\ttfamily \#include \char`\"{}Types.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Utils.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reader/nodes.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classDotGraph}{Dot\+Graph}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{Dot\+Graph\+Base}} \{ \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723}{LOCAL\+\_\+\+MODEL}}
+, \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69}{GLOBAL\+\_\+\+MODEL}}
+, \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1}{AGENT\+\_\+\+TEMPLATE}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for drawing graphs of input models. Class used for making graph files of input models created by parsing the data and adding graphviz syntax. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}\label{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}} 
+\index{DotGraph.hpp@{DotGraph.hpp}!DotGraphBase@{DotGraphBase}}
+\index{DotGraphBase@{DotGraphBase}!DotGraph.hpp@{DotGraph.hpp}}
+\doxysubsubsection{\texorpdfstring{DotGraphBase}{DotGraphBase}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{Dot\+Graph\+Base}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOCAL\_MODEL@{LOCAL\_MODEL}!DotGraph.hpp@{DotGraph.hpp}}\index{DotGraph.hpp@{DotGraph.hpp}!LOCAL\_MODEL@{LOCAL\_MODEL}}}\mbox{\Hypertarget{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723}\label{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723}} 
+LOCAL\+\_\+\+MODEL&(unfolded) local model = TS with states and transitions \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GLOBAL\_MODEL@{GLOBAL\_MODEL}!DotGraph.hpp@{DotGraph.hpp}}\index{DotGraph.hpp@{DotGraph.hpp}!GLOBAL\_MODEL@{GLOBAL\_MODEL}}}\mbox{\Hypertarget{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69}\label{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69}} 
+GLOBAL\+\_\+\+MODEL&(unfolded) global model = TS with states and transitions \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AGENT\_TEMPLATE@{AGENT\_TEMPLATE}!DotGraph.hpp@{DotGraph.hpp}}\index{DotGraph.hpp@{DotGraph.hpp}!AGENT\_TEMPLATE@{AGENT\_TEMPLATE}}}\mbox{\Hypertarget{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1}\label{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1}} 
+AGENT\+\_\+\+TEMPLATE&(folded/compact) agent graph = sets of locations and labelled edges \\
+\hline
+
+\end{DoxyEnumFields}

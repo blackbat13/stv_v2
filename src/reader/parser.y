@@ -65,8 +65,8 @@ spec: spec agent { $$=$1; $$->insert($2); }
 query: T_FORMULA formula { }
      ;
 
-formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; formulaDescription.knowledge=""; } 
-       | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; formulaDescription.knowledge=""; } 
+formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; formulaDescription.knowledge=""; formulaDescription.hartley=""; } 
+       | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; formulaDescription.knowledge=""; formulaDescription.hartley=""; } 
        | coalition '[' ']' know cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$5; }
        | coalition T_LT T_GT know cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$5; }
        | coalition '[' ']' hartley cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$5; }
@@ -98,11 +98,6 @@ local: T_LOCAL '[' ident_list ']' { $$=$3; }
 persistent: T_PERSISTENT '[' ident_list ']' { $$=$3; }
           | T_PERSISTENT '[' ']'  { $$=NULL; }
           ;
-
-know: T_KNOW T_IDENT { formulaDescription.knowledge=$2; }
-    ;
-
-hartley: T_HARTLEY T_IDENT { formulaDescription.hartley=$2; }
 
 ident_list: ident_list ',' T_IDENT { $$=$1; $$->insert($3); delete $3; }
           | T_IDENT { $$=new set<string>; $$->insert($1); delete $1; }
@@ -176,6 +171,13 @@ cond_elem: num_exp T_EQ num_exp { $$=new ExprEq($1, $3);}
          | T_IDENT { $$=new ExprIdent($1); delete $1; }
          | T_NUM { $$=new ExprConst($1); }
          ;
+
+know: T_KNOW T_IDENT { formulaDescription.knowledge=$2; formulaDescription.hartley=""; }
+    ;
+
+hartley: T_HARTLEY T_IDENT '[' T_LE T_NUM ']' { formulaDescription.hartley=$2; formulaDescription.knowledge=""; formulaDescription.le=true; formulaDescription.hCoeff=$5; }
+       | T_HARTLEY T_IDENT '[' T_GE T_NUM ']' { formulaDescription.hartley=$2; formulaDescription.knowledge=""; formulaDescription.le=false; formulaDescription.hCoeff=$5; }
+       ;
 
 %%
 

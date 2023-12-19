@@ -19,9 +19,21 @@ class TestVerif
         GlobalModelGenerator* generator = new GlobalModelGenerator();
         bool result;
         string knowledge;
+        string hartley;
+        int hCoeff;
+        bool le;
 
     TestVerif(string path) {
         result = verify(path, generator);
+    }
+
+    TestVerif(string path, bool ok) {
+        if (!ok) {
+            result = verify(path, generator);
+        }
+        else {
+            result = verifyFull(path, generator);
+        }
     }
 
     ~TestVerif() {
@@ -33,7 +45,31 @@ class TestVerif
         config.fname = path.data();
         config.output_local_models = false;
         config.output_global_model = false;
-        config.stv_mode = '2';
+        config.stv_mode = 2;
+
+        auto tp = new ModelParser();
+        
+        tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+        auto localModels = &(get<0>(desc));
+        auto formula = &(get<1>(desc));
+
+        generator->initModel(localModels, formula);
+
+        bool result = false;
+
+        auto verification = new Verification(generator);
+        
+        result = verification->verify();
+        
+        return result;
+    }
+
+    bool verifyFull(string path, GlobalModelGenerator* generator)
+    {
+        config.fname = path.data();
+        config.output_local_models = false;
+        config.output_global_model = false;
+        config.stv_mode = 3;
 
         auto tp = new ModelParser();
         
@@ -52,6 +88,9 @@ class TestVerif
         result = verification->verify();
 
         knowledge = generator->getFormula()->knowledge;
+        hartley = generator->getFormula()->hartley;
+        hCoeff = generator->getFormula()->hCoeff;
+        le = generator->getFormula()->le;
         
         return result;
     }
