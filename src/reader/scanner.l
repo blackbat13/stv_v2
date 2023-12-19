@@ -3,6 +3,7 @@
 #include <string.h>
 #include <string>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -40,6 +41,7 @@ blank [ \n\t]
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }
 "&K_"           { return T_KNOW; }
+"&H_"           { return T_HARTLEY; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
 %%

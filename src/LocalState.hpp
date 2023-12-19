@@ -21,7 +21,7 @@ class LocalState {
         string name;
 
         /// @brief Local variables as a name and their current values.
-        map<string, int> environment; 
+        map<string, int> environment;
      
         // komparator
         

@@ -154,10 +154,31 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
             currEnv[it->first] = it->second;
         }
     }
-    // if (this->generator->getFormula()->knowledge != "") {
-    //     printf("%s\n", this->generator->getFormula()->knowledge.c_str());
-    // }
-    return this->generator->getFormula()->p->eval(currEnv)==1;
+    auto val = *this->generator->getFormula()->p;
+    return val[0]->eval(currEnv)==1;
+}
+
+/// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
+/// @param localStates A pointer to a set of pointers to LocalState.
+/// @return Returns an integer with encoded answers. If the first formula was fulfilled, then the first bit is 1, otherwise it is 0, etc.
+int64_t Verification::verifyLocalStatesWithMultipleFormulas(vector<LocalState*>* localStates) {
+    map<string, int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
+
+    for (const auto localState : *localStates) {
+        for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
+            currEnv[it->first] = it->second;
+        }
+    }
+    int64_t values = 0;
+    int64_t add = 1;
+    auto val = *this->generator->getFormula()->p;
+    for (int i = 0; i < val.size(); i++) {
+        if (val[i]->eval(currEnv)) {
+            values += add;
+        }
+        add *= 2;
+    }
+    return values;
 }
 
 /// @brief Recursively verifies GlobalState 
