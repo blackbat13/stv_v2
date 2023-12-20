@@ -25,6 +25,8 @@ class TestVerif
 
     TestVerif(string path) {
         result = verify(path, generator);
+        hCoeff = 0;
+        le = false;
     }
 
     TestVerif(string path, bool ok) {

@@ -34,3 +34,51 @@ TEST(HartleyDetectionTest, HartleyDetectionTest3)
     EXPECT_EQ(verify.le, true);
     EXPECT_EQ(verify.hCoeff, 1);
 }
+
+TEST(HartleyVerificationTest, HartleyOK)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationOK.txt", true);
+
+    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.hartley, "Coercer1");
+}
+
+TEST(HartleyVerificationTest, HartleyOK2)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationOK2.txt", true);
+
+    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.hartley, "Coercer1");
+}
+
+TEST(HartleyVerificationTest, HartleyOK3)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationOK3.txt", true);
+
+    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.hartley, "Coercer1");
+}
+
+TEST(HartleyVerificationTest, HartleyERR)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationERR.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+    EXPECT_EQ(verify.hartley, "Coercer1");
+}
+
+TEST(HartleyVerificationTest, HartleyERR2)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationERR2.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+    EXPECT_EQ(verify.hartley, "Coercer1");
+}
+
+TEST(HartleyVerificationTest, HartleyERR3)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationERR3.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+    EXPECT_EQ(verify.hartley, "Coercer1");
+}
