@@ -239,6 +239,13 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.output_dot_files = 1;
             } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
                 config.add_epsilon_transitions = 1;
+            } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {
+                config.formula_from_parameter = 1;
+                if (i + 1 < argc) {
+                    config.formula = argv[++i];
+                } else {
+                    printf("ERR: no formula was specified!\n");
+                }
             }
         }
     }
