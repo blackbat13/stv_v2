@@ -6,6 +6,12 @@ Utility functions. A collection of utility functions to use in the project.
 
 
 {\ttfamily \#include \char`\"{}Utils.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include \char`\"{}Global\+Model\+Generator.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -20,10 +26,19 @@ void \mbox{\hyperlink{Utils_8cpp_ae45accf23ba6404b9b292d148e3eda27}{output\+Glob
 \mbox{\Hypertarget{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}\label{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}} 
 unsigned long {\bfseries get\+Mem\+Cap} ()
 \item 
+\mbox{\Hypertarget{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}\label{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}} 
+void {\bfseries load\+Config\+From\+File} (string filename)
+\item 
+\mbox{\Hypertarget{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}\label{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}} 
+void {\bfseries load\+Config\+From\+Args} (int argc, char $\ast$$\ast$argv)
+\item 
 void \mbox{\hyperlink{Utils_8cpp_a31d4dbc4222c0740fc9b6911e129ea05}{tarjan\+Visit}} (\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$v, map$<$ int, int $>$ $\ast$dindex, map$<$ int, int $>$ $\ast$lowlink, stack$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$stack, map$<$ int, bool $>$ $\ast$onstack, int $\ast$depth, vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$$>$ $\ast$comp)
 \begin{DoxyCompactList}\small\item\em Utility function for SCC-\/computatation. \end{DoxyCompactList}\item 
 vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $>$ \mbox{\hyperlink{Utils_8cpp_a4073ec29a638e918c58e44dfe345e842}{get\+Local\+States\+SCC}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
-\begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}\label{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}} 
+map$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$, vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $>$ {\bfseries get\+Context\+Model} (\mbox{\hyperlink{structFormula}{Formula}} $\ast$formula, \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$local\+Models, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 

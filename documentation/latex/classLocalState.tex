@@ -7,18 +7,20 @@ Represents a single \mbox{\hyperlink{classLocalState}{Local\+State}}, containing
 
 
 
-{\ttfamily \#include $<$Types.\+hpp$>$}
+{\ttfamily \#include $<$Local\+State.\+hpp$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{classLocalState_afc41e99633f48c66337ece5bc1a70dd4}{compare}} (\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$state)
-\begin{DoxyCompactList}\small\item\em Function comparing two states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function comparing two states. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classLocalState_ad2be0f4ff5c8972f63c9bd7af439ff23}{to\+String}} (string indent=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Debug information on the given \mbox{\hyperlink{classLocalState}{Local\+State}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classLocalState_ae235a01f583577bba291360f829ffac9}\label{classLocalState_ae235a01f583577bba291360f829ffac9}} 
-int \mbox{\hyperlink{classLocalState_ae235a01f583577bba291360f829ffac9}{id}}
+\mbox{\Hypertarget{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}\label{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}} 
+uint32\+\_\+t \mbox{\hyperlink{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}{id}}
 \begin{DoxyCompactList}\small\item\em State identifier. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classLocalState_a8f147438a2008244801118ed93009a6d}\label{classLocalState_a8f147438a2008244801118ed93009a6d}} 
 string \mbox{\hyperlink{classLocalState_a8f147438a2008244801118ed93009a6d}{name}}
@@ -31,7 +33,10 @@ map$<$ string, int $>$ \mbox{\hyperlink{classLocalState_a34bdc2e97427c07b102d810
 \begin{DoxyCompactList}\small\item\em Binding to an \mbox{\hyperlink{classAgent}{Agent}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classLocalState_a13e96c06cf28959be8e87e4045d33265}\label{classLocalState_a13e96c06cf28959be8e87e4045d33265}} 
 set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ \mbox{\hyperlink{classLocalState_a13e96c06cf28959be8e87e4045d33265}{local\+Transitions}}
-\begin{DoxyCompactList}\small\item\em Binding to the set of \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Binding to the set of \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}\label{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}} 
+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}{epistemic\+Global\+States}}
+\begin{DoxyCompactList}\small\item\em Binding to the set of \mbox{\hyperlink{structGlobalState}{Global\+State}} that this \mbox{\hyperlink{classLocalState}{Local\+State}} belongs to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -56,9 +61,29 @@ Function comparing two states.
 \begin{DoxyReturn}{Returns}
 Returns true if the current \mbox{\hyperlink{classLocalState}{Local\+State}} is the same as the passed one, otherwise false. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classLocalState_ad2be0f4ff5c8972f63c9bd7af439ff23}\label{classLocalState_ad2be0f4ff5c8972f63c9bd7af439ff23}} 
+\index{LocalState@{LocalState}!toString@{toString}}
+\index{toString@{toString}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily string Local\+State\+::to\+String (\begin{DoxyParamCaption}\item[{string}]{indent = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Debug information on the given \mbox{\hyperlink{classLocalState}{Local\+State}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em indent} & -\/ optional indentation string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classLocalState}{Local\+State}} data
+
+\mbox{\hyperlink{classLocalState}{Local\+State}} data 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{Types_8hpp}{Types.\+hpp}}\item 
-\mbox{\hyperlink{Types_8cc}{Types.\+cc}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{LocalState_8hpp}{Local\+State.\+hpp}}\item 
+\mbox{\hyperlink{LocalState_8cpp}{Local\+State.\+cpp}}\end{DoxyCompactItemize}

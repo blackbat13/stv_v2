@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['globalstateverificationstatus_419',['GlobalStateVerificationStatus',['../Types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048',1,'Types.hpp']]]
+  ['historyentrytype_464',['HistoryEntryType',['../Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4',1,'Verification.hpp']]]
 ];

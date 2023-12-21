@@ -7,6 +7,8 @@
 #include "Verification.hpp"
 #define DEPTH_PREFIX string(depth * 4, ' ')
 
+#include <bits/stdc++.h>
+
 extern Cfg config;
 
 /// @brief Converts global verification status into a string.
@@ -152,7 +154,32 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
             currEnv[it->first] = it->second;
         }
     }
-    return this->generator->getFormula()->p->eval(currEnv)==1;
+    auto val = *this->generator->getFormula()->p;
+    return val[0]->eval(currEnv)==1;
+}
+
+/// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
+/// @param localStates A pointer to a set of pointers to LocalState.
+/// @return Returns an integer with encoded answers. If the first formula was fulfilled, then the first bit is 1, otherwise it is 0, etc.
+int64_t Verification::verifyLocalStatesWithMultipleFormulas(vector<LocalState*>* localStates) {
+    map<string, int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
+
+    for (const auto localState : *localStates) {
+        for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
+            currEnv[it->first] = it->second;
+        }
+    }
+    int64_t values = 0;
+    int64_t add = 1;
+    auto val = *this->generator->getFormula()->p;
+    for (int i = 0; i < val.size(); i++) {
+        if (val[i]->eval(currEnv)) {
+            values += add;
+        }
+        add *= 2;
+    }
+    // cout << values << endl;
+    return values;
 }
 
 /// @brief Recursively verifies GlobalState 
@@ -176,6 +203,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     #endif
 
     bool isFMode = this->generator->getFormula()->isF;
+    bool hasKnowledge = this->generator->getFormula()->knowledge != "" || this->generator->getFormula()->hartley != "";
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
@@ -202,20 +230,113 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 1) verify localStates that the globalState is composed of
-    if (isFMode) {
-        if (this->verifyLocalStates(&globalState->localStatesProjection)) {
-            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
-            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
-            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
-            return true;
+    if (isFMode) { // F
+        if (hasKnowledge) { // K&H
+            string knowledgeAgent;
+            if (this->generator->getFormula()->knowledge != "") {
+                knowledgeAgent = this->generator->getFormula()->knowledge;
+            }
+            else if (this->generator->getFormula()->hartley != "") {
+                knowledgeAgent = this->generator->getFormula()->hartley;
+            }
+
+            bool allEpistemicOk = true;
+            Agent* knowledgeAgentInstance;
+            auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
+            for (auto globalAgent : globalModelAgents) {
+                if (globalAgent->name == knowledgeAgent) {
+                    knowledgeAgentInstance = globalAgent;
+                    break;
+                }
+            }
+            auto epistemicClassesForAgent = this->generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
+            if (this->generator->getFormula()->knowledge != "") { // K
+                for (auto global : *epistemicClassesForAgent) {
+                    if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+                        allEpistemicOk = false;
+                        break;
+                    }
+                }
+            }
+            else { // H
+                set<int64_t>* foundClasses = new set<int64_t>();
+                for (auto global : *epistemicClassesForAgent) {
+                    foundClasses->insert(this->verifyLocalStatesWithMultipleFormulas(&global->localStatesProjection));
+                }
+                if (!calcHartley(foundClasses, generator->getFormula()->le, generator->getFormula()->hCoeff)) {
+                    allEpistemicOk = false;
+                }
+                free(foundClasses);
+            }
+            if (allEpistemicOk) {
+                this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                return true;
+            }
+        }
+        else { // !K
+            if (this->verifyLocalStates(&globalState->localStatesProjection)) {
+                this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                return true;
+            }
         }
     }
-    else {
-        if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
-            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
-            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-            return false;
+    else { // G
+        if (hasKnowledge) { // K&H
+            string knowledgeAgent;
+            if (this->generator->getFormula()->knowledge != "") {
+                knowledgeAgent = this->generator->getFormula()->knowledge;
+            }
+            else if (this->generator->getFormula()->hartley != "") {
+                knowledgeAgent = this->generator->getFormula()->hartley;
+            }
+            bool allEpistemicOk = true;
+            Agent* knowledgeAgentInstance;
+            auto globalModelAgents = this->generator->getCurrentGlobalModel()->agents;
+            for (auto globalAgent : globalModelAgents) {
+                if (globalAgent->name == knowledgeAgent) {
+                    knowledgeAgentInstance = globalAgent;
+                    break;
+                }
+            }
+            auto epistemicClassesForAgent = this->generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
+            if (this->generator->getFormula()->knowledge != "") { // K
+                for (auto global : *epistemicClassesForAgent) {
+                    if (!this->verifyLocalStates(&global->localStatesProjection)) {
+                        for (auto global2 : *epistemicClassesForAgent) {
+                            this->addHistoryStateStatus(global2, global2->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                            dbgVerifStatus(DEPTH_PREFIX, global2, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                            global2->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        }
+                        return false;
+                    }
+                }
+            }
+            else { // H
+                set<int64_t>* foundClasses = new set<int64_t>();
+                for (auto global : *epistemicClassesForAgent) {
+                    foundClasses->insert(this->verifyLocalStatesWithMultipleFormulas(&global->localStatesProjection));
+                }
+                if (!calcHartley(foundClasses, generator->getFormula()->le, generator->getFormula()->hCoeff)) {
+                    this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                    dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                    globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                    free(foundClasses);
+                    return false;
+                }
+                free(foundClasses);
+            }
+        }
+        else { // !K
+            if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+                this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                return false;
+            }
         }
     }
     
@@ -253,6 +374,65 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
         else {
             uncontrolledGlobalTransitions.insert(globalTransition);
+        }
+    }
+    // solve the uncontrolled transition blocking the controlled transition, making it uncontrolled
+    if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
+        set<Agent*> agents = generator->getFormula()->coalition;
+        set<Agent*> brokenAgents;
+        set<Agent*> potentiallyBrokenAgents;
+        // find if there are uncontrolled actions with only agents that are not in coalition, if yes, then they can block the controlled actions if they are a participants
+        for (const auto globalTransition : uncontrolledGlobalTransitions) {
+            bool agentTest = false;
+            for (auto glob : globalTransition->localTransitions) {
+                for (auto agt : agents) {
+                    if (glob->agent->name.c_str() == agt->name.c_str()) {
+                        agentTest = true;
+                        break;
+                    }
+                }
+                if(agentTest) {
+                    potentiallyBrokenAgents.clear();
+                    break;
+                }
+                else {
+                    potentiallyBrokenAgents.insert(glob->agent);
+                }
+            }
+            // if the global transition can fire without any of the coalition agents, mark the agents participating as a definitely faulty ones
+            if (!agentTest) {
+                brokenAgents.insert(potentiallyBrokenAgents.begin(), potentiallyBrokenAgents.end());
+                potentiallyBrokenAgents.clear();
+            }
+        }
+        // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
+        if (brokenAgents.size() > 0) {
+            stack<GlobalTransition*> transitionsToBeMoved;
+            // mark bad controlled global transition as uncontrolled
+            for (const auto globalTransition : controlledGlobalTransitions) {
+                bool agentTest = true;
+                for (auto localTrans : globalTransition->localTransitions) {
+                    bool brokenAgentFound = false;
+                    for (auto agt : brokenAgents) {
+                        if(localTrans->agent->name.c_str() == agt->name.c_str()) {
+                            brokenAgentFound = true;
+                            break;
+                        }
+                    }
+                    if(brokenAgentFound) {
+                        agentTest = false;
+                    }
+                }
+                if (!agentTest) {
+                    transitionsToBeMoved.push(globalTransition);
+                }
+            }
+            while (!transitionsToBeMoved.empty()) {
+                GlobalTransition* tr = transitionsToBeMoved.top();
+                transitionsToBeMoved.pop();
+                uncontrolledGlobalTransitions.insert(tr);
+                controlledGlobalTransitions.erase(tr);
+            }
         }
     }
 
@@ -749,6 +929,16 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         // Maybe a controlled action is an option too
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
+            // for (const auto globalTransition : uncontrolledGlobalTransitions) {
+            //     set<Agent*> agents = generator->getFormula()->coalition;
+            //     for (auto agt : agents) {
+            //         cout << (*globalTransition->localTransitions.begin())->name << " " << (*globalTransition->localTransitions.begin())->agent->name.c_str() << " ? " << agt->name << endl;
+            //         if ((*globalTransition->localTransitions.begin())->agent->name.c_str() != agt->name.c_str()) {
+            //             cout << "uh oh" << endl;
+            //             hasValidChoiceTransition = false;
+            //         }
+            //     }
+            // }
             if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
                 hasValidChoiceTransition = false;
             }
@@ -840,4 +1030,18 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
 
     return matches;
+}
+
+/// @brief Calculates a Hartley coefficient and compares it to a number.
+/// @param nums Set of binary encoded results.
+/// @param le Less equal flag. If true, less equal. If false, greater equal.
+/// @param k A set number to compare a coefficient to.
+/// @return Returns a log2(#nums) <= k or log2(#nums) >= k.
+bool Verification::calcHartley(set<int64_t>* nums, bool le, float k) {
+    // cout << log2f((float)nums->size()) << (le ? " <= " : " >= ") << k << endl;
+    // cout << (log2f((float)nums->size()) <= k) << endl;
+    if (le) {
+        return log2f((float)nums->size()) <= k;
+    }
+    return log2f((float)nums->size()) >= k;
 }

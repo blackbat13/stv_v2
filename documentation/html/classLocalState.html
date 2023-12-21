@@ -93,20 +93,23 @@ $(document).ready(function(){initNavTree('classLocalState.html',''); initResizab
 <p>Represents a single <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, containing id, name and internal variables.  
  <a href="classLocalState.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="Types_8hpp_source.html">Types.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="LocalState_8hpp_source.html">LocalState.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afc41e99633f48c66337ece5bc1a70dd4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#afc41e99633f48c66337ece5bc1a70dd4">compare</a> (<a class="el" href="classLocalState.html">LocalState</a> *state)</td></tr>
 <tr class="memdesc:afc41e99633f48c66337ece5bc1a70dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function comparing two states.  <a href="classLocalState.html#afc41e99633f48c66337ece5bc1a70dd4">More...</a><br /></td></tr>
 <tr class="separator:afc41e99633f48c66337ece5bc1a70dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2be0f4ff5c8972f63c9bd7af439ff23"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#ad2be0f4ff5c8972f63c9bd7af439ff23">toString</a> (string indent=&quot;&quot;)</td></tr>
+<tr class="memdesc:ad2be0f4ff5c8972f63c9bd7af439ff23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug information on the given <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>.  <a href="classLocalState.html#ad2be0f4ff5c8972f63c9bd7af439ff23">More...</a><br /></td></tr>
+<tr class="separator:ad2be0f4ff5c8972f63c9bd7af439ff23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae235a01f583577bba291360f829ffac9"><td class="memItemLeft" align="right" valign="top"><a id="ae235a01f583577bba291360f829ffac9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#ae235a01f583577bba291360f829ffac9">id</a></td></tr>
-<tr class="memdesc:ae235a01f583577bba291360f829ffac9"><td class="mdescLeft">&#160;</td><td class="mdescRight">State identifier. <br /></td></tr>
-<tr class="separator:ae235a01f583577bba291360f829ffac9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1b3e3cb13308d208822c22e4af8f41"><td class="memItemLeft" align="right" valign="top"><a id="a1d1b3e3cb13308d208822c22e4af8f41"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#a1d1b3e3cb13308d208822c22e4af8f41">id</a></td></tr>
+<tr class="memdesc:a1d1b3e3cb13308d208822c22e4af8f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">State identifier. <br /></td></tr>
+<tr class="separator:a1d1b3e3cb13308d208822c22e4af8f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f147438a2008244801118ed93009a6d"><td class="memItemLeft" align="right" valign="top"><a id="a8f147438a2008244801118ed93009a6d"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#a8f147438a2008244801118ed93009a6d">name</a></td></tr>
 <tr class="memdesc:a8f147438a2008244801118ed93009a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">State name. <br /></td></tr>
@@ -123,6 +126,10 @@ map&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a c
 set&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#a13e96c06cf28959be8e87e4045d33265">localTransitions</a></td></tr>
 <tr class="memdesc:a13e96c06cf28959be8e87e4045d33265"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding to the set of <a class="el" href="structLocalTransition.html" title="Represents a single local transition, containing id, global name, local name, is shared and count of ...">LocalTransition</a>. <br /></td></tr>
 <tr class="separator:a13e96c06cf28959be8e87e4045d33265"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac51a9b090f2de4c412410d63d32f68"><td class="memItemLeft" align="right" valign="top"><a id="a0ac51a9b090f2de4c412410d63d32f68"></a>
+set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLocalState.html#a0ac51a9b090f2de4c412410d63d32f68">epistemicGlobalStates</a></td></tr>
+<tr class="memdesc:a0ac51a9b090f2de4c412410d63d32f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Binding to the set of <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> that this <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> belongs to. <br /></td></tr>
+<tr class="separator:a0ac51a9b090f2de4c412410d63d32f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, containing id, name and internal variables. </p>
@@ -154,9 +161,38 @@ set&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &g
 
 </div>
 </div>
+<a id="ad2be0f4ff5c8972f63c9bd7af439ff23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2be0f4ff5c8972f63c9bd7af439ff23">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string LocalState::toString </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>indent</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Debug information on the given <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indent</td><td>- optional indentation string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> data</dd>
+<dd>
+<a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> data </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="Types_8hpp_source.html">Types.hpp</a></li>
-<li><a class="el" href="Types_8cc.html">Types.cc</a></li>
+<li><a class="el" href="LocalState_8hpp_source.html">LocalState.hpp</a></li>
+<li><a class="el" href="LocalState_8cpp.html">LocalState.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -21,7 +21,7 @@ class LocalState {
         string name;
 
         /// @brief Local variables as a name and their current values.
-        map<string, int> environment; 
+        map<string, int> environment;
      
         // komparator
         
@@ -34,6 +34,9 @@ class LocalState {
 
         /// @brief Binding to the set of LocalTransition.
         set<LocalTransition*> localTransitions;
+
+        /// @brief Binding to the set of GlobalState that this LocalState belongs to.
+        set<GlobalState*> epistemicGlobalStates;
 
         /// @brief Debug information on the given LocalState
         /// @param indent - optional indentation string 

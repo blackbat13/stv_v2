@@ -7,7 +7,7 @@
 
 TEST(SimpleVotingTest, 1Voter1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/1Voter1Coercer.txt");
+    TestVerif verify("../tests/examples/svote/1Voter1Coercer.txt", true);
 
     EXPECT_EQ(verify.result, false);
 
@@ -16,7 +16,7 @@ TEST(SimpleVotingTest, 1Voter1Coercer)
 
 TEST(SimpleVotingTest, 2Voters1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/2Voters1Coercer.txt");
+    TestVerif verify("../tests/examples/svote/2Voters1Coercer.txt", true);
 
     EXPECT_EQ(verify.result, false);
 
@@ -25,7 +25,7 @@ TEST(SimpleVotingTest, 2Voters1Coercer)
 
 TEST(SimpleVotingTest, 3Voters1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/3Voters1Coercer.txt");
+    TestVerif verify("../tests/examples/svote/3Voters1Coercer.txt", true);
 
     EXPECT_EQ(verify.result, false);
 
@@ -34,7 +34,7 @@ TEST(SimpleVotingTest, 3Voters1Coercer)
 
 TEST(SimpleVotingTest, 4Voters1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/4Voters1Coercer.txt");
+    TestVerif verify("../tests/examples/svote/4Voters1Coercer.txt", true);
 
     EXPECT_EQ(verify.result, false);
 
@@ -43,28 +43,28 @@ TEST(SimpleVotingTest, 4Voters1Coercer)
 
 TEST(SimpleVotingTestF, 1Voter1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/1Voter1CoercerF.txt");
+    TestVerif verify("../tests/examples/svote/1Voter1CoercerF.txt", true);
 
     EXPECT_EQ(verify.result, true);
 }
 
 TEST(SimpleVotingTestF, 2Voters1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/2Voters1CoercerF.txt");
+    TestVerif verify("../tests/examples/svote/2Voters1CoercerF.txt", true);
 
     EXPECT_EQ(verify.result, true);
 }
 
 TEST(SimpleVotingTestF, 3Voters1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/3Voters1CoercerF.txt");
+    TestVerif verify("../tests/examples/svote/3Voters1CoercerF.txt", true);
 
     EXPECT_EQ(verify.result, true);
 }
 
 TEST(SimpleVotingTestF, 4Voters1Coercer)
 {
-    TestVerif verify("../tests/examples/svote/4Voters1CoercerF.txt");
+    TestVerif verify("../tests/examples/svote/4Voters1CoercerF.txt", true);
 
     EXPECT_EQ(verify.result, true);
 }

@@ -37,6 +37,7 @@ var annotated_dup =
     [ "LocalStateTemplate", "classLocalStateTemplate.html", "classLocalStateTemplate" ],
     [ "LocalTransition", "structLocalTransition.html", "structLocalTransition" ],
     [ "ModelParser", "classModelParser.html", "classModelParser" ],
+    [ "TestVerif", "classTestVerif.html", "classTestVerif" ],
     [ "TransitionTemplate", "classTransitionTemplate.html", "classTransitionTemplate" ],
     [ "Var", "structVar.html", "structVar" ],
     [ "Verification", "classVerification.html", "classVerification" ],

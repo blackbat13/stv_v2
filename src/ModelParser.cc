@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 #include <tuple>
+#include <iostream>
 
 using namespace std;
 
@@ -45,10 +46,13 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    for(set<AgentTemplate*>::iterator it=modelDescription->begin(); it != modelDescription->end(); it++, i++) {
       models.agents.push_back((*it)->generateAgent(i));
    }
-
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
+   formula.knowledge = formulaDescription.knowledge;
+   formula.hartley = formulaDescription.hartley;
+   formula.le = formulaDescription.le;
+   formula.hCoeff = formulaDescription.hCoeff;
    
    for (const auto agent : models.agents) {
       if (formulaDescription.coalition->count(agent->name)>0) {

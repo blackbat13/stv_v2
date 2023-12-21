@@ -10,6 +10,7 @@
 
 
 #include <algorithm>
+#include <string.h>
 #include <iostream>
 
 extern Cfg config;
@@ -32,11 +33,14 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     this->formula = formula;
     this->globalModel = new GlobalModel();
     this->globalModel->agents = localModels->agents;
-    this->globalModel->initState = this->generateInitState();
 
     for (auto it = begin (this->globalModel->agents); it != end (this->globalModel->agents); ++it) {
         this->agentIndex[*it]=std::distance(this->globalModel->agents.begin(), it);
     }
+
+    this->globalModel->initState = this->generateInitState();
+    this->globalModel->epistemicClassesKnowledge.clear();
+
     return this->globalModel->initState;
 }
 
@@ -56,12 +60,8 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
                 #if VERBOSE
                     cout << "expandState via (localTransition) " << localTransition->name << " : " << localTransition->from->id << " -> " << localTransition->to->id << endl;
                 #endif
-
                 auto it = agentIndex[localTransition->from->agent];
-                // if(it<0)cout << "ERR" << endl;
                 localStates[it]=localTransition->to;
-                // localStates.erase(localTransition->from);
-                // localStates.insert(localTransition->to);
             }            
             auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
             globalTransition->to = targetState;
@@ -180,7 +180,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
         localStates.push_back(agt->initState);
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
-    
+
     return initState;
 }
 
@@ -246,6 +246,22 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     }
     
     this->globalModel->globalStates.push_back(globalState);
+
+    if (strcmp(this->formula->knowledge.c_str(), "") != 0 || strcmp(this->formula->hartley.c_str(), "") != 0) {
+        Agent* a;
+        for (auto agt : globalModel->agents) {
+            if (strcmp(agt->name.c_str(), this->formula->knowledge.c_str()) == 0) {
+                a = agt;
+                break;
+            }
+            if (strcmp(agt->name.c_str(), this->formula->hartley.c_str()) == 0) {
+                a = agt;
+                break;
+            }
+        }
+        this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
+    }
+
     return globalState;
 }
 
@@ -338,6 +354,28 @@ EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(vector<LocalSta
         epistemicClassesForAgent->insert({ hash, epistemicClass });
     }
     return epistemicClassesForAgent->at(hash);
+}
+
+/// @brief Checks if a vector of LocalState is already an epistemic class for a given Agent, if not, creates a new one.
+/// @param localStates Local states from agent.
+/// @param agent Agent for which to check the existence of an epistemic class.
+/// @return A pointer to a new or existing EpistemicClass.
+set<GlobalState*>* GlobalModelGenerator::findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* global, Agent* agent) {
+    string hash = this->computeEpistemicClassHash(localStates, agent);
+    if (this->globalModel->epistemicClassesKnowledge.find(agent) == this->globalModel->epistemicClassesKnowledge.end()) {
+        this->globalModel->epistemicClassesKnowledge.insert({ agent, map<string, set<GlobalState*>>() });
+    }
+    auto epistemicClassesForAgent = &this->globalModel->epistemicClassesKnowledge[agent];
+    if (epistemicClassesForAgent->find(hash) == epistemicClassesForAgent->end()) {
+        set<GlobalState*> epistemicClass;
+        epistemicClass.insert(global);
+        epistemicClassesForAgent->insert({ hash, epistemicClass });
+    }
+    else {
+        auto s = epistemicClassesForAgent->find(hash);
+        s->second.insert(global);
+    }
+    return &epistemicClassesForAgent->at(hash);
 }
 
 /// @brief Gets a GlobalState from an EpistemicClass if it exists in that episcemic class.

@@ -85,48 +85,59 @@ $(document).ready(function(){initNavTree('DotGraph_8hpp_source.html',''); initRe
 <div class="title">DotGraph.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DOT_PARSER</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define DOT_PARSER</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Types_8hpp.html">Types.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nodes_8hpp.html">reader/nodes.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classDotGraph.html">   11</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDotGraph.html">DotGraph</a>{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    std::vector&lt;std::string&gt; nodes;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::vector&lt;std::string&gt; edges;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    std::string name;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    std::string caption;</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classDotGraph.html#a02b23bbc3defedf86bfe2f6a8ca8a55c">   17</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code" href="classDotGraph.html#a02b23bbc3defedf86bfe2f6a8ca8a55c">styleString</a>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>(<a class="code" href="structGlobalModel.html">GlobalModel</a> *<span class="keyword">const</span> gm, <span class="keywordtype">bool</span> extended=<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>(<a class="code" href="classAgent.html">Agent</a> *<span class="keyword">const</span> ag, <span class="keywordtype">bool</span> extended=<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>(<a class="code" href="classAgentTemplate.html">AgentTemplate</a> *<span class="keyword">const</span> at);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordtype">void</span> saveToFile(std::string filename=<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">void</span> addNode(std::string <span class="keywordtype">id</span>, std::string name);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">void</span> addEdge(std::string src, std::string trg, std::string label);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif</span></div>
+<a href="DotGraph_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef DOT_PARSER</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define DOT_PARSER</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Types_8hpp.html">Types.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="nodes_8hpp.html">reader/nodes.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591">   17</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591">DotGraphBase</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723">   18</a></span>&#160;    <a class="code" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723">LOCAL_MODEL</a>, </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69">   19</a></span>&#160;    <a class="code" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69">GLOBAL_MODEL</a>, </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1">   20</a></span>&#160;    <a class="code" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1">AGENT_TEMPLATE</a>, </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classDotGraph.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDotGraph.html">DotGraph</a>{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::vector&lt;std::string&gt; nodes;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    std::vector&lt;std::string&gt; edges;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    std::string graphName;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591">DotGraphBase</a> graphBase;</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classDotGraph.html#a02b23bbc3defedf86bfe2f6a8ca8a55c">   29</a></span>&#160;    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code" href="classDotGraph.html#a02b23bbc3defedf86bfe2f6a8ca8a55c">styleString</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>(<a class="code" href="structGlobalModel.html">GlobalModel</a> *<span class="keyword">const</span> gm, <span class="keywordtype">bool</span> extended=<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>(<a class="code" href="classAgent.html">Agent</a> *<span class="keyword">const</span> ag, <span class="keywordtype">bool</span> extended=<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classDotGraph.html">DotGraph</a>(<a class="code" href="classAgentTemplate.html">AgentTemplate</a> *<span class="keyword">const</span> at);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> saveToFile(std::string pathprefix, std::string nameprefix, std::string basename=<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> addNode(std::string <span class="keywordtype">id</span>, std::string name);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> addEdge(std::string src, std::string trg, std::string label);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aDotGraph_8hpp_html_af87eedfdc6f5102a5c2105e9d097a591"><div class="ttname"><a href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591">DotGraphBase</a></div><div class="ttdeci">DotGraphBase</div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:17</div></div>
+<div class="ttc" id="aDotGraph_8hpp_html_af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723"><div class="ttname"><a href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723">LOCAL_MODEL</a></div><div class="ttdeci">@ LOCAL_MODEL</div><div class="ttdoc">(unfolded) local model = TS with states and transitions</div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:18</div></div>
+<div class="ttc" id="aDotGraph_8hpp_html_af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69"><div class="ttname"><a href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69">GLOBAL_MODEL</a></div><div class="ttdeci">@ GLOBAL_MODEL</div><div class="ttdoc">(unfolded) global model = TS with states and transitions</div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:19</div></div>
+<div class="ttc" id="aDotGraph_8hpp_html_af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1"><div class="ttname"><a href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1">AGENT_TEMPLATE</a></div><div class="ttdeci">@ AGENT_TEMPLATE</div><div class="ttdoc">(folded/compact) agent graph = sets of locations and labelled edges</div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:20</div></div>
 <div class="ttc" id="aTypes_8hpp_html"><div class="ttname"><a href="Types_8hpp.html">Types.hpp</a></div><div class="ttdoc">Custom data structures. Data structures and classes containing model data.</div></div>
 <div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
 <div class="ttc" id="aclassAgentTemplate_html"><div class="ttname"><a href="classAgentTemplate.html">AgentTemplate</a></div><div class="ttdoc">Represents a single agent loaded from the description from a file.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:111</div></div>
-<div class="ttc" id="aclassAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Contains all data for a single Agent, including id, name and all of the agents' variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:95</div></div>
-<div class="ttc" id="aclassDotGraph_html"><div class="ttname"><a href="classDotGraph.html">DotGraph</a></div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:11</div></div>
-<div class="ttc" id="aclassDotGraph_html_a02b23bbc3defedf86bfe2f6a8ca8a55c"><div class="ttname"><a href="classDotGraph.html#a02b23bbc3defedf86bfe2f6a8ca8a55c">DotGraph::styleString</a></div><div class="ttdeci">static string styleString</div><div class="ttdoc">(temporary hard-coded) graphviz visual configuration</div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:17</div></div>
+<div class="ttc" id="aclassAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Contains all data for a single Agent, including id, name and all of the agents' variables.</div><div class="ttdef"><b>Definition:</b> Agent.hpp:13</div></div>
+<div class="ttc" id="aclassDotGraph_html"><div class="ttname"><a href="classDotGraph.html">DotGraph</a></div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:23</div></div>
+<div class="ttc" id="aclassDotGraph_html_a02b23bbc3defedf86bfe2f6a8ca8a55c"><div class="ttname"><a href="classDotGraph.html#a02b23bbc3defedf86bfe2f6a8ca8a55c">DotGraph::styleString</a></div><div class="ttdeci">static string styleString</div><div class="ttdoc">(temporary hard-coded) graphviz visual configuration</div><div class="ttdef"><b>Definition:</b> DotGraph.hpp:29</div></div>
 <div class="ttc" id="anodes_8hpp_html"><div class="ttname"><a href="nodes_8hpp.html">nodes.hpp</a></div><div class="ttdoc">Parser templates. Class for setting up a new objects from a parser.</div></div>
-<div class="ttc" id="astructGlobalModel_html"><div class="ttname"><a href="structGlobalModel.html">GlobalModel</a></div><div class="ttdoc">Represents a global model, containing agents and a formula.</div><div class="ttdef"><b>Definition:</b> Types.hpp:198</div></div>
+<div class="ttc" id="astructGlobalModel_html"><div class="ttname"><a href="structGlobalModel.html">GlobalModel</a></div><div class="ttdoc">Represents a global model, containing agents and a formula.</div><div class="ttdef"><b>Definition:</b> GlobalModel.hpp:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>DotGraph.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="DotGraph_8hpp.html">DotGraph.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>

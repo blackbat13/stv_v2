@@ -83,6 +83,7 @@ $(document).ready(function(){initNavTree('classGlobalModelGenerator.html',''); i
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classGlobalModelGenerator-members.html">List of all members</a>  </div>
@@ -112,6 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad9b21fa1580e4dd4479c00d192a97501"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501">expandState</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *state)</td></tr>
 <tr class="memdesc:ad9b21fa1580e4dd4479c00d192a97501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goes through all <a class="el" href="structGlobalTransition.html" title="Represents a single global transition.">GlobalTransition</a> in a given <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> and creates new GlobalStates connected to the given one.  <a href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501">More...</a><br /></td></tr>
 <tr class="separator:ad9b21fa1580e4dd4479c00d192a97501"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1de661140eb7c06e2c610cd726689b7c"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a1de661140eb7c06e2c610cd726689b7c">expandStateAndReturn</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *state)</td></tr>
+<tr class="memdesc:a1de661140eb7c06e2c610cd726689b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501" title="Goes through all GlobalTransition in a given GlobalState and creates new GlobalStates connected to th...">GlobalModelGenerator::expandState</a> that also additionally returns a vector of newly created states.  <a href="classGlobalModelGenerator.html#a1de661140eb7c06e2c610cd726689b7c">More...</a><br /></td></tr>
+<tr class="separator:a1de661140eb7c06e2c610cd726689b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="memItemLeft" align="right" valign="top"><a id="a8f2f18be55f04da04ad4bcd1c9f0eef2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">expandAllStates</a> ()</td></tr>
 <tr class="memdesc:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands the states starting from the initial <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> and continues until there are no more states to expand. <br /></td></tr>
@@ -122,33 +126,40 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a9bf572d8e168df504b19f14a1833097e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structFormula.html">Formula</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a9bf572d8e168df504b19f14a1833097e">getFormula</a> ()</td></tr>
 <tr class="memdesc:a9bf572d8e168df504b19f14a1833097e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get for the <a class="el" href="structFormula.html">Formula</a> used in initialization.  <a href="classGlobalModelGenerator.html#a9bf572d8e168df504b19f14a1833097e">More...</a><br /></td></tr>
 <tr class="separator:a9bf572d8e168df504b19f14a1833097e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a7825f93f972dc94468598cf35382b"><td class="memItemLeft" align="right" valign="top">set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a89a7825f93f972dc94468598cf35382b">findOrCreateEpistemicClassForKnowledge</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState, <a class="el" href="classAgent.html">Agent</a> *agent)</td></tr>
+<tr class="memdesc:a89a7825f93f972dc94468598cf35382b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a vector of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one.  <a href="classGlobalModelGenerator.html#a89a7825f93f972dc94468598cf35382b">More...</a><br /></td></tr>
+<tr class="separator:a89a7825f93f972dc94468598cf35382b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a4547365e456449e61e08cbd6e18791d0"><td class="memItemLeft" align="right" valign="top"><a id="a4547365e456449e61e08cbd6e18791d0"></a>
+map&lt; <a class="el" href="classAgent.html">Agent</a> *, size_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a4547365e456449e61e08cbd6e18791d0">agentIndex</a></td></tr>
+<tr class="memdesc:a4547365e456449e61e08cbd6e18791d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">auxiliary variable mapping <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> pointer to its index (replace size_t with if needed later) <br /></td></tr>
+<tr class="separator:a4547365e456449e61e08cbd6e18791d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3b233fda6152b674804997ccbbb838ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a3b233fda6152b674804997ccbbb838ee">generateInitState</a> ()</td></tr>
 <tr class="memdesc:a3b233fda6152b674804997ccbbb838ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates initial state of the model from <a class="el" href="structGlobalModel.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> in memory.  <a href="classGlobalModelGenerator.html#a3b233fda6152b674804997ccbbb838ee">More...</a><br /></td></tr>
 <tr class="separator:a3b233fda6152b674804997ccbbb838ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af254ce4e97619dc6e4ff939fb9708b44"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#af254ce4e97619dc6e4ff939fb9708b44">generateStateFromLocalStates</a> (set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, set&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &gt; *viaLocalTransitions, <a class="el" href="structGlobalState.html">GlobalState</a> *prevGlobalState)</td></tr>
-<tr class="memdesc:af254ce4e97619dc6e4ff939fb9708b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state.  <a href="classGlobalModelGenerator.html#af254ce4e97619dc6e4ff939fb9708b44">More...</a><br /></td></tr>
-<tr class="separator:af254ce4e97619dc6e4ff939fb9708b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d8f01cdcd20893ae23260a090b04315"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a5d8f01cdcd20893ae23260a090b04315">generateStateFromLocalStates</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, set&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &gt; *viaLocalTransitions, <a class="el" href="structGlobalState.html">GlobalState</a> *prevGlobalState)</td></tr>
+<tr class="memdesc:a5d8f01cdcd20893ae23260a090b04315"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state.  <a href="classGlobalModelGenerator.html#a5d8f01cdcd20893ae23260a090b04315">More...</a><br /></td></tr>
+<tr class="separator:a5d8f01cdcd20893ae23260a090b04315"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac718e108f277e27fac26566e69626a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#aac718e108f277e27fac26566e69626a3">generateGlobalTransitions</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *fromGlobalState, set&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &gt; localTransitions, map&lt; <a class="el" href="classAgent.html">Agent</a> *, vector&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &gt;&gt; transitionsByAgent)</td></tr>
 <tr class="memdesc:aac718e108f277e27fac26566e69626a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all shared global transitions to a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a>.  <a href="classGlobalModelGenerator.html#aac718e108f277e27fac26566e69626a3">More...</a><br /></td></tr>
 <tr class="separator:aac718e108f277e27fac26566e69626a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abacfe0205b17337d10e2d80b1cd3cec5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#abacfe0205b17337d10e2d80b1cd3cec5">checkLocalTransitionConditions</a> (<a class="el" href="structLocalTransition.html">LocalTransition</a> *localTransition, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState)</td></tr>
-<tr class="memdesc:abacfe0205b17337d10e2d80b1cd3cec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if all conditions for a given local transition in a given global state are fulfilled.  <a href="classGlobalModelGenerator.html#abacfe0205b17337d10e2d80b1cd3cec5">More...</a><br /></td></tr>
-<tr class="separator:abacfe0205b17337d10e2d80b1cd3cec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73cf40fd36ec61f15cce6d52772c884f"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a73cf40fd36ec61f15cce6d52772c884f">computeEpistemicClassHash</a> (set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="classAgent.html">Agent</a> *agent)</td></tr>
-<tr class="memdesc:a73cf40fd36ec61f15cce6d52772c884f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a hash from a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> and an <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>.  <a href="classGlobalModelGenerator.html#a73cf40fd36ec61f15cce6d52772c884f">More...</a><br /></td></tr>
-<tr class="separator:a73cf40fd36ec61f15cce6d52772c884f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af3616869b74b17af839fdf1bdd354f49"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#af3616869b74b17af839fdf1bdd354f49">computeGlobalStateHash</a> (set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates)</td></tr>
-<tr class="memdesc:af3616869b74b17af839fdf1bdd354f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a hash from a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>.  <a href="classGlobalModelGenerator.html#af3616869b74b17af839fdf1bdd354f49">More...</a><br /></td></tr>
-<tr class="separator:af3616869b74b17af839fdf1bdd354f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c42244f7e8902f95c34915ae69ce8df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structEpistemicClass.html">EpistemicClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a4c42244f7e8902f95c34915ae69ce8df">findOrCreateEpistemicClass</a> (set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="classAgent.html">Agent</a> *agent)</td></tr>
-<tr class="memdesc:a4c42244f7e8902f95c34915ae69ce8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one.  <a href="classGlobalModelGenerator.html#a4c42244f7e8902f95c34915ae69ce8df">More...</a><br /></td></tr>
-<tr class="separator:a4c42244f7e8902f95c34915ae69ce8df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81969a319955d7db12a6f74b347dc67e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a81969a319955d7db12a6f74b347dc67e">findGlobalStateInEpistemicClass</a> (set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="structEpistemicClass.html">EpistemicClass</a> *epistemicClass)</td></tr>
-<tr class="memdesc:a81969a319955d7db12a6f74b347dc67e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> from an <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a> if it exists in that episcemic class.  <a href="classGlobalModelGenerator.html#a81969a319955d7db12a6f74b347dc67e">More...</a><br /></td></tr>
-<tr class="separator:a81969a319955d7db12a6f74b347dc67e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131f493e5990ea53a56117a1c6a58fb7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a131f493e5990ea53a56117a1c6a58fb7">computeEpistemicClassHash</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="classAgent.html">Agent</a> *agent)</td></tr>
+<tr class="memdesc:a131f493e5990ea53a56117a1c6a58fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a hash from a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> and an <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>.  <a href="classGlobalModelGenerator.html#a131f493e5990ea53a56117a1c6a58fb7">More...</a><br /></td></tr>
+<tr class="separator:a131f493e5990ea53a56117a1c6a58fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6e324a3bad67d1e80614e6fb1b9b26c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ac6e324a3bad67d1e80614e6fb1b9b26c">computeGlobalStateHash</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates)</td></tr>
+<tr class="memdesc:ac6e324a3bad67d1e80614e6fb1b9b26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a hash from a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>.  <a href="classGlobalModelGenerator.html#ac6e324a3bad67d1e80614e6fb1b9b26c">More...</a><br /></td></tr>
+<tr class="separator:ac6e324a3bad67d1e80614e6fb1b9b26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc24910b5193e1916aea16926d0374bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structEpistemicClass.html">EpistemicClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#acc24910b5193e1916aea16926d0374bf">findOrCreateEpistemicClass</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="classAgent.html">Agent</a> *agent)</td></tr>
+<tr class="memdesc:acc24910b5193e1916aea16926d0374bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a vector of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one.  <a href="classGlobalModelGenerator.html#acc24910b5193e1916aea16926d0374bf">More...</a><br /></td></tr>
+<tr class="separator:acc24910b5193e1916aea16926d0374bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71726acc560329d3bd9a0b178857d0a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a71726acc560329d3bd9a0b178857d0a8">findGlobalStateInEpistemicClass</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="structEpistemicClass.html">EpistemicClass</a> *epistemicClass)</td></tr>
+<tr class="memdesc:a71726acc560329d3bd9a0b178857d0a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> from an <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a> if it exists in that episcemic class.  <a href="classGlobalModelGenerator.html#a71726acc560329d3bd9a0b178857d0a8">More...</a><br /></td></tr>
+<tr class="separator:a71726acc560329d3bd9a0b178857d0a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -168,54 +179,8 @@ Protected Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores the local models, formula and a global model. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="abacfe0205b17337d10e2d80b1cd3cec5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abacfe0205b17337d10e2d80b1cd3cec5">&#9670;&nbsp;</a></span>checkLocalTransitionConditions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool GlobalModelGenerator::checkLocalTransitionConditions </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structLocalTransition.html">LocalTransition</a> *&#160;</td>
-          <td class="paramname"><em>localTransition</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
-          <td class="paramname"><em>globalState</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Checks if all conditions for a given local transition in a given global state are fulfilled. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">localTransition</td><td>Local transition to traverse. </td></tr>
-    <tr><td class="paramname">globalState</td><td>Current global state. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns true if all of the necessary conditions to use that transition are fulfilled, otherwise false. </dd></dl>
-
-</div>
-</div>
-<a id="a73cf40fd36ec61f15cce6d52772c884f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73cf40fd36ec61f15cce6d52772c884f">&#9670;&nbsp;</a></span>computeEpistemicClassHash()</h2>
+<a id="a131f493e5990ea53a56117a1c6a58fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a131f493e5990ea53a56117a1c6a58fb7">&#9670;&nbsp;</a></span>computeEpistemicClassHash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -226,7 +191,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">string GlobalModelGenerator::computeEpistemicClassHash </td>
           <td>(</td>
-          <td class="paramtype">set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
           <td class="paramname"><em>localStates</em>, </td>
         </tr>
         <tr>
@@ -251,7 +216,7 @@ Protected Attributes</h2></td></tr>
 <p>Creates a hash from a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> and an <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">localStates</td><td>Pointer to a set of pointers of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> and pointer to and <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> to turn into a hash. </td></tr>
+    <tr><td class="paramname">localStates</td><td>Pointer to a vector of pointers of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> and pointer to and <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> to turn into a hash. </td></tr>
   </table>
   </dd>
 </dl>
@@ -259,8 +224,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af3616869b74b17af839fdf1bdd354f49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3616869b74b17af839fdf1bdd354f49">&#9670;&nbsp;</a></span>computeGlobalStateHash()</h2>
+<a id="ac6e324a3bad67d1e80614e6fb1b9b26c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6e324a3bad67d1e80614e6fb1b9b26c">&#9670;&nbsp;</a></span>computeGlobalStateHash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,7 +236,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">string GlobalModelGenerator::computeGlobalStateHash </td>
           <td>(</td>
-          <td class="paramtype">set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
           <td class="paramname"><em>localStates</em></td><td>)</td>
           <td></td>
         </tr>
@@ -286,7 +251,7 @@ Protected Attributes</h2></td></tr>
 <p>Creates a hash from a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">localStates</td><td>Pointer to a set of pointers of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> to turn into a hash. </td></tr>
+    <tr><td class="paramname">localStates</td><td>Pointer to a vector of pointers of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> to turn into a hash. </td></tr>
   </table>
   </dd>
 </dl>
@@ -320,8 +285,34 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a81969a319955d7db12a6f74b347dc67e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a81969a319955d7db12a6f74b347dc67e">&#9670;&nbsp;</a></span>findGlobalStateInEpistemicClass()</h2>
+<a id="a1de661140eb7c06e2c610cd726689b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1de661140eb7c06e2c610cd726689b7c">&#9670;&nbsp;</a></span>expandStateAndReturn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; GlobalModelGenerator::expandStateAndReturn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>state</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501" title="Goes through all GlobalTransition in a given GlobalState and creates new GlobalStates connected to th...">GlobalModelGenerator::expandState</a> that also additionally returns a vector of newly created states. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">state</td><td>A state from which the expansion should start. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a71726acc560329d3bd9a0b178857d0a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71726acc560329d3bd9a0b178857d0a8">&#9670;&nbsp;</a></span>findGlobalStateInEpistemicClass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +323,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structGlobalState.html">GlobalState</a> * GlobalModelGenerator::findGlobalStateInEpistemicClass </td>
           <td>(</td>
-          <td class="paramtype">set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
           <td class="paramname"><em>localStates</em>, </td>
         </tr>
         <tr>
@@ -357,7 +348,7 @@ Protected Attributes</h2></td></tr>
 <p>Gets a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> from an <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a> if it exists in that episcemic class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">localStates</td><td>Pointer to a set of pointers to <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, from which will be generated a global state hash. </td></tr>
+    <tr><td class="paramname">localStates</td><td>Pointer to a vector of pointers to <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>, from which will be generated a global state hash. </td></tr>
     <tr><td class="paramname">epistemicClass</td><td>Epistemic class in which to check if a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> exists. </td></tr>
   </table>
   </dd>
@@ -366,8 +357,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a4c42244f7e8902f95c34915ae69ce8df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c42244f7e8902f95c34915ae69ce8df">&#9670;&nbsp;</a></span>findOrCreateEpistemicClass()</h2>
+<a id="acc24910b5193e1916aea16926d0374bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc24910b5193e1916aea16926d0374bf">&#9670;&nbsp;</a></span>findOrCreateEpistemicClass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -378,7 +369,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structEpistemicClass.html">EpistemicClass</a> * GlobalModelGenerator::findOrCreateEpistemicClass </td>
           <td>(</td>
-          <td class="paramtype">set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
           <td class="paramname"><em>localStates</em>, </td>
         </tr>
         <tr>
@@ -400,7 +391,51 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one. </p>
+<p>Checks if a vector of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">localStates</td><td>Local states from agent. </td></tr>
+    <tr><td class="paramname">agent</td><td><a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> for which to check the existence of an epistemic class. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to a new or existing <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a>. </dd></dl>
+
+</div>
+</div>
+<a id="a89a7825f93f972dc94468598cf35382b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a7825f93f972dc94468598cf35382b">&#9670;&nbsp;</a></span>findOrCreateEpistemicClassForKnowledge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; * GlobalModelGenerator::findOrCreateEpistemicClassForKnowledge </td>
+          <td>(</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>localStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>global</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classAgent.html">Agent</a> *&#160;</td>
+          <td class="paramname"><em>agent</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if a vector of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> is already an epistemic class for a given <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a>, if not, creates a new one. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">localStates</td><td>Local states from agent. </td></tr>
@@ -492,8 +527,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af254ce4e97619dc6e4ff939fb9708b44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af254ce4e97619dc6e4ff939fb9708b44">&#9670;&nbsp;</a></span>generateStateFromLocalStates()</h2>
+<a id="a5d8f01cdcd20893ae23260a090b04315"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d8f01cdcd20893ae23260a090b04315">&#9670;&nbsp;</a></span>generateStateFromLocalStates()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -504,7 +539,7 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structGlobalState.html">GlobalState</a> * GlobalModelGenerator::generateStateFromLocalStates </td>
           <td>(</td>
-          <td class="paramtype">set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
+          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
           <td class="paramname"><em>localStates</em>, </td>
         </tr>
         <tr>

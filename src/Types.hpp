@@ -62,16 +62,24 @@ struct Condition {
 
 /// @brief Contains a template for coalition of Agent as string from the formula. 
 struct FormulaTemplate{
-   set<string>* coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
-   ExprNode* formula;
-   bool isF;
+    set<string>* coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
+    vector<ExprNode*>* formula;
+    bool isF;
+    string knowledge;
+    string hartley;
+    int hCoeff;
+    bool le;
 };
 
 struct Formula {
     /// @brief Coalition of Agent from the formula.
     set<Agent*> coalition;
-    ExprNode* p; // [YK]: temporary solution to encode <<coalution>> G p
+    vector<ExprNode*>* p; // [YK]: temporary solution to encode <<coalution>> G p
     bool isF;
+    string knowledge;
+    string hartley;
+    int hCoeff;
+    bool le;
 };
 
 /// @brief Represents a single local model, contains all agents and variables.

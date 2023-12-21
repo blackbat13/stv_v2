@@ -92,8 +92,24 @@ Usage</h1>
 <div class="line">make clean</div>
 <div class="line">make</div>
 <div class="line">./stv</div>
+</div><!-- fragment --><p> or </p><div class="fragment"><div class="line">cd build</div>
+<div class="line">./build-run</div>
 </div><!-- fragment --><p>Configuration file:</p>
 <div class="fragment"><div class="line">build/config.txt</div>
+</div><!-- fragment --><p>CLI configuration overwrite: <br  />
+ </p><div class="fragment"><div class="line"># Input model</div>
+<div class="line">./stv --file PATH_TO_MODEL </div>
+<div class="line">./stv -f PATH_TO_MODEL </div>
+<div class="line"># Mode</div>
+<div class="line">./stv -m 0  # </div>
+<div class="line">./stv -m 1  # generate GlobalModel</div>
+<div class="line">./stv -m 2  # run verification</div>
+<div class="line">./stv -m 3  # same as 1 &amp;&amp; 2</div>
+<div class="line"># Flags</div>
+<div class="line"># --OUTPUT_GLOBAL_MODEL      stdout data on global model (after expandAllStates)</div>
+<div class="line"># --OUTPUT_LOCAL_MODELS      stdout data on local models () </div>
+<div class="line"># --OUTPUT_DOT_FILES         generate .dot files for agent templates, local and global models</div>
+<div class="line"># --ADD_EPSILON_TRANSITIONS  generate global models with epsilon transitions</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Tests</h1>
 <p>To run tests:</p>
@@ -101,7 +117,65 @@ Tests</h1>
 <div class="line">make clean</div>
 <div class="line">make sample_test</div>
 <div class="line">./sample_test</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><p> or </p><div class="fragment"><div class="line">cd build</div>
+<div class="line">./build-test</div>
+</div><!-- fragment --><p>To run larger tests:</p>
+<div class="fragment"><div class="line">cd build</div>
+<div class="line">make clean</div>
+<div class="line">make sample_test</div>
+<div class="line">./sample_test</div>
+</div><!-- fragment --><p> or </p><div class="fragment"><div class="line">cd build</div>
+<div class="line">./build-big-test</div>
+</div><!-- fragment --><p>You might need to run </p><div class="fragment"><div class="line">ulimit -s unlimited</div>
+</div><!-- fragment --><p> beforehand</p>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Performance estimation</h1>
+<p>Ubuntu/WSL: <br  />
+</p>
+<div class="fragment"><div class="line"># Minimal</div>
+<div class="line">&gt; /usr/bin/time -f &quot;%M\t%e&quot; ./stv</div>
+<div class="line"># %M - maximum resident set size in KB</div>
+<div class="line"># %e - elapsed real time (wall clock) in seconds</div>
+<div class="line"> </div>
+<div class="line"># More detailed</div>
+<div class="line">&gt; /usr/bin/time -f &quot;time result\ncmd:%C\nreal %es\nuser %Us \nsys  %Ss \nmemory:%MKB \ncpu %P&quot; ./stv</div>
+<div class="line"># %C   command line and arguments</div>
+<div class="line"># %e   elapsed real time (wall clock) in seconds</div>
+<div class="line"># %U   user time in seconds</div>
+<div class="line"># %S   system (kernel) time in seconds</div>
+<div class="line"># %M   maximum resident set size in KB</div>
+<div class="line"># %P   percent of CPU this job got</div>
+<div class="line"> </div>
+<div class="line"># Full (verbose)</div>
+<div class="line">&gt; /usr/bin/time -v ./stv</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
+Specification</h1>
+<p>The specification language was inspired by ISPL (Interpreted Systems Programming Language) from <a href="https://vas.doc.ic.ac.uk/software/mcmas/">MCMAS</a>. <br  />
+ The detailed syntax for the input format can be derived from *./src/reader/{parser.y,scanner.l}*, which intrinsically make up an EBNF grammar. <br  />
+ For the most parts, it is simple enough to get intuition just from looking at example's source code and the program's output.</p>
+<p>IMPORTANTS NOTES:</p><ol type="1">
+<li>the (local) action names must be unique;</li>
+<li>the transition relation (from the global model) should be serial;</li>
+</ol>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Examples and templates</h1>
+<p>In *./examples* and *./tests/examples* there are several ready-to-use MAS specification files together with a proposed property (captured by ATL formula) for verification.</p>
+<p>Often, we would want to reason about different (data-)configurations of the same system. <br  />
+ Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behaviour. <br  />
+ A template can be fed with a configuration data to generate a concrete instance of a system. <br  />
+ Moreover, their use is independent from the tool: one can choose any templating engine (of the myriads available) or even write a custom one from the scratch.</p>
+<p>Here, we utilize the <a href="https://ejs.co/">EJS</a> templating engine. <br  />
+ It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.</p>
+<div class="fragment"><div class="line"># EJS feeds the data (as a list of key:val pairs) to the template file to generate the output:</div>
+<div class="line">&gt; npm exec -- ejs TEMPLATE_FILE.ejs -i &quot;{PARAM1:VAL1,PARAM2:VAL2,...}&quot; -o OUTPUT_FILE.txt</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"># Possible generation query for the &quot;trains&quot;:</div>
+<div class="line">&gt; npm exec -- ejs Trains.ejs -i &#39;{&quot;N_TRAINS&quot;:3,&quot;WITH_FORMULA&quot;:1}&#39; -o 3Trains1Controller.txt</div>
+<div class="line"> </div>
+<div class="line"># Possible generation query for the &quot;simple voting&quot;:</div>
+<div class="line">&gt; npm exec -- ejs Simple_voting.ejs -i &#39;{&quot;N_VOTERS&quot;:2,&quot;N_CANDIDATES&quot;:1,&quot;WITH_FORMULA&quot;:0}&#39; -o 2Voters1Coercer1Candidate.txt</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md6"></a>
 Misc</h1>
 <p>With <code>OUTPUT_DOT_FILES</code> flag the program outputs *.dot* files for templates, local and global models where: <br  />
 </p><ul>
@@ -110,7 +184,8 @@ Misc</h1>
 </ul>
 <p>Use Graphviz <a href="https://www.graphviz.org/">(link)</a> to view in other format (eps, pdf, jpeg, etc.): </p><div class="fragment"><div class="line"># Analogously for other formats</div>
 <div class="line">dot -Tpng lts_of_AGENT.dot &gt; lts_of_AGENT.png</div>
-</div><!-- fragment --><p>The <em>dot2png.sh</em> script converts all *.dot* files from a current folder to *.png*. </p>
+</div><!-- fragment --><p>For the smaller graphs use <em>dot2png.sh</em> script, which converts all *.dot* files from a current folder to *.png*. <br  />
+ For bigger ones use <code>svg</code> format (may be viewed in Inkscape) and <em>dot2svg.sh</em>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

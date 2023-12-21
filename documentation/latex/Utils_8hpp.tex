@@ -23,7 +23,16 @@ void \mbox{\hyperlink{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}{output\+Glob
 unsigned long {\bfseries get\+Mem\+Cap} ()
 \item 
 vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $>$ \mbox{\hyperlink{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}{get\+Local\+States\+SCC}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
-\begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{Utils_8hpp_a4998007a3beac1408262f8c5bd9c637d}\label{Utils_8hpp_a4998007a3beac1408262f8c5bd9c637d}} 
+map$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$, vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $>$ {\bfseries get\+Context\+Model} (\mbox{\hyperlink{structFormula}{Formula}} $\ast$formula, \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$local\+Models, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+\item 
+\mbox{\Hypertarget{Utils_8hpp_af3e68dc19a5fd43208b033e88cfe9fb1}\label{Utils_8hpp_af3e68dc19a5fd43208b033e88cfe9fb1}} 
+void {\bfseries load\+Config\+From\+File} (string filename=\char`\"{}config.\+txt\char`\"{})
+\item 
+\mbox{\Hypertarget{Utils_8hpp_a09a7988a2599103af311e927c494b8e1}\label{Utils_8hpp_a09a7988a2599103af311e927c494b8e1}} 
+void {\bfseries load\+Config\+From\+Args} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}

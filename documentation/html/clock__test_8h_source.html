@@ -87,81 +87,50 @@ $(document).ready(function(){initNavTree('clock__test_8h_source.html',''); initR
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;gtest/gtest.h&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GlobalModelGenerator_8hpp.html">GlobalModelGenerator.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Verification_8hpp.html">Verification.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;ModelParser.hpp&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Utils_8hpp.html">Utils.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;tuple&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifndef CONFIG</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define CONFIG</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;config.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;TEST(ClockTest, Clock6Hours15Minutes)</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="classTestVerif.html">TestVerif</a> verify(<span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15Minutes.txt&quot;</span>, <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;TEST(ClockTest, Clock6Hours15Minutes)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    config.fname = <span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15Minutes.txt&quot;</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    config.output_local_models = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    config.output_global_model = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    config.stv_mode = <span class="charliteral">&#39;2&#39;</span>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">auto</span> tp = <span class="keyword">new</span> <a class="code" href="classModelParser.html">ModelParser</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    tuple&lt;LocalModels*, Formula*&gt; desc = tp-&gt;parse(config.fname);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">auto</span> localModels = get&lt;0&gt;(desc);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">auto</span> formula = get&lt;1&gt;(desc);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classGlobalModelGenerator.html">GlobalModelGenerator</a>* generator = <span class="keyword">new</span> <a class="code" href="classGlobalModelGenerator.html">GlobalModelGenerator</a>();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    generator-&gt;<a class="code" href="classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6">initModel</a>(localModels, formula);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    EXPECT_EQ(verify.result, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    EXPECT_EQ((verify.generator-&gt;getCurrentGlobalModel())-&gt;globalStates.size(), 90);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;TEST(ClockTest, Clock6Hours15MinutesAndDays)</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="classTestVerif.html">TestVerif</a> verify(<span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15MinutesAndDays.txt&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    EXPECT_EQ(verify.result, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    EXPECT_EQ((verify.generator-&gt;getCurrentGlobalModel())-&gt;globalStates.size(), 1155);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;TEST(ClockTestF, Clock6Hours15Minutes)</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classTestVerif.html">TestVerif</a> verify(<span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15MinutesF.txt&quot;</span>, <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    generator-&gt;<a class="code" href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">expandAllStates</a>();</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">auto</span> verification = <span class="keyword">new</span> <a class="code" href="classVerification.html">Verification</a>(generator);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    result = verification-&gt;verify();</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    EXPECT_EQ(result, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    EXPECT_EQ((generator-&gt;<a class="code" href="classGlobalModelGenerator.html#a8115d1786015dee46c171e0295c35a4a">getCurrentGlobalModel</a>())-&gt;globalStates.size(), 90);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;TEST(ClockTest, Clock6Hours15MinutesAndDays)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    config.fname = <span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15MinutesAndDays.txt&quot;</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    config.output_local_models = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    config.output_global_model = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    config.stv_mode = <span class="charliteral">&#39;2&#39;</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">auto</span> tp = <span class="keyword">new</span> <a class="code" href="classModelParser.html">ModelParser</a>();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    tuple&lt;LocalModels*, Formula*&gt; desc = tp-&gt;parse(config.fname);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">auto</span> localModels = get&lt;0&gt;(desc);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">auto</span> formula = get&lt;1&gt;(desc);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classGlobalModelGenerator.html">GlobalModelGenerator</a>* generator = <span class="keyword">new</span> <a class="code" href="classGlobalModelGenerator.html">GlobalModelGenerator</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    generator-&gt;<a class="code" href="classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6">initModel</a>(localModels, formula);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    generator-&gt;<a class="code" href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">expandAllStates</a>();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">auto</span> verification = <span class="keyword">new</span> <a class="code" href="classVerification.html">Verification</a>(generator);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    result = verification-&gt;verify();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    EXPECT_EQ(result, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    EXPECT_EQ((generator-&gt;<a class="code" href="classGlobalModelGenerator.html#a8115d1786015dee46c171e0295c35a4a">getCurrentGlobalModel</a>())-&gt;globalStates.size(), 1155);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="ttc" id="aGlobalModelGenerator_8hpp_html"><div class="ttname"><a href="GlobalModelGenerator_8hpp.html">GlobalModelGenerator.hpp</a></div><div class="ttdoc">Generator of a global model. Class for initializing and generating a global model.</div></div>
-<div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
-<div class="ttc" id="aVerification_8hpp_html"><div class="ttname"><a href="Verification_8hpp.html">Verification.hpp</a></div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html"><div class="ttname"><a href="classGlobalModelGenerator.html">GlobalModelGenerator</a></div><div class="ttdoc">Stores the local models, formula and a global model.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.hpp:16</div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html_a8115d1786015dee46c171e0295c35a4a"><div class="ttname"><a href="classGlobalModelGenerator.html#a8115d1786015dee46c171e0295c35a4a">GlobalModelGenerator::getCurrentGlobalModel</a></div><div class="ttdeci">GlobalModel * getCurrentGlobalModel()</div><div class="ttdoc">Get for a GlobalModel used in initialization.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:77</div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html_a8f2f18be55f04da04ad4bcd1c9f0eef2"><div class="ttname"><a href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">GlobalModelGenerator::expandAllStates</a></div><div class="ttdeci">void expandAllStates()</div><div class="ttdoc">Expands the states starting from the initial GlobalState and continues until there are no more states...</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:56</div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html_af8a60f8b1efcd9eb7615c6ed458d81e6"><div class="ttname"><a href="classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6">GlobalModelGenerator::initModel</a></div><div class="ttdeci">GlobalState * initModel(LocalModels *localModels, Formula *formula)</div><div class="ttdoc">Initializes a global model from local models and a formula.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:23</div></div>
-<div class="ttc" id="aclassModelParser_html"><div class="ttname"><a href="classModelParser.html">ModelParser</a></div><div class="ttdoc">A parser for converting a text file into a model.</div><div class="ttdef"><b>Definition:</b> ModelParser.hpp:16</div></div>
-<div class="ttc" id="aclassVerification_html"><div class="ttname"><a href="classVerification.html">Verification</a></div><div class="ttdoc">A class that verifies if the model fulfills the formula. Also can do some operations on decision hist...</div><div class="ttdef"><b>Definition:</b> Verification.hpp:84</div></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    EXPECT_EQ(verify.result, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;TEST(ClockTestF, Clock6Hours15MinutesAndDays)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classTestVerif.html">TestVerif</a> verify(<span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15MinutesAndDaysF.txt&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    EXPECT_EQ(verify.result, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;TEST(ClockTestF, Clock6Hours15MinutesAndDays2)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classTestVerif.html">TestVerif</a> verify(<span class="stringliteral">&quot;../tests/examples/clock/Clock6Hours15MinutesAndDaysFFalse.txt&quot;</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    EXPECT_EQ(verify.result, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="ttc" id="aclassTestVerif_html"><div class="ttname"><a href="classTestVerif.html">TestVerif</a></div><div class="ttdef"><b>Definition:</b> config.h:17</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

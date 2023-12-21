@@ -1,0 +1,24 @@
+Agent Voter1:
+LOCAL: [Voter1_vote]
+PERSISTENT: [Voter1_vote]
+INITIAL: [Voter1_vote:=0]
+init q0
+vote1: q0 -> q1 [Voter1_vote:=1]
+vote2: q0 -> q1 [Voter1_vote:=2]
+vote3: q0 -> q1 [Voter1_vote:=3]
+vote4: q0 -> q1 [Voter1_vote:=4]
+vote5: q0 -> q1 [Voter1_vote:=5]
+vote6: q0 -> q1 [Voter1_vote:=6]
+shared[2] pass[passage]: q1 -> q2
+idle: q2 -> q2
+
+Agent Coercer1:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init q0
+shared[2] pass[pass]: q0 -> q1
+wait: q1 -> q2
+idle: q2 -> q2
+
+FORMULA: <<Voter1>><>&H_Coercer1[<=2](Voter1_vote==0),(Voter1_vote>0),(Voter1_vote>1),(Voter1_vote>2),(Voter1_vote>3),(Voter1_vote>4),(Voter1_vote>5),(Voter1_vote>6)
