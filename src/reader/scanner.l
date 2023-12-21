@@ -16,7 +16,7 @@ extern "C" int yylex();
 
 ident [a-zA-Z][_a-zA-Z0-9]*
 single [\[\]():!,+\-*/%]
-comment #([ \t]*[a-zA-Z][_a-zA-Z0-9]*)*
+comment #[^\n]*
 blank [ \n\t]
 %%
 
