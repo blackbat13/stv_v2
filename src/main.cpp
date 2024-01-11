@@ -148,12 +148,19 @@ int main(int argc, char* argv[]) {
 		// KBCprojection(clonedGM, 0);
 		// DotGraph(clonedGM, true).saveToFile("", "projected-");
 		// KBCexpansion(clonedGM, 0);
-		cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
+		// cout << " GS:" << generator->getCurrentGlobalModel()->globalStates.size() << "{";
+		// for(auto gs : generator->getCurrentGlobalModel()->globalStates)
+			// cout << gs->localStatesProjection.size() << ",";
+		// cout << "}" << endl;
 		for(int i=0; i<generator->getCurrentGlobalModel()->agents.size(); i++){
 			GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
-			cout << cloneModel->globalStates.size() << endl;
+			// cout << "CGS:" << cloneModel->globalStates.size() << "{";
+			// for(auto gs : cloneModel->globalStates)
+				// cout << gs->localStatesProjection.size() << ",";
+			// cout << "}" << endl;
 			KBCprojection(cloneModel, i);
-			KBCexpansion(cloneModel, i);
+			Agent* nil = KBCexpansion(cloneModel, i);
+			cout << "---" << endl;
 		}
 		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
 		// KBCprojection(generator->getCurrentGlobalModel(), 0);
