@@ -15,6 +15,9 @@ using namespace std;
 /// @brief Variable names with their values.
 typedef map<string, int> Environment;
 
+class GlobalModelGenerator;
+struct GlobalState;
+
 // węzeł bazowy dla wyrażeń
 
 /// @brief Base node for expressions.
@@ -26,6 +29,7 @@ class ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) = 0;
       virtual int eval( Environment& env ) = 0;
 };
 
@@ -47,6 +51,7 @@ class ExprConst: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -68,6 +73,7 @@ class ExprIdent: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -90,6 +96,7 @@ class ExprAdd: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -112,6 +119,7 @@ class ExprSub: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -134,6 +142,7 @@ class ExprMul: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -156,6 +165,7 @@ class ExprDiv: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -178,6 +188,7 @@ class ExprRem: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -200,6 +211,7 @@ class ExprAnd: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -222,6 +234,7 @@ class ExprOr: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -243,6 +256,7 @@ class ExprNot: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -265,6 +279,7 @@ class ExprEq: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -287,6 +302,7 @@ class ExprNe: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -309,6 +325,7 @@ class ExprLt: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -331,6 +348,7 @@ class ExprLe: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -353,6 +371,7 @@ class ExprGt: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
@@ -375,8 +394,60 @@ class ExprGe: public ExprNode {
       /// @brief Calculates the expression value.
       /// @param env Environment values.
       /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
 };
 
+// węzeł dla wiedzy
+
+/// @brief Node for a knowledge operator.
+class ExprKnow: public ExprNode {
+   
+   // argumenty
+
+   /// @brief Expression arguments.
+   string agentName;
+   ExprNode *arg;
+   
+   public:
+      /// @brief Constant expression constructor.
+      /// @param _agentName Agent name for knowledge operator.
+      /// @param _arg Expression to verify with the given knowledge.
+      ExprKnow(string _agentName, ExprNode *_arg): agentName(_agentName), arg(_arg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual int eval( Environment& env );
+};
+
+// węzeł dla Hartleya
+
+/// @brief Node for a Hartley operator.
+class ExprHart: public ExprNode {
+   
+   // argumenty
+
+   /// @brief Expression arguments.
+   string agentName;
+   bool le;
+   int val;
+   ExprNode *arg;
+   
+   public:
+      /// @brief Constant expression constructor.
+      /// @param _agentName Agent name for Hartley operator.
+      /// @param _le Flag for if Hartley coefficient should be less equal or greater equal.
+      /// @param _val Number to compare the result to.
+      /// @param _arg Expression to verify with the given knowledge.
+      ExprHart(string _agentName, bool _le, int _val, ExprNode *_arg): agentName(_agentName), le(_le), val(_val), arg(_arg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns an integer.
+      virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual int eval( Environment& env );
+};
 
 #endif

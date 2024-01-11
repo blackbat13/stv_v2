@@ -8,7 +8,6 @@
 #include "Types.hpp"
 #include "Constants.hpp"
 
-
 #include <algorithm>
 #include <string.h>
 #include <iostream>
@@ -172,6 +171,12 @@ Formula* GlobalModelGenerator::getFormula() {
     return this->formula;
 }
 
+/// @brief Get size of the Formula used in initialization.
+/// @return Returns the formula size.
+int GlobalModelGenerator::getFormulaSize() {
+    return this->formula->p->size();
+}
+
 /// @brief Generates initial state of the model from GlobalModel in memory.
 /// @return Returns a pointer to an initial GlobalState.
 GlobalState* GlobalModelGenerator::generateInitState() {
@@ -247,18 +252,9 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     
     this->globalModel->globalStates.push_back(globalState);
 
-    if (strcmp(this->formula->knowledge.c_str(), "") != 0 || strcmp(this->formula->hartley.c_str(), "") != 0) {
-        Agent* a;
-        for (auto agt : globalModel->agents) {
-            if (strcmp(agt->name.c_str(), this->formula->knowledge.c_str()) == 0) {
-                a = agt;
-                break;
-            }
-            if (strcmp(agt->name.c_str(), this->formula->hartley.c_str()) == 0) {
-                a = agt;
-                break;
-            }
-        }
+    Agent* a;
+    for (auto agt : globalModel->agents) {
+        a = agt;
         this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
     }
 
@@ -388,4 +384,19 @@ GlobalState* GlobalModelGenerator::findGlobalStateInEpistemicClass(vector<LocalS
         return nullptr;
     }
     return epistemicClass->globalStates[hash];
+}
+
+/// @brief Get a pointer to an agent by using its name.
+/// @param agentName Name of an Agent that we want to get its instance.
+/// @return Pointer to an Agent.
+Agent* GlobalModelGenerator::getAgentInstanceByName(string agentName) {
+    Agent* agentInstance = nullptr;
+    auto globalModelAgents = globalModel->agents;
+    for (auto globalAgent : globalModelAgents) {
+        if (globalAgent->name == agentName) {
+            agentInstance = globalAgent;
+            break;
+        }
+    }
+    return agentInstance;
 }

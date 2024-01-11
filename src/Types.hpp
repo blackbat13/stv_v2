@@ -76,10 +76,6 @@ struct Formula {
     set<Agent*> coalition;
     vector<ExprNode*>* p; // [YK]: temporary solution to encode <<coalution>> G p
     bool isF;
-    string knowledge;
-    string hartley;
-    int hCoeff;
-    bool le;
 };
 
 /// @brief Represents a single local model, contains all agents and variables.
