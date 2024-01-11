@@ -275,9 +275,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		ls->id = ls_id;
 		//Generate a name for the new state
 		ls->name = "";//std::to_string(ls_id);
-		//asm("INT3");
-		for(GlobalState* gs : *obs)ls->name+=gs->hash+"|"; //for(LocalState* ls : gs->localStatesProjection) s+=ls->name+"|";
-		//for(GlobalState* gs : *obs) cout << ls_id << endl;
+		for(GlobalState* gs : *obs)ls->name+=gs->hash+"|";
 		if(ls->name.size()>0) ls->name.pop_back();
 		//Bind the state to the output agent
 		ls->agent = o;
