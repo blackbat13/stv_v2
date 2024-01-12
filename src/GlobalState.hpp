@@ -38,6 +38,10 @@ struct GlobalState {
     /// @param indent - optional indentation string 
     /// @return GlobalState data
     std::string toString(string indent="");
+
+    /// @brief Get for the environment of a given global state.
+    /// @return A map of variable names and their values for the current global state.
+    map<string, int> getGlobalStateEnvironment();
 };
 
 #endif

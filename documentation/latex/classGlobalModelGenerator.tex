@@ -31,8 +31,12 @@ void \mbox{\hyperlink{classGlobalModelGenerator_a8f2f18be55f04da04ad4bcd1c9f0eef
 \begin{DoxyCompactList}\small\item\em Get for a \mbox{\hyperlink{structGlobalModel}{Global\+Model}} used in initialization. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structFormula}{Formula}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}{get\+Formula}} ()
 \begin{DoxyCompactList}\small\item\em Get for the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}{get\+Formula\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Get size of the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. \end{DoxyCompactList}\item 
 set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}{find\+Or\+Create\+Epistemic\+Class\+For\+Knowledge}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agent)
-\begin{DoxyCompactList}\small\item\em Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}{get\+Agent\+Instance\+By\+Name}} (string agent\+Name)
+\begin{DoxyCompactList}\small\item\em Get a pointer to an agent by using its name. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -254,6 +258,24 @@ Creates a new \mbox{\hyperlink{structGlobalState}{Global\+State}} using some of 
 \begin{DoxyReturn}{Returns}
 Returns a pointer to a new or already existing in the same epistemic class \mbox{\hyperlink{structGlobalModel}{Global\+Model}}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}\label{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!getAgentInstanceByName@{getAgentInstanceByName}}
+\index{getAgentInstanceByName@{getAgentInstanceByName}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{getAgentInstanceByName()}{getAgentInstanceByName()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}} $\ast$ Global\+Model\+Generator\+::get\+Agent\+Instance\+By\+Name (\begin{DoxyParamCaption}\item[{string}]{agent\+Name }\end{DoxyParamCaption})}
+
+
+
+Get a pointer to an agent by using its name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent\+Name} & Name of an \mbox{\hyperlink{classAgent}{Agent}} that we want to get its instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to an \mbox{\hyperlink{classAgent}{Agent}}. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}\label{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getCurrentGlobalModel@{getCurrentGlobalModel}}
 \index{getCurrentGlobalModel@{getCurrentGlobalModel}!GlobalModelGenerator@{GlobalModelGenerator}}
@@ -279,6 +301,19 @@ Get for the \mbox{\hyperlink{structFormula}{Formula}} used in initialization.
 
 \begin{DoxyReturn}{Returns}
 Returns a pointer to the formula structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}\label{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!getFormulaSize@{getFormulaSize}}
+\index{getFormulaSize@{getFormulaSize}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{getFormulaSize()}{getFormulaSize()}}
+{\footnotesize\ttfamily int Global\+Model\+Generator\+::get\+Formula\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get size of the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. 
+
+\begin{DoxyReturn}{Returns}
+Returns the formula size. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}\label{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!initModel@{initModel}}

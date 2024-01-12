@@ -1,0 +1,79 @@
+\hypertarget{classExprHart}{}\doxysection{Expr\+Hart Class Reference}
+\label{classExprHart}\index{ExprHart@{ExprHart}}
+
+
+Node for a Hartley operator.  
+
+
+
+
+{\ttfamily \#include $<$expressions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExprHart_a91d7f768101bfe82c27c672b9e4f1ee9}{Expr\+Hart}} (string \+\_\+agent\+Name, bool \+\_\+le, int \+\_\+val, vector$<$ \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$ $>$ $\ast$\+\_\+arg)
+\begin{DoxyCompactList}\small\item\em Constant expression constructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classExprHart_afbdd050133b3afc10abbd1ae16ae66a2}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classExprHart_a4c19d208e89b0e9c0473f72c2cd7b772}\label{classExprHart_a4c19d208e89b0e9c0473f72c2cd7b772}} 
+virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node for a Hartley operator. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classExprHart_a91d7f768101bfe82c27c672b9e4f1ee9}\label{classExprHart_a91d7f768101bfe82c27c672b9e4f1ee9}} 
+\index{ExprHart@{ExprHart}!ExprHart@{ExprHart}}
+\index{ExprHart@{ExprHart}!ExprHart@{ExprHart}}
+\doxysubsubsection{\texorpdfstring{ExprHart()}{ExprHart()}}
+{\footnotesize\ttfamily Expr\+Hart\+::\+Expr\+Hart (\begin{DoxyParamCaption}\item[{string}]{\+\_\+agent\+Name,  }\item[{bool}]{\+\_\+le,  }\item[{int}]{\+\_\+val,  }\item[{vector$<$ \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$ $>$ $\ast$}]{\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constant expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+agent\+Name} & \mbox{\hyperlink{classAgent}{Agent}} name for Hartley operator. \\
+\hline
+{\em \+\_\+le} & Flag for if Hartley coefficient should be less equal or greater equal. \\
+\hline
+{\em \+\_\+val} & Number to compare the result to. \\
+\hline
+{\em \+\_\+arg} & Expression to verify with the given knowledge. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExprHart_afbdd050133b3afc10abbd1ae16ae66a2}\label{classExprHart_afbdd050133b3afc10abbd1ae16ae66a2}} 
+\index{ExprHart@{ExprHart}!eval@{eval}}
+\index{eval@{eval}!ExprHart@{ExprHart}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily int Expr\+Hart\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}{Expr\+Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{expressions_8hpp}{expressions.\+hpp}}\item 
+\mbox{\hyperlink{expressions_8cc}{expressions.\+cc}}\end{DoxyCompactItemize}

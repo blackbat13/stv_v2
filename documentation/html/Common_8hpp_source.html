@@ -125,9 +125,11 @@ $(document).ready(function(){initNavTree('Common_8hpp_source.html',''); initResi
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structCfg.html#a24c35a9bea24df2ae7d1b80c6cc17b35">   43</a></span>&#160;    std::string <a class="code" href="structCfg.html#a24c35a9bea24df2ae7d1b80c6cc17b35">dotdir</a>;           </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> model_id; <span class="comment">// &lt;-- this is temporary member (used in Verification.cpp for a hardcoded formula); has lower priority than `fname`</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structCfg.html#a1added5dd2bed4363d43a4006c8c731b">   45</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structCfg.html#a1added5dd2bed4363d43a4006c8c731b">add_epsilon_transitions</a>; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;};</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">bool</span> formula_from_parameter;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::string formula;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif </span></div>
 <div class="ttc" id="aclassAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Contains all data for a single Agent, including id, name and all of the agents' variables.</div><div class="ttdef"><b>Definition:</b> Agent.hpp:13</div></div>
 <div class="ttc" id="aclassLocalState_html"><div class="ttname"><a href="classLocalState.html">LocalState</a></div><div class="ttdoc">Represents a single LocalState, containing id, name and internal variables.</div><div class="ttdef"><b>Definition:</b> LocalState.hpp:13</div></div>
 <div class="ttc" id="aexpressions_8hpp_html"><div class="ttname"><a href="expressions_8hpp.html">expressions.hpp</a></div><div class="ttdoc">Eval and helper class for expressions. Eval and helper class for expressions.</div></div>
@@ -145,7 +147,7 @@ $(document).ready(function(){initNavTree('Common_8hpp_source.html',''); initResi
 <div class="ttc" id="astructGlobalModel_html"><div class="ttname"><a href="structGlobalModel.html">GlobalModel</a></div><div class="ttdoc">Represents a global model, containing agents and a formula.</div><div class="ttdef"><b>Definition:</b> GlobalModel.hpp:13</div></div>
 <div class="ttc" id="astructGlobalState_html"><div class="ttname"><a href="structGlobalState.html">GlobalState</a></div><div class="ttdoc">Represents a single global state.</div><div class="ttdef"><b>Definition:</b> GlobalState.hpp:13</div></div>
 <div class="ttc" id="astructGlobalTransition_html"><div class="ttname"><a href="structGlobalTransition.html">GlobalTransition</a></div><div class="ttdoc">Represents a single global transition.</div><div class="ttdef"><b>Definition:</b> GlobalTransition.hpp:13</div></div>
-<div class="ttc" id="astructLocalModels_html"><div class="ttname"><a href="structLocalModels.html">LocalModels</a></div><div class="ttdoc">Represents a single local model, contains all agents and variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:86</div></div>
+<div class="ttc" id="astructLocalModels_html"><div class="ttname"><a href="structLocalModels.html">LocalModels</a></div><div class="ttdoc">Represents a single local model, contains all agents and variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:82</div></div>
 <div class="ttc" id="astructLocalTransition_html"><div class="ttname"><a href="structLocalTransition.html">LocalTransition</a></div><div class="ttdoc">Represents a single local transition, containing id, global name, local name, is shared and count of ...</div><div class="ttdef"><b>Definition:</b> LocalTransition.hpp:7</div></div>
 <div class="ttc" id="astructVar_html"><div class="ttname"><a href="structVar.html">Var</a></div><div class="ttdoc">Represents a variable in the model, containing name, initial value and persistence.</div><div class="ttdef"><b>Definition:</b> Types.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->

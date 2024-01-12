@@ -88,11 +88,6 @@ class TestVerif
         auto verification = new Verification(generator);
         
         result = verification->verify();
-
-        knowledge = generator->getFormula()->knowledge;
-        hartley = generator->getFormula()->hartley;
-        hCoeff = generator->getFormula()->hCoeff;
-        le = generator->getFormula()->le;
         
         return result;
     }

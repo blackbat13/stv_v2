@@ -147,19 +147,15 @@ $(document).ready(function(){initNavTree('Types_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="structFormula.html#add7c79b6d4907e5d466ede2718907e5a">   76</a></span>&#160;    set&lt;Agent*&gt; <a class="code" href="structFormula.html#add7c79b6d4907e5d466ede2718907e5a">coalition</a>;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    vector&lt;ExprNode*&gt;* p; <span class="comment">// [YK]: temporary solution to encode &lt;&lt;coalution&gt;&gt; G p</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">bool</span> isF;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">string</span> knowledge;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">string</span> hartley;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordtype">int</span> hCoeff;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">bool</span> le;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="structLocalModels.html">   86</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structLocalModels.html">LocalModels</a> {</div>
-<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="structLocalModels.html#aa63e5349d321ace9b841aaab6054350e">   88</a></span>&#160;    vector&lt;Agent*&gt; <a class="code" href="structLocalModels.html#aa63e5349d321ace9b841aaab6054350e">agents</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// agents[i].id == i</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;};</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SELENE_TYPES</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="structLocalModels.html">   82</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structLocalModels.html">LocalModels</a> {</div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="structLocalModels.html#aa63e5349d321ace9b841aaab6054350e">   84</a></span>&#160;    vector&lt;Agent*&gt; <a class="code" href="structLocalModels.html#aa63e5349d321ace9b841aaab6054350e">agents</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">// agents[i].id == i</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SELENE_TYPES</span></div>
 <div class="ttc" id="aAgent_8hpp_html"><div class="ttname"><a href="Agent_8hpp.html">Agent.hpp</a></div><div class="ttdoc">Class of an agent. Class of an agent.</div></div>
 <div class="ttc" id="aEpistemicClass_8hpp_html"><div class="ttname"><a href="EpistemicClass_8hpp.html">EpistemicClass.hpp</a></div><div class="ttdoc">Struct of an epistemic class. Struct of an epistemic class.</div></div>
 <div class="ttc" id="aGlobalModel_8hpp_html"><div class="ttname"><a href="GlobalModel_8hpp.html">GlobalModel.hpp</a></div><div class="ttdoc">Struct of a global model. Struct of a global model.</div></div>
@@ -175,8 +171,8 @@ $(document).ready(function(){initNavTree('Types_8hpp_source.html',''); initResiz
 <div class="ttc" id="astructFormulaTemplate_html"><div class="ttname"><a href="structFormulaTemplate.html">FormulaTemplate</a></div><div class="ttdoc">Contains a template for coalition of Agent as string from the formula.</div><div class="ttdef"><b>Definition:</b> Types.hpp:64</div></div>
 <div class="ttc" id="astructFormula_html"><div class="ttname"><a href="structFormula.html">Formula</a></div><div class="ttdef"><b>Definition:</b> Types.hpp:74</div></div>
 <div class="ttc" id="astructFormula_html_add7c79b6d4907e5d466ede2718907e5a"><div class="ttname"><a href="structFormula.html#add7c79b6d4907e5d466ede2718907e5a">Formula::coalition</a></div><div class="ttdeci">set&lt; Agent * &gt; coalition</div><div class="ttdoc">Coalition of Agent from the formula.</div><div class="ttdef"><b>Definition:</b> Types.hpp:76</div></div>
-<div class="ttc" id="astructLocalModels_html"><div class="ttname"><a href="structLocalModels.html">LocalModels</a></div><div class="ttdoc">Represents a single local model, contains all agents and variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:86</div></div>
-<div class="ttc" id="astructLocalModels_html_aa63e5349d321ace9b841aaab6054350e"><div class="ttname"><a href="structLocalModels.html#aa63e5349d321ace9b841aaab6054350e">LocalModels::agents</a></div><div class="ttdeci">vector&lt; Agent * &gt; agents</div><div class="ttdoc">A vector of agents for the current model.</div><div class="ttdef"><b>Definition:</b> Types.hpp:88</div></div>
+<div class="ttc" id="astructLocalModels_html"><div class="ttname"><a href="structLocalModels.html">LocalModels</a></div><div class="ttdoc">Represents a single local model, contains all agents and variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:82</div></div>
+<div class="ttc" id="astructLocalModels_html_aa63e5349d321ace9b841aaab6054350e"><div class="ttname"><a href="structLocalModels.html#aa63e5349d321ace9b841aaab6054350e">LocalModels::agents</a></div><div class="ttdeci">vector&lt; Agent * &gt; agents</div><div class="ttdoc">A vector of agents for the current model.</div><div class="ttdef"><b>Definition:</b> Types.hpp:84</div></div>
 <div class="ttc" id="astructVar_html"><div class="ttname"><a href="structVar.html">Var</a></div><div class="ttdoc">Represents a variable in the model, containing name, initial value and persistence.</div><div class="ttdef"><b>Definition:</b> Types.hpp:37</div></div>
 <div class="ttc" id="astructVar_html_a0e10d54a8a5f415596585a5bce72bcae"><div class="ttname"><a href="structVar.html#a0e10d54a8a5f415596585a5bce72bcae">Var::initialValue</a></div><div class="ttdeci">int initialValue</div><div class="ttdoc">Initial value of the variable.</div><div class="ttdef"><b>Definition:</b> Types.hpp:42</div></div>
 <div class="ttc" id="astructVar_html_a4f203af1d57ced7e80b3c02e2120e7c4"><div class="ttname"><a href="structVar.html#a4f203af1d57ced7e80b3c02e2120e7c4">Var::name</a></div><div class="ttdeci">string name</div><div class="ttdoc">Variable name.</div><div class="ttdef"><b>Definition:</b> Types.hpp:39</div></div>

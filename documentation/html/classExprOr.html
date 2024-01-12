@@ -99,8 +99,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7b1414ba9c6bd0b95fe48dd6bf957d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprOr.html#ab7b1414ba9c6bd0b95fe48dd6bf957d3">ExprOr</a> (<a class="el" href="classExprNode.html">ExprNode</a> *_larg, <a class="el" href="classExprNode.html">ExprNode</a> *_rarg)</td></tr>
 <tr class="memdesc:ab7b1414ba9c6bd0b95fe48dd6bf957d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logic OR expression constructor.  <a href="classExprOr.html#ab7b1414ba9c6bd0b95fe48dd6bf957d3">More...</a><br /></td></tr>
 <tr class="separator:ab7b1414ba9c6bd0b95fe48dd6bf957d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af5f728674932ef4e7033cd6f625f775c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprOr.html#af5f728674932ef4e7033cd6f625f775c">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)</td></tr>
-<tr class="memdesc:af5f728674932ef4e7033cd6f625f775c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <a href="classExprOr.html#af5f728674932ef4e7033cd6f625f775c">More...</a><br /></td></tr>
+<tr class="memitem:a87c02c337f8c1831cd2076dac0b23bc0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprOr.html#a87c02c337f8c1831cd2076dac0b23bc0">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env, <a class="el" href="classGlobalModelGenerator.html">GlobalModelGenerator</a> *generator, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState)</td></tr>
+<tr class="memdesc:a87c02c337f8c1831cd2076dac0b23bc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <a href="classExprOr.html#a87c02c337f8c1831cd2076dac0b23bc0">More...</a><br /></td></tr>
+<tr class="separator:a87c02c337f8c1831cd2076dac0b23bc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5f728674932ef4e7033cd6f625f775c"><td class="memItemLeft" align="right" valign="top"><a id="af5f728674932ef4e7033cd6f625f775c"></a>
+virtual int&#160;</td><td class="memItemRight" valign="bottom"><b>eval</b> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)</td></tr>
 <tr class="separator:af5f728674932ef4e7033cd6f625f775c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -152,8 +155,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af5f728674932ef4e7033cd6f625f775c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5f728674932ef4e7033cd6f625f775c">&#9670;&nbsp;</a></span>eval()</h2>
+<a id="a87c02c337f8c1831cd2076dac0b23bc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87c02c337f8c1831cd2076dac0b23bc0">&#9670;&nbsp;</a></span>eval()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,8 +168,24 @@ Public Member Functions</h2></td></tr>
           <td class="memname">int ExprOr::eval </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;&#160;</td>
-          <td class="paramname"><em>env</em></td><td>)</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classGlobalModelGenerator.html">GlobalModelGenerator</a> *&#160;</td>
+          <td class="paramname"><em>generator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -185,7 +204,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns an integer. </dd></dl>
 
-<p>Implements <a class="el" href="classExprNode.html#a5f155835c446271416ed3eb4f1d34f1f">ExprNode</a>.</p>
+<p>Implements <a class="el" href="classExprNode.html#a8ab5403a4d2e61674cbebb5527fe31fc">ExprNode</a>.</p>
 
 </div>
 </div>

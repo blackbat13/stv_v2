@@ -14,8 +14,10 @@ Node for an identifier.
 \item 
 \mbox{\hyperlink{classExprIdent_adee748429a8a7a85374e413d4a534c36}{Expr\+Ident}} (string \+\_\+ident)
 \begin{DoxyCompactList}\small\item\em Identifier expression constructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classExprIdent_a0444e26ebc128d2fad6cc62a4a1683d7}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classExprIdent_a24c5b44c7995f80b82a11e4b05eac892}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
-\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -43,21 +45,9 @@ Identifier expression constructor.
 \mbox{\Hypertarget{classExprIdent_a24c5b44c7995f80b82a11e4b05eac892}\label{classExprIdent_a24c5b44c7995f80b82a11e4b05eac892}} 
 \index{ExprIdent@{ExprIdent}!eval@{eval}}
 \index{eval@{eval}!ExprIdent@{ExprIdent}}
-\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily int Expr\+Ident\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
-
-
-Calculates the expression value. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em env} & Environment values. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Returns an integer.
-\end{DoxyReturn}
 
 \begin{DoxyParams}{Parameters}
 {\em env} & \\
@@ -69,7 +59,29 @@ Returns an integer.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+Implements \mbox{\hyperlink{classExprNode}{Expr\+Node}}.
+
+\mbox{\Hypertarget{classExprIdent_a0444e26ebc128d2fad6cc62a4a1683d7}\label{classExprIdent_a0444e26ebc128d2fad6cc62a4a1683d7}} 
+\index{ExprIdent@{ExprIdent}!eval@{eval}}
+\index{eval@{eval}!ExprIdent@{ExprIdent}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int Expr\+Ident\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}{Expr\+Node}}.
 
 
 
