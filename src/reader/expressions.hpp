@@ -9,6 +9,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 
 using namespace std;
 
@@ -433,7 +434,7 @@ class ExprHart: public ExprNode {
    string agentName;
    bool le;
    int val;
-   ExprNode *arg;
+   vector<ExprNode*>* arg;
    
    public:
       /// @brief Constant expression constructor.
@@ -441,7 +442,7 @@ class ExprHart: public ExprNode {
       /// @param _le Flag for if Hartley coefficient should be less equal or greater equal.
       /// @param _val Number to compare the result to.
       /// @param _arg Expression to verify with the given knowledge.
-      ExprHart(string _agentName, bool _le, int _val, ExprNode *_arg): agentName(_agentName), le(_le), val(_val), arg(_arg) {};
+      ExprHart(string _agentName, bool _le, int _val, vector<ExprNode*>* _arg): agentName(_agentName), le(_le), val(_val), arg(_arg) {};
 
       /// @brief Calculates the expression value.
       /// @param env Environment values.

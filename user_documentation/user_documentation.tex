@@ -201,12 +201,11 @@ Formula description starts in a new line with a keyword $FORMULA$. After a colon
   \item \verb+[]+ -- G -- Globally
   \item \verb+<>+ -- F -- Finally
 \end{itemize}
-Additionally you can specify knowledge operators after the previously mentioned symbols.
+Additionally you can specify the following knowledge operators:
 \begin{itemize}
-  \item $\&K{\_}$ -- Knowledge (Additional agent name needed after the "{\_}".)
-  \item $\&H{\_}$ -- Hartley entropy (Additional agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Allows for listing more than one formula, separated with commas.)
+  \item $\&K{\_}agent(formula)$ -- Knowledge (Agent name needed after the "{\_}". Lastly, you write the formula that you want to check in round brackets.)
+  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy (Agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Lastly, you write the formulas that you want to check in round brackets. Allows for listing more than one formula, separated with commas, each formula encapsulated within round brackets.)
 \end{itemize}
-Lastly, you write the formula that you want to check in round brackets.
 \begin{lstlisting}[title={A formula that checks if there is a strategy that globally Agent1 could take such actions that the value will be always equal to 1 or 7777.}]
   FORMULA: <<Agent1>>[](value==1 || value==7777)
 \end{lstlisting}
@@ -214,7 +213,7 @@ Lastly, you write the formula that you want to check in round brackets.
   FORMULA: <<Agent1>><>K_Agent2(value==1 || value==7777)
 \end{lstlisting}
 \begin{lstlisting}[title={A formula that uses a Hartley operator.}]
-  FORMULA: <<Agent1>>[]H_Agent2[>=3](value==1 || value==7777),(value==2)
+  FORMULA: <<Agent1>>[]H_Agent2[>=3]((value==1 || value==7777),(value==2))
 \end{lstlisting}
 
 \subsection{Avaliable operators}
@@ -236,6 +235,8 @@ List of avaliable operators for conditions, variable changes and formula descrip
   \item \verb+*+ -- Multiplication of two variables.
   \item \verb+/+ -- Division of two variables, returns an integer.
   \item \verb+%+ -- Modulo of two variables.
+  \item $\&K{\_}agent(formula)$ -- Knowledge
+  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy
 \end{itemize}
 
 

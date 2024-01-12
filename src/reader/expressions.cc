@@ -6,6 +6,7 @@
 
 #include "expressions.hpp"
 #include "../GlobalModelGenerator.hpp"
+#include <bits/stdc++.h>
 
 /// @brief 
 /// @param env 
@@ -153,38 +154,46 @@ int ExprKnow::eval( Environment& env, GlobalModelGenerator *generator, GlobalSta
    Agent* knowledgeAgentInstance = generator->getAgentInstanceByName(agentName);
    auto epistemicClassesForAgent = generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
    for (auto global : *epistemicClassesForAgent) {
-         if (!arg->eval(env, generator, globalState)) {
-            allEpistemicOk = false;
-            break;
-         }
+      map<string, int> currEnv = global->getGlobalStateEnvironment();
+      if (!arg->eval(currEnv, generator, globalState)) {
+         allEpistemicOk = false;
+         break;
+      }
    }
    return (allEpistemicOk ? 1 : 0);
 }
 
 int ExprHart::eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) {
-   // bool allEpistemicOk = true;
-   // Agent* knowledgeAgentInstance = generator->getAgentInstanceByName(agentName);
-   // auto epistemicClassesForAgent = generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
-   // set<int64_t>* foundClasses = new set<int64_t>();
-   // for (auto global : *epistemicClassesForAgent) {
-   //    map<string, int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
-   //    int64_t values = 0;
-   //    int64_t add = 1;
-   //    auto val = generator->getFormulaSize();
-   //    for (int i = 0; i < val; i++) {
-   //       if (val[i]->eval(currEnv)) {
-   //             values += add;
-   //       }
-   //       add *= 2;
-   //    }
-   //    // cout << values << endl;
-   //    foundClasses->insert(this->verifyLocalStatesWithMultipleFormulas(&global->localStatesProjection));
-   // }
+   bool allEpistemicOk = true;
+   Agent* knowledgeAgentInstance = generator->getAgentInstanceByName(agentName);
+   auto epistemicClassesForAgent = generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
+   
+   set<int64_t>* foundClasses = new set<int64_t>();
+   
+   for (auto global : *epistemicClassesForAgent) {
+      map<string, int> currEnv = global->getGlobalStateEnvironment();
 
-   // if (!calcHartley(foundClasses, generator->getFormula()->le, generator->getFormula()->hCoeff)) {
-   //       allEpistemicOk = false;
-   // }
-   // free(foundClasses);
-   // return (allEpistemicOk ? 1 : 0);
-   return 1;
+      int64_t values = 0;
+      int64_t add = 1;
+      auto val = (*arg).size();
+      vector<ExprNode*> exprNodes = *arg;
+      for (int i = 0; i < val; i++) {
+         if (exprNodes[i]->eval(currEnv, generator, globalState)) {
+               values += add;
+         }
+         add *= 2;
+      }
+      foundClasses->insert(values);
+   }
+
+   if (le) {
+      allEpistemicOk = (log2f((float)foundClasses->size()) <= (float)val);
+   }
+   else {
+      allEpistemicOk = (log2f((float)foundClasses->size()) >= (float)val);
+   }
+
+   free(foundClasses);
+
+   return (allEpistemicOk ? 1 : 0);
 }

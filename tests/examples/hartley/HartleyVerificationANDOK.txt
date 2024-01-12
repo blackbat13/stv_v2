@@ -21,4 +21,4 @@ shared[2] pass[pass]: q0 -> q1
 wait: q1 -> q2
 idle: q2 -> q2
 
-FORMULA: <<Voter1>><>&H_Voter1[<=2]((Voter1_vote==0),(Voter1_vote>0),(Voter1_vote>1),(Voter1_vote>2),(Voter1_vote>3),(Voter1_vote>4),(Voter1_vote>5),(Voter1_vote>6))
+FORMULA: <<Voter1>><>(&H_Coercer1[>=1]((Voter1_vote==0),(Voter1_vote>0),(Voter1_vote>1),(Voter1_vote>2),(Voter1_vote>3),(Voter1_vote>4),(Voter1_vote>5),(Voter1_vote>6)) && Voter1_vote < 10)

@@ -25,3 +25,17 @@ std::string GlobalState::toString(string indent){
    res+="\n" + indent + "]";
    return res;
 }
+
+/// @brief Get for the environment of a given global state.
+/// @return A map of variable names and their values for the current global state.
+map<string, int> GlobalState::getGlobalStateEnvironment() {
+   map<string, int> currEnv;
+
+   for (const auto localState : localStatesProjection) {
+      for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
+            currEnv[it->first] = it->second;
+      }
+   }
+
+   return currEnv;
+}

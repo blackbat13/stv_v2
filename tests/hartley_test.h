@@ -82,3 +82,45 @@ TEST(HartleyVerificationTest, HartleyERR3)
     EXPECT_EQ(verify.result, false);
     // EXPECT_EQ(verify.hartley, "Coercer1");
 }
+
+TEST(HartleyTestLogic, AND_OK)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationANDOK.txt", true);
+
+    EXPECT_EQ(verify.result, true);
+}
+
+TEST(HartleyTestLogic, AND_ERR)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationANDERR.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+}
+
+TEST(HartleyTestLogic, OR_OK)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationOROK.txt", true);
+
+    EXPECT_EQ(verify.result, true);
+}
+
+TEST(HartleyTestLogic, OR_ERR)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationORERR.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+}
+
+TEST(HartleyTestLogic, NOT_OK)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationNegationOK.txt", true);
+
+    EXPECT_EQ(verify.result, true);
+}
+
+TEST(HartleyTestLogic, NOT_ERR)
+{
+    TestVerif verify("../tests/examples/hartley/HartleyVerificationNegationERR.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+}

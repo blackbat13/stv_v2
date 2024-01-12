@@ -158,30 +158,6 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates, GlobalSta
     return val[0]->eval(currEnv, generator, globalState)==1;
 }
 
-/// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
-/// @param localStates A pointer to a set of pointers to LocalState.
-/// @return Returns an integer with encoded answers. If the first formula was fulfilled, then the first bit is 1, otherwise it is 0, etc.
-int64_t Verification::verifyLocalStatesWithMultipleFormulas(vector<LocalState*>* localStates) {
-    map<string, int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
-
-    for (const auto localState : *localStates) {
-        for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
-            currEnv[it->first] = it->second;
-        }
-    }
-    int64_t values = 0;
-    int64_t add = 1;
-    auto val = *this->generator->getFormula()->p;
-    for (int i = 0; i < val.size(); i++) {
-        if (val[i]->eval(currEnv)) {
-            values += add;
-        }
-        add *= 2;
-    }
-    // cout << values << endl;
-    return values;
-}
-
 /// @brief Recursively verifies GlobalState 
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param depth Current depth of the recursion.
@@ -936,18 +912,4 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
 
     return matches;
-}
-
-/// @brief Calculates a Hartley coefficient and compares it to a number.
-/// @param nums Set of binary encoded results.
-/// @param le Less equal flag. If true, less equal. If false, greater equal.
-/// @param k A set number to compare a coefficient to.
-/// @return Returns a log2(#nums) <= k or log2(#nums) >= k.
-bool Verification::calcHartley(set<int64_t>* nums, bool le, float k) {
-    // cout << log2f((float)nums->size()) << (le ? " <= " : " >= ") << k << endl;
-    // cout << (log2f((float)nums->size()) <= k) << endl;
-    if (le) {
-        return log2f((float)nums->size()) <= k;
-    }
-    return log2f((float)nums->size()) >= k;
 }

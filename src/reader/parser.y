@@ -167,8 +167,8 @@ cond_elem: num_exp T_EQ num_exp { $$=new ExprEq($1, $3);}
          | T_IDENT { $$=new ExprIdent($1); delete $1; }
          | T_NUM { $$=new ExprConst($1); }
          | T_KNOW T_IDENT '(' cond ')' { $$=new ExprKnow($2, $4); }
-         | T_HARTLEY T_IDENT '[' T_LE T_NUM ']' '(' cond ')' { $$=new ExprHart($2, true, $5, $8); }
-         | T_HARTLEY T_IDENT '[' T_GE T_NUM ']' '(' cond ')' { $$=new ExprHart($2, false, $5, $8); }
+         | T_HARTLEY T_IDENT '[' T_LE T_NUM ']' '(' cond_list ')' { $$=new ExprHart($2, true, $5, $8); }
+         | T_HARTLEY T_IDENT '[' T_GE T_NUM ']' '(' cond_list ')' { $$=new ExprHart($2, false, $5, $8); }
          ;
 
 %%
