@@ -27,7 +27,13 @@ int main(int argc, char* argv[]) {
 
     auto tp = new ModelParser();
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
-    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    tuple<LocalModels, Formula> desc;
+    if (!config.formula_from_parameter) {
+        desc = tp->parse(config.fname);
+    }
+    else {
+        desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
+    }
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 

@@ -122,6 +122,13 @@ Avaliable flags:
   \begin{lstlisting}
     --ADD_EPSILON_TRANSITIONS
   \end{lstlisting}
+  \item replace the formula from the model file with a different one:
+  \begin{lstlisting}
+    --OVERWRITE_FORMULA [formula]
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example formula replacement with another one.}]
+    --OVERWRITE_FORMULA "FORMULA: <<Voter1>><>(Voter1_vote == 1)"
+  \end{lstlisting}
 \end{itemize}
 
 \section{Creating a model}

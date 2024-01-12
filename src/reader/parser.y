@@ -16,6 +16,8 @@ extern "C" int yylex();
 void yyrestart( FILE* );
 void yyerror( char* );
 extern char* yytext;
+typedef struct yy_buffer_state * YY_BUFFER_STATE;
+extern YY_BUFFER_STATE yy_scan_string(const char * str);
 
 extern set<class AgentTemplate*>* modelDescription;
 extern FormulaTemplate formulaDescription;
@@ -172,6 +174,10 @@ cond_elem: num_exp T_EQ num_exp { $$=new ExprEq($1, $3);}
          ;
 
 %%
+
+void set_input_string(const char* in) {
+  yy_scan_string(in);
+}
 
 // Chwilowa funkcja błędu
 void yyerror( char* s ) {
