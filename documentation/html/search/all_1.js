@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['calchartley_25',['calcHartley',['../classVerification.html#ab7ed2a8a8f766b810169ea832affff6d',1,'Verification']]],
   ['cfg_26',['Cfg',['../structCfg.html',1,'']]],
   ['checkuncontrolledset_27',['checkUncontrolledSet',['../classVerification.html#a850053a49cc9a539aa664d0100cb59a8',1,'Verification']]],
   ['cloneentry_28',['cloneEntry',['../classHistoryDbg.html#a26dc59aaa0f58b2c8124853a80766c35',1,'HistoryDbg']]],

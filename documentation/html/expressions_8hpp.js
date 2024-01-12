@@ -17,5 +17,7 @@ var expressions_8hpp =
     [ "ExprLe", "classExprLe.html", "classExprLe" ],
     [ "ExprGt", "classExprGt.html", "classExprGt" ],
     [ "ExprGe", "classExprGe.html", "classExprGe" ],
+    [ "ExprKnow", "classExprKnow.html", "classExprKnow" ],
+    [ "ExprHart", "classExprHart.html", "classExprHart" ],
     [ "Environment", "expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4", null ]
 ];

@@ -25,7 +25,9 @@ public:
     void expandAllStates();
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();
+    int getFormulaSize();
     set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);
+    Agent* getAgentInstanceByName(string agentName);
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;

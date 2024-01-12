@@ -12,19 +12,22 @@ Base node for expressions.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual int \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
-\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+virtual int \mbox{\hyperlink{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)=0
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}\label{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}} 
+virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)=0
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Base node for expressions. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}\label{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}} 
+\mbox{\Hypertarget{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}\label{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}} 
 \index{ExprNode@{ExprNode}!eval@{eval}}
 \index{eval@{eval}!ExprNode@{ExprNode}}
 \doxysubsubsection{\texorpdfstring{eval()}{eval()}}
-{\footnotesize\ttfamily virtual int Expr\+Node\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual int Expr\+Node\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -40,7 +43,7 @@ Returns an integer.
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{classExprGe_a5d1ac27dc897e8d8e1963b692d0003b8}{Expr\+Ge}}, \mbox{\hyperlink{classExprGt_a3873c15d19713483161495c6731722ad}{Expr\+Gt}}, \mbox{\hyperlink{classExprLe_a5361703041959b38a3e2a2fc46b7f812}{Expr\+Le}}, \mbox{\hyperlink{classExprLt_a9f8382215c4cb0f0c69fa65d5b1cd0ce}{Expr\+Lt}}, \mbox{\hyperlink{classExprNe_a291bc45bc095f7bae4519189dd393d2e}{Expr\+Ne}}, \mbox{\hyperlink{classExprEq_a64362fb0c713a9186b339f2984656b3d}{Expr\+Eq}}, \mbox{\hyperlink{classExprNot_ae662985b83e9bc3b8de58544512fb2bd}{Expr\+Not}}, \mbox{\hyperlink{classExprOr_af5f728674932ef4e7033cd6f625f775c}{Expr\+Or}}, \mbox{\hyperlink{classExprAnd_ac53a24af26296a44488a76782a75669d}{Expr\+And}}, \mbox{\hyperlink{classExprRem_a025389d6cf681c1aa0d73e868f07564d}{Expr\+Rem}}, \mbox{\hyperlink{classExprDiv_abe7f10c7f2dc5e4406c21ba934e45864}{Expr\+Div}}, \mbox{\hyperlink{classExprMul_a97269387c273426fb3f76cf74618d944}{Expr\+Mul}}, \mbox{\hyperlink{classExprSub_ac01c33e82ab4927825c8d895071d9fb7}{Expr\+Sub}}, \mbox{\hyperlink{classExprAdd_a1b70e42bda6c1ec0b4ed8b5fc20a4d68}{Expr\+Add}}, \mbox{\hyperlink{classExprIdent_a24c5b44c7995f80b82a11e4b05eac892}{Expr\+Ident}}, and \mbox{\hyperlink{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}{Expr\+Const}}.
+Implemented in \mbox{\hyperlink{classExprHart_afbdd050133b3afc10abbd1ae16ae66a2}{Expr\+Hart}}, \mbox{\hyperlink{classExprKnow_a2b934d48a24db8258b75f129fcbe1842}{Expr\+Know}}, \mbox{\hyperlink{classExprGe_a10d34beff7ef30ef2381ec24ad06baf5}{Expr\+Ge}}, \mbox{\hyperlink{classExprGt_a21e4430856f214703b5addb4b2eed407}{Expr\+Gt}}, \mbox{\hyperlink{classExprLe_a0c5e2cb9ff96d4a97e2b6256899a9fbb}{Expr\+Le}}, \mbox{\hyperlink{classExprLt_afaf35173fe8a378863cf791108d6fab7}{Expr\+Lt}}, \mbox{\hyperlink{classExprNe_a6a5a0591c7a223169b936c84f9e24b11}{Expr\+Ne}}, \mbox{\hyperlink{classExprEq_adb2a1291e71379f0cea58c9d5fec3248}{Expr\+Eq}}, \mbox{\hyperlink{classExprNot_af28d7286ff72cb05357a65429a362285}{Expr\+Not}}, \mbox{\hyperlink{classExprOr_a87c02c337f8c1831cd2076dac0b23bc0}{Expr\+Or}}, \mbox{\hyperlink{classExprAnd_adf8f5522bbb03df5e5980162a0093bb0}{Expr\+And}}, \mbox{\hyperlink{classExprRem_a408d84c8669ca7125018399f8f14ef17}{Expr\+Rem}}, \mbox{\hyperlink{classExprDiv_a512bea1b82880663cdc85a608c0bd167}{Expr\+Div}}, \mbox{\hyperlink{classExprMul_a63160b257cc905998abaffde23845883}{Expr\+Mul}}, \mbox{\hyperlink{classExprSub_ae2a61b3d8f9df33bc256c6bb7a8bce2f}{Expr\+Sub}}, \mbox{\hyperlink{classExprAdd_af83a4be510ff3f5dae0c3c8fb9080895}{Expr\+Add}}, \mbox{\hyperlink{classExprIdent_a0444e26ebc128d2fad6cc62a4a1683d7}{Expr\+Ident}}, and \mbox{\hyperlink{classExprConst_a4d5ccda478e76fa886537116027a8faa}{Expr\+Const}}.
 
 
 

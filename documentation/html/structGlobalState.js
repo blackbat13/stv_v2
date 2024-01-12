@@ -1,6 +1,7 @@
 var structGlobalState =
 [
     [ "GlobalState", "structGlobalState.html#a6efeb01ae077be126e3187461c560063", null ],
+    [ "getGlobalStateEnvironment", "structGlobalState.html#a102da8b349dd138c16fe376fbb4ba8d8", null ],
     [ "toString", "structGlobalState.html#a5e2c53ae6d50c58d9b54d4dd0ba34f74", null ],
     [ "epistemicClasses", "structGlobalState.html#ae5d81b1f8e057f2ae62513f1471ba0c1", null ],
     [ "globalTransitions", "structGlobalState.html#ab82eec24f8aae99faf18d6434487d0d7", null ],

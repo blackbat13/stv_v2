@@ -52,10 +52,6 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
-   formula.knowledge = formulaDescription.knowledge;
-   formula.hartley = formulaDescription.hartley;
-   formula.le = formulaDescription.le;
-   formula.hCoeff = formulaDescription.hCoeff;
 
    if (formula.p != nullptr) {
       for (const auto agent : models.agents) {
@@ -96,11 +92,7 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
-   formula.knowledge = formulaDescription.knowledge;
-   formula.hartley = formulaDescription.hartley;
-   formula.le = formulaDescription.le;
-   formula.hCoeff = formulaDescription.hCoeff;
-
+   
    for (const auto agent : models.agents) {
       if (formulaDescription.coalition->count(agent->name)>0) {
          formula.coalition.insert(agent);

@@ -111,12 +111,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a6c660da9834323396f88f1baa998f730"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a6c660da9834323396f88f1baa998f730">verifyLocalStates</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates)</td></tr>
-<tr class="memdesc:a6c660da9834323396f88f1baa998f730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> that a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> is composed of with a hardcoded formula.  <a href="classVerification.html#a6c660da9834323396f88f1baa998f730">More...</a><br /></td></tr>
-<tr class="separator:a6c660da9834323396f88f1baa998f730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a147e612f5fdc81b2795caac3daf9e11f"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a147e612f5fdc81b2795caac3daf9e11f">verifyLocalStatesWithMultipleFormulas</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates)</td></tr>
-<tr class="memdesc:a147e612f5fdc81b2795caac3daf9e11f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> that a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> is composed of with a hardcoded formula.  <a href="classVerification.html#a147e612f5fdc81b2795caac3daf9e11f">More...</a><br /></td></tr>
-<tr class="separator:a147e612f5fdc81b2795caac3daf9e11f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08f7b02642396da661af921aa0857a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#ac08f7b02642396da661af921aa0857a1">verifyLocalStates</a> (vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *localStates, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState)</td></tr>
+<tr class="memdesc:ac08f7b02642396da661af921aa0857a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> that a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> is composed of with a hardcoded formula.  <a href="classVerification.html#ac08f7b02642396da661af921aa0857a1">More...</a><br /></td></tr>
+<tr class="separator:ac08f7b02642396da661af921aa0857a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#a4c07b0f4ef0c6de86d1a84399adf344d">verifyGlobalState</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *globalState, int depth)</td></tr>
 <tr class="memdesc:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively verifies <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a>.  <a href="classVerification.html#a4c07b0f4ef0c6de86d1a84399adf344d">More...</a><br /></td></tr>
 <tr class="separator:a4c07b0f4ef0c6de86d1a84399adf344d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,9 +168,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:ad8f45302a6b2529f626ae0c7a953b57f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#ad8f45302a6b2529f626ae0c7a953b57f">restoreHistory</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *globalState, <a class="el" href="structGlobalTransition.html">GlobalTransition</a> *globalTransition, int depth, bool controlled)</td></tr>
 <tr class="memdesc:ad8f45302a6b2529f626ae0c7a953b57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores the decisions made for a given global state and transition in current recursion depth.  <a href="classVerification.html#ad8f45302a6b2529f626ae0c7a953b57f">More...</a><br /></td></tr>
 <tr class="separator:ad8f45302a6b2529f626ae0c7a953b57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7ed2a8a8f766b810169ea832affff6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerification.html#ab7ed2a8a8f766b810169ea832affff6d">calcHartley</a> (set&lt; int64_t &gt; *nums, bool le, float k)</td></tr>
-<tr class="memdesc:ab7ed2a8a8f766b810169ea832affff6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates a Hartley coefficient and compares it to a number.  <a href="classVerification.html#ab7ed2a8a8f766b810169ea832affff6d">More...</a><br /></td></tr>
-<tr class="separator:ab7ed2a8a8f766b810169ea832affff6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -476,59 +470,6 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns true if the <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a> is the same for both of the <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a>. Returns false if they are different or at least one of them has no <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a>. </dd></dl>
-
-</div>
-</div>
-<a id="ab7ed2a8a8f766b810169ea832affff6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7ed2a8a8f766b810169ea832affff6d">&#9670;&nbsp;</a></span>calcHartley()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Verification::calcHartley </td>
-          <td>(</td>
-          <td class="paramtype">set&lt; int64_t &gt; *&#160;</td>
-          <td class="paramname"><em>nums</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>le</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>k</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calculates a Hartley coefficient and compares it to a number. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nums</td><td>Set of binary encoded results. </td></tr>
-    <tr><td class="paramname">le</td><td>Less equal flag. If true, less equal. If false, greater equal. </td></tr>
-    <tr><td class="paramname">k</td><td>A set number to compare a coefficient to. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a log2(#nums) &lt;= k or log2(#nums) &gt;= k. </dd></dl>
 
 </div>
 </div>
@@ -1071,8 +1012,8 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
 
 </div>
 </div>
-<a id="a6c660da9834323396f88f1baa998f730"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c660da9834323396f88f1baa998f730">&#9670;&nbsp;</a></span>verifyLocalStates()</h2>
+<a id="ac08f7b02642396da661af921aa0857a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac08f7b02642396da661af921aa0857a1">&#9670;&nbsp;</a></span>verifyLocalStates()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1084,8 +1025,18 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
           <td class="memname">bool Verification::verifyLocalStates </td>
           <td>(</td>
           <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>localStates</em></td><td>)</td>
+          <td class="paramname"><em>localStates</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1103,41 +1054,6 @@ stack&lt; <a class="el" href="structHistoryEntry.html">HistoryEntry</a> * &gt;&#
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns true if there is a <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> with a specific set of values, fulfilling the criteria, otherwise returns false. </dd></dl>
-
-</div>
-</div>
-<a id="a147e612f5fdc81b2795caac3daf9e11f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a147e612f5fdc81b2795caac3daf9e11f">&#9670;&nbsp;</a></span>verifyLocalStatesWithMultipleFormulas()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int64_t Verification::verifyLocalStatesWithMultipleFormulas </td>
-          <td>(</td>
-          <td class="paramtype">vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *&#160;</td>
-          <td class="paramname"><em>localStates</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Verifies a set of <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a> that a <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> is composed of with a hardcoded formula. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">localStates</td><td>A pointer to a set of pointers to <a class="el" href="classLocalState.html" title="Represents a single LocalState, containing id, name and internal variables.">LocalState</a>. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns an integer with encoded answers. If the first formula was fulfilled, then the first bit is 1, otherwise it is 0, etc. </dd></dl>
 
 </div>
 </div>

@@ -52,7 +52,6 @@ extern FormulaTemplate formulaDescription;
 %type  <assignSet> initial assign_list assignments
 %type  <agent> description agent
 %type  <model> spec model
-%type  <ident> know hartley
 %type  <condList> cond_list
 
 %%
@@ -67,12 +66,8 @@ spec: spec agent { $$=$1; $$->insert($2); }
 query: T_FORMULA formula { }
      ;
 
-formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; formulaDescription.knowledge=""; formulaDescription.hartley=""; } 
-       | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; formulaDescription.knowledge=""; formulaDescription.hartley=""; } 
-       | coalition '[' ']' know cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$5; }
-       | coalition T_LT T_GT know cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$5; }
-       | coalition '[' ']' hartley cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$5; }
-       | coalition T_LT T_GT hartley cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$5; }
+formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; }
+       | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; }
        ;
 
 cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
@@ -156,6 +151,7 @@ num_elem: T_IDENT { $$=new ExprIdent($1); delete $1; }
 condition: '[' cond ']' { $$=$2; }
          | { $$=NULL; }
          ;
+
 cond: cond T_OR cond_and { $$=new ExprOr($1, $3);}
     | cond_and { $$=$1; }
     ;
@@ -172,14 +168,10 @@ cond_elem: num_exp T_EQ num_exp { $$=new ExprEq($1, $3);}
          | '(' cond ')' { $$=$2; }
          | T_IDENT { $$=new ExprIdent($1); delete $1; }
          | T_NUM { $$=new ExprConst($1); }
+         | T_KNOW T_IDENT '(' cond ')' { $$=new ExprKnow($2, $4); }
+         | T_HARTLEY T_IDENT '[' T_LE T_NUM ']' '(' cond_list ')' { $$=new ExprHart($2, true, $5, $8); }
+         | T_HARTLEY T_IDENT '[' T_GE T_NUM ']' '(' cond_list ')' { $$=new ExprHart($2, false, $5, $8); }
          ;
-
-know: T_KNOW T_IDENT { formulaDescription.knowledge=$2; formulaDescription.hartley=""; }
-    ;
-
-hartley: T_HARTLEY T_IDENT '[' T_LE T_NUM ']' { formulaDescription.hartley=$2; formulaDescription.knowledge=""; formulaDescription.le=true; formulaDescription.hCoeff=$5; }
-       | T_HARTLEY T_IDENT '[' T_GE T_NUM ']' { formulaDescription.hartley=$2; formulaDescription.knowledge=""; formulaDescription.le=false; formulaDescription.hCoeff=$5; }
-       ;
 
 %%
 
