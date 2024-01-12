@@ -13,7 +13,9 @@ Represents a single global state.
 \begin{DoxyCompactItemize}
 \item 
 std\+::string \mbox{\hyperlink{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}{to\+String}} (string indent=\char`\"{}\char`\"{})
-\begin{DoxyCompactList}\small\item\em Debug information on the given \mbox{\hyperlink{structGlobalState}{Global\+State}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Debug information on the given \mbox{\hyperlink{structGlobalState}{Global\+State}}. \end{DoxyCompactList}\item 
+map$<$ string, int $>$ \mbox{\hyperlink{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}{get\+Global\+State\+Environment}} ()
+\begin{DoxyCompactList}\small\item\em Get for the environment of a given global state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,6 +43,19 @@ vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ \mbox{\hyp
 Represents a single global state. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}\label{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}} 
+\index{GlobalState@{GlobalState}!getGlobalStateEnvironment@{getGlobalStateEnvironment}}
+\index{getGlobalStateEnvironment@{getGlobalStateEnvironment}!GlobalState@{GlobalState}}
+\doxysubsubsection{\texorpdfstring{getGlobalStateEnvironment()}{getGlobalStateEnvironment()}}
+{\footnotesize\ttfamily map$<$ string, int $>$ Global\+State\+::get\+Global\+State\+Environment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get for the environment of a given global state. 
+
+\begin{DoxyReturn}{Returns}
+A map of variable names and their values for the current global state. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}\label{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}} 
 \index{GlobalState@{GlobalState}!toString@{toString}}
 \index{toString@{toString}!GlobalState@{GlobalState}}

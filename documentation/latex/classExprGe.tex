@@ -14,8 +14,11 @@ Node for \char`\"{}$>$=\char`\"{} operator.
 \item 
 \mbox{\hyperlink{classExprGe_a5e2ffd60cf19e6efa6e409a82039ee23}{Expr\+Ge}} (\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+rarg)
 \begin{DoxyCompactList}\small\item\em Greater or equal expression constructor. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classExprGe_a5d1ac27dc897e8d8e1963b692d0003b8}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
-\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+virtual int \mbox{\hyperlink{classExprGe_a10d34beff7ef30ef2381ec24ad06baf5}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classExprGe_a5d1ac27dc897e8d8e1963b692d0003b8}\label{classExprGe_a5d1ac27dc897e8d8e1963b692d0003b8}} 
+virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -42,11 +45,11 @@ Greater or equal expression constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classExprGe_a5d1ac27dc897e8d8e1963b692d0003b8}\label{classExprGe_a5d1ac27dc897e8d8e1963b692d0003b8}} 
+\mbox{\Hypertarget{classExprGe_a10d34beff7ef30ef2381ec24ad06baf5}\label{classExprGe_a10d34beff7ef30ef2381ec24ad06baf5}} 
 \index{ExprGe@{ExprGe}!eval@{eval}}
 \index{eval@{eval}!ExprGe@{ExprGe}}
 \doxysubsubsection{\texorpdfstring{eval()}{eval()}}
-{\footnotesize\ttfamily int Expr\+Ge\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int Expr\+Ge\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -62,7 +65,7 @@ Returns an integer.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+Implements \mbox{\hyperlink{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}{Expr\+Node}}.
 
 
 

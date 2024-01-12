@@ -14,8 +14,11 @@ Node for a constant.
 \item 
 \mbox{\hyperlink{classExprConst_ab39620d7be911584979798c9cd63cde5}{Expr\+Const}} (int \+\_\+val)
 \begin{DoxyCompactList}\small\item\em Constant expression constructor. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
-\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+virtual int \mbox{\hyperlink{classExprConst_a4d5ccda478e76fa886537116027a8faa}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}\label{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}} 
+virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -40,11 +43,11 @@ Constant expression constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}\label{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}} 
+\mbox{\Hypertarget{classExprConst_a4d5ccda478e76fa886537116027a8faa}\label{classExprConst_a4d5ccda478e76fa886537116027a8faa}} 
 \index{ExprConst@{ExprConst}!eval@{eval}}
 \index{eval@{eval}!ExprConst@{ExprConst}}
 \doxysubsubsection{\texorpdfstring{eval()}{eval()}}
-{\footnotesize\ttfamily int Expr\+Const\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int Expr\+Const\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 
@@ -60,7 +63,7 @@ Returns an integer.
 \end{DoxyReturn}
 
 
-Implements \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+Implements \mbox{\hyperlink{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}{Expr\+Node}}.
 
 
 

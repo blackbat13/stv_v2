@@ -22,9 +22,7 @@ bool \mbox{\hyperlink{classVerification_a2bcca3fd98e67e70b3861773221bbe0f}{verif
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{classVerification_a6c660da9834323396f88f1baa998f730}{verify\+Local\+States}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
-\begin{DoxyCompactList}\small\item\em Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{\hyperlink{structGlobalState}{Global\+State}} is composed of with a hardcoded formula. \end{DoxyCompactList}\item 
-int64\+\_\+t \mbox{\hyperlink{classVerification_a147e612f5fdc81b2795caac3daf9e11f}{verify\+Local\+States\+With\+Multiple\+Formulas}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
+bool \mbox{\hyperlink{classVerification_ac08f7b02642396da661af921aa0857a1}{verify\+Local\+States}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
 \begin{DoxyCompactList}\small\item\em Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{\hyperlink{structGlobalState}{Global\+State}} is composed of with a hardcoded formula. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_a4c07b0f4ef0c6de86d1a84399adf344d}{verify\+Global\+State}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth)
 \begin{DoxyCompactList}\small\item\em Recursively verifies \mbox{\hyperlink{structGlobalState}{Global\+State}}. \end{DoxyCompactList}\item 
@@ -61,9 +59,7 @@ bool \mbox{\hyperlink{classVerification_a850053a49cc9a539aa664d0100cb59a8}{check
 bool \mbox{\hyperlink{classVerification_a1a46f99ee6e8ffc66b966e086e70815c}{verify\+Transition\+Sets}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ controlled\+Global\+Transitions, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions, bool is\+FMode)
 \begin{DoxyCompactList}\small\item\em Checks if given transition sets are able to fulfill the formula for its given epistemic class. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}{restore\+History}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition, int depth, bool controlled)
-\begin{DoxyCompactList}\small\item\em Restores the decisions made for a given global state and transition in current recursion depth. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classVerification_ab7ed2a8a8f766b810169ea832affff6d}{calc\+Hartley}} (set$<$ int64\+\_\+t $>$ $\ast$nums, bool le, float k)
-\begin{DoxyCompactList}\small\item\em Calculates a Hartley coefficient and compares it to a number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Restores the decisions made for a given global state and transition in current recursion depth. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -202,28 +198,6 @@ Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if t
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns true if the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same for both of the \mbox{\hyperlink{structGlobalState}{Global\+State}}. Returns false if they are different or at least one of them has no \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classVerification_ab7ed2a8a8f766b810169ea832affff6d}\label{classVerification_ab7ed2a8a8f766b810169ea832affff6d}} 
-\index{Verification@{Verification}!calcHartley@{calcHartley}}
-\index{calcHartley@{calcHartley}!Verification@{Verification}}
-\doxysubsubsection{\texorpdfstring{calcHartley()}{calcHartley()}}
-{\footnotesize\ttfamily bool Verification\+::calc\+Hartley (\begin{DoxyParamCaption}\item[{set$<$ int64\+\_\+t $>$ $\ast$}]{nums,  }\item[{bool}]{le,  }\item[{float}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Calculates a Hartley coefficient and compares it to a number. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em nums} & Set of binary encoded results. \\
-\hline
-{\em le} & Less equal flag. If true, less equal. If false, greater equal. \\
-\hline
-{\em k} & A set number to compare a coefficient to. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Returns a log2(\#nums) $<$= k or log2(\#nums) $>$= k. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classVerification_a850053a49cc9a539aa664d0100cb59a8}\label{classVerification_a850053a49cc9a539aa664d0100cb59a8}} 
 \index{Verification@{Verification}!checkUncontrolledSet@{checkUncontrolledSet}}
@@ -468,11 +442,11 @@ Recursively verifies \mbox{\hyperlink{structGlobalState}{Global\+State}}.
 \begin{DoxyReturn}{Returns}
 Returns true if the verification is PENDING or VERIFIED\+\_\+\+OK, otherwise returns false. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classVerification_a6c660da9834323396f88f1baa998f730}\label{classVerification_a6c660da9834323396f88f1baa998f730}} 
+\mbox{\Hypertarget{classVerification_ac08f7b02642396da661af921aa0857a1}\label{classVerification_ac08f7b02642396da661af921aa0857a1}} 
 \index{Verification@{Verification}!verifyLocalStates@{verifyLocalStates}}
 \index{verifyLocalStates@{verifyLocalStates}!Verification@{Verification}}
 \doxysubsubsection{\texorpdfstring{verifyLocalStates()}{verifyLocalStates()}}
-{\footnotesize\ttfamily bool Verification\+::verify\+Local\+States (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool Verification\+::verify\+Local\+States (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -485,24 +459,6 @@ Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with a specific set of values, fulfilling the criteria, otherwise returns false. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classVerification_a147e612f5fdc81b2795caac3daf9e11f}\label{classVerification_a147e612f5fdc81b2795caac3daf9e11f}} 
-\index{Verification@{Verification}!verifyLocalStatesWithMultipleFormulas@{verifyLocalStatesWithMultipleFormulas}}
-\index{verifyLocalStatesWithMultipleFormulas@{verifyLocalStatesWithMultipleFormulas}!Verification@{Verification}}
-\doxysubsubsection{\texorpdfstring{verifyLocalStatesWithMultipleFormulas()}{verifyLocalStatesWithMultipleFormulas()}}
-{\footnotesize\ttfamily int64\+\_\+t Verification\+::verify\+Local\+States\+With\+Multiple\+Formulas (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{\hyperlink{structGlobalState}{Global\+State}} is composed of with a hardcoded formula. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em local\+States} & A pointer to a set of pointers to \mbox{\hyperlink{classLocalState}{Local\+State}}. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-Returns an integer with encoded answers. If the first formula was fulfilled, then the first bit is 1, otherwise it is 0, etc. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classVerification_a1a46f99ee6e8ffc66b966e086e70815c}\label{classVerification_a1a46f99ee6e8ffc66b966e086e70815c}} 
 \index{Verification@{Verification}!verifyTransitionSets@{verifyTransitionSets}}
