@@ -61,4 +61,4 @@ shared[2] ng_Voter3[g_Voter3]: q2 -> q3 [Coercer1_Voter3_gv:=2]
 shared[2] pun_Voter3[pun_Voter3]: q5 -> q6 [Coercer1_pun3:=1]
 shared[2] npun_Voter3[npun_Voter3]: q5 -> q6 [Coercer1_npun3:=1]
 
-FORMULA: <<Coercer1>>[](Coercer1_Voter1_finish==0 || Voter1_vote!=1 || &K_Coercer1(Voter1_vote==1) )
+FORMULA: <<Coercer1>>[](Coercer1_Voter1_finish==0 || (Voter1_vote==1 && &K_Coercer1(Voter1_vote==1)) )
