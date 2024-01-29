@@ -246,6 +246,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 } else {
                     printf("ERR: no formula was specified!\n");
                 }
+            } else if (arg == "-OUTPUT_ERR_PATH" || arg == "--OUTPUT_ERR_PATH") {
+                config.output_err_path = 1;
             }
         }
     }

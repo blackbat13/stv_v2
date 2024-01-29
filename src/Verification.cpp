@@ -920,3 +920,42 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
 
     return matches;
 }
+
+/// @brief Prints out the first ERR path.
+void Verification::historyDecisionsERR() {
+    GlobalState* lastState = this->generator->getCurrentGlobalModel()->initState;
+    set<string> visited;
+    visited.insert(lastState->hash);
+    bool changed = true;
+    
+    while (changed) {
+        cout << "States:" << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout << local->name << ";";
+        }
+        cout << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout << "[" << local->agent->name << "] " << local->name << " (";
+            for (auto val : local->environment) {
+                cout << val.first << "=" << val.second << ";";
+            }
+            cout << ")" << endl;
+        }
+        cout << endl;
+
+        changed = false;
+        for (auto transition : lastState->globalTransitions) {
+            if (!transition->isInvalidDecision && visited.find(transition->to->hash) == visited.end()) {
+                lastState = transition->to;
+                visited.insert(transition->to->hash);
+                cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
+                for (auto val : transition->localTransitions) {
+                    cout << "[" << val->agent->name << "]" << " " << val->name << endl;
+                }
+                cout << endl;
+                changed = true;
+                break;
+            }
+        }
+    }
+}

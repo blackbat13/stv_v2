@@ -78,7 +78,11 @@ int main(int argc, char* argv[]) {
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
-        printf("Verification result: %s\n", verification->verify() ? "OK" : "ERR");
+        bool verifResult = verification->verify();
+        printf("Verification result: %s\n", verifResult ? "OK" : "ERR");
+        if (!verifResult && config.output_err_path) {
+            verification->historyDecisionsERR();
+        }
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)

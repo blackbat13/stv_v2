@@ -32,3 +32,10 @@ TEST(CTLTest, FERR)
 
     EXPECT_EQ(verify.result, false);
 }
+
+TEST(CTLTest, DeeperPathERR)
+{
+    TestVerif verify("../tests/examples/ctl/CTLSyntaxTestERR3.txt", true);
+
+    EXPECT_EQ(verify.result, false);
+}

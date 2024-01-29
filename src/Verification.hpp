@@ -86,6 +86,7 @@ public:
     Verification(GlobalModelGenerator* generator);
     ~Verification();
     bool verify();
+    void historyDecisionsERR();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
