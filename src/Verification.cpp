@@ -179,6 +179,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     #endif
 
     bool isFMode = this->generator->getFormula()->isF;
+    bool isCTLMode = this->generator->getFormula()->isCTL;
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
@@ -235,6 +236,12 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     bool hasOmittedTransitions = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
+        // if CTL then treat everything as uncontrolled transitions
+        if (isCTLMode) {
+            uncontrolledGlobalTransitions.insert(globalTransition);
+            continue;
+        }
+
         if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
             if (fixedGlobalTransition == nullptr) {
                 controlledGlobalTransitions.insert(globalTransition);
