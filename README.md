@@ -38,7 +38,7 @@ CLI configuration overwrite:
 # --OUTPUT_DOT_FILES         generate .dot files for agent templates, local and global models
 # --ADD_EPSILON_TRANSITIONS  generate global models with epsilon transitions
 # --OVERWRITE_FORMULA        replace the formula from the model file with a different one
-# --OUTPUT_ERR_PATH          output path if the formula verification returns an ERR
+# --COUNTEREXAMPLE           output counterexample path if the formula verification returns an ERR
 ```
 
 ## Tests

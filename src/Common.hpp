@@ -45,7 +45,7 @@ struct Cfg{
     bool add_epsilon_transitions; ///< add epsilon transitions to the states in the model when it's blocked for some reason
     bool formula_from_parameter;
     std::string formula;
-    bool output_err_path;
+    bool counterexample;
 };
 
 #endif 

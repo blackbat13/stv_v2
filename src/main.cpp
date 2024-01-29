@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
         // }
         bool verifResult = verification->verify();
         printf("Verification result: %s\n", verifResult ? "OK" : "ERR");
-        if (!verifResult && config.output_err_path) {
+        if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
         }
     }
