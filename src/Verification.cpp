@@ -179,6 +179,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     #endif
 
     bool isFMode = this->generator->getFormula()->isF;
+    bool isCTLMode = this->generator->getFormula()->isCTL;
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
@@ -235,6 +236,12 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     bool hasOmittedTransitions = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
+        // if CTL then treat everything as uncontrolled transitions
+        if (isCTLMode) {
+            uncontrolledGlobalTransitions.insert(globalTransition);
+            continue;
+        }
+
         if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
             if (fixedGlobalTransition == nullptr) {
                 controlledGlobalTransitions.insert(globalTransition);
@@ -912,4 +919,43 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
 
     return matches;
+}
+
+/// @brief Prints out the first ERR path.
+void Verification::historyDecisionsERR() {
+    GlobalState* lastState = this->generator->getCurrentGlobalModel()->initState;
+    set<string> visited;
+    visited.insert(lastState->hash);
+    bool changed = true;
+    
+    while (changed) {
+        cout << "States:" << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout << local->name << ";";
+        }
+        cout << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout << "[" << local->agent->name << "] " << local->name << " (";
+            for (auto val : local->environment) {
+                cout << val.first << "=" << val.second << ";";
+            }
+            cout << ")" << endl;
+        }
+        cout << endl;
+
+        changed = false;
+        for (auto transition : lastState->globalTransitions) {
+            if (!transition->isInvalidDecision && visited.find(transition->to->hash) == visited.end()) {
+                lastState = transition->to;
+                visited.insert(transition->to->hash);
+                cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
+                for (auto val : transition->localTransitions) {
+                    cout << "[" << val->agent->name << "]" << " " << val->name << endl;
+                }
+                cout << endl;
+                changed = true;
+                break;
+            }
+        }
+    }
 }

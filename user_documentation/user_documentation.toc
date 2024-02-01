@@ -8,7 +8,7 @@
 \contentsline {section}{\numberline {3}Creating a model}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Model description}{4}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Agents}{4}{subsubsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.2}Actions}{5}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2}Actions}{6}{subsubsection.3.1.2}%
 \contentsline {subsubsection}{\numberline {3.1.3}Shared actions}{6}{subsubsection.3.1.3}%
 \contentsline {subsubsection}{\numberline {3.1.4}Conditions}{6}{subsubsection.3.1.4}%
 \contentsline {subsubsection}{\numberline {3.1.5}Variable change}{7}{subsubsection.3.1.5}%
@@ -16,4 +16,4 @@
 \contentsline {subsection}{\numberline {3.2}Formula description}{7}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Avaliable operators}{8}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Running a specific model}{9}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Example model}{9}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.5}Example model}{10}{subsection.3.5}%

@@ -65,10 +65,6 @@ struct FormulaTemplate{
     set<string>* coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
     vector<ExprNode*>* formula;
     bool isF;
-    string knowledge;
-    string hartley;
-    int hCoeff;
-    bool le;
 };
 
 struct Formula {
@@ -76,6 +72,7 @@ struct Formula {
     set<Agent*> coalition;
     vector<ExprNode*>* p; // [YK]: temporary solution to encode <<coalution>> G p
     bool isF;
+    bool isCTL;
 };
 
 /// @brief Represents a single local model, contains all agents and variables.

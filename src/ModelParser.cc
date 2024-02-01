@@ -52,6 +52,7 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
+   formula.isCTL = false;
 
    if (formula.p != nullptr) {
       for (const auto agent : models.agents) {
@@ -59,6 +60,13 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
             formula.coalition.insert(agent);
             break;
          }
+      }
+   }
+
+   if (formulaDescription.coalition->size() == 0) {
+      formula.isCTL = true;
+      for (const auto agent : models.agents) {
+         formula.coalition.insert(agent);
       }
    }
 

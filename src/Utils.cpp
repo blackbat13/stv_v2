@@ -246,6 +246,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 } else {
                     printf("ERR: no formula was specified!\n");
                 }
+            } else if (arg == "-COUNTEREXAMPLE" || arg == "--COUNTEREXAMPLE") {
+                config.counterexample = 1;
             }
         }
     }

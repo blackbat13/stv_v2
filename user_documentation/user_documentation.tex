@@ -129,6 +129,10 @@ Avaliable flags:
   \begin{lstlisting}[title={Example formula replacement with another one.}]
     --OVERWRITE_FORMULA "FORMULA: <<Voter1>><>(Voter1_vote == 1)"
   \end{lstlisting}
+  \item output counterexample path if the formula verification returns an ERR:
+  \begin{lstlisting}
+    --COUNTEREXAMPLE
+  \end{lstlisting}
 \end{itemize}
 
 \section{Creating a model}
@@ -203,7 +207,7 @@ To add a comment, put a $\#$ in a text line. Every alphanumeric character, inclu
 \end{lstlisting}
 
 \subsection{Formula description}
-Formula description starts in a new line with a keyword $FORMULA$. After a colon, you enter the agent coalition in double angle brackets, for which you want to verify the formula. Then, you use one of the symbols used for verification:
+Formula description starts in a new line with a keyword $FORMULA$. After a colon, you enter the optional agent coalition in double angle brackets, for which you want to verify the formula. If you omit specifying the agent coalition, the formula will be verified for CTL instead. Then, you use one of the symbols used for verification:
 \begin{itemize}
   \item \verb+[]+ -- G -- Globally
   \item \verb+<>+ -- F -- Finally

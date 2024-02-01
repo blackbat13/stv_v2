@@ -68,6 +68,8 @@ query: T_FORMULA formula { }
 
 formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; }
        | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; }
+       | '[' ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=false; formulaDescription.formula=$3; }
+       | T_LT T_GT cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$3; }
        ;
 
 cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
@@ -75,6 +77,7 @@ cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
          ;
 
 coalition: T_LT T_LT ident_list T_GT T_GT { $$=$3; }
+         | T_LT T_LT T_GT T_GT { $$=new set<string>; }
          ;
       
 agent: T_AGENT T_IDENT ':' description { $$=$4; $$->setIdent($2); delete $2; }

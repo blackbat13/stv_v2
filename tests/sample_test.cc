@@ -13,6 +13,7 @@
 #include "clock_test.h"
 #include "knowledge_test.h"
 #include "hartley_test.h"
+#include "ctl_test.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
