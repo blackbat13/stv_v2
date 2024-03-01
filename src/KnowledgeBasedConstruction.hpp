@@ -1,7 +1,7 @@
 /**
  * @file KnowledgeBasedConstruction.hpp
- * @brief Blah
- * Blah blah
+ * @brief KBC implementation
+ * @author Filip Jamroga
  */
 
 #include "Types.hpp"

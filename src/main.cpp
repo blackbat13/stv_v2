@@ -152,7 +152,26 @@ int main(int argc, char* argv[]) {
 		// for(auto gs : generator->getCurrentGlobalModel()->globalStates)
 			// cout << gs->localStatesProjection.size() << ",";
 		// cout << "}" << endl;
-		for(int i=0; i<generator->getCurrentGlobalModel()->agents.size(); i++){
+		bool debugEpistemic = false;
+		if(debugEpistemic){
+			cout << endl << "Epistemic Debug Printout" << endl << "========================" << endl;
+			for(GlobalState* gs : generator->getCurrentGlobalModel()->globalStates){
+				cout << "S: " << gs->hash << endl;
+				for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
+					cout << "|- A: " << ee.first->id  << "| N: ";
+					for(LocalState* ls : gs->localStatesProjection){
+						if(ls->agent->id == ee.first->id) cout << ls->name << endl;
+					}
+					cout << "|- E: " << ee.second->globalStates.size() << endl;
+					for (const auto& [k, v] : ee.second->globalStates){
+						cout << "|  |- "<< k << endl;
+					}
+				}
+				cout << "‾‾‾‾‾" << endl;
+			}
+			cout << "========================" << endl;
+		}else{
+		for(int i=0; i<1; i++){//i<generator->getCurrentGlobalModel()->agents.size(); i++){
 			GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
 			// cout << "CGS:" << cloneModel->globalStates.size() << "{";
 			// for(auto gs : cloneModel->globalStates)
@@ -160,7 +179,9 @@ int main(int argc, char* argv[]) {
 			// cout << "}" << endl;
 			KBCprojection(cloneModel, i);
 			Agent* nil = KBCexpansion(cloneModel, i);
+			DotGraph(nil).saveToFile("", "kbc-");
 			cout << "---" << endl;
+		}
 		}
 		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
 		// KBCprojection(generator->getCurrentGlobalModel(), 0);
