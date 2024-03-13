@@ -61,7 +61,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		set<GlobalState*>*,
 		set<GlobalState*>*,
 		string
-		>*> transitions;
+		>> transitions;
 	
 	
 	//initial state observation -> queue
@@ -112,8 +112,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					int j = 0;
 					//asm("INT3");
 					
-					if(gs == (GlobalState *)0x1) cout << "HIT!" << endl;
-					if(gs == (GlobalState *)0x1) break;//I have no clue why I have to do this, but at this point this seems to be the only solution that works (please send help)
+					//if(gs == (GlobalState *)0x1) cout << "HIT!" << endl;
+					//if(gs == (GlobalState *)0x1) break;//I have no clue why I have to do this, but at this point this seems to be the only solution that works (please send help)
 					if(gs->globalTransitions.size()<=0) break;
 					for(GlobalTransition* gt : gs->globalTransitions){
 						j++;
@@ -133,28 +133,6 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 				
 				//cout << "SRS:" << succeedingRaw.size() << endl;
 				//find all subsets of globalstates, which are indistinguishable from the point of view of the relevant agent
-				/*set<set<GlobalState*>*> succeedingObservations;
-				while(succeedingRaw.size()>0){
-					auto element = succeedingRaw.begin();
-					GlobalState* gs = *element;
-					if(gs == (GlobalState *)0x1) cout << "HIT!" << endl;
-					set<GlobalState*> nextObservation;
-					
-					for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
-						if(ee.first->id == agent_id){
-							for(pair<string, GlobalState*> ecs : ee.second->globalStates){
-								if(succeedingRaw.count(ecs.second)>0){
-									nextObservation.insert(ecs.second);
-									succeedingRaw.erase(ecs.second);
-								}
-							}
-						}
-					}
-					
-					succeedingObservations.insert(&nextObservation);
-					observationQueue.push(&nextObservation);
-					succeedingRaw.erase(gs);
-				}*/
 				set<set<GlobalState*>*> succeedingObservations;
 				vector<GlobalState*> succeedingRawVector(succeedingRaw.begin(), succeedingRaw.end());
 				while(succeedingRawVector.size()>0){
@@ -202,7 +180,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					get<0>(tr) = observation;
 					get<1>(tr) = obs;
 					get<2>(tr) = label;
-					transitions.insert(&tr);
+					transitions.insert(tr);
 				}
 				
 				// set<set<GlobalState*>*> unsearchedObservations;
@@ -216,20 +194,45 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		}
 	}
 	
+	cout << "plip" <<endl;
 	//Convert all searched observations into local states in the output agent
 	map<set<GlobalState*>, int> obs2id;
 	int ls_id = 0;
+	cout << "SO#: " << searchedObservations.size() << endl;
+	vector<string> nams;
+	for(set<GlobalState*>* obs : searchedObservations){
+		cout << " OS: " << obs->size() << endl;
+		int gsc = 0;
+		string nam = "";
+		for(GlobalState* gs : *obs){
+			cout << " |-H: " << gs->hash << endl;
+			nam+=gs->hash+"-";
+			gsc++;
+			if(gsc==obs->size()) break;
+		};
+		nams.push_back(nam);
+		cout << " ‾‾‾‾" << nam << endl;
+	}
+	cout << "plop" <<endl;
 	for(set<GlobalState*>* obs : searchedObservations){
 		set<GlobalState*> observation = *obs;
-		obs2id[observation] = ls_id;
+		obs2id[*obs] = ls_id;
 		
 		//Create new local state object
 		LocalState* ls = new LocalState();
 		//Set its id
 		ls->id = ls_id;
 		//Generate a name for the new state
-		ls->name = "";//std::to_string(ls_id);
-		for(GlobalState* gs : *obs)ls->name+=gs->hash+"-";
+		ls->name = std::to_string(ls_id)+" ";
+		int gsc = 0;
+		for(GlobalState* gs : *obs){
+			cout << " |-H: " << gs->hash << endl;
+			ls->name+=gs->hash+"-";
+			gsc++;
+			if(gsc==obs->size()) break;
+		}
+		ls->name = nams[ls_id];
+		//for(GlobalState* gs : *obs)ls->name+=gs->hash+"-";
 		if(ls->name.size()>0) ls->name.pop_back();
 		//Bind the state to the output agent
 		ls->agent = o;
@@ -241,11 +244,13 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	//Generate all local transitions and bind them transitons to their local states
 	//cout << "!" << endl;
 	int lt_id=0;
+	cout << " T#: " << transitions.size() << endl;
 	for(auto tr : transitions){
+		//asm("INT3");
 		LocalTransition* t = new LocalTransition();
 		t->id = lt_id;
-		t->name.assign(get<2>(*tr));
-		t->localName.assign(get<2>(*tr));
+		t->name.assign(get<2>(tr));
+		t->localName.assign(get<2>(tr));
 		t->isShared = false;
 		t->sharedCount = 0;
 		/*for(Condition* c : localTransitions[i]->conditions){
@@ -259,8 +264,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 			t->conditions.insert(cc);
 		}*/
 		t->agent = o;
-		t->from = o->localStates[obs2id[*get<0>(*tr)]];
-		t->to = o->localStates[obs2id[*get<1>(*tr)]];
+		t->from = o->localStates[obs2id[*get<0>(tr)]];
+		t->to = o->localStates[obs2id[*get<1>(tr)]];
 		o->localTransitions.push_back(t);
 		o->localStates[t->from->id]->localTransitions.insert(t);
 		
