@@ -171,17 +171,24 @@ int main(int argc, char* argv[]) {
 			}
 			cout << "========================" << endl;
 		}else{
-		for(int i=0; i<1; i++){//i<generator->getCurrentGlobalModel()->agents.size(); i++){
-			GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
-			// cout << "CGS:" << cloneModel->globalStates.size() << "{";
-			// for(auto gs : cloneModel->globalStates)
-				// cout << gs->localStatesProjection.size() << ",";
-			// cout << "}" << endl;
-			KBCprojection(cloneModel, i);
-			Agent* nil = KBCexpansion(cloneModel, i);
-			DotGraph(nil).saveToFile("", "kbc-");
-			cout << "---" << endl;
-		}
+			LocalModels KBCdLM;
+			for(int i=0; i<1; i++){//i<generator->getCurrentGlobalModel()->agents.size(); i++){
+				GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
+				// cout << "CGS:" << cloneModel->globalStates.size() << "{";
+				// for(auto gs : cloneModel->globalStates)
+					// cout << gs->localStatesProjection.size() << ",";
+				// cout << "}" << endl;
+				KBCprojection(cloneModel, i);
+				Agent* a = KBCexpansion(cloneModel, i);
+				KBCdLM.agents.push_back(a);
+				DotGraph(a).saveToFile("", "kbc-");
+				cout << "---" << endl;
+			}
+			GlobalModelGenerator* KBCdGenerator = new GlobalModelGenerator();
+			KBCdGenerator->initModel(&KBCdLM, formula);
+			KBCdGenerator->expandAllStates();
+			auto KBCverif = new Verification(KBCdGenerator);
+			printf("Post-KBC verification result: %s\n", KBCverif->verify() ? "OK" : "ERR");
 		}
 		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
 		// KBCprojection(generator->getCurrentGlobalModel(), 0);
