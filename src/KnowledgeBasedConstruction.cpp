@@ -56,7 +56,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	Agent* o = new Agent(agent_id, gm->agents[agent_id]->name);
 	
 	queue<set<GlobalState*>*> observationQueue;
-	set<set<GlobalState*>*> searchedObservations;
+	set<set<GlobalState*>> searchedObservations;
+	set<set<GlobalState*>*> allObservationPointers;
 	set<tuple<
 		set<GlobalState*>*,
 		set<GlobalState*>*,
@@ -84,8 +85,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	while(observationQueue.size() > 0){//process all observations in the queue
 		set<GlobalState*>* observation = observationQueue.front();	//Get the next element of the queue,...
 		observationQueue.pop();										//...remove it from it,...
-		if(searchedObservations.count(observation)==0){			//...check if observation has already been searched...
-			searchedObservations.insert(observation);				//...and add it to the list of searched observations if not.
+		if(searchedObservations.count(*observation)==0){			//...check if observation has already been searched...
+			searchedObservations.insert(*observation);				//...and add it to the list of searched observations if not.
 			
 			//get all action labels
 			set<string> labels;
@@ -140,8 +141,9 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					GlobalState* gs = succeedingRawVector[0];
 					
 					//if(gs == (GlobalState *)0x1) cout << "HIT!" << endl;
-					set<GlobalState*> nextObservation;
-					nextObservation.insert(gs);
+					set<GlobalState*>* nextObservation = new set<GlobalState*>;
+					nextObservation->insert(gs);
+					allObservationPointers.insert(nextObservation);
 					
 					for(int i=1; i<succeedingRawVector.size(); i++){
 						bool added2obs = false;
@@ -150,7 +152,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 								for(pair<string, GlobalState*> ecs : ee.second->globalStates){
 									if(ecs.first == succeedingRawVector[i]->hash){
 										added2obs = true;
-										nextObservation.insert(succeedingRawVector[i]);
+										nextObservation->insert(succeedingRawVector[i]);
 										break;
 									}
 								}
@@ -160,8 +162,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						if(!added2obs) succeedingRawVectorNext.push_back(succeedingRawVector[i]);
 					}
 					
-					succeedingObservations.insert(&nextObservation);
-					observationQueue.push(&nextObservation);
+					succeedingObservations.insert(nextObservation);
+					observationQueue.push(nextObservation);
 					succeedingRawVector = succeedingRawVectorNext;
 				}
 				
@@ -194,45 +196,20 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		}
 	}
 	
-	cout << "plip" <<endl;
 	//Convert all searched observations into local states in the output agent
 	map<set<GlobalState*>, int> obs2id;
 	int ls_id = 0;
-	cout << "SO#: " << searchedObservations.size() << endl;
-	vector<string> nams;
-	for(set<GlobalState*>* obs : searchedObservations){
-		cout << " OS: " << obs->size() << endl;
-		int gsc = 0;
-		string nam = "";
-		for(GlobalState* gs : *obs){
-			cout << " |-H: " << gs->hash << endl;
-			nam+=gs->hash+"-";
-			gsc++;
-			if(gsc==obs->size()) break;
-		};
-		nams.push_back(nam);
-		cout << " ‾‾‾‾" << nam << endl;
-	}
-	cout << "plop" <<endl;
-	for(set<GlobalState*>* obs : searchedObservations){
-		set<GlobalState*> observation = *obs;
-		obs2id[*obs] = ls_id;
+	for(set<GlobalState*> obs : searchedObservations){
+		//set<GlobalState*> observation2 = *obs;
+		obs2id[obs] = ls_id;
 		
 		//Create new local state object
 		LocalState* ls = new LocalState();
 		//Set its id
 		ls->id = ls_id;
 		//Generate a name for the new state
-		ls->name = std::to_string(ls_id)+" ";
-		int gsc = 0;
-		for(GlobalState* gs : *obs){
-			cout << " |-H: " << gs->hash << endl;
-			ls->name+=gs->hash+"-";
-			gsc++;
-			if(gsc==obs->size()) break;
-		}
-		ls->name = nams[ls_id];
-		//for(GlobalState* gs : *obs)ls->name+=gs->hash+"-";
+		ls->name = "";
+		for(GlobalState* gs : obs)ls->name+=gs->hash+"-";
 		if(ls->name.size()>0) ls->name.pop_back();
 		//Bind the state to the output agent
 		ls->agent = o;
@@ -242,11 +219,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	}
 	
 	//Generate all local transitions and bind them transitons to their local states
-	//cout << "!" << endl;
 	int lt_id=0;
-	cout << " T#: " << transitions.size() << endl;
 	for(auto tr : transitions){
-		//asm("INT3");
 		LocalTransition* t = new LocalTransition();
 		t->id = lt_id;
 		t->name.assign(get<2>(tr));
@@ -277,17 +251,26 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	o->initState = o->localStates[0];
 	//cout << o->initState->name << endl;
 	
-	//cout << "E: " << searchedObservations.size() << "|" << transitions.size() << endl;
+	cout << "E: " << searchedObservations.size() << "|" << transitions.size() << endl;
+	for(auto p : allObservationPointers) delete p;
 	return o;
 }
 
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
 	LocalModels clonedLM;
+	Formula clonedF;
+	
 	for(Agent* a : localModels->agents){
 		clonedLM.agents.push_back(a->clone());
 	}
+	for(Agent* a : formula->coalition){
+		clonedF.coalition.insert(clonedLM.agents[a->id]);
+	}
+	clonedF.p = formula->p;
+	clonedF.isF = formula->isF;
+	
 	GlobalModelGenerator* cloneGenerator = new GlobalModelGenerator();
-	cloneGenerator->initModel(&clonedLM, formula);
+	cloneGenerator->initModel(&clonedLM, &clonedF);
 	cloneGenerator->expandAllStates();
 	//auto verification = new Verification(cloneGenerator);
 	//verification->verify();
