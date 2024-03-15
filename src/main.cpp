@@ -142,7 +142,7 @@ int main(int argc, char* argv[]) {
 		// GlobalState* s1 = generator->getCurrentGlobalModel()->globalStates[1];
 		// GlobalState* s2 = generator->getCurrentGlobalModel()->globalStates[2];
 		//asm("INT3");
-		// DotGraph(generator->getCurrentGlobalModel(), true).saveToFile("", "base-");
+		DotGraph(generator->getCurrentGlobalModel(), true).saveToFile("", "base-");
 		// GlobalModel* clonedGM = cloneGlobalModel(localModels, formula);
 		// DotGraph(clonedGM, true).saveToFile("", "clone-");
 		// KBCprojection(clonedGM, 0);
@@ -172,13 +172,16 @@ int main(int argc, char* argv[]) {
 			cout << "========================" << endl;
 		}else{
 			LocalModels KBCdLM;
-			for(int i=0; i<1; i++){//i<generator->getCurrentGlobalModel()->agents.size(); i++){
+			for(int i=2; i<3; i++){//i<generator->getCurrentGlobalModel()->agents.size(); i++){
 				GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
 				// cout << "CGS:" << cloneModel->globalStates.size() << "{";
 				// for(auto gs : cloneModel->globalStates)
 					// cout << gs->localStatesProjection.size() << ",";
 				// cout << "}" << endl;
+				DotGraph(cloneModel, true).saveToFile("", "cloned-");
 				KBCprojection(cloneModel, i);
+				DotGraph(cloneModel, true).saveToFile("", "projected-");
+				DotGraph(cloneModel->agents[i]).saveToFile("", "base-local-");
 				Agent* a = KBCexpansion(cloneModel, i);
 				KBCdLM.agents.push_back(a);
 				DotGraph(a).saveToFile("", "kbc-");
