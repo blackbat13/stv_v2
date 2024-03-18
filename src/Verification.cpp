@@ -945,7 +945,7 @@ void Verification::historyDecisionsERR() {
 
         changed = false;
         for (auto transition : lastState->globalTransitions) {
-            if (!transition->isInvalidDecision && visited.find(transition->to->hash) == visited.end()) {
+            if (transition->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_ERR) {
                 lastState = transition->to;
                 visited.insert(transition->to->hash);
                 cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
@@ -953,7 +953,9 @@ void Verification::historyDecisionsERR() {
                     cout << "[" << val->agent->name << "]" << " " << val->name << endl;
                 }
                 cout << endl;
-                changed = true;
+                if (visited.find(transition->to->hash) != visited.end()) {
+                    changed = true;
+                }
                 break;
             }
         }
