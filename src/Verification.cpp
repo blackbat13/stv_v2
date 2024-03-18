@@ -947,15 +947,15 @@ void Verification::historyDecisionsERR() {
         for (auto transition : lastState->globalTransitions) {
             if (transition->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_ERR) {
                 lastState = transition->to;
-                visited.insert(transition->to->hash);
                 cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
                 for (auto val : transition->localTransitions) {
                     cout << "[" << val->agent->name << "]" << " " << val->name << endl;
                 }
                 cout << endl;
-                if (visited.find(transition->to->hash) != visited.end()) {
+                if (visited.find(transition->to->hash) == visited.end()) {
                     changed = true;
                 }
+                visited.insert(transition->to->hash);
                 break;
             }
         }
