@@ -79,6 +79,7 @@ int main(int argc, char* argv[]) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
         printf("Verification result: %s\n", verification->verify() ? "OK" : "ERR");
+        cout << "All generated states count: " << verification->totalStates << endl;
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)

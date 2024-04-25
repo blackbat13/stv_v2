@@ -224,6 +224,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     
     // 2) ensure that the state is expanded
     if (!globalState->isExpanded) {
+        totalStates++;
         this->generator->expandState(globalState);
     }
     

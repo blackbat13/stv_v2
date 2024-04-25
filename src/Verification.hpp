@@ -86,6 +86,7 @@ public:
     Verification(GlobalModelGenerator* generator);
     ~Verification();
     bool verify();
+    long long int totalStates = 0;
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
