@@ -39,6 +39,7 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
 
     this->globalModel->initState = this->generateInitState();
     this->globalModel->epistemicClassesKnowledge.clear();
+    this->correctModel = true;
 
     return this->globalModel->initState;
 }
@@ -399,4 +400,15 @@ Agent* GlobalModelGenerator::getAgentInstanceByName(string agentName) {
         }
     }
     return agentInstance;
+}
+
+/// @brief Sets formula to an incorrectly written state.
+void GlobalModelGenerator::markFormulaAsIncorrect() {
+    correctModel = false;
+}
+
+/// @brief Gets formula status.
+/// @return True if formula is written correctly, false otherwise.
+bool GlobalModelGenerator::getFormulaCorectness() {
+    return correctModel;
 }

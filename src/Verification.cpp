@@ -155,7 +155,12 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates, GlobalSta
         }
     }
     auto val = *this->generator->getFormula()->p;
-    return val[0]->eval(currEnv, generator, globalState)==1;
+    if (val[0]->eval(currEnv, generator, globalState)==1 && generator->getFormulaCorectness()) {
+        return true;
+    } else if (!generator->getFormulaCorectness()) {
+        throw std::runtime_error("Incorrect variable name");
+    }
+    return false;
 }
 
 /// @brief Recursively verifies GlobalState 

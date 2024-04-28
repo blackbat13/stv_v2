@@ -20,3 +20,5 @@ shared[2] approach1[approach]: q2 -> q2
 shared[2] cross1[cross]: q2 [Down==1]-> q2
 shared[2] cross1[cross]: q2 [Down==0]-> q1 [Bad:=1]
 shared[2] leave1[leave]: q2 -> q0 [Down:=0]
+
+FORMULA: <<>>[](1==0)

@@ -86,7 +86,11 @@ int ExprHart::eval( Environment& env ) {
 
 int ExprIdent::eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState) {
    auto res = env.find(ident);
-   return res == env.end() ? -1 : (*res).second;
+   if (res == env.end()) {
+      generator->markFormulaAsIncorrect();
+      return -1;
+   }
+   return (*res).second;
 }
 
 int ExprConst::eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) {

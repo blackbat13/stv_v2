@@ -62,6 +62,9 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
          }
       }
    }
+   if (formula.coalition.size() != formulaDescription.coalition->size()) {
+      throw std::runtime_error("Incorrect agent name");
+   }
 
    if (formulaDescription.coalition->size() == 0) {
       formula.isCTL = true;
