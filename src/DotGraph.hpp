@@ -28,7 +28,7 @@ public:
     DotGraphBase graphBase;
     static string styleString;
     DotGraph();
-    DotGraph(GlobalModel *const gm, bool extended=false);
+    DotGraph(GlobalModel *const gm, bool extended=false, bool correct=false);
     DotGraph(Agent *const ag, bool extended=false);
     DotGraph(AgentTemplate *const at);
     void saveToFile(std::string pathprefix, std::string nameprefix, std::string basename="");

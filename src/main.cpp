@@ -83,6 +83,10 @@ int main(int argc, char* argv[]) {
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
         }
+        if(config.output_dot_files && verifResult){
+            // save GlobalModel solution
+            DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
+        }
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
