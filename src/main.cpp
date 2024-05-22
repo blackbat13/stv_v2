@@ -79,7 +79,7 @@ int main(int argc, char* argv[]) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
         bool verifResult = verification->verify();
-        printf("Verification result: %s\n", verifResult ? "OK" : "ERR");
+        printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
         }
