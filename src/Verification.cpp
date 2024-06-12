@@ -517,7 +517,9 @@ bool Verification::revertLastDecision(int depth) {
     auto invalidDecision = this->historyEnd->decision;
     auto invalidDecisionHistoryEntry = this->historyEnd;
     while (!this->historyToRestore.empty()) {
-        delete this->historyToRestore.top();
+        if (!config.output_dot_files) {
+            delete this->historyToRestore.top();
+        }
         this->historyToRestore.pop();
     }
     if (!invalidDecision->isInvalidDecision) {
@@ -553,14 +555,18 @@ bool Verification::revertLastDecision(int depth) {
                     histDbg.markEntry(entry, '-');
                 }
             #endif
-            delete entry;
+            if (!config.output_dot_files) {
+                delete entry;
+            }
         }
     }
     
     // Ensure all ok
     if (this->historyEnd == this->historyStart || this->historyEnd->globalState != shallowestGlobalState) {
         while (!this->historyToRestore.empty()) {
-            delete this->historyToRestore.top();
+            if (!config.output_dot_files) {
+                delete this->historyToRestore.top();
+            }
             this->historyToRestore.pop();
         }
         return false;
@@ -610,7 +616,9 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     this->historyEnd = this->historyEnd->prev;
     this->historyEnd->next = nullptr;
     if (freeMemory) {
-        delete entry;
+        if (!config.output_dot_files) {
+            delete entry;
+        }
     }
 }
 
@@ -879,7 +887,9 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
         this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
         this->historyToRestore.pop();
         if (!this->historyToRestore.empty()) {
-            delete entry;
+            if (!config.output_dot_files) {
+                delete entry;
+            }
             entry = this->historyToRestore.top();
         }
     }
@@ -906,14 +916,18 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     // Delete top history entry
     if (matches) {
         this->historyToRestore.pop();
-        delete entry;
+        if (!config.output_dot_files) {
+            delete entry;
+        }
     }
     if (!this->historyToRestore.empty() && this->historyToRestore.top()->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
         entry = this->historyToRestore.top();
         entry->decision->isInvalidDecision = true;
         this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
         this->historyToRestore.pop();
-        delete entry;
+        if (!config.output_dot_files) {
+            delete entry;
+        }
     }
     if (this->historyToRestore.empty()) {
         // Last entry to restore - exit restore mode
