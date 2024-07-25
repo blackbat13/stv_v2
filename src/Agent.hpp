@@ -8,6 +8,7 @@
 #define AGENT_H
 
 #include "Common.hpp"
+#include "Types.hpp"
 
 /// @brief Contains all data for a single Agent, including id, name and all of the agents' variables.
 class Agent {
@@ -38,6 +39,9 @@ class Agent {
         // sprawdź, czy stan nie został już wygenerowany.
         
         LocalState* includesState(LocalState *state);
+		
+		/// @brief Creates a complete, independent copy of the current Agent and its resources, including the ones located at pointers
+		Agent* clone();
 };
 
 #endif // AGENT_H

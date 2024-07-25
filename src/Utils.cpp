@@ -190,24 +190,26 @@ void loadConfigFromFile(string filename) {
             auto val = line.substr(delimPos + 1);
             if (key == "MODEL_ID") {
                 config.model_id = val[0] - '0';
-                if (val == "1") {
+                if (config.model_id == 1) {
                     config.fname = "../examples/trains/Trains2Controller1.txt";
-                } else if (val == "2") {
+                } else if (config.model_id == 2) {
                     config.fname = "../examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
-                } else if (val == "3") {
+                } else if (config.model_id == 3) {
                     config.fname = "../examples/svote/Voters2Candidates2.txt";
                 }
             } else if (key == "OUTPUT_LOCAL_MODELS") {
-                config.output_local_models = (val == "1");
+                config.output_local_models = (val[0] == '1');
             } else if (key == "OUTPUT_GLOBAL_MODEL") {
-                config.output_global_model = (val == "1");
+                config.output_global_model = (val[0] == '1');
             } else if (key == "MODE") {
                 config.stv_mode = (val[0] - '0');
             } else if (key == "OUTPUT_DOT_FILES") {
-                config.output_dot_files = (val == "1");
+                config.output_dot_files = (val[0] == '1');
             } else if (key == "DOT_DIR") {
                 config.dotdir = val;
-            }
+            } else if (key == "KBC_ENABLED"){
+				config.kbc = (val[0] == '1');
+			}
         }
     } else {
         printf("Could not open the config file \"%s\"...", filename.c_str());
@@ -237,6 +239,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.output_local_models = 1;
             } else if (arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES") {
                 config.output_dot_files = 1;
+            } else if (arg == "-KBC_ENABLED" || arg == "--KBC_ENABLED") {
+                config.kbc = 1;
             } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
                 config.add_epsilon_transitions = 1;
             } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {

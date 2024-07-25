@@ -7,6 +7,8 @@
 #ifndef COMMON
 #define COMMON
 
+#define EPSILON "&epsilon;"//"STV KBC RESERVED CONST 'Epsilon'"
+
 #include <map>
 #include <set>
 
@@ -40,6 +42,7 @@ struct Cfg{
     bool output_local_models;     ///< (obsolete) print data on local model
     bool output_global_model;     ///< (obsolete) print data on local model
     bool output_dot_files;        ///< flag for .dot export (by default exports templates and local/global models)
+    bool kbc;					            ///< flag for knowledge-based construction
     std::string dotdir;           ///< pathprefix for .dot files export
     int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula); has lower priority than `fname`
     bool add_epsilon_transitions; ///< add epsilon transitions to the states in the model when it's blocked for some reason
