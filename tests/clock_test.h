@@ -7,7 +7,7 @@
 
 TEST(ClockTest, Clock6Hours15Minutes)
 {
-    TestVerif verify("../tests/examples/clock/Clock6Hours15Minutes.txt");
+    TestVerif verify("../tests/examples/clock/Clock6Hours15Minutes.txt", true);
 
     EXPECT_EQ(verify.result, true);
 
@@ -16,7 +16,7 @@ TEST(ClockTest, Clock6Hours15Minutes)
 
 TEST(ClockTest, Clock6Hours15MinutesAndDays)
 {
-    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDays.txt");
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDays.txt", true);
 
     EXPECT_EQ(verify.result, true);
 
@@ -25,21 +25,21 @@ TEST(ClockTest, Clock6Hours15MinutesAndDays)
 
 TEST(ClockTestF, Clock6Hours15Minutes)
 {
-    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesF.txt");
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesF.txt", true);
 
     EXPECT_EQ(verify.result, true);
 }
 
 TEST(ClockTestF, Clock6Hours15MinutesAndDays)
 {
-    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDaysF.txt");
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDaysF.txt", true);
 
     EXPECT_EQ(verify.result, true);
 }
 
 TEST(ClockTestF, Clock6Hours15MinutesAndDays2)
 {
-    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDaysFFalse.txt");
+    TestVerif verify("../tests/examples/clock/Clock6Hours15MinutesAndDaysFFalse.txt", true);
 
     EXPECT_EQ(verify.result, false);
 }

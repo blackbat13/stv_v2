@@ -86,6 +86,7 @@ public:
     Verification(GlobalModelGenerator* generator);
     ~Verification();
     bool verify();
+    void historyDecisionsERR();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
@@ -99,7 +100,7 @@ protected:
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.
     HistoryEntry* historyEnd;
-    bool verifyLocalStates(vector<LocalState*>* localStates);
+    bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
     bool isAgentInCoalition(Agent* agent);

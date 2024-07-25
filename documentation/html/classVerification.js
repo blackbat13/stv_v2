@@ -20,12 +20,12 @@ var classVerification =
     [ "undoLastHistoryEntry", "classVerification.html#a35a5a3380e87a9f9a802d16d4d5d49a1", null ],
     [ "verify", "classVerification.html#a2bcca3fd98e67e70b3861773221bbe0f", null ],
     [ "verifyGlobalState", "classVerification.html#a4c07b0f4ef0c6de86d1a84399adf344d", null ],
-    [ "verifyLocalStates", "classVerification.html#a6f050f20797887e631159eb430f02e18", null ],
-    [ "verifyTransitionSets", "classVerification.html#a7b5a98c05cb9f3bc7ebdfc9fa1a77ffe", null ],
+    [ "verifyLocalStates", "classVerification.html#ac08f7b02642396da661af921aa0857a1", null ],
+    [ "verifyTransitionSets", "classVerification.html#a1a46f99ee6e8ffc66b966e086e70815c", null ],
     [ "generator", "classVerification.html#ab283068f07ee48981abcaa1787a98d08", null ],
     [ "historyEnd", "classVerification.html#accd7b60752d13e14e319544cb6adb2e0", null ],
     [ "historyStart", "classVerification.html#a0c99d888d26d30df16342201fc4b2e75", null ],
     [ "historyToRestore", "classVerification.html#a0ee06d27394d4a35a23605f3b17a9783", null ],
-    [ "mode", "classVerification.html#a7eb395d7d6204422a426100897e4d9d6", null ],
+    [ "mode", "classVerification.html#a3ac626e5f81440a22cd350c01800b95e", null ],
     [ "revertToGlobalState", "classVerification.html#a7065922fca10a441a01ae63500a2d529", null ]
 ];

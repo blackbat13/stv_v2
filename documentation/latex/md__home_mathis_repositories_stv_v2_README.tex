@@ -9,6 +9,12 @@ To run\+:
 \DoxyCodeLine{./stv}
 
 \end{DoxyCode}
+ or 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{./build-\/run}
+
+\end{DoxyCode}
 
 
 Configuration file\+:
@@ -16,6 +22,27 @@ Configuration file\+:
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{build/config.txt}
+
+\end{DoxyCode}
+
+
+CLI configuration overwrite\+: ~\newline
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Input model}
+\DoxyCodeLine{./stv -\/-\/file PATH\_TO\_MODEL }
+\DoxyCodeLine{./stv -\/f PATH\_TO\_MODEL }
+\DoxyCodeLine{\# Mode}
+\DoxyCodeLine{./stv -\/m 0  \# }
+\DoxyCodeLine{./stv -\/m 1  \# generate GlobalModel}
+\DoxyCodeLine{./stv -\/m 2  \# run verification}
+\DoxyCodeLine{./stv -\/m 3  \# same as 1 \&\& 2}
+\DoxyCodeLine{\# Flags}
+\DoxyCodeLine{\# -\/-\/OUTPUT\_GLOBAL\_MODEL      stdout data on global model (after expandAllStates)}
+\DoxyCodeLine{\# -\/-\/OUTPUT\_LOCAL\_MODELS      stdout data on local models () }
+\DoxyCodeLine{\# -\/-\/OUTPUT\_DOT\_FILES         generate .dot files for agent templates, local and global models}
+\DoxyCodeLine{\# -\/-\/ADD\_EPSILON\_TRANSITIONS  generate global models with epsilon transitions}
+\DoxyCodeLine{\# -\/-\/OVERWRITE\_FORMULA        replace the formula from the model file with a different one}
 
 \end{DoxyCode}
 \hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md2}{}\doxysection{Tests}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md2}
@@ -29,7 +56,95 @@ To run tests\+:
 \DoxyCodeLine{./sample\_test}
 
 \end{DoxyCode}
-\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md3}{}\doxysection{Misc}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md3}
+ or 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{./build-\/test}
+
+\end{DoxyCode}
+
+
+To run larger tests\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{make clean}
+\DoxyCodeLine{make sample\_test}
+\DoxyCodeLine{./sample\_test}
+
+\end{DoxyCode}
+ or 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd build}
+\DoxyCodeLine{./build-\/big-\/test}
+
+\end{DoxyCode}
+
+
+You might need to run 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ulimit -\/s unlimited}
+
+\end{DoxyCode}
+ beforehand\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md3}{}\doxysection{Performance estimation}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md3}
+Ubuntu/\+WSL\+: ~\newline
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Minimal}
+\DoxyCodeLine{> /usr/bin/time -\/f "{}\%M\(\backslash\)t\%e"{} ./stv}
+\DoxyCodeLine{\# \%M -\/ maximum resident set size in KB}
+\DoxyCodeLine{\# \%e -\/ elapsed real time (wall clock) in seconds}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# More detailed}
+\DoxyCodeLine{> /usr/bin/time -\/f "{}time result\(\backslash\)ncmd:\%C\(\backslash\)nreal \%es\(\backslash\)nuser \%Us \(\backslash\)nsys  \%Ss \(\backslash\)nmemory:\%MKB \(\backslash\)ncpu \%P"{} ./stv}
+\DoxyCodeLine{\# \%C   command line and arguments}
+\DoxyCodeLine{\# \%e   elapsed real time (wall clock) in seconds}
+\DoxyCodeLine{\# \%U   user time in seconds}
+\DoxyCodeLine{\# \%S   system (kernel) time in seconds}
+\DoxyCodeLine{\# \%M   maximum resident set size in KB}
+\DoxyCodeLine{\# \%P   percent of CPU this job got}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Full (verbose)}
+\DoxyCodeLine{> /usr/bin/time -\/v ./stv}
+
+\end{DoxyCode}
+\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md4}{}\doxysection{Specification}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md4}
+The specification language was inspired by ISPL (Interpreted Systems Programming Language) from \href{https://vas.doc.ic.ac.uk/software/mcmas/}{\texttt{ MCMAS}}. ~\newline
+ The detailed syntax for the input format can be derived from $\ast$./src/reader/\{parser.\+y,scanner.\+l\}$\ast$, which intrinsically make up an EBNF grammar. ~\newline
+ For the most parts, it is simple enough to get intuition just from looking at example\textquotesingle{}s source code and the program\textquotesingle{}s output.
+
+IMPORTANTS NOTES\+:
+\begin{DoxyEnumerate}
+\item the (local) action names must be unique;
+\item the transition relation (from the global model) should be serial;
+\end{DoxyEnumerate}\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md5}{}\doxysection{Examples and templates}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md5}
+In $\ast$./examples$\ast$ and $\ast$./tests/examples$\ast$ there are several ready-\/to-\/use MAS specification files together with a proposed property (captured by ATL formula) for verification.
+
+Often, we would want to reason about different (data-\/)configurations of the same system. ~\newline
+ Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behaviour. ~\newline
+ A template can be fed with a configuration data to generate a concrete instance of a system. ~\newline
+ Moreover, their use is independent from the tool\+: one can choose any templating engine (of the myriads available) or even write a custom one from the scratch.
+
+Here, we utilize the \href{https://ejs.co/}{\texttt{ EJS}} templating engine. ~\newline
+ It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# EJS feeds the data (as a list of key:val pairs) to the template file to generate the output:}
+\DoxyCodeLine{> npm exec -\/-\/ ejs TEMPLATE\_FILE.ejs -\/i "{}\{PARAM1:VAL1,PARAM2:VAL2,...\}"{} -\/o OUTPUT\_FILE.txt}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Possible generation query for the "{}trains"{}:}
+\DoxyCodeLine{> npm exec -\/-\/ ejs Trains.ejs -\/i '\{"{}N\_TRAINS"{}:3,"{}WITH\_FORMULA"{}:1\}' -\/o 3Trains1Controller.txt}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Possible generation query for the "{}simple voting"{}:}
+\DoxyCodeLine{> npm exec -\/-\/ ejs Simple\_voting.ejs -\/i '\{"{}N\_VOTERS"{}:2,"{}N\_CANDIDATES"{}:1,"{}WITH\_FORMULA"{}:0\}' -\/o 2Voters1Coercer1Candidate.txt}
+
+\end{DoxyCode}
+\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md6}{}\doxysection{Misc}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md6}
 With {\ttfamily OUTPUT\+\_\+\+DOT\+\_\+\+FILES} flag the program outputs $\ast$.dot$\ast$ files for templates, local and global models where\+: ~\newline
 
 \begin{DoxyItemize}
@@ -45,4 +160,5 @@ Use Graphviz \href{https://www.graphviz.org/}{\texttt{ (link)}} to view in other
 \end{DoxyCode}
 
 
-The {\itshape dot2png.\+sh} script converts all $\ast$.dot$\ast$ files from a current folder to $\ast$.png$\ast$. 
+For the smaller graphs use {\itshape dot2png.\+sh} script, which converts all $\ast$.dot$\ast$ files from a current folder to $\ast$.png$\ast$. ~\newline
+ For bigger ones use {\ttfamily svg} format (may be viewed in Inkscape) and {\itshape dot2svg.\+sh}. 

@@ -1,0 +1,75 @@
+\hypertarget{classExprKnow}{}\doxysection{Expr\+Know Class Reference}
+\label{classExprKnow}\index{ExprKnow@{ExprKnow}}
+
+
+Node for a knowledge operator.  
+
+
+
+
+{\ttfamily \#include $<$expressions.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classExprKnow_ab026068926330af32d447860dbfb779f}{Expr\+Know}} (string \+\_\+agent\+Name, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+arg)
+\begin{DoxyCompactList}\small\item\em Constant expression constructor. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classExprKnow_a2b934d48a24db8258b75f129fcbe1842}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classExprKnow_a5609d3280adb176901484deca0e19668}\label{classExprKnow_a5609d3280adb176901484deca0e19668}} 
+virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Node for a knowledge operator. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classExprKnow_ab026068926330af32d447860dbfb779f}\label{classExprKnow_ab026068926330af32d447860dbfb779f}} 
+\index{ExprKnow@{ExprKnow}!ExprKnow@{ExprKnow}}
+\index{ExprKnow@{ExprKnow}!ExprKnow@{ExprKnow}}
+\doxysubsubsection{\texorpdfstring{ExprKnow()}{ExprKnow()}}
+{\footnotesize\ttfamily Expr\+Know\+::\+Expr\+Know (\begin{DoxyParamCaption}\item[{string}]{\+\_\+agent\+Name,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constant expression constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+agent\+Name} & \mbox{\hyperlink{classAgent}{Agent}} name for knowledge operator. \\
+\hline
+{\em \+\_\+arg} & Expression to verify with the given knowledge. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExprKnow_a2b934d48a24db8258b75f129fcbe1842}\label{classExprKnow_a2b934d48a24db8258b75f129fcbe1842}} 
+\index{ExprKnow@{ExprKnow}!eval@{eval}}
+\index{eval@{eval}!ExprKnow@{ExprKnow}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+{\footnotesize\ttfamily int Expr\+Know\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calculates the expression value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em env} & Environment values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns an integer. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classExprNode_a8ab5403a4d2e61674cbebb5527fe31fc}{Expr\+Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{expressions_8hpp}{expressions.\+hpp}}\item 
+\mbox{\hyperlink{expressions_8cc}{expressions.\+cc}}\end{DoxyCompactItemize}

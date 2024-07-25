@@ -82,7 +82,9 @@ $(document).ready(function(){initNavTree('structGlobalTransition.html',''); init
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="structGlobalTransition-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GlobalTransition Struct Reference</div>  </div>
@@ -92,14 +94,20 @@ $(document).ready(function(){initNavTree('structGlobalTransition.html',''); init
 <p>Represents a single global transition.  
  <a href="structGlobalTransition.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="Types_8hpp_source.html">Types.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="GlobalTransition_8hpp_source.html">GlobalTransition.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ae35df90140166dec569474ee28c6d81f"><td class="memItemLeft" align="right" valign="top"><a id="ae35df90140166dec569474ee28c6d81f"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><b>joinLocalTransitionNames</b> (char sep=';')</td></tr>
+<tr class="separator:ae35df90140166dec569474ee28c6d81f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a1f32451290b0db18c3066d0cc924d498"><td class="memItemLeft" align="right" valign="top"><a id="a1f32451290b0db18c3066d0cc924d498"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalTransition.html#a1f32451290b0db18c3066d0cc924d498">id</a></td></tr>
-<tr class="memdesc:a1f32451290b0db18c3066d0cc924d498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the transition. <br /></td></tr>
-<tr class="separator:a1f32451290b0db18c3066d0cc924d498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0091cb21aedcbc1811591fe3cdfcc2a0"><td class="memItemLeft" align="right" valign="top"><a id="a0091cb21aedcbc1811591fe3cdfcc2a0"></a>
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalTransition.html#a0091cb21aedcbc1811591fe3cdfcc2a0">id</a></td></tr>
+<tr class="memdesc:a0091cb21aedcbc1811591fe3cdfcc2a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the transition. <br /></td></tr>
+<tr class="separator:a0091cb21aedcbc1811591fe3cdfcc2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a042d1bace6ff8fd7a037408698efe2bb"><td class="memItemLeft" align="right" valign="top"><a id="a042d1bace6ff8fd7a037408698efe2bb"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalTransition.html#a042d1bace6ff8fd7a037408698efe2bb">isInvalidDecision</a></td></tr>
 <tr class="memdesc:a042d1bace6ff8fd7a037408698efe2bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks if the transition is invalid, true if there is no point in traversing that transition, otherwise false. <br /></td></tr>
@@ -116,11 +124,18 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 set&lt; <a class="el" href="structLocalTransition.html">LocalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalTransition.html#a9e68bf0bab1148c6e20cb6cd5502c38c">localTransitions</a></td></tr>
 <tr class="memdesc:a9e68bf0bab1148c6e20cb6cd5502c38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local transitions that define this global transition. A single transition or more in case of shared transitions. <br /></td></tr>
 <tr class="separator:a9e68bf0bab1148c6e20cb6cd5502c38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a9cd560d7bedb69f6f890d9993dc783b6"><td class="memItemLeft" align="right" valign="top"><a id="a9cd560d7bedb69f6f890d9993dc783b6"></a>
+static atomic_uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>next_id</b></td></tr>
+<tr class="separator:a9cd560d7bedb69f6f890d9993dc783b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single global transition. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="Types_8hpp_source.html">Types.hpp</a></li>
+</div><hr/>The documentation for this struct was generated from the following files:<ul>
+<li><a class="el" href="GlobalTransition_8hpp_source.html">GlobalTransition.hpp</a></li>
+<li><a class="el" href="GlobalTransition_8cpp.html">GlobalTransition.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['fromvalue_426',['FromValue',['../Types_8hpp.html#ae6d1722ec32c3fdc9cb938063d93ccbdaa7ee41d70d7fc8d6eb853b94edf2451b',1,'Types.hpp']]],
-  ['fromvar_427',['FromVar',['../Types_8hpp.html#ae6d1722ec32c3fdc9cb938063d93ccbda59ef514664486b1d457ce91bf991f66c',1,'Types.hpp']]]
+  ['global_5fmodel_478',['GLOBAL_MODEL',['../DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69',1,'DotGraph.hpp']]]
 ];

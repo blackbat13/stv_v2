@@ -81,7 +81,7 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
 }
 
 /// @brief parses the transitions/states templates into nodes/edges
-DotGraph::DotGraph(GlobalModel *const gm, bool extended){
+DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
     nodes.clear();
     edges.clear();
     const std::string sep="||";              // (async) agent names separator
@@ -123,11 +123,20 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended){
             }
             transitionLabel.pop_back();  // truncate sep
             if(!t->from || !t->to)continue;
-            this->addEdge(
-                '"'+t->from->hash+'"', 
-                '"'+t->to->hash+'"', 
-                transitionLabel + (isShared ? "\", color=\"blue" : "")
-            );
+                if(correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK) {
+                    this->addEdge(
+                        '"'+t->from->hash+'"', 
+                        '"'+t->to->hash+'"', 
+                        transitionLabel + "\", color=\"red"
+                    ); 
+                }
+                else {
+                this->addEdge(
+                    '"'+t->from->hash+'"', 
+                    '"'+t->to->hash+'"', 
+                    transitionLabel + (isShared ? "\", color=\"blue" : "")
+                );
+            }
         }
 
         this->addNode('"'+s->hash+'"', stateLabel);

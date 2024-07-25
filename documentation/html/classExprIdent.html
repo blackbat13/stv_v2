@@ -99,8 +99,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adee748429a8a7a85374e413d4a534c36"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprIdent.html#adee748429a8a7a85374e413d4a534c36">ExprIdent</a> (string _ident)</td></tr>
 <tr class="memdesc:adee748429a8a7a85374e413d4a534c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier expression constructor.  <a href="classExprIdent.html#adee748429a8a7a85374e413d4a534c36">More...</a><br /></td></tr>
 <tr class="separator:adee748429a8a7a85374e413d4a534c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0444e26ebc128d2fad6cc62a4a1683d7"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprIdent.html#a0444e26ebc128d2fad6cc62a4a1683d7">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env, <a class="el" href="classGlobalModelGenerator.html">GlobalModelGenerator</a> *generator, <a class="el" href="structGlobalState.html">GlobalState</a> *globalState)</td></tr>
+<tr class="memdesc:a0444e26ebc128d2fad6cc62a4a1683d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <a href="classExprIdent.html#a0444e26ebc128d2fad6cc62a4a1683d7">More...</a><br /></td></tr>
+<tr class="separator:a0444e26ebc128d2fad6cc62a4a1683d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24c5b44c7995f80b82a11e4b05eac892"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprIdent.html#a24c5b44c7995f80b82a11e4b05eac892">eval</a> (<a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;env)</td></tr>
-<tr class="memdesc:a24c5b44c7995f80b82a11e4b05eac892"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the expression value.  <a href="classExprIdent.html#a24c5b44c7995f80b82a11e4b05eac892">More...</a><br /></td></tr>
 <tr class="separator:a24c5b44c7995f80b82a11e4b05eac892"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -142,7 +144,7 @@ Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a24c5b44c7995f80b82a11e4b05eac892"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24c5b44c7995f80b82a11e4b05eac892">&#9670;&nbsp;</a></span>eval()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24c5b44c7995f80b82a11e4b05eac892">&#9670;&nbsp;</a></span>eval() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,15 +166,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Calculates the expression value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">env</td><td>Environment values. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns an integer.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">env</td><td></td></tr>
@@ -182,7 +175,60 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><br  />
  </dd></dl>
 
-<p>Implements <a class="el" href="classExprNode.html#a5f155835c446271416ed3eb4f1d34f1f">ExprNode</a>.</p>
+<p>Implements <a class="el" href="classExprNode.html">ExprNode</a>.</p>
+
+</div>
+</div>
+<a id="a0444e26ebc128d2fad6cc62a4a1683d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0444e26ebc128d2fad6cc62a4a1683d7">&#9670;&nbsp;</a></span>eval() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ExprIdent::eval </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a> &amp;&#160;</td>
+          <td class="paramname"><em>env</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classGlobalModelGenerator.html">GlobalModelGenerator</a> *&#160;</td>
+          <td class="paramname"><em>generator</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
+          <td class="paramname"><em>globalState</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the expression value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">env</td><td>Environment values. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns an integer. </dd></dl>
+
+<p>Implements <a class="el" href="classExprNode.html#a8ab5403a4d2e61674cbebb5527fe31fc">ExprNode</a>.</p>
 
 </div>
 </div>

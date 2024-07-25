@@ -28,14 +28,17 @@ var NAVTREE =
     [ "STV2 - StraTegic Verifier 2", "md__home_mathis_repositories_stv_v2_README.html", [
       [ "Usage", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md1", null ],
       [ "Tests", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md2", null ],
-      [ "Misc", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md3", null ]
+      [ "Performance estimation", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md3", null ],
+      [ "Specification", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md4", null ],
+      [ "Examples and templates", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md5", null ],
+      [ "Misc", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md6", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ]
       ] ]
@@ -55,8 +58,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Constants_8hpp_source.html",
-"nodes_8hpp_source.html"
+"Agent_8cpp.html",
+"classTestVerif.html#a50e1c954622480ac4bce2be8f03a59eb"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

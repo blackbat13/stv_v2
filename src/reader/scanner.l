@@ -3,6 +3,7 @@
 #include <string.h>
 #include <string>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ extern "C" int yylex();
 
 ident [a-zA-Z][_a-zA-Z0-9]*
 single [\[\]():!,+\-*/%]
+comment #[^\n]*
 blank [ \n\t]
 %%
 
@@ -38,6 +40,9 @@ blank [ \n\t]
 [0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }
+"&K_"           { return T_KNOW; }
+"&H_"           { return T_HARTLEY; }
+{comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
 %%
 

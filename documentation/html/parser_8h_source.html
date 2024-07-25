@@ -159,49 +159,52 @@ $(document).ready(function(){initNavTree('parser_8h_source.html',''); initResiza
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    T_LE = 273,                    <span class="comment">/* T_LE  */</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    T_NUM = 274,                   <span class="comment">/* T_NUM  */</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    T_SHARED = 275,                <span class="comment">/* T_SHARED  */</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    T_IDENT = 276                  <span class="comment">/* T_IDENT  */</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;  };</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">enum</span> yytokentype yytoken_kind_t;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">/* Value type.  */</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#if ! defined YYSTYPE &amp;&amp; ! defined YYSTYPE_IS_DECLARED</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="unionYYSTYPE.html">   82</a></span>&#160;<span class="keyword">union </span><a class="code" href="unionYYSTYPE.html">YYSTYPE</a></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#line 23 &quot;../src/reader/parser.y&quot;</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;       set&lt;class AgentTemplate*&gt;*  model;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;       <span class="keyword">class </span><a class="code" href="classExprNode.html">ExprNode</a>*             expr;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;       <span class="keyword">class </span><a class="code" href="classAssignment.html">Assignment</a>*           <a class="code" href="classAssignment.html#afe2932c47e89dac72810398258ed017d">assign</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;       <span class="keyword">class </span><a class="code" href="classTransitionTemplate.html">TransitionTemplate</a>*   trans;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;       <span class="keyword">class </span><a class="code" href="classAgentTemplate.html">AgentTemplate</a>*        agent;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;       set&lt;class Assignment*&gt;*     assignSet;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;       <span class="keywordtype">char</span>*                       ident;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;       set&lt;string&gt;*                identSet;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;       <span class="keywordtype">int</span>                         val;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#line 97 &quot;../src/reader/parser.h&quot;</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;};</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">typedef</span> <span class="keyword">union </span><a class="code" href="unionYYSTYPE.html">YYSTYPE</a> <a class="code" href="unionYYSTYPE.html">YYSTYPE</a>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor"># define YYSTYPE_IS_TRIVIAL 1</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor"># define YYSTYPE_IS_DECLARED 1</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">extern</span> <a class="code" href="unionYYSTYPE.html">YYSTYPE</a> yylval;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    T_IDENT = 276,                 <span class="comment">/* T_IDENT  */</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    T_KNOW = 277,                  <span class="comment">/* T_KNOW  */</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    T_HARTLEY = 278                <span class="comment">/* T_HARTLEY  */</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;  };</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;  <span class="keyword">typedef</span> <span class="keyword">enum</span> yytokentype yytoken_kind_t;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">/* Value type.  */</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#if ! defined YYSTYPE &amp;&amp; ! defined YYSTYPE_IS_DECLARED</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="unionYYSTYPE.html">   84</a></span>&#160;<span class="keyword">union </span><a class="code" href="unionYYSTYPE.html">YYSTYPE</a></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#line 26 &quot;../src/reader/parser.y&quot;</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;       set&lt;class AgentTemplate*&gt;*  model;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;       <span class="keyword">class </span><a class="code" href="classExprNode.html">ExprNode</a>*             expr;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;       <span class="keyword">class </span><a class="code" href="classAssignment.html">Assignment</a>*           <a class="code" href="classAssignment.html#afe2932c47e89dac72810398258ed017d">assign</a>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;       <span class="keyword">class </span><a class="code" href="classTransitionTemplate.html">TransitionTemplate</a>*   trans;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;       <span class="keyword">class </span><a class="code" href="classAgentTemplate.html">AgentTemplate</a>*        agent;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;       set&lt;class Assignment*&gt;*     assignSet;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;       <span class="keywordtype">char</span>*                       ident;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;       set&lt;string&gt;*                identSet;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;       <span class="keywordtype">int</span>                         val;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;       vector&lt;class ExprNode*&gt;*    condList;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#line 100 &quot;../src/reader/parser.h&quot;</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;};</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keyword">typedef</span> <span class="keyword">union </span><a class="code" href="unionYYSTYPE.html">YYSTYPE</a> <a class="code" href="unionYYSTYPE.html">YYSTYPE</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor"># define YYSTYPE_IS_TRIVIAL 1</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor"># define YYSTYPE_IS_DECLARED 1</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keywordtype">int</span> yyparse (<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="keyword">extern</span> <a class="code" href="unionYYSTYPE.html">YYSTYPE</a> yylval;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !YY_YY_SRC_READER_PARSER_H_INCLUDED  */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keywordtype">int</span> yyparse (<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !YY_YY_SRC_READER_PARSER_H_INCLUDED  */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aclassAgentTemplate_html"><div class="ttname"><a href="classAgentTemplate.html">AgentTemplate</a></div><div class="ttdoc">Represents a single agent loaded from the description from a file.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:111</div></div>
 <div class="ttc" id="aclassAssignment_html"><div class="ttname"><a href="classAssignment.html">Assignment</a></div><div class="ttdoc">Represents an assingment.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:22</div></div>
 <div class="ttc" id="aclassAssignment_html_afe2932c47e89dac72810398258ed017d"><div class="ttname"><a href="classAssignment.html#afe2932c47e89dac72810398258ed017d">Assignment::assign</a></div><div class="ttdeci">virtual void assign(Environment &amp;env)</div><div class="ttdoc">Make an assignment in a given environment.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:41</div></div>
-<div class="ttc" id="aclassExprNode_html"><div class="ttname"><a href="classExprNode.html">ExprNode</a></div><div class="ttdoc">Base node for expressions.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:21</div></div>
+<div class="ttc" id="aclassExprNode_html"><div class="ttname"><a href="classExprNode.html">ExprNode</a></div><div class="ttdoc">Base node for expressions.</div><div class="ttdef"><b>Definition:</b> expressions.hpp:25</div></div>
 <div class="ttc" id="aclassTransitionTemplate_html"><div class="ttname"><a href="classTransitionTemplate.html">TransitionTemplate</a></div><div class="ttdoc">Represents a meta-transition.</div><div class="ttdef"><b>Definition:</b> nodes.hpp:49</div></div>
-<div class="ttc" id="aunionYYSTYPE_html"><div class="ttname"><a href="unionYYSTYPE.html">YYSTYPE</a></div><div class="ttdef"><b>Definition:</b> parser.h:83</div></div>
+<div class="ttc" id="aunionYYSTYPE_html"><div class="ttname"><a href="unionYYSTYPE.html">YYSTYPE</a></div><div class="ttdef"><b>Definition:</b> parser.h:85</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

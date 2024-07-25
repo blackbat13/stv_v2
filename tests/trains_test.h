@@ -7,7 +7,7 @@
 
 TEST(TrainsTest, 1Train1Controller)
 {
-    TestVerif verify("../tests/examples/trains/1Train1Controller.txt");
+    TestVerif verify("../tests/examples/trains/1Train1Controller.txt", true);
 
     EXPECT_EQ(verify.result, false);
 
@@ -16,7 +16,7 @@ TEST(TrainsTest, 1Train1Controller)
 
 TEST(TrainsTest, 2Trains1Controller)
 {
-    TestVerif verify("../tests/examples/trains/2Trains1Controller.txt");
+    TestVerif verify("../tests/examples/trains/2Trains1Controller.txt", true);
 
     EXPECT_EQ(verify.result, false);
 

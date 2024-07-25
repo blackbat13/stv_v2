@@ -7,20 +7,21 @@ Represents a single global state.
 
 
 
-{\ttfamily \#include $<$Types.\+hpp$>$}
+{\ttfamily \#include $<$Global\+State.\+hpp$>$}
 
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}{to\+String}} (string indent=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Debug information on the given \mbox{\hyperlink{structGlobalState}{Global\+State}}. \end{DoxyCompactList}\item 
+map$<$ string, int $>$ \mbox{\hyperlink{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}{get\+Global\+State\+Environment}} ()
+\begin{DoxyCompactList}\small\item\em Get for the environment of a given global state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structGlobalState_aa687c3850ec9a843ae3e903ee555e00c}\label{structGlobalState_aa687c3850ec9a843ae3e903ee555e00c}} 
-int \mbox{\hyperlink{structGlobalState_aa687c3850ec9a843ae3e903ee555e00c}{id}}
-\begin{DoxyCompactList}\small\item\em Identifier of the global state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}\label{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}} 
 string \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{hash}}
 \begin{DoxyCompactList}\small\item\em Hash of the global state used in quick checks if the states are in the same epistemic class. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalState_a527373fc0711c77277191a4c9d89dccc}\label{structGlobalState_a527373fc0711c77277191a4c9d89dccc}} 
-map$<$ \mbox{\hyperlink{structVar}{Var}} $\ast$, int $>$ \mbox{\hyperlink{structGlobalState_a527373fc0711c77277191a4c9d89dccc}{vars}}
-\begin{DoxyCompactList}\small\item\em Map of model variables and their current values. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_ae5d81b1f8e057f2ae62513f1471ba0c1}\label{structGlobalState_ae5d81b1f8e057f2ae62513f1471ba0c1}} 
 map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_ae5d81b1f8e057f2ae62513f1471ba0c1}{epistemic\+Classes}}
 \begin{DoxyCompactList}\small\item\em Map of agents and the epistemic classes that belongs to the respective agent. \end{DoxyCompactList}\item 
@@ -28,19 +29,56 @@ map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, \mbox{\hyperlink{structEpist
 bool \mbox{\hyperlink{structGlobalState_afd4eaea4861b96810c9e1de175a0c35a}{is\+Expanded}}
 \begin{DoxyCompactList}\small\item\em If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_ae7fb8df92923463538071039a0066a6d}\label{structGlobalState_ae7fb8df92923463538071039a0066a6d}} 
-\mbox{\hyperlink{Types_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} \mbox{\hyperlink{structGlobalState_ae7fb8df92923463538071039a0066a6d}{verification\+Status}}
+Global\+State\+Verification\+Status \mbox{\hyperlink{structGlobalState_ae7fb8df92923463538071039a0066a6d}{verification\+Status}}
 \begin{DoxyCompactList}\small\item\em Current verifivation status of this state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}\label{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}} 
 set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}{global\+Transitions}}
 \begin{DoxyCompactList}\small\item\em Every \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in the model. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalState_a567d8b2e461ed46b4ec31d51a777efe4}\label{structGlobalState_a567d8b2e461ed46b4ec31d51a777efe4}} 
-set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_a567d8b2e461ed46b4ec31d51a777efe4}{local\+States}}
+\mbox{\Hypertarget{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}\label{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}} 
+vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}{local\+States\+Projection}}
 \begin{DoxyCompactList}\small\item\em Local states of each agent that define this global state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Represents a single global state. 
 
-The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}\label{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}} 
+\index{GlobalState@{GlobalState}!getGlobalStateEnvironment@{getGlobalStateEnvironment}}
+\index{getGlobalStateEnvironment@{getGlobalStateEnvironment}!GlobalState@{GlobalState}}
+\doxysubsubsection{\texorpdfstring{getGlobalStateEnvironment()}{getGlobalStateEnvironment()}}
+{\footnotesize\ttfamily map$<$ string, int $>$ Global\+State\+::get\+Global\+State\+Environment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get for the environment of a given global state. 
+
+\begin{DoxyReturn}{Returns}
+A map of variable names and their values for the current global state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}\label{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}} 
+\index{GlobalState@{GlobalState}!toString@{toString}}
+\index{toString@{toString}!GlobalState@{GlobalState}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily std\+::string Global\+State\+::to\+String (\begin{DoxyParamCaption}\item[{string}]{indent = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Debug information on the given \mbox{\hyperlink{structGlobalState}{Global\+State}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em indent} & -\/ optional indentation string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structGlobalState}{Global\+State}} data
+
+\mbox{\hyperlink{structGlobalState}{Global\+State}} data 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{Types_8hpp}{Types.\+hpp}}\end{DoxyCompactItemize}
+\mbox{\hyperlink{GlobalState_8hpp}{Global\+State.\+hpp}}\item 
+\mbox{\hyperlink{GlobalState_8cpp}{Global\+State.\+cpp}}\end{DoxyCompactItemize}

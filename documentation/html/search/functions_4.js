@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['findglobalstateinepistemicclass_311',['findGlobalStateInEpistemicClass',['../classGlobalModelGenerator.html#a81969a319955d7db12a6f74b347dc67e',1,'GlobalModelGenerator']]],
-  ['findorcreateepistemicclass_312',['findOrCreateEpistemicClass',['../classGlobalModelGenerator.html#a4c42244f7e8902f95c34915ae69ce8df',1,'GlobalModelGenerator']]]
+  ['findglobalstateinepistemicclass_351',['findGlobalStateInEpistemicClass',['../classGlobalModelGenerator.html#a71726acc560329d3bd9a0b178857d0a8',1,'GlobalModelGenerator']]],
+  ['findorcreateepistemicclass_352',['findOrCreateEpistemicClass',['../classGlobalModelGenerator.html#acc24910b5193e1916aea16926d0374bf',1,'GlobalModelGenerator']]],
+  ['findorcreateepistemicclassforknowledge_353',['findOrCreateEpistemicClassForKnowledge',['../classGlobalModelGenerator.html#a89a7825f93f972dc94468598cf35382b',1,'GlobalModelGenerator']]]
 ];

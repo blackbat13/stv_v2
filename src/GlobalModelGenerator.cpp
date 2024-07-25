@@ -8,9 +8,11 @@
 #include "Types.hpp"
 #include "Constants.hpp"
 
-
 #include <algorithm>
+#include <string.h>
 #include <iostream>
+
+extern Cfg config;
 
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
@@ -30,11 +32,15 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     this->formula = formula;
     this->globalModel = new GlobalModel();
     this->globalModel->agents = localModels->agents;
-    this->globalModel->initState = this->generateInitState();
 
     for (auto it = begin (this->globalModel->agents); it != end (this->globalModel->agents); ++it) {
         this->agentIndex[*it]=std::distance(this->globalModel->agents.begin(), it);
     }
+
+    this->globalModel->initState = this->generateInitState();
+    this->globalModel->epistemicClassesKnowledge.clear();
+    this->correctModel = true;
+
     return this->globalModel->initState;
 }
 
@@ -54,16 +60,43 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
                 #if VERBOSE
                     cout << "expandState via (localTransition) " << localTransition->name << " : " << localTransition->from->id << " -> " << localTransition->to->id << endl;
                 #endif
-
                 auto it = agentIndex[localTransition->from->agent];
-                // if(it<0)cout << "ERR" << endl;
                 localStates[it]=localTransition->to;
-                // localStates.erase(localTransition->from);
-                // localStates.insert(localTransition->to);
             }            
             auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
             globalTransition->to = targetState;
         }
+    }
+    // add optional epsilon transition if no more states to expand to
+    if (config.add_epsilon_transitions && state->globalTransitions.size() == 0) {
+        set<LocalTransition*> epsilon;
+        Agent* agent = *this->getFormula()->coalition.begin();
+        LocalState* localState;
+        for (auto state : state->localStatesProjection) {
+            if (state->agent->name == agent->name) {
+                localState = state;
+            }
+        }
+
+        LocalTransition* transition = new LocalTransition;
+        transition->id = -1;
+        transition->isShared = 0;
+        transition->name = "ɛ";
+        transition->localName = "ɛ";
+        transition->sharedCount = 0;
+        transition->agent = agent;
+        transition->from = localState;
+        transition->to = localState;
+        epsilon.insert(transition);
+
+        auto globalTransition = new GlobalTransition();
+        // globalTransition->id = this->globalModel->globalTransitions.size();
+        globalTransition->isInvalidDecision = false;
+        globalTransition->from = state;
+        globalTransition->to = state;
+        globalTransition->localTransitions = epsilon;
+        state->globalTransitions.insert(globalTransition);
+        // printf("added a state!\n");
     }
     state->isExpanded = true;
 }
@@ -139,6 +172,12 @@ Formula* GlobalModelGenerator::getFormula() {
     return this->formula;
 }
 
+/// @brief Get size of the Formula used in initialization.
+/// @return Returns the formula size.
+int GlobalModelGenerator::getFormulaSize() {
+    return this->formula->p->size();
+}
+
 /// @brief Generates initial state of the model from GlobalModel in memory.
 /// @return Returns a pointer to an initial GlobalState.
 GlobalState* GlobalModelGenerator::generateInitState() {
@@ -147,7 +186,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
         localStates.push_back(agt->initState);
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
-    
+
     return initState;
 }
 
@@ -213,6 +252,13 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     }
     
     this->globalModel->globalStates.push_back(globalState);
+
+    Agent* a;
+    for (auto agt : globalModel->agents) {
+        a = agt;
+        this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
+    }
+
     return globalState;
 }
 
@@ -229,6 +275,26 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
         auto currentLocalTransitions = localTransitions;
         currentLocalTransitions.insert(transition);
         if (hasOtherAgents) {
+            if (config.add_epsilon_transitions == 1) {
+                for (auto agentCheck : transitionsByOtherAgents) {
+                    auto state = **find(agentCheck.first->localStates.begin(), agentCheck.first->localStates.end(), agentCheck.second[0]->from);
+                    if (state.localTransitions.size() > 1) {
+                        for (auto possibility : state.localTransitions) {
+                            if (transition->name != possibility->name) {
+                                set<LocalTransition*> sumTransitions = currentLocalTransitions;
+                                sumTransitions.insert(possibility);
+                                auto globalTransition = new GlobalTransition();
+                                // globalTransition->id = this->globalModel->globalTransitions.size();
+                                globalTransition->isInvalidDecision = false;
+                                globalTransition->from = fromGlobalState;
+                                globalTransition->to = fromGlobalState;
+                                globalTransition->localTransitions = sumTransitions;
+                                fromGlobalState->globalTransitions.insert(globalTransition);
+                            }
+                        }
+                    }
+                }
+            }
             this->generateGlobalTransitions(fromGlobalState, currentLocalTransitions, transitionsByOtherAgents);
         }
         else {
@@ -287,6 +353,28 @@ EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(vector<LocalSta
     return epistemicClassesForAgent->at(hash);
 }
 
+/// @brief Checks if a vector of LocalState is already an epistemic class for a given Agent, if not, creates a new one.
+/// @param localStates Local states from agent.
+/// @param agent Agent for which to check the existence of an epistemic class.
+/// @return A pointer to a new or existing EpistemicClass.
+set<GlobalState*>* GlobalModelGenerator::findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* global, Agent* agent) {
+    string hash = this->computeEpistemicClassHash(localStates, agent);
+    if (this->globalModel->epistemicClassesKnowledge.find(agent) == this->globalModel->epistemicClassesKnowledge.end()) {
+        this->globalModel->epistemicClassesKnowledge.insert({ agent, map<string, set<GlobalState*>>() });
+    }
+    auto epistemicClassesForAgent = &this->globalModel->epistemicClassesKnowledge[agent];
+    if (epistemicClassesForAgent->find(hash) == epistemicClassesForAgent->end()) {
+        set<GlobalState*> epistemicClass;
+        epistemicClass.insert(global);
+        epistemicClassesForAgent->insert({ hash, epistemicClass });
+    }
+    else {
+        auto s = epistemicClassesForAgent->find(hash);
+        s->second.insert(global);
+    }
+    return &epistemicClassesForAgent->at(hash);
+}
+
 /// @brief Gets a GlobalState from an EpistemicClass if it exists in that episcemic class.
 /// @param localStates Pointer to a vector of pointers to LocalState, from which will be generated a global state hash.
 /// @param epistemicClass Epistemic class in which to check if a GlobalState exists.
@@ -297,4 +385,30 @@ GlobalState* GlobalModelGenerator::findGlobalStateInEpistemicClass(vector<LocalS
         return nullptr;
     }
     return epistemicClass->globalStates[hash];
+}
+
+/// @brief Get a pointer to an agent by using its name.
+/// @param agentName Name of an Agent that we want to get its instance.
+/// @return Pointer to an Agent.
+Agent* GlobalModelGenerator::getAgentInstanceByName(string agentName) {
+    Agent* agentInstance = nullptr;
+    auto globalModelAgents = globalModel->agents;
+    for (auto globalAgent : globalModelAgents) {
+        if (globalAgent->name == agentName) {
+            agentInstance = globalAgent;
+            break;
+        }
+    }
+    return agentInstance;
+}
+
+/// @brief Sets formula to an incorrectly written state.
+void GlobalModelGenerator::markFormulaAsIncorrect() {
+    correctModel = false;
+}
+
+/// @brief Gets formula status.
+/// @return True if formula is written correctly, false otherwise.
+bool GlobalModelGenerator::getFormulaCorectness() {
+    return correctModel;
 }

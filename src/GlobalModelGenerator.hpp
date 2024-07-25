@@ -25,6 +25,11 @@ public:
     void expandAllStates();
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();
+    int getFormulaSize();
+    set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);
+    Agent* getAgentInstanceByName(string agentName);
+    void markFormulaAsIncorrect();
+    bool getFormulaCorectness();
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;
@@ -36,6 +41,8 @@ protected:
     Formula* formula;
     /// @brief GlobalModel created in initModel.
     GlobalModel* globalModel;
+    /// @brief Flag holding info if model is actually correct.
+    bool correctModel;
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
     void generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent);

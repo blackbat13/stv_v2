@@ -110,9 +110,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDotGraph.html#af729d471e72486912d422d96ad7276a9">DotGraph</a> (<a class="el" href="classAgentTemplate.html">AgentTemplate</a> *const at)</td></tr>
 <tr class="memdesc:af729d471e72486912d422d96ad7276a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the edge/state templates into nodes/edges <br /></td></tr>
 <tr class="separator:af729d471e72486912d422d96ad7276a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6a8481eae1c5e4e260c1c203957f864"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDotGraph.html#ac6a8481eae1c5e4e260c1c203957f864">saveToFile</a> (std::string filename=&quot;&quot;)</td></tr>
-<tr class="memdesc:ac6a8481eae1c5e4e260c1c203957f864"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates a <code>.dot</code> file  <a href="classDotGraph.html#ac6a8481eae1c5e4e260c1c203957f864">More...</a><br /></td></tr>
-<tr class="separator:ac6a8481eae1c5e4e260c1c203957f864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab5b20a15540e7e62b9628a665dc4b98"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDotGraph.html#aab5b20a15540e7e62b9628a665dc4b98">saveToFile</a> (std::string pathprefix, std::string nameprefix, std::string basename=&quot;&quot;)</td></tr>
+<tr class="memdesc:aab5b20a15540e7e62b9628a665dc4b98"><td class="mdescLeft">&#160;</td><td class="mdescRight">creates a <code>.dot</code> file  <a href="classDotGraph.html#aab5b20a15540e7e62b9628a665dc4b98">More...</a><br /></td></tr>
+<tr class="separator:aab5b20a15540e7e62b9628a665dc4b98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -122,12 +122,12 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 <tr class="memitem:a87709043cda8c808af92f859bc8fe09b"><td class="memItemLeft" align="right" valign="top"><a id="a87709043cda8c808af92f859bc8fe09b"></a>
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>edges</b></td></tr>
 <tr class="separator:a87709043cda8c808af92f859bc8fe09b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c4a5c95b8c552ca3006eb3d056caa54"><td class="memItemLeft" align="right" valign="top"><a id="a5c4a5c95b8c552ca3006eb3d056caa54"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
-<tr class="separator:a5c4a5c95b8c552ca3006eb3d056caa54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb74879f036692ee42a9776e47ee3973"><td class="memItemLeft" align="right" valign="top"><a id="abb74879f036692ee42a9776e47ee3973"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>caption</b></td></tr>
-<tr class="separator:abb74879f036692ee42a9776e47ee3973"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb6a27b53d5923ebf49d891bca687871"><td class="memItemLeft" align="right" valign="top"><a id="afb6a27b53d5923ebf49d891bca687871"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>graphName</b></td></tr>
+<tr class="separator:afb6a27b53d5923ebf49d891bca687871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2012f6d59fa71f3d5b9831e9fa8999ad"><td class="memItemLeft" align="right" valign="top"><a id="a2012f6d59fa71f3d5b9831e9fa8999ad"></a>
+<a class="el" href="DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591">DotGraphBase</a>&#160;</td><td class="memItemRight" valign="bottom"><b>graphBase</b></td></tr>
+<tr class="separator:a2012f6d59fa71f3d5b9831e9fa8999ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -242,8 +242,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac6a8481eae1c5e4e260c1c203957f864"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6a8481eae1c5e4e260c1c203957f864">&#9670;&nbsp;</a></span>saveToFile()</h2>
+<a id="aab5b20a15540e7e62b9628a665dc4b98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab5b20a15540e7e62b9628a665dc4b98">&#9670;&nbsp;</a></span>saveToFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,8 +252,24 @@ Protected Member Functions</h2></td></tr>
           <td class="memname">void DotGraph::saveToFile </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>filename</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td class="paramname"><em>pathprefix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>nameprefix</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>basename</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -261,7 +277,7 @@ Protected Member Functions</h2></td></tr>
 <p>creates a <code>.dot</code> file </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>name of file (parent graph name if blank) </td></tr>
+    <tr><td class="paramname">basename</td><td>name of file (parent graph name if blank) </td></tr>
   </table>
   </dd>
 </dl>
@@ -309,7 +325,7 @@ Protected Member Functions</h2></td></tr>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="DotGraph_8hpp_source.html">DotGraph.hpp</a></li>
-<li>DotGraph.cpp</li>
+<li><a class="el" href="DotGraph_8cpp.html">DotGraph.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

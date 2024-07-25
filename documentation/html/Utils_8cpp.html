@@ -92,6 +92,12 @@ $(document).ready(function(){initNavTree('Utils_8cpp.html',''); initResizable();
 <p>Utility functions. A collection of utility functions to use in the project.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="Utils_8hpp_source.html">Utils.hpp</a>&quot;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &quot;<a class="el" href="GlobalModelGenerator_8hpp_source.html">GlobalModelGenerator.hpp</a>&quot;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -110,12 +116,21 @@ Functions</h2></td></tr>
 <tr class="memitem:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5cfa822422f5ca06a58b1d0443ac8b8b"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b> ()</td></tr>
 <tr class="separator:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a024972bddde6f8ca273e590f32fa8a2a"><td class="memItemLeft" align="right" valign="top"><a id="a024972bddde6f8ca273e590f32fa8a2a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>loadConfigFromFile</b> (string filename)</td></tr>
+<tr class="separator:a024972bddde6f8ca273e590f32fa8a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a7988a2599103af311e927c494b8e1"><td class="memItemLeft" align="right" valign="top"><a id="a09a7988a2599103af311e927c494b8e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>loadConfigFromArgs</b> (int argc, char **argv)</td></tr>
+<tr class="separator:a09a7988a2599103af311e927c494b8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d4dbc4222c0740fc9b6911e129ea05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a31d4dbc4222c0740fc9b6911e129ea05">tarjanVisit</a> (<a class="el" href="classLocalState.html">LocalState</a> *v, map&lt; int, int &gt; *dindex, map&lt; int, int &gt; *lowlink, stack&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *stack, map&lt; int, bool &gt; *onstack, int *depth, vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&gt; *comp)</td></tr>
 <tr class="memdesc:a31d4dbc4222c0740fc9b6911e129ea05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function for SCC-computatation.  <a href="Utils_8cpp.html#a31d4dbc4222c0740fc9b6911e129ea05">More...</a><br /></td></tr>
 <tr class="separator:a31d4dbc4222c0740fc9b6911e129ea05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4073ec29a638e918c58e44dfe345e842"><td class="memItemLeft" align="right" valign="top">vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a4073ec29a638e918c58e44dfe345e842">getLocalStatesSCC</a> (<a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
 <tr class="memdesc:a4073ec29a638e918c58e44dfe345e842"><td class="mdescLeft">&#160;</td><td class="mdescRight">a quick implementation of a Tarjan SCC algorithm (based on DFS)  <a href="Utils_8cpp.html#a4073ec29a638e918c58e44dfe345e842">More...</a><br /></td></tr>
 <tr class="separator:a4073ec29a638e918c58e44dfe345e842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf62caf9d6ec26c1047df6d6380d2111"><td class="memItemLeft" align="right" valign="top"><a id="adf62caf9d6ec26c1047df6d6380d2111"></a>
+map&lt; <a class="el" href="classLocalState.html">LocalState</a> *, vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getContextModel</b> (<a class="el" href="structFormula.html">Formula</a> *formula, <a class="el" href="structLocalModels.html">LocalModels</a> *localModels, <a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
+<tr class="separator:adf62caf9d6ec26c1047df6d6380d2111"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>

@@ -33,9 +33,12 @@ CLI configuration overwrite:
 ./stv -m 2  # run verification
 ./stv -m 3  # same as 1 && 2
 # Flags
-# --OUTPUT_GLOBAL_MODEL     stdout data on global model (after expandAllStates)
-# --OUTPUT_LOCAL_MODELS     stdout data on local models () 
-# --OUTPUT_DOT_FILES        generate .dot files for agent templates, local and global models
+# --OUTPUT_GLOBAL_MODEL      stdout data on global model (after expandAllStates)
+# --OUTPUT_LOCAL_MODELS      stdout data on local models () 
+# --OUTPUT_DOT_FILES         generate .dot files for agent templates, local and global models
+# --ADD_EPSILON_TRANSITIONS  generate global models with epsilon transitions
+# --OVERWRITE_FORMULA        replace the formula from the model file with a different one
+# --COUNTEREXAMPLE           output counterexample path if the formula verification returns an ERR
 ```
 
 ## Tests

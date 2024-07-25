@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string>
 #include <set>
+#include <vector>
 
 #include "expressions.hpp"
 #include "nodes.hpp"
@@ -15,6 +16,8 @@ extern "C" int yylex();
 void yyrestart( FILE* );
 void yyerror( char* );
 extern char* yytext;
+typedef struct yy_buffer_state * YY_BUFFER_STATE;
+extern YY_BUFFER_STATE yy_scan_string(const char * str);
 
 extern set<class AgentTemplate*>* modelDescription;
 extern FormulaTemplate formulaDescription;
@@ -30,6 +33,7 @@ extern FormulaTemplate formulaDescription;
        char*                       ident;
        set<string>*                identSet;
        int                         val;
+       vector<class ExprNode*>*    condList;
 }
 
 %token   T_AGENT T_INIT T_LOCAL T_INITIAL T_FORMULA
@@ -37,6 +41,7 @@ extern FormulaTemplate formulaDescription;
 %token   T_NE T_GT T_GE T_LT T_LE 
 %token   <val> T_NUM T_SHARED
 %token   <ident> T_IDENT
+%token   T_KNOW T_HARTLEY
 
 %type  <val>  shared
 %type  <expr> num_exp num_mul num_elem
@@ -47,6 +52,7 @@ extern FormulaTemplate formulaDescription;
 %type  <assignSet> initial assign_list assignments
 %type  <agent> description agent
 %type  <model> spec model
+%type  <condList> cond_list
 
 %%
 model: spec { modelDescription = $1; }
@@ -60,11 +66,18 @@ spec: spec agent { $$=$1; $$->insert($2); }
 query: T_FORMULA formula { }
      ;
 
-formula: coalition '[' ']' cond { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4;} 
-       | coalition T_LT T_GT cond { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4;} 
+formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$4; }
+       | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; }
+       | '[' ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=false; formulaDescription.formula=$3; }
+       | T_LT T_GT cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$3; }
        ;
 
+cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
+         | cond { $$=new vector<ExprNode*>; $$->push_back($1); }
+         ;
+
 coalition: T_LT T_LT ident_list T_GT T_GT { $$=$3; }
+         | T_LT T_LT T_GT T_GT { $$=new set<string>; }
          ;
       
 agent: T_AGENT T_IDENT ':' description { $$=$4; $$->setIdent($2); delete $2; }
@@ -141,6 +154,7 @@ num_elem: T_IDENT { $$=new ExprIdent($1); delete $1; }
 condition: '[' cond ']' { $$=$2; }
          | { $$=NULL; }
          ;
+
 cond: cond T_OR cond_and { $$=new ExprOr($1, $3);}
     | cond_and { $$=$1; }
     ;
@@ -157,9 +171,16 @@ cond_elem: num_exp T_EQ num_exp { $$=new ExprEq($1, $3);}
          | '(' cond ')' { $$=$2; }
          | T_IDENT { $$=new ExprIdent($1); delete $1; }
          | T_NUM { $$=new ExprConst($1); }
+         | T_KNOW T_IDENT '(' cond ')' { $$=new ExprKnow($2, $4); }
+         | T_HARTLEY T_IDENT '[' T_LE T_NUM ']' '(' cond_list ')' { $$=new ExprHart($2, true, $5, $8); }
+         | T_HARTLEY T_IDENT '[' T_GE T_NUM ']' '(' cond_list ')' { $$=new ExprHart($2, false, $5, $8); }
          ;
 
 %%
+
+void set_input_string(const char* in) {
+  yy_scan_string(in);
+}
 
 // Chwilowa funkcja błędu
 void yyerror( char* s ) {

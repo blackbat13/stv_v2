@@ -1,0 +1,16 @@
+Agent A1:
+LOCAL: [State]
+PERSISTENT: [State]
+INITIAL: [State:=0]
+init q0
+shared[2] syncwithA2[sync]: q0 -> q1 [State:=1]
+
+Agent A2:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init q0
+shared[2] syncwithA2[syncwithA2]: q0 -> q1
+idle: q0 -> q0
+
+FORMULA: <<A1>>[](State==1)

@@ -82,6 +82,7 @@ $(document).ready(function(){initNavTree('structGlobalState.html',''); initResiz
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="structGlobalState-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -92,22 +93,23 @@ $(document).ready(function(){initNavTree('structGlobalState.html',''); initResiz
 <p>Represents a single global state.  
  <a href="structGlobalState.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="Types_8hpp_source.html">Types.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="GlobalState_8hpp_source.html">GlobalState.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5e2c53ae6d50c58d9b54d4dd0ba34f74"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a5e2c53ae6d50c58d9b54d4dd0ba34f74">toString</a> (string indent=&quot;&quot;)</td></tr>
+<tr class="memdesc:a5e2c53ae6d50c58d9b54d4dd0ba34f74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug information on the given <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a>.  <a href="structGlobalState.html#a5e2c53ae6d50c58d9b54d4dd0ba34f74">More...</a><br /></td></tr>
+<tr class="separator:a5e2c53ae6d50c58d9b54d4dd0ba34f74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a102da8b349dd138c16fe376fbb4ba8d8"><td class="memItemLeft" align="right" valign="top">map&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a102da8b349dd138c16fe376fbb4ba8d8">getGlobalStateEnvironment</a> ()</td></tr>
+<tr class="memdesc:a102da8b349dd138c16fe376fbb4ba8d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get for the environment of a given global state.  <a href="structGlobalState.html#a102da8b349dd138c16fe376fbb4ba8d8">More...</a><br /></td></tr>
+<tr class="separator:a102da8b349dd138c16fe376fbb4ba8d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa687c3850ec9a843ae3e903ee555e00c"><td class="memItemLeft" align="right" valign="top"><a id="aa687c3850ec9a843ae3e903ee555e00c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#aa687c3850ec9a843ae3e903ee555e00c">id</a></td></tr>
-<tr class="memdesc:aa687c3850ec9a843ae3e903ee555e00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the global state. <br /></td></tr>
-<tr class="separator:aa687c3850ec9a843ae3e903ee555e00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441ac69c0383abf8feb652daab8b33b7"><td class="memItemLeft" align="right" valign="top"><a id="a441ac69c0383abf8feb652daab8b33b7"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a441ac69c0383abf8feb652daab8b33b7">hash</a></td></tr>
 <tr class="memdesc:a441ac69c0383abf8feb652daab8b33b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hash of the global state used in quick checks if the states are in the same epistemic class. <br /></td></tr>
 <tr class="separator:a441ac69c0383abf8feb652daab8b33b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a527373fc0711c77277191a4c9d89dccc"><td class="memItemLeft" align="right" valign="top"><a id="a527373fc0711c77277191a4c9d89dccc"></a>
-map&lt; <a class="el" href="structVar.html">Var</a> *, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a527373fc0711c77277191a4c9d89dccc">vars</a></td></tr>
-<tr class="memdesc:a527373fc0711c77277191a4c9d89dccc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of model variables and their current values. <br /></td></tr>
-<tr class="separator:a527373fc0711c77277191a4c9d89dccc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5d81b1f8e057f2ae62513f1471ba0c1"><td class="memItemLeft" align="right" valign="top"><a id="ae5d81b1f8e057f2ae62513f1471ba0c1"></a>
 map&lt; <a class="el" href="classAgent.html">Agent</a> *, <a class="el" href="structEpistemicClass.html">EpistemicClass</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ae5d81b1f8e057f2ae62513f1471ba0c1">epistemicClasses</a></td></tr>
 <tr class="memdesc:ae5d81b1f8e057f2ae62513f1471ba0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of agents and the epistemic classes that belongs to the respective agent. <br /></td></tr>
@@ -117,22 +119,73 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 <tr class="memdesc:afd4eaea4861b96810c9e1de175a0c35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary. <br /></td></tr>
 <tr class="separator:afd4eaea4861b96810c9e1de175a0c35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7fb8df92923463538071039a0066a6d"><td class="memItemLeft" align="right" valign="top"><a id="ae7fb8df92923463538071039a0066a6d"></a>
-<a class="el" href="Types_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048">GlobalStateVerificationStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ae7fb8df92923463538071039a0066a6d">verificationStatus</a></td></tr>
+GlobalStateVerificationStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ae7fb8df92923463538071039a0066a6d">verificationStatus</a></td></tr>
 <tr class="memdesc:ae7fb8df92923463538071039a0066a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current verifivation status of this state. <br /></td></tr>
 <tr class="separator:ae7fb8df92923463538071039a0066a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab82eec24f8aae99faf18d6434487d0d7"><td class="memItemLeft" align="right" valign="top"><a id="ab82eec24f8aae99faf18d6434487d0d7"></a>
 set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ab82eec24f8aae99faf18d6434487d0d7">globalTransitions</a></td></tr>
 <tr class="memdesc:ab82eec24f8aae99faf18d6434487d0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every <a class="el" href="structGlobalTransition.html" title="Represents a single global transition.">GlobalTransition</a> in the model. <br /></td></tr>
 <tr class="separator:ab82eec24f8aae99faf18d6434487d0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a567d8b2e461ed46b4ec31d51a777efe4"><td class="memItemLeft" align="right" valign="top"><a id="a567d8b2e461ed46b4ec31d51a777efe4"></a>
-set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a567d8b2e461ed46b4ec31d51a777efe4">localStates</a></td></tr>
-<tr class="memdesc:a567d8b2e461ed46b4ec31d51a777efe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local states of each agent that define this global state. <br /></td></tr>
-<tr class="separator:a567d8b2e461ed46b4ec31d51a777efe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4baebd90504941bbabd20cbc4b0cfe3"><td class="memItemLeft" align="right" valign="top"><a id="ad4baebd90504941bbabd20cbc4b0cfe3"></a>
+vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ad4baebd90504941bbabd20cbc4b0cfe3">localStatesProjection</a></td></tr>
+<tr class="memdesc:ad4baebd90504941bbabd20cbc4b0cfe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local states of each agent that define this global state. <br /></td></tr>
+<tr class="separator:ad4baebd90504941bbabd20cbc4b0cfe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single global state. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="Types_8hpp_source.html">Types.hpp</a></li>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a102da8b349dd138c16fe376fbb4ba8d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a102da8b349dd138c16fe376fbb4ba8d8">&#9670;&nbsp;</a></span>getGlobalStateEnvironment()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">map&lt; string, int &gt; GlobalState::getGlobalStateEnvironment </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get for the environment of a given global state. </p>
+<dl class="section return"><dt>Returns</dt><dd>A map of variable names and their values for the current global state. </dd></dl>
+
+</div>
+</div>
+<a id="a5e2c53ae6d50c58d9b54d4dd0ba34f74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e2c53ae6d50c58d9b54d4dd0ba34f74">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GlobalState::toString </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>indent</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Debug information on the given <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indent</td><td>- optional indentation string </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> data</dd>
+<dd>
+<a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> data </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li><a class="el" href="GlobalState_8hpp_source.html">GlobalState.hpp</a></li>
+<li><a class="el" href="GlobalState_8cpp.html">GlobalState.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

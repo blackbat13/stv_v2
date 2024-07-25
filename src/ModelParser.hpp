@@ -18,6 +18,7 @@ public:
     ModelParser();
     ~ModelParser();
     tuple<LocalModels, Formula> parse(string fileName);
+    tuple<LocalModels, Formula> parseAndOverwriteFormula(string fileName, string s);
     
 protected:
     // @internal

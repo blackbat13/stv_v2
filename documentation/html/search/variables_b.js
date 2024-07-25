@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['patternname_398',['patternName',['../classTransitionTemplate.html#ac3fc56220e83b1b8f5e1661b3b5d5ab0',1,'TransitionTemplate']]],
-  ['persistent_399',['persistent',['../structVar.html#aa32055d36c033ef3c9961aed76cb85d6',1,'Var']]],
-  ['prev_400',['prev',['../structHistoryEntry.html#aa07d62eba982b1671b3abcbf0ce9ba9c',1,'HistoryEntry']]],
-  ['prevstatus_401',['prevStatus',['../structHistoryEntry.html#a99e34ecadba76fd7a1d47e8e47891df5',1,'HistoryEntry']]]
+  ['output_5fdot_5ffiles_449',['output_dot_files',['../structCfg.html#a0c2ee0e48b6ca67924161287deefcc6f',1,'Cfg']]],
+  ['output_5fglobal_5fmodel_450',['output_global_model',['../structCfg.html#a04d390956b37d33a3c62d2e482e9b21f',1,'Cfg']]],
+  ['output_5flocal_5fmodels_451',['output_local_models',['../structCfg.html#afe7b0d13fc6f88e1cc75a1dba96e001a',1,'Cfg']]]
 ];

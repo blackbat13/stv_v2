@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mark_5fdecision_5fas_5finvalid_428',['MARK_DECISION_AS_INVALID',['../Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae',1,'Verification.hpp']]]
+  ['local_5fmodel_479',['LOCAL_MODEL',['../DotGraph_8hpp.html#af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723',1,'DotGraph.hpp']]]
 ];

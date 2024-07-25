@@ -8,7 +8,13 @@
 #include "simple_voting_test.h"
 #include "simple_voting_with_fakes_test.h"
 #include "simple_voting_run_test.h"
+#include "simple_voting_test_but_faster.h"
+#include "simple_voting_run_test_but_faster.h"
 #include "clock_test.h"
+#include "knowledge_test.h"
+#include "hartley_test.h"
+#include "ctl_test.h"
+#include "input_error_test.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

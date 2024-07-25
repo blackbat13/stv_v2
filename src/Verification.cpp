@@ -7,6 +7,8 @@
 #include "Verification.hpp"
 #define DEPTH_PREFIX string(depth * 4, ' ')
 
+#include <bits/stdc++.h>
+
 extern Cfg config;
 
 /// @brief Converts global verification status into a string.
@@ -144,7 +146,7 @@ bool Verification::verify() {
 /// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
 /// @param localStates A pointer to a set of pointers to LocalState.
 /// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.
-bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
+bool Verification::verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState) {
     map<string, int> currEnv; // [YK]: temporary solution assuming that Agents environments are disjoint
 
     for (const auto localState : *localStates) {
@@ -152,7 +154,13 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates) {
             currEnv[it->first] = it->second;
         }
     }
-    return this->generator->getFormula()->p->eval(currEnv)==1;
+    auto val = *this->generator->getFormula()->p;
+    if (val[0]->eval(currEnv, generator, globalState)==1 && generator->getFormulaCorectness()) {
+        return true;
+    } else if (!generator->getFormulaCorectness()) {
+        throw std::runtime_error("Incorrect variable name");
+    }
+    return false;
 }
 
 /// @brief Recursively verifies GlobalState 
@@ -176,6 +184,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     #endif
 
     bool isFMode = this->generator->getFormula()->isF;
+    bool isCTLMode = this->generator->getFormula()->isCTL;
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         return false;
@@ -202,16 +211,16 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     
     // 1) verify localStates that the globalState is composed of
-    if (isFMode) {
-        if (this->verifyLocalStates(&globalState->localStatesProjection)) {
+    if (isFMode) { // F
+        if (this->verifyLocalStates(&globalState->localStatesProjection, globalState)) {
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
             return true;
         }
     }
-    else {
-        if (!this->verifyLocalStates(&globalState->localStatesProjection)) {
+    else { // G
+        if (!this->verifyLocalStates(&globalState->localStatesProjection, globalState)) {
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
@@ -232,6 +241,12 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     bool hasOmittedTransitions = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
+        // if CTL then treat everything as uncontrolled transitions
+        if (isCTLMode) {
+            uncontrolledGlobalTransitions.insert(globalTransition);
+            continue;
+        }
+
         if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
             if (fixedGlobalTransition == nullptr) {
                 controlledGlobalTransitions.insert(globalTransition);
@@ -253,6 +268,65 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
         else {
             uncontrolledGlobalTransitions.insert(globalTransition);
+        }
+    }
+    // solve the uncontrolled transition blocking the controlled transition, making it uncontrolled
+    if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
+        set<Agent*> agents = generator->getFormula()->coalition;
+        set<Agent*> brokenAgents;
+        set<Agent*> potentiallyBrokenAgents;
+        // find if there are uncontrolled actions with only agents that are not in coalition, if yes, then they can block the controlled actions if they are a participants
+        for (const auto globalTransition : uncontrolledGlobalTransitions) {
+            bool agentTest = false;
+            for (auto glob : globalTransition->localTransitions) {
+                for (auto agt : agents) {
+                    if (glob->agent->name.c_str() == agt->name.c_str()) {
+                        agentTest = true;
+                        break;
+                    }
+                }
+                if(agentTest) {
+                    potentiallyBrokenAgents.clear();
+                    break;
+                }
+                else {
+                    potentiallyBrokenAgents.insert(glob->agent);
+                }
+            }
+            // if the global transition can fire without any of the coalition agents, mark the agents participating as a definitely faulty ones
+            if (!agentTest) {
+                brokenAgents.insert(potentiallyBrokenAgents.begin(), potentiallyBrokenAgents.end());
+                potentiallyBrokenAgents.clear();
+            }
+        }
+        // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
+        if (brokenAgents.size() > 0) {
+            stack<GlobalTransition*> transitionsToBeMoved;
+            // mark bad controlled global transition as uncontrolled
+            for (const auto globalTransition : controlledGlobalTransitions) {
+                bool agentTest = true;
+                for (auto localTrans : globalTransition->localTransitions) {
+                    bool brokenAgentFound = false;
+                    for (auto agt : brokenAgents) {
+                        if(localTrans->agent->name.c_str() == agt->name.c_str()) {
+                            brokenAgentFound = true;
+                            break;
+                        }
+                    }
+                    if(brokenAgentFound) {
+                        agentTest = false;
+                    }
+                }
+                if (!agentTest) {
+                    transitionsToBeMoved.push(globalTransition);
+                }
+            }
+            while (!transitionsToBeMoved.empty()) {
+                GlobalTransition* tr = transitionsToBeMoved.top();
+                transitionsToBeMoved.pop();
+                uncontrolledGlobalTransitions.insert(tr);
+                controlledGlobalTransitions.erase(tr);
+            }
         }
     }
 
@@ -749,6 +823,16 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         // Maybe a controlled action is an option too
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
+            // for (const auto globalTransition : uncontrolledGlobalTransitions) {
+            //     set<Agent*> agents = generator->getFormula()->coalition;
+            //     for (auto agt : agents) {
+            //         cout << (*globalTransition->localTransitions.begin())->name << " " << (*globalTransition->localTransitions.begin())->agent->name.c_str() << " ? " << agt->name << endl;
+            //         if ((*globalTransition->localTransitions.begin())->agent->name.c_str() != agt->name.c_str()) {
+            //             cout << "uh oh" << endl;
+            //             hasValidChoiceTransition = false;
+            //         }
+            //     }
+            // }
             if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
                 hasValidChoiceTransition = false;
             }
@@ -840,4 +924,45 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
     }
 
     return matches;
+}
+
+/// @brief Prints out the first ERR path.
+void Verification::historyDecisionsERR() {
+    GlobalState* lastState = this->generator->getCurrentGlobalModel()->initState;
+    set<string> visited;
+    visited.insert(lastState->hash);
+    bool changed = true;
+    
+    while (changed) {
+        cout << "States:" << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout << local->name << ";";
+        }
+        cout << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout << "[" << local->agent->name << "] " << local->name << " (";
+            for (auto val : local->environment) {
+                cout << val.first << "=" << val.second << ";";
+            }
+            cout << ")" << endl;
+        }
+        cout << endl;
+
+        changed = false;
+        for (auto transition : lastState->globalTransitions) {
+            if (transition->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_ERR) {
+                lastState = transition->to;
+                cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
+                for (auto val : transition->localTransitions) {
+                    cout << "[" << val->agent->name << "]" << " " << val->name << endl;
+                }
+                cout << endl;
+                if (visited.find(transition->to->hash) == visited.end()) {
+                    changed = true;
+                }
+                visited.insert(transition->to->hash);
+                break;
+            }
+        }
+    }
 }

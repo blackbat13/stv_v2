@@ -1,0 +1,308 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{lbcolor}{rgb}{0.95, 0.95, 0.95}
+
+\lstset{
+    language=bash,
+    captionpos=b,
+    keywordstyle=\bfseries\ttfamily\color[rgb]{0, 0, 1},
+    identifierstyle=\ttfamily,
+    commentstyle=\color[rgb]{0.133, 0.545, 0.133},
+    stringstyle=\ttfamily\color[rgb]{0.627, 0.126, 0.941},
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    tabsize=2,
+    breaklines=true,
+    prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+    breakatwhitespace=true,
+    aboveskip={\baselineskip},
+    columns=fixed,
+    upquote=true,
+    extendedchars=true,
+    frame=single,
+    backgroundcolor=\color{lbcolor}
+}
+
+\begin{document}
+
+\title{stv\_v2 Manual}
+\author{Institute of Computer Science of Polish Academy of Sciences}
+\date{\today}
+\maketitle
+\vspace*{12cm}
+
+\pagenumbering{roman}
+\tableofcontents
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+
+\newpage
+
+\section{Usage}
+Basic functionality of stv\_v2.
+
+\subsection{Build}
+\begin{lstlisting}
+  cd build
+  make clean
+  make
+\end{lstlisting}
+or
+\begin{lstlisting}
+  cd build
+  ./build-run
+\end{lstlisting}
+
+\subsection{Run}
+\begin{lstlisting}
+  ./stv
+\end{lstlisting}
+
+\section{Changing default settings}
+How to change default run of stv\_v2.
+
+\subsection{Config file}
+Some options can be changed straight from the config file that is in:
+\begin{lstlisting}
+  build/config.txt
+\end{lstlisting}
+
+\bigbreak\bigbreak
+\subsection{Options}
+The following options are acceptable:
+\begin{itemize}
+  \item Change model file path:
+  \begin{lstlisting}
+    ./stv --file PATH_TO_MODEL 
+    ./stv -f PATH_TO_MODEL 
+  \end{lstlisting}
+  \item Change mode:
+  \begin{itemize}
+    \item Normal mode:
+    \begin{lstlisting}
+      ./stv -m 0
+    \end{lstlisting}
+    \item Generate GlobalModel:
+    \begin{lstlisting}
+      ./stv -m 1
+    \end{lstlisting}
+    \item Run verification:
+    \begin{lstlisting}
+      ./stv -m 2
+    \end{lstlisting}
+    \item Generate GlobalModel and run verification:
+    \begin{lstlisting}
+      ./stv -m 3
+    \end{lstlisting}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Flags}
+Avaliable flags:
+\begin{itemize}
+  \item stdout data on global model (after expandAllStates):
+  \begin{lstlisting}
+    --OUTPUT_GLOBAL_MODEL
+  \end{lstlisting}
+  \item stdout data on local models:
+  \begin{lstlisting}
+    --OUTPUT_LOCAL_MODELS
+  \end{lstlisting}
+  \item generate .dot files for agent templates, local and global models:
+  \begin{lstlisting}
+    --OUTPUT_DOT_FILES 
+  \end{lstlisting}
+  \item generate global models with epsilon transitions:
+  \begin{lstlisting}
+    --ADD_EPSILON_TRANSITIONS
+  \end{lstlisting}
+  \item replace the formula from the model file with a different one:
+  \begin{lstlisting}
+    --OVERWRITE_FORMULA [formula]
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example formula replacement with another one.}]
+    --OVERWRITE_FORMULA "FORMULA: <<Voter1>><>(Voter1_vote == 1)"
+  \end{lstlisting}
+  \item output counterexample path if the formula verification returns an ERR:
+  \begin{lstlisting}
+    --COUNTEREXAMPLE
+  \end{lstlisting}
+\end{itemize}
+
+\section{Creating a model}
+Model creation info.
+\subsection{Model description}
+
+\subsubsection{Agents}
+Describing a new agent starts with a new line with a keyword $Agent$ followed by the name of the agent and a colon.
+\begin{lstlisting}[title={Creating an agent with a name "newAgentName".}]
+  Agent newAgentName:
+\end{lstlisting}
+Then a few agent description lines follow.
+\begin{itemize}
+  \item In a new line starting with a keyword $LOCAL$, we add local variable names in square brackets, separated by a by a comma if there's more than one variable. We can also leave the brackets empty.
+  \begin{lstlisting}[title={Creating local variables named "variableName1", "variableName2".}]
+    LOCAL: [variableName1, variableName2, ...]
+  \end{lstlisting}
+  \item In a new line starting with a keyword $PERSISTENT$, we add variable names of the variables, which value should be remembered at all times. As previously, we add the names in square brackets, separated by a comma if there's more than one variable. We can also leave the brackets empty.
+  \begin{lstlisting}[title={Making local variables named "variableName1", "variableName2" and so on, persistent.}]
+    PERSISTENT: [variableName1, variableName2, ...]
+  \end{lstlisting}
+  \item In a new line starting with a keyword $INITIAL$, we can set the values of the created variables using an $:=$ operator after the variable name and assigning it an integer. As previously, we add the names in square brackets, separated by a comma if there's more than one variable. We can also leave the brackets empty. The default value for each variable is 0.
+  \begin{lstlisting}[title={Setting a value 7777 to the "variableName1" variable and so on.}]
+    INITIAL: [variableName1:=7777, ...]
+  \end{lstlisting}
+  \item In a new line starting with a keyword $init$, we have to set the name of the initial local state from which the agent is going to start.
+  \begin{lstlisting}[title={Setting the "q0" as the initial state in the local model.}]
+    init q0
+  \end{lstlisting}
+\end{itemize}
+
+\subsubsection{Actions}
+Following the previous lines, we can specify the actions avaliable for the agent, each new action in a new line.
+First we enter the action name, then after a colon we specify the avaliable action by writing a state, from which the model will be able to execute the action, then an "arrow" ($->$) operator and finally a state to which we will move after executing the action.
+\begin{lstlisting}[title={Making a loop out of 3 actions: action1, action2 and action3.}]
+  action1: q0 -> q1
+  action2: q1 -> q2
+  action3: q2 -> q0
+\end{lstlisting}
+
+\subsubsection{Shared actions}
+If the action will be shared with another agent he have to start the action by writing a keyword $shared$. Then in square brackets we have to write and integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual.
+\begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent. The current agent will be the one performing the sync.}]
+  shared[2] action1[action1]: q0 -> q1
+\end{lstlisting}
+\begin{lstlisting}[title={Creating an action that will synchronize with 2 other agent. The current agent will be the one waiting for sync.}]
+  shared[3] action1[someAction]: q0 -> q1
+\end{lstlisting}
+
+\subsubsection{Conditions}
+To add a condition for an action to fire, we have to add the condition between the square brackets between the initial state name and the arrow operator.
+\begin{lstlisting}[title={Local action that can only fire if someLocalValue is equal to 1.}]
+  action1: q0 [someLocalValue==1] -> q1
+\end{lstlisting}
+
+\subsubsection{Variable change}
+To change the variable after the action fires, we have to add the change between the square brackets after the name of the state that we moved to in this action. If you have to assign multiple variables, you can separate the variable assignment instances with a comma.
+\begin{lstlisting}[title={Action that sets the value of someLocalValue to 1 and localValue to 2.}]
+  action1: q0 -> q1 [someLocalValue:=1, localValue:=2]
+\end{lstlisting}
+\begin{lstlisting}[title={Action that sets the value of someLocalValue to 7777.}]
+  action1: q0 -> q1 [someLocalValue:=7777]
+\end{lstlisting}
+
+\subsubsection{Comments}
+To add a comment, put a $\#$ in a text line. Every alphanumeric character, including spaces and tabs from this point on will be treated as a comment, until a new line begins.
+\begin{lstlisting}[title={Example comments in a file.}]
+  action1: q0 -> q1 #this is a comment
+  action2: q0 -> q1 # this is also a comment
+  action3: q0 -> q1 #   this   is   a   comment   too
+  # this also works
+\end{lstlisting}
+
+\subsection{Formula description}
+Formula description starts in a new line with a keyword $FORMULA$. After a colon, you enter the optional agent coalition in double angle brackets, for which you want to verify the formula. If you omit specifying the agent coalition, the formula will be verified for CTL instead. Then, you use one of the symbols used for verification:
+\begin{itemize}
+  \item \verb+[]+ -- G -- Globally
+  \item \verb+<>+ -- F -- Finally
+\end{itemize}
+Additionally you can specify the following knowledge operators:
+\begin{itemize}
+  \item $\&K{\_}agent(formula)$ -- Knowledge (Agent name needed after the "{\_}". Lastly, you write the formula that you want to check in round brackets.)
+  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy (Agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Lastly, you write the formulas that you want to check in round brackets. Allows for listing more than one formula, separated with commas, each formula encapsulated within round brackets.)
+\end{itemize}
+\begin{lstlisting}[title={A formula that checks if there is a strategy that globally Agent1 could take such actions that the value will be always equal to 1 or 7777.}]
+  FORMULA: <<Agent1>>[](value==1 || value==7777)
+\end{lstlisting}
+\begin{lstlisting}[title={A formula that uses a knowledge operator.}]
+  FORMULA: <<Agent1>><>K_Agent2(value==1 || value==7777)
+\end{lstlisting}
+\begin{lstlisting}[title={A formula that uses a Hartley operator.}]
+  FORMULA: <<Agent1>>[]H_Agent2[>=3]((value==1 || value==7777),(value==2))
+\end{lstlisting}
+
+\subsection{Avaliable operators}
+List of avaliable operators for conditions, variable changes and formula description:
+\begin{itemize}
+  \item \verb+:=+ -- Variable assignment.
+  \item \verb+||+ -- Logic OR.
+  \item \verb+&&+ -- Logic AND.
+  \item \verb+==+ -- Equal.
+  \item \verb+!=+ -- Not equal.
+  \item \verb+>=+ -- Greater or equal.
+  \item \verb+>+ -- Greater.
+  \item \verb+<=+ -- Less or equal.
+  \item \verb+<+ -- Less.
+  \item \verb+()+ -- Brackets.
+  \item \verb+!+ -- Negation of a variable.
+  \item \verb+++ -- Addition of two variables.
+  \item \verb+-+ -- Subtraction of two variables.
+  \item \verb+*+ -- Multiplication of two variables.
+  \item \verb+/+ -- Division of two variables, returns an integer.
+  \item \verb+%+ -- Modulo of two variables.
+  \item $\&K{\_}agent(formula)$ -- Knowledge
+  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy
+\end{itemize}
+
+
+
+\subsection{Running a specific model}
+As mentioned previously, use the corresponding option to change the model file path.
+
+\subsection{Example model}
+A classic example model of two voters trying to vote as they want, choosing between two candidates. There's also a coercer, trying to force them to vote on a specific candidate by punishing them or not after casting a vote.
+\begin{lstlisting}
+Agent Voter1:
+LOCAL: [Voter1_vote]
+PERSISTENT: [Voter1_vote]
+INITIAL: []
+init q0
+voter1vote1: q0 -> q1 [Voter1_vote:=1]
+shared[2] gv_1_Voter1[gv_1_Voter1]: q1 [Voter1_vote==1] -> q2
+voter1vote2: q0 -> q1 [Voter1_vote:=2]
+shared[2] gv_2_Voter1[gv_2_Voter1]: q1 [Voter1_vote==2] -> q2
+shared[2] ng_Voter1[ng_Voter1]: q1 -> q2
+shared[2] pun_Voter1[pn_Voter1]: q2 -> q3
+shared[2] npun_Voter1[pn_Voter1]: q2 -> q3
+idle: q3->q3
+
+Agent Voter2:
+LOCAL: [Voter2_vote]
+PERSISTENT: [Voter2_vote]
+INITIAL: []
+init q0
+voter2vote1: q0 -> q1 [Voter2_vote:=1]
+shared[2] gv_1_Voter2[gv_1_Voter2]: q1 [Voter2_vote==1] -> q2
+voter2vote2: q0 -> q1 [Voter2_vote:=2]
+shared[2] gv_2_Voter2[gv_2_Voter2]: q1 [Voter2_vote==2] -> q2
+shared[2] ng_Voter2[ng_Voter2]: q1 -> q2
+shared[2] pun_Voter2[pn_Voter2]: q2 -> q3
+shared[2] npun_Voter2[pn_Voter2]: q2 -> q3
+idle: q3->q3
+
+Agent Coercer1:
+LOCAL: [Coercer1_Voter1_vote, Coercer1_Voter1_gv, Coercer1_pun1, Coercer1_npun1, Coercer1_Voter2_vote, Coercer1_Voter2_gv, Coercer1_pun2, Coercer1_npun2]
+PERSISTENT: [Coercer1_Voter1_vote, Coercer1_Voter1_gv, Coercer1_pun1, Coercer1_npun1, Coercer1_Voter2_vote, Coercer1_Voter2_gv, Coercer1_pun2, Coercer1_npun]
+INITIAL: []
+init q0
+shared[2] gv_1_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_vote:=1, Coercer1_Voter1_gv:=1]
+shared[2] gv_2_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_vote:=2, Coercer1_Voter1_gv:=1]
+shared[2] ng_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_gv:=2]
+shared[2] pun_Voter1[pun_Voter1]: q2 -> q3 [Coercer1_pun1:=1]
+shared[2] npun_Voter1[npun_Voter1]: q2 -> q3 [Coercer1_npun1:=1]
+
+shared[2] gv_1_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_vote:=1, Coercer1_Voter2_gv:=1]
+shared[2] gv_2_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_vote:=2, Coercer1_Voter2_gv:=1]
+shared[2] ng_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_gv:=2]
+shared[2] pun_Voter2[pun_Voter2]: q3 -> q4 [Coercer1_pun2:=1]
+shared[2] npun_Voter2[npun_Voter2]: q3 -> q4 [Coercer1_npun2:=1]
+
+FORMULA: <<Voter1>>[](((Voter1_vote == 1) && (Coercer1_npun1 == 1)) || ((Voter2_vote == 1) && (Coercer1_npun2 == 1)))
+\end{lstlisting}
+\end{document}

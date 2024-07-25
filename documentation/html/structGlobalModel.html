@@ -92,7 +92,7 @@ $(document).ready(function(){initNavTree('structGlobalModel.html',''); initResiz
 <p>Represents a global model, containing agents and a formula.  
  <a href="structGlobalModel.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="Types_8hpp_source.html">Types.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="GlobalModel_8hpp_source.html">GlobalModel.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -112,19 +112,19 @@ vector&lt; <a class="el" href="classAgent.html">Agent</a> * &gt;&#160;</td><td c
 vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalModel.html#adc5b27422d2f1f31cb1fbe251855ff6e">globalStates</a></td></tr>
 <tr class="memdesc:adc5b27422d2f1f31cb1fbe251855ff6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> in the model. <br /></td></tr>
 <tr class="separator:adc5b27422d2f1f31cb1fbe251855ff6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acedd39c3f744a0823b8c555e921bd2a2"><td class="memItemLeft" align="right" valign="top"><a id="acedd39c3f744a0823b8c555e921bd2a2"></a>
-vector&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalModel.html#acedd39c3f744a0823b8c555e921bd2a2">globalTransitions</a></td></tr>
-<tr class="memdesc:acedd39c3f744a0823b8c555e921bd2a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every <a class="el" href="structGlobalTransition.html" title="Represents a single global transition.">GlobalTransition</a> in the model. <br /></td></tr>
-<tr class="separator:acedd39c3f744a0823b8c555e921bd2a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60eb7ac94bb32e1b2deeb9b19a4b61f3"><td class="memItemLeft" align="right" valign="top"><a id="a60eb7ac94bb32e1b2deeb9b19a4b61f3"></a>
 map&lt; <a class="el" href="classAgent.html">Agent</a> *, map&lt; string, <a class="el" href="structEpistemicClass.html">EpistemicClass</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalModel.html#a60eb7ac94bb32e1b2deeb9b19a4b61f3">epistemicClasses</a></td></tr>
-<tr class="memdesc:a60eb7ac94bb32e1b2deeb9b19a4b61f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> pointers to a map of <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a>. <br /></td></tr>
+<tr class="memdesc:a60eb7ac94bb32e1b2deeb9b19a4b61f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> pointers to a map of <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a> for graph traversal. <br /></td></tr>
 <tr class="separator:a60eb7ac94bb32e1b2deeb9b19a4b61f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe331c17cec932b9bc8b29ade4624eaa"><td class="memItemLeft" align="right" valign="top"><a id="abe331c17cec932b9bc8b29ade4624eaa"></a>
+map&lt; <a class="el" href="classAgent.html">Agent</a> *, map&lt; string, set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalModel.html#abe331c17cec932b9bc8b29ade4624eaa">epistemicClassesKnowledge</a></td></tr>
+<tr class="memdesc:abe331c17cec932b9bc8b29ade4624eaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> pointers to a map of <a class="el" href="structEpistemicClass.html" title="Represents a single epistemic class.">EpistemicClass</a> for knowledge checks. <br /></td></tr>
+<tr class="separator:abe331c17cec932b9bc8b29ade4624eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a global model, containing agents and a formula. </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="Types_8hpp_source.html">Types.hpp</a></li>
+<li><a class="el" href="GlobalModel_8hpp_source.html">GlobalModel.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

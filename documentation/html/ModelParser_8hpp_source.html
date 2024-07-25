@@ -98,13 +98,14 @@ $(document).ready(function(){initNavTree('ModelParser_8hpp_source.html',''); ini
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="classModelParser.html">ModelParser</a>();</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    ~<a class="code" href="classModelParser.html">ModelParser</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    tuple&lt;LocalModels*, Formula*&gt; parse(<span class="keywordtype">string</span> fileName);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// @internal</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;};</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    tuple&lt;LocalModels, Formula&gt; parse(<span class="keywordtype">string</span> fileName);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    tuple&lt;LocalModels, Formula&gt; parseAndOverwriteFormula(<span class="keywordtype">string</span> fileName, <span class="keywordtype">string</span> s);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// @internal</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aTypes_8hpp_html"><div class="ttname"><a href="Types_8hpp.html">Types.hpp</a></div><div class="ttdoc">Custom data structures. Data structures and classes containing model data.</div></div>
 <div class="ttc" id="aclassModelParser_html"><div class="ttname"><a href="classModelParser.html">ModelParser</a></div><div class="ttdoc">A parser for converting a text file into a model.</div><div class="ttdef"><b>Definition:</b> ModelParser.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->

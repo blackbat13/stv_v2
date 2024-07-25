@@ -37,7 +37,13 @@ int main(int argc, char* argv[]) {
 
     auto tp = new ModelParser();
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
-    tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+    tuple<LocalModels, Formula> desc;
+    if (!config.formula_from_parameter) {
+        desc = tp->parse(config.fname);
+    }
+    else {
+        desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
+    }
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
@@ -84,7 +90,15 @@ int main(int argc, char* argv[]) {
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
-        printf("Verification result: %s\n", verification->verify() ? "OK" : "ERR");
+        bool verifResult = verification->verify();
+        printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
+        if (!verifResult && config.counterexample) {
+            verification->historyDecisionsERR();
+        }
+        if(config.output_dot_files && verifResult){
+            // save GlobalModel solution
+            DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
+        }
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)

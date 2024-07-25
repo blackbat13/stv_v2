@@ -15,7 +15,7 @@
 \mbox{\Hypertarget{classDotGraph_af729d471e72486912d422d96ad7276a9}\label{classDotGraph_af729d471e72486912d422d96ad7276a9}} 
 \mbox{\hyperlink{classDotGraph_af729d471e72486912d422d96ad7276a9}{Dot\+Graph}} (\mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} $\ast$const at)
 \begin{DoxyCompactList}\small\item\em parses the edge/state templates into nodes/edges \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classDotGraph_ac6a8481eae1c5e4e260c1c203957f864}{save\+To\+File}} (std\+::string filename=\char`\"{}\char`\"{})
+void \mbox{\hyperlink{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}{save\+To\+File}} (std\+::string pathprefix, std\+::string nameprefix, std\+::string basename=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em creates a {\ttfamily .dot} file \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -26,11 +26,11 @@ std\+::vector$<$ std\+::string $>$ {\bfseries nodes}
 \mbox{\Hypertarget{classDotGraph_a87709043cda8c808af92f859bc8fe09b}\label{classDotGraph_a87709043cda8c808af92f859bc8fe09b}} 
 std\+::vector$<$ std\+::string $>$ {\bfseries edges}
 \item 
-\mbox{\Hypertarget{classDotGraph_a5c4a5c95b8c552ca3006eb3d056caa54}\label{classDotGraph_a5c4a5c95b8c552ca3006eb3d056caa54}} 
-std\+::string {\bfseries name}
+\mbox{\Hypertarget{classDotGraph_afb6a27b53d5923ebf49d891bca687871}\label{classDotGraph_afb6a27b53d5923ebf49d891bca687871}} 
+std\+::string {\bfseries graph\+Name}
 \item 
-\mbox{\Hypertarget{classDotGraph_abb74879f036692ee42a9776e47ee3973}\label{classDotGraph_abb74879f036692ee42a9776e47ee3973}} 
-std\+::string {\bfseries caption}
+\mbox{\Hypertarget{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad}\label{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad}} 
+\mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{Dot\+Graph\+Base}} {\bfseries graph\+Base}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -83,11 +83,11 @@ creates a node string in graphviz syntax
 {\em name} & displayed node label/name \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classDotGraph_ac6a8481eae1c5e4e260c1c203957f864}\label{classDotGraph_ac6a8481eae1c5e4e260c1c203957f864}} 
+\mbox{\Hypertarget{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}\label{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}} 
 \index{DotGraph@{DotGraph}!saveToFile@{saveToFile}}
 \index{saveToFile@{saveToFile}!DotGraph@{DotGraph}}
 \doxysubsubsection{\texorpdfstring{saveToFile()}{saveToFile()}}
-{\footnotesize\ttfamily void Dot\+Graph\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{filename = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Dot\+Graph\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{pathprefix,  }\item[{std\+::string}]{nameprefix,  }\item[{std\+::string}]{basename = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
 
 
 
@@ -95,7 +95,7 @@ creates a {\ttfamily .dot} file
 
 
 \begin{DoxyParams}{Parameters}
-{\em filename} & name of file (parent graph name if blank) \\
+{\em basename} & name of file (parent graph name if blank) \\
 \hline
 \end{DoxyParams}
 
@@ -133,5 +133,5 @@ creates a {\ttfamily .dot} file
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Dot\+Graph.\+hpp\item 
-Dot\+Graph.\+cpp\end{DoxyCompactItemize}
+\mbox{\hyperlink{DotGraph_8hpp}{Dot\+Graph.\+hpp}}\item 
+\mbox{\hyperlink{DotGraph_8cpp}{Dot\+Graph.\+cpp}}\end{DoxyCompactItemize}
