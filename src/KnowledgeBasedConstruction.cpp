@@ -523,9 +523,6 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 				if(i==observation->size()) break;
 			}
 			
-			for(string label : labels) cout << label << " ";
-			cout<<endl;
-			
 			//search results of each action separately
 			for(string label : labels){
 				//find all global states succeeding the states in our current observation
@@ -543,7 +540,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					for(GlobalTransition* gt : gs->globalTransitions){
 						j++;
 						bool relevant = false;
-						for(LocalTransition* lt : gt->localTransitions) if((lt->agent->id==agent_id && lt->name==label) || (label==EPSILON && lt->name==label)){
+						for(LocalTransition* lt : gt->localTransitions) if(lt->agent->id==agent_id && lt->name==label){
 							//a local transition is only relevant if it belongs to both the agent in question, and represents the currently searched action
 							relevant = true;
 							break;
@@ -553,6 +550,37 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					}
 					if(i==observation->size()) break;
 				}
+				
+				//EPSILON greed
+				int succeedingSizeLast = 0;
+				//int greed = 0;
+				while(succeedingSizeLast < succeedingRaw.size()){
+					succeedingSizeLast = succeedingRaw.size();
+					int i = 0;
+					for(GlobalState* gs : succeedingRaw){
+						i++;
+						int j = 0;
+						//asm("INT3");
+						
+						//if(gs == (GlobalState *)0x1) cout << "HIT!" << endl;
+						//if(gs == (GlobalState *)0x1) break;//I have no clue why I have to do this, but at this point this seems to be the only solution that works (please send help)
+						if(gs->globalTransitions.size()<=0) break;
+						for(GlobalTransition* gt : gs->globalTransitions){
+							j++;
+							bool relevant = false;
+							for(LocalTransition* lt : gt->localTransitions) if(lt->name==EPSILON){
+								//a local transition is only relevant if it belongs to both the agent in question, and represents the currently searched action
+								relevant = true;
+								break;
+							}
+							if(relevant) succeedingRaw.insert(gt->to);
+							//if(relevant) greed++;
+							if(j==gs->globalTransitions.size()) break;
+						}
+						if(i==succeedingRaw.size()) break;
+					}
+				}
+				//cout<<"Greed: "<<greed<<endl;
 				
 				//if(succeedingRaw.size()==0) continue;
 				
@@ -591,12 +619,6 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					succeedingRawVector = succeedingRawVectorNext;
 				}
 				
-				// cout << "SOS:" << succeedingObservations.size() << endl;
-				// for(auto obs : succeedingObservations){
-					// cout << obs->size() << endl;
-				// }
-				
-				if(label==EPSILON) cout<<"#ESO: "<<succeedingObservations.size()<<endl;
 				//register all found transitions
 				for(set<GlobalState*>* obs : succeedingObservations){
 					tuple<
