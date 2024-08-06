@@ -236,8 +236,19 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		ls->id = ls_id;
 		//Generate a name for the new state
 		ls->name = "";
-		for(GlobalState* gs : obs)ls->name+=gs->hash+"-";
-		if(ls->name.size()>0) ls->name.pop_back();
+		for(GlobalState* gs : obs){
+			//Find the local state in the observation that belongs to the agent in focus and set the name of ls as the found state's name
+			for(LocalState* x : gs->localStatesProjection){
+				if(x->agent->id == agent_id){
+					ls->name+=x->name;
+					break;
+				}
+			}
+			//Every instance of the local state belonging to our agent is going to point to the same local state, so there is no need to continue searching
+			if(ls->name.size()>0) break;
+		}
+		//for(GlobalState* gs : obs)ls->name+=gs->hash+"-";
+		//if(ls->name.size()>0) ls->name.pop_back();
 		//Bind the state to the output agent
 		ls->agent = o;
 		o->localStates.push_back(ls);
