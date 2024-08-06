@@ -240,7 +240,10 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 			//Find the local state in the observation that belongs to the agent in focus and set the name of ls as the found state's name
 			for(LocalState* x : gs->localStatesProjection){
 				if(x->agent->id == agent_id){
+					//Copy over the name...
 					ls->name+=x->name;
+					//... and the variables while we're at it as well! (No need to search again! :D)
+					ls->environment = x->environment;
 					break;
 				}
 			}
