@@ -151,67 +151,40 @@ int main(int argc, char* argv[]) {
     }
     
 	if(config.kbc){//run Filip Jamroga's code (location to be changed)
-		// GlobalState* s0 = generator->getCurrentGlobalModel()->globalStates[0];
-		// std::pair<Agent*, EpistemicClass*> firstEntry = *s0->epistemicClasses.begin();
-		// GlobalState* s1 = generator->getCurrentGlobalModel()->globalStates[1];
-		// GlobalState* s2 = generator->getCurrentGlobalModel()->globalStates[2];
-		//asm("INT3");
-		DotGraph(generator->getCurrentGlobalModel(), true).saveToFile("", "base-");
-		// GlobalModel* clonedGM = cloneGlobalModel(localModels, formula);
-		// DotGraph(clonedGM, true).saveToFile("", "clone-");
-		// KBCprojection(clonedGM, 0);
-		// DotGraph(clonedGM, true).saveToFile("", "projected-");
-		// KBCexpansion(clonedGM, 0);
-		// cout << " GS:" << generator->getCurrentGlobalModel()->globalStates.size() << "{";
-		// for(auto gs : generator->getCurrentGlobalModel()->globalStates)
-			// cout << gs->localStatesProjection.size() << ",";
-		// cout << "}" << endl;
+		//DotGraph(generator->getCurrentGlobalModel(), true).saveToFile("", "base-");
 		bool debugEpistemic = false;
 		if(debugEpistemic){
-			cout << endl << "Epistemic Debug Printout" << endl << "========================" << endl;
-			for(GlobalState* gs : generator->getCurrentGlobalModel()->globalStates){
-				cout << "S: " << gs->hash << endl;
-				for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
-					cout << "|- A: " << ee.first->id  << "| N: ";
-					for(LocalState* ls : gs->localStatesProjection){
-						if(ls->agent->id == ee.first->id) cout << ls->name << endl;
-					}
-					cout << "|- E: " << ee.second->globalStates.size() << endl;
-					for (const auto& [k, v] : ee.second->globalStates){
-						cout << "|  |- "<< k << endl;
-					}
-				}
-				cout << "‾‾‾‾‾" << endl;
-			}
-			cout << "========================" << endl;
+			cout << endl << "ERROR: Epistemic Debug Printout Deprecated" << endl;
+            return -1;
 		}else{
 			LocalModels KBCdLM;
-			for(int i=2; i<3; i++){//i<generator->getCurrentGlobalModel()->agents.size(); i++){
-				GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
-				// cout << "CGS:" << cloneModel->globalStates.size() << "{";
-				// for(auto gs : cloneModel->globalStates)
-					// cout << gs->localStatesProjection.size() << ",";
-				// cout << "}" << endl;
-				DotGraph(cloneModel, true).saveToFile("", "cloned-");
-				KBCprojection(cloneModel, i);
-				DotGraph(cloneModel, true).saveToFile("", "projected-");
-				DotGraph(cloneModel->agents[i]).saveToFile("", "base-local-");
-				Agent* a = KBCexpansion(cloneModel, i);
-				KBCdLM.agents.push_back(a);
-				DotGraph(a).saveToFile("", "kbc-");
-				cout << "---" << endl;
+            set<int> selectedAgents = {0, 1, 2, 3};
+			for(int i=0; i<generator->getCurrentGlobalModel()->agents.size(); i++){
+                if(selectedAgents.count(i)>0){
+                    GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
+                    //DotGraph(cloneModel, true).saveToFile("", "cloned-");
+                    KBCprojection(cloneModel, i);
+                    //DotGraph(cloneModel, true).saveToFile("", "projected-");
+                    //DotGraph(cloneModel->agents[i]).saveToFile("", "base-local-");
+                    Agent* a = KBCexpansion(cloneModel, i);
+                    KBCdLM.agents.push_back(a);
+                    //DotGraph(a).saveToFile("", "kbc-");
+                    cout << "Created a KBC'd version of Agent #" << i << endl;
+                }else{
+                    KBCdLM.agents.push_back(localModels->agents[i]->clone());
+                    cout << "Copied Agent #" << i << " verbatim\n";
+                }
 			}
+			cout << "Finished KBC iteration\n";
 			GlobalModelGenerator* KBCdGenerator = new GlobalModelGenerator();
-			KBCdGenerator->initModel(&KBCdLM, formula);
+            cout << ".\n";
+            KBCdGenerator->initModel(&KBCdLM, formula);
+            cout << ".\n";
 			KBCdGenerator->expandAllStates();
+            cout << "Attempting verification\n";
 			auto KBCverif = new Verification(KBCdGenerator);
 			printf("Post-KBC verification result: %s\n", KBCverif->verify() ? "OK" : "ERR");
 		}
-		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
-		// KBCprojection(generator->getCurrentGlobalModel(), 0);
-		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
-		// KBCexpansion(generator->getCurrentGlobalModel(), 0);
-		// cout << generator->getCurrentGlobalModel()->globalStates.size() << endl;
 	}
 
     if(false){

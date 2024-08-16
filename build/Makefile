@@ -1,7 +1,7 @@
 CC = g++ --std=c++17
 GTEST_DIR = /usr/src/googletest/googletest
 USER_DIR = ../tests
-CPPFLAGS += -g -isystem $(GTEST_DIR)/include
+CPPFLAGS += -g -O3 -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 	
 main: main.o GlobalModelGenerator.o ModelParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o KnowledgeBasedConstruction.o parser.o scanner.o expressions.o nodes.o 
