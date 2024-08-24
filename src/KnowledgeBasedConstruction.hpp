@@ -17,8 +17,7 @@
 
 using namespace std;
 
-//void mockKBC(GlobalModel *const gm);
-//void mockLocalKBC(Agent *const a);
+void ModelDotDump(GlobalModel *const gm, string prefix);
 void KBCprojection(GlobalModel *const gm, int agent_id);
 Agent* KBCexpansion(GlobalModel *const gm, int agent_id);
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula);

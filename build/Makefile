@@ -1,4 +1,4 @@
-CC = g++ --std=c++17
+CC = g++ --std=c++20
 GTEST_DIR = /usr/src/googletest/googletest
 USER_DIR = ../tests
 CPPFLAGS += -g -O3 -isystem $(GTEST_DIR)/include

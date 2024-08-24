@@ -5,10 +5,18 @@
  */
 
 #include "KnowledgeBasedConstruction.hpp"
+#include "DotGraph.hpp"
 
 using namespace::std;
 
 const bool kbc_debug = true;
+
+void ModelDotDump(GlobalModel *const gm, string prefix){
+	DotGraph(gm, true).saveToFile("KBCDOT", prefix+"global-");
+	for(Agent* a : gm->agents){
+		DotGraph(a).saveToFile("KBCDOT", prefix+"local-"+to_string(a->id)+"-");
+	}
+}
 
 void KBCprojection(GlobalModel *const gm, int agent_id){
 	// LocalTransition et;//epsilon transition
@@ -49,6 +57,7 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 		gs->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
 	}
 	
+	DotGraph(gm, true).saveToFile("KBCDOT", "global-epsilon-"+to_string(rand())+"-");
 	//cout << "Epsilon:" << c << endl;
 }
 
@@ -292,7 +301,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	o->initState = o->localStates[0];
 	//cout << o->initState->name << endl;
 	
-	cout << "E: " << searchedObservations.size() << "|" << transitions.size() << endl;
+	//cout << "E: " << searchedObservations.size() << "|" << transitions.size() << endl;
 	for(auto p : allObservationPointers) delete p;
 	return o;
 }
