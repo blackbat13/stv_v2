@@ -99,6 +99,7 @@ int main(int argc, char* argv[]) {
             // save GlobalModel solution
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
+        delete verification;
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
@@ -186,6 +187,7 @@ int main(int argc, char* argv[]) {
             delete gm;
             gm = KBCdGenerator->getCurrentGlobalModel();
             cout << "Stats for Global Model after KBC iteration #" << i << ": States: " << gm->globalStates.size() << endl;
+            delete KBCverif;
         }
         ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
 	}
@@ -199,6 +201,8 @@ int main(int argc, char* argv[]) {
         printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
         printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
     }
+
+    //delete generator;
 
     return 0;
 }

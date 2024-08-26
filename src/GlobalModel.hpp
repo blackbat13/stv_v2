@@ -13,6 +13,19 @@
 struct GlobalModel {
     // Data
 
+    ~GlobalModel(){
+        //delete initState;
+        delete formula;
+        for(auto item : globalStates) {
+            delete item;
+        }
+        for(auto item : epistemicClasses) {
+            for(auto const& [key, val] : item.second) {
+                delete val;
+            }
+        }
+    }
+
     /// @brief Pointers to all agents in a model.
     vector<Agent*> agents;
     // agents[i].id == i
