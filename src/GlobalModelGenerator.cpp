@@ -16,6 +16,10 @@ extern Cfg config;
 
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
+    this->globalModel = nullptr;
+    this->formula = nullptr;
+    this->localModels = nullptr;
+    this->correctModel = false;
 }
 
 /// @brief Destructor for GlobalModelGenerator class.
@@ -30,6 +34,9 @@ GlobalModelGenerator::~GlobalModelGenerator() {
 GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* formula) {
     this->localModels = localModels;
     this->formula = formula;
+    if(this->globalModel) {
+        delete this->globalModel;
+    }
     this->globalModel = new GlobalModel();
     this->globalModel->agents = localModels->agents;
 
