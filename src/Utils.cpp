@@ -248,6 +248,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 }
             } else if (arg == "-COUNTEREXAMPLE" || arg == "--COUNTEREXAMPLE") {
                 config.counterexample = 1;
+            } else if (arg == "-REDUCE" || arg == "--REDUCE") {
+                config.reduce = 1;
             }
         }
     }

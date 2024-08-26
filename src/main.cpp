@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
     }
 
 
-    if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
+    if(config.stv_mode & (1 << 0) || config.reduce){     // mode.binary = /[0,1]*1/ (generate)
         generator->expandAllStates();
     }
     

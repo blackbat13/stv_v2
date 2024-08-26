@@ -23,6 +23,7 @@ public:
     void expandState(GlobalState* state);
     vector<GlobalState*> expandStateAndReturn(GlobalState* state);
     void expandAllStates();
+    void expandAndReduceAllStates(int depth);
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();
     int getFormulaSize();

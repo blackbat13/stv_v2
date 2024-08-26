@@ -11,8 +11,16 @@
 #include <algorithm>
 #include <string.h>
 #include <iostream>
+#include <unordered_set>
 
 extern Cfg config;
+
+struct GlobalStateTupleHash {
+    size_t operator()(const tuple<GlobalState*, int, bool>& t) const {
+        auto gsHash = hash<string>()(get<0>(t)->hash);
+        return gsHash;
+    }
+};
 
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
@@ -157,6 +165,30 @@ void GlobalModelGenerator::expandAllStates() {
                 statesToExpand.insert(targetGlobalState);
             }
         }
+    }
+}
+
+/// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
+/// @param depth Current depth of the recursive generation of all states.
+void GlobalModelGenerator::expandAndReduceAllStates(int depth) {
+    if(this->globalModel->initState->isExpanded){
+        #if VERBOSE
+            printf("\nInitial state %s was already expanded\n", this->globalModel->initState->hash.c_str());
+        #endif
+        return;
+    }
+    unordered_set<tuple<GlobalState*, int, bool>, GlobalStateTupleHash> statesToExpand; //state, depth, reexplore
+    statesToExpand.insert({this->globalModel->initState, 0, false});
+    while (!statesToExpand.empty()) {
+        auto globalStateStruct = statesToExpand.top();
+        #if VERBOSE
+            printf("\nExpanding %s\n", globalState->hash.c_str());
+        #endif
+        auto createdStates = this->expandStateAndReturn(get<0>(globalStateStruct));
+        for (auto newState : createdStates) {
+            statesToExpand.push({newState, get<1>(globalStateStruct) + 1, false});
+        }
+        statesToExpand.pop();
     }
 }
 
