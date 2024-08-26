@@ -49,6 +49,8 @@ class TestVerif
         config.output_global_model = false;
         config.stv_mode = 2;
 
+        bool result = false;
+
         for(int i = 0; i < 10; i++) {
             auto tp = new ModelParser();
             
@@ -58,15 +60,12 @@ class TestVerif
 
             generator->initModel(localModels, formula);
 
-            bool result = false;
-
             auto verification = new Verification(generator);
             
             result = verification->verify();
             delete verification;
             delete tp;
         }
-        
         return result;
     }
 
@@ -77,6 +76,8 @@ class TestVerif
         config.output_global_model = false;
         config.stv_mode = 3;
 
+        bool result = false;
+
         for(int i = 0; i < 10; i++) {
             auto tp = new ModelParser();
             
@@ -86,8 +87,6 @@ class TestVerif
 
             generator->initModel(localModels, formula);
 
-            bool result = false;
-
             generator->expandAllStates();
 
             auto verification = new Verification(generator);
@@ -96,7 +95,6 @@ class TestVerif
             delete verification;
             delete tp;
         }
-
         return result;
     }
 };
