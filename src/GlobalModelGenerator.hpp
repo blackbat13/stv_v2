@@ -12,6 +12,9 @@
 #include "GlobalTransition.hpp"
 #include "Agent.hpp"
 
+#include <unordered_set>
+#include <unordered_map>
+
 using namespace std;
 
 /// @brief Stores the local models, formula and a global model.
@@ -36,6 +39,13 @@ public:
     map<Agent*,size_t> agentIndex;
 
 protected:
+    struct GlobalStateTupleHash {
+        size_t operator()(const tuple<GlobalState*, int>& t) const {
+            auto gsHash = hash<string>()(get<0>(t)->hash);
+            auto deHash = hash<int>()(get<1>(t));
+            return gsHash ^ deHash;
+        }
+    };
     /// @brief LocalModels used in initModel.
     LocalModels* localModels;
     /// @brief Formula used in initModel.

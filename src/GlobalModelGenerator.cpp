@@ -11,7 +11,6 @@
 #include <algorithm>
 #include <string.h>
 #include <iostream>
-#include <unordered_set>
 
 extern Cfg config;
 
@@ -257,6 +256,9 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                             isOk = false;
                             break;
                         }
+                    }
+                    if(!isOk) {
+                        break;
                     }
 
                     map<string, int> environmentFrom = localTransitionsInCandidate->from->environment; //11.1
