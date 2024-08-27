@@ -21,9 +21,9 @@ public:
     ~GlobalModelGenerator();
     GlobalState* initModel(LocalModels* localModels, Formula* formula);
     void expandState(GlobalState* state);
-    vector<GlobalState*> expandStateAndReturn(GlobalState* state);
+    vector<GlobalState*> expandStateAndReturn(GlobalState* state, bool addTarget = true);
     void expandAllStates();
-    void expandAndReduceAllStates(int depth);
+    void expandAndReduceAllStates();
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();
     int getFormulaSize();
@@ -44,6 +44,14 @@ protected:
     GlobalModel* globalModel;
     /// @brief Flag holding info if model is actually correct.
     bool correctModel;
+    /// @brief Lookup map containing global states and the depths that the global state is contained in. For reductions.
+    unordered_map<GlobalState*, unordered_set<int>> candidateStateDepths;
+    /// @brief Quick lookup if the state in current depth exists. For reductions.
+    unordered_set<tuple<GlobalState*, int>, GlobalStateTupleHash> statesToExpand; //state, depth, reexplore
+    /// @brief Candidate states to be used in reductions. For reductions.
+    stack<GlobalState*> globalModelCandidates;
+    /// @brief Saved depths of states added to statesToExpand. For reductions.
+    stack<int> stateDepths;
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
     void generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent);
