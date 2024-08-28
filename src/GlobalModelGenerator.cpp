@@ -182,7 +182,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     int depth;
     bool reexplore = false;
     GlobalState* g = globalModelCandidates.top(); //1
-
+    cout << "=====[" << g->hash << "]=====" << endl;
     auto findIfCandidateExists = candidateStateDepths.find({g});
     if(findIfCandidateExists->second.size() >= 2) { //2
         depth = stateDepths.top(); //3
@@ -220,7 +220,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     set<GlobalTransition*> selectedTransitions;
 
     allAvaliableTransitions.insert(g->globalTransitions.begin(), g->globalTransitions.end());
-    g->globalTransitions.clear();
 
     stringstream ss(config.reduce_args);
     string s;
@@ -236,9 +235,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     set<Agent*> intersectResult;
 
     if(allAvaliableTransitions.size() != 0) { //8
-        cout << "here1" << endl;
         if(reexplore == false) { //9
-            cout << "here2" << endl;
             for(auto transitionCandidate : allAvaliableTransitions) { //10
                 cout << "global transition" << endl;
                 agentsInTransition.clear();
@@ -247,8 +244,8 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                 for(auto localTransitionsInCandidate : transitionCandidate->localTransitions) { //11
                     for(auto agent : globalModel->agents) { //11.2 (Checks if any agent from coalition didn't change the place)
                         if(agent->name == localTransitionsInCandidate->agent->name) { // to change when there's more agents in a coalition
-                            uint32_t stateFrom = localTransitionsInCandidate->from->id;
-                            uint32_t stateTo = localTransitionsInCandidate->to->id;
+                            string stateFrom = localTransitionsInCandidate->from->name;
+                            string stateTo = localTransitionsInCandidate->to->name;
                             if(stateFrom != stateTo) {
                                 isOk = false;
                                 cout << "changed place" << endl;
@@ -310,15 +307,22 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
             stateDepths.push(globalModelCandidates.size());
             cout << "pushed depth (" << stateDepths.top() << ")" << endl;
         }
+        g->globalTransitions.clear();
+        g->globalTransitions.insert(selectedTransitions.begin(), selectedTransitions.end());
+        expandState(g);
         unordered_set<GlobalState*> createdStates;
-        for(auto item : selectedTransitions) {
-            // cout << item->to->toString() << endl;
-            vector<GlobalState*> tempStates = expandStateAndReturn(item->to, true);
-            cout << "newly created states (" << tempStates.size() << ")" << endl;
-            createdStates.insert(tempStates.begin(), tempStates.end());
+        for(auto item : g->globalTransitions) {
+            createdStates.insert(item->to);
+            cout << "later going to state " << item->to->hash << endl;
+            // cout << item->from->hash << endl;
+            // cout << item->to->hash << endl;
+            // cout << "here1" << endl;
+            // vector<GlobalState*> tempStates = expandStateAndReturn(g, true);
+            // cout << "newly created states (" << tempStates.size() << ")" << endl;
+            // createdStates.insert(tempStates.begin(), tempStates.end());
 
         }
-        //16 (Or maybe we don't have to connect the states after all? They are connected anyway and there are no dupes...)
+        //16 (Or maybe we don't have to connect the states after all?)
         cout << "total newly created states (" << createdStates.size() << ")" << endl;
         for(auto newGlobalState : createdStates) {
             globalModelCandidates.push(newGlobalState);
