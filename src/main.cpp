@@ -66,8 +66,9 @@ int main(int argc, char* argv[]) {
         DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
 
-
-    if(config.stv_mode & (1 << 0) || config.reduce){     // mode.binary = /[0,1]*1/ (generate)
+    if(config.reduce) {
+        generator->expandAndReduceAllStates();
+    } else if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
         generator->expandAllStates();
     }
     

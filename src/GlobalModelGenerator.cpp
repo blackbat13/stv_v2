@@ -11,23 +11,15 @@
 #include <algorithm>
 #include <string.h>
 #include <iostream>
+#include <sstream>
 
 extern Cfg config;
-
-struct GlobalStateTupleHash {
-    size_t operator()(const tuple<GlobalState*, int>& t) const {
-        auto gsHash = hash<string>()(get<0>(t)->hash);
-        auto deHash = hash<int>()(get<1>(t));
-        return gsHash ^ deHash;
-    }
-};
 
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
     while(!this->stateDepths.empty()){
         this->stateDepths.pop();
     }
-    this->statesToExpand.clear();
     this->candidateStateDepths.clear();
 }
 
@@ -54,7 +46,6 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     this->globalModel->epistemicClassesKnowledge.clear();
     this->correctModel = true;
 
-    statesToExpand.insert({this->globalModel->initState, 0});
     globalModelCandidates.push(this->globalModel->initState);
     auto candidateDepthPtr = candidateStateDepths.find(this->globalModel->initState);
     if(candidateDepthPtr == candidateStateDepths.end()) {
@@ -125,13 +116,16 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
 
 /// @brief GlobalModelGenerator::expandState that also additionally returns a vector of newly created states
 /// @param state A state from which the expansion should start.
-vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* state, bool addTarget) {
+vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* state, bool returnAnyway) {
     size_t cardinalityBefore;
     vector<GlobalState*> res;
     if (state->isExpanded) {
         #if VERBOSE
             printf("\nState %s was already expanded\n", state->hash.c_str());
         #endif
+        if(returnAnyway) {
+            res.push_back(state);
+        }
         return res;
     }
     for (const auto globalTransition : state->globalTransitions) {
@@ -149,11 +143,7 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
             if(cardinalityBefore!=this->globalModel->globalStates.size()){   
                 res.push_back(targetState);
             }
-            if(addTarget) {
-                globalTransition->to = targetState;
-            } else {
-                globalTransition->to = nullptr;
-            }
+            globalTransition->to = targetState;
         }
     }
     state->isExpanded = true;
@@ -189,12 +179,6 @@ void GlobalModelGenerator::expandAllStates() {
 /// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
 /// @param depth Current depth of the recursive generation of all states.
 void GlobalModelGenerator::expandAndReduceAllStates() {
-    if(this->globalModel->initState->isExpanded){
-        #if VERBOSE
-            printf("\nInitial state %s was already expanded\n", this->globalModel->initState->hash.c_str());
-        #endif
-        return;
-    }
     int depth;
     bool reexplore = false;
     GlobalState* g = globalModelCandidates.top(); //1
@@ -202,72 +186,88 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     auto findIfCandidateExists = candidateStateDepths.find({g});
     if(findIfCandidateExists->second.size() >= 2) { //2
         depth = stateDepths.top(); //3
-        if(globalModelCandidates.size() - 1 > depth) { //4
+        int anotherDepth = -1;
+        for(auto item : findIfCandidateExists->second){
+            if(item != globalModelCandidates.size() - 1) {
+                anotherDepth = item;
+                break;
+            }
+        }
+        if(anotherDepth > depth) { //4
             reexplore = true;
         } else {
             globalModelCandidates.pop();
-            statesToExpand.erase({g, globalModelCandidates.size()});
-            candidateStateDepths.erase(g);
+            candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
+            cout << "depth" << endl;
             return;
         }
     } //5
 
     if(!reexplore) { //6
-        auto agent = *this->formula->coalition.begin();
-        string hash = this->computeEpistemicClassHash(&(g->localStatesProjection), agent);
-        if (this->globalModel->epistemicClasses.find(agent) == this->globalModel->epistemicClasses.end()) {
-            this->globalModel->epistemicClasses.insert({ agent, map<string, EpistemicClass*>() });
-        }
-        auto epistemicClassesForAgent = &this->globalModel->epistemicClasses[agent];
-        if (epistemicClassesForAgent->find(hash) != epistemicClassesForAgent->end()) {
+        if(this->addedStates.find(g) != addedStates.end()) {
             globalModelCandidates.pop();
-            statesToExpand.erase({g, globalModelCandidates.size()});
-            candidateStateDepths.erase(g);
-            return;
+            candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
+            cout << "found" << endl;
+            return;    
         }
     } else {
         globalModelCandidates.pop();
-        statesToExpand.erase({g, globalModelCandidates.size()});
-        candidateStateDepths.erase(g);
+        candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
         return;
     }
-    set<GlobalTransition*> allAvaliableTransitions; //7 (the state is there already, we just have to connect it later)
+    this->addedStates.insert(g); //7
+    set<GlobalTransition*> allAvaliableTransitions;
     set<GlobalTransition*> selectedTransitions;
 
     allAvaliableTransitions.insert(g->globalTransitions.begin(), g->globalTransitions.end());
     g->globalTransitions.clear();
 
-    //temp
-    set<string> reductionImportantVariables;
+    stringstream ss(config.reduce_args);
+    string s;
+    set<string> reductionImportantVariables; //temp
+    while(getline(ss, s, ' ')) {
+        cout << s << endl;
+        reductionImportantVariables.insert(s);
+    } //getting lost here
+    
     bool isOk = true;
     set<Agent*> agentsInTransition;
     set<Agent*> agentsInTransition2;
     set<Agent*> intersectResult;
 
     if(allAvaliableTransitions.size() != 0) { //8
+        cout << "here1" << endl;
         if(reexplore == false) { //9
+            cout << "here2" << endl;
             for(auto transitionCandidate : allAvaliableTransitions) { //10
+                cout << "global transition" << endl;
                 agentsInTransition.clear();
                 agentsInTransition2.clear();
                 intersectResult.clear();
                 for(auto localTransitionsInCandidate : transitionCandidate->localTransitions) { //11
-                    for(auto agent : globalModel->agents) { //11.2
-                        if(agent->name == localTransitionsInCandidate->agent->name) {
-                            isOk = false;
-                            break;
+                    for(auto agent : globalModel->agents) { //11.2 (Checks if any agent from coalition didn't change the place)
+                        if(agent->name == localTransitionsInCandidate->agent->name) { // to change when there's more agents in a coalition
+                            uint32_t stateFrom = localTransitionsInCandidate->from->id;
+                            uint32_t stateTo = localTransitionsInCandidate->to->id;
+                            if(stateFrom != stateTo) {
+                                isOk = false;
+                                cout << "changed place" << endl;
+                                break;
+                            }
                         }
                     }
                     if(!isOk) {
                         break;
                     }
 
-                    map<string, int> environmentFrom = localTransitionsInCandidate->from->environment; //11.1
+                    map<string, int> environmentFrom = localTransitionsInCandidate->from->environment; //11.1 (Checks if the variable for the reduction wasn't changed in the local transition)
                     map<string, int> environmentTo = localTransitionsInCandidate->to->environment;
                     for(auto firstKey : environmentFrom) {
                         if(reductionImportantVariables.find(firstKey.first) != reductionImportantVariables.end()) {
                             int secondValue = environmentTo.find(firstKey.first)->second;
                             if(firstKey.second != secondValue) {
                                 isOk = false;
+                                cout << "changed value" << endl;
                                 break;
                             }
                         }
@@ -293,28 +293,40 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                 }
                 set_intersection(agentsInTransition.begin(), agentsInTransition.end(), agentsInTransition2.begin(), agentsInTransition2.end(), inserter(intersectResult, intersectResult.begin()));
                 if(!intersectResult.empty()) {
+                    cout << "joint agents" << endl;
                     continue;
                 }
                 selectedTransitions.insert(transitionCandidate);
+                cout << "candidate added!" << endl;
                 break;
             } //12
         } //13
         if(selectedTransitions.size() == 0) { //14
             selectedTransitions.clear();
             selectedTransitions.insert(allAvaliableTransitions.begin(), allAvaliableTransitions.end());
+            cout << "added all " << selectedTransitions.size() << " transitions" << endl;
         }
         if(selectedTransitions.size() == allAvaliableTransitions.size()) { //15
             stateDepths.push(globalModelCandidates.size());
+            cout << "pushed depth (" << stateDepths.top() << ")" << endl;
         }
-        vector<GlobalState*> createdStates = expandStateAndReturn(g); //16
+        unordered_set<GlobalState*> createdStates;
+        for(auto item : selectedTransitions) {
+            // cout << item->to->toString() << endl;
+            vector<GlobalState*> tempStates = expandStateAndReturn(item->to, true);
+            cout << "newly created states (" << tempStates.size() << ")" << endl;
+            createdStates.insert(tempStates.begin(), tempStates.end());
+
+        }
+        //16 (Or maybe we don't have to connect the states after all? They are connected anyway and there are no dupes...)
+        cout << "total newly created states (" << createdStates.size() << ")" << endl;
         for(auto newGlobalState : createdStates) {
-            statesToExpand.insert({newGlobalState, statesToExpand.size()});
             globalModelCandidates.push(newGlobalState);
             auto candidateDepthPtr = candidateStateDepths.find(newGlobalState);
             if(candidateDepthPtr == candidateStateDepths.end()) {
-                candidateStateDepths.insert({newGlobalState, unordered_set<int>({statesToExpand.size() - 1})});
+                candidateStateDepths.insert({newGlobalState, unordered_set<int>({globalModelCandidates.size() - 1})});
             } else {
-                candidateDepthPtr->second.insert(statesToExpand.size() - 1);
+                candidateDepthPtr->second.insert(globalModelCandidates.size() - 1);
             }
             expandAndReduceAllStates();
         }

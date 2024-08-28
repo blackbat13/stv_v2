@@ -250,6 +250,11 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.counterexample = 1;
             } else if (arg == "-REDUCE" || arg == "--REDUCE") {
                 config.reduce = 1;
+                if (i + 1 < argc) {
+                    config.reduce_args = argv[++i];
+                } else {
+                    printf("ERR: no variables were specified!\n");
+                }
             }
         }
     }
