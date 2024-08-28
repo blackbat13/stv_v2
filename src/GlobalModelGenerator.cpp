@@ -295,7 +295,9 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                 }
                 selectedTransitions.insert(transitionCandidate);
                 cout << "candidate added!" << endl;
-                break;
+                if(!config.reduce_all) {
+                    break;
+                }
             } //12
         } //13
         if(selectedTransitions.size() == 0) { //14
