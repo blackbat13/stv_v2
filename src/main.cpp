@@ -62,7 +62,9 @@ int main(int argc, char* argv[]) {
             DotGraph(agt, true).saveToFile(config.dotdir, fbasename+"-");
         }
         // save GlobalModel
-        // generator->expandAllStates();   // todo: add allExpanded flag?
+        if(!config.reduce) {
+            generator->expandAllStates();   // todo: add allExpanded flag?
+        }
         DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
 
