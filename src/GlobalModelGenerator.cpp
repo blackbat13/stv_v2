@@ -182,7 +182,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     int depth;
     bool reexplore = false;
     GlobalState* g = globalModelCandidates.top(); //1
-    cout << "=====[" << g->hash << "]=====" << endl;
     auto findIfCandidateExists = candidateStateDepths.find({g});
     if(findIfCandidateExists->second.size() >= 2) { //2
         depth = stateDepths.top(); //3
@@ -198,7 +197,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
         } else {
             globalModelCandidates.pop();
             candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
-            cout << "depth" << endl;
             return;
         }
     } //5
@@ -207,7 +205,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
         if(this->addedStates.find(g) != addedStates.end()) {
             globalModelCandidates.pop();
             candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
-            cout << "found" << endl;
             return;    
         }
     } else {
@@ -237,7 +234,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     if(allAvaliableTransitions.size() != 0) { //8
         if(reexplore == false) { //9
             for(auto transitionCandidate : allAvaliableTransitions) { //10
-                cout << "global transition" << endl;
                 agentsInTransition.clear();
                 agentsInTransition2.clear();
                 intersectResult.clear();
@@ -248,7 +244,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                             string stateTo = localTransitionsInCandidate->to->name;
                             if(stateFrom != stateTo) {
                                 isOk = false;
-                                cout << "changed place" << endl;
                                 break;
                             }
                         }
@@ -264,7 +259,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                             int secondValue = environmentTo.find(firstKey.first)->second;
                             if(firstKey.second != secondValue) {
                                 isOk = false;
-                                cout << "changed value" << endl;
                                 break;
                             }
                         }
@@ -290,11 +284,9 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                 }
                 set_intersection(agentsInTransition.begin(), agentsInTransition.end(), agentsInTransition2.begin(), agentsInTransition2.end(), inserter(intersectResult, intersectResult.begin()));
                 if(!intersectResult.empty()) {
-                    cout << "joint agents" << endl;
                     continue;
                 }
                 selectedTransitions.insert(transitionCandidate);
-                cout << "candidate added!" << endl;
                 if(!config.reduce_all) {
                     break;
                 }
@@ -303,11 +295,9 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
         if(selectedTransitions.size() == 0) { //14
             selectedTransitions.clear();
             selectedTransitions.insert(allAvaliableTransitions.begin(), allAvaliableTransitions.end());
-            cout << "added all " << selectedTransitions.size() << " transitions" << endl;
         }
         if(selectedTransitions.size() == allAvaliableTransitions.size()) { //15
             stateDepths.push(globalModelCandidates.size());
-            cout << "pushed depth (" << stateDepths.top() << ")" << endl;
         }
         g->globalTransitions.clear();
         g->globalTransitions.insert(selectedTransitions.begin(), selectedTransitions.end());
@@ -315,7 +305,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
         unordered_set<GlobalState*> createdStates;
         for(auto item : g->globalTransitions) {
             createdStates.insert(item->to);
-            cout << "later going to state " << item->to->hash << endl;
             // cout << item->from->hash << endl;
             // cout << item->to->hash << endl;
             // cout << "here1" << endl;
@@ -325,7 +314,6 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
 
         }
         //16 (Or maybe we don't have to connect the states after all?)
-        cout << "total newly created states (" << createdStates.size() << ")" << endl;
         for(auto newGlobalState : createdStates) {
             globalModelCandidates.push(newGlobalState);
             auto candidateDepthPtr = candidateStateDepths.find(newGlobalState);
