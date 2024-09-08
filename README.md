@@ -39,6 +39,8 @@ CLI configuration overwrite:
 # --ADD_EPSILON_TRANSITIONS  generate global models with epsilon transitions
 # --OVERWRITE_FORMULA        replace the formula from the model file with a different one
 # --COUNTEREXAMPLE           output counterexample path if the formula verification returns an ERR
+# --REDUCE                   reduce the amount of states and transitions using a DFS-POR algorithm and select the first correct transition
+# --REDUCE_ALL               reduce the amount of states and transitions using a DFS-POR algorithm and select all avaliable transitions
 ```
 
 ## Tests
