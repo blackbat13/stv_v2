@@ -46,6 +46,9 @@ struct Cfg{
     bool formula_from_parameter;
     std::string formula;
     bool counterexample;
+    bool reduce;
+    bool reduce_all;
+    std::string reduce_args;
 };
 
 #endif 

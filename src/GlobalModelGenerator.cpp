@@ -11,11 +11,16 @@
 #include <algorithm>
 #include <string.h>
 #include <iostream>
+#include <sstream>
 
 extern Cfg config;
 
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
+    while(!this->stateDepths.empty()){
+        this->stateDepths.pop();
+    }
+    this->candidateStateDepths.clear();
 }
 
 /// @brief Destructor for GlobalModelGenerator class.
@@ -40,6 +45,14 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     this->globalModel->initState = this->generateInitState();
     this->globalModel->epistemicClassesKnowledge.clear();
     this->correctModel = true;
+
+    globalModelCandidates.push(this->globalModel->initState);
+    auto candidateDepthPtr = candidateStateDepths.find(this->globalModel->initState);
+    if(candidateDepthPtr == candidateStateDepths.end()) {
+        candidateStateDepths.insert({this->globalModel->initState, unordered_set<int>({0})});
+    } else {
+        candidateDepthPtr->second.insert(0);
+    }
 
     return this->globalModel->initState;
 }
@@ -103,13 +116,16 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
 
 /// @brief GlobalModelGenerator::expandState that also additionally returns a vector of newly created states
 /// @param state A state from which the expansion should start.
-vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* state) {
+vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* state, bool returnAnyway) {
     size_t cardinalityBefore;
     vector<GlobalState*> res;
     if (state->isExpanded) {
         #if VERBOSE
             printf("\nState %s was already expanded\n", state->hash.c_str());
         #endif
+        if(returnAnyway) {
+            res.push_back(state);
+        }
         return res;
     }
     for (const auto globalTransition : state->globalTransitions) {
@@ -158,6 +174,163 @@ void GlobalModelGenerator::expandAllStates() {
             }
         }
     }
+}
+
+/// @brief Expands and reduces the states starting from the initial GlobalState using a DFS-POR algorithm and continues until there are no more states to expand.
+/// @param depth Current depth of the recursive generation of all states.
+void GlobalModelGenerator::expandAndReduceAllStates() {
+    int depth;
+    bool reexplore = false;
+    GlobalState* g = globalModelCandidates.top(); //1
+    auto findIfCandidateExists = candidateStateDepths.find({g});
+    if(findIfCandidateExists->second.size() >= 2) { //2
+        depth = stateDepths.top(); //3
+        int anotherDepth = -1;
+        for(auto item : findIfCandidateExists->second){
+            if(item != globalModelCandidates.size() - 1) {
+                anotherDepth = item;
+                break;
+            }
+        }
+        if(anotherDepth > depth) { //4
+            reexplore = true;
+        } else {
+            globalModelCandidates.pop();
+            candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
+            return;
+        }
+    } //5
+
+    if(!reexplore) { //6
+        if(this->addedStates.find(g) != addedStates.end()) {
+            globalModelCandidates.pop();
+            candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
+            return;    
+        }
+    } else {
+        globalModelCandidates.pop();
+        candidateStateDepths.find(g)->second.erase(globalModelCandidates.size());
+        return;
+    }
+    this->addedStates.insert(g); //7
+    set<GlobalTransition*> allAvaliableTransitions;
+    set<GlobalTransition*> selectedTransitions;
+
+    allAvaliableTransitions.insert(g->globalTransitions.begin(), g->globalTransitions.end());
+
+    stringstream ss(config.reduce_args);
+    string s;
+    set<string> reductionImportantVariables; //temp
+    while(getline(ss, s, ' ')) {
+        cout << s << endl;
+        reductionImportantVariables.insert(s);
+    } //getting lost here
+    
+    bool isOk = true;
+    set<Agent*> agentsInTransition;
+    set<Agent*> agentsInTransition2;
+    set<Agent*> intersectResult;
+
+    if(allAvaliableTransitions.size() != 0) { //8
+        if(reexplore == false) { //9
+            for(auto transitionCandidate : allAvaliableTransitions) { //10
+                agentsInTransition.clear();
+                agentsInTransition2.clear();
+                intersectResult.clear();
+                for(auto localTransitionsInCandidate : transitionCandidate->localTransitions) { //11
+                    for(auto agent : globalModel->agents) { //11.2 (Checks if any agent from coalition didn't change the place)
+                        if(agent->name == localTransitionsInCandidate->agent->name) { // to change when there's more agents in a coalition
+                            string stateFrom = localTransitionsInCandidate->from->name;
+                            string stateTo = localTransitionsInCandidate->to->name;
+                            if(stateFrom != stateTo) {
+                                isOk = false;
+                                break;
+                            }
+                        }
+                    }
+                    if(!isOk) {
+                        break;
+                    }
+
+                    map<string, int> environmentFrom = localTransitionsInCandidate->from->environment; //11.1 (Checks if the variable for the reduction wasn't changed in the local transition)
+                    map<string, int> environmentTo = localTransitionsInCandidate->to->environment;
+                    for(auto firstKey : environmentFrom) {
+                        if(reductionImportantVariables.find(firstKey.first) != reductionImportantVariables.end()) {
+                            int secondValue = environmentTo.find(firstKey.first)->second;
+                            if(firstKey.second != secondValue) {
+                                isOk = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if(!isOk) {
+                        break;
+                    }
+
+                    agentsInTransition.insert(localTransitionsInCandidate->agent);
+                }
+                if(!isOk) {
+                    continue;
+                }
+                //11.3
+                set<GlobalTransition*> globalTransitionsCopy;
+                globalTransitionsCopy.insert(allAvaliableTransitions.begin(), allAvaliableTransitions.end());
+                globalTransitionsCopy.erase(transitionCandidate);
+                for(auto transitionCandidate2 : globalTransitionsCopy) {
+                    for(auto localTransitionsInCandidate : transitionCandidate2->localTransitions) {
+                        agentsInTransition2.insert(localTransitionsInCandidate->agent);
+                    }
+                }
+                set_intersection(agentsInTransition.begin(), agentsInTransition.end(), agentsInTransition2.begin(), agentsInTransition2.end(), inserter(intersectResult, intersectResult.begin()));
+                if(!intersectResult.empty()) {
+                    continue;
+                }
+                selectedTransitions.insert(transitionCandidate);
+                if(!config.reduce_all) {
+                    break;
+                }
+            } //12
+        } //13
+        if(selectedTransitions.size() == 0) { //14
+            selectedTransitions.clear();
+            selectedTransitions.insert(allAvaliableTransitions.begin(), allAvaliableTransitions.end());
+        }
+        if(selectedTransitions.size() == allAvaliableTransitions.size()) { //15
+            stateDepths.push(globalModelCandidates.size());
+        }
+        g->globalTransitions.clear();
+        g->globalTransitions.insert(selectedTransitions.begin(), selectedTransitions.end());
+        expandState(g);
+        unordered_set<GlobalState*> createdStates;
+        for(auto item : g->globalTransitions) {
+            createdStates.insert(item->to);
+            // cout << item->from->hash << endl;
+            // cout << item->to->hash << endl;
+            // cout << "here1" << endl;
+            // vector<GlobalState*> tempStates = expandStateAndReturn(g, true);
+            // cout << "newly created states (" << tempStates.size() << ")" << endl;
+            // createdStates.insert(tempStates.begin(), tempStates.end());
+
+        }
+        //16 (Or maybe we don't have to connect the states after all?)
+        for(auto newGlobalState : createdStates) {
+            globalModelCandidates.push(newGlobalState);
+            auto candidateDepthPtr = candidateStateDepths.find(newGlobalState);
+            if(candidateDepthPtr == candidateStateDepths.end()) {
+                candidateStateDepths.insert({newGlobalState, unordered_set<int>({globalModelCandidates.size() - 1})});
+            } else {
+                candidateDepthPtr->second.insert(globalModelCandidates.size() - 1);
+            }
+            expandAndReduceAllStates();
+        }
+    } //17
+
+    depth = stateDepths.top(); //18
+    if(depth == globalModelCandidates.size()) { //19
+        stateDepths.pop();
+    }
+    globalModelCandidates.pop(); //20
 }
 
 /// @brief Get for a GlobalModel used in initialization.
