@@ -176,7 +176,7 @@ void GlobalModelGenerator::expandAllStates() {
     }
 }
 
-/// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
+/// @brief Expands and reduces the states starting from the initial GlobalState using a DFS-POR algorithm and continues until there are no more states to expand.
 /// @param depth Current depth of the recursive generation of all states.
 void GlobalModelGenerator::expandAndReduceAllStates() {
     int depth;

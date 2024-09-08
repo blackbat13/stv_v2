@@ -1,0 +1,25 @@
+Agent P1:
+LOCAL: [P1_has_r0,P1_has_b0,P1_has_r1,P1_has_b1]
+PERSISTENT: [P1_has_r0,P1_has_b0,P1_has_r1,P1_has_b1]
+INITIAL: [P1_has_r0:=0,P1_has_b0:=0,P1_has_r1:=0,P1_has_b1:=0]
+init idle
+shared[2] serving_0_0[serving_0_0]: idle -> served [P1_has_b1:=1]
+shared[2] serving_0_1[serving]: idle -> served [P1_has_b0:=1]
+shared[2] serving_1_0[serving_1_0]: idle -> served [P1_has_r0:=1]
+shared[2] serving_1_1[serving]: idle -> served [P1_has_r1:=1]
+idle : idle -> idle
+stop_1 : served -> served
+
+Agent P2:
+LOCAL: [P2_has_r0,P2_has_b0,P2_has_r1,P2_has_b1]
+PERSISTENT: [P2_has_r0,P2_has_b0,P2_has_r1,P2_has_b1]
+INITIAL: [P2_has_r0:=0,P2_has_b0:=0,P2_has_r1:=0,P2_has_b1:=0]
+init idle
+shared[2] serving_0_0[serving]: idle -> served [P2_has_b0:=1]
+shared[2] serving_0_1[serving_0_1]: idle -> served [P2_has_b1:=1]
+shared[2] serving_1_0[serving]: idle -> served [P2_has_r1:=1]
+shared[2] serving_1_1[serving_1_1]: idle -> served [P2_has_r0:=1]
+idle : idle -> idle
+stop_2 : served -> served
+
+FORMULA: <<P1>><>(P1_has_r1==1)

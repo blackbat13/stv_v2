@@ -91,6 +91,34 @@ class TestVerif
         
         return result;
     }
+
+    bool reducedVerify(string path, GlobalModelGenerator* generator)
+    {
+        config.fname = path.data();
+        config.output_local_models = false;
+        config.output_global_model = false;
+        config.stv_mode = 3;
+        config.reduce = true;
+        config.reduce_args = "";
+
+        auto tp = new ModelParser();
+        
+        tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+        auto localModels = &(get<0>(desc));
+        auto formula = &(get<1>(desc));
+
+        generator->initModel(localModels, formula);
+
+        bool result = false;
+
+        generator->expandAndReduceAllStates();
+
+        auto verification = new Verification(generator);
+        
+        result = verification->verify();
+        
+        return result;
+    }
 };
 
 #endif

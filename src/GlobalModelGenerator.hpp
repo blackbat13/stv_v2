@@ -55,12 +55,13 @@ protected:
     GlobalModel* globalModel;
     /// @brief Flag holding info if model is actually correct.
     bool correctModel;
-    /// @brief Lookup map containing global states and the depths that the global state is contained in. For reductions.
+    /// @brief Lookup map containing global states and the depths that the global state is contained in. Used for reductions.
     unordered_map<GlobalState*, unordered_set<int>> candidateStateDepths;
-    /// @brief Candidate states to be used in reductions. For reductions.
+    /// @brief Candidate states to be used in reductions. Used for reductions.
     stack<GlobalState*> globalModelCandidates;
-    /// @brief Saved depths of states added to statesToExpand. For reductions.
+    /// @brief Saved depths of states added to statesToExpand. Used for reductions.
     stack<int> stateDepths;
+    /// @brief States that were added to a stack of states. Used for reductions.
     unordered_set<GlobalState*> addedStates;
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
