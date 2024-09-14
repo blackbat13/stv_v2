@@ -152,14 +152,27 @@ int main(int argc, char* argv[]) {
     }
     
 	if(config.kbc){//run Filip Jamroga's code (location to be changed)
-        int maxKBCIterations = 6;
+        int maxKBCIterations = 1;
         int i=0;
         GlobalModel* gm = generator->getCurrentGlobalModel();
+
+        // Generate the list of agents that KBC is applied to based on user config
+        set<int> selectedAgents = {};
+        if(config.kbc_coalition_only){
+            for (auto itr = formula->coalition.begin(); itr != formula->coalition.end(); itr++) {
+                selectedAgents.insert((*itr)->id);
+            }
+        }else{
+            for(int i=0; i<gm->agents.size(); i++) selectedAgents.insert(i);
+        }
+
+        // Perform KBC the expected number of times
         for(i=0; i<maxKBCIterations; i++){
-            ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
+            //ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
             cout << "Attempting KBC Iteration #" << i+1 << endl;
             LocalModels KBCdLM;
-            set<int> selectedAgents = {0, 1, 2, 3};
+
+            // Perform KBC for the selected agents
             for(int j=0; j<gm->agents.size(); j++){
                 if(selectedAgents.count(j)>0){
                     GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
@@ -168,25 +181,35 @@ int main(int argc, char* argv[]) {
                     KBCdLM.agents.push_back(a);
                     //DotGraph(a).saveToFile("", "kbc-");
                     cout << "Created a KBC'd version of Agent #" << j << " " << a->name << endl;
-                    cout << "Stats for Agent #" << j << ": States: " << a->localStates.size() << " Transitions: " << a->localTransitions.size() << endl;
+                    //cout << "Stats for Agent #" << j << ": States: " << a->localStates.size() << " Transitions: " << a->localTransitions.size() << endl;
                     delete cloneModel;
                 }else{
                     KBCdLM.agents.push_back(localModels->agents[j]->clone());
                     cout << "Copied Agent #" << j << " verbatim\n";
                 }
-            }
-            cout << "Finished KBC iteration\n";
+            }cout << "Finished KBC iteration\n";
             GlobalModelGenerator* KBCdGenerator = new GlobalModelGenerator();
-            cout << ".\n";
+            //cout << ".\n";
             KBCdGenerator->initModel(&KBCdLM, formula);
-            cout << ".\n";
+            //cout << ".\n";
             KBCdGenerator->expandAllStates();
+
+            if(config.output_dot_files){
+                // save LocalModels
+                for (const auto& agt : KBCdLM.agents) {
+                    DotGraph(agt, true).saveToFile(config.dotdir, fbasename+"-KBC-");
+                }
+                // save GlobalModel
+                //generator->expandAllStates();   // todo: add allExpanded flag?
+                DotGraph(KBCdGenerator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-KBC-");
+            }
+
             cout << "Attempting verification\n";
             auto KBCverif = new Verification(KBCdGenerator);
             printf("Post-KBC verification result: %s\n", KBCverif->verify() ? "TRUE" : "FALSE");
             delete gm;
             gm = KBCdGenerator->getCurrentGlobalModel();
-            cout << "Stats for Global Model after KBC iteration #" << i << ": States: " << gm->globalStates.size() << endl;
+            //cout << "Stats for Global Model after KBC iteration #" << i << ": States: " << gm->globalStates.size() << endl;
             delete KBCverif;
         }
         ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");

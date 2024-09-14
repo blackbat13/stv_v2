@@ -208,8 +208,10 @@ void loadConfigFromFile(string filename) {
             } else if (key == "DOT_DIR") {
                 config.dotdir = val;
             } else if (key == "KBC_ENABLED"){
-				config.kbc = (val[0] == '1');
-			}
+                config.kbc = (val[0] == '1');
+            } else if (key == "KBC_COALITION_ONLY"){
+                config.kbc_coalition_only = (val[0] == '1');
+            }
         }
     } else {
         printf("Could not open the config file \"%s\"...", filename.c_str());
@@ -241,6 +243,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.output_dot_files = 1;
             } else if (arg == "-KBC_ENABLED" || arg == "--KBC_ENABLED") {
                 config.kbc = 1;
+            } else if (arg == "-KBC_COALITION_ONLY" || arg == "--KBC_COALITION_ONLY") {
+                config.kbc_coalition_only = 1;
             } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
                 config.add_epsilon_transitions = 1;
             } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {

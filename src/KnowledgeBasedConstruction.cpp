@@ -189,9 +189,11 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					for(int i=1; i<succeedingRawVector.size(); i++){
 						bool added2obs = false;
 						for(pair<Agent*, EpistemicClass*> ee : gs->epistemicClasses){
+							//cout << "EC: " << ee.second->globalStates.size() << endl;
 							if(ee.first->id == agent_id){
 								for(pair<string, GlobalState*> ecs : ee.second->globalStates){
 									if(ecs.first == succeedingRawVector[i]->hash){
+										//cout << "Hit!\n";
 										added2obs = true;
 										nextObservation->insert(succeedingRawVector[i]);
 										break;
@@ -203,6 +205,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						if(!added2obs) succeedingRawVectorNext.push_back(succeedingRawVector[i]);
 					}
 					
+					//cout << succeedingRawVector.size() << "->" << succeedingRawVectorNext.size() << endl;
 					succeedingObservations.insert(nextObservation);
 					observationQueue.push(nextObservation);
 					succeedingRawVector = succeedingRawVectorNext;
