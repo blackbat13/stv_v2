@@ -211,7 +211,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		}
 	}
 
-	cout << "RD: " << repertoireData.size() << endl;
+/*	cout << "RD: " << repertoireData.size() << endl;
 	vector<string> keys;
 	for (auto & it : repertoireData) {
 		keys.push_back(it.first);
@@ -222,7 +222,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 				cout << "| | |-G: " << it3 << endl;
 			}
 		}
-	}
+	}*/
 	
 	//Convert all searched observations into local states in the output agent
 	map<set<GlobalState*>, int> obs2id;
