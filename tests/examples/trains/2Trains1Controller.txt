@@ -1,25 +1,25 @@
 Agent Train1:
-INITIAL: [Train1_pos := 1]
 LOCAL: [Train1_pos]
+INITIAL: [Train1_pos:=1]
 init idle
-shared[2] in_Train1: idle [Train1_pos==1] -> idle [Train1_pos:=2]
-shared[2] out_Train1: idle [Train1_pos==2] -> idle [Train1_pos:=3]
-return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]
+shared[2] in_Train1[in_Train1]: idle [Train1_pos==1] -> idle [Train1_pos:=2]
+shared[2] out_Train1[out_Train1]: idle [Train1_pos==2] -> idle [Train1_pos:=3]
+return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]    
 
 Agent Train2:
-INITIAL: [Train2_pos := 1]
 LOCAL: [Train2_pos]
+INITIAL: [Train2_pos:=1]
 init idle
-shared[2] in_Train2: idle [Train2_pos==1] -> idle [Train2_pos:=2]
-shared[2] out_Train2: idle [Train2_pos==2] -> idle [Train2_pos:=3]
-return_2: idle [Train2_pos==3] -> idle [Train2_pos:=1]
+shared[2] in_Train2[in_Train2]: idle [Train2_pos==1] -> idle [Train2_pos:=2]
+shared[2] out_Train2[out_Train2]: idle [Train2_pos==2] -> idle [Train2_pos:=3]
+return_2: idle [Train2_pos==3] -> idle [Train2_pos:=1]    
 
 Agent Controller:
 LOCAL: []
 init green
-shared[2] in_Train1: green -> red
-shared[2] out_Train1: red -> green
-shared[2] in_Train2: green -> red
-shared[2] out_Train2: red -> green
+shared[2] in_Train1[in]: green -> red
+shared[2] out_Train1[out]: red -> green
+shared[2] in_Train2[in]: green -> red
+shared[2] out_Train2[out]: red -> green
 
 FORMULA: <<Train1>>[](Train1_pos==2 && Train2_pos==2)
