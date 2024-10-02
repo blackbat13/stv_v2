@@ -54,6 +54,13 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
         candidateDepthPtr->second.insert(0);
     }
 
+    Agent* a;
+    for (auto agt : globalModel->agents) {
+        a = agt;
+        set<GlobalState*>* states = this->findOrCreateEpistemicClassForKnowledge(&this->globalModel->initState->localStatesProjection, this->globalModel->initState, a);
+        this->globalModel->initState->epistemicClassesAllAgents[a] = states;
+    }
+
     return this->globalModel->initState;
 }
 
@@ -111,6 +118,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
         state->globalTransitions.insert(globalTransition);
         // printf("added a state!\n");
     }
+
     state->isExpanded = true;
 }
 
@@ -360,6 +368,15 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
 
+    // Agent* a;
+    // for (auto agt : globalModel->agents) {
+    //     a = agt;
+    //     set<GlobalState*>* states;
+    //     states->insert(initState);
+    //     initState->epistemicClassesAllAgents[a] = states;
+    // }
+    // cout << "----------" << endl;
+
     return initState;
 }
 
@@ -386,6 +403,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     
     // Create a new GlobalState
     auto globalState = new GlobalState();
+
     // Reserve vector capacity
     globalState->localStatesProjection.reserve(localStates->size());
     
@@ -398,6 +416,13 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     // Bind globalState with epistemicClass
     epistemicClass->globalStates.insert({ globalState->hash, globalState });
     globalState->epistemicClasses[agent] = epistemicClass;
+
+    Agent* a;
+    for (auto agt : globalModel->agents) {
+        a = agt;
+        set<GlobalState*>* states = this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
+        globalState->epistemicClassesAllAgents[a] = states;
+    }
     
     // globalState->globalTransitions:
     // 1) group transitions by name from localStates (only those that can be executed (check sharedCount, check conditions))
@@ -423,14 +448,8 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
         auto transitionsByAgent = trPair.second;
         this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
     }
-    
-    this->globalModel->globalStates.push_back(globalState);
 
-    Agent* a;
-    for (auto agt : globalModel->agents) {
-        a = agt;
-        this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
-    }
+    this->globalModel->globalStates.push_back(globalState);
 
     return globalState;
 }

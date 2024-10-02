@@ -113,6 +113,28 @@ int main(int argc, char* argv[]) {
         //
     }
 
+    // GlobalModel g = *(generator->getCurrentGlobalModel());
+    // bool first = true;
+    // for(auto const globalState : g.globalStates) {
+    //     if(first) {
+    //         first = false;
+    //     }
+    //     cout << "State " << globalState->hash << endl;
+    //     for (Agent* agt : g.agents) {
+    //         cout << agt->name << " Epistemic states: ";
+    //         auto it = globalState->epistemicClassesAllAgents.find(agt);
+    //         if(it != globalState->epistemicClassesAllAgents.end()) {
+    //             auto item = (*(it->second));
+    //             cout << "Size: " << item.size() << endl;
+    //             for(const auto item2 : item) {
+    //                 cout << item2->hash << " ";
+    //             }
+    //             cout << endl;
+    //         }
+    //     }
+    //     cout << "----------" << endl;
+    // }
+
     if(config.stv_mode & (1 << 3)){
         ofstream ofs;
 
