@@ -74,12 +74,19 @@ int main(int argc, char* argv[]) {
             DotGraph(agt, true).saveToFile(config.dotdir, fbasename+"-");
         }
         // save GlobalModel
-        generator->expandAllStates();   // todo: add allExpanded flag?
+        if(!config.reduce) {
+            generator->expandAllStates();   // todo: add allExpanded flag?
+        }
         DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
 
-
-    if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
+    if(config.reduce) {
+        generator->expandAndReduceAllStates();
+        if(config.output_dot_files){
+            // save GlobalModel solution
+            DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
+        }
+    } else if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
         generator->expandAllStates();
     }
     

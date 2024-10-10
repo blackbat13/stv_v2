@@ -129,9 +129,29 @@ Avaliable flags:
   \begin{lstlisting}[title={Example formula replacement with another one.}]
     --OVERWRITE_FORMULA "FORMULA: <<Voter1>><>(Voter1_vote == 1)"
   \end{lstlisting}
-  \item output counterexample path if the formula verification returns an ERR:
+  \item output counterexample path if the formula verification returns FALSE:
   \begin{lstlisting}
     --COUNTEREXAMPLE
+  \end{lstlisting}
+  \item reduce the amount of states and transitions using a DFS-POR algorithm and select the first correct transition:
+  \begin{lstlisting}
+    --REDUCE [agents]
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example reduction with no specified agent.}]
+    --REDUCE ""
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example reduction with 2 specified agents.}]
+    --REDUCE "Agent1 Agent2"
+  \end{lstlisting}
+  \item reduce the amount of states and transitions using a DFS-POR algorithm and select all avaliable transitions:
+  \begin{lstlisting}
+    --REDUCE_ALL [agents]
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example reduction with no specified agent.}]
+    --REDUCE_ALL ""
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example reduction with 2 specified agents.}]
+    --REDUCE_ALL "Agent1 Agent2"
   \end{lstlisting}
 \end{itemize}
 
@@ -178,7 +198,7 @@ If the action will be shared with another agent he have to start the action by w
 \begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent. The current agent will be the one performing the sync.}]
   shared[2] action1[action1]: q0 -> q1
 \end{lstlisting}
-\begin{lstlisting}[title={Creating an action that will synchronize with 2 other agent. The current agent will be the one waiting for sync.}]
+\begin{lstlisting}[title={Creating an action that will synchronize with 2 other agents. The current agent will be the one waiting for sync.}]
   shared[3] action1[someAction]: q0 -> q1
 \end{lstlisting}
 
