@@ -4,7 +4,7 @@ INITIAL: [Train1_pos:=1]
 init idle
 shared[2] in_Train1: idle [Train1_pos==1] -> idle [Train1_pos:=2]
 shared[2] out_Train1: idle [Train1_pos==2] -> idle [Train1_pos:=3]
-return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]    
+return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]
 
 Agent Train2:
 LOCAL: [Train2_pos]
@@ -12,7 +12,7 @@ INITIAL: [Train2_pos:=1]
 init idle
 shared[2] in_Train2: idle [Train2_pos==1] -> idle [Train2_pos:=2]
 shared[2] out_Train2: idle [Train2_pos==2] -> idle [Train2_pos:=3]
-return_2: idle [Train2_pos==3] -> idle [Train2_pos:=1]    
+return_2: idle [Train2_pos==3] -> idle [Train2_pos:=1]
 
 Agent Controller:
 LOCAL: []
@@ -22,4 +22,4 @@ shared[2] out_Train1: red -> green
 shared[2] in_Train2: green -> red
 shared[2] out_Train2: red -> green
 
-FORMULA: <<Train1>>[](Train1_pos==1 || Train1_pos==2 || Train1_pos==3)
+FORMULA: <<Train1, Train2, Controller>>[](Train1_pos==1 || Train1_pos==2 || Train1_pos==3)
