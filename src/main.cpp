@@ -241,7 +241,7 @@ int main(int argc, char* argv[]) {
             //cout << "Stats for Global Model after KBC iteration #" << i << ": States: " << gm->globalStates.size() << endl;
             delete KBCverif;
         }
-        ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
+        //ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
 	}
 
     if(false){
