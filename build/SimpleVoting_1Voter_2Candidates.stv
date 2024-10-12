@@ -1,0 +1,26 @@
+Agent Voter1:
+LOCAL: [V1_vote]
+PERSISTENT: [V1_vote]
+INITIAL: []
+init q0
+vote1: q0 -> q1 [V1_vote:=1]
+vote2: q0 -> q1 [V1_vote:=2]
+shared[2] gv_1_Voter1[gv_1_Voter1]: q1 [V1_vote==1] -> q2
+shared[2] gv_2_Voter1[gv_2_Voter1]: q1 [V1_vote==2] -> q2
+shared[2] ng_Voter1[ng_Voter1]: q1 -> q2
+shared[2] pun_Voter1[pn_Voter1]: q2 -> q3
+shared[2] npun_Voter1[pn_Voter1]: q2 -> q3
+idle: q3->q3
+
+Agent Coercer:
+LOCAL: [C_V1_vote, C_V1_gv, C_V1_pun, C_V1_finish]
+PERSISTENT: [C_V1_vote, C_V1_gv, C_V1_pun, C_V1_finish]
+INITIAL: []
+init q0
+shared[2] gv_1_Voter1[g_Voter1]: q0 -> q1 [C_V1_vote:=1, C_V1_gv:=1]    
+shared[2] gv_2_Voter1[g_Voter1]: q0 -> q1 [C_V1_vote:=2, C_V1_gv:=1]    
+shared[2] ng_Voter1[g_Voter1]: q0 -> q1 [C_V1_gv:=2]
+shared[2] pun_Voter1[pun_Voter1]: q1 -> q2 [C_V1_pun:=1, C_V1_finish:=1]
+shared[2] npun_Voter1[npun_Voter1]: q1 -> q2 [C_V1_pun:=-1, C_V1_finish:=1]
+
+FORMULA: <<Coercer>>[](C_V1_finish==0 || (V1_vote==1 && &K_Coercer(V1_vote==1)) )
