@@ -34,6 +34,9 @@ struct GlobalState {
     /// @brief Local states of each agent that define this global state.
     vector<LocalState*> localStatesProjection;
 
+    /// @brief States in the same epistemic class as the current one, for KBC
+    map<Agent*, set<GlobalState*>*> epistemicClassesAllAgents;
+
     /// @brief Debug information on the given GlobalState
     /// @param indent - optional indentation string 
     /// @return GlobalState data

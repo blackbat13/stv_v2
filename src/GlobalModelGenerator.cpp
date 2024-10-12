@@ -54,6 +54,13 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
         candidateDepthPtr->second.insert(0);
     }
 
+    Agent* a;
+    for (auto agt : globalModel->agents) {
+        a = agt;
+        set<GlobalState*>* states = this->findOrCreateEpistemicClassForKnowledge(&this->globalModel->initState->localStatesProjection, this->globalModel->initState, a);
+        this->globalModel->initState->epistemicClassesAllAgents[a] = states;
+    }
+
     return this->globalModel->initState;
 }
 
@@ -111,6 +118,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
         state->globalTransitions.insert(globalTransition);
         // printf("added a state!\n");
     }
+
     state->isExpanded = true;
 }
 
@@ -234,16 +242,22 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     if(allAvaliableTransitions.size() != 0) { //8
         if(reexplore == false) { //9
             for(auto transitionCandidate : allAvaliableTransitions) { //10
+                isOk = true;
+                cout << transitionCandidate->from->hash << endl;
                 agentsInTransition.clear();
                 agentsInTransition2.clear();
                 intersectResult.clear();
                 for(auto localTransitionsInCandidate : transitionCandidate->localTransitions) { //11
-                    for(auto agent : globalModel->agents) { //11.2 (Checks if any agent from coalition didn't change the place)
+                    cout << "candidate " << localTransitionsInCandidate->from->name << " => " << localTransitionsInCandidate->to->name << endl;
+                    auto coalitionAgents = this->getFormula()->coalition;
+                    for(auto agent : coalitionAgents) { //11.2 (Checks if any agent from coalition didn't change the place)
                         if(agent->name == localTransitionsInCandidate->agent->name) { // to change when there's more agents in a coalition
                             string stateFrom = localTransitionsInCandidate->from->name;
                             string stateTo = localTransitionsInCandidate->to->name;
                             if(stateFrom != stateTo) {
                                 isOk = false;
+                                cout << "[!]state changed[!] ";
+                                cout << agent->name << ": " << stateFrom << " -> " << stateTo << endl;
                                 break;
                             }
                         }
@@ -259,6 +273,8 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                             int secondValue = environmentTo.find(firstKey.first)->second;
                             if(firstKey.second != secondValue) {
                                 isOk = false;
+                                cout << "[!]value changed[!] ";
+                                cout << firstKey.first << " = " << firstKey.second << " | " << secondValue << endl;
                                 break;
                             }
                         }
@@ -270,6 +286,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
 
                     agentsInTransition.insert(localTransitionsInCandidate->agent);
                 }
+                cout << "----------" << endl;
                 if(!isOk) {
                     continue;
                 }
@@ -284,8 +301,10 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                 }
                 set_intersection(agentsInTransition.begin(), agentsInTransition.end(), agentsInTransition2.begin(), agentsInTransition2.end(), inserter(intersectResult, intersectResult.begin()));
                 if(!intersectResult.empty()) {
+                    cout << "not empty" << endl;
                     continue;
                 }
+                cout << (*transitionCandidate->localTransitions.begin())->from->name << " >> " << (*transitionCandidate->localTransitions.begin())->to->name << endl;
                 selectedTransitions.insert(transitionCandidate);
                 if(!config.reduce_all) {
                     break;
@@ -360,6 +379,15 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
 
+    // Agent* a;
+    // for (auto agt : globalModel->agents) {
+    //     a = agt;
+    //     set<GlobalState*>* states;
+    //     states->insert(initState);
+    //     initState->epistemicClassesAllAgents[a] = states;
+    // }
+    // cout << "----------" << endl;
+
     return initState;
 }
 
@@ -386,6 +414,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     
     // Create a new GlobalState
     auto globalState = new GlobalState();
+
     // Reserve vector capacity
     globalState->localStatesProjection.reserve(localStates->size());
     
@@ -398,6 +427,13 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     // Bind globalState with epistemicClass
     epistemicClass->globalStates.insert({ globalState->hash, globalState });
     globalState->epistemicClasses[agent] = epistemicClass;
+
+    Agent* a;
+    for (auto agt : globalModel->agents) {
+        a = agt;
+        set<GlobalState*>* states = this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
+        globalState->epistemicClassesAllAgents[a] = states;
+    }
     
     // globalState->globalTransitions:
     // 1) group transitions by name from localStates (only those that can be executed (check sharedCount, check conditions))
@@ -423,14 +459,8 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
         auto transitionsByAgent = trPair.second;
         this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
     }
-    
-    this->globalModel->globalStates.push_back(globalState);
 
-    Agent* a;
-    for (auto agt : globalModel->agents) {
-        a = agt;
-        this->findOrCreateEpistemicClassForKnowledge(localStates, globalState, a);
-    }
+    this->globalModel->globalStates.push_back(globalState);
 
     return globalState;
 }
