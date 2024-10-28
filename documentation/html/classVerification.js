@@ -10,6 +10,7 @@ var classVerification =
     [ "checkUncontrolledSet", "classVerification.html#a850053a49cc9a539aa664d0100cb59a8", null ],
     [ "equivalentGlobalTransitions", "classVerification.html#a265b783962885eebe96a4f2182c22577", null ],
     [ "getEpistemicClassForGlobalState", "classVerification.html#a7259a1ef834cc71f0bf7586f4fb27ba3", null ],
+    [ "historyDecisionsERR", "classVerification.html#ad116509bfb638d11b225fc8097ef14ee", null ],
     [ "isAgentInCoalition", "classVerification.html#a2ccd4e9d525a868217902a15ed93860b", null ],
     [ "isGlobalTransitionControlledByCoalition", "classVerification.html#a500beadd751b6513289f3916cf3f8501", null ],
     [ "newHistoryMarkDecisionAsInvalid", "classVerification.html#a92b87e0dc375f1d17160492a4cb82ce5", null ],

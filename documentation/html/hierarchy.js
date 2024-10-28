@@ -32,6 +32,7 @@ var hierarchy =
     [ "GlobalModel", "structGlobalModel.html", null ],
     [ "GlobalModelGenerator", "classGlobalModelGenerator.html", null ],
     [ "GlobalState", "structGlobalState.html", null ],
+    [ "GlobalModelGenerator::GlobalStateTupleHash", "structGlobalModelGenerator_1_1GlobalStateTupleHash.html", null ],
     [ "GlobalTransition", "structGlobalTransition.html", null ],
     [ "HistoryDbg", "classHistoryDbg.html", null ],
     [ "HistoryEntry", "structHistoryEntry.html", null ],

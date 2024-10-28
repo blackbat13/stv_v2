@@ -9,6 +9,11 @@ Stores the local models, formula and a global model.
 
 {\ttfamily \#include $<$Global\+Model\+Generator.\+hpp$>$}
 
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structGlobalModelGenerator_1_1GlobalStateTupleHash}{Global\+State\+Tuple\+Hash}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,11 +27,13 @@ Stores the local models, formula and a global model.
 \begin{DoxyCompactList}\small\item\em Initializes a global model from local models and a formula. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{expand\+State}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
 \begin{DoxyCompactList}\small\item\em Goes through all \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in a given \mbox{\hyperlink{structGlobalState}{Global\+State}} and creates new Global\+States connected to the given one. \end{DoxyCompactList}\item 
-vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a1de661140eb7c06e2c610cd726689b7c}{expand\+State\+And\+Return}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
+vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}{expand\+State\+And\+Return}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state, bool return\+Anyway=false)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{Global\+Model\+Generator\+::expand\+State}} that also additionally returns a vector of newly created states. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classGlobalModelGenerator_a8f2f18be55f04da04ad4bcd1c9f0eef2}\label{classGlobalModelGenerator_a8f2f18be55f04da04ad4bcd1c9f0eef2}} 
 void \mbox{\hyperlink{classGlobalModelGenerator_a8f2f18be55f04da04ad4bcd1c9f0eef2}{expand\+All\+States}} ()
 \begin{DoxyCompactList}\small\item\em Expands the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} and continues until there are no more states to expand. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}{expand\+And\+Reduce\+All\+States}} ()
+\begin{DoxyCompactList}\small\item\em Expands and reduces the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} using a DFS-\/\+POR algorithm and continues until there are no more states to expand. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}{get\+Current\+Global\+Model}} ()
 \begin{DoxyCompactList}\small\item\em Get for a \mbox{\hyperlink{structGlobalModel}{Global\+Model}} used in initialization. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structFormula}{Formula}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}{get\+Formula}} ()
@@ -36,7 +43,12 @@ int \mbox{\hyperlink{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318
 set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}{find\+Or\+Create\+Epistemic\+Class\+For\+Knowledge}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agent)
 \begin{DoxyCompactList}\small\item\em Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}{get\+Agent\+Instance\+By\+Name}} (string agent\+Name)
-\begin{DoxyCompactList}\small\item\em Get a pointer to an agent by using its name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get a pointer to an agent by using its name. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}\label{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}} 
+void \mbox{\hyperlink{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}{mark\+Formula\+As\+Incorrect}} ()
+\begin{DoxyCompactList}\small\item\em Sets formula to an incorrectly written state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}{get\+Formula\+Corectness}} ()
+\begin{DoxyCompactList}\small\item\em Gets formula status. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,7 +83,22 @@ string \mbox{\hyperlink{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structFormula}{Formula}} used in init\+Model. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}\label{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}} 
 \mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}{global\+Model}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structGlobalModel}{Global\+Model}} created in init\+Model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structGlobalModel}{Global\+Model}} created in init\+Model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}\label{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}} 
+bool \mbox{\hyperlink{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}{correct\+Model}}
+\begin{DoxyCompactList}\small\item\em Flag holding info if model is actually correct. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}\label{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}} 
+unordered\+\_\+map$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$, unordered\+\_\+set$<$ int $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}{candidate\+State\+Depths}}
+\begin{DoxyCompactList}\small\item\em Lookup map containing global states and the depths that the global state is contained in. Used for reductions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}\label{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}} 
+stack$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}{global\+Model\+Candidates}}
+\begin{DoxyCompactList}\small\item\em Candidate states to be used in reductions. Used for reductions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}\label{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}} 
+stack$<$ int $>$ \mbox{\hyperlink{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}{state\+Depths}}
+\begin{DoxyCompactList}\small\item\em Saved depths of states added to states\+To\+Expand. Used for reductions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}\label{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}} 
+unordered\+\_\+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}{added\+States}}
+\begin{DoxyCompactList}\small\item\em States that were added to a stack of states. Used for reductions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -114,6 +141,21 @@ Creates a hash from a set of \mbox{\hyperlink{classLocalState}{Local\+State}}.
 \begin{DoxyReturn}{Returns}
 Returns a string with a hash. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}\label{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!expandAndReduceAllStates@{expandAndReduceAllStates}}
+\index{expandAndReduceAllStates@{expandAndReduceAllStates}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{expandAndReduceAllStates()}{expandAndReduceAllStates()}}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::expand\+And\+Reduce\+All\+States (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Expands and reduces the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} using a DFS-\/\+POR algorithm and continues until there are no more states to expand. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em depth} & Current depth of the recursive generation of all states. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}\label{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!expandState@{expandState}}
 \index{expandState@{expandState}!GlobalModelGenerator@{GlobalModelGenerator}}
@@ -129,11 +171,11 @@ Goes through all \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} i
 {\em state} & A state from which the expansion should start. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classGlobalModelGenerator_a1de661140eb7c06e2c610cd726689b7c}\label{classGlobalModelGenerator_a1de661140eb7c06e2c610cd726689b7c}} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}\label{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!expandStateAndReturn@{expandStateAndReturn}}
 \index{expandStateAndReturn@{expandStateAndReturn}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{expandStateAndReturn()}{expandStateAndReturn()}}
-{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ Global\+Model\+Generator\+::expand\+State\+And\+Return (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ Global\+Model\+Generator\+::expand\+State\+And\+Return (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{state,  }\item[{bool}]{return\+Anyway = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
 
@@ -301,6 +343,19 @@ Get for the \mbox{\hyperlink{structFormula}{Formula}} used in initialization.
 
 \begin{DoxyReturn}{Returns}
 Returns a pointer to the formula structure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}\label{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!getFormulaCorectness@{getFormulaCorectness}}
+\index{getFormulaCorectness@{getFormulaCorectness}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{getFormulaCorectness()}{getFormulaCorectness()}}
+{\footnotesize\ttfamily bool Global\+Model\+Generator\+::get\+Formula\+Corectness (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets formula status. 
+
+\begin{DoxyReturn}{Returns}
+True if formula is written correctly, false otherwise. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}\label{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getFormulaSize@{getFormulaSize}}
