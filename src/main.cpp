@@ -3,9 +3,11 @@
 #include "ModelParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
 #include <tuple>
+#include <limits.h>
 #include <algorithm>
 
 #include "reader/nodes.hpp"
@@ -99,12 +101,39 @@ int main(int argc, char* argv[]) {
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
     }
-
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
         // Print out model metadata
+
+        int col_width[3] = {16,16,16}; // graph-name, #states, #transitions
+
+        // update first col width if needed (and possible)
+        for (const auto agent : localModels->agents) {
+            size_t alen = agent->name.length();
+            if(alen<INT_MAX){
+                col_width[0] = max(col_width[0],static_cast<int>(alen));
+            }
+        }        
+
+        #if __linux__
+        cout << "\e[1m\e[4m"  // bold && underline mode
+             << std::left << setw(col_width[0]) << "Graph" 
+             << std::right << setw(col_width[1]) << "States"
+             << setw(col_width[2]) << "Transition"
+             << "s\e[0m" // reset to normal mode
+             << endl;
+        #else
+        cout << std::left << setw(col_width[0]) << "Graph" 
+             << std::right << setw(col_width[1]) << "States" 
+             << setw(col_width[2]) << "Transitions" 
+             << endl;
+        #endif
+       
         for (const auto agent : localModels->agents) {
             // name: [states, transitions]
-            cout << agent->name << ":  [" << agent->localStates.size() << ", " << agent->localTransitions.size() <<  "]"<< endl;
+            cout << std::left << setw(col_width[0]) << agent->name // << ":  [" 
+                 << std::right << setw(col_width[1]) << agent->localStates.size() //<< ", " 
+                 << setw(col_width[2]) << agent->localTransitions.size() //<<  "]"
+                 << endl;
         }
         
         set<GlobalTransition*> globTrn;
@@ -113,7 +142,10 @@ int main(int argc, char* argv[]) {
                 globTrn.insert(tr);
             }
         }
-        cout <<"Global:  [" << (generator->getCurrentGlobalModel())->globalStates.size() << ", " << (globTrn.size()) << "]" << endl;
+        cout << std::left << setw(col_width[0]) << "Global" // << ":  [" 
+             << std::right << setw(col_width[1]) << (generator->getCurrentGlobalModel())->globalStates.size() //<< ", " 
+             << setw(col_width[2]) << (globTrn.size()) //<<  "]"
+             << endl;
         //
     }
 
