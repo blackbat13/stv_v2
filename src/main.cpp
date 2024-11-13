@@ -88,6 +88,10 @@ int main(int argc, char* argv[]) {
         bool verifResult = verification->verify();
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
+            // auto gm = generator->getCurrentGlobalModel();
+            // for (auto state : gm->globalStates) {
+            //     printf(">>>>>> %s[%d]; %i\n", state->hash.c_str(), state->verificationStatus);
+            // }
             verification->historyDecisionsERR();
         }
         if(config.output_dot_files && verifResult){

@@ -187,6 +187,9 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     bool isCTLMode = this->generator->getFormula()->isCTL;
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
+        if(config.counterexample){
+            countertrace.push_back(globalState);
+        }
         return false;
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
@@ -194,6 +197,9 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
         if (isFMode) {
+            if(config.counterexample){
+                countertrace.push_back(globalState);
+            }
             return false;
         }
         else {
@@ -224,6 +230,9 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+            if(config.counterexample){
+                countertrace.push_back(globalState);
+            }
             return false;
         }
     }
@@ -331,6 +340,9 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     }
 
     if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode)) {
+        if(config.counterexample){
+            countertrace.push_back(globalState);
+        }
         return false;
     }
     
@@ -933,6 +945,44 @@ void Verification::historyDecisionsERR() {
     visited.insert(lastState->hash);
     bool changed = true;
     
+    cout << "@@@@@ CURR COUNTER EX BELOW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+    reverse(this->countertrace.begin(), this->countertrace.end());
+    for (auto el: this->countertrace){    
+        cout << "globalState:" << endl;
+        for (auto local : lastState->localStatesProjection) {
+            cout <<  local->name << ";";
+        }
+        cout << endl;
+        cout << "id = " << el->hash << "[" << el->verificationStatus << "]" << endl;
+
+        cout << "localStates:" << endl;
+        for (auto local : el->localStatesProjection) {
+            cout << "\t[" << local->agent->name << "] " << local->name << " (";
+            for (auto val : local->environment) {
+                cout << val.first << "=" << val.second << ";";
+            }
+            cout << ")" << endl;
+        }
+        cout << endl;
+
+        for (auto transition : el->globalTransitions) {
+            bool mult =false;
+            if(find(this->countertrace.begin(), this->countertrace.end(), transition->to) != this->countertrace.end()){
+                if(mult){
+                    cout<< " OR " << endl;
+                }else{
+                    cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
+                }
+                for (auto val : transition->localTransitions) {
+                    cout << "\t[" << val->agent->name << "]" << " " << val->name << endl;
+                }
+                mult=true;
+                cout << endl;
+            }
+        }
+    }
+    cout << "@@@@@ PREV COUNTER EX BELOW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
+
     while (changed) {
         cout << "States:" << endl;
         for (auto local : lastState->localStatesProjection) {
