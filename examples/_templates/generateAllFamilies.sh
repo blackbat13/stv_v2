@@ -59,7 +59,7 @@ echo -e "Generating family of SAI..."
 N_AGENTS_DOMAIN=(1 10)
 OUTDIR='../sai'
 mkdir -p $OUTDIR
-for ((i=${N_AGENTS[0]};i<=${N_AGENTS[1]};i++)); do
+for ((i=${N_AGENTS_DOMAIN[0]};i<=${N_AGENTS_DOMAIN[1]};i++)); do
     ofile="$OUTDIR/SAI${i}Agents.txt"
     npm exec -- ejs sai.ejs -i "{\"N_AGENTS\":${i},\"WITH_FORMULA\":1}" -o $ofile
 done
@@ -92,3 +92,20 @@ for ((i=${N_ADVENTURERS[0]};i<=${N_ADVENTURERS[1]};i++)); do
         npm exec -- ejs fetchQuest.ejs -i "{\"N_ADVENTURERS\":${i},\"N_DEPTH\":${j},\"WITH_FORMULA\":1}" -o $ofile
     done
 done
+
+
+# #----------#
+# # tasv.ejs #
+# #----------#
+# echo -e "Generating family of tasv..."
+# N_V=(1 5) 
+# N_C=(1 3) 
+# OUTDIR='../tasv'
+# TFILE='./tasv.ejs'
+# mkdir -p $OUTDIR
+# for ((i=${N_V[0]};i<=${N_V[1]};i++)); do
+#     for ((j=${N_C[0]};j<=${N_C[1]};j++)); do
+#         ofile="$OUTDIR/Voters${i}Candidates${j}.txt"
+#         npm exec -- ejs $TFILE -i "{\"N_VOTERS\":${i},\"N_CANDIDATES\":${j},\"WITH_FORMULA\":1}" -o $ofile
+#     done
+# done
