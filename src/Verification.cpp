@@ -949,7 +949,7 @@ void Verification::historyDecisionsERR() {
     reverse(this->countertrace.begin(), this->countertrace.end());
     for (auto el: this->countertrace){    
         cout << "globalState:" << endl;
-        for (auto local : lastState->localStatesProjection) {
+        for (auto local : el->localStatesProjection) {
             cout <<  local->name << ";";
         }
         cout << endl;
@@ -964,22 +964,21 @@ void Verification::historyDecisionsERR() {
             cout << ")" << endl;
         }
         cout << endl;
+        bool altDecExists =false;
 
         for (auto transition : el->globalTransitions) {
-            bool mult =false;
+            if(altDecExists){
+                cout<< "\tOR " << endl;
+            }
             if(find(this->countertrace.begin(), this->countertrace.end(), transition->to) != this->countertrace.end()){
-                if(mult){
-                    cout<< " OR " << endl;
-                }else{
-                    cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
-                }
+                if(!altDecExists)cout << "Decisions:\n" << transition->joinLocalTransitionNames().c_str() << endl;
                 for (auto val : transition->localTransitions) {
                     cout << "\t[" << val->agent->name << "]" << " " << val->name << endl;
                 }
-                mult=true;
-                cout << endl;
+                altDecExists=true;
             }
         }
+        cout << endl;
     }
     cout << "@@@@@ PREV COUNTER EX BELOW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << endl;
 

@@ -1,0 +1,89 @@
+Agent Voter1:
+LOCAL: [Voter1_vote]
+PERSISTENT: [Voter1_vote]
+INITIAL: [Voter1_vote:=0]
+init q0
+shared[2] vote0_Voter1[vote0_Voter1]: q0 -> q1 [Voter1_vote:=0]
+shared[2] vote1_Voter1[vote1_Voter1]: q0 -> q1 [Voter1_vote:=1]
+shared[2] vote2_Voter1[vote2_Voter1]: q0 -> q1 [Voter1_vote:=2]
+shared[2] gv_0_Voter1[gv_0_Voter1]: q1 [Voter1_vote==0] -> q2
+shared[2] gv_1_Voter1[gv_1_Voter1]: q1 [Voter1_vote==1] -> q2
+shared[2] gv_2_Voter1[gv_2_Voter1]: q1 [Voter1_vote==2] -> q2
+skip_vote_Voter1: q0 -> q1
+shared[2] ng_Voter1[ng_Voter1]: q1 -> q2
+shared[2] pun_Voter1[pn_Voter1]: q2 -> q3
+shared[2] npun_Voter1[pn_Voter1]: q2 -> q3
+shared[2] revote1from0_Voter1[revote1_Voter1]: q3[Voter1_vote==0] -> q4 [Voter1_vote:=1]
+shared[2] revote2from0_Voter1[revote2_Voter1]: q3[Voter1_vote==0] -> q4 [Voter1_vote:=2]
+shared[2] revote0from1_Voter1[revote0_Voter1]: q3[Voter1_vote==1] -> q4 [Voter1_vote:=0]
+shared[2] revote2from1_Voter1[revote2_Voter1]: q3[Voter1_vote==1] -> q4 [Voter1_vote:=2]
+shared[2] revote0from2_Voter1[revote0_Voter1]: q3[Voter1_vote==2] -> q4 [Voter1_vote:=0]
+shared[2] revote1from2_Voter1[revote1_Voter1]: q3[Voter1_vote==2] -> q4 [Voter1_vote:=1]
+skip_revote_Voter: q3 -> q4
+    
+Agent Voter2:
+LOCAL: [Voter2_vote]
+PERSISTENT: [Voter2_vote]
+INITIAL: [Voter2_vote:=0]
+init q0
+shared[2] vote0_Voter2[vote0_Voter2]: q0 -> q1 [Voter2_vote:=0]
+shared[2] vote1_Voter2[vote1_Voter2]: q0 -> q1 [Voter2_vote:=1]
+shared[2] vote2_Voter2[vote2_Voter2]: q0 -> q1 [Voter2_vote:=2]
+shared[2] gv_0_Voter2[gv_0_Voter2]: q1 [Voter2_vote==0] -> q2
+shared[2] gv_1_Voter2[gv_1_Voter2]: q1 [Voter2_vote==1] -> q2
+shared[2] gv_2_Voter2[gv_2_Voter2]: q1 [Voter2_vote==2] -> q2
+skip_vote_Voter2: q0 -> q1
+shared[2] ng_Voter2[ng_Voter2]: q1 -> q2
+shared[2] pun_Voter2[pn_Voter2]: q2 -> q3
+shared[2] npun_Voter2[pn_Voter2]: q2 -> q3
+shared[2] revote1from0_Voter2[revote1_Voter2]: q3[Voter2_vote==0] -> q4 [Voter2_vote:=1]
+shared[2] revote2from0_Voter2[revote2_Voter2]: q3[Voter2_vote==0] -> q4 [Voter2_vote:=2]
+shared[2] revote0from1_Voter2[revote0_Voter2]: q3[Voter2_vote==1] -> q4 [Voter2_vote:=0]
+shared[2] revote2from1_Voter2[revote2_Voter2]: q3[Voter2_vote==1] -> q4 [Voter2_vote:=2]
+shared[2] revote0from2_Voter2[revote0_Voter2]: q3[Voter2_vote==2] -> q4 [Voter2_vote:=0]
+shared[2] revote1from2_Voter2[revote1_Voter2]: q3[Voter2_vote==2] -> q4 [Voter2_vote:=1]
+skip_revote_Voter: q3 -> q4
+    
+Agent Authority1:
+LOCAL: [Tally1, Tally2, Freq]
+PERSISTENT: [Tally1, Tally2, Freq]
+INITIAL: [Tally1:=0, Tally2:=0, Freq:=0]
+init q0
+shared[2] vote0_Voter1[vote_Voter1]: q0[Freq<=2] -> q0 [Freq:=Freq+1]
+shared[2] vote1_Voter1[vote_Voter1]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally1:=Tally1+1]
+shared[2] vote2_Voter1[vote_Voter1]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally2:=Tally2+1]
+shared[2] revote1from0_Voter1[revote_Voter1]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally1:=Tally1+1]
+shared[2] revote2from0_Voter1[revote_Voter1]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally2:=Tally2+1]
+shared[2] revote0from1_Voter1[revote_Voter1]: q0[Freq<=2 && Tally1!=0] -> q0 [Tally1:=Tally1-1]
+shared[2] revote2from1_Voter1[revote_Voter1]: q0[Freq<=2 && Tally1!=0] -> q0 [Tally1:=Tally1-1, Tally2:=Tally2+1]
+shared[2] revote0from2_Voter1[revote_Voter1]: q0[Freq<=2 && Tally2!=0] -> q0 [Tally2:=Tally2-1]
+shared[2] revote1from2_Voter1[revote_Voter1]: q0[Freq<=2 && Tally2!=0] -> q0 [Tally2:=Tally2-1, Tally1:=Tally1+1]
+shared[2] vote0_Voter2[vote_Voter2]: q0[Freq<=2] -> q0 [Freq:=Freq+1]
+shared[2] vote1_Voter2[vote_Voter2]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally1:=Tally1+1]
+shared[2] vote2_Voter2[vote_Voter2]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally2:=Tally2+1]
+shared[2] revote1from0_Voter2[revote_Voter2]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally1:=Tally1+1]
+shared[2] revote2from0_Voter2[revote_Voter2]: q0[Freq<=2] -> q0 [Freq:=Freq+1, Tally2:=Tally2+1]
+shared[2] revote0from1_Voter2[revote_Voter2]: q0[Freq<=2 && Tally1!=0] -> q0 [Tally1:=Tally1-1]
+shared[2] revote2from1_Voter2[revote_Voter2]: q0[Freq<=2 && Tally1!=0] -> q0 [Tally1:=Tally1-1, Tally2:=Tally2+1]
+shared[2] revote0from2_Voter2[revote_Voter2]: q0[Freq<=2 && Tally2!=0] -> q0 [Tally2:=Tally2-1]
+shared[2] revote1from2_Voter2[revote_Voter2]: q0[Freq<=2 && Tally2!=0] -> q0 [Tally2:=Tally2-1, Tally1:=Tally1+1]
+
+Agent Coercer1:
+LOCAL: [Coercer1_Voter1_vote, Coercer1_Voter1_gv, Coercer1_pun1, Coercer1_npun1,Coercer1_Voter2_vote, Coercer1_Voter2_gv, Coercer1_pun2, Coercer1_npun2]
+PERSISTENT: [Coercer1_Voter1_vote, Coercer1_Voter1_gv, Coercer1_pun1, Coercer1_npun1,Coercer1_Voter2_vote, Coercer1_Voter2_gv, Coercer1_pun2, Coercer1_npun2]
+INITIAL: []
+init q0
+shared[2] gv_0_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_vote:=0, Coercer1_Voter1_gv:=1]    
+shared[2] gv_1_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_vote:=1, Coercer1_Voter1_gv:=1]    
+shared[2] gv_2_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_vote:=2, Coercer1_Voter1_gv:=1]    
+shared[2] ng_Voter1[g_Voter1]: q0 -> q1 [Coercer1_Voter1_gv:=2]
+shared[2] pun_Voter1[pun_Voter1]: q2 -> q3 [Coercer1_pun1:=1]
+shared[2] npun_Voter1[npun_Voter1]: q2 -> q3 [Coercer1_npun1:=1]
+shared[2] gv_0_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_vote:=0, Coercer1_Voter2_gv:=1]    
+shared[2] gv_1_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_vote:=1, Coercer1_Voter2_gv:=1]    
+shared[2] gv_2_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_vote:=2, Coercer1_Voter2_gv:=1]    
+shared[2] ng_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_gv:=2]
+shared[2] pun_Voter2[pun_Voter2]: q3 -> q4 [Coercer1_pun2:=1]
+shared[2] npun_Voter2[npun_Voter2]: q3 -> q4 [Coercer1_npun2:=1]
+
+FORMULA: <<Coercer1>>[]((Voter1_vote != 1) || (Coercer1_pun1 == 1 && Coercer1_npun1 == 0))
