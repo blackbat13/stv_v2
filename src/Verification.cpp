@@ -3,7 +3,6 @@
  * @brief Class for verification of the formula on a model.
  * Class for verification of the specified formula on a specified model.
  */
-
 #include "Verification.hpp"
 #define DEPTH_PREFIX string(depth * 4, ' ')
 
@@ -239,6 +238,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool hasOmittedTransitions = false;
+    bool hasMergedTransitionsIntoUncontrolled = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
         // if CTL then treat everything as uncontrolled transitions
@@ -301,6 +301,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
         // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
         if (brokenAgents.size() > 0) {
+            cout << "here we go" << endl;
             stack<GlobalTransition*> transitionsToBeMoved;
             // mark bad controlled global transition as uncontrolled
             for (const auto globalTransition : controlledGlobalTransitions) {
@@ -327,10 +328,11 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                 uncontrolledGlobalTransitions.insert(tr);
                 controlledGlobalTransitions.erase(tr);
             }
+            hasMergedTransitionsIntoUncontrolled = true;
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled)) {
         return false;
     }
     
@@ -406,6 +408,20 @@ void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition
     this->historyEnd = newHistoryEntry;
 }
 
+/// @brief Creates a HistoryEntry of the type UNCONTROLLED_DECISION and puts it on top of the stack of the decision history. 
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param decision Pointer to a GlobalTransition that is to be recorded in the decision history.
+void Verification::addHistoryUncontrolledDecision(GlobalState* globalState, GlobalTransition* decision) {
+    auto newHistoryEntry = new HistoryEntry();
+    newHistoryEntry->type = HistoryEntryType::UNCONTROLLED_DECISION;
+    newHistoryEntry->globalState = globalState;
+    newHistoryEntry->decision = decision;
+    newHistoryEntry->prev = this->historyEnd;
+    newHistoryEntry->next = nullptr;
+    this->historyEnd->next = newHistoryEntry;
+    this->historyEnd = newHistoryEntry;
+}
+
 /// @brief Creates a HistoryEntry of the type STATE_STATUS and puts it to the top of the decision history.
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param prevStatus Previous GlobalStateVerificationStatus to be logged.
@@ -427,7 +443,8 @@ void Verification::addHistoryStateStatus(GlobalState* globalState, GlobalStateVe
 /// @param depth Depth of the recursion of the validation algorithm.
 /// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
 /// @param globalTransitionControlled True if the GlobalTransition is in the set of global transitions controlled by a coalition and it is not a fixed global transition.
-void Verification::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
+/// @return Returns true if the natural strategy is good for now.
+bool Verification::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::CONTEXT;
     newHistoryEntry->globalState = globalState;
@@ -436,8 +453,38 @@ void Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     newHistoryEntry->globalTransitionControlled = globalTransitionControlled;
     newHistoryEntry->prev = this->historyEnd;
     newHistoryEntry->next = nullptr;
+    newHistoryEntry->strategy = StrategyEntry();
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
+
+    if (!globalTransitionControlled) {
+        return true;
+    }
+
+    StrategyEntry strategyEntry = StrategyEntry();
+    strategyEntry.type = ADDED;
+
+    auto actionName = (*(decision->localTransitions.begin()))->localName;
+    bitset<STRATEGY_BITS> valueBits = globalStateToValueBits(globalState);
+    auto existingStrategy = naturalStrategy.find(valueBits);
+    if(existingStrategy != naturalStrategy.end()) {
+        if((*existingStrategy).second != actionName) {
+            cout << (*existingStrategy).first << endl;
+            cout << "not good, " << actionName << " executed when " << (*existingStrategy).second << " was expected" << endl;
+            return false;
+        }
+        strategyEntry.type = NOT_MODIFIED;
+    }
+    naturalStrategy.insert({valueBits, actionName});
+    existingStrategy = naturalStrategy.find(valueBits);
+
+    strategyEntry.actionName = (*existingStrategy).second;
+    strategyEntry.globalValues = (*existingStrategy).first;
+    newHistoryEntry->strategy = strategyEntry;
+    this->historyEnd->next = newHistoryEntry;
+    this->historyEnd = newHistoryEntry;
+    cout << strategyEntry.globalValues << " -> " << strategyEntry.actionName << endl;
+    return true;
 }
 
 /// @brief Creates a HistoryEntry of the type MARK_DECISION_AS_INVALID and returns it.
@@ -463,6 +510,7 @@ void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, Glo
     this->historyEnd = newHistoryEntry;
 }
 
+
 /// @brief Reverts GlobalState and history to the previous decision state.
 /// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
 /// @return Returns true if rollback is successful, otherwise returns false.
@@ -485,7 +533,7 @@ bool Verification::revertLastDecision(int depth) {
     // Undo Z->T (including Z, excluding T); find Y while doing that
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
-    while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION) {
+    while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION && this->historyEnd->type != HistoryEntryType::UNCONTROLLED_DECISION) {
         auto entry = this->historyEnd;
         if (entry->type == HistoryEntryType::CONTEXT && entry->depth < shallowestDepth) {
             shallowestDepth = entry->depth;
@@ -605,6 +653,11 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     else if (this->historyEnd->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
         this->historyEnd->decision->isInvalidDecision = false;
     }
+
+    if (this->historyEnd->strategy.type == StrategyEntryType::ADDED) {
+        // cout << "erased " << this->historyEnd->strategy.globalValues << endl;
+        this->naturalStrategy.erase(this->historyEnd->strategy.globalValues);
+    }
     
     auto entry = this->historyEnd;
     this->historyEnd = this->historyEnd->prev;
@@ -688,15 +741,19 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
-bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
+    cout << "m " << mixed << endl;
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
+        cout << "trying " << globalTransition->from->hash << " -> " << globalTransition->to->hash << endl;
         if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
-            // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
+            // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
             if (!this->restoreHistory(globalState, globalTransition, depth, false)) {
                 continue;
             }
         }
+
+        this->addHistoryUncontrolledDecision(globalState, globalTransition);
         
         // About to go deeper - add history entry with type=CONTEXT
         this->addHistoryContext(globalState, depth, globalTransition, false);
@@ -759,7 +816,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode) {
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool isMixedControlTransitions = false;
@@ -773,9 +830,10 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         bool hasValidControlledTransition = false;
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
+            cout << "trying " << globalTransition->from->hash << " -> " << globalTransition->to->hash << endl;
             if (this->mode == TraversalMode::RESTORE) {
                 // Skip loop iterations performed before the one from historyToRestore
-                // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
+                // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
                 if (!this->restoreHistory(globalState, globalTransition, depth, true)) {
                     continue;
                 }
@@ -798,9 +856,22 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 #endif
                 this->addHistoryDecision(globalState, globalTransition);
             }
+            //todo check the state value here after all, maybe with addHistoryContext
             
             // About to go deeper - add history entry with type=CONTEXT
-            this->addHistoryContext(globalState, depth, globalTransition, true);
+            if (true) { //todo add flag check
+                this->addHistoryContext(globalState, depth, globalTransition, true);
+            }
+            else {
+                if(!this->addHistoryContext(globalState, depth, globalTransition, true)) {
+                    cout << "this" << endl;
+                    this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                    dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!naturalStrategy");
+                    globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                    bool reverted = this->revertLastDecision(depth);
+                    return false;
+                }
+            }
             
             #if VERBOSE
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
@@ -833,7 +904,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             //         }
             //     }
             // }
-            if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+            if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
                 hasValidChoiceTransition = false;
             }
             if (epistemicClass && fixedGlobalTransition == nullptr) {
@@ -859,7 +930,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     }
     
     // 2) verify paths not controlled by the coalition (all must be OK)
-    if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+    if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
         return false;
     }
     return true;
@@ -965,4 +1036,21 @@ void Verification::historyDecisionsERR() {
             }
         }
     }
+}
+
+bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalState) {
+    LocalState* agentState;
+    for(auto agentStates : globalState->localStatesProjection) {
+        if(agentStates->agent->name == (*(this->generator->getFormula()->coalition.begin()))->name) {
+            agentState = agentStates;
+            break;
+        }
+    }
+    bitset<STRATEGY_BITS> currentValues = 0;
+    int it = 0;
+    for(auto variable : agentState->environment) {
+        currentValues |= ((variable.second ? 1 : 0) << it);
+        it++;
+    }
+    return currentValues;
 }

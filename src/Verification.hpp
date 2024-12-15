@@ -1,6 +1,7 @@
 /**
  * @file Verification.hpp
  */
+#define STRATEGY_BITS 64
 
 #ifndef SELENE_VERIFICATION
 #define SELENE_VERIFICATION
@@ -8,6 +9,19 @@
 #include <stack>
 #include "Types.hpp"
 #include "GlobalModelGenerator.hpp"
+#include <bitset>
+
+/// @brief StrategyEntry entry type.
+enum StrategyEntryType {
+    NOT_MODIFIED, ///< Entry didn't have to get modified.
+    ADDED, ///< Entry got added to the map.
+};
+
+struct StrategyEntry {
+    StrategyEntryType type = NOT_MODIFIED;
+    bitset<STRATEGY_BITS> globalValues = 0;
+    string actionName = "";
+};
 
 /// @brief HistoryEntry entry type.
 enum HistoryEntryType {
@@ -15,6 +29,7 @@ enum HistoryEntryType {
     STATE_STATUS, ///< Changed verification status.
     CONTEXT, ///< Recursion has gone deeper.
     MARK_DECISION_AS_INVALID, ///< Marking a transition as invalid.
+    UNCONTROLLED_DECISION, ///< One uncontrolled choice from a set, from which all of them has to be OK.
 };
 
 string verStatusToStr(GlobalStateVerificationStatus status);
@@ -35,6 +50,8 @@ struct HistoryEntry {
     GlobalStateVerificationStatus newStatus;
     /// @brief Recursion depth.
     int depth;
+    /// @brief Holds currently processed strategy for the current state.
+    StrategyEntry strategy;
     /// @brief Pointer to the previous HistoryEntry.
     HistoryEntry* prev;
     /// @brief Pointer to the next HistoryEntry.
@@ -59,6 +76,8 @@ struct HistoryEntry {
     };
 };
 
+
+
 /// @brief Stores history and allows displaying it to the console.
 class HistoryDbg {
 public:
@@ -78,6 +97,13 @@ enum TraversalMode {
     NORMAL, ///< Normal model traversal.
     REVERT, ///< Backtracking through recursion with state rollback.
     RESTORE, ///< Backtracking through recursion.
+};
+
+/// @brief A comparator for two bitsets containing values for the global states.
+struct StrategyBitsComparator {
+    bool operator() (const bitset<STRATEGY_BITS> &b1, const bitset<STRATEGY_BITS> &b2) const {
+        return b1.to_ulong() < b2.to_ulong();
+    }
 };
 
 /// @brief A class that verifies if the model fulfills the formula. Also can do some operations on decision history.
@@ -100,25 +126,30 @@ protected:
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.
     HistoryEntry* historyEnd;
+    /// @brief A table of actions paired vith globalState internal variables state for natural strategy construction.
+    map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> naturalStrategy;
+
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
     bool isAgentInCoalition(Agent* agent);
     EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
     bool areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2);
-    void addHistoryDecision(GlobalState* globalState, GlobalTransition* ecision);
+    void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
     void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
-    void addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
+    bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
     void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
+    void addHistoryUncontrolledDecision(GlobalState* globalState, GlobalTransition* decision);
     HistoryEntry* newHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
     bool revertLastDecision(int depth);
     void undoLastHistoryEntry(bool freeMemory);
     void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
-    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
-    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode);
+    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
+    bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
 };
 
 #endif // SELENE_VERIFICATION

@@ -1,0 +1,121 @@
+Agent P1:
+LOCAL: [last_move_1,round1,my_turn_1,P1_00,P1_01,P1_02,P1_10,P1_11,P1_12,P1_20,P1_21,P1_22]
+PERSISTENT: [last_move_1,round1,my_turn_1,P1_00,P1_01,P1_02,P1_10,P1_11,P1_12,P1_20,P1_21,P1_22]
+INITIAL: [last_move_1:=0,round1:=0,my_turn_1:=0,P1_00:=1,P1_10:=2,P1_20:=2,P1_01:=1,P1_11:=2,P1_21:=1,P1_02:=0,P1_12:=0,P1_22:=0]
+init idle
+shared[2] my_turn[turn]: idle[my_turn_1==0] -> start_turn[my_turn_1:=1]
+shared[1] play_local_1_00[turn]: start_turn[P1_00 == 0 && my_turn_1==1] -> end_turn[P1_00:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=0]
+shared[1] play_local_1_01[turn]: start_turn[P1_01 == 0 && my_turn_1==1] -> end_turn[P1_01:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=1]
+shared[1] play_local_1_02[turn]: start_turn[P1_02 == 0 && my_turn_1==1] -> end_turn[P1_02:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=2]
+shared[1] play_local_1_10[turn]: start_turn[P1_10 == 0 && my_turn_1==1] -> end_turn[P1_10:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=3]
+shared[1] play_local_1_11[turn]: start_turn[P1_11 == 0 && my_turn_1==1] -> end_turn[P1_11:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=4]
+shared[1] play_local_1_12[turn]: start_turn[P1_12 == 0 && my_turn_1==1] -> end_turn[P1_12:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=5]
+shared[1] play_local_1_20[turn]: start_turn[P1_20 == 0 && my_turn_1==1] -> end_turn[P1_20:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=6]
+shared[1] play_local_1_21[turn]: start_turn[P1_21 == 0 && my_turn_1==1] -> end_turn[P1_21:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=7]
+shared[1] play_local_1_22[turn]: start_turn[P1_22 == 0 && my_turn_1==1] -> end_turn[P1_22:=1, my_turn_1:=2, round1 := round1+1, last_move_1:=8]
+shared[2] play_1_00[play]: end_turn[last_move_1==0] -> wait
+shared[2] play_1_01[play]: end_turn[last_move_1==1] -> wait
+shared[2] play_1_02[play]: end_turn[last_move_1==2] -> wait
+shared[2] play_1_10[play]: end_turn[last_move_1==3] -> wait
+shared[2] play_1_11[play]: end_turn[last_move_1==4] -> wait
+shared[2] play_1_12[play]: end_turn[last_move_1==5] -> wait
+shared[2] play_1_20[play]: end_turn[last_move_1==6] -> wait
+shared[2] play_1_21[play]: end_turn[last_move_1==7] -> wait
+shared[2] play_1_22[play]: end_turn[last_move_1==8] -> wait
+shared[2] get_1_00[play]: wait -> start_turn[P1_00:=2,my_turn_1:=1]
+shared[2] get_1_01[play]: wait -> start_turn[P1_01:=2,my_turn_1:=1]
+shared[2] get_1_02[play]: wait -> start_turn[P1_02:=2,my_turn_1:=1]
+shared[2] get_1_10[play]: wait -> start_turn[P1_10:=2,my_turn_1:=1]
+shared[2] get_1_11[play]: wait -> start_turn[P1_11:=2,my_turn_1:=1]
+shared[2] get_1_12[play]: wait -> start_turn[P1_12:=2,my_turn_1:=1]
+shared[2] get_1_20[play]: wait -> start_turn[P1_20:=2,my_turn_1:=1]
+shared[2] get_1_21[play]: wait -> start_turn[P1_21:=2,my_turn_1:=1]
+shared[2] get_1_22[play]: wait -> start_turn[P1_22:=2,my_turn_1:=1]
+
+
+Agent P2:
+LOCAL: [last_move_2,round2,my_turn_2,P2_00,P2_01,P2_02,P2_10,P2_11,P2_12,P2_20,P2_21,P2_22]
+PERSISTENT: [last_move_2,round2,my_turn_2,P2_00,P2_01,P2_02,P2_10,P2_11,P2_12,P2_20,P2_21,P2_22]
+INITIAL: [last_move_2:=0,round2:=0,my_turn_2:=0,P2_00:=1,P2_10:=2,P2_20:=2,P2_01:=1,P2_11:=2,P2_21:=1,P2_02:=0,P2_12:=0,P2_22:=0]
+init idle
+shared[2] my_turn[turn]: idle[my_turn_2==0] -> wait[my_turn_2:=2]
+shared[1] play_local_2_00[turn]: start_turn[P2_00 == 0 && my_turn_2==2] -> end_turn[P2_00:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=0]
+shared[1] play_local_2_01[turn]: start_turn[P2_01 == 0 && my_turn_2==2] -> end_turn[P2_01:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=1]
+shared[1] play_local_2_02[turn]: start_turn[P2_02 == 0 && my_turn_2==2] -> end_turn[P2_02:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=2]
+shared[1] play_local_2_10[turn]: start_turn[P2_10 == 0 && my_turn_2==2] -> end_turn[P2_10:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=3]
+shared[1] play_local_2_11[turn]: start_turn[P2_11 == 0 && my_turn_2==2] -> end_turn[P2_11:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=4]
+shared[1] play_local_2_12[turn]: start_turn[P2_12 == 0 && my_turn_2==2] -> end_turn[P2_12:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=5]
+shared[1] play_local_2_20[turn]: start_turn[P2_20 == 0 && my_turn_2==2] -> end_turn[P2_20:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=6]
+shared[1] play_local_2_21[turn]: start_turn[P2_21 == 0 && my_turn_2==2] -> end_turn[P2_21:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=7]
+shared[1] play_local_2_22[turn]: start_turn[P2_22 == 0 && my_turn_2==2] -> end_turn[P2_22:=2, my_turn_2:=1, round2 := round2+1, last_move_2:=8]
+shared[2] play_2_00[play]: end_turn[last_move_2==0] -> wait
+shared[2] play_2_01[play]: end_turn[last_move_2==1] -> wait
+shared[2] play_2_02[play]: end_turn[last_move_2==2] -> wait
+shared[2] play_2_10[play]: end_turn[last_move_2==3] -> wait
+shared[2] play_2_11[play]: end_turn[last_move_2==4] -> wait
+shared[2] play_2_12[play]: end_turn[last_move_2==5] -> wait
+shared[2] play_2_20[play]: end_turn[last_move_2==6] -> wait
+shared[2] play_2_21[play]: end_turn[last_move_2==7] -> wait
+shared[2] play_2_22[play]: end_turn[last_move_2==8] -> wait
+shared[2] get_2_00[play]: wait -> start_turn[P2_00:=1,my_turn_2:=2]
+shared[2] get_2_01[play]: wait -> start_turn[P2_01:=1,my_turn_2:=2]
+shared[2] get_2_02[play]: wait -> start_turn[P2_02:=1,my_turn_2:=2]
+shared[2] get_2_10[play]: wait -> start_turn[P2_10:=1,my_turn_2:=2]
+shared[2] get_2_11[play]: wait -> start_turn[P2_11:=1,my_turn_2:=2]
+shared[2] get_2_12[play]: wait -> start_turn[P2_12:=1,my_turn_2:=2]
+shared[2] get_2_20[play]: wait -> start_turn[P2_20:=1,my_turn_2:=2]
+shared[2] get_2_21[play]: wait -> start_turn[P2_21:=1,my_turn_2:=2]
+shared[2] get_2_22[play]: wait -> start_turn[P2_22:=1,my_turn_2:=2]
+
+
+Agent Score:
+LOCAL: [turn,play,last_move,round,P1_WIN,P2_WIN,DRAW,P3_00,P3_01,P3_02,P3_10,P3_11,P3_12,P3_20,P3_21,P3_22,end]
+PERSISTENT: [turn,play,last_move,round,P1_WIN,P2_WIN,DRAW,P3_00,P3_01,P3_02,P3_10,P3_11,P3_12,P3_20,P3_21,P3_22,end]
+INITIAL: [turn:=1,play:=0,last_move:=0,round:=0,P1_WIN:=0,P2_WIN:=0,DRAW:=0,P3_00:=1,P3_10:=2,P3_20:=2,P3_01:=1,P3_11:=2,P3_21:=1,P3_02:=0,P3_12:=0,P3_22:=0, end:=0]
+init idle
+shared[2] my_turn[turn]: idle[turn==1] -> turn_1
+shared[2] play_1_00[turn]: turn_1[P3_00 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=0,P3_00:=1]
+shared[2] play_1_01[turn]: turn_1[P3_01 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=1,P3_01:=1]
+shared[2] play_1_02[turn]: turn_1[P3_02 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=2,P3_02:=1]
+shared[2] play_1_10[turn]: turn_1[P3_10 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=3,P3_10:=1]
+shared[2] play_1_11[turn]: turn_1[P3_11 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=4,P3_11:=1]
+shared[2] play_1_12[turn]: turn_1[P3_12 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=5,P3_12:=1]
+shared[2] play_1_20[turn]: turn_1[P3_20 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=6,P3_20:=1]
+shared[2] play_1_21[turn]: turn_1[P3_21 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=7,P3_21:=1]
+shared[2] play_1_22[turn]: turn_1[P3_22 == 0 &&turn==1 && round<10] -> check_score_1[turn:=2, round := round+1, last_move:=8,P3_22:=1]
+shared[2] play_2_00[turn]: turn_2[P3_00 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=0,P3_00:=2]
+shared[2] play_2_01[turn]: turn_2[P3_01 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=1,P3_01:=2]
+shared[2] play_2_02[turn]: turn_2[P3_02 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=2,P3_02:=2]
+shared[2] play_2_10[turn]: turn_2[P3_10 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=3,P3_10:=2]
+shared[2] play_2_11[turn]: turn_2[P3_11 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=4,P3_11:=2]
+shared[2] play_2_12[turn]: turn_2[P3_12 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=5,P3_12:=2]
+shared[2] play_2_20[turn]: turn_2[P3_20 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=6,P3_20:=2]
+shared[2] play_2_21[turn]: turn_2[P3_21 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=7,P3_21:=2]
+shared[2] play_2_22[turn]: turn_2[P3_22 == 0 &&turn==2 && round<10] -> check_score_2[turn:=1, round := round+1, last_move:=8,P3_22:=2]
+shared[1] check_win_1[turn] : check_score_1[((P3_00==1 && P3_01==1 && P3_02==1) || (P3_10==1 && P3_11==1 && P3_12==1) || (P3_20==1 && P3_21==1 && P3_22==1) || (P3_00==1 && P3_10==1 && P3_20==1) || (P3_01==1 && P3_11==1 && P3_21==1) || (P3_02==1 && P3_12==1 && P3_22==1) || (P3_00==1 && P3_11==1 && P3_22==1) || (P3_02==1 && P3_11==1 && P3_20==1))] -> end_game[P1_WIN:=1, end:=1]
+shared[1] check_win_1[turn] : check_score_1[!((P3_00==1 && P3_01==1 && P3_02==1) || (P3_10==1 && P3_11==1 && P3_12==1) || (P3_20==1 && P3_21==1 && P3_22==1) || (P3_00==1 && P3_10==1 && P3_20==1) || (P3_01==1 && P3_11==1 && P3_21==1) || (P3_02==1 && P3_12==1 && P3_22==1) || (P3_00==1 && P3_11==1 && P3_22==1) || (P3_02==1 && P3_11==1 && P3_20==1)) && round<9] -> wait
+shared[1] check_win_1[turn] : check_score_1[!((P3_00==1 && P3_01==1 && P3_02==1) || (P3_10==1 && P3_11==1 && P3_12==1) || (P3_20==1 && P3_21==1 && P3_22==1) || (P3_00==1 && P3_10==1 && P3_20==1) || (P3_01==1 && P3_11==1 && P3_21==1) || (P3_02==1 && P3_12==1 && P3_22==1) || (P3_00==1 && P3_11==1 && P3_22==1) || (P3_02==1 && P3_11==1 && P3_20==1)) && round>=9] -> end_game[DRAW:=1, end:=1]
+shared[1] check_win_2[turn] : check_score_2[((P3_00==2 && P3_01==2 && P3_02==2) || (P3_10==2 && P3_11==2 && P3_12==2) || (P3_20==2 && P3_21==2 && P3_22==2) || (P3_00==2 && P3_10==2 && P3_20==2) || (P3_01==2 && P3_11==2 && P3_21==2) || (P3_02==2 && P3_12==2 && P3_22==2) || (P3_00==2 && P3_11==2 && P3_22==2) || (P3_02==2 && P3_11==2 && P3_20==2))] -> end_game[P2_WIN:=1, end:=1]
+shared[1] check_win_2[turn] : check_score_2[!((P3_00==2 && P3_01==2 && P3_02==2) || (P3_10==2 && P3_11==2 && P3_12==2) || (P3_20==2 && P3_21==2 && P3_22==2) || (P3_00==2 && P3_10==2 && P3_20==2) || (P3_01==2 && P3_11==2 && P3_21==2) || (P3_02==2 && P3_12==2 && P3_22==2) || (P3_00==2 && P3_11==2 && P3_22==2) || (P3_02==2 && P3_11==2 && P3_20==2)) && round<9] -> wait
+shared[1] check_win_2[turn] : check_score_2[!((P3_00==2 && P3_01==2 && P3_02==2) || (P3_10==2 && P3_11==2 && P3_12==2) || (P3_20==2 && P3_21==2 && P3_22==2) || (P3_00==2 && P3_10==2 && P3_20==2) || (P3_01==2 && P3_11==2 && P3_21==2) || (P3_02==2 && P3_12==2 && P3_22==2) || (P3_00==2 && P3_11==2 && P3_22==2) || (P3_02==2 && P3_11==2 && P3_20==2)) && round>=9] -> end_game[DRAW:=1, end:=1]
+shared[2] get_1_00[play]: wait[ last_move==0 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_01[play]: wait[ last_move==1 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_02[play]: wait[ last_move==2 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_10[play]: wait[ last_move==3 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_11[play]: wait[ last_move==4 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_12[play]: wait[ last_move==5 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_20[play]: wait[ last_move==6 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_21[play]: wait[ last_move==7 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_1_22[play]: wait[ last_move==8 && turn==1 && round<10] -> turn_1[turn:=1]
+shared[2] get_2_00[play]: wait[ last_move==0 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_01[play]: wait[ last_move==1 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_02[play]: wait[ last_move==2 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_10[play]: wait[ last_move==3 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_11[play]: wait[ last_move==4 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_12[play]: wait[ last_move==5 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_20[play]: wait[ last_move==6 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_21[play]: wait[ last_move==7 && turn==2 && round<10] -> turn_2[turn:=2]
+shared[2] get_2_22[play]: wait[ last_move==8 && turn==2 && round<10] -> turn_2[turn:=2]
+loopAndWait: end_game -> end_game
+
+FORMULA: <<P1>><>(DRAWWW==1)
