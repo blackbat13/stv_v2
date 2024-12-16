@@ -856,10 +856,9 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 #endif
                 this->addHistoryDecision(globalState, globalTransition);
             }
-            //todo check the state value here after all, maybe with addHistoryContext
             
             // About to go deeper - add history entry with type=CONTEXT
-            if (true) { //todo add flag check
+            if (!config.natural_strategy) {
                 this->addHistoryContext(globalState, depth, globalTransition, true);
             }
             else {
@@ -1053,4 +1052,8 @@ bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalSt
         it++;
     }
     return currentValues;
+}
+
+map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> Verification::getNaturalStrategy() {
+    return this->naturalStrategy;
 }

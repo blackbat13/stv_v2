@@ -41,6 +41,7 @@ CLI configuration overwrite:
 # --COUNTEREXAMPLE           output counterexample path if the formula verification returns an ERR
 # --REDUCE                   reduce the amount of states and transitions using a DFS-POR algorithm and select the first correct transition
 # --REDUCE_ALL               reduce the amount of states and transitions using a DFS-POR algorithm and select all avaliable transitions
+# --NATURAL_STRATEGY         generate a natural strategy for the given model
 ```
 
 ## Tests

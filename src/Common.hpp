@@ -49,6 +49,7 @@ struct Cfg{
     bool reduce;
     bool reduce_all;
     std::string reduce_args;
+    bool natural_strategy;
 };
 
 #endif 

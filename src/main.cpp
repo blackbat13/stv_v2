@@ -52,6 +52,10 @@ int main(int argc, char* argv[]) {
         outputGlobalModel(generator->getCurrentGlobalModel());
     }
 
+    if(config.natural_strategy) {
+        config.stv_mode |= 3;
+    }
+
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
@@ -89,6 +93,11 @@ int main(int argc, char* argv[]) {
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
+        }
+        if (config.natural_strategy) {
+            for (auto item : verification->getNaturalStrategy()) {
+                cout << item.first << " " << item.second << endl;
+            }
         }
         if(config.output_dot_files && verifResult){
             // save GlobalModel solution

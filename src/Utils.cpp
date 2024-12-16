@@ -263,6 +263,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 } else {
                     printf("ERR: no variables were specified!\n");
                 }
+            } else if (arg == "-NATURAL_STRATEGY" || arg == "--NATURAL_STRATEGY") {
+                config.natural_strategy = 1;
             }
         }
     }

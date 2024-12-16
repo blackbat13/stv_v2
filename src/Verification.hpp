@@ -113,6 +113,7 @@ public:
     ~Verification();
     bool verify();
     void historyDecisionsERR();
+    map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
