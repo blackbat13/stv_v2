@@ -95,8 +95,17 @@ int main(int argc, char* argv[]) {
             verification->historyDecisionsERR();
         }
         if (config.natural_strategy) {
-            for (auto item : verification->getNaturalStrategy()) {
-                cout << item.first << " " << item.second << endl;
+            for (auto item : verification->getReducedStrategy()) {
+                for (int i = 0; i < get<0>(item).size(); i++) {
+                    cout << (get<0>(get<0>(item)[i]) ? "" : "~") << get<1>(get<0>(item)[i]);
+                    if (i + 1 < get<0>(item).size()) {
+                        cout << " & ";
+                    }
+                }
+                if (get<0>(item).size() == 0) {
+                    cout << "T";
+                }
+                cout << " --> " << get<1>(item) << endl;
             }
         }
         if(config.output_dot_files && verifResult){

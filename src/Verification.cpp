@@ -127,6 +127,8 @@ Verification::Verification(GlobalModelGenerator* generator) {
     this->historyStart->next = nullptr;
     
     this->historyEnd = this->historyStart;
+    this->strategyVariableLimit = 0;
+    this->variableNames.clear();
 }
 
 /// @brief Destructor for Verification.
@@ -483,7 +485,7 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     newHistoryEntry->strategy = strategyEntry;
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
-    cout << strategyEntry.globalValues << " -> " << strategyEntry.actionName << endl;
+    cout << strategyEntry.globalValues << " -> " << *(strategyEntry.actionName) << endl;
     return true;
 }
 
@@ -742,7 +744,6 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
 bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
-    cout << "m " << mixed << endl;
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         cout << "trying " << globalTransition->from->hash << " -> " << globalTransition->to->hash << endl;
         if (this->mode == TraversalMode::RESTORE) {
@@ -863,7 +864,6 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
             else {
                 if(!this->addHistoryContext(globalState, depth, globalTransition, true)) {
-                    cout << "this" << endl;
                     this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
                     dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!naturalStrategy");
                     globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
@@ -1046,14 +1046,152 @@ bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalSt
         }
     }
     bitset<STRATEGY_BITS> currentValues = 0;
+    if (this->strategyVariableLimit == 0) {
+        this->variableNames.clear();
+    }
     int it = 0;
     for(auto variable : agentState->environment) {
         currentValues |= ((variable.second ? 1 : 0) << it);
+        if (this->strategyVariableLimit == 0) {
+            this->variableNames.push_back(variable.first);
+        }
         it++;
+    }
+    if (this->strategyVariableLimit == 0) {
+        strategyVariableLimit = it;
     }
     return currentValues;
 }
 
 map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> Verification::getNaturalStrategy() {
     return this->naturalStrategy;
+}
+
+vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrategy() {
+    vector<tuple<vector<tuple<bool, string>>, string>> result;
+    for (auto item : naturalStrategy) {
+
+        tuple<vector<tuple<bool, string>>, string> newItem = {vector<tuple<bool, string>>(strategyVariableLimit, {false, ""}) , ""};
+        
+        auto values = item.first.to_ulong();
+        for (int i = 0; i < strategyVariableLimit; i++) {
+            if (values & 1) {
+                get<0>(get<0>(newItem)[i]) = true;
+            }
+            values = values >> 1;
+            get<1>(get<0>(newItem)[i]) = variableNames[i];
+        }
+        get<1>(newItem) = item.second;
+        result.push_back(newItem);
+    }
+    return reduceStrategy(result);
+}
+
+vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn, bool upperHalf) {
+    // cout << "Entered new iteration!" << endl;
+    // for (auto item : strategyEntries) {
+    //     for (auto values : get<0>(item)) {
+    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
+    //     }
+    //     cout << "--> " << get<1>(item) << endl;
+    // }
+    
+    queue<short> toBeRemoved;
+    short minSum = 999, minSumID = 0, maxSum = 0, maxSumID = 0, maxValue = strategyEntries.size();
+    // remove unnecessary columns
+    for (int i = (!upperHalf ? lockedColumn : lockedColumn + 1); i < get<0>(strategyEntries[0]).size(); i++) {
+        short sum = 0;
+        for (int j = 0; j < strategyEntries.size(); j++) {
+            sum += (get<0>(get<0>(strategyEntries[j])[i]) ? 1 : 0);
+        }
+        if (sum == strategyEntries.size() || sum == 0) {
+            toBeRemoved.push(i);
+        }
+        if (sum > 0 && sum < minSum) {
+            minSum = sum;
+            minSumID = i;
+        }
+        if (sum < strategyEntries.size() && sum > maxSum) {
+            maxSum = sum;
+            maxSumID = i;
+        }
+    }
+    vector<tuple<vector<tuple<bool, string>>, string>> result(strategyEntries.size(), {vector<tuple<bool, string>>(), ""});
+
+    for (int i = 0; i < strategyEntries.size(); i++) {
+        get<1>(result[i]) = get<1>(strategyEntries[i]);
+    }
+    short totalOffsetMin = 0;
+    short totalOffsetMax = 0;
+    for (int i = 0; i < get<0>(strategyEntries[0]).size(); i++) {
+        if (!toBeRemoved.empty() && toBeRemoved.front() == i) {
+            toBeRemoved.pop();
+            if (minSumID > i) {
+                totalOffsetMin++;
+            }
+            if (maxSumID > i) {
+                totalOffsetMax++;
+            }
+            continue;
+        }
+        for (int j = 0; j < strategyEntries.size(); j++) {
+            get<0>(result[j]).push_back(get<0>(strategyEntries[j])[i]);
+        }
+    }
+    minSumID -= totalOffsetMin;
+    maxSumID -= totalOffsetMax;
+
+    if (result.size() == 1 || get<0>(result[0]).size() == 0) {
+        return result;
+    }
+    //get a division point, pick least valued weighted count of 0's and 1's 
+    short winnerID = ((((maxValue - maxSum) * 2) < minSum) ? maxSumID : minSumID);
+
+    bool toLookFor = true;
+    if (minSumID != winnerID) {
+        toLookFor = false;
+    }
+    // bring the defining column to the front
+    for (int i = 0; i < result.size(); i++) {
+        swap(get<0>(result[i])[(!upperHalf ? lockedColumn : lockedColumn + 1)], get<0>(result[i])[winnerID]);
+    }
+
+    //sort by defining value
+    short swapSpot = 0;
+    for (int i = 0; i < result.size(); i++) {
+        if(get<0>(get<0>(result[i])[(!upperHalf ? lockedColumn : lockedColumn + 1)]) == toLookFor) {
+            swap(result[i], result[swapSpot]);
+            swapSpot++;
+        }
+    }
+    
+    vector<tuple<vector<tuple<bool, string>>, string>> finalResult;
+    finalResult.reserve(result.size());
+    vector<tuple<vector<tuple<bool, string>>, string>> upperPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin(), result.begin() + swapSpot);
+    vector<tuple<vector<tuple<bool, string>>, string>> lowerPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin() + swapSpot, result.end());
+
+    // cout << "\nUpper part:" << endl;
+    // for (auto item : upperPart) {
+    //     for (auto values : get<0>(item)) {
+    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
+    //     }
+    //     cout << "--> " << get<1>(item) << endl;
+    // }
+
+    // cout << "\nLower part:" << endl;
+    // for (auto item : lowerPart) {
+    //     for (auto values : get<0>(item)) {
+    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
+    //     }
+    //     cout << "--> " << get<1>(item) << endl;
+    // }
+    // cout << "-------------------------" << endl;
+
+    upperPart = reduceStrategy(upperPart, lockedColumn + 1, true);
+    lowerPart = reduceStrategy(lowerPart, lockedColumn, false);
+
+    finalResult.insert(finalResult.end(), upperPart.begin(), upperPart.end());
+    finalResult.insert(finalResult.end(), lowerPart.begin(), lowerPart.end());
+
+    return finalResult;
 }

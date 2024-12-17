@@ -114,6 +114,7 @@ public:
     bool verify();
     void historyDecisionsERR();
     map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
+    vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
@@ -129,6 +130,10 @@ protected:
     HistoryEntry* historyEnd;
     /// @brief A table of actions paired vith globalState internal variables state for natural strategy construction.
     map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> naturalStrategy;
+    /// @brief Max strategy variables found.
+    short strategyVariableLimit;
+    /// @brief Easily readable variable names for natural strategy generation.
+    vector<string> variableNames;
 
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);
@@ -151,6 +156,7 @@ protected:
     bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
     bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
+    vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
 };
 
 #endif // SELENE_VERIFICATION
