@@ -478,7 +478,7 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     naturalStrategy.insert({valueBits, actionName});
     existingStrategy = naturalStrategy.find(valueBits);
 
-    strategyEntry.actionName = (*existingStrategy).second;
+    strategyEntry.actionName = &((*existingStrategy).second);
     strategyEntry.globalValues = (*existingStrategy).first;
     newHistoryEntry->strategy = strategyEntry;
     this->historyEnd->next = newHistoryEntry;

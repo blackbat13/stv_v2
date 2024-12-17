@@ -20,7 +20,7 @@ enum StrategyEntryType {
 struct StrategyEntry {
     StrategyEntryType type = NOT_MODIFIED;
     bitset<STRATEGY_BITS> globalValues = 0;
-    string actionName = "";
+    string* actionName;
 };
 
 /// @brief HistoryEntry entry type.
