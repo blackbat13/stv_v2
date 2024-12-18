@@ -303,7 +303,6 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
         // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
         if (brokenAgents.size() > 0) {
-            cout << "here we go" << endl;
             stack<GlobalTransition*> transitionsToBeMoved;
             // mark bad controlled global transition as uncontrolled
             for (const auto globalTransition : controlledGlobalTransitions) {
@@ -471,8 +470,6 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     auto existingStrategy = naturalStrategy.find(valueBits);
     if(existingStrategy != naturalStrategy.end()) {
         if((*existingStrategy).second != actionName) {
-            cout << (*existingStrategy).first << endl;
-            cout << "not good, " << actionName << " executed when " << (*existingStrategy).second << " was expected" << endl;
             return false;
         }
         strategyEntry.type = NOT_MODIFIED;
@@ -485,7 +482,6 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     newHistoryEntry->strategy = strategyEntry;
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
-    cout << strategyEntry.globalValues << " -> " << *(strategyEntry.actionName) << endl;
     return true;
 }
 
@@ -657,7 +653,6 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     }
 
     if (this->historyEnd->strategy.type == StrategyEntryType::ADDED) {
-        // cout << "erased " << this->historyEnd->strategy.globalValues << endl;
         this->naturalStrategy.erase(this->historyEnd->strategy.globalValues);
     }
     
@@ -745,7 +740,6 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @return Returns true if every transition yields a correct result, false otherwise.
 bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
-        cout << "trying " << globalTransition->from->hash << " -> " << globalTransition->to->hash << endl;
         if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
             // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
@@ -831,7 +825,6 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         bool hasValidControlledTransition = false;
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
-            cout << "trying " << globalTransition->from->hash << " -> " << globalTransition->to->hash << endl;
             if (this->mode == TraversalMode::RESTORE) {
                 // Skip loop iterations performed before the one from historyToRestore
                 // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
