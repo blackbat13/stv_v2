@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
-        bool verifResult = verification->verify();
+        bool verifResult = verification->fixpointVerify();
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();

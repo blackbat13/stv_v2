@@ -1,0 +1,16 @@
+Agent Voter1:
+LOCAL: [Voter1_vote,Voter1_pun]
+PERSISTENT: [Voter1_vote,Voter1_pun]
+INITIAL: [Voter1_vote:=1]
+init q0
+vote1: q0 -> q1 [Voter1_vote:=1]
+gv_1_Voter1: q1 [Voter1_vote==1] -> q2
+vote2: q0 -> q1 [Voter1_vote:=2]
+gv_2_Voter1: q1 [Voter1_vote==2] -> q2
+ng_Voter1: q1 -> q2
+pn_Voter1: q2 -> q3 [Voter1_pun:=1]
+pn_Voter1: q2 -> q3 [Voter1_pun:=2]
+loop: q3 -> q3
+
+
+FORMULA: <<Voter1>>[](Voter1_vote != 2)
