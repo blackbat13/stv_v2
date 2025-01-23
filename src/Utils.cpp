@@ -263,6 +263,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 } else {
                     printf("ERR: no variables were specified!\n");
                 }
+            } else if (arg == "-FIXPOINT" || arg == "--FIXPOINT") {
+                config.fixpoint = 1;
             }
         }
     }
