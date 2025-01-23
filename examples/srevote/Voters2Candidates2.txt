@@ -10,7 +10,7 @@ shared[2] gv_2_Voter1[gv_2_Voter1]: q1 [Voter1_vote==2] -> q2 [Voter1_give:=1]
 shared[2] ng_Voter1[ng_Voter1]: q1 -> q2 [Voter1_give:=2]
 shared[2] pun_Voter1[pn_Voter1]: q2 -> q3
 shared[2] npun_Voter1[pn_Voter1]: q2 -> q3
-idle: q3->q3
+idle: q3->q0
 
 Agent Voter2:
 LOCAL: [Voter2_vote]
@@ -24,7 +24,7 @@ shared[2] gv_2_Voter2[gv_2_Voter2]: q1 [Voter2_vote==2] -> q2
 shared[2] ng_Voter2[ng_Voter2]: q1 -> q2
 shared[2] pun_Voter2[pn_Voter2]: q2 -> q3
 shared[2] npun_Voter2[pn_Voter2]: q2 -> q3
-idle: q3->q3
+idle: q3->q0
 
 Agent Coercer1:
 LOCAL: [Coercer1_Voter1_vote, Coercer1_Voter1_gv, Coercer1_pun1, Coercer1_npun1,Coercer1_Voter2_vote, Coercer1_Voter2_gv, Coercer1_pun2, Coercer1_npun2]
@@ -41,5 +41,6 @@ shared[2] gv_2_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_vote:=2, Coercer1_Vot
 shared[2] ng_Voter2[g_Voter2]: q1 -> q2 [Coercer1_Voter2_gv:=2]
 shared[2] pun_Voter2[pun_Voter2]: q3 -> q4 [Coercer1_pun2:=1]
 shared[2] npun_Voter2[npun_Voter2]: q3 -> q4 [Coercer1_npun2:=1]
+idle: q4 -> q0
 
-FORMULA: <<Voter1>><>(Voter1_vote==1 && Voter1_give==2)
+FORMULA: <<Voter1>>[](Voter1_give!=2)
