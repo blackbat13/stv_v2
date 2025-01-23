@@ -1,16 +1,13 @@
 Agent Voter1:
-LOCAL: [Voter1_vote,Voter1_pun]
-PERSISTENT: [Voter1_vote,Voter1_pun]
-INITIAL: [Voter1_vote:=1]
-init q0
-vote1: q0 -> q1 [Voter1_vote:=1]
-gv_1_Voter1: q1 [Voter1_vote==1] -> q2
-vote2: q0 -> q1 [Voter1_vote:=2]
-gv_2_Voter1: q1 [Voter1_vote==2] -> q2
-ng_Voter1: q1 -> q2
-pn_Voter1: q2 -> q3 [Voter1_pun:=1]
-pn_Voter1: q2 -> q3 [Voter1_pun:=2]
-loop: q3 -> q3
+LOCAL: [Voter1_vote,Voter1_give]
+PERSISTENT: [Voter1_vote,Voter1_give]
+INITIAL: []
+init idle0
+act1: idle0 -> voted1 [Voter1_vote:=1]
+act2: idle0 -> voted2 [Voter1_vote:=2]
+act3: voted1 -> obeyed1 [Voter1_give:=1]
+act4: voted2 -> obeyed2 [Voter1_give:=1]
+act5: voted1 -> disobeyed1 [Voter1_give:=2]
+act5: voted2 -> disobeyed2 [Voter1_give:=2]
 
-
-FORMULA: <<Voter1>>[](Voter1_vote != 2)
+FORMULA: <<Voter1>><>(Voter1_vote==1 && Voter1_give==2)
