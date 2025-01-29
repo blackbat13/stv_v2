@@ -2,7 +2,7 @@ FILES=`ls *.txt | sort`
 echo "=====[Measuring execution time]====="
 for FILE in $FILES; do
 	echo "Measuring $FILE..."
-	COMMAND1="../../build/stv -f $FILE -m 2"
+	COMMAND1="../../build/stv -f $FILE -m 1"
 	COMMAND2="../../build/stv -f $FILE -m 3"
 	COMMAND3="../../build/stv -f $FILE -m 3 --NATURAL_STRATEGY"
 
