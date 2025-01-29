@@ -115,6 +115,7 @@ public:
     void historyDecisionsERR();
     map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
     vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
+    int getStrategyComplexity();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
@@ -134,6 +135,8 @@ protected:
     short strategyVariableLimit;
     /// @brief Easily readable variable names for natural strategy generation.
     vector<string> variableNames;
+    /// @brief Natural strategy complexity before reduction
+    int reductionComplexityBefore;
 
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);

@@ -10,6 +10,8 @@
 
 extern Cfg config;
 
+// #define VERBOSE 1
+
 /// @brief Converts global verification status into a string.
 /// @param status Enum value to be converted.
 /// @return Verification status converted into a string.
@@ -1063,7 +1065,6 @@ map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> Verification::getNatu
 vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrategy() {
     vector<tuple<vector<tuple<bool, string>>, string>> result;
     for (auto item : naturalStrategy) {
-
         tuple<vector<tuple<bool, string>>, string> newItem = {vector<tuple<bool, string>>(strategyVariableLimit, {false, ""}) , ""};
         
         auto values = item.first.to_ulong();
@@ -1077,6 +1078,16 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrat
         get<1>(newItem) = item.second;
         result.push_back(newItem);
     }
+    this->reductionComplexityBefore = 0;
+    for (auto item : result) {
+        this->reductionComplexityBefore += (strategyVariableLimit - 1);
+        for (auto values : get<0>(item)) {
+            this->reductionComplexityBefore += (get<0>(values) ? 1 : 2);
+            // cout << get<1>(values) << " = " << get<0>(values) << " | ";
+        }
+        // cout << "--> " << get<1>(item) << endl;
+    }
+    // cout << "=====" << endl;
     return reduceStrategy(result);
 }
 
@@ -1088,7 +1099,6 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     //     }
     //     cout << "--> " << get<1>(item) << endl;
     // }
-    
     queue<short> toBeRemoved;
     short minSum = 999, minSumID = 0, maxSum = 0, maxSumID = 0, maxValue = strategyEntries.size();
     // remove unnecessary columns
@@ -1187,4 +1197,8 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     finalResult.insert(finalResult.end(), lowerPart.begin(), lowerPart.end());
 
     return finalResult;
+}
+
+int Verification::getStrategyComplexity() {
+    return this->reductionComplexityBefore;
 }

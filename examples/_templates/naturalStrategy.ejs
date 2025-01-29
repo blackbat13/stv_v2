@@ -1,0 +1,37 @@
+<%#
+PARAMETERS:
+    N_VOTERS - denotes the number of voters
+    WITH_FORMULA - flag denoting if formula should be included
+_%>
+<%_ for( let i = 1; i <= N_VOTERS; i++ ) { _%>
+Agent Voter<%=i%>:
+LOCAL: [Voter<%=i%>_vote]
+PERSISTENT: [Voter<%=i%>_vote]
+INITIAL: []
+init q0
+voter<%=i%>vote1: q0 -> q1 [Voter<%=i%>_vote:=1]
+shared[2] gv_1_Voter<%=i%>[gv_1_Voter<%=i%>]: q1 [Voter<%=i%>_vote==1] -> q2
+voter<%=i%>vote2: q0 -> q1 [Voter<%=i%>_vote:=2]
+shared[2] gv_2_Voter<%=i%>[gv_2_Voter<%=i%>]: q1 [Voter<%=i%>_vote==2] -> q2
+shared[2] ng_Voter<%=i%>[ng_Voter<%=i%>]: q1 -> q2
+shared[2] pun_Voter<%=i%>[pn_Voter<%=i%>]: q2 -> q3
+shared[2] npun_Voter<%=i%>[pn_Voter<%=i%>]: q2 -> q3
+
+<% }_%>
+Agent Coercer:
+LOCAL: [<%= Array.from({length: N_VOTERS}, (x, i) => i+1).map(x=>`Coercer_Voter${x}_vote, Coercer_Voter${x}_gv, Coercer_pun${x}, Coercer_npun${x}`).join(', ') %>, finish]
+PERSISTENT: [<%= Array.from({length: N_VOTERS}, (x, i) => i+1).map(x=>`Coercer_Voter${x}_vote, Coercer_Voter${x}_gv, Coercer_pun${x}, Coercer_npun${x}`).join(', ') %>, finish]
+INITIAL: []
+init q0
+<% for( let i = 1; i <= N_VOTERS; i++ ) { _%>
+shared[2] gv_1_Voter<%=i%>[g_Voter<%=i%>]: q<%=(i-1)*2%> -> q<%=(i-1)*2+1%> [Coercer_Voter<%=i%>_vote:=1, Coercer_Voter<%=i%>_gv:=1]
+shared[2] gv_2_Voter<%=i%>[g_Voter<%=i%>]: q<%=(i-1)*2%> -> q<%=(i-1)*2+1%> [Coercer_Voter<%=i%>_vote:=2, Coercer_Voter<%=i%>_gv:=1]
+shared[2] ng_Voter<%=i%>[g_Voter<%=i%>]: q<%=(i-1)*2%> -> q<%=(i-1)*2+1%> [Coercer_Voter<%=i%>_gv:=2]
+shared[2] pun_Voter<%=i%>[pun_Voter<%=i%>]: q<%=(i-1)*2+1%> -> q<%=i*2%> [Coercer_pun<%=i%>:=1]
+shared[2] npun_Voter<%=i%>[npun_Voter<%=i%>]: q<%=(i-1)*2+1%> -> q<%=i*2%> [Coercer_npun<%=i%>:=1]
+<%_ } _%>
+finish: q<%=N_VOTERS*2%> -> q<%=N_VOTERS*2%> [finish:=1]
+
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { -%>
+FORMULA: <<Coercer>>[](((Voter<%=N_VOTERS%>_vote != 2) || (finish != 1)) || (Coercer_pun<%=N_VOTERS%> == 1))
+<%_ } _%>
