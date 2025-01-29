@@ -1193,7 +1193,16 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     minSumID -= totalOffsetMin;
     maxSumID -= totalOffsetMax;
 
-    if (result.size() == 1 || get<0>(result[0]).size() == 0) {
+    // cout << "\nResult before:" << endl;
+    // cout << lockedColumn << endl;
+    // for (auto item : result) {
+    //     for (auto values : get<0>(item)) {
+    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
+    //     }
+    //     cout << "--> " << get<1>(item) << endl;
+    // }
+
+    if (result.size() == 1 || get<0>(result[0]).size() == 0 || lockedColumn == get<0>(result[0]).size() - 1) {
         return result;
     }
     //get a division point, pick least valued weighted count of 0's and 1's 
@@ -1221,6 +1230,14 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     finalResult.reserve(result.size());
     vector<tuple<vector<tuple<bool, string>>, string>> upperPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin(), result.begin() + swapSpot);
     vector<tuple<vector<tuple<bool, string>>, string>> lowerPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin() + swapSpot, result.end());
+
+    // cout << "\nResult:" << endl;
+    // for (auto item : result) {
+    //     for (auto values : get<0>(item)) {
+    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
+    //     }
+    //     cout << "--> " << get<1>(item) << endl;
+    // }
 
     // cout << "\nUpper part:" << endl;
     // for (auto item : upperPart) {
