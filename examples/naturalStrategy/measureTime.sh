@@ -13,9 +13,11 @@ for FILE in $FILES; do
     RESULT1=$(echo "scale=2; var=$TIME2; var2=$TIME1; var-=var2; if(var<1&&var>-1&&var!=0) print 0; var" | bc)
     echo "Strategy discovery time (normal): ${RESULT1}s"
 	
-	TIME3=$(/usr/bin/time -f "%e" $COMMAND3 2>&1 > /dev/null)
-    RESULT2=$(echo "scale=2; var=$TIME3; var2=$TIME1; var-=var2; if(var<1&&var>-1&&var!=0) print 0; var" | bc)
+	TIME3=$(/usr/bin/time -f "%e" $COMMAND3 2>&1 > temp.txt)
+	RESULT2=$(echo "scale=2; var=$TIME3; var2=$TIME1; var-=var2; if(var<1&&var>-1&&var!=0) print 0; var" | bc)
 	echo "Strategy discovery time (natural): ${RESULT2}s" 
+    tail -2 temp.txt
+	rm -f temp.txt
 
 	echo "===================================="
 done
