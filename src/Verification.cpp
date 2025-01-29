@@ -407,6 +407,7 @@ void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition
     newHistoryEntry->decision = decision;
     newHistoryEntry->prev = this->historyEnd;
     newHistoryEntry->next = nullptr;
+    newHistoryEntry->depth = 10;
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
 }
@@ -459,31 +460,40 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     newHistoryEntry->strategy = StrategyEntry();
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
-
+    
     if (!globalTransitionControlled) {
         return true;
     }
 
-    StrategyEntry strategyEntry = StrategyEntry();
-    strategyEntry.type = ADDED;
-
-    auto actionName = (*(decision->localTransitions.begin()))->localName;
-    bitset<STRATEGY_BITS> valueBits = globalStateToValueBits(globalState);
-    auto existingStrategy = naturalStrategy.find(valueBits);
-    if(existingStrategy != naturalStrategy.end()) {
-        if((*existingStrategy).second != actionName) {
-            return false;
+    if (config.natural_strategy) {
+        StrategyEntry strategyEntry = StrategyEntry();
+        strategyEntry.type = ADDED;
+        auto coalition = generator->getFormula()->coalition;
+        string actionName;
+        for(auto item : decision->localTransitions) {
+            if(coalition.find(item->agent) != coalition.end()) {
+                actionName = item->localName;
+                break;
+            }
         }
-        strategyEntry.type = NOT_MODIFIED;
-    }
-    naturalStrategy.insert({valueBits, actionName});
-    existingStrategy = naturalStrategy.find(valueBits);
+        bitset<STRATEGY_BITS> valueBits = globalStateToValueBits(globalState);
+        auto existingStrategy = naturalStrategy.find(valueBits);
+        if(existingStrategy != naturalStrategy.end()) {
+            if((*existingStrategy).second != actionName) {
+                return false;
+            }
+            strategyEntry.type = NOT_MODIFIED;
+        }
+        naturalStrategy.insert({valueBits, actionName});
+        existingStrategy = naturalStrategy.find(valueBits);
 
-    strategyEntry.actionName = &((*existingStrategy).second);
-    strategyEntry.globalValues = (*existingStrategy).first;
-    newHistoryEntry->strategy = strategyEntry;
-    this->historyEnd->next = newHistoryEntry;
-    this->historyEnd = newHistoryEntry;
+        strategyEntry.actionName = &((*existingStrategy).second);
+        strategyEntry.globalValues = (*existingStrategy).first;
+        newHistoryEntry->strategy = strategyEntry;
+        // cout << "ADDED " << strategyEntry.type << " " << strategyEntry.actionName->c_str() << " " << strategyEntry.globalValues << endl;
+        this->historyEnd->next = newHistoryEntry;
+        this->historyEnd = newHistoryEntry;
+    }
     return true;
 }
 
@@ -497,6 +507,7 @@ HistoryEntry* Verification::newHistoryMarkDecisionAsInvalid(GlobalState* globalS
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->decision = decision;
     newHistoryEntry->next = nullptr;
+    // cout << decision->from->hash.c_str() << " -> " << decision->to->hash.c_str() << " marked as invalid" << endl;
     return newHistoryEntry;
 }
 
@@ -533,7 +544,7 @@ bool Verification::revertLastDecision(int depth) {
     // Undo Z->T (including Z, excluding T); find Y while doing that
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
-    while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION && this->historyEnd->type != HistoryEntryType::UNCONTROLLED_DECISION) {
+    while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION) {
         auto entry = this->historyEnd;
         if (entry->type == HistoryEntryType::CONTEXT && entry->depth < shallowestDepth) {
             shallowestDepth = entry->depth;
@@ -544,6 +555,7 @@ bool Verification::revertLastDecision(int depth) {
         #endif
         this->undoLastHistoryEntry(true);
     }
+    // histDbg.print(DEPTH_PREFIX);
     
     #if VERBOSE
         vector<HistoryEntry*> dbgHEsToDelete;
@@ -655,6 +667,7 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     }
 
     if (this->historyEnd->strategy.type == StrategyEntryType::ADDED) {
+        // cout << "REMOVED " << this->historyEnd->strategy.type << " " << this->historyEnd->strategy.actionName->c_str() << " " << this->historyEnd->strategy.globalValues << endl;
         this->naturalStrategy.erase(this->historyEnd->strategy.globalValues);
     }
     
@@ -750,6 +763,10 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
             }
         }
 
+
+        this->addHistoryUncontrolledDecision(globalState, globalTransition);
+        
+        
         this->addHistoryUncontrolledDecision(globalState, globalTransition);
         
         // About to go deeper - add history entry with type=CONTEXT
@@ -830,6 +847,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             if (this->mode == TraversalMode::RESTORE) {
                 // Skip loop iterations performed before the one from historyToRestore
                 // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
+                // cout << depth << endl;
                 if (!this->restoreHistory(globalState, globalTransition, depth, true)) {
                     continue;
                 }
@@ -854,26 +872,48 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
             
             // About to go deeper - add history entry with type=CONTEXT
-            if (!config.natural_strategy) {
-                this->addHistoryContext(globalState, depth, globalTransition, true);
-            }
-            else {
-                if(!this->addHistoryContext(globalState, depth, globalTransition, true)) {
-                    this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-                    dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!naturalStrategy");
-                    globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-                    bool reverted = this->revertLastDecision(depth);
-                    return false;
-                }
-            }
+            this->addHistoryContext(globalState, depth, globalTransition, true);
+            // if (!config.natural_strategy) {
+            //     this->addHistoryContext(globalState, depth, globalTransition, true);
+            // }
+            // else {
+            //     if(!this->addHistoryContext(globalState, depth, globalTransition, true)) {
+            //         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+            //         dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!naturalStrategy");
+            //         globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+            //         bool reverted = this->revertLastDecision(depth);
+            //         continue;
+            //     }
+            // }
             
             #if VERBOSE
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            if (this->mode == TraversalMode::REVERT && !isFMode) {
-                // Recursive verifyGlobalState caused REVERT mode, just exit
-                return false;
+            if (this->mode == TraversalMode::REVERT) {
+                // Recursive verifyGlobalState caused REVERT mode
+                if (globalState == this->revertToGlobalState) {
+                    // This is the "top" state (first Y in selene-ver2.png) from which recursion should be rebuilt
+                    this->revertToGlobalState = nullptr;
+                    if (this->historyToRestore.empty()) {
+                        this->mode = TraversalMode::NORMAL;
+                        #if VERBOSE
+                            printf("%sset mode=NORMAL\n", DEPTH_PREFIX.c_str());
+                        #endif
+                    }
+                    else {
+                        this->mode = TraversalMode::RESTORE;
+                        #if VERBOSE
+                            printf("%sset mode=RESTORE\n", DEPTH_PREFIX.c_str());
+                        #endif
+                    }
+                    this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
+                    globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                    return this->verifyGlobalState(globalState, depth); // Same state, same depth
+                }
+                else {
+                    return false;
+                }
             }
             if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
                 this->undoHistoryUntil(prevHistoryEnd, false, depth); 
@@ -939,6 +979,12 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
 bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled) {
     // Check if top history entry matches this loop iteration
     auto entry = this->historyToRestore.top();
+    while(entry->type == HistoryEntryType::DECISION) {
+        // cout << "Removed ";
+        // cout << entry->type << " " << entry->globalState->hash.c_str() << " " << entry->depth << " " << entry->decision->to->hash.c_str() << " " << entry->globalTransitionControlled << endl;
+        historyToRestore.pop();
+        entry = this->historyToRestore.top();
+    }
     if (entry->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
         entry->decision->isInvalidDecision = true;
         this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
@@ -948,7 +994,10 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
             entry = this->historyToRestore.top();
         }
     }
+    // cout << entry->type << " " << entry->globalState->hash.c_str() << " " << entry->depth << " " << entry->decision->to->hash.c_str() << " " << entry->globalTransitionControlled << endl;
+    // cout << HistoryEntryType::CONTEXT << " " << globalState->hash.c_str() << " " << depth << " " << globalTransition->to->hash.c_str() << " " << controlled << endl;
     bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == controlled;
+    // cout << "? " << matches << endl;
     #if VERBOSE
         if (matches) {
             if (controlled) {

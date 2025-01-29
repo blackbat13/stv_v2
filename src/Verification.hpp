@@ -72,6 +72,9 @@ struct HistoryEntry {
         else if (this->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
             snprintf(buff, sizeof(buff), "markInvalid in %s: to %s", this->globalState->hash.c_str(), this->decision->to->hash.c_str());
         }
+        else if (this->type == HistoryEntryType::UNCONTROLLED_DECISION) {
+            snprintf(buff, sizeof(buff), "uncontrolledDecision in %s at depth %i: to %s (%s)", this->globalState->hash.c_str(), this->depth, this->decision->to->hash.c_str(), this->globalTransitionControlled ? "controlled" : "uncontrolled");
+        }
         return string(buff);
     };
 };

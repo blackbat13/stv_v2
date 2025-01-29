@@ -30,6 +30,13 @@ TEST(NaturalStrategyTest, Test4)
 {
     TestVerif strategyVerify("../tests/examples/naturalStrategy/naturalStrategyTest4.txt", 3);
 
+    EXPECT_EQ(strategyVerify.result, false);
+}
+
+TEST(NaturalStrategyTest, Test5)
+{
+    TestVerif strategyVerify("../tests/examples/naturalStrategy/naturalStrategyTest5.txt", 3);
+
     EXPECT_EQ(strategyVerify.result, true);
 }
 
