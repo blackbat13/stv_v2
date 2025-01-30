@@ -762,12 +762,6 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
                 continue;
             }
         }
-
-
-        this->addHistoryUncontrolledDecision(globalState, globalTransition);
-        
-        
-        this->addHistoryUncontrolledDecision(globalState, globalTransition);
         
         // About to go deeper - add history entry with type=CONTEXT
         this->addHistoryContext(globalState, depth, globalTransition, false);
@@ -872,7 +866,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
             
             // About to go deeper - add history entry with type=CONTEXT
-            this->addHistoryContext(globalState, depth, globalTransition, true);
+            bool okStrategy = this->addHistoryContext(globalState, depth, globalTransition, true);
             // if (!config.natural_strategy) {
             //     this->addHistoryContext(globalState, depth, globalTransition, true);
             // }
@@ -890,6 +884,9 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
+            if (config.natural_strategy && !okStrategy) {
+                hasValidControlledTransition = false;
+            }
             if (this->mode == TraversalMode::REVERT) {
                 // Recursive verifyGlobalState caused REVERT mode
                 if (globalState == this->revertToGlobalState) {
