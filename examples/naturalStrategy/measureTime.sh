@@ -1,4 +1,4 @@
-FILES=`ls *.txt | sort`
+FILES=`ls *.txt | grep "^[0-9]" | sort`
 echo "=====[Measuring execution time]====="
 for FILE in $FILES; do
 	echo "Measuring $FILE..."
