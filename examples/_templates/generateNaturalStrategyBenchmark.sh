@@ -18,6 +18,14 @@ N_VOTERS_DOMAIN=(1 9)
 OUTDIR='../naturalStrategy'
 mkdir -p $OUTDIR
 for ((i=${N_VOTERS_DOMAIN[0]};i<=${N_VOTERS_DOMAIN[1]};i++)); do
-    ofile="$OUTDIR/${i}Voters1Coercer.txt"
+    ofile="$OUTDIR/${i}Voters1CoercerSVote.txt"
     npm exec -- ejs naturalStrategy.ejs -i "{\"N_VOTERS\":$i,\"WITH_FORMULA\":1}" -o $ofile
+done
+
+N_VOTERS_DOMAIN=(1 9)
+OUTDIR='../vvote'
+mkdir -p $OUTDIR
+for ((i=${N_VOTERS_DOMAIN[0]};i<=${N_VOTERS_DOMAIN[1]};i++)); do
+    ofile="$OUTDIR/${i}Voters1CoercerVVote.txt"
+    npm exec -- ejs vvote.ejs -i "{\"N_VOTERS\":$i,\"WITH_FORMULA\":1}" -o $ofile
 done
