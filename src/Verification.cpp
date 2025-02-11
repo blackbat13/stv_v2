@@ -1134,7 +1134,12 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrat
         // cout << "--> " << get<1>(item) << endl;
     }
     // cout << "=====" << endl;
-    return reduceStrategy(result);
+    auto reduceResult = reduceStrategy(result);
+    auto temp = &get<0>(reduceResult[reduceResult.size() - 1]);
+    tuple<bool, string> t = {true, "T"};
+    temp->clear();
+    temp->push_back(t);
+    return reduceResult;
 }
 
 vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn, bool upperHalf) {
