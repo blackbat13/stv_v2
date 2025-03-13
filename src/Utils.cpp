@@ -265,6 +265,8 @@ void loadConfigFromArgs(int argc, char** argv) {
                 }
             } else if (arg == "-FIXPOINT" || arg == "--FIXPOINT") {
                 config.fixpoint = 1;
+            } else if (arg == "-NATURAL_STRATEGY" || arg == "--NATURAL_STRATEGY") {
+                config.natural_strategy = 1;
             }
         }
     }

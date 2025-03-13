@@ -16,6 +16,7 @@
 #include "ctl_test.h"
 #include "input_error_test.h"
 #include "reduction_test.h"
+#include "natural_strategy_test.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

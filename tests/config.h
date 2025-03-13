@@ -29,12 +29,18 @@ class TestVerif
         le = false;
     }
 
-    TestVerif(string path, bool ok) {
-        if (!ok) {
+    TestVerif(string path, int mode) {
+        if (mode == 0) {
             result = verify(path, generator);
         }
-        else {
+        else if (mode == 1) {
             result = verifyFull(path, generator);
+        }
+        else if (mode == 2) {
+            result = reducedVerify(path, generator);
+        }
+        else if (mode == 3) {
+            result = strategyVerify(path, generator);
         }
     }
 
@@ -112,6 +118,33 @@ class TestVerif
         bool result = false;
 
         generator->expandAndReduceAllStates();
+
+        auto verification = new Verification(generator);
+        
+        result = verification->verify();
+        
+        return result;
+    }
+
+    bool strategyVerify(string path, GlobalModelGenerator* generator)
+    {
+        config.fname = path.data();
+        config.output_local_models = false;
+        config.output_global_model = false;
+        config.stv_mode = 3;
+        config.natural_strategy = true;
+
+        auto tp = new ModelParser();
+        
+        tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+        auto localModels = &(get<0>(desc));
+        auto formula = &(get<1>(desc));
+
+        generator->initModel(localModels, formula);
+
+        bool result = false;
+
+        generator->expandAllStates();
 
         auto verification = new Verification(generator);
         

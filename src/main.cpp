@@ -52,6 +52,10 @@ int main(int argc, char* argv[]) {
         outputGlobalModel(generator->getCurrentGlobalModel());
     }
 
+    if(config.natural_strategy) {
+        config.stv_mode |= 3;
+    }
+
     if(config.output_dot_files){
         // save AgentTemplates
         for(auto it:*modelDescription) {
@@ -95,6 +99,33 @@ int main(int argc, char* argv[]) {
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
+        }
+        if (config.natural_strategy) {
+            if (verifResult) {
+                int reductionComplexityAfter = 0;
+                for (auto item : verification->getReducedStrategy()) {
+                    for (int i = 0; i < get<0>(item).size(); i++) {
+                        cout << (get<0>(get<0>(item)[i]) ? "" : "~") << get<1>(get<0>(item)[i]);
+                        reductionComplexityAfter += (get<0>(get<0>(item)[i]) ? 1 : 2);
+                        if (i + 1 < get<0>(item).size()) {
+                            cout << " & ";
+                        }
+                    }
+                    if (get<0>(item).size() == 0) {
+                        reductionComplexityAfter += 1;
+                        cout << "T";
+                    }
+                    else {
+                        reductionComplexityAfter += ((get<0>(item).size()) - 1);
+                    }
+                    cout << " --> " << get<1>(item) << endl;
+                }
+                cout << "Complexity before reduction: " << verification->getStrategyComplexity() << endl;
+                cout << "Complexity after reduction: " << reductionComplexityAfter << endl;
+            }
+            else {
+                cout << "No natural strategy present." << endl;
+            }
         }
         if(config.output_dot_files && verifResult){
             // save GlobalModel solution

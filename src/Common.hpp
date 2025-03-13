@@ -50,6 +50,7 @@ struct Cfg{
     bool reduce_all;
     std::string reduce_args;
     bool fixpoint;
+    bool natural_strategy;
 };
 
 #endif 
