@@ -1,4 +1,4 @@
-# STV2 - StraTegic Verifier 2 
+# STV2 - StraTegic Verifier version 2
 
 ## Usage
 
@@ -105,7 +105,7 @@ Ubuntu/WSL:
 
 ## Specification
 
-The specification language was inspired by ISPL (Interpreted Systems Programming Language) from [MCMAS](https://vas.doc.ic.ac.uk/software/mcmas/).   
+The specification language was inspired by ISPL (Interpreted Systems Programming Language) from [MCMAS](https://vas.doc.ic.ac.uk/software/mcmas/).
 The detailed syntax for the input format can be derived from *./src/reader/{parser.y,scanner.l}*, which intrinsically make up an EBNF grammar.  
 For the most parts, it is simple enough to get intuition just from looking at example's source code and the program's output.
 
@@ -119,12 +119,12 @@ IMPORTANTS NOTES:
 In *./examples* and *./tests/examples* there are several ready-to-use MAS specification files together with a proposed property (captured by ATL formula) for verification.
 
 Often, we would want to reason about different (data-)configurations of the same system.  
-Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behaviour.  
+Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behavior.  
 A template can be fed with a configuration data to generate a concrete instance of a system.  
 Moreover, their use is independent from the tool: one can choose any templating engine (of the myriads available) or even write a custom one from the scratch.
 
-Here, we utilize the [EJS](https://ejs.co/) templating engine.   
-It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations. 
+Here, we utilize the [EJS](https://ejs.co/) templating engine.
+It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.
 
 ```sh
 # EJS feeds the data (as a list of key:val pairs) to the template file to generate the output:
@@ -152,3 +152,17 @@ dot -Tpng lts_of_AGENT.dot > lts_of_AGENT.png
 
 For the smaller graphs use *dot2png.sh* script, which converts all *.dot* files from a current folder to *.png*.  
 For bigger ones use `svg` format (may be viewed in Inkscape) and *dot2svg.sh*.
+
+## Web interface
+
+The web interface is available at [http://stv.cs-htiew.com/](http://stv.cs-htiew.com/).
+
+## Credits
+
+Lead developer: Mateusz Kamiński (@Mathisplay)
+
+Project supervisor: Damian Kurpiewski (@blackbat13)
+
+Initial codebase: Witold Pazderski
+
+Additional features: Yan Kim
