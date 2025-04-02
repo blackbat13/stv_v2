@@ -18,6 +18,7 @@ ident [a-zA-Z][_a-zA-Z0-9]*
 single [\[\]():!,+\-*/%]
 comment #[^\n]*
 blank [ \n\t]
+floatno [0-9]*\.[0-9]+
 %%
 
 "Agent"        { return T_AGENT; }
@@ -37,6 +38,7 @@ blank [ \n\t]
 ">"            { return T_GT; }
 "<="           { return T_LE; }
 "<"            { return T_LT; }
+{floatno}      { yylval.floatno = atof(yytext); return T_FLOAT; }
 [0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }

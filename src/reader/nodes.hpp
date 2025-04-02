@@ -81,6 +81,9 @@ class TransitionTemplate {
       /// @brief Set of assignments.
       set<Assignment*> *assignments;
 
+      /// @brief Probability of executing the action.
+      ProbNode *probability;
+
       /// @brief TransitionTemplate constructor.
       /// @param _shared Needed amound of needed agents. -1 if not shared.
       /// @param _patternName Name of the pattern.
@@ -89,9 +92,10 @@ class TransitionTemplate {
       /// @param _endState End state name.
       /// @param _cond Condition expression that has do be fulfilled in that transition.
       /// @param _assign Set of assignments.
-      TransitionTemplate(int _shared, string _patternName, string _matchName, string _startState, string _endState, ExprNode *_cond, set<Assignment*> *_assign): 
+      /// @param _prob Probability of executing the action.
+      TransitionTemplate(int _shared, string _patternName, string _matchName, string _startState, string _endState, ExprNode *_cond, set<Assignment*> *_assign, ProbNode *_prob): 
             shared(_shared), patternName(_patternName), matchName(_matchName),
-            startState(_startState), endState(_endState), condition(_cond), assignments(_assign) {};
+            startState(_startState), endState(_endState), condition(_cond), assignments(_assign), probability(_prob) {};
             
 };
 

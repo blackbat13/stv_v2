@@ -26,6 +26,7 @@ extern FormulaTemplate formulaDescription;
 %union {
        set<class AgentTemplate*>*  model;
        class ExprNode*             expr;
+       class ProbNode*             prob;
        class Assignment*           assign;
        class TransitionTemplate*   trans;
        class AgentTemplate*        agent;
@@ -33,6 +34,7 @@ extern FormulaTemplate formulaDescription;
        char*                       ident;
        set<string>*                identSet;
        int                         val;
+       float                       floatno;
        vector<class ExprNode*>*    condList;
 }
 
@@ -40,11 +42,13 @@ extern FormulaTemplate formulaDescription;
 %token   T_PERSISTENT T_TO T_ASSIGN T_OR T_AND T_EQ
 %token   T_NE T_GT T_GE T_LT T_LE 
 %token   <val> T_NUM T_SHARED
+%token   <floatno> T_FLOAT
 %token   <ident> T_IDENT
 %token   T_KNOW T_HARTLEY
 
 %type  <val>  shared
 %type  <expr> num_exp num_mul num_elem
+%type  <prob> prob_exp prob_mul prob_elem
 %type  <expr> condition cond cond_and cond_elem
 %type  <trans> transition
 %type  <identSet> local persistent ident_list coalition
@@ -114,17 +118,30 @@ assignment: T_IDENT T_ASSIGN num_exp { $$=new Assignment($1, $3); }
           ;
           
 transition: shared T_IDENT '[' T_IDENT ']' ':' T_IDENT condition T_TO T_IDENT assignments {
-              $$=new TransitionTemplate($1, $2, $4, $7, $10, $8, $11); 
+              $$=new TransitionTemplate($1, $2, $4, $7, $10, $8, $11, new ProbConst(1)); 
               delete $2;
               delete $4;
               delete $7;
               delete $10;
             }
           | shared T_IDENT ':' T_IDENT condition T_TO T_IDENT assignments {
-              $$=new TransitionTemplate($1, $2, $2, $4, $7, $5, $8);
+              $$=new TransitionTemplate($1, $2, $2, $4, $7, $5, $8, new ProbConst(1));
               delete $2;
               delete $4;
               delete $7;
+            }
+          | shared T_IDENT '[' T_IDENT ']' ':' T_IDENT condition T_TO prob_exp ':' T_IDENT assignments {
+              $$=new TransitionTemplate($1, $2, $4, $7, $12, $8, $13, $10); 
+              delete $2;
+              delete $4;
+              delete $7;
+              delete $12;
+            }
+          | shared T_IDENT ':' T_IDENT condition T_TO prob_exp ':' T_IDENT assignments {
+              $$=new TransitionTemplate($1, $2, $2, $4, $9, $5, $10, $7);
+              delete $2;
+              delete $4;
+              delete $9;
             }
           ;
 
@@ -148,7 +165,21 @@ num_mul: num_mul '*' num_elem { $$=new ExprMul($1, $3);}
 num_elem: T_IDENT { $$=new ExprIdent($1); delete $1; }
         | '-'T_NUM { $$=new ExprConst(-$2); }
         | T_NUM { $$=new ExprConst($1); }
-        | '(' num_exp ')' {$$ = $2; }
+        | '(' num_exp ')' { $$ = $2; }
+        ;
+
+prob_exp: prob_exp '-' prob_mul { $$=new ProbSub($1, $3);}
+       | prob_exp '+' prob_mul { $$=new ProbAdd($1, $3);}
+       | prob_mul { $$=$1; }
+       ;
+prob_mul: prob_mul '*' prob_elem { $$=new ProbMul($1, $3);}
+       | prob_mul '/' prob_elem { $$=new ProbDiv($1, $3);}
+       | prob_elem { $$=$1; }
+       ;
+prob_elem: T_NUM { $$=new ProbConst($1); }
+        | '-'T_FLOAT { $$=new ProbConst(-$2); }
+        | T_FLOAT { $$=new ProbConst($1); }
+        | '(' prob_exp ')' { $$ = $2; }
         ;
 
 condition: '[' cond ']' { $$=$2; }

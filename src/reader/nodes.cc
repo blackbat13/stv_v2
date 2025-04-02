@@ -104,6 +104,9 @@ AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
 /// @return Returns itself.
 AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    transitions->insert(_transition);
+   
+   // remove later
+   printf("%f\n", _transition->probability->eval());
 
    /* 
    [YK]: 

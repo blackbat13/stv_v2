@@ -1,0 +1,17 @@
+Agent Voter1:
+LOCAL: [v11, v12, v1c]
+PERSISTENT: []
+INITIAL: [v11:=0, v12:=0, v1c:=0]
+init q0
+regm: q0 -> q1
+regi: q0 -> q2
+regp: q0 -> q3
+packm: q1 -> q4
+packi: q2 -> q5
+packp: q3 -> q6
+vote1m: q4 -> 90/100 : q7 [v11:=1]
+vote2m: q4 -> 1-0.1 : q8 [v12:=1]
+vote1i: q5 -> 1-0.4 : q9 [v11:=1]
+vote2i: q5 -> 1-0.4 : q10 [v12:=1]
+vote1p: q6 -> 0.99  : q11 [v11:=1]
+vote2p: q6 -> 1-0.01 : q12 [v12:=1]
