@@ -25,6 +25,9 @@ struct LocalTransition {
 
     /// @brief Conditions that have to be fulfilled for the transition to be avaliable.
     set<Condition*> conditions;
+
+    /// @brief Used for probability formula verification. The probability of this LocalTransition executing.
+    float probability;
     
     // Bindings
 

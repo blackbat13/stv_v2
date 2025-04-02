@@ -106,7 +106,7 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    transitions->insert(_transition);
    
    // remove later
-   printf("%f\n", _transition->probability->eval());
+   // printf("%f\n", _transition->probability->eval());
 
    /* 
    [YK]: 
@@ -264,6 +264,7 @@ Agent * AgentTemplate::generateAgent(int id) {
          transition->agent = result;
          transition->from = state;
          transition->to = newState;
+         transition->probability = (*it)->probability->eval();
          
          // zapamiętaj w węźle
          state->localTransitions.insert(transition);

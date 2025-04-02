@@ -400,6 +400,11 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     bool hasMergedTransitionsIntoUncontrolled = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
+        // Remove later
+        // cout << globalTransition->from->hash.c_str() << " " << globalTransition->to->hash.c_str() << endl;
+        // for (auto locTrans : globalTransition->localTransitions) {
+        //     cout << locTrans->name << " " << locTrans->from->name.c_str() << " -> " << locTrans->to->name.c_str() << " Probability: " << locTrans->probability << endl;
+        // }
         // if CTL then treat everything as uncontrolled transitions
         if (isCTLMode) {
             uncontrolledGlobalTransitions.insert(globalTransition);

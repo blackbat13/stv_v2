@@ -53,6 +53,24 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
    formula.isCTL = false;
+   if (formulaDescription.probability != NULL) {
+      formula.probability = formulaDescription.probability->eval();
+      if (formulaDescription.probabilitySign == "==") {
+         formula.probabilitySign = ProbabilitySign::EQ;
+      } else if (formulaDescription.probabilitySign == "!=") {
+         formula.probabilitySign = ProbabilitySign::NE;
+      } else if (formulaDescription.probabilitySign == ">") {
+         formula.probabilitySign = ProbabilitySign::GT;
+      } else if (formulaDescription.probabilitySign == ">=") {
+         formula.probabilitySign = ProbabilitySign::GE;
+      } else if (formulaDescription.probabilitySign == "<") {
+         formula.probabilitySign = ProbabilitySign::LT;
+      } else if (formulaDescription.probabilitySign == "<=") {
+         formula.probabilitySign = ProbabilitySign::LE;
+      } 
+   }
+
+   // cout << "Formula probability: " << formula.probabilitySign << " " << formula.probability << endl;
 
    if (formula.p != nullptr) {
       for (const auto agent : models.agents) {

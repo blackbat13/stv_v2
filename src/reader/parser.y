@@ -44,9 +44,9 @@ extern FormulaTemplate formulaDescription;
 %token   <val> T_NUM T_SHARED
 %token   <floatno> T_FLOAT
 %token   <ident> T_IDENT
-%token   T_KNOW T_HARTLEY
+%token   T_KNOW T_HARTLEY T_PROB
 
-%type  <val>  shared
+%type  <val> shared
 %type  <expr> num_exp num_mul num_elem
 %type  <prob> prob_exp prob_mul prob_elem
 %type  <expr> condition cond cond_and cond_elem
@@ -57,7 +57,8 @@ extern FormulaTemplate formulaDescription;
 %type  <agent> description agent
 %type  <model> spec model
 %type  <condList> cond_list
-
+%type  <ident> probability_equality
+ 
 %%
 model: spec { modelDescription = $1; }
      ;
@@ -74,7 +75,19 @@ formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaD
        | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; }
        | '[' ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=false; formulaDescription.formula=$3; }
        | T_LT T_GT cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$3; }
+       | coalition '[' ']' T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$9; formulaDescription.probability=$7; formulaDescription.probabilitySign=$6; }
+       | coalition T_LT T_GT T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$9; formulaDescription.probability=$7; formulaDescription.probabilitySign=$6; }
+       | '[' ']' T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=false; formulaDescription.formula=$8; formulaDescription.probability=$6; formulaDescription.probabilitySign=$5; }
+       | T_LT T_GT T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$8; formulaDescription.probability=$6; formulaDescription.probabilitySign=$5; }
        ;
+
+probability_equality: T_EQ { $$="=="; }
+                    | T_NE { $$="!="; }
+                    | T_GT { $$=">"; }
+                    | T_GE { $$=">="; }
+                    | T_LT { $$="<"; }
+                    | T_LE { $$="<="; }
+                    ;
 
 cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
          | cond { $$=new vector<ExprNode*>; $$->push_back($1); }

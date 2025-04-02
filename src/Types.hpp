@@ -31,7 +31,16 @@
 
 using namespace std;
 
-
+/// @brief Probability inequality sign used for the probabilistic verification
+enum ProbabilitySign {
+    NONE, ///< No probability detected.
+    EQ, ///< Equal (==)
+    NE, ///< Not equal (!=)
+    GT, ///< Greater than (>)
+    GE, ///< Greater equal (>=)
+    LT, ///< Less than (<)
+    LE ///< Less equal (<=)
+};
 
 /// @brief Represents a variable in the model, containing name, initial value and persistence.
 struct Var {
@@ -61,18 +70,23 @@ struct Condition {
 };
 
 /// @brief Contains a template for coalition of Agent as string from the formula. 
-struct FormulaTemplate{
+struct FormulaTemplate {
     set<string>* coalition; // this will be replaced by an Agent pointer upon instantiation of a formula
     vector<ExprNode*>* formula;
     bool isF;
+    ProbNode* probability;
+    string probabilitySign = "";
 };
 
+/// @brief Contains the processed verification formula.
 struct Formula {
     /// @brief Coalition of Agent from the formula.
     set<Agent*> coalition;
     vector<ExprNode*>* p; // [YK]: temporary solution to encode <<coalution>> G p
     bool isF;
     bool isCTL;
+    float probability = 1;
+    ProbabilitySign probabilitySign = ProbabilitySign::NONE;
 };
 
 /// @brief Represents a single local model, contains all agents and variables.
