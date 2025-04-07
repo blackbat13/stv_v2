@@ -9,12 +9,25 @@ regp: q0 -> q3
 packm: q1 -> q4
 packi: q2 -> q5
 packp: q3 -> q6
+
 vote1m: q4 -> 90/100 : q7 [v11:=1]
+vote1m: q4 -> 10/100 : q13 [v1c:=1]
+
 vote2m: q4 -> 1-0.1 : q8 [v12:=1]
+vote2m: q4 -> 0.1   : q13 [v1c:=1]
+
 vote1i: q5 -> 1-0.4 : q9 [v11:=1]
+vote1i: q5 -> 0.4   : q13 [v1c:=1]
+
 vote2i: q5 -> 1-0.4 : q10 [v12:=1]
+vote2i: q5 -> 0.4   : q13 [v1c:=1]
+
 vote1p: q6 -> 0.99  : q11 [v11:=1]
+vote1p: q6 -> 0.01  : q13 [v1c:=1]
+
 vote2p: q6 -> 1-0.01 : q12 [v12:=1]
+vote2p: q6 -> 0.01   : q13 [v1c:=1]
+
 idle: q7 -> q7
 idle: q8 -> q8
 idle: q9 -> q9

@@ -25,6 +25,9 @@ struct GlobalState {
 
     /// @brief Current verifivation status of this state.
     GlobalStateVerificationStatus verificationStatus;
+
+    /// @brief Collective probability of the state.
+    float probability = 0.0;
     
     // Bindings
 

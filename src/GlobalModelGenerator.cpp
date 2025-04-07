@@ -61,6 +61,10 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
         this->globalModel->initState->epistemicClassesAllAgents[a] = states;
     }
 
+    if(this->formula->probabilitySign != ProbabilitySign::NONE) {
+        config.probability = true;
+    }
+
     return this->globalModel->initState;
 }
 
@@ -459,6 +463,14 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
         }
         auto transitionsByAgent = trPair.second;
         this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
+    }
+    // add state probability
+    if (config.probability) {
+        float currentProb = 1.0;
+        for (auto prob : *viaLocalTransitions) {
+            currentProb *= prob->probability;
+        }
+        globalState->probability = currentProb;
     }
 
     this->globalModel->globalStates.push_back(globalState);

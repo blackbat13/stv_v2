@@ -51,6 +51,7 @@ struct Cfg{
     std::string reduce_args;
     bool fixpoint;
     bool natural_strategy;
+    bool probability = false;
 };
 
 #endif 

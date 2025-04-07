@@ -117,9 +117,16 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
         for (const auto& t : s->globalTransitions) {
             std::string transitionLabel = "";
             bool isShared = false;
+            float probability = 1.0;
             for(const auto& e: t->localTransitions){
+                probability *= e->probability;
                 transitionLabel+=e->name+",";
                 isShared=isShared || e->isShared;
+            }
+            if(probability != 1.0) {
+                string probStr = to_string(probability);
+                probStr.erase(probStr.find_last_not_of('0') + 1, std::string::npos);
+                transitionLabel += "(p=" + probStr + "),";
             }
             transitionLabel.pop_back();  // truncate sep
             if(!t->from || !t->to)continue;
