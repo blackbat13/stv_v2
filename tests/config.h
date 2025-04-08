@@ -30,6 +30,8 @@ class TestVerif
     }
 
     TestVerif(string path, int mode) {
+        hCoeff = 0;
+        le = false;
         if (mode == 0) {
             result = verify(path, generator);
         }
@@ -41,6 +43,9 @@ class TestVerif
         }
         else if (mode == 3) {
             result = strategyVerify(path, generator);
+        }
+        else if (mode == 4) {
+            result = probabilityVerify(path, generator);
         }
     }
 
@@ -150,6 +155,32 @@ class TestVerif
         
         result = verification->verify();
         
+        return result;
+    }
+
+    bool probabilityVerify(string path, GlobalModelGenerator* generator)
+    {
+        config.fname = path.data();
+        config.output_local_models = false;
+        config.output_global_model = false;
+        config.stv_mode = 3;
+
+        auto tp = new ModelParser();
+    
+        tuple<LocalModels, Formula> desc;
+        desc = tp->parse(config.fname);
+
+        auto localModels = &(get<0>(desc));
+        auto formula = &(get<1>(desc));
+
+        generator = new GlobalModelGenerator();
+        generator->initModel(localModels, formula);
+        bool result = false;
+
+        generator->expandAllStates();
+        auto verification = new Verification(generator);
+        result = verification->verify();
+
         return result;
     }
 };

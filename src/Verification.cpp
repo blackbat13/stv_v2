@@ -313,6 +313,7 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates, GlobalSta
         }
     }
     auto val = *this->generator->getFormula()->p;
+
     if (val[0]->eval(currEnv, generator, globalState)==1 && generator->getFormulaCorectness()) {
         return true;
     } else if (!generator->getFormulaCorectness()) {
@@ -929,6 +930,15 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
         #if VERBOSE
             printf("%senter UNcontrolled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
         #endif
+        
+        // add state probability
+        if (config.probability && globalState != globalTransition->to) {
+            float currentProb = globalState->probability;
+            for (auto prob : globalTransition->localTransitions) {
+                currentProb *= prob->probability;
+            }
+            globalTransition->to->probability += currentProb;
+        }
         auto isTransitionValid = this->verifyGlobalState(globalTransition->to, depth + 1);
         if (this->mode == TraversalMode::REVERT) {
             // Recursive verifyGlobalState caused REVERT mode
@@ -956,6 +966,14 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
             }
         }
         if (!isTransitionValid) {
+            // remove state probability
+            if (config.probability && globalState != globalTransition->to) {
+                float currentProb = globalState->probability;
+                for (auto prob : globalTransition->localTransitions) {
+                    currentProb *= prob->probability;
+                }
+                globalTransition->to->probability -= currentProb;
+            }
             if (hasOmittedTransitions) {
                 bool reverted = this->revertLastDecision(depth);
                 #if VERBOSE
@@ -993,8 +1011,37 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         isMixedControlTransitions = true;
     }
 
+    map<string, set<GlobalTransition*>> probabilityTransitions; //might have some problems with more than 1 probability in one transition
+    set<GlobalTransition*> controlledGlobalTransitionsCopy;
+    
+    if (config.probability) {
+        controlledGlobalTransitionsCopy.insert(controlledGlobalTransitions.begin(), controlledGlobalTransitions.end());
+        for (const auto globalTransition : controlledGlobalTransitionsCopy) {
+            string foundProb = "";
+            for (auto locals : globalTransition->localTransitions) {
+                if (locals->probability != 1.0) {
+                    foundProb = locals->localName.c_str();
+                    if (probabilityTransitions.find(locals->localName.c_str()) == probabilityTransitions.end()) {
+                        probabilityTransitions.emplace(locals->name.c_str(), set<GlobalTransition*>());
+                    }
+                    break;
+                }
+            }
+            if (foundProb != "") {
+                probabilityTransitions[foundProb].insert(globalTransition);
+                controlledGlobalTransitions.erase(globalTransition);
+            }
+        }
+        // for (auto item : probabilityTransitions) {
+        //     cout << item.first << endl;
+        //     for (auto item2 : item.second) {
+        //         cout << item2->to->hash << endl;
+        //     }
+        // }
+    }
+
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
-    if (controlledGlobalTransitions.size() > 0) {
+    if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
         bool hasValidControlledTransition = false;
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
@@ -1043,6 +1090,15 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             #if VERBOSE
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
+
+            // add state probability
+            if (config.probability && globalState != globalTransition->to) {
+                float currentProb = globalState->probability;
+                for (auto prob : globalTransition->localTransitions) {
+                    currentProb *= prob->probability;
+                }
+                globalTransition->to->probability += currentProb;
+            }
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
             if (config.natural_strategy && !okStrategy) {
                 hasValidControlledTransition = false;
@@ -1080,6 +1136,26 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
             if (hasValidControlledTransition) {
                 break;
+            } else if (config.probability && globalState != globalTransition->to) {
+                float currentProb = globalState->probability;
+                for (auto prob : globalTransition->localTransitions) {
+                    currentProb *= prob->probability;
+                }
+                globalTransition->to->probability -= currentProb;
+            }
+        }
+        // Maybe a probabilistic action is an option
+        if (probabilityTransitions.size() > 0) {
+            for (auto currentSet : probabilityTransitions) {
+                if ((*(currentSet.second.begin()))->isInvalidDecision) { 
+                    continue;
+                }
+                if (this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
+                    if (epistemicClass && fixedGlobalTransition == nullptr) {
+                        epistemicClass->fixedCoalitionTransition = *(currentSet.second.begin());
+                    }
+                    return true;
+                }
             }
         }
         // Maybe a controlled action is an option too

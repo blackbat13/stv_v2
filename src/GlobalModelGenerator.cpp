@@ -383,7 +383,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
         localStates.push_back(agt->initState);
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
-
+    initState->probability = 1.0;
     // Agent* a;
     // for (auto agt : globalModel->agents) {
     //     a = agt;
@@ -406,6 +406,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     auto agent = *this->formula->coalition.begin();
     auto epistemicClass = this->findOrCreateEpistemicClass(localStates, agent);
     auto identicalGlobalState = this->findGlobalStateInEpistemicClass(localStates, epistemicClass);
+    
     if (identicalGlobalState != nullptr) {
         // The state already exists: return GlobalState that was created earlier
         #if VERBOSE
@@ -463,14 +464,6 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
         }
         auto transitionsByAgent = trPair.second;
         this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
-    }
-    // add state probability
-    if (config.probability) {
-        float currentProb = 1.0;
-        for (auto prob : *viaLocalTransitions) {
-            currentProb *= prob->probability;
-        }
-        globalState->probability = currentProb;
     }
 
     this->globalModel->globalStates.push_back(globalState);

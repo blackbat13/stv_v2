@@ -109,7 +109,14 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
                 }
                 stateLabel.pop_back();
                 stateLabel.pop_back();
-                stateLabel+="}|";    
+                stateLabel+="}|";
+            }
+            if(s->probability != 1.0) {
+                stateLabel+="{";
+                string probStr = to_string(s->probability);
+                probStr.erase(probStr.find_last_not_of('0') + 1, std::string::npos);
+                stateLabel += "(p=" + probStr + ")";
+                stateLabel+="}|";
             }
             stateLabel.pop_back();
             stateLabel+="}\", shape=\"record";
@@ -130,7 +137,7 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
             }
             transitionLabel.pop_back();  // truncate sep
             if(!t->from || !t->to)continue;
-                if(correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK) {
+                if(correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
                     this->addEdge(
                         '"'+t->from->hash+'"', 
                         '"'+t->to->hash+'"', 
