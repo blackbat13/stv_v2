@@ -421,7 +421,16 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                 #if VERBOSE
                     printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
                 #endif
-                uncontrolledGlobalTransitions.insert(globalTransition);
+                if (!config.probability) {
+                    uncontrolledGlobalTransitions.insert(globalTransition);
+                } else {
+                    string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
+                    for (auto globalTransition2 : globalState->globalTransitions) {
+                        if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
+                            uncontrolledGlobalTransitions.insert(globalTransition2);
+                        }
+                    }
+                }
             }
             else {
                 // omit controlled transition that is != fixedGlobalTransition
@@ -827,6 +836,20 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
         this->historyEnd->decision->isInvalidDecision = false;
     }
 
+    if (config.probability && (this->historyEnd->type == HistoryEntryType::DECISION || this->historyEnd->type == HistoryEntryType::CONTEXT)) {
+        // remove state probability
+        #if VERBOSE
+            printf("removed probability from %s\n", historyEnd->decision->to->hash.c_str());
+        #endif
+        if (historyEnd->decision->from != historyEnd->decision->to) {
+            float currentProb = historyEnd->decision->from->probability;
+            for (auto prob : historyEnd->decision->localTransitions) {
+                currentProb *= prob->probability;
+            }
+            historyEnd->decision->to->probability -= currentProb;
+        }
+    }
+
     if (this->historyEnd->strategy.type == StrategyEntryType::ADDED) {
         // cout << "REMOVED " << this->historyEnd->strategy.type << " " << this->historyEnd->strategy.actionName->c_str() << " " << this->historyEnd->strategy.globalValues << endl;
         this->naturalStrategy.erase(this->historyEnd->strategy.globalValues);
@@ -933,6 +956,9 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
         
         // add state probability
         if (config.probability && globalState != globalTransition->to) {
+            #if VERBOSE
+                printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), globalTransition->to->hash.c_str());
+            #endif
             float currentProb = globalState->probability;
             for (auto prob : globalTransition->localTransitions) {
                 currentProb *= prob->probability;
@@ -966,14 +992,6 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
             }
         }
         if (!isTransitionValid) {
-            // remove state probability
-            if (config.probability && globalState != globalTransition->to) {
-                float currentProb = globalState->probability;
-                for (auto prob : globalTransition->localTransitions) {
-                    currentProb *= prob->probability;
-                }
-                globalTransition->to->probability -= currentProb;
-            }
             if (hasOmittedTransitions) {
                 bool reverted = this->revertLastDecision(depth);
                 #if VERBOSE
@@ -1093,6 +1111,9 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
 
             // add state probability
             if (config.probability && globalState != globalTransition->to) {
+                #if VERBOSE
+                    printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), globalTransition->to->hash.c_str());
+                #endif
                 float currentProb = globalState->probability;
                 for (auto prob : globalTransition->localTransitions) {
                     currentProb *= prob->probability;
@@ -1147,12 +1168,93 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         // Maybe a probabilistic action is an option
         if (probabilityTransitions.size() > 0) {
             for (auto currentSet : probabilityTransitions) {
-                if ((*(currentSet.second.begin()))->isInvalidDecision) { 
+                GlobalTransition* initialDecision = *(currentSet.second.begin());
+
+                if (this->mode == TraversalMode::RESTORE) {
+                    // Skip loop iterations performed before the one from historyToRestore
+                    // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
+                    // cout << depth << endl;
+                    if (!this->restoreHistory(globalState, initialDecision, depth, true)) {
+                        continue;
+                    }
+                }
+                
+                // Ensure that the transtiion wasn't marked as invalid as a part of the RESTORE-REVERT procedure
+                if (initialDecision->isInvalidDecision) { 
+                    #if VERBOSE
+                        printf("%sIGNORE invalidInitialDecision in %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), initialDecision->to->hash.c_str());
+                    #endif
                     continue;
                 }
-                if (this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
+                
+                auto prevHistoryEnd = this->historyEnd;
+                
+                if (epistemicClass && fixedGlobalTransition == nullptr) {
+                    epistemicClass->fixedCoalitionTransition = initialDecision; 
+                    #if VERBOSE
+                        printf("%sDECIDE %s -[%s]-> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), initialDecision->joinLocalTransitionNames().c_str(), initialDecision->to->hash.c_str());
+                    #endif
+                    this->addHistoryDecision(globalState, initialDecision);
+                }
+                
+                // About to go deeper - add history entry with type=CONTEXT
+                bool okStrategy = this->addHistoryContext(globalState, depth, initialDecision, true);
+                
+                #if VERBOSE
+                    printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), initialDecision->from->hash.c_str(), initialDecision->to->hash.c_str());
+                #endif
+    
+                // add state probability
+                if (config.probability && globalState != initialDecision->to) {
+                    #if VERBOSE
+                        printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), initialDecision->to->hash.c_str());
+                    #endif
+                    float currentProb = globalState->probability;
+                    for (auto prob : initialDecision->localTransitions) {
+                        currentProb *= prob->probability;
+                    }
+                    initialDecision->to->probability += currentProb;
+                }
+                hasValidControlledTransition = this->verifyGlobalState(initialDecision->to, depth + 1);
+                if (config.natural_strategy && !okStrategy) {
+                    hasValidControlledTransition = false;
+                }
+                if (this->mode == TraversalMode::REVERT) {
+                    // Recursive verifyGlobalState caused REVERT mode
+                    if (globalState == this->revertToGlobalState) {
+                        // This is the "top" state (first Y in selene-ver2.png) from which recursion should be rebuilt
+                        this->revertToGlobalState = nullptr;
+                        if (this->historyToRestore.empty()) {
+                            this->mode = TraversalMode::NORMAL;
+                            #if VERBOSE
+                                printf("%sset mode=NORMAL\n", DEPTH_PREFIX.c_str());
+                            #endif
+                        }
+                        else {
+                            this->mode = TraversalMode::RESTORE;
+                            #if VERBOSE
+                                printf("%sset mode=RESTORE\n", DEPTH_PREFIX.c_str());
+                            #endif
+                        }
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
+                        globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                        return this->verifyGlobalState(globalState, depth); // Same state, same depth
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
+                    this->undoHistoryUntil(prevHistoryEnd, false, depth); 
+                    #if VERBOSE
+                        printf("%sundoHistoryUntil (inside %s)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
+                    #endif
+                }
+
+                currentSet.second.erase(initialDecision);
+                if (hasValidControlledTransition && this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
                     if (epistemicClass && fixedGlobalTransition == nullptr) {
-                        epistemicClass->fixedCoalitionTransition = *(currentSet.second.begin());
+                        epistemicClass->fixedCoalitionTransition = initialDecision;
                     }
                     return true;
                 }

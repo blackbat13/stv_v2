@@ -2,13 +2,13 @@
 #include "config.h"
 
 #include "test_test.h"
-#include "probability_test.h"
+#include "probability_test.h" //has to be on top, idk why
+#include "simple_voting_run_test.h" //has to be on top, idk why
 #include "general_test.h"
 #include "trains_test.h"
 #include "trains_with_bridge_test.h"
 #include "simple_voting_test.h"
 #include "simple_voting_with_fakes_test.h"
-#include "simple_voting_run_test.h"
 #include "simple_voting_test_but_faster.h"
 #include "simple_voting_run_test_but_faster.h"
 #include "clock_test.h"
