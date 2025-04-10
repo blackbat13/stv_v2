@@ -2,6 +2,7 @@
 #include "config.h"
 
 #include "test_test.h"
+#include "probability_test.h"
 #include "general_test.h"
 #include "trains_test.h"
 #include "trains_with_bridge_test.h"
@@ -16,8 +17,7 @@
 #include "ctl_test.h"
 #include "input_error_test.h"
 #include "reduction_test.h"
-#include "natural_strategy_test.h"
-#include "probability_test.h"
+#include "natural_strategy_test.h" // run last, idk why
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

@@ -59,6 +59,8 @@ class TestVerif
         config.output_local_models = false;
         config.output_global_model = false;
         config.stv_mode = 2;
+        config.natural_strategy = false;
+        config.reduce = false;
 
         auto tp = new ModelParser();
         
@@ -83,6 +85,8 @@ class TestVerif
         config.output_local_models = false;
         config.output_global_model = false;
         config.stv_mode = 3;
+        config.natural_strategy = false;
+        config.reduce = false;
 
         auto tp = new ModelParser();
         
@@ -111,6 +115,7 @@ class TestVerif
         config.stv_mode = 3;
         config.reduce = true;
         config.reduce_args = "";
+        config.natural_strategy = false;
 
         auto tp = new ModelParser();
         
@@ -138,6 +143,7 @@ class TestVerif
         config.output_global_model = false;
         config.stv_mode = 3;
         config.natural_strategy = true;
+        config.reduce = false;
 
         auto tp = new ModelParser();
         
@@ -164,6 +170,8 @@ class TestVerif
         config.output_local_models = false;
         config.output_global_model = false;
         config.stv_mode = 3;
+        config.natural_strategy = false;
+        config.reduce = false;
 
         auto tp = new ModelParser();
     
@@ -173,7 +181,6 @@ class TestVerif
         auto localModels = &(get<0>(desc));
         auto formula = &(get<1>(desc));
 
-        generator = new GlobalModelGenerator();
         generator->initModel(localModels, formula);
         bool result = false;
 
