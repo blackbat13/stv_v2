@@ -166,6 +166,8 @@ protected:
     bool maxFixpointVerify();
     bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
     vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
+    void increaseProbability(GlobalState* currentState, GlobalTransition* decision);
+    void lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision);
 };
 
 #endif // SELENE_VERIFICATION

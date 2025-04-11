@@ -510,11 +510,6 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     bool hasMergedTransitionsIntoUncontrolled = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
-        // Remove later
-        // cout << globalTransition->from->hash.c_str() << " " << globalTransition->to->hash.c_str() << endl;
-        // for (auto locTrans : globalTransition->localTransitions) {
-        //     cout << locTrans->name << " " << locTrans->from->name.c_str() << " -> " << locTrans->to->name.c_str() << " Probability: " << locTrans->probability << endl;
-        // }
         // if CTL then treat everything as uncontrolled transitions
         if (isCTLMode) {
             uncontrolledGlobalTransitions.insert(globalTransition);
@@ -951,15 +946,13 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
         #if VERBOSE
             printf("removed probability from %s\n", historyEnd->decision->to->hash.c_str());
         #endif
-        float currentProb = historyEnd->decision->from->probability;
-        for (auto prob : historyEnd->decision->localTransitions) {
-            currentProb *= prob->probability;
-        }
-        historyEnd->decision->to->probability -= currentProb;
+        lowerProbability(historyEnd->decision->from, historyEnd->decision->to, historyEnd->decision->localTransitions);
     }
 
     if (this->historyEnd->strategy.type == StrategyEntryType::ADDED) {
-        // cout << "REMOVED " << this->historyEnd->strategy.type << " " << this->historyEnd->strategy.actionName->c_str() << " " << this->historyEnd->strategy.globalValues << endl;
+        #if VERBOSE
+            cout << "REMOVED " << this->historyEnd->strategy.type << " " << this->historyEnd->strategy.actionName->c_str() << " " << this->historyEnd->strategy.globalValues << endl;
+        #endif
         this->naturalStrategy.erase(this->historyEnd->strategy.globalValues);
     }
     
@@ -1067,11 +1060,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
             #if VERBOSE
                 printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), globalTransition->to->hash.c_str());
             #endif
-            float currentProb = globalState->probability;
-            for (auto prob : globalTransition->localTransitions) {
-                currentProb *= prob->probability;
-            }
-            globalTransition->to->probability += currentProb;
+            increaseProbability(globalState, globalTransition);
         }
         auto isTransitionValid = this->verifyGlobalState(globalTransition->to, depth + 1);
         if (this->mode == TraversalMode::REVERT) {
@@ -1155,12 +1144,6 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 }
             }
         }
-        // for (auto item : probabilityTransitions) {
-        //     cout << item.first << endl;
-        //     for (auto item2 : item.second) {
-        //         cout << item2->to->hash << endl;
-        //     }
-        // }
     }
 
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
@@ -1197,18 +1180,6 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             
             // About to go deeper - add history entry with type=CONTEXT
             bool okStrategy = this->addHistoryContext(globalState, depth, globalTransition, true);
-            // if (!config.natural_strategy) {
-            //     this->addHistoryContext(globalState, depth, globalTransition, true);
-            // }
-            // else {
-            //     if(!this->addHistoryContext(globalState, depth, globalTransition, true)) {
-            //         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-            //         dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!naturalStrategy");
-            //         globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-            //         bool reverted = this->revertLastDecision(depth);
-            //         continue;
-            //     }
-            // }
             
             #if VERBOSE
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
@@ -1219,11 +1190,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 #if VERBOSE
                     printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), globalTransition->to->hash.c_str());
                 #endif
-                float currentProb = globalState->probability;
-                for (auto prob : globalTransition->localTransitions) {
-                    currentProb *= prob->probability;
-                }
-                globalTransition->to->probability += currentProb;
+                increaseProbability(globalState, globalTransition);
             }
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
             if (config.natural_strategy && !okStrategy) {
@@ -1263,11 +1230,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             if (hasValidControlledTransition) {
                 break;
             } else if (config.probability && globalState != globalTransition->to) {
-                float currentProb = globalState->probability;
-                for (auto prob : globalTransition->localTransitions) {
-                    currentProb *= prob->probability;
-                }
-                globalTransition->to->probability -= currentProb;
+                lowerProbability(globalState, globalTransition->to, globalTransition->localTransitions);
             }
         }
         // Maybe a probabilistic action is an option
@@ -1314,11 +1277,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                     #if VERBOSE
                         printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), initialDecision->to->hash.c_str());
                     #endif
-                    float currentProb = globalState->probability;
-                    for (auto prob : initialDecision->localTransitions) {
-                        currentProb *= prob->probability;
-                    }
-                    initialDecision->to->probability += currentProb;
+                    increaseProbability(globalState, initialDecision);
                 }
                 hasValidControlledTransition = this->verifyGlobalState(initialDecision->to, depth + 1);
                 if (config.natural_strategy && !okStrategy) {
@@ -1370,16 +1329,6 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         // Maybe a controlled action is an option too
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
-            // for (const auto globalTransition : uncontrolledGlobalTransitions) {
-            //     set<Agent*> agents = generator->getFormula()->coalition;
-            //     for (auto agt : agents) {
-            //         cout << (*globalTransition->localTransitions.begin())->name << " " << (*globalTransition->localTransitions.begin())->agent->name.c_str() << " ? " << agt->name << endl;
-            //         if ((*globalTransition->localTransitions.begin())->agent->name.c_str() != agt->name.c_str()) {
-            //             cout << "uh oh" << endl;
-            //             hasValidChoiceTransition = false;
-            //         }
-            //     }
-            // }
             if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
                 hasValidChoiceTransition = false;
             }
@@ -1436,10 +1385,7 @@ bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* gl
             entry = this->historyToRestore.top();
         }
     }
-    // cout << entry->type << " " << entry->globalState->hash.c_str() << " " << entry->depth << " " << entry->decision->to->hash.c_str() << " " << entry->globalTransitionControlled << endl;
-    // cout << HistoryEntryType::CONTEXT << " " << globalState->hash.c_str() << " " << depth << " " << globalTransition->to->hash.c_str() << " " << controlled << endl;
     bool matches = entry->type == HistoryEntryType::CONTEXT && entry->globalState == globalState && entry->depth == depth && entry->decision == globalTransition && entry->globalTransitionControlled == controlled;
-    // cout << "? " << matches << endl;
     #if VERBOSE
         if (matches) {
             if (controlled) {
@@ -1523,6 +1469,9 @@ void Verification::historyDecisionsERR() {
     }
 }
 
+/// @brief Changes globalState variables to a bitset used in natural strategy synthesis.
+/// @param globalState State that we want to extractvariable values from.
+/// @return Bitset of environment variable values.
 bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalState) {
     LocalState* agentState;
     for(auto agentStates : globalState->localStatesProjection) {
@@ -1549,10 +1498,14 @@ bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalSt
     return currentValues;
 }
 
+/// @brief Get natural strategy map.
+/// @return Map of variable values and action names.
 map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> Verification::getNaturalStrategy() {
     return this->naturalStrategy;
 }
 
+/// @brief Takes natural strategy from memory and reduces it using reduceStrategy().
+/// @return Vector of tuples <vector of tuples <variable value, variable name>, action name>.
 vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrategy() {
     vector<tuple<vector<tuple<bool, string>>, string>> result;
     for (auto item : naturalStrategy) {
@@ -1574,11 +1527,8 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrat
         this->reductionComplexityBefore += (strategyVariableLimit - 1);
         for (auto values : get<0>(item)) {
             this->reductionComplexityBefore += (get<0>(values) ? 1 : 2);
-            // cout << get<1>(values) << " = " << get<0>(values) << " | ";
         }
-        // cout << "--> " << get<1>(item) << endl;
     }
-    // cout << "=====" << endl;
     auto reduceResult = reduceStrategy(result);
     auto temp = &get<0>(reduceResult[reduceResult.size() - 1]);
     tuple<bool, string> t = {true, "T"};
@@ -1587,14 +1537,12 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrat
     return reduceResult;
 }
 
+/// @brief Natural strategy reduction algorithm.
+/// @param strategyEntries Vector of tuples <vector of tuples <variable value, variable name>, action name> containing not reduced natural strategy.
+/// @param lockedColumn Index of the furthest leftmost locked column.
+/// @param upperHalf Indicates if the first columns of the processed strategy entries can't be shuffled. True if they can't be shuffled, false otherwise.
+/// @return Vector of tuples <vector of tuples <variable value, variable name>, action name>.
 vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn, bool upperHalf) {
-    // cout << "Entered new iteration!" << endl;
-    // for (auto item : strategyEntries) {
-    //     for (auto values : get<0>(item)) {
-    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
-    //     }
-    //     cout << "--> " << get<1>(item) << endl;
-    // }
     queue<short> toBeRemoved;
     short minSum = 999, minSumID = 0, maxSum = 0, maxSumID = 0, maxValue = strategyEntries.size();
     // remove unnecessary columns
@@ -1640,15 +1588,6 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     minSumID -= totalOffsetMin;
     maxSumID -= totalOffsetMax;
 
-    // cout << "\nResult before:" << endl;
-    // cout << lockedColumn << endl;
-    // for (auto item : result) {
-    //     for (auto values : get<0>(item)) {
-    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
-    //     }
-    //     cout << "--> " << get<1>(item) << endl;
-    // }
-
     if (result.size() == 1 || get<0>(result[0]).size() == 0 || lockedColumn == get<0>(result[0]).size() - 1) {
         return result;
     }
@@ -1678,31 +1617,6 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     vector<tuple<vector<tuple<bool, string>>, string>> upperPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin(), result.begin() + swapSpot);
     vector<tuple<vector<tuple<bool, string>>, string>> lowerPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin() + swapSpot, result.end());
 
-    // cout << "\nResult:" << endl;
-    // for (auto item : result) {
-    //     for (auto values : get<0>(item)) {
-    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
-    //     }
-    //     cout << "--> " << get<1>(item) << endl;
-    // }
-
-    // cout << "\nUpper part:" << endl;
-    // for (auto item : upperPart) {
-    //     for (auto values : get<0>(item)) {
-    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
-    //     }
-    //     cout << "--> " << get<1>(item) << endl;
-    // }
-
-    // cout << "\nLower part:" << endl;
-    // for (auto item : lowerPart) {
-    //     for (auto values : get<0>(item)) {
-    //         cout << get<1>(values) << " = " << get<0>(values) << " | ";
-    //     }
-    //     cout << "--> " << get<1>(item) << endl;
-    // }
-    // cout << "-------------------------" << endl;
-
     upperPart = reduceStrategy(upperPart, lockedColumn + 1, true);
     lowerPart = reduceStrategy(lowerPart, lockedColumn, false);
 
@@ -1712,6 +1626,31 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(
     return finalResult;
 }
 
+/// @brief Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1.
+/// @return Total sum of the natural strategy complexity before reduction.
 int Verification::getStrategyComplexity() {
     return this->reductionComplexityBefore;
+}
+
+/// @brief Increases next GlobalState probability reached through the decision by adding to it a multiplied currentState probability with the decision probability.
+/// @param currentState From which GlobalState the action was executed.
+/// @param decision GlobalTransition containing all transitions in the executed action and the next reachable GlobalState.
+void Verification::increaseProbability(GlobalState* currentState, GlobalTransition* decision) {
+    float currentProb = currentState->probability;
+    for (auto prob : decision->localTransitions) {
+        currentProb *= prob->probability;
+    }
+    decision->to->probability += currentProb;
+}
+
+/// @brief Decreases previous GlobalState probability reached from the decision by subtracting from it a multiplied currentState probability with the decision probability.
+/// @param currentStateFrom From which GlobalState the action was executed.
+/// @param currentStateTo To which grobal state the action was executed.
+/// @param decision Set of LocalTransition containing all transitions in the executed action.
+void Verification::lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision) {
+    float currentProb = currentStateFrom->probability;
+    for (auto prob : decision) {
+        currentProb *= prob->probability;
+    }
+    currentStateTo->probability -= currentProb;
 }
