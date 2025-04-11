@@ -44,7 +44,7 @@ extern FormulaTemplate formulaDescription;
 %token   <val> T_NUM T_SHARED
 %token   <floatno> T_FLOAT
 %token   <ident> T_IDENT
-%token   T_KNOW T_HARTLEY T_PROB
+%token   T_KNOW T_HARTLEY T_PROB T_REST
 
 %type  <val> shared
 %type  <expr> num_exp num_mul num_elem
@@ -156,6 +156,10 @@ transition: shared T_IDENT '[' T_IDENT ']' ':' T_IDENT condition T_TO T_IDENT as
               delete $4;
               delete $9;
             }
+          | prob_exp ':' T_IDENT assignments {
+              $$=new TransitionTemplate(0, "", "", "", $3, new ExprConst(1), $4, $1); 
+              delete $3;
+            }
           ;
 
 shared: T_SHARED '[' T_NUM ']' { $$ = $3; } 
@@ -184,6 +188,7 @@ num_elem: T_IDENT { $$=new ExprIdent($1); delete $1; }
 prob_exp: prob_exp '-' prob_mul { $$=new ProbSub($1, $3);}
        | prob_exp '+' prob_mul { $$=new ProbAdd($1, $3);}
        | prob_mul { $$=$1; }
+       | T_REST { $$=new ProbConst(1000.0); }
        ;
 prob_mul: prob_mul '*' prob_elem { $$=new ProbMul($1, $3);}
        | prob_mul '/' prob_elem { $$=new ProbDiv($1, $3);}

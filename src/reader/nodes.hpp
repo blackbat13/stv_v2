@@ -96,7 +96,6 @@ class TransitionTemplate {
       TransitionTemplate(int _shared, string _patternName, string _matchName, string _startState, string _endState, ExprNode *_cond, set<Assignment*> *_assign, ProbNode *_prob): 
             shared(_shared), patternName(_patternName), matchName(_matchName),
             startState(_startState), endState(_endState), condition(_cond), assignments(_assign), probability(_prob) {};
-            
 };
 
 /// @brief A template for the local state. 
@@ -113,6 +112,8 @@ class LocalStateTemplate { // [YK]: <-- a class implementing Location
 
 /// @brief Represents a single agent loaded from the description from a file.
 class AgentTemplate {
+      TransitionTemplate transitionCache = TransitionTemplate(0, "", "", "", "", new ExprConst(1), new set<Assignment*>(), new ProbConst(1));
+      float probabilityCache = 0.0;
       // identyfikator agenta
 
       /// @brief Agent identifier.

@@ -45,6 +45,7 @@ floatno [0-9]*\.[0-9]+
 "&K_"          { return T_KNOW; }
 "&H_"          { return T_HARTLEY; }
 "&P"           { return T_PROB; }
+"&REST"        { return T_REST; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
 %%
