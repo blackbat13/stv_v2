@@ -1139,8 +1139,12 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                     if (probabilityTransitions.find(locals->localName.c_str()) == probabilityTransitions.end()) {
                         probabilityTransitions.emplace(locals->localName.c_str(), set<GlobalTransition*>());
                     }
-                    probabilityTransitions[foundProb].insert(globalTransition);
-                    controlledGlobalTransitions.erase(globalTransition);
+                    for (auto locals2 : globalTransition->localTransitions) {
+                        foundProb = locals2->localName.c_str();
+                        probabilityTransitions[foundProb].insert(globalTransition);
+                        controlledGlobalTransitions.erase(globalTransition);
+                    }
+                    break;
                 }
             }
         }
