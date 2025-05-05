@@ -74,7 +74,7 @@ class TestVerif
 
         auto verification = new Verification(generator);
         
-        result = verification->verify();
+        result = verification->verify().result;
         
         return result;
     }
@@ -102,7 +102,7 @@ class TestVerif
 
         auto verification = new Verification(generator);
         
-        result = verification->verify();
+        result = verification->verify().result;
         
         return result;
     }
@@ -131,7 +131,7 @@ class TestVerif
 
         auto verification = new Verification(generator);
         
-        result = verification->verify();
+        result = verification->verify().result;
         
         return result;
     }
@@ -159,7 +159,7 @@ class TestVerif
 
         auto verification = new Verification(generator);
         
-        result = verification->verify();
+        result = verification->verify().result;
         
         return result;
     }
@@ -186,7 +186,7 @@ class TestVerif
 
         generator->expandAllStates();
         auto verification = new Verification(generator);
-        result = verification->verify();
+        result = verification->verify().result;
 
         return result;
     }

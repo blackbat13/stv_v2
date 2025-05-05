@@ -91,10 +91,10 @@ int main(int argc, char* argv[]) {
         // }
         bool verifResult;
         if(config.fixpoint) {
-            verifResult = verification->fixpointVerify();
+            verifResult = verification->fixpointVerify().result;
         }
         else {
-            verifResult = verification->verify();
+            verifResult = verification->verify().result;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {

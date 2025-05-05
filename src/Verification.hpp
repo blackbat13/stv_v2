@@ -109,13 +109,18 @@ struct StrategyBitsComparator {
     }
 };
 
+struct VerificationResponse {
+    bool result;
+    float probability;
+};
+
 /// @brief A class that verifies if the model fulfills the formula. Also can do some operations on decision history.
 class Verification {
 public:
     Verification(GlobalModelGenerator* generator);
     ~Verification();
-    bool verify();
-    bool fixpointVerify();
+    VerificationResponse verify();
+    VerificationResponse fixpointVerify();
     void historyDecisionsERR();
     map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
     vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
@@ -139,11 +144,13 @@ protected:
     short strategyVariableLimit;
     /// @brief Easily readable variable names for natural strategy generation.
     vector<string> variableNames;
-    /// @brief Natural strategy complexity before reduction
+    /// @brief Natural strategy complexity before reduction.
     int reductionComplexityBefore;
+    /// @brief Contains global probability (1-P) for probability verification.
+    float globalProbability;
 
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
-    bool verifyGlobalState(GlobalState* globalState, int depth);
+    VerificationResponse verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
     bool isAgentInCoalition(Agent* agent);
     EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
@@ -159,15 +166,17 @@ protected:
     void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
-    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
-    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
+    VerificationResponse checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
+    VerificationResponse verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
-    bool minFixpointVerify();
-    bool maxFixpointVerify();
+    VerificationResponse minFixpointVerify();
+    VerificationResponse maxFixpointVerify();
     bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
     vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
     void increaseProbability(GlobalState* currentState, GlobalTransition* decision);
     void lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision);
+    void increaseGlobalProbability(float increaseBy);
+    void lowerGlobalProbability(float lowerBy);
 };
 
 #endif // SELENE_VERIFICATION
