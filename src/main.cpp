@@ -89,19 +89,22 @@ int main(int argc, char* argv[]) {
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
-        bool verifResult;
+        VerificationResponse verifResult;
         if(config.fixpoint) {
-            verifResult = verification->fixpointVerify().result;
+            verifResult = verification->fixpointVerify();
         }
         else {
-            verifResult = verification->verify().result;
+            verifResult = verification->verify();
         }
-        printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
-        if (!verifResult && config.counterexample) {
+        printf("Verification result: %s\n", verifResult.result ? "TRUE" : "FALSE");
+        if (config.probability) {
+            printf("Probability 1-P: %f\n", verifResult.probability);
+        }
+        if (!verifResult.result && config.counterexample) {
             verification->historyDecisionsERR();
         }
         if (config.natural_strategy) {
-            if (verifResult) {
+            if (verifResult.result) {
                 int reductionComplexityAfter = 0;
                 for (auto item : verification->getReducedStrategy()) {
                     for (int i = 0; i < get<0>(item).size(); i++) {
@@ -127,7 +130,7 @@ int main(int argc, char* argv[]) {
                 cout << "No natural strategy present." << endl;
             }
         }
-        if(config.output_dot_files && verifResult){
+        if(config.output_dot_files && verifResult.result){
             // save GlobalModel solution
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }

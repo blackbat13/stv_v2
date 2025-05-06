@@ -61,6 +61,7 @@ class TestVerif
         config.stv_mode = 2;
         config.natural_strategy = false;
         config.reduce = false;
+        config.probability = false;
 
         auto tp = new ModelParser();
         
@@ -87,6 +88,7 @@ class TestVerif
         config.stv_mode = 3;
         config.natural_strategy = false;
         config.reduce = false;
+        config.probability = false;
 
         auto tp = new ModelParser();
         
@@ -116,6 +118,7 @@ class TestVerif
         config.reduce = true;
         config.reduce_args = "";
         config.natural_strategy = false;
+        config.probability = false;
 
         auto tp = new ModelParser();
         
@@ -144,6 +147,7 @@ class TestVerif
         config.stv_mode = 3;
         config.natural_strategy = true;
         config.reduce = false;
+        config.probability = false;
 
         auto tp = new ModelParser();
         

@@ -166,7 +166,7 @@ protected:
     void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
-    VerificationResponse checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
+    VerificationResponse checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false, bool addProbabilitiesInstead = false);
     VerificationResponse verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
     VerificationResponse minFixpointVerify();

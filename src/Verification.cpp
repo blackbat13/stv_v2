@@ -348,32 +348,32 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
     bool isCTLMode = this->generator->getFormula()->isCTL;
 
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
-        // if (config.probability) {
-        //     return {true, 0};
-        // }
+        if (config.probability) {
+            cout << "On ERR: " << globalState->probability << endl;
+            return {true, globalState->probability};
+        }
         return {false, 0};
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
         // kinda incorrect but alright for small loops
-        // if (config.probability) {
-        //     increaseGlobalProbability(1.0 - globalState->probability);
-        //     return {true, globalState->probability};
-        // }
-        return {true, 1};
+        if (config.probability) {
+            return {true, 0};
+        }
+        return {true, 0};
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
         if (isFMode) {
-            // if (config.probability) {
-            //     return {true, 0};
-            // }
+            if (config.probability) {
+                cout << "On pending: " << globalState->probability << endl;
+                return {true, globalState->probability};
+            }
             return {false, 0};
         }
         else {
-            // if (config.probability) {
-            //     increaseGlobalProbability(1.0 - globalState->probability);
-            //     return {true, globalState->probability};
-            // }
-            return {true, 1};
+            if (config.probability) {
+                return {true, 0};
+            }
+            return {true, 0};
         }
     }
     if (this->historyEnd != nullptr && this->historyEnd->type == HistoryEntryType::STATE_STATUS && this->historyEnd->globalState == globalState && this->historyEnd->prevStatus == GlobalStateVerificationStatus::PENDING && this->historyEnd->newStatus == GlobalStateVerificationStatus::UNVERIFIED) {
@@ -392,11 +392,10 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
-            // if (config.probability) {
-            //     increaseGlobalProbability(1.0 - globalState->probability);
-            //     return {true, globalState->probability};
-            // }
-            return {true, 1};
+            if (config.probability) {
+                return {true, 0};
+            }
+            return {true, 0};
         }
     }
     else { // G
@@ -404,9 +403,9 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-            // if (config.probability) {
-            //     return {true, 0};
-            // }
+            if (config.probability) {
+                return {true, globalState->probability};
+            }
             return {false, 0};
         }
         
@@ -526,10 +525,9 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled).result) {
-        // if (config.probability) {
-        //     return {true, 0};
-        // }
+    auto verifyTransitionSetsResult = verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled);
+    cout << "On verifyTransitionSetsResult: " << verifyTransitionSetsResult.probability << endl;
+    if (!verifyTransitionSetsResult.result) {
         return {false, 0};
     }
     
@@ -537,11 +535,14 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
     this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
     dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
     globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
-    // if (config.probability) {
-    //     increaseGlobalProbability(1.0 - globalState->probability);
-    //     return {true, globalState->probability};
-    // }
-    return {true, 1};
+    if (config.probability) {
+        if (depth == 0 && verifyTransitionSetsResult.probability > (1.0 - this->generator->getFormula()->probability)) {
+            this->revertLastDecision(depth);
+            return {false, verifyTransitionSetsResult.probability};
+        }
+        return {true, verifyTransitionSetsResult.probability};
+    }
+    return {true, 0};
 }
 
 /// @brief Checks if any of the LocalTransition in a given GlobalTransition has an Agent in a coalition in the formula.
@@ -961,7 +962,8 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
-VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
+VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed, bool addProbabilitiesInstead) {
+    float worstProbability = 0.0;
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
@@ -986,6 +988,13 @@ VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> u
             increaseProbability(globalState, globalTransition);
         }
         auto isTransitionValid = this->verifyGlobalState(globalTransition->to, depth + 1);
+        if (config.probability) {
+            if (addProbabilitiesInstead) {
+                worstProbability += isTransitionValid.probability;
+            } else if (isTransitionValid.result > worstProbability) {
+                worstProbability = isTransitionValid.probability;
+            }
+        }
         if (this->mode == TraversalMode::REVERT) {
             // Recursive verifyGlobalState caused REVERT mode
             if (globalState == this->revertToGlobalState) {
@@ -1008,6 +1017,9 @@ VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> u
                 return this->verifyGlobalState(globalState, depth); // Same state, same depth
             }
             else {
+                if (config.probability) {
+                    return {true, globalState->probability}; // ???
+                }
                 return {false, 0};
             }
         }
@@ -1030,7 +1042,8 @@ VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> u
             return {false, 0};
         }
     }
-    return {true, 1};
+    cout << "In checkUncontrolledSet: " << worstProbability << endl;
+    return {true, worstProbability};
 }
 
 /// @brief Checks if given transition sets are able to fulfill the formula for its given epistemic class.
@@ -1044,6 +1057,7 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool isMixedControlTransitions = false;
+    float errorProbability = 0.0;
 
     if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
         isMixedControlTransitions = true;
@@ -1072,7 +1086,6 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
             }
         }
     }
-
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
     if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
         bool hasValidControlledTransition = false;
@@ -1119,7 +1132,9 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                 #endif
                 increaseProbability(globalState, globalTransition);
             }
-            hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1).result;
+            auto verifRes = this->verifyGlobalState(globalTransition->to, depth + 1);
+            hasValidControlledTransition = verifRes.result;
+            errorProbability = verifRes.probability;
             if (config.natural_strategy && !okStrategy) {
                 hasValidControlledTransition = false;
             }
@@ -1162,6 +1177,7 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
         }
         // Maybe a probabilistic action is an option
         if (probabilityTransitions.size() > 0) {
+            errorProbability = 0.0;
             for (auto currentSet : probabilityTransitions) {
                 GlobalTransition* initialDecision = *(currentSet.second.begin());
 
@@ -1206,7 +1222,9 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                     #endif
                     increaseProbability(globalState, initialDecision);
                 }
-                hasValidControlledTransition = this->verifyGlobalState(initialDecision->to, depth + 1).result;
+                auto verificationResult = this->verifyGlobalState(initialDecision->to, depth + 1);
+                hasValidControlledTransition = verificationResult.result;
+                errorProbability = verificationResult.probability;
                 if (config.natural_strategy && !okStrategy) {
                     hasValidControlledTransition = false;
                 }
@@ -1245,7 +1263,9 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                     continue;
                 }
                 currentSet.second.erase(initialDecision);
-                if (hasValidControlledTransition && this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions).result) {
+                auto checkUncontrolledProbabilityResult = this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions, true);
+                errorProbability += checkUncontrolledProbabilityResult.probability;
+                if (hasValidControlledTransition && checkUncontrolledProbabilityResult.result) {
                     if (epistemicClass && fixedGlobalTransition == nullptr) {
                         epistemicClass->fixedCoalitionTransition = initialDecision;
                     }
@@ -1263,12 +1283,12 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                 epistemicClass->fixedCoalitionTransition = *uncontrolledGlobalTransitions.begin();
             }
         }
-        if (!hasValidControlledTransition && !hasValidChoiceTransition && !hasValidControlledTransition) {
+        if (!hasValidControlledTransition && !hasValidChoiceTransition) {
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!hasValidControlledTransition");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
             // A different decision could've been made above if transition/decision hadn't been fixed somewhere else
-            bool reverted = this->revertLastDecision(depth); 
+            bool reverted = this->revertLastDecision(depth);
             #if VERBOSE
                 if (reverted) {
                     printf("%srevertLastDecision to %s (inside %s)\n", DEPTH_PREFIX.c_str(), this->revertToGlobalState->hash.c_str(), globalState->hash.c_str());
@@ -1277,15 +1297,23 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                     printf("%srevertLastDecision failed (inside %s)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
                 }
             #endif
+            if (config.probability) {
+                return {true, errorProbability};
+            }
             return {false, 0};
         }
     }
     
     // 2) verify paths not controlled by the coalition (all must be OK)
-    if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions).result) {
+    auto checkUncontrolledSetResult = this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions);
+    errorProbability += checkUncontrolledSetResult.probability; // ???
+    if (!isMixedControlTransitions && !checkUncontrolledSetResult.result) {
+        if (config.probability) {
+            return {true, checkUncontrolledSetResult.probability};
+        }
         return {false, 0};
     }
-    return {true, 1};
+    return {true, errorProbability};
 }
 
 /// @brief Restores the decisions made for a given global state and transition in current recursion depth.
