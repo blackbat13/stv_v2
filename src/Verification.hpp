@@ -177,6 +177,7 @@ protected:
     void lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision);
     void increaseGlobalProbability(float increaseBy);
     void lowerGlobalProbability(float lowerBy);
+    bool checkGlobalProbability();
 };
 
 #endif // SELENE_VERIFICATION

@@ -350,29 +350,24 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
     if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
         if (config.probability) {
             cout << "On ERR: " << globalState->probability << endl;
-            return {true, globalState->probability};
+            increaseGlobalProbability(globalState->probability);
+            return {checkGlobalProbability(), globalState->probability};
         }
         return {false, 0};
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
-        // kinda incorrect but alright for small loops
-        if (config.probability) {
-            return {true, 0};
-        }
         return {true, 0};
     }
     else if (globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
         if (isFMode) {
             if (config.probability) {
                 cout << "On pending: " << globalState->probability << endl;
-                return {true, globalState->probability};
+                increaseGlobalProbability(globalState->probability);
+                return {checkGlobalProbability(), globalState->probability};
             }
             return {false, 0};
         }
         else {
-            if (config.probability) {
-                return {true, 0};
-            }
             return {true, 0};
         }
     }
@@ -393,7 +388,7 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
             if (config.probability) {
-                return {true, 0};
+                return {checkGlobalProbability(), 0};
             }
             return {true, 0};
         }
@@ -404,7 +399,7 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
             if (config.probability) {
-                return {true, globalState->probability};
+                return {checkGlobalProbability(), globalState->probability};
             }
             return {false, 0};
         }
@@ -528,6 +523,9 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
     auto verifyTransitionSetsResult = verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled);
     cout << "On verifyTransitionSetsResult: " << verifyTransitionSetsResult.probability << endl;
     if (!verifyTransitionSetsResult.result) {
+        if (config.probability) {
+            return {checkGlobalProbability(), verifyTransitionSetsResult.probability};
+        }
         return {false, 0};
     }
     
@@ -536,11 +534,7 @@ VerificationResponse Verification::verifyGlobalState(GlobalState* globalState, i
     dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
     globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
     if (config.probability) {
-        if (depth == 0 && verifyTransitionSetsResult.probability > (1.0 - this->generator->getFormula()->probability)) {
-            this->revertLastDecision(depth);
-            return {false, verifyTransitionSetsResult.probability};
-        }
-        return {true, verifyTransitionSetsResult.probability};
+        return {checkGlobalProbability(), verifyTransitionSetsResult.probability};
     }
     return {true, 0};
 }
@@ -1018,7 +1012,7 @@ VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> u
             }
             else {
                 if (config.probability) {
-                    return {true, globalState->probability}; // ???
+                    return {checkGlobalProbability(), globalState->probability}; // ???
                 }
                 return {false, 0};
             }
@@ -1043,7 +1037,7 @@ VerificationResponse Verification::checkUncontrolledSet(set<GlobalTransition*> u
         }
     }
     cout << "In checkUncontrolledSet: " << worstProbability << endl;
-    return {true, worstProbability};
+    return {checkGlobalProbability(), worstProbability};
 }
 
 /// @brief Checks if given transition sets are able to fulfill the formula for its given epistemic class.
@@ -1135,7 +1129,7 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
             auto verifRes = this->verifyGlobalState(globalTransition->to, depth + 1);
             hasValidControlledTransition = verifRes.result;
             errorProbability = verifRes.probability;
-            if (config.natural_strategy && !okStrategy) {
+            if ((config.natural_strategy && !okStrategy) || (config.probability && !checkGlobalProbability())) {
                 hasValidControlledTransition = false;
             }
             if (this->mode == TraversalMode::REVERT) {
@@ -1225,7 +1219,7 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                 auto verificationResult = this->verifyGlobalState(initialDecision->to, depth + 1);
                 hasValidControlledTransition = verificationResult.result;
                 errorProbability = verificationResult.probability;
-                if (config.natural_strategy && !okStrategy) {
+                if ((config.natural_strategy && !okStrategy) || (config.probability && !checkGlobalProbability())) {
                     hasValidControlledTransition = false;
                 }
                 if (this->mode == TraversalMode::REVERT) {
@@ -1265,6 +1259,9 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                 currentSet.second.erase(initialDecision);
                 auto checkUncontrolledProbabilityResult = this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions, true);
                 errorProbability += checkUncontrolledProbabilityResult.probability;
+                if (config.probability && !checkGlobalProbability()) {
+                    checkUncontrolledProbabilityResult.result = false;
+                }
                 if (hasValidControlledTransition && checkUncontrolledProbabilityResult.result) {
                     if (epistemicClass && fixedGlobalTransition == nullptr) {
                         epistemicClass->fixedCoalitionTransition = initialDecision;
@@ -1277,6 +1274,9 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
             if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions).result) {
+                hasValidChoiceTransition = false;
+            }
+            if (config.probability && !checkGlobalProbability()) {
                 hasValidChoiceTransition = false;
             }
             if (epistemicClass && fixedGlobalTransition == nullptr) {
@@ -1298,7 +1298,7 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
                 }
             #endif
             if (config.probability) {
-                return {true, errorProbability};
+                return {checkGlobalProbability(), errorProbability};
             }
             return {false, 0};
         }
@@ -1309,7 +1309,7 @@ VerificationResponse Verification::verifyTransitionSets(set<GlobalTransition*> c
     errorProbability += checkUncontrolledSetResult.probability; // ???
     if (!isMixedControlTransitions && !checkUncontrolledSetResult.result) {
         if (config.probability) {
-            return {true, checkUncontrolledSetResult.probability};
+            return {checkGlobalProbability(), checkUncontrolledSetResult.probability};
         }
         return {false, 0};
     }
@@ -1620,4 +1620,10 @@ void Verification::increaseGlobalProbability(float increaseBy) {
 /// @param lowerBy Amount to lower the probability by.
 void Verification::lowerGlobalProbability(float lowerBy) {
     globalProbability -= lowerBy;
+}
+
+/// @brief Checks if global probability of 1-P is lower than acceptable.
+/// @return True if still ok to go, false otherwise.
+bool Verification::checkGlobalProbability() {
+    return (globalProbability <= 1.0 - generator->getFormula()->probability);
 }
