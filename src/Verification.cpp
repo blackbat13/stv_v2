@@ -1613,13 +1613,25 @@ void Verification::lowerProbability(GlobalState* currentStateFrom, GlobalState* 
 /// @brief Increases global probability by a given amount.
 /// @param increaseBy Amount to increase the probability by.
 void Verification::increaseGlobalProbability(float increaseBy) {
+    #if VERBOSE
+        cout << "Increased probability from " << globalProbability;
+    #endif
     globalProbability += increaseBy;
+    #if VERBOSE
+        cout << " to " << globalProbability << endl;
+    #endif
 }
 
 /// @brief Lowers global probability by a given amount.
 /// @param lowerBy Amount to lower the probability by.
 void Verification::lowerGlobalProbability(float lowerBy) {
+    #if VERBOSE
+        cout << "Lowered probability from " << globalProbability;
+    #endif
     globalProbability -= lowerBy;
+    #if VERBOSE
+        cout << " to " << globalProbability << endl;
+    #endif
 }
 
 /// @brief Checks if global probability of 1-P is lower than acceptable.
