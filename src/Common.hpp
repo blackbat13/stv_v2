@@ -52,6 +52,8 @@ struct Cfg{
     bool fixpoint;
     bool natural_strategy;
     bool probability = false;
+    bool verify_strategy;
+    std::string strategy_file_path;
 };
 
 #endif 

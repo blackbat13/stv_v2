@@ -1,6 +1,7 @@
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
 #include "ModelParser.hpp"
+#include "StrategyParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
 #include <fstream>
@@ -26,6 +27,7 @@ int main(int argc, char* argv[]) {
     loadConfigFromArgs(argc,argv);
 
     auto tp = new ModelParser();
+    auto sp = new StrategyParser();
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
     tuple<LocalModels, Formula> desc;
     if (!config.formula_from_parameter) {
@@ -34,6 +36,11 @@ int main(int argc, char* argv[]) {
     else {
         desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
     }
+
+    if (config.verify_strategy) {
+        sp->parse(config.strategy_file_path);
+    }
+
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
