@@ -31,7 +31,7 @@ StrategyParser::~StrategyParser() {
 /// @brief Parses a file with given name into a usable strategy.
 /// @param fileName Name of the file to be converted into a strategy.
 /// @return Pointer to a model created from a given file.
-StrategyCollection StrategyParser::parse(string fileName) {
+StrategyCollection* StrategyParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    // zamapuj go jako wejście dla Fleksa
@@ -39,7 +39,7 @@ StrategyCollection StrategyParser::parse(string fileName) {
    // uruchom parsowanie
    stratparse();
 
-   StrategyCollection strategyCollection;
+   StrategyCollection* strategyCollection = new StrategyCollection();
 
    for (auto it = strategyCollectionTemplate.selectedStrategy.begin(); it != strategyCollectionTemplate.selectedStrategy.end(); it++) {
       Action action;
@@ -47,7 +47,7 @@ StrategyCollection StrategyParser::parse(string fileName) {
       action.hash = it->second.hash;
       action.states = it->second.states;
       cout << action.hash << " " << action.actionName << endl;
-      strategyCollection.addAction(action);
+      strategyCollection->addAction(action);
    }
 
    fclose(f);

@@ -120,6 +120,7 @@ public:
     map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
     vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
     int getStrategyComplexity();
+    Result verifyStrategy();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;

@@ -11,6 +11,7 @@
 #include "GlobalState.hpp"
 #include "GlobalTransition.hpp"
 #include "Agent.hpp"
+#include "Types.hpp"
 
 #include <unordered_set>
 #include <unordered_map>
@@ -35,6 +36,8 @@ public:
     Agent* getAgentInstanceByName(string agentName);
     void markFormulaAsIncorrect();
     bool getFormulaCorectness();
+    void initStrategy(StrategyCollection* strat);
+    string getCoalitionIdentifier(vector<LocalState *> *localStates);
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;
@@ -63,6 +66,8 @@ protected:
     stack<int> stateDepths;
     /// @brief States that were added to a stack of states. Used for reductions.
     unordered_set<GlobalState*> addedStates;
+    /// @brief Strategy to check during verification (if any)
+    StrategyCollection* strategyCollection;
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
     void generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent);

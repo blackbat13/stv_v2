@@ -17,7 +17,7 @@ class StrategyParser {
     public:
         StrategyParser();
         ~StrategyParser();
-        StrategyCollection parse(string fileName);
+        StrategyCollection* parse(string fileName);
     
     protected:
         // @internal

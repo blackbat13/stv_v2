@@ -51,6 +51,8 @@ struct GlobalState {
     /// @brief Get for the environment of a given global state.
     /// @return A map of variable names and their values for the current global state.
     map<string, int> getGlobalStateEnvironment();
+
+    VerifResult stateVerifResult = VerifResult::NONE;
 };
 
 #endif

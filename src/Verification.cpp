@@ -520,7 +520,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
                 controlledGlobalTransitions.insert(globalTransition);
             } else if (fixedGlobalTransition == nullptr) {
-
+                // the decision is invalid, skip it
             } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
                 // controlled transition that is fixed should be treated as an uncontrolled transition 
                 #if VERBOSE
@@ -1657,4 +1657,145 @@ void Verification::lowerProbability(GlobalState* currentStateFrom, GlobalState* 
         currentProb *= prob->probability;
     }
     currentStateTo->probability -= currentProb;
+}
+
+Result Verification::verifyStrategy() {
+    Result verificationResult;
+    VerificationFormulaMode formulaMode = this->generator->getFormula()->isF ? VerificationFormulaMode::F : VerificationFormulaMode::G;
+    stack<StateVerificationInfo> statesToProcess;
+    StateVerificationInfo initState;
+    StateVerificationInfo* currentState;
+    initState.globalState = this->generator->getCurrentGlobalModel()->initState;
+    initState.depth = 0;
+    statesToProcess.emplace(initState);
+
+    while (!statesToProcess.empty()) {
+        currentState = &statesToProcess.top();
+
+        if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
+            currentState->fromState->verifResult = VerifResult::FALSE;
+            // initiate rollback
+            // todo here
+        } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
+            continue;
+        } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
+            if (formulaMode == VerificationFormulaMode::F) {
+                currentState->fromState->verifResult = VerifResult::FALSE;
+                // initiate rollback
+                // todo here
+            }
+            else {
+                continue;
+            }
+        }
+
+        if (currentState->verifResult == VerifResult::FALSE) {
+            // if processing controlled then switch back to VerifResult::NONE
+            // todo here
+            // if processing uncontrolled then propagate VerifResult::FALSE and initiate rollback
+            // todo here
+        }
+
+        if (!currentState->processed) {
+            // 1) verify localStates that the globalState is composed of
+            if (formulaMode == VerificationFormulaMode::F) { // F
+                if (currentState->verifResult == VerifResult::TRUE || this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
+                    this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                    dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                    currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                    // cache the result for later
+                    currentState->verifResult = VerifResult::TRUE;
+                    statesToProcess.pop();
+                    continue;
+                } else {
+                    // cache the result for later
+                    currentState->verifResult = VerifResult::FALSE;
+                }
+            } else { // G
+                if (currentState->verifResult == VerifResult::FALSE || !this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
+                    this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                    dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                    currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                    // cache the result for later
+                    currentState->verifResult = VerifResult::FALSE;
+                    // trigger revert until last decision
+                    // todo here
+                    continue;
+                } else {
+                    // cache the result for later
+                    currentState->verifResult = VerifResult::TRUE;
+                }
+            }
+            
+            // 2) ensure that the state is expanded
+            if (!currentState->globalState->isExpanded) {
+                this->generator->expandState(currentState->globalState);
+            }
+            
+            // classify transition end global states 
+            for (auto globalTransition : currentState->globalState->globalTransitions) {
+                // add CTL support here
+                auto epistemicClass = this->getEpistemicClassForGlobalState(currentState->globalState);
+                auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+                if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
+                    if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
+                        currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                    } else if (fixedGlobalTransition == nullptr) {
+                        // the decision is invalid, skip it
+                    } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
+                        // controlled transition that is fixed should be treated as an uncontrolled transition 
+                        #if VERBOSE
+                            printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+                        #endif
+                        if (!config.probability) {
+                            currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                        } else {
+                            string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
+                            for (auto globalTransition2 : currentState->globalState->globalTransitions) {
+                                if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
+                                    currentState->uncontrolledStatesleftToProcess.emplace(globalTransition2->to);
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                }
+            }
+            currentState->processed = true;
+        }
+
+        if (!currentState->controlledStatesleftToProcess.empty()) { // process controlled states, one by one
+            StateVerificationInfo newState;
+            newState.globalState = currentState->controlledStatesleftToProcess.front();
+            newState.fromState = currentState;
+            newState.depth = currentState->depth + 1;
+            statesToProcess.emplace(newState);
+            currentState->controlledStatesleftToProcess.pop();
+        } else if (!currentState->uncontrolledStatesleftToProcess.empty()) { // process uncontrolled states, one by one
+            StateVerificationInfo newState;
+            newState.globalState = currentState->uncontrolledStatesleftToProcess.front();
+            newState.fromState = currentState;
+            newState.depth = currentState->depth + 1;
+            statesToProcess.emplace(newState);
+            currentState->uncontrolledStatesleftToProcess.pop();
+        } else {
+            // if got back to the state, processed all stated and they didn't invalidate parent state, mark it as correct
+            if (currentState->verifResult == VerifResult::NONE) {
+                currentState->verifResult = VerifResult::TRUE;
+                if (currentState->fromState != nullptr) {
+                    statesToProcess.pop();
+                } else {
+                    if (currentState->verifResult == VerifResult::TRUE) {
+                        verificationResult.verificationResult = true;
+                    } else {
+                        verificationResult.verificationResult = false;
+                    }
+                    statesToProcess.pop();
+                }
+            }
+        }
+    }
+    return verificationResult;
 }

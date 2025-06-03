@@ -114,4 +114,30 @@ class StrategyCollection {
         };
 };
 
+struct Result {
+    bool verificationResult = false;
+};
+
+struct StateVerificationInfo {
+    GlobalState* globalState = nullptr;
+    StateVerificationInfo* fromState = nullptr;
+    queue<GlobalState*> controlledStatesleftToProcess;
+    queue<GlobalState*> uncontrolledStatesleftToProcess;
+    int depth = 0;
+    bool processed = false;
+    VerifResult verifResult = VerifResult::NONE;
+};
+
+enum VerificationFormulaMode {
+    NONE = 0,
+    F = 1,
+    G = 2
+};
+
+enum VerifResult {
+    NONE = 0,
+    TRUE = 1,
+    FALSE = 2
+};
+
 #endif // SELENE_TYPES

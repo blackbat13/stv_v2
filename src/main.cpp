@@ -30,6 +30,7 @@ int main(int argc, char* argv[]) {
     auto sp = new StrategyParser();
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
     tuple<LocalModels, Formula> desc;
+    StrategyCollection* strat = new StrategyCollection();
     if (!config.formula_from_parameter) {
         desc = tp->parse(config.fname);
     }
@@ -38,7 +39,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (config.verify_strategy) {
-        sp->parse(config.strategy_file_path);
+        strat = sp->parse(config.strategy_file_path);
     }
 
     auto localModels = &(get<0>(desc));
@@ -47,6 +48,9 @@ int main(int argc, char* argv[]) {
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
+    if (config.verify_strategy) {
+        generator->initStrategy(strat);
+    }
     if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
     }
@@ -97,8 +101,11 @@ int main(int argc, char* argv[]) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
         bool verifResult;
-        if(config.fixpoint) {
+        if (config.fixpoint) {
             verifResult = verification->fixpointVerify();
+        }
+        else if (config.verify_strategy) {
+            verifResult = verification->verifyStrategy().verificationResult;
         }
         else {
             verifResult = verification->verify();

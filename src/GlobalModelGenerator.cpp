@@ -621,3 +621,18 @@ void GlobalModelGenerator::markFormulaAsIncorrect() {
 bool GlobalModelGenerator::getFormulaCorectness() {
     return correctModel;
 }
+
+void GlobalModelGenerator::initStrategy(StrategyCollection* strat)
+{
+    this->strategyCollection = strat;
+}
+
+string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
+    string hash = "";
+    for (const auto localState : *localStates) {
+        if (formula->coalition.find(localState->agent) != formula->coalition.end()) {
+            hash += localState->name + ";";
+        }
+    }
+    return hash;
+}
