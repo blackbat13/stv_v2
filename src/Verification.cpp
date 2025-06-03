@@ -1672,6 +1672,7 @@ Result Verification::verifyStrategy() {
     while (!statesToProcess.empty()) {
         currentState = &statesToProcess.top();
 
+        // reached a previously visited state
         if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
             currentState->fromState->verifResult = VerifResult::FALSE;
             // initiate rollback
@@ -1689,6 +1690,7 @@ Result Verification::verifyStrategy() {
             }
         }
 
+        // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
         if (currentState->verifResult == VerifResult::FALSE) {
             // if processing controlled then switch back to VerifResult::NONE
             // todo here
@@ -1697,6 +1699,10 @@ Result Verification::verifyStrategy() {
         }
 
         if (!currentState->processed) {
+            // mark state as pending if haven't visited it yet
+            this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::PENDING);
+            dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::PENDING, "entered state");
+            currentState->globalState->verificationStatus = GlobalStateVerificationStatus::PENDING;
             // 1) verify localStates that the globalState is composed of
             if (formulaMode == VerificationFormulaMode::F) { // F
                 if (currentState->verifResult == VerifResult::TRUE || this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
@@ -1738,25 +1744,29 @@ Result Verification::verifyStrategy() {
                 auto epistemicClass = this->getEpistemicClassForGlobalState(currentState->globalState);
                 auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
                 if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
-                    if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
-                        currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
-                    } else if (fixedGlobalTransition == nullptr) {
-                        // the decision is invalid, skip it
-                    } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
-                        // controlled transition that is fixed should be treated as an uncontrolled transition 
-                        #if VERBOSE
-                            printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-                        #endif
-                        if (!config.probability) {
-                            currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
-                        } else {
-                            string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
-                            for (auto globalTransition2 : currentState->globalState->globalTransitions) {
-                                if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
-                                    currentState->uncontrolledStatesleftToProcess.emplace(globalTransition2->to);
+                    if (!config.verify_strategy) {
+                        if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
+                            currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                        } else if (fixedGlobalTransition == nullptr) {
+                            // the decision is invalid, skip it
+                        } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
+                            // controlled transition that is fixed should be treated as an uncontrolled transition 
+                            #if VERBOSE
+                                printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+                            #endif
+                            if (!config.probability) {
+                                currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                            } else {
+                                string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
+                                for (auto globalTransition2 : currentState->globalState->globalTransitions) {
+                                    if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
+                                        currentState->uncontrolledStatesleftToProcess.emplace(globalTransition2->to);
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        // select the strategy from file
                     }
                 }
                 else {
