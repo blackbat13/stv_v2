@@ -1738,7 +1738,7 @@ Result Verification::verifyStrategy() {
                 this->generator->expandState(currentState->globalState);
             }
             
-            // classify transition end global states 
+            // classify transition end global states
             for (auto globalTransition : currentState->globalState->globalTransitions) {
                 // add CTL support here
                 auto epistemicClass = this->getEpistemicClassForGlobalState(currentState->globalState);
@@ -1791,7 +1791,7 @@ Result Verification::verifyStrategy() {
             statesToProcess.emplace(newState);
             currentState->uncontrolledStatesleftToProcess.pop();
         } else {
-            // if got back to the state, processed all stated and they didn't invalidate parent state, mark it as correct
+            // if got back to the state, processed all states and they didn't invalidate parent state, mark it as correct
             if (currentState->verifResult == VerifResult::NONE) {
                 currentState->verifResult = VerifResult::TRUE;
                 if (currentState->fromState != nullptr) {
