@@ -1,5 +1,6 @@
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
+#include "VerificationIterative.hpp"
 #include "ModelParser.hpp"
 #include "StrategyParser.hpp"
 #include "Utils.hpp"
@@ -105,10 +106,15 @@ int main(int argc, char* argv[]) {
             verifResult = verification->fixpointVerify();
         }
         else if (config.verify_strategy) {
-            verifResult = verification->verifyStrategy().verificationResult;
+            auto verificationIt = new VerificationIterative(generator);
+            verifResult = verificationIt->verify().verificationResult;
+            delete verificationIt;
         }
         else {
-            verifResult = verification->verify();
+            // verifResult = verification->verify();
+            auto verificationIt = new VerificationIterative(generator);
+            verifResult = verificationIt->verify().verificationResult;
+            delete verificationIt;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
@@ -228,7 +234,9 @@ int main(int argc, char* argv[]) {
         printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
         printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
     }
-
+    delete tp;
+    delete sp;
+    delete strat;
     return 0;
 }
 

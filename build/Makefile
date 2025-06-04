@@ -4,10 +4,10 @@ USER_DIR = ../tests
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 	
-main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o  strategyParser.o strategyScanner.o strategyNodes.o
-	$(CC) $(CPPFLAGS)    -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o DotGraph.o parser.o scanner.o expressions.o nodes.o  strategyParser.o strategyScanner.o strategyNodes.o
+main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o DotGraph.o parser.o scanner.o expressions.o nodes.o  strategyParser.o strategyScanner.o strategyNodes.o
+	$(CC) $(CPPFLAGS)    -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o parser.o scanner.o expressions.o nodes.o  strategyParser.o strategyScanner.o strategyNodes.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/StrategyParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/StrategyParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
 	$(CC) $(CPPFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
@@ -36,6 +36,9 @@ Utils.o: ../src/Utils.hpp ../src/Utils.cpp
 
 Verification.o: ../src/Verification.hpp ../src/Verification.cpp
 	$(CC) $(CPPFLAGS) -c ../src/Verification.cpp
+
+VerificationIterative.o: ../src/VerificationIterative.hpp ../src/VerificationIterative.cpp
+	$(CC) $(CPPFLAGS) -c ../src/VerificationIterative.cpp
 
 DotGraph.o: ../src/DotGraph.hpp ../src/DotGraph.cpp
 	$(CC) $(CPPFLAGS) -c ../src/DotGraph.cpp
@@ -103,14 +106,14 @@ gtest_main.a : gtest-all.o gtest_main.o
 
 # tests here
 
-sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
+sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS)    -lpthread $^ -o $@
 
-sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
+sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc
 
-big_tests : big_tests.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
+big_tests : big_tests.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS)    -lpthread $^ -o $@
 
-big_tests.o : $(USER_DIR)/big_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
+big_tests.o : $(USER_DIR)/big_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/big_tests.cc
