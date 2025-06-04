@@ -1707,7 +1707,7 @@ Result Verification::verifyStrategy() {
         // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
         if (currentState->verifResult == VerifResult::FALSE) {
             if (currentState->controlled) { // if processing controlled then switch back to VerifResult::NOT_VERIFIED
-                if (!currentState->controlledStatesleftToProcess.empty()) { // there are options
+                if (!currentState->controlledTransitionsLeftToProcess.empty()) { // there are options
                     currentState->verifResult = VerifResult::NOT_VERIFIED;
                 } else { // there are no options left
                     if (currentState->fromState != nullptr) {
@@ -1776,7 +1776,7 @@ Result Verification::verifyStrategy() {
                 if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
                     if (!config.verify_strategy) {
                         if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
-                            currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                            currentState->controlledTransitionsLeftToProcess.emplace(globalTransition);
                         } else if (fixedGlobalTransition == nullptr) {
                             // the decision is invalid, skip it
                         } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
@@ -1785,12 +1785,12 @@ Result Verification::verifyStrategy() {
                                 printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
                             #endif
                             if (!config.probability) {
-                                currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                                currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
                             } else {
                                 string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
                                 for (auto globalTransition2 : currentState->globalState->globalTransitions) {
                                     if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
-                                        currentState->uncontrolledStatesleftToProcess.emplace(globalTransition2->to);
+                                        currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition2);
                                     }
                                 }
                             }
@@ -1798,40 +1798,40 @@ Result Verification::verifyStrategy() {
                     } else if (generator->getActionNameFromStateInStrategy(currentState->globalState) != ";" && generator->getActionNameFromStateInStrategy(currentState->globalState) != "") {
                         if (globalTransition->joinLocalTransitionNames().find(generator->getActionNameFromStateInStrategy(currentState->globalState)) != string::npos) {
                             // cout << "Should use: " << globalTransition->joinLocalTransitionNames() << endl;
-                            currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                            currentState->controlledTransitionsLeftToProcess.emplace(globalTransition);
                         } else {
                             // cout << "Shouldn't use: " << globalTransition->joinLocalTransitionNames() << endl;
                         }
                         // might need to fix it when there's multiple agents in a coalition
                     }
                 } else {
-                    currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                    currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
                 }
             }
-            if (!currentState->controlledStatesleftToProcess.empty()) {
+            if (!currentState->controlledTransitionsLeftToProcess.empty()) {
                 currentState->controlled = true;
             }
-            if (!currentState->uncontrolledStatesleftToProcess.empty()) {
+            if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) {
                 currentState->uncontrolled = true;
             }
             currentState->processed = true;
         }
 
         // push another state onto the queue, go back and continue or return a value
-        if (!currentState->controlledStatesleftToProcess.empty()) { // process controlled states, one by one
+        if (!currentState->controlledTransitionsLeftToProcess.empty()) { // process controlled states, one by one
             StateVerificationInfo newState;
-            newState.globalState = currentState->controlledStatesleftToProcess.front();
+            newState.globalState = currentState->controlledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
             newState.depth = currentState->depth + 1;
             statesToProcess.emplace(newState);
-            currentState->controlledStatesleftToProcess.pop();
-        } else if (!currentState->uncontrolledStatesleftToProcess.empty()) { // process uncontrolled states, one by one
+            currentState->controlledTransitionsLeftToProcess.pop();
+        } else if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) { // process uncontrolled states, one by one
             StateVerificationInfo newState;
-            newState.globalState = currentState->uncontrolledStatesleftToProcess.front();
+            newState.globalState = currentState->uncontrolledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
             newState.depth = currentState->depth + 1;
             statesToProcess.emplace(newState);
-            currentState->uncontrolledStatesleftToProcess.pop();
+            currentState->uncontrolledTransitionsLeftToProcess.pop();
         } else {
             // if got back to the state, processed all states and they didn't invalidate parent state, mark it as correct
             if (currentState->verifResult == VerifResult::NOT_VERIFIED) {

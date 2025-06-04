@@ -127,8 +127,8 @@ struct Result {
 struct StateVerificationInfo {
     GlobalState* globalState = nullptr;
     StateVerificationInfo* fromState = nullptr;
-    queue<GlobalState*> controlledStatesleftToProcess;
-    queue<GlobalState*> uncontrolledStatesleftToProcess;
+    queue<GlobalTransition*> controlledTransitionsLeftToProcess;
+    queue<GlobalTransition*> uncontrolledTransitionsLeftToProcess;
     int depth = 0;
     bool processed = false;
     VerifResult verifResult = VerifResult::NOT_VERIFIED;

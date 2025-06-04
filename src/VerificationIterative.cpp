@@ -338,7 +338,7 @@ Result VerificationIterative::verify() {
         // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
         if (currentState->verifResult == VerifResult::FALSE) {
             if (currentState->controlled) { // if processing controlled then switch back to VerifResult::NOT_VERIFIED
-                if (!currentState->controlledStatesleftToProcess.empty()) { // there are options
+                if (!currentState->controlledTransitionsLeftToProcess.empty()) { // there are options
                     currentState->verifResult = VerifResult::NOT_VERIFIED;
                 } else { // there are no options left
                     if (currentState->fromState != nullptr) {
@@ -356,6 +356,9 @@ Result VerificationIterative::verify() {
                 statesToProcess.pop();
                 continue;
             }
+        } else if (currentState->verifResult == VerifResult::NOT_VERIFIED && currentState->controlled && !currentState->uncontrolled) {
+            // clear out the stacks, since the selection wasn't invalid
+            currentState->controlledTransitionsLeftToProcess = queue<GlobalTransition*>();
         }
 
         // do some initial processing for the state
@@ -403,7 +406,7 @@ Result VerificationIterative::verify() {
                 if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
                     if (!config.verify_strategy) {
                         if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
-                            currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                            currentState->controlledTransitionsLeftToProcess.emplace(globalTransition);
                         } else if (fixedGlobalTransition == nullptr) {
                             // the decision is invalid, skip it
                         } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
@@ -412,12 +415,12 @@ Result VerificationIterative::verify() {
                                 printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
                             #endif
                             if (!config.probability) {
-                                currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                                currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
                             } else {
                                 string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
                                 for (auto globalTransition2 : currentState->globalState->globalTransitions) {
                                     if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
-                                        currentState->uncontrolledStatesleftToProcess.emplace(globalTransition2->to);
+                                        currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition2);
                                     }
                                 }
                             }
@@ -425,40 +428,42 @@ Result VerificationIterative::verify() {
                     } else if (generator->getActionNameFromStateInStrategy(currentState->globalState) != ";" && generator->getActionNameFromStateInStrategy(currentState->globalState) != "") {
                         if (globalTransition->joinLocalTransitionNames().find(generator->getActionNameFromStateInStrategy(currentState->globalState)) != string::npos) {
                             // cout << "Should use: " << globalTransition->joinLocalTransitionNames() << endl;
-                            currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                            currentState->controlledTransitionsLeftToProcess.emplace(globalTransition);
                         } else {
                             // cout << "Shouldn't use: " << globalTransition->joinLocalTransitionNames() << endl;
                         }
                         // might need to fix it when there's multiple agents in a coalition
                     }
                 } else {
-                    currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
+                    currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
                 }
             }
-            if (!currentState->controlledStatesleftToProcess.empty()) {
+            if (!currentState->controlledTransitionsLeftToProcess.empty()) {
                 currentState->controlled = true;
             }
-            if (!currentState->uncontrolledStatesleftToProcess.empty()) {
+            if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) {
                 currentState->uncontrolled = true;
             }
+
+            testForAndFixBadAgents(currentState);
             currentState->processed = true;
         }
 
         // push another state onto the queue, go back and continue or return a value
-        if (!currentState->controlledStatesleftToProcess.empty()) { // process controlled states, one by one
+        if (!currentState->controlledTransitionsLeftToProcess.empty()) { // process controlled states, one by one
             StateVerificationInfo newState;
-            newState.globalState = currentState->controlledStatesleftToProcess.front();
+            newState.globalState = currentState->controlledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
             newState.depth = currentState->depth + 1;
             statesToProcess.emplace(newState);
-            currentState->controlledStatesleftToProcess.pop();
-        } else if (!currentState->uncontrolledStatesleftToProcess.empty()) { // process uncontrolled states, one by one
+            currentState->controlledTransitionsLeftToProcess.pop();
+        } else if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) { // process uncontrolled states, one by one
             StateVerificationInfo newState;
-            newState.globalState = currentState->uncontrolledStatesleftToProcess.front();
+            newState.globalState = currentState->uncontrolledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
             newState.depth = currentState->depth + 1;
             statesToProcess.emplace(newState);
-            currentState->uncontrolledStatesleftToProcess.pop();
+            currentState->uncontrolledTransitionsLeftToProcess.pop();
         } else {
             // if got back to the state, processed all states and they didn't invalidate parent state, mark it as correct
             if (currentState->verifResult == VerifResult::NOT_VERIFIED) {
@@ -479,4 +484,78 @@ Result VerificationIterative::verify() {
         }
     }
     return verificationResult;
+}
+
+bool VerificationIterative::testForAndFixBadAgents(StateVerificationInfo* stateVerificationInfo) {
+    bool hasMergedTransitionsIntoUncontrolled = false;
+    if (stateVerificationInfo->controlled && stateVerificationInfo->uncontrolled) {
+        set<Agent*> agents = generator->getFormula()->coalition;
+        set<Agent*> brokenAgents;
+        set<Agent*> potentiallyBrokenAgents;
+
+        queue<GlobalTransition*> uncontrolledGlobalTransitions(stateVerificationInfo->uncontrolledTransitionsLeftToProcess);
+        queue<GlobalTransition*> controlledGlobalTransitions(stateVerificationInfo->controlledTransitionsLeftToProcess);
+
+        // find if there are uncontrolled actions with only agents that are not in coalition, if yes, then they can block the controlled actions if they are a participants
+        while (!uncontrolledGlobalTransitions.empty()) {
+            GlobalTransition* globalTransition = uncontrolledGlobalTransitions.front();
+            uncontrolledGlobalTransitions.pop();
+            bool agentTest = false;
+            for (auto glob : globalTransition->localTransitions) {
+                for (auto agt : agents) {
+                    if (glob->agent->name.c_str() == agt->name.c_str()) {
+                        agentTest = true;
+                        break;
+                    }
+                }
+                if(agentTest) {
+                    potentiallyBrokenAgents.clear();
+                    break;
+                }
+                else {
+                    potentiallyBrokenAgents.insert(glob->agent);
+                }
+            }
+            // if the global transition can fire without any of the coalition agents, mark the agents participating as a definitely faulty ones
+            if (!agentTest) {
+                brokenAgents.insert(potentiallyBrokenAgents.begin(), potentiallyBrokenAgents.end());
+                potentiallyBrokenAgents.clear();
+            }
+        }
+        // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
+        if (brokenAgents.size() > 0) {
+            stack<GlobalTransition*> transitionsToBeMoved;
+            stateVerificationInfo->controlledTransitionsLeftToProcess = queue<GlobalTransition*>();
+            // mark bad controlled global transition as uncontrolled
+            while (!controlledGlobalTransitions.empty()) {
+                GlobalTransition* globalTransition = controlledGlobalTransitions.front();
+                controlledGlobalTransitions.pop();
+                bool agentTest = true;
+                for (auto localTrans : globalTransition->localTransitions) {
+                    bool brokenAgentFound = false;
+                    for (auto agt : brokenAgents) {
+                        if(localTrans->agent->name.c_str() == agt->name.c_str()) {
+                            brokenAgentFound = true;
+                            break;
+                        }
+                    }
+                    if(brokenAgentFound) {
+                        agentTest = false;
+                    }
+                }
+                if (!agentTest) {
+                    transitionsToBeMoved.push(globalTransition);
+                } else {
+                    stateVerificationInfo->controlledTransitionsLeftToProcess.emplace(globalTransition);
+                }
+            }
+            while (!transitionsToBeMoved.empty()) {
+                GlobalTransition* tr = transitionsToBeMoved.top();
+                transitionsToBeMoved.pop();
+                stateVerificationInfo->uncontrolledTransitionsLeftToProcess.emplace(tr);
+            }
+            hasMergedTransitionsIntoUncontrolled = true;
+        }
+    }
+    return hasMergedTransitionsIntoUncontrolled;
 }

@@ -72,6 +72,7 @@ class VerificationIterative {
         bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
         bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
         vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
+        bool testForAndFixBadAgents(StateVerificationInfo* stateVerificationInfo);
 };
 
 #endif // VERIFICATION_ITERATIVE
