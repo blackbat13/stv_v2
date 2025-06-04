@@ -38,6 +38,7 @@ public:
     bool getFormulaCorectness();
     void initStrategy(StrategyCollection* strat);
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
+    string getActionNameFromStateInStrategy(GlobalState* state);
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;

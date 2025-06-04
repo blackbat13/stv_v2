@@ -8,6 +8,7 @@
 #define GLOBAL_STATE
 
 #include "Common.hpp"
+#include "TypesDependency.hpp"
 
 /// @brief Represents a single global state.
 struct GlobalState {
@@ -52,7 +53,7 @@ struct GlobalState {
     /// @return A map of variable names and their values for the current global state.
     map<string, int> getGlobalStateEnvironment();
 
-    VerifResult stateVerifResult = VerifResult::NONE;
+    VerifResult stateVerifResult = VerifResult::NOT_VERIFIED;
 };
 
 #endif

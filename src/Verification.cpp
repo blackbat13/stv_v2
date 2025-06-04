@@ -1668,36 +1668,66 @@ Result Verification::verifyStrategy() {
     initState.globalState = this->generator->getCurrentGlobalModel()->initState;
     initState.depth = 0;
     statesToProcess.emplace(initState);
+    int lastDepth = -1;
 
     while (!statesToProcess.empty()) {
         currentState = &statesToProcess.top();
+        cout << string(20, '=') << endl;
+        cout << "Stack size: " << statesToProcess.size() << endl;
+        cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
+        cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
 
-        // reached a previously visited state
-        if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
-            currentState->fromState->verifResult = VerifResult::FALSE;
-            // initiate rollback
-            // todo here
-        } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
-            continue;
-        } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
-            if (formulaMode == VerificationFormulaMode::F) {
-                currentState->fromState->verifResult = VerifResult::FALSE;
+        // reached a previously visited state by going forward
+        if (currentState->depth > lastDepth) {
+            lastDepth = currentState->depth;
+            if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
+                if (currentState->fromState != nullptr) {
+                    currentState->fromState->verifResult = VerifResult::FALSE;
+                }
                 // initiate rollback
-                // todo here
+                statesToProcess.pop();
+                continue;
+            } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
+                // go on
+                statesToProcess.pop();
+                continue;
+            } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
+                if (formulaMode == VerificationFormulaMode::F) {
+                    if (currentState->fromState != nullptr) {
+                        currentState->fromState->verifResult = VerifResult::FALSE;
+                    }
+                }
+                // initiate rollback
+                statesToProcess.pop();
+                continue;
             }
-            else {
+        }
+        lastDepth = currentState->depth;
+
+        // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
+        if (currentState->verifResult == VerifResult::FALSE) {
+            if (currentState->controlled) { // if processing controlled then switch back to VerifResult::NOT_VERIFIED
+                if (!currentState->controlledStatesleftToProcess.empty()) { // there are options
+                    currentState->verifResult = VerifResult::NOT_VERIFIED;
+                } else { // there are no options left
+                    if (currentState->fromState != nullptr) {
+                        currentState->fromState->verifResult = VerifResult::FALSE;
+                    }
+                    // initiate rollback
+                    statesToProcess.pop();
+                    continue;
+                }
+            } else if (currentState->uncontrolled) { // if processing uncontrolled then propagate VerifResult::FALSE and initiate rollback
+                if (currentState->fromState != nullptr) {
+                    currentState->fromState->verifResult = VerifResult::FALSE;
+                }
+                // initiate rollback
+                statesToProcess.pop();
                 continue;
             }
         }
 
-        // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
-        if (currentState->verifResult == VerifResult::FALSE) {
-            // if processing controlled then switch back to VerifResult::NONE
-            // todo here
-            // if processing uncontrolled then propagate VerifResult::FALSE and initiate rollback
-            // todo here
-        }
-
+        // do some initial processing for the state
         if (!currentState->processed) {
             // mark state as pending if haven't visited it yet
             this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::PENDING);
@@ -1705,31 +1735,31 @@ Result Verification::verifyStrategy() {
             currentState->globalState->verificationStatus = GlobalStateVerificationStatus::PENDING;
             // 1) verify localStates that the globalState is composed of
             if (formulaMode == VerificationFormulaMode::F) { // F
-                if (currentState->verifResult == VerifResult::TRUE || this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
+                if (currentState->globalState->stateVerifResult == VerifResult::TRUE || this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
                     this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
                     dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
                     currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
                     // cache the result for later
-                    currentState->verifResult = VerifResult::TRUE;
+                    currentState->globalState->stateVerifResult = VerifResult::TRUE;
                     statesToProcess.pop();
                     continue;
                 } else {
                     // cache the result for later
-                    currentState->verifResult = VerifResult::FALSE;
+                    currentState->globalState->stateVerifResult = VerifResult::FALSE;
                 }
             } else { // G
-                if (currentState->verifResult == VerifResult::FALSE || !this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
+                if (currentState->globalState->stateVerifResult == VerifResult::FALSE || !this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
                     this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
                     dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
                     currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
                     // cache the result for later
-                    currentState->verifResult = VerifResult::FALSE;
+                    currentState->globalState->stateVerifResult = VerifResult::FALSE;
                     // trigger revert until last decision
                     // todo here
                     continue;
                 } else {
                     // cache the result for later
-                    currentState->verifResult = VerifResult::TRUE;
+                    currentState->globalState->stateVerifResult = VerifResult::TRUE;
                 }
             }
             
@@ -1737,7 +1767,7 @@ Result Verification::verifyStrategy() {
             if (!currentState->globalState->isExpanded) {
                 this->generator->expandState(currentState->globalState);
             }
-            
+
             // classify transition end global states
             for (auto globalTransition : currentState->globalState->globalTransitions) {
                 // add CTL support here
@@ -1765,17 +1795,29 @@ Result Verification::verifyStrategy() {
                                 }
                             }
                         }
-                    } else {
-                        // select the strategy from file
+                    } else if (generator->getActionNameFromStateInStrategy(currentState->globalState) != ";" && generator->getActionNameFromStateInStrategy(currentState->globalState) != "") {
+                        if (globalTransition->joinLocalTransitionNames().find(generator->getActionNameFromStateInStrategy(currentState->globalState)) != string::npos) {
+                            // cout << "Should use: " << globalTransition->joinLocalTransitionNames() << endl;
+                            currentState->controlledStatesleftToProcess.emplace(globalTransition->to);
+                        } else {
+                            // cout << "Shouldn't use: " << globalTransition->joinLocalTransitionNames() << endl;
+                        }
+                        // might need to fix it when there's multiple agents in a coalition
                     }
-                }
-                else {
+                } else {
                     currentState->uncontrolledStatesleftToProcess.emplace(globalTransition->to);
                 }
+            }
+            if (!currentState->controlledStatesleftToProcess.empty()) {
+                currentState->controlled = true;
+            }
+            if (!currentState->uncontrolledStatesleftToProcess.empty()) {
+                currentState->uncontrolled = true;
             }
             currentState->processed = true;
         }
 
+        // push another state onto the queue, go back and continue or return a value
         if (!currentState->controlledStatesleftToProcess.empty()) { // process controlled states, one by one
             StateVerificationInfo newState;
             newState.globalState = currentState->controlledStatesleftToProcess.front();
@@ -1792,11 +1834,13 @@ Result Verification::verifyStrategy() {
             currentState->uncontrolledStatesleftToProcess.pop();
         } else {
             // if got back to the state, processed all states and they didn't invalidate parent state, mark it as correct
-            if (currentState->verifResult == VerifResult::NONE) {
+            if (currentState->verifResult == VerifResult::NOT_VERIFIED) {
                 currentState->verifResult = VerifResult::TRUE;
                 if (currentState->fromState != nullptr) {
+                    // go on
                     statesToProcess.pop();
-                } else {
+                    continue;
+                } else { // got back to root state
                     if (currentState->verifResult == VerifResult::TRUE) {
                         verificationResult.verificationResult = true;
                     } else {

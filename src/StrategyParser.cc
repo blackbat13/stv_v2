@@ -46,7 +46,7 @@ StrategyCollection* StrategyParser::parse(string fileName) {
       action.actionName = it->second.actionName;
       action.hash = it->second.hash;
       action.states = it->second.states;
-      cout << action.hash << " " << action.actionName << endl;
+      // cout << action.hash << " " << action.actionName << endl;
       strategyCollection->addAction(action);
    }
 

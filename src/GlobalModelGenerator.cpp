@@ -627,6 +627,19 @@ void GlobalModelGenerator::initStrategy(StrategyCollection* strat)
     this->strategyCollection = strat;
 }
 
+string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state) {
+    string coalitionLocalStateName = getCoalitionIdentifier(&(state->localStatesProjection));
+    try {
+        auto match = this->strategyCollection->getStrategy()[coalitionLocalStateName];
+        return match.actionName + ";";
+    }
+    catch (const std::out_of_range& e) {
+        cout << "No action name found for coalition local state: " << coalitionLocalStateName << endl;
+        return "";
+    }
+    return "";
+}
+
 string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
     string hash = "";
     for (const auto localState : *localStates) {

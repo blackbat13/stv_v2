@@ -11,6 +11,7 @@
 #include <set>
 
 #include <stack>
+#include <queue>
 #include <string>
 #include <utility>
 #include <vector>
@@ -28,6 +29,8 @@
 #include "reader/expressions.hpp"
 
 #include <atomic> //std::atomic_uint32_t
+
+#include "TypesDependency.hpp"
 
 using namespace std;
 
@@ -112,6 +115,9 @@ class StrategyCollection {
         void addAction(Action action) {
             selectedStrategy[action.hash] = action;
         };
+        map<string, Action> getStrategy() {
+            return selectedStrategy;
+        };
 };
 
 struct Result {
@@ -125,19 +131,15 @@ struct StateVerificationInfo {
     queue<GlobalState*> uncontrolledStatesleftToProcess;
     int depth = 0;
     bool processed = false;
-    VerifResult verifResult = VerifResult::NONE;
+    VerifResult verifResult = VerifResult::NOT_VERIFIED;
+    bool controlled = false;
+    bool uncontrolled = false;
 };
 
 enum VerificationFormulaMode {
-    NONE = 0,
+    NOT_SET = 0,
     F = 1,
     G = 2
-};
-
-enum VerifResult {
-    NONE = 0,
-    TRUE = 1,
-    FALSE = 2
 };
 
 #endif // SELENE_TYPES
