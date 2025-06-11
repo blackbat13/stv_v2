@@ -159,35 +159,38 @@ void VerificationIterative::undoLastHistoryEntry() {
 
 bool VerificationIterative::revertToLastDecision()
 {
-    auto currentHistoryState = this->history.top();
     // Undo Z->T (including Z, excluding T); find Y while doing that
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
     while (!this->history.empty() && this->history.top().type != HistoryEntryType::DECISION) {
-        currentHistoryState = this->history.top();
-        cout << "[!] " << currentHistoryState.depth << " " << currentHistoryState.globalState->hash << " " << currentHistoryState.type << endl;
-        if (currentHistoryState.type == HistoryEntryType::CONTEXT && currentHistoryState.depth < shallowestDepth) {
-            shallowestDepth = currentHistoryState.depth;
-            shallowestGlobalState = currentHistoryState.globalState;
+        cout << "[!] " << this->history.top().depth << " " << this->history.top().globalState->hash << " " << this->history.top().type << endl;
+        if (this->history.top().type == HistoryEntryType::CONTEXT && this->history.top().depth < shallowestDepth) {
+            shallowestDepth = this->history.top().depth;
+            shallowestGlobalState = this->history.top().globalState;
         }
-        currentHistoryState = this->history.top();
-        cout << "[!!] " << currentHistoryState.depth << " " << currentHistoryState.globalState->hash << " " << currentHistoryState.type << endl;
         this->undoLastHistoryEntry();
     }
-    cout << "there" << endl;
+    if (!this->history.empty()) {
+        cout << "[found] " << this->history.top().depth << " " << this->history.top().globalState->hash << " " << this->history.top().type << endl;
+        auto invalidDecisionGlobalState = this->history.top().globalState;
+        auto invalidDecision = this->history.top().decision;
+        auto invalidDecisionHistoryEntry = this->history.top();
+        history.pop();
+        if (!invalidDecision->isInvalidDecision) {
+            // Mark the decision (transition) as invalid
+            this->addHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
+            invalidDecision->isInvalidDecision = true;
+        }
+    }
+    
     if (this->history.empty() || this->history.top().type != HistoryEntryType::DECISION || shallowestGlobalState == nullptr) {
         return false;
     }
     
     // Undo T->Y (including T, excluding Y); build path to repeat while doing that
-    if (history.empty()) {
-        statesToProcess.pop();
-        return false;
-    }
-    currentHistoryState = this->history.top();
-    auto invalidDecisionGlobalState = currentHistoryState.globalState;
-    auto invalidDecision = currentHistoryState.decision;
-    auto invalidDecisionHistoryEntry = currentHistoryState;
+    auto invalidDecisionGlobalState = this->history.top().globalState;
+    auto invalidDecision = this->history.top().decision;
+    auto invalidDecisionHistoryEntry = this->history.top();
     cout << "there2" << endl;
 
     if (!invalidDecision->isInvalidDecision) {
@@ -199,8 +202,7 @@ bool VerificationIterative::revertToLastDecision()
 
     cout << shallowestGlobalState->hash << endl;
     while (!this->history.empty() && this->history.top().globalState != shallowestGlobalState) {
-        currentHistoryState = this->history.top();
-        cout << "[!2] " << currentHistoryState.globalState->hash << " " << currentHistoryState.type << endl;
+        cout << "[!2] " << this->history.top().globalState->hash << " " << this->history.top().type << endl;
         this->undoLastHistoryEntry();
     }
     while (this->history.top().globalState != this->statesToProcess.top().globalState) {
@@ -537,6 +539,7 @@ Result VerificationIterative::verify() {
                         currentState->fromState->verifResult = VerifResult::FALSE;
                     }
                     // initiate rollback
+                    statesToProcess.pop();
                     revertToLastDecision();
                     continue;
                 }
@@ -545,6 +548,7 @@ Result VerificationIterative::verify() {
                     currentState->fromState->verifResult = VerifResult::FALSE;
                 }
                 // initiate rollback
+                statesToProcess.pop();
                 revertToLastDecision();
                 continue;
             }
@@ -578,6 +582,7 @@ Result VerificationIterative::verify() {
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::FALSE;
                     // todo: trigger revert until last decision
+                    statesToProcess.pop();
                     revertToLastDecision();
                     continue;
                 } else {
