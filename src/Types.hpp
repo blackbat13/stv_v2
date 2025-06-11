@@ -134,6 +134,9 @@ struct StateVerificationInfo {
     VerifResult verifResult = VerifResult::NOT_VERIFIED;
     bool controlled = false;
     bool uncontrolled = false;
+    bool hasValidControlledTransition = false;
+    bool hasValidUncontrolledTransition = false;
+    bool isControlledByCoalition = false;
 };
 
 enum VerificationFormulaMode {

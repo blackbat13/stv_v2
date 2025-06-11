@@ -25,7 +25,7 @@ struct GlobalState {
     bool isExpanded;
 
     /// @brief Current verifivation status of this state.
-    GlobalStateVerificationStatus verificationStatus;
+    GlobalStateVerificationStatus verificationStatus = GLOBAL_STATE_VERIFICATION_STATUS::UNVERIFIED;
 
     /// @brief Collective probability of the state.
     float probability = 0.0;

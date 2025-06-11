@@ -491,27 +491,34 @@ Result VerificationIterative::verify() {
         auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
         
         if (config.verify_strategy) {
-            cout << string(20, '=') << endl;
-            cout << "Stack size: " << statesToProcess.size() << endl;
-            cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
-            cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
+            // cout << string(20, '=') << endl;
+            // cout << "Stack size: " << statesToProcess.size() << endl;
+            // cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
+            // cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
         } else {
-            cout << string(20, '=') << endl;
-            cout << currentState->globalState->hash << endl;
+            // cout << string(20, '=') << endl;
+            // cout << currentState->globalState->hash << endl;
         }
 
         // reached a previously visited state by going forward
         if (currentState->depth > lastDepth) {
+            // cout << "New state" << endl;
             lastDepth = currentState->depth;
             if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
                 if (currentState->fromState != nullptr) {
-                    currentState->fromState->verifResult = VerifResult::FALSE;
+                    if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
+                        currentState->fromState->hasValidUncontrolledTransition = false;
+                    }
+                    // cout << "ERR1" << endl;
                 }
                 // initiate rollback?
                 statesToProcess.pop();
                 continue;
             } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
                 // go on
+                if (currentState->isControlledByCoalition) { // if controlled then mark the transition as good
+                    currentState->fromState->hasValidControlledTransition = true;
+                }
                 statesToProcess.pop();
                 continue;
             } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
@@ -519,42 +526,51 @@ Result VerificationIterative::verify() {
                     if (currentState->fromState != nullptr) {
                         this->addHistoryStateStatus(currentState->fromState->globalState, currentState->fromState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
                         currentState->fromState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-                        currentState->fromState->verifResult = VerifResult::FALSE;
+                        if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
+                            currentState->fromState->hasValidUncontrolledTransition = false;
+                        }
+                        // cout << "ERR2" << endl;
                     }
                 }
                 // initiate rollback?
                 statesToProcess.pop();
                 continue;
             }
+        } else {
+            // cout << "Went back to state" << endl;
         }
         lastDepth = currentState->depth;
 
-        // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
-        if (currentState->verifResult == VerifResult::FALSE) {
-            if (currentState->controlled) { // if processing controlled then switch back to VerifResult::NOT_VERIFIED
-                if (!currentState->controlledTransitionsLeftToProcess.empty()) { // there are options
-                    currentState->verifResult = VerifResult::NOT_VERIFIED;
-                } else { // there are no options left
-                    if (currentState->fromState != nullptr) {
-                        currentState->fromState->verifResult = VerifResult::FALSE;
-                    }
-                    // initiate rollback
-                    statesToProcess.pop();
-                    revertToLastDecision();
-                    continue;
+        // got back to the state after some other states got taken off the stack and it breaks the state verification
+        if ((currentState->controlled && !currentState->uncontrolled && currentState->controlledTransitionsLeftToProcess.empty() && currentState->hasValidControlledTransition == false) || (currentState->uncontrolled && currentState->hasValidUncontrolledTransition == false)) {
+            // cout << "here 1" << endl;
+            if (currentState->fromState != nullptr) {
+                if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
+                    currentState->fromState->hasValidUncontrolledTransition = false;
                 }
-            } else if (currentState->uncontrolled) { // if processing uncontrolled then propagate VerifResult::FALSE and initiate rollback
-                if (currentState->fromState != nullptr) {
-                    currentState->fromState->verifResult = VerifResult::FALSE;
-                }
-                // initiate rollback
                 statesToProcess.pop();
                 revertToLastDecision();
                 continue;
+            } else { // got back to root state
+                verificationResult.verificationResult = false;
+                statesToProcess.pop();
+                continue;
             }
-        } else if (currentState->verifResult == VerifResult::NOT_VERIFIED && currentState->controlled && !currentState->uncontrolled) {
-            // clear out the stacks, since the selection wasn't invalid
-            currentState->controlledTransitionsLeftToProcess = queue<GlobalTransition*>();
+        } else if ((currentState->controlled && currentState->hasValidControlledTransition == true) || (currentState->uncontrolled && currentState->uncontrolledTransitionsLeftToProcess.empty() && currentState->hasValidUncontrolledTransition == true)) { // there is a controlled action that is ok or all uncontrolled actions are ok 
+            // cout << "here 2" << endl;
+            if (currentState->fromState != nullptr) {
+                // go on
+                if (currentState->isControlledByCoalition) { // if controlled then mark the transition as good
+                    currentState->fromState->hasValidControlledTransition = true;
+                }
+                statesToProcess.pop();
+                continue;
+            } else { // got back to root state
+                // cout << "here 3" << endl;
+                verificationResult.verificationResult = true;
+                statesToProcess.pop();
+                continue;
+            }
         }
 
         // do some initial processing for the state
@@ -569,8 +585,18 @@ Result VerificationIterative::verify() {
                     currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::TRUE;
-                    statesToProcess.pop();
-                    continue;
+                    // cout << "OK" << endl;
+                    if (currentState->fromState != nullptr) {
+                        if (currentState->isControlledByCoalition) { // if controlled then mark the transition as good
+                            currentState->fromState->hasValidControlledTransition = true;
+                        }
+                        statesToProcess.pop();
+                        continue;
+                    } else { // initial state is good already
+                        verificationResult.verificationResult = true;
+                        statesToProcess.pop();
+                        continue;
+                    }
                 } else {
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::FALSE;
@@ -581,10 +607,20 @@ Result VerificationIterative::verify() {
                     currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::FALSE;
-                    // todo: trigger revert until last decision
-                    statesToProcess.pop();
-                    revertToLastDecision();
-                    continue;
+                    // cout << "ERR3" << endl;
+                    if (currentState->fromState != nullptr) {
+                        if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
+                            currentState->fromState->hasValidUncontrolledTransition = false;
+                        }
+                        // todo: trigger revert until last decision
+                        statesToProcess.pop();
+                        revertToLastDecision();
+                        continue;
+                    } else { // initial state is bad already
+                        verificationResult.verificationResult = false;
+                        statesToProcess.pop();
+                        continue;
+                    }
                 } else {
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::TRUE;
@@ -637,12 +673,24 @@ Result VerificationIterative::verify() {
                     currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
                 }
             }
+
+            // prepare current state according to the presence of controlled and uncontrolled transitions
             if (!currentState->controlledTransitionsLeftToProcess.empty()) {
                 currentState->controlled = true;
+                currentState->hasValidControlledTransition = false;
             }
             if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) {
                 currentState->uncontrolled = true;
+                currentState->hasValidUncontrolledTransition = true;
             }
+
+            // if (currentState->controlled && currentState->uncontrolled) {
+            //     cout << "Mixed transitions" << endl;
+            // } else if (currentState->controlled) {
+            //     cout << "Controlled transitions" << endl;
+            // } else if (currentState->uncontrolled) {
+            //     cout << "Uncontrolled transitions" << endl;
+            // }
 
             testForAndFixBadAgents(currentState);
             currentState->processed = true;
@@ -654,6 +702,7 @@ Result VerificationIterative::verify() {
             newState.globalState = currentState->controlledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
             newState.depth = currentState->depth + 1;
+            newState.isControlledByCoalition = true;
             if (epistemicClass && fixedGlobalTransition == nullptr) {
                 epistemicClass->fixedCoalitionTransition = currentState->controlledTransitionsLeftToProcess.front(); 
                 this->addHistoryDecision(currentState->globalState, currentState->controlledTransitionsLeftToProcess.front());
@@ -669,29 +718,13 @@ Result VerificationIterative::verify() {
             this->addHistoryContext(currentState->globalState, currentState->depth, currentState->uncontrolledTransitionsLeftToProcess.front(), false);
             statesToProcess.emplace(newState);
             currentState->uncontrolledTransitionsLeftToProcess.pop();
-        } else {
-            // if got back to the state, processed all states and they didn't invalidate parent state, mark it as correct
-            if (currentState->verifResult == VerifResult::NOT_VERIFIED) {
-                currentState->verifResult = VerifResult::TRUE;
-                if (currentState->fromState != nullptr) {
-                    // go on
-                    statesToProcess.pop();
-                    continue;
-                } else { // got back to root state
-                    if (currentState->verifResult == VerifResult::TRUE) {
-                        verificationResult.verificationResult = true;
-                    } else {
-                        verificationResult.verificationResult = false;
-                    }
-                    statesToProcess.pop();
-                }
-            }
         }
     }
-    while (!history.empty()) {
-        cout << history.top().toString() << endl;
-        history.pop();
-    }
+
+    // while (!history.empty()) {
+    //     cout << history.top().toString() << endl;
+    //     history.pop();
+    // }
 
     return verificationResult;
 }
