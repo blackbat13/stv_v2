@@ -135,7 +135,7 @@ struct StateVerificationInfo {
     bool controlled = false;
     bool uncontrolled = false;
     bool hasValidControlledTransition = false;
-    bool hasValidUncontrolledTransition = false;
+    bool hasValidUncontrolledTransition = true;
     bool isControlledByCoalition = false;
 };
 
