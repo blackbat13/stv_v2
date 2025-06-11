@@ -26,6 +26,8 @@ struct DecisionEntry {
     GlobalStateVerificationStatus prevStatus = GlobalStateVerificationStatus::UNVERIFIED;
     /// @brief Next model verification state.
     GlobalStateVerificationStatus newStatus = GlobalStateVerificationStatus::UNVERIFIED;
+    /// @brief Iteration depth.
+    int depth = 0;
     /// @brief Holds currently processed strategy for the current state.
     StrategyEntry strategy = StrategyEntry();
     string toString() {
@@ -82,16 +84,16 @@ class VerificationIterative {
         // add and take away from stack the StateVerificationInfo
         void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
         void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
-        bool addHistoryContext(GlobalState* globalState, GlobalTransition* decision, bool globalTransitionControlled);
+        bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
         void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
-        bool revertLastDecision();
-        void undoLastHistoryEntry(bool freeMemory);
-        void undoHistoryUntil(DecisionEntry* historyEntry, bool inclusive);
+        bool revertToLastDecision();
+        void undoLastHistoryEntry();
         
         bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
         bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
         vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
         bool testForAndFixBadAgents(StateVerificationInfo* stateVerificationInfo);
+        stack<StateVerificationInfo> statesToProcess;
 };
 
 #endif // VERIFICATION_ITERATIVE

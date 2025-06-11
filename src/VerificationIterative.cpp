@@ -74,12 +74,13 @@ void VerificationIterative::addHistoryStateStatus(GlobalState* globalState, Glob
 /// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
 /// @param globalTransitionControlled True if the GlobalTransition is in the set of global transitions controlled by a coalition and it is not a fixed global transition.
 /// @return Returns true if the natural strategy is good for now.
-bool VerificationIterative::addHistoryContext(GlobalState* globalState, GlobalTransition* decision, bool globalTransitionControlled) {
+bool VerificationIterative::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
     DecisionEntry newHistoryEntry;
     newHistoryEntry.type = HistoryEntryType::CONTEXT;
     newHistoryEntry.globalState = globalState;
     newHistoryEntry.decision = decision;
     newHistoryEntry.globalTransitionControlled = globalTransitionControlled;
+    newHistoryEntry.depth = depth;
     newHistoryEntry.strategy = StrategyEntry();
     
     if (!globalTransitionControlled) {
@@ -127,6 +128,88 @@ void VerificationIterative::addHistoryMarkDecisionAsInvalid(GlobalState* globalS
     newHistoryEntry.globalState = globalState;
     newHistoryEntry.decision = decision;
     history.emplace(newHistoryEntry);
+}
+
+/// @brief Removes the top entry of the history stack.
+void VerificationIterative::undoLastHistoryEntry() {
+    if (this->history.empty()) {
+        return;
+    }
+    if (this->history.top().type == HistoryEntryType::DECISION) {
+        auto epistemicClass = this->getEpistemicClassForGlobalState(this->history.top().globalState);
+        epistemicClass->fixedCoalitionTransition = nullptr;
+    } else if (this->history.top().type == HistoryEntryType::STATE_STATUS) {
+        this->history.top().globalState->verificationStatus = this->history.top().prevStatus;
+    } else if (this->history.top().type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
+        this->history.top().decision->isInvalidDecision = false;
+    }
+
+    // change probability here
+    // todo
+
+    if (this->history.top().strategy.type == StrategyEntryType::ADDED) {
+        #if VERBOSE
+            cout << "REMOVED " << this->historyEnd->strategy.type << " " << this->historyEnd->strategy.actionName->c_str() << " " << this->historyEnd->strategy.globalValues << endl;
+        #endif
+        this->naturalStrategy.erase(this->history.top().strategy.globalValues);
+    }
+    
+    history.pop();
+}
+
+bool VerificationIterative::revertToLastDecision()
+{
+    auto currentHistoryState = this->history.top();
+    // Undo Z->T (including Z, excluding T); find Y while doing that
+    int shallowestDepth = 99999999;
+    GlobalState* shallowestGlobalState = nullptr;
+    while (!this->history.empty() && this->history.top().type != HistoryEntryType::DECISION) {
+        currentHistoryState = this->history.top();
+        cout << "[!] " << currentHistoryState.depth << " " << currentHistoryState.globalState->hash << " " << currentHistoryState.type << endl;
+        if (currentHistoryState.type == HistoryEntryType::CONTEXT && currentHistoryState.depth < shallowestDepth) {
+            shallowestDepth = currentHistoryState.depth;
+            shallowestGlobalState = currentHistoryState.globalState;
+        }
+        currentHistoryState = this->history.top();
+        cout << "[!!] " << currentHistoryState.depth << " " << currentHistoryState.globalState->hash << " " << currentHistoryState.type << endl;
+        this->undoLastHistoryEntry();
+    }
+    cout << "there" << endl;
+    if (this->history.empty() || this->history.top().type != HistoryEntryType::DECISION || shallowestGlobalState == nullptr) {
+        return false;
+    }
+    
+    // Undo T->Y (including T, excluding Y); build path to repeat while doing that
+    if (history.empty()) {
+        statesToProcess.pop();
+        return false;
+    }
+    currentHistoryState = this->history.top();
+    auto invalidDecisionGlobalState = currentHistoryState.globalState;
+    auto invalidDecision = currentHistoryState.decision;
+    auto invalidDecisionHistoryEntry = currentHistoryState;
+    cout << "there2" << endl;
+
+    if (!invalidDecision->isInvalidDecision) {
+        cout << "there4" << endl;
+        // Mark the decision (transition) as invalid
+        this->addHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
+        invalidDecision->isInvalidDecision = true;
+    }
+
+    cout << shallowestGlobalState->hash << endl;
+    while (!this->history.empty() && this->history.top().globalState != shallowestGlobalState) {
+        currentHistoryState = this->history.top();
+        cout << "[!2] " << currentHistoryState.globalState->hash << " " << currentHistoryState.type << endl;
+        this->undoLastHistoryEntry();
+    }
+    while (this->history.top().globalState != this->statesToProcess.top().globalState) {
+        cout << "[kick] " << statesToProcess.top().globalState->hash << endl;
+        this->statesToProcess.pop();
+    }
+
+    cout << "there3" << endl;
+    return true;
 }
 
 /// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
@@ -391,7 +474,6 @@ int VerificationIterative::getStrategyComplexity() {
 Result VerificationIterative::verify() {
     Result verificationResult;
     VerificationFormulaMode formulaMode = this->generator->getFormula()->isF ? VerificationFormulaMode::F : VerificationFormulaMode::G;
-    stack<StateVerificationInfo> statesToProcess;
     StateVerificationInfo initState;
     StateVerificationInfo* currentState;
     initState.globalState = this->generator->getCurrentGlobalModel()->initState;
@@ -399,7 +481,7 @@ Result VerificationIterative::verify() {
     
     statesToProcess.emplace(initState);
     int lastDepth = -1;
-
+    
     while (!statesToProcess.empty()) {
         currentState = &statesToProcess.top();
 
@@ -423,7 +505,7 @@ Result VerificationIterative::verify() {
                 if (currentState->fromState != nullptr) {
                     currentState->fromState->verifResult = VerifResult::FALSE;
                 }
-                // initiate rollback
+                // initiate rollback?
                 statesToProcess.pop();
                 continue;
             } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
@@ -438,7 +520,7 @@ Result VerificationIterative::verify() {
                         currentState->fromState->verifResult = VerifResult::FALSE;
                     }
                 }
-                // initiate rollback
+                // initiate rollback?
                 statesToProcess.pop();
                 continue;
             }
@@ -455,7 +537,7 @@ Result VerificationIterative::verify() {
                         currentState->fromState->verifResult = VerifResult::FALSE;
                     }
                     // initiate rollback
-                    statesToProcess.pop();
+                    revertToLastDecision();
                     continue;
                 }
             } else if (currentState->uncontrolled) { // if processing uncontrolled then propagate VerifResult::FALSE and initiate rollback
@@ -463,7 +545,7 @@ Result VerificationIterative::verify() {
                     currentState->fromState->verifResult = VerifResult::FALSE;
                 }
                 // initiate rollback
-                statesToProcess.pop();
+                revertToLastDecision();
                 continue;
             }
         } else if (currentState->verifResult == VerifResult::NOT_VERIFIED && currentState->controlled && !currentState->uncontrolled) {
@@ -496,6 +578,7 @@ Result VerificationIterative::verify() {
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::FALSE;
                     // todo: trigger revert until last decision
+                    revertToLastDecision();
                     continue;
                 } else {
                     // cache the result for later
@@ -570,7 +653,7 @@ Result VerificationIterative::verify() {
                 epistemicClass->fixedCoalitionTransition = currentState->controlledTransitionsLeftToProcess.front(); 
                 this->addHistoryDecision(currentState->globalState, currentState->controlledTransitionsLeftToProcess.front());
             }
-            this->addHistoryContext(currentState->globalState, currentState->controlledTransitionsLeftToProcess.front(), true);
+            this->addHistoryContext(currentState->globalState, currentState->depth, currentState->controlledTransitionsLeftToProcess.front(), true);
             statesToProcess.emplace(newState);
             currentState->controlledTransitionsLeftToProcess.pop();
         } else if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) { // process uncontrolled states, one by one
@@ -578,7 +661,7 @@ Result VerificationIterative::verify() {
             newState.globalState = currentState->uncontrolledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
             newState.depth = currentState->depth + 1;
-            this->addHistoryContext(currentState->globalState, currentState->uncontrolledTransitionsLeftToProcess.front(), false);
+            this->addHistoryContext(currentState->globalState, currentState->depth, currentState->uncontrolledTransitionsLeftToProcess.front(), false);
             statesToProcess.emplace(newState);
             currentState->uncontrolledTransitionsLeftToProcess.pop();
         } else {
