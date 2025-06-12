@@ -226,7 +226,7 @@ class IterativeVerif
         config.fname = path.data();
         config.output_local_models = false;
         config.output_global_model = false;
-        config.stv_mode = 2;
+        config.stv_mode = 3;
         config.natural_strategy = false;
         config.reduce = false;
 

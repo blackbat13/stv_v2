@@ -37,6 +37,7 @@ build/selene
 build/stv
 build/sample_test
 build/big_tests
+build/iterative_tests
 
 # Flex/bison
 src/reader/parser.c
