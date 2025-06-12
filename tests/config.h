@@ -4,6 +4,7 @@
 
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
+#include "VerificationIterative.hpp"
 #include "ModelParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
@@ -188,6 +189,62 @@ class TestVerif
         auto verification = new Verification(generator);
         result = verification->verify();
 
+        return result;
+    }
+};
+
+class IterativeVerif
+{
+    public:
+        GlobalModelGenerator* generator = new GlobalModelGenerator();
+        bool result;
+        string knowledge;
+        string hartley;
+        int hCoeff;
+        bool le;
+
+    IterativeVerif(string path) {
+        result = verify(path, generator);
+        hCoeff = 0;
+        le = false;
+    }
+
+    IterativeVerif(string path, int mode) {
+        hCoeff = 0;
+        le = false;
+        if (mode == 0) {
+            result = verify(path, generator);
+        }
+    }
+
+    ~IterativeVerif() {
+        delete(generator);
+    }
+
+    bool verify(string path, GlobalModelGenerator* generator)
+    {
+        config.fname = path.data();
+        config.output_local_models = false;
+        config.output_global_model = false;
+        config.stv_mode = 2;
+        config.natural_strategy = false;
+        config.reduce = false;
+
+        auto tp = new ModelParser();
+        
+        tuple<LocalModels, Formula> desc = tp->parse(config.fname);
+        auto localModels = &(get<0>(desc));
+        auto formula = &(get<1>(desc));
+        generator->initModel(localModels, formula);
+
+        bool result = false;
+
+        auto verification = new VerificationIterative(generator);
+        result = verification->verify().verificationResult;
+        
+        delete verification;
+        delete tp;
+        
         return result;
     }
 };
