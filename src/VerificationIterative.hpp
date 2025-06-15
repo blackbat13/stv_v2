@@ -30,6 +30,9 @@ struct DecisionEntry {
     int depth = 0;
     /// @brief Holds currently processed strategy for the current state.
     StrategyEntry strategy = StrategyEntry();
+    float stateProbabilityPrevious = 0.0;
+    float probabilityTrueChange = 0.0;
+    float probabilityFalseChange = 0.0;
     string toString() {
         char buff[1024] = { 0 };
         if (this->type == HistoryEntryType::DECISION) {
@@ -85,6 +88,8 @@ class VerificationIterative {
         void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
         void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
         bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
+        void addHistoryProbability(GlobalTransition* decision);
+        void propagateProbability(GlobalState* fromState);
         void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
         bool revertToLastDecision();
         void undoLastHistoryEntry();

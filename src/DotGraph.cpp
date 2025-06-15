@@ -136,15 +136,17 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
                 transitionLabel += "(p=" + probStr + "),";
             }
             transitionLabel.pop_back();  // truncate sep
-            if(!t->from || !t->to)continue;
-                if(correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
-                    this->addEdge(
-                        '"'+t->from->hash+'"', 
-                        '"'+t->to->hash+'"', 
-                        transitionLabel + "\", color=\"red"
-                    ); 
-                }
-                else {
+            if (!t->from || !t->to) {
+                continue;
+            }
+            cout << t->from->hash << " " << t->from->verificationStatus << endl;
+            if (correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
+                this->addEdge(
+                    '"'+t->from->hash+'"', 
+                    '"'+t->to->hash+'"', 
+                    transitionLabel + "\", color=\"red"
+                ); 
+            } else {
                 this->addEdge(
                     '"'+t->from->hash+'"', 
                     '"'+t->to->hash+'"', 

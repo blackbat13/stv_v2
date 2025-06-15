@@ -10,6 +10,8 @@
 #include "Common.hpp"
 #include "TypesDependency.hpp"
 
+extern Cfg config;
+
 /// @brief Represents a single global state.
 struct GlobalState {
     GlobalState();
@@ -28,7 +30,7 @@ struct GlobalState {
     GlobalStateVerificationStatus verificationStatus = GLOBAL_STATE_VERIFICATION_STATUS::UNVERIFIED;
 
     /// @brief Collective probability of the state.
-    float probability = 0.0;
+    float probability = config.probability ? 0.0 : 1.0;
     
     // Bindings
 

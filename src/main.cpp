@@ -96,6 +96,7 @@ int main(int argc, char* argv[]) {
     
     if(config.stv_mode & (1 << 1)){     // mode.binary = /[0,1]*1[0,1]/ (verify)
         auto verification = new Verification(generator);
+        auto verificationIt = new VerificationIterative(generator);
         // Show verifications of vars in each global state; to use the following code, make verification->verifyLocalStates public and ensure that generator->expandAllStates() has been called
         // auto gm = generator->getCurrentGlobalModel();
         // for (auto state : gm->globalStates) {
@@ -104,17 +105,13 @@ int main(int argc, char* argv[]) {
         bool verifResult;
         if (config.fixpoint) {
             verifResult = verification->fixpointVerify();
-        }
-        else if (config.verify_strategy) {
-            auto verificationIt = new VerificationIterative(generator);
+        } else if (config.verify_strategy) {
             verifResult = verificationIt->verify().verificationResult;
-            delete verificationIt;
-        }
-        else {
+        } else if (config.probability) {
+            verifResult = verificationIt->verify().verificationResult;
+        } else {
             // verifResult = verification->verify();
-            auto verificationIt = new VerificationIterative(generator);
             verifResult = verificationIt->verify().verificationResult;
-            delete verificationIt;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (!verifResult && config.counterexample) {
@@ -151,6 +148,8 @@ int main(int argc, char* argv[]) {
             // save GlobalModel solution
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
+        delete verificationIt;
+        delete verification;
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
