@@ -137,6 +137,8 @@ struct StateVerificationInfo {
     bool hasValidControlledTransition = false;
     bool hasValidUncontrolledTransition = true;
     bool isControlledByCoalition = false;
+    float* probabilityTrue;
+    float* probabilityFalse;
 };
 
 enum VerificationFormulaMode {

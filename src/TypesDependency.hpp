@@ -40,6 +40,7 @@ enum HistoryEntryType {
     MARK_DECISION_AS_INVALID, ///< Marking a transition as invalid.
     UNCONTROLLED_DECISION, ///< One uncontrolled choice from a set, from which all of them has to be OK.
     PROBABILITY, ///< There's a change in probability.
+    ANSWER_PROBABILITY ///< There's a change in the answer probability.
 };
 
 #endif // TYPES_DEPENDENCY

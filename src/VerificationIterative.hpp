@@ -88,8 +88,9 @@ class VerificationIterative {
         void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
         void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
         bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
-        void addHistoryProbability(GlobalTransition* decision);
-        void propagateProbability(GlobalState* fromState);
+        void addHistoryProbability(GlobalTransition* decision, float* probabilityTrue, float* probabilityFalse);
+        void addHistoryAnswerProbability(GlobalState* globalState, float *probabilityTrue, float *probabilityFalse, float probabilityChange);
+        void propagateProbability(GlobalState* fromState, float* probabilityTrue, float* probabilityFalse);
         void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
         bool revertToLastDecision();
         void undoLastHistoryEntry();

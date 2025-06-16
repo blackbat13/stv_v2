@@ -139,7 +139,6 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
             if (!t->from || !t->to) {
                 continue;
             }
-            cout << t->from->hash << " " << t->from->verificationStatus << endl;
             if (correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
                 this->addEdge(
                     '"'+t->from->hash+'"', 
