@@ -4,6 +4,7 @@
 #define TYPES_DEPENDENCY
 
 #include <bitset>
+#include <queue>
 
 using namespace std;
 
@@ -41,6 +42,42 @@ enum HistoryEntryType {
     UNCONTROLLED_DECISION, ///< One uncontrolled choice from a set, from which all of them has to be OK.
     PROBABILITY, ///< There's a change in probability.
     ANSWER_PROBABILITY ///< There's a change in the answer probability.
+};
+
+enum ProbabilityCalculationType {
+    SUM_PROBABILITY,
+    MIN_PROBABILITY
+};
+
+class ProbabilityEntry {
+    public:
+        ProbabilityEntry();
+        ProbabilityEntry(ProbabilityCalculationType mode);
+        ~ProbabilityEntry();
+        void changeVerificationMode(ProbabilityCalculationType mode);
+        void changeProbabilityTrue(float changeProbabilityBy);
+        void changeProbabilityFalse(float changeProbabilityBy);
+    private:
+        ProbabilityCalculationType probabilityCalculationType = ProbabilityCalculationType::SUM_PROBABILITY;
+        float probabilityTrue = 0.0;
+        float probabilityFalse = 0.0;
+};
+
+struct StateVerificationInfo {
+    GlobalState* globalState = nullptr;
+    StateVerificationInfo* fromState = nullptr;
+    queue<GlobalTransition*> controlledTransitionsLeftToProcess;
+    queue<GlobalTransition*> uncontrolledTransitionsLeftToProcess;
+    int depth = 0;
+    bool processed = false;
+    VerifResult verifResult = VerifResult::NOT_VERIFIED;
+    bool controlled = false;
+    bool uncontrolled = false;
+    bool hasValidControlledTransition = false;
+    bool hasValidUncontrolledTransition = true;
+    bool isControlledByCoalition = false;
+    ProbabilityEntry trueFalseProbability;
+    ProbabilityEntry* relevantProbability = nullptr; // if empty, probability is more important, otherwise modify this
 };
 
 #endif // TYPES_DEPENDENCY

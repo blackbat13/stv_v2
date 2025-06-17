@@ -124,23 +124,6 @@ struct Result {
     bool verificationResult = false;
 };
 
-struct StateVerificationInfo {
-    GlobalState* globalState = nullptr;
-    StateVerificationInfo* fromState = nullptr;
-    queue<GlobalTransition*> controlledTransitionsLeftToProcess;
-    queue<GlobalTransition*> uncontrolledTransitionsLeftToProcess;
-    int depth = 0;
-    bool processed = false;
-    VerifResult verifResult = VerifResult::NOT_VERIFIED;
-    bool controlled = false;
-    bool uncontrolled = false;
-    bool hasValidControlledTransition = false;
-    bool hasValidUncontrolledTransition = true;
-    bool isControlledByCoalition = false;
-    float* probabilityTrue;
-    float* probabilityFalse;
-};
-
 enum VerificationFormulaMode {
     NOT_SET = 0,
     F = 1,

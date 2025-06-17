@@ -31,6 +31,7 @@ struct DecisionEntry {
     /// @brief Holds currently processed strategy for the current state.
     StrategyEntry strategy = StrategyEntry();
     float stateProbabilityPrevious = 0.0;
+    ProbabilityEntry* probabilityEntryChanged = nullptr;
     float probabilityTrueChange = 0.0;
     float probabilityFalseChange = 0.0;
     string toString() {
