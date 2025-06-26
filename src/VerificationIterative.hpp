@@ -30,10 +30,14 @@ struct DecisionEntry {
     int depth = 0;
     /// @brief Holds currently processed strategy for the current state.
     StrategyEntry strategy = StrategyEntry();
+    /// @brief Holds previous GlobalState probability.
     float stateProbabilityPrevious = 0.0;
-    ProbabilityEntry* probabilityEntryChanged = nullptr;
-    float probabilityTrueChange = 0.0;
-    float probabilityFalseChange = 0.0;
+    /// @brief Holds previous probability answer calculation method.
+    ProbabilityCalculationType previousProbabilityEntryType = ProbabilityCalculationType::NONE_PROBABILITY;
+    /// @brief Holds currently used probability calculation method, used to rollback correct probability value.
+    ProbabilityCalculationType activeProbabilityEntryType = ProbabilityCalculationType::SUM_PROBABILITY;
+    /// @brief Holds previous true/false probability
+    ProbabilityTrueFalse previousProbabilityAnswerValues;
     string toString() {
         char buff[1024] = { 0 };
         if (this->type == HistoryEntryType::DECISION) {
@@ -89,9 +93,8 @@ class VerificationIterative {
         void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
         void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
         bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
-        void addHistoryProbability(GlobalTransition* decision, float* probabilityTrue, float* probabilityFalse);
-        void addHistoryAnswerProbability(GlobalState* globalState, float *probabilityTrue, float *probabilityFalse, float probabilityChange);
-        void propagateProbability(GlobalState* fromState, float* probabilityTrue, float* probabilityFalse);
+        void addHistoryProbability(GlobalTransition* decision);
+        void addHistoryAnswerProbability(GlobalState* globalState, ProbabilityCalculationType currentMode, ProbabilityTrueFalse newProbabilityValues);
         void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
         bool revertToLastDecision();
         void undoLastHistoryEntry();

@@ -46,6 +46,8 @@ struct GlobalState {
     /// @brief States in the same epistemic class as the current one, for KBC
     map<Agent*, set<GlobalState*>*> epistemicClassesAllAgents;
 
+    ProbabilityEntry probabilityResult;
+
     /// @brief Debug information on the given GlobalState
     /// @param indent - optional indentation string 
     /// @return GlobalState data

@@ -46,21 +46,35 @@ enum HistoryEntryType {
 
 enum ProbabilityCalculationType {
     SUM_PROBABILITY,
-    MIN_PROBABILITY
+    MIN_PROBABILITY,
+    NONE_PROBABILITY
+};
+
+struct ProbabilityTrueFalse {
+    float probabilityTrue = 0.0;
+    float probabilityFalse = 0.0;
 };
 
 class ProbabilityEntry {
     public:
-        ProbabilityEntry();
-        ProbabilityEntry(ProbabilityCalculationType mode);
-        ~ProbabilityEntry();
-        void changeVerificationMode(ProbabilityCalculationType mode);
-        void changeProbabilityTrue(float changeProbabilityBy);
-        void changeProbabilityFalse(float changeProbabilityBy);
+        ProbabilityEntry() {} ;
+        ProbabilityEntry(ProbabilityCalculationType mode) { probabilityCalculationType = mode; };
+        ~ProbabilityEntry() {};
+        void changeVerificationMode(ProbabilityCalculationType mode) { probabilityCalculationType = mode; }
+        ProbabilityCalculationType getVerificationMode() { return probabilityCalculationType; }
+        void changeSumProbabilityTrue(float changeProbabilityBy) { sumProbability.probabilityTrue += changeProbabilityBy; }
+        void changeSumProbabilityFalse(float changeProbabilityBy) { sumProbability.probabilityFalse += changeProbabilityBy; }
+        ProbabilityTrueFalse getSumProbability() { return sumProbability; }
+        void setSumProbability(ProbabilityTrueFalse newSumProbability ) { sumProbability = newSumProbability; }
+        void changeMinProbabilityTrue(float newProbability) { (minProbability.probabilityTrue > newProbability ? minProbability.probabilityTrue = newProbability : 0); }
+        void changeMinProbabilityFalse(float newProbability) { (minProbability.probabilityFalse < newProbability ? minProbability.probabilityFalse = newProbability : 0); }
+        ProbabilityTrueFalse getMinProbability() { return minProbability; }
+        void setMinProbability(ProbabilityTrueFalse newMinProbability ) { minProbability = newMinProbability; }
+        ProbabilityTrueFalse returnProbability() { return (probabilityCalculationType == ProbabilityCalculationType::MIN_PROBABILITY ? minProbability : sumProbability); }
     private:
         ProbabilityCalculationType probabilityCalculationType = ProbabilityCalculationType::SUM_PROBABILITY;
-        float probabilityTrue = 0.0;
-        float probabilityFalse = 0.0;
+        ProbabilityTrueFalse sumProbability;
+        ProbabilityTrueFalse minProbability;
 };
 
 struct StateVerificationInfo {
@@ -76,8 +90,6 @@ struct StateVerificationInfo {
     bool hasValidControlledTransition = false;
     bool hasValidUncontrolledTransition = true;
     bool isControlledByCoalition = false;
-    ProbabilityEntry trueFalseProbability;
-    ProbabilityEntry* relevantProbability = nullptr; // if empty, probability is more important, otherwise modify this
 };
 
 #endif // TYPES_DEPENDENCY
