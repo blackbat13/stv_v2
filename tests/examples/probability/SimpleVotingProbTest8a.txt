@@ -16,9 +16,9 @@ shared[2] action1[action]: q0 -> q1
 shared[2] action2[action]: q0 -> q1
 
 do1: q1 -> 0.1 : q2 [ok:=-1, end:=1]
-do1: q1 -> 0.9 : q2 [ok:=-1, end:=2]
+           0.9 : q2 [ok:=-1, end:=2]
 do2: q1 -> 0.1 : q2 [ok:=1, end:=1]
-do2: q1 -> 0.9 : q2 [ok:=1, end:=2]
+           0.9 : q2 [ok:=1, end:=2]
 
 loop: q2 -> q2
 

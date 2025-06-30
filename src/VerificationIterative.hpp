@@ -87,6 +87,7 @@ class VerificationIterative {
         bool isAgentInCoalition(Agent* agent);
         EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
         bool areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2);
+        string checkIfProbabilistic(GlobalTransition* transitionToCheck);
         
         // todo: fix history
         // add and take away from stack the StateVerificationInfo

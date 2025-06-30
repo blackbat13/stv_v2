@@ -122,6 +122,7 @@ class StrategyCollection {
 
 struct Result {
     bool verificationResult = false;
+    ProbabilityTrueFalse probabilityResult;
 };
 
 enum VerificationFormulaMode {

@@ -82,6 +82,8 @@ struct StateVerificationInfo {
     StateVerificationInfo* fromState = nullptr;
     queue<GlobalTransition*> controlledTransitionsLeftToProcess;
     queue<GlobalTransition*> uncontrolledTransitionsLeftToProcess;
+    map<string, set<GlobalTransition*>> controlledProbabilisticTransitionsLeftToProcess;
+    map<string, set<GlobalTransition*>> uncontrolledProbabilisticTransitionsLeftToProcess;
     int depth = 0;
     bool processed = false;
     VerifResult verifResult = VerifResult::NOT_VERIFIED;

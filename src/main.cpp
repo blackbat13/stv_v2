@@ -103,12 +103,15 @@ int main(int argc, char* argv[]) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
         bool verifResult;
+        Result verifResult2;
         if (config.fixpoint) {
             verifResult = verification->fixpointVerify();
         } else if (config.verify_strategy) {
             verifResult = verificationIt->verify().verificationResult;
         } else if (config.probability) {
-            verifResult = verificationIt->verify().verificationResult;
+            verifResult2 = verificationIt->verify();
+            verifResult = verifResult2.verificationResult;
+            printf("Probability\nTRUE: %f\nFALSE: %f", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);
         } else {
             // verifResult = verification->verify();
             verifResult = verificationIt->verify().verificationResult;
