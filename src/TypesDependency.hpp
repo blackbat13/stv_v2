@@ -73,8 +73,8 @@ class ProbabilityEntry {
         ProbabilityTrueFalse returnProbability() { return (probabilityCalculationType == ProbabilityCalculationType::MIN_PROBABILITY ? minProbability : sumProbability); }
     private:
         ProbabilityCalculationType probabilityCalculationType = ProbabilityCalculationType::SUM_PROBABILITY;
-        ProbabilityTrueFalse sumProbability;
-        ProbabilityTrueFalse minProbability;
+        ProbabilityTrueFalse sumProbability = {0.0, 0.0};
+        ProbabilityTrueFalse minProbability = {1.0, 0.0};
 };
 
 struct StateVerificationInfo {
@@ -89,9 +89,12 @@ struct StateVerificationInfo {
     VerifResult verifResult = VerifResult::NOT_VERIFIED;
     bool controlled = false;
     bool uncontrolled = false;
+    bool hasControlledProbabilistic = false;
+    bool hasUncontrolledProbabilistic = false;
     bool hasValidControlledTransition = false;
     bool hasValidUncontrolledTransition = true;
     bool isControlledByCoalition = false;
+    bool gotThroughPreselectedTransition = false;
 };
 
 #endif // TYPES_DEPENDENCY

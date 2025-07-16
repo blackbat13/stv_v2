@@ -95,7 +95,7 @@ class VerificationIterative {
         void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
         bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
         void addHistoryProbability(GlobalTransition* decision);
-        void addHistoryAnswerProbability(GlobalState* globalState, ProbabilityCalculationType currentMode, ProbabilityTrueFalse newProbabilityValues);
+        void addHistoryAnswerProbability(StateVerificationInfo* globalState, ProbabilityCalculationType currentMode, ProbabilityTrueFalse newProbabilityValues);
         void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
         bool revertToLastDecision();
         void undoLastHistoryEntry();

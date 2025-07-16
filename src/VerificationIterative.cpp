@@ -146,22 +146,33 @@ void VerificationIterative::addHistoryProbability(GlobalTransition* decision) {
 /// @param globalState 
 /// @param currentMode SUM_PROBABILITY if controlled, MIN_PROBABILITY if uncontrolled.
 /// @param newProbabilityValues 
-void VerificationIterative::addHistoryAnswerProbability(GlobalState* globalState, ProbabilityCalculationType currentMode, ProbabilityTrueFalse newProbabilityValues)
+void VerificationIterative::addHistoryAnswerProbability(StateVerificationInfo* stateVerifInfo, ProbabilityCalculationType currentMode, ProbabilityTrueFalse newProbabilityValues)
 {
+    GlobalState* globalState = stateVerifInfo->fromState->globalState;
     DecisionEntry newHistoryEntry;
     newHistoryEntry.type = HistoryEntryType::ANSWER_PROBABILITY;
     newHistoryEntry.globalState = globalState;
     newHistoryEntry.previousProbabilityEntryType = globalState->probabilityResult.getVerificationMode();
-    globalState->probabilityResult.changeVerificationMode(currentMode);
-    newHistoryEntry.activeProbabilityEntryType = currentMode;
-    newHistoryEntry.previousProbabilityAnswerValues = (currentMode == ProbabilityCalculationType::SUM_PROBABILITY ? globalState->probabilityResult.getSumProbability() : globalState->probabilityResult.getMinProbability());
-    if (currentMode == ProbabilityCalculationType::SUM_PROBABILITY) {
+    // not sure how it will work with mixed actions but should be fine for now
+    if (stateVerifInfo->gotThroughPreselectedTransition) {
+        globalState->probabilityResult.changeVerificationMode(ProbabilityCalculationType::SUM_PROBABILITY);
+        newHistoryEntry.activeProbabilityEntryType = ProbabilityCalculationType::SUM_PROBABILITY;
+        newHistoryEntry.previousProbabilityAnswerValues = globalState->probabilityResult.getSumProbability();
+    } else {
+        globalState->probabilityResult.changeVerificationMode(currentMode);
+        newHistoryEntry.activeProbabilityEntryType = currentMode;
+        newHistoryEntry.previousProbabilityAnswerValues = (currentMode == ProbabilityCalculationType::SUM_PROBABILITY ? globalState->probabilityResult.getSumProbability() : globalState->probabilityResult.getMinProbability());
+    }
+    
+    
+    if (newHistoryEntry.activeProbabilityEntryType == ProbabilityCalculationType::SUM_PROBABILITY) {
         globalState->probabilityResult.changeSumProbabilityTrue(newProbabilityValues.probabilityTrue);
         globalState->probabilityResult.changeSumProbabilityFalse(newProbabilityValues.probabilityFalse);
     } else {
         globalState->probabilityResult.changeMinProbabilityTrue(newProbabilityValues.probabilityTrue);
         globalState->probabilityResult.changeMinProbabilityFalse(newProbabilityValues.probabilityFalse);
     }
+    cout << "Adding probability to " << globalState->hash.c_str() << ": " << newProbabilityValues.probabilityTrue << " " << newProbabilityValues.probabilityFalse << endl;
     history.emplace(newHistoryEntry);
 }
 
@@ -207,7 +218,6 @@ void VerificationIterative::undoLastHistoryEntry() {
         } else if (this->history.top().globalState->probabilityResult.getVerificationMode() == ProbabilityCalculationType::MIN_PROBABILITY) {
             this->history.top().globalState->probabilityResult.setMinProbability(this->history.top().previousProbabilityAnswerValues);
         }
-        this->history.top().globalState->probabilityResult.changeVerificationMode(this->history.top().previousProbabilityEntryType);
     }
 
     // change probability here
@@ -230,38 +240,29 @@ bool VerificationIterative::revertToLastDecision()
     GlobalState* shallowestGlobalState = nullptr;
     while (!this->history.empty() && this->history.top().type != HistoryEntryType::DECISION) {
         // cout << "[!] " << this->history.top().depth << " " << this->history.top().globalState->hash << " " << this->history.top().type << endl;
-        if (this->history.top().type == HistoryEntryType::CONTEXT && this->history.top().depth < shallowestDepth) {
-            shallowestDepth = this->history.top().depth;
-            shallowestGlobalState = this->history.top().globalState;
+        if (this->history.top().type == HistoryEntryType::CONTEXT) {
+            this->history.top().globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+            if (this->history.top().depth < shallowestDepth) {
+                shallowestDepth = this->history.top().depth;
+                shallowestGlobalState = this->history.top().globalState;
+            }
         }
         this->undoLastHistoryEntry();
     }
-    if (!this->history.empty()) {
-        // cout << "[found] " << this->history.top().depth << " " << this->history.top().globalState->hash << " " << this->history.top().type << endl;
-        auto invalidDecisionGlobalState = this->history.top().globalState;
-        auto invalidDecision = this->history.top().decision;
-        auto invalidDecisionHistoryEntry = this->history.top();
-        history.pop();
-        if (!invalidDecision->isInvalidDecision) {
-            // Mark the decision (transition) as invalid
-            this->addHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
-            invalidDecision->isInvalidDecision = true;
-        }
-    }
-    
+
     if (this->history.empty() || this->history.top().type != HistoryEntryType::DECISION || shallowestGlobalState == nullptr) {
         return false;
     }
-    
-    // Undo T->Y (including T, excluding Y); build path to repeat while doing that
+
+    // cout << "[found] " << this->history.top().depth << " " << this->history.top().globalState->hash << " " << this->history.top().type << endl;
     auto invalidDecisionGlobalState = this->history.top().globalState;
     auto invalidDecision = this->history.top().decision;
     auto invalidDecisionHistoryEntry = this->history.top();
-
     if (!invalidDecision->isInvalidDecision) {
         // Mark the decision (transition) as invalid
         this->addHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
         invalidDecision->isInvalidDecision = true;
+        cout << "Marked " << invalidDecision->joinLocalTransitionNames() << " as invalid." << endl;
     }
 
     // cout << shallowestGlobalState->hash << endl;
@@ -580,6 +581,15 @@ Result VerificationIterative::verify() {
             cout << "Probability in state\nT: " << currentState->globalState->probabilityResult.returnProbability().probabilityTrue << "\nF: " << currentState->globalState->probabilityResult.returnProbability().probabilityFalse << endl;
         }
         
+        cout << "Prob: " << currentState->globalState->probabilityResult.returnProbability().probabilityFalse << " >= " << (1.0 - this->generator->getFormula()->probability) << endl;
+        if (config.probability && currentState->depth == 0 && currentState->globalState->probabilityResult.returnProbability().probabilityFalse > (1.0 - this->generator->getFormula()->probability)) {
+            cout << "ERR, revert" << endl;
+            revertToLastDecision();
+            statesToProcess.pop();
+            statesToProcess.emplace(initState);
+            continue;
+        }
+        cout << "Here 3" << endl;
         // reached a previously visited state by going forward
         if (currentState->depth > lastDepth) {
             // cout << "New state" << endl;
@@ -589,12 +599,14 @@ Result VerificationIterative::verify() {
                     if (currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
                         currentState->fromState->hasValidControlledTransition = false;
                         if (config.probability) {
-                            addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::SUM_PROBABILITY, {0.0, currentState->globalState->probability});
+                            currentState->fromState->hasValidControlledTransition = true;
+                            addHistoryAnswerProbability(currentState, ProbabilityCalculationType::SUM_PROBABILITY, {0.0, currentState->fromState->globalState->probability});
                         }
                     } else if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
                         currentState->fromState->hasValidUncontrolledTransition = false;
                         if (config.probability) {
-                            addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::MIN_PROBABILITY, {0.0, currentState->globalState->probability});
+                            currentState->fromState->hasValidUncontrolledTransition = true;
+                            addHistoryAnswerProbability(currentState, ProbabilityCalculationType::MIN_PROBABILITY, {0.0, currentState->fromState->globalState->probability});
                         }
                     }
                 }
@@ -606,10 +618,12 @@ Result VerificationIterative::verify() {
                 if (currentState->isControlledByCoalition) { // if controlled then mark the transition as good
                     currentState->fromState->hasValidControlledTransition = true;
                     if (config.probability) {
-                        addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::SUM_PROBABILITY, {currentState->globalState->probability, 0.0});
+                        currentState->fromState->hasValidControlledTransition = true;
+                        addHistoryAnswerProbability(currentState, ProbabilityCalculationType::SUM_PROBABILITY, {currentState->fromState->globalState->probability, 0.0});
                     }
                 } else if (config.probability) {
-                    addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::MIN_PROBABILITY, {currentState->globalState->probability, 0.0});
+                    currentState->fromState->hasValidUncontrolledTransition = true;
+                    addHistoryAnswerProbability(currentState, ProbabilityCalculationType::MIN_PROBABILITY, {currentState->fromState->globalState->probability, 0.0});
                 }
                 statesToProcess.pop();
                 continue;
@@ -620,10 +634,12 @@ Result VerificationIterative::verify() {
                     if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
                         currentState->fromState->hasValidUncontrolledTransition = false;
                         if (config.probability) {
-                            addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::MIN_PROBABILITY, {0.0, currentState->globalState->probability});
+                            currentState->fromState->hasValidUncontrolledTransition = true;
+                            addHistoryAnswerProbability(currentState, ProbabilityCalculationType::MIN_PROBABILITY, {0.0, currentState->globalState->probability});
                         }
                     } else if (config.probability) {
-                        addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::SUM_PROBABILITY, {0.0, currentState->globalState->probability});
+                        currentState->fromState->hasValidControlledTransition = true;
+                        addHistoryAnswerProbability(currentState, ProbabilityCalculationType::SUM_PROBABILITY, {0.0, currentState->globalState->probability});
                     }
                 } else if (formulaMode == VerificationFormulaMode::G) {
                     this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
@@ -631,10 +647,12 @@ Result VerificationIterative::verify() {
                     if (currentState->isControlledByCoalition) { // if controlled then mark the transition as good
                         currentState->fromState->hasValidControlledTransition = true;
                         if (config.probability) {
-                            addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::SUM_PROBABILITY, {currentState->globalState->probability, 0.0});
+                            currentState->fromState->hasValidControlledTransition = true;
+                            addHistoryAnswerProbability(currentState, ProbabilityCalculationType::SUM_PROBABILITY, {currentState->globalState->probability, 0.0});
                         }
                     } else if (config.probability) {
-                        addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::MIN_PROBABILITY, {currentState->globalState->probability, 0.0});
+                        currentState->fromState->hasValidUncontrolledTransition = true;
+                        addHistoryAnswerProbability(currentState, ProbabilityCalculationType::MIN_PROBABILITY, {currentState->globalState->probability, 0.0});
                     }
                 }
                 // initiate rollback?
@@ -643,7 +661,7 @@ Result VerificationIterative::verify() {
             }
         }
         lastDepth = currentState->depth;
-
+        cout << "Here 2" << endl;
         // do some initial processing for the state (verification and history)
         if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::UNVERIFIED) {
             // mark state as pending if haven't visited it yet
@@ -660,10 +678,12 @@ Result VerificationIterative::verify() {
                         if (currentState->isControlledByCoalition) { // if controlled then mark the transition as good
                             currentState->fromState->hasValidControlledTransition = true;
                             if (config.probability) {
-                                addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::SUM_PROBABILITY, {currentState->globalState->probability, 0.0});
+                                currentState->fromState->hasValidControlledTransition = true;
+                                addHistoryAnswerProbability(currentState, ProbabilityCalculationType::SUM_PROBABILITY, {currentState->globalState->probability, 0.0});
                             }
                         } else if (config.probability) {
-                            addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::MIN_PROBABILITY, {currentState->globalState->probability, 0.0});
+                            currentState->fromState->hasValidUncontrolledTransition = true;
+                            addHistoryAnswerProbability(currentState, ProbabilityCalculationType::MIN_PROBABILITY, {currentState->globalState->probability, 0.0});
                         }
                         statesToProcess.pop();
                         continue;
@@ -686,10 +706,12 @@ Result VerificationIterative::verify() {
                         if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
                             currentState->fromState->hasValidUncontrolledTransition = false;
                             if (config.probability) {
-                                addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::MIN_PROBABILITY, {0.0, currentState->globalState->probability});
+                                currentState->fromState->hasValidUncontrolledTransition = true;
+                                addHistoryAnswerProbability(currentState, ProbabilityCalculationType::MIN_PROBABILITY, {0.0, currentState->globalState->probability});
                             }
                         } else if (config.probability) {
-                            addHistoryAnswerProbability(currentState->fromState->globalState, ProbabilityCalculationType::SUM_PROBABILITY, {0.0, currentState->globalState->probability});
+                            currentState->fromState->hasValidControlledTransition = true;
+                            addHistoryAnswerProbability(currentState, ProbabilityCalculationType::SUM_PROBABILITY, {0.0, currentState->globalState->probability});
                         }
                         // todo: trigger revert until last decision
                         statesToProcess.pop();
@@ -708,6 +730,7 @@ Result VerificationIterative::verify() {
                 }
             }
         }
+        cout << "Here 1" << endl;
         // do some initial processing for the state (split to controlled/uncontrolled)
         if (!currentState->processed) {
             // 2) ensure that the state is expanded
@@ -740,6 +763,7 @@ Result VerificationIterative::verify() {
                         } else if (fixedGlobalTransition == nullptr) {
                             // the decision is invalid, skip it
                         } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
+                            cout << "EPISTEMIC CLASS" << endl;
                             // controlled transition that is fixed should be treated as an uncontrolled transition
                             // might be a problem when action is treated as uncontrolled, then all uncontrolled actions must be true
                             #if VERBOSE
@@ -752,13 +776,16 @@ Result VerificationIterative::verify() {
                                 if (transitionName != "") {
                                     if (currentState->uncontrolledProbabilisticTransitionsLeftToProcess.find(transitionName) == currentState->uncontrolledProbabilisticTransitionsLeftToProcess.end()) {
                                         currentState->uncontrolledProbabilisticTransitionsLeftToProcess.emplace(transitionName, set<GlobalTransition*>());
+                                        currentState->hasUncontrolledProbabilistic = true;
                                     }
                                     for (GlobalTransition* probTransition : currentState->globalState->globalTransitions) {
-                                        string temp = checkIfProbabilistic(globalTransition);
+                                        string temp = checkIfProbabilistic(probTransition);
                                         if (temp == transitionName) {
-                                            currentState->uncontrolledProbabilisticTransitionsLeftToProcess[transitionName].insert(globalTransition);
+                                            currentState->uncontrolledProbabilisticTransitionsLeftToProcess[transitionName].insert(probTransition);
+                                            cout << "Inserted transition " << temp << " " << transitionName << " " << probTransition->from->hash.c_str() << " -> " << probTransition->to->hash.c_str() << endl;
                                         }
                                     }
+                                    cout << "End loop" << endl;
                                 } else {
                                     currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
                                 }
@@ -808,15 +835,32 @@ Result VerificationIterative::verify() {
                 currentState->uncontrolled = true;
                 currentState->hasValidUncontrolledTransition = true;
             }
+            if (!currentState->controlledProbabilisticTransitionsLeftToProcess.empty()) {
+                currentState->hasControlledProbabilistic = true;
+                currentState->hasValidControlledTransition = false;
+            }
+            if (!currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty()) {
+                currentState->hasUncontrolledProbabilistic = true;
+                currentState->hasValidUncontrolledTransition = true;
+            }
 
             testForAndFixBadAgents(currentState);
             currentState->processed = true;
         }
+
         // got back to the state after some other states got taken off the stack and it breaks the state verification
-        if (config.probability && (currentState->globalState->probabilityResult.returnProbability().probabilityFalse != 0.0 || currentState->globalState->probabilityResult.returnProbability().probabilityTrue != 0.0)) {
+        cout << currentState->hasControlledProbabilistic << " " << currentState->hasValidControlledTransition << " " << currentState->hasUncontrolledProbabilistic << " " << currentState->uncontrolledTransitionsLeftToProcess.empty() << " " << currentState->hasValidUncontrolledTransition << endl;
+        if (config.probability && ((currentState->hasControlledProbabilistic && currentState->hasValidControlledTransition == true) || (currentState->hasUncontrolledProbabilistic && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty() && currentState->hasValidUncontrolledTransition == true))) {
             // push the probability up
+            // do it only if there was a response from the controlled or all uncontrolled actions
+            cout << "Here" << endl;
             if (currentState->fromState != nullptr) {
-                addHistoryAnswerProbability(currentState->fromState->globalState, (currentState->isControlledByCoalition ? ProbabilityCalculationType::SUM_PROBABILITY : ProbabilityCalculationType::MIN_PROBABILITY), currentState->globalState->probabilityResult.returnProbability());
+                addHistoryAnswerProbability(currentState, (currentState->isControlledByCoalition ? ProbabilityCalculationType::SUM_PROBABILITY : ProbabilityCalculationType::MIN_PROBABILITY), currentState->globalState->probabilityResult.returnProbability());
+                if (currentState->isControlledByCoalition) {
+                    currentState->fromState->hasValidControlledTransition = true;
+                } else {
+                    currentState->fromState->hasValidUncontrolledTransition = true;
+                }
                 statesToProcess.pop();
                 continue;
             } else {
@@ -841,6 +885,10 @@ Result VerificationIterative::verify() {
                         this->addHistoryStateStatus(currentState->fromState->globalState, currentState->fromState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
                         currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
                     }
+
+                    if(config.probability) {
+                        addHistoryAnswerProbability(currentState, (currentState->isControlledByCoalition ? ProbabilityCalculationType::SUM_PROBABILITY : ProbabilityCalculationType::MIN_PROBABILITY), currentState->globalState->probabilityResult.returnProbability());
+                    }
                     statesToProcess.pop();
                     continue;
                 } else { // got back to root state
@@ -857,6 +905,10 @@ Result VerificationIterative::verify() {
                     if (!currentState->isControlledByCoalition) { // if uncontrolled then mark the transition as not good
                         currentState->fromState->hasValidUncontrolledTransition = false;
                     }
+                    if(config.probability) {
+                        addHistoryAnswerProbability(currentState, (currentState->isControlledByCoalition ? ProbabilityCalculationType::SUM_PROBABILITY : ProbabilityCalculationType::MIN_PROBABILITY), currentState->globalState->probabilityResult.returnProbability());
+                        currentState->fromState->hasValidUncontrolledTransition = true;
+                    }
                     statesToProcess.pop();
                     if (!config.probability) {
                         revertToLastDecision();
@@ -869,6 +921,8 @@ Result VerificationIterative::verify() {
                 }
             }
         }
+
+        cout << "Here?" << endl;
 
         // push another state onto the queue, go back and continue or return a value
         if (config.probability && currentState->controlledProbabilisticTransitionsLeftToProcess.size() > 0) {
@@ -883,23 +937,27 @@ Result VerificationIterative::verify() {
                     this->addHistoryDecision(currentState->globalState, controlledProbabilisticTransition);
                 }
                 this->addHistoryContext(currentState->globalState, currentState->depth, controlledProbabilisticTransition, true);
-                currentState->globalState->probabilityResult = ProbabilityCalculationType::SUM_PROBABILITY;
                 this->addHistoryProbability(controlledProbabilisticTransition);
                 statesToProcess.emplace(newState);
+                cout << "Deployed controlled probabilistic" << newState.globalState->hash.c_str() << endl;
             }
             currentState->controlledProbabilisticTransitionsLeftToProcess.erase(currentState->controlledProbabilisticTransitionsLeftToProcess.begin());
         } else if (config.probability && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.size() > 0) {
+            string fixedProbTransName = fixedGlobalTransition->joinLocalTransitionNames();
             for (GlobalTransition* uncontrolledProbabilisticTransition : currentState->uncontrolledProbabilisticTransitionsLeftToProcess.begin()->second) {
                 StateVerificationInfo newState;
                 newState.globalState = uncontrolledProbabilisticTransition->to;
                 newState.fromState = currentState;
                 newState.depth = currentState->depth + 1;
                 this->addHistoryContext(currentState->globalState, currentState->depth, uncontrolledProbabilisticTransition, false);
-                currentState->globalState->probabilityResult = ProbabilityCalculationType::MIN_PROBABILITY;
+                if (fixedGlobalTransition != nullptr && uncontrolledProbabilisticTransition->joinLocalTransitionNames() == fixedProbTransName) {
+                    newState.gotThroughPreselectedTransition = true;
+                }
                 this->addHistoryProbability(uncontrolledProbabilisticTransition);
                 statesToProcess.emplace(newState);
+                cout << "Deployed uncontrolled probabilistic: " << newState.globalState->hash.c_str() << endl;
             }
-            currentState->controlledProbabilisticTransitionsLeftToProcess.erase(currentState->controlledProbabilisticTransitionsLeftToProcess.begin());
+            currentState->uncontrolledProbabilisticTransitionsLeftToProcess.erase(currentState->uncontrolledProbabilisticTransitionsLeftToProcess.begin());
         } else if (!currentState->controlledTransitionsLeftToProcess.empty()) { // process controlled states, one by one
             StateVerificationInfo newState;
             newState.globalState = currentState->controlledTransitionsLeftToProcess.front()->to;
@@ -912,7 +970,6 @@ Result VerificationIterative::verify() {
             }
             this->addHistoryContext(currentState->globalState, currentState->depth, currentState->controlledTransitionsLeftToProcess.front(), true);
             if (config.probability) {
-                currentState->globalState->probabilityResult = ProbabilityCalculationType::SUM_PROBABILITY;
                 this->addHistoryProbability(currentState->controlledTransitionsLeftToProcess.front());
             }
             statesToProcess.emplace(newState);
@@ -924,7 +981,6 @@ Result VerificationIterative::verify() {
             newState.depth = currentState->depth + 1;
             this->addHistoryContext(currentState->globalState, currentState->depth, currentState->uncontrolledTransitionsLeftToProcess.front(), false);
             if (config.probability) {
-                currentState->globalState->probabilityResult = ProbabilityCalculationType::MIN_PROBABILITY;
                 this->addHistoryProbability(currentState->uncontrolledTransitionsLeftToProcess.front());
             }
             statesToProcess.emplace(newState);
