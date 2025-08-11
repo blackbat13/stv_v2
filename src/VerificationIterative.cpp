@@ -173,6 +173,10 @@ void VerificationIterative::addHistoryAnswerProbability(StateVerificationInfo* s
         globalState->probabilityResult.changeMinProbabilityFalse(newProbabilityValues.probabilityFalse);
     }
     cout << "Adding probability to " << globalState->hash.c_str() << ": " << newProbabilityValues.probabilityTrue << " " << newProbabilityValues.probabilityFalse << endl;
+    
+    if (stateVerifInfo->fromState != nullptr) {
+        stateVerifInfo->fromState->gotResponseFromOtherState = true;
+    }
     history.emplace(newHistoryEntry);
 }
 
@@ -258,13 +262,7 @@ bool VerificationIterative::revertToLastDecision()
     auto invalidDecisionGlobalState = this->history.top().globalState;
     auto invalidDecision = this->history.top().decision;
     auto invalidDecisionHistoryEntry = this->history.top();
-    if (!invalidDecision->isInvalidDecision) {
-        // Mark the decision (transition) as invalid
-        this->addHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
-        invalidDecision->isInvalidDecision = true;
-        cout << "Marked " << invalidDecision->joinLocalTransitionNames() << " as invalid." << endl;
-    }
-
+    
     // cout << shallowestGlobalState->hash << endl;
     while (!this->history.empty() && this->history.top().globalState != shallowestGlobalState) {
         this->undoLastHistoryEntry();
@@ -272,6 +270,16 @@ bool VerificationIterative::revertToLastDecision()
     while (this->statesToProcess.top().globalState != shallowestGlobalState) {
         this->statesToProcess.pop();
     }
+
+    if (!invalidDecision->isInvalidDecision) {
+        // Mark the decision (transition) as invalid
+        //this->addHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
+        invalidDecision->isInvalidDecision = true;
+        cout << "Marked " << invalidDecision->joinLocalTransitionNames() << " (" << invalidDecision->from->hash << "->" << invalidDecision->to->hash << ") as invalid." << endl;
+    }
+
+    this->mode = GraphTraversalMode::RESTORE_STATES;
+    this->revertToGlobalState = invalidDecision->from;
     return true;
 }
 
@@ -553,6 +561,7 @@ int VerificationIterative::getStrategyComplexity() {
 
 Result VerificationIterative::verify() {
     Result verificationResult;
+    verificationResult.verificationResult = false;
     VerificationFormulaMode formulaMode = this->generator->getFormula()->isF ? VerificationFormulaMode::F : VerificationFormulaMode::G;
     StateVerificationInfo initState;
     StateVerificationInfo* currentState;
@@ -563,6 +572,7 @@ Result VerificationIterative::verify() {
     
     statesToProcess.emplace(initState);
     int lastDepth = -1;
+    bool hasAnyGoodDecision = false;
     
     while (!statesToProcess.empty()) {
         currentState = &statesToProcess.top();
@@ -583,13 +593,25 @@ Result VerificationIterative::verify() {
         
         cout << "Prob: " << currentState->globalState->probabilityResult.returnProbability().probabilityFalse << " >= " << (1.0 - this->generator->getFormula()->probability) << endl;
         if (config.probability && currentState->depth == 0 && currentState->globalState->probabilityResult.returnProbability().probabilityFalse > (1.0 - this->generator->getFormula()->probability)) {
-            cout << "ERR, revert" << endl;
+            cout << "ERR1, revert" << endl;
             revertToLastDecision();
-            statesToProcess.pop();
+            while (!statesToProcess.empty()) {
+                statesToProcess.pop();
+            }
             statesToProcess.emplace(initState);
+            hasAnyGoodDecision = false;
             continue;
         }
+
         cout << "Here 3" << endl;
+        if (this->mode == GraphTraversalMode::RESTORE_STATES) {
+            // currentState->globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+            if (currentState->globalState == this->revertToGlobalState) {
+                this->mode = GraphTraversalMode::NORMAL_TRAVERSAL;
+                cout << "=== REVERT END ===" << endl;
+            }
+        }
+
         // reached a previously visited state by going forward
         if (currentState->depth > lastDepth) {
             // cout << "New state" << endl;
@@ -741,8 +763,10 @@ Result VerificationIterative::verify() {
             // classify transition end global state
             for (auto globalTransition : currentState->globalState->globalTransitions) {
                 if (globalTransition->isInvalidDecision) {
+                    cout << globalTransition->joinLocalTransitionNames().c_str() << " is invalid." << endl;
                     continue;
                 }
+                cout << globalTransition->joinLocalTransitionNames().c_str() << " is valid." << endl;
                 // add CTL support here
                 if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
                     if (!config.verify_strategy) {
@@ -843,9 +867,37 @@ Result VerificationIterative::verify() {
                 currentState->hasUncontrolledProbabilistic = true;
                 currentState->hasValidUncontrolledTransition = true;
             }
+            if (currentState->controlledTransitionsLeftToProcess.empty() && currentState->uncontrolledTransitionsLeftToProcess.empty() && currentState->controlledProbabilisticTransitionsLeftToProcess.empty() && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty()) {
+                cout << "Nothing here" << endl;
+                statesToProcess.pop();
+                undoLastHistoryEntry();
+                revertToLastDecision();
+                continue;
+            }
 
             testForAndFixBadAgents(currentState);
             currentState->processed = true;
+        }
+
+        if (config.probability && currentState->controlledTransitionsLeftToProcess.empty() && currentState->uncontrolledTransitionsLeftToProcess.empty() && currentState->controlledProbabilisticTransitionsLeftToProcess.empty() && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty() && !currentState->gotResponseFromOtherState) {
+            if (hasAnyGoodDecision == false) {
+                verificationResult.verificationResult = false;
+                verificationResult.probabilityResult = currentState->globalState->probabilityResult.returnProbability();
+                return verificationResult;
+            }
+            cout << "ERR2, revert" << endl;
+            revertToLastDecision();
+            while (!statesToProcess.empty()) {
+                statesToProcess.pop();
+            }
+            statesToProcess.emplace(initState);
+            hasAnyGoodDecision = false;
+            continue;
+        } else if (config.probability && currentState->depth == 0 && currentState->globalState->probabilityResult.returnProbability().probabilityTrue > this->generator->getFormula()->probability && currentState->controlledTransitionsLeftToProcess.empty() && currentState->uncontrolledTransitionsLeftToProcess.empty() && currentState->controlledProbabilisticTransitionsLeftToProcess.empty() && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty()) {
+            cout << "GOOD ENOUGH" << endl;
+            verificationResult.verificationResult = true;
+            verificationResult.probabilityResult = currentState->globalState->probabilityResult.returnProbability();
+            return verificationResult;
         }
 
         // got back to the state after some other states got taken off the stack and it breaks the state verification
@@ -959,6 +1011,7 @@ Result VerificationIterative::verify() {
             }
             currentState->uncontrolledProbabilisticTransitionsLeftToProcess.erase(currentState->uncontrolledProbabilisticTransitionsLeftToProcess.begin());
         } else if (!currentState->controlledTransitionsLeftToProcess.empty()) { // process controlled states, one by one
+            cout << "This 1" << endl;
             StateVerificationInfo newState;
             newState.globalState = currentState->controlledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;
@@ -975,6 +1028,8 @@ Result VerificationIterative::verify() {
             statesToProcess.emplace(newState);
             currentState->controlledTransitionsLeftToProcess.pop();
         } else if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) { // process uncontrolled states, one by one
+            cout << "This 2" << endl;
+            cout << currentState->uncontrolledTransitionsLeftToProcess.size() << endl;
             StateVerificationInfo newState;
             newState.globalState = currentState->uncontrolledTransitionsLeftToProcess.front()->to;
             newState.fromState = currentState;

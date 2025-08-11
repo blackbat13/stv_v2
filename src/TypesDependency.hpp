@@ -95,6 +95,7 @@ struct StateVerificationInfo {
     bool hasValidUncontrolledTransition = true;
     bool isControlledByCoalition = false;
     bool gotThroughPreselectedTransition = false;
+    bool gotResponseFromOtherState = false;
 };
 
 #endif // TYPES_DEPENDENCY

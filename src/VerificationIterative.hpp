@@ -59,6 +59,13 @@ struct DecisionEntry {
     };
 };
 
+/// @brief Current model traversal mode.
+enum GraphTraversalMode {
+    NORMAL_TRAVERSAL, ///< Normal model traversal.
+    RESTORE_STATES, ///< Reconstructing recursion.
+};
+
+
 /// @brief A class that verifies if the model fulfills the formula. Also can do some operations on decision history.
 class VerificationIterative {
     public:
@@ -69,6 +76,10 @@ class VerificationIterative {
         int getStrategyComplexity();
         Result verify();
     protected:
+        /// @brief Current mode of model traversal.
+        GraphTraversalMode mode = GraphTraversalMode::NORMAL_TRAVERSAL;
+        /// @brief Global state to which revert will rollback to.
+        GlobalState* revertToGlobalState;
         /// @brief Holds current model and formula.
         GlobalModelGenerator* generator;
         /// @brief Stack of decisions made.
