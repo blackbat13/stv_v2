@@ -893,7 +893,7 @@ Result VerificationIterative::verify() {
             statesToProcess.emplace(initState);
             hasAnyGoodDecision = false;
             continue;
-        } else if (config.probability && currentState->depth == 0 && currentState->globalState->probabilityResult.returnProbability().probabilityTrue > this->generator->getFormula()->probability && currentState->controlledTransitionsLeftToProcess.empty() && currentState->uncontrolledTransitionsLeftToProcess.empty() && currentState->controlledProbabilisticTransitionsLeftToProcess.empty() && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty()) {
+        } else if (config.probability && currentState->depth == 0 && currentState->globalState->probabilityResult.returnProbability().probabilityTrue >= this->generator->getFormula()->probability && currentState->controlledTransitionsLeftToProcess.empty() && currentState->uncontrolledTransitionsLeftToProcess.empty() && currentState->controlledProbabilisticTransitionsLeftToProcess.empty() && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.empty()) {
             cout << "GOOD ENOUGH" << endl;
             verificationResult.verificationResult = true;
             verificationResult.probabilityResult = currentState->globalState->probabilityResult.returnProbability();
