@@ -37,6 +37,8 @@ public:
     void markFormulaAsIncorrect();
     bool getFormulaCorectness();
     void initStrategy(StrategyCollection* strat);
+    void createIterativeStrategy(LocalModels *localModels);
+    bool nextIterativeStrategy();
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
     string getActionNameFromStateInStrategy(GlobalState* state);
 
@@ -76,6 +78,7 @@ protected:
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
+    ProbabilityStrategyDecisions probabilityStrategy;
 };
 
 #endif // SELENE_GLOBAL_MODEL_GENERATOR

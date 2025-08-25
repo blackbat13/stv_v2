@@ -109,6 +109,8 @@ int main(int argc, char* argv[]) {
         } else if (config.verify_strategy) {
             verifResult = verificationIt->verify().verificationResult;
         } else if (config.probability) {
+            generator->createIterativeStrategy(localModels);
+            config.verify_strategy = true;
             verifResult2 = verificationIt->verify();
             verifResult = verifResult2.verificationResult;
             printf("Probability\nTRUE: %f\nFALSE: %f\n", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);

@@ -99,26 +99,6 @@ struct LocalModels {
     // agents[i].id == i
 };
 
-struct Action {
-    /// @brief 
-    vector<string> *states;
-    /// @brief 
-    string hash;
-    /// @brief 
-    string actionName;
-};
-
-class StrategyCollection {
-    private:
-        map<string, Action> selectedStrategy;
-    public:
-        void addAction(Action action) {
-            selectedStrategy[action.hash] = action;
-        };
-        map<string, Action> getStrategy() {
-            return selectedStrategy;
-        };
-};
 
 struct Result {
     bool verificationResult = false;

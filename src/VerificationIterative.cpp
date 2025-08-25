@@ -239,6 +239,10 @@ void VerificationIterative::undoLastHistoryEntry() {
 
 bool VerificationIterative::revertToLastDecision()
 {
+    // temporary infinite loop to debug, change later to proper handling of creating a new strategy
+    while (true) {
+        cout << "STOP" << endl;
+    }
     // Undo Z->T (including Z, excluding T); find Y while doing that
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
@@ -280,6 +284,7 @@ bool VerificationIterative::revertToLastDecision()
 
     this->mode = GraphTraversalMode::RESTORE_STATES;
     this->revertToGlobalState = invalidDecision->from;
+    
     return true;
 }
 
@@ -581,10 +586,10 @@ Result VerificationIterative::verify() {
         auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
         
         if (config.verify_strategy) {
-            // cout << string(20, '=') << endl;
-            // cout << "Stack size: " << statesToProcess.size() << endl;
-            // cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
-            // cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
+            cout << string(20, '=') << endl;
+            cout << "Stack size: " << statesToProcess.size() << endl;
+            cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
+            cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
         } else {
             cout << string(20, '=') << endl;
             cout << currentState->globalState->hash << " " << (currentState->isControlledByCoalition ? "CONTROLLED" : "UNCONTROLLED") << endl;

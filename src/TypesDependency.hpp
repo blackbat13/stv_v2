@@ -98,4 +98,41 @@ struct StateVerificationInfo {
     bool gotResponseFromOtherState = false;
 };
 
+struct Action {
+    /// @brief 
+    vector<string> *states;
+    /// @brief 
+    string hash;
+    /// @brief 
+    string actionName;
+};
+
+class StrategyCollection {
+    private:
+        map<string, Action> selectedStrategy;
+    public:
+        void addAction(Action action) {
+            selectedStrategy[action.hash] = action;
+        };
+        void addStrategy(StrategyCollection strategy) {
+            for (auto item : strategy.getStrategy()) {
+                selectedStrategy[item.first] = item.second;
+            }
+        }
+        void clear() {
+            selectedStrategy.clear();
+        };
+        map<string, Action> getStrategy() {
+            return selectedStrategy;
+        };
+};
+
+class ProbabilityStrategyDecisions {
+    public:
+        ProbabilityStrategyDecisions() {} ;
+        ~ProbabilityStrategyDecisions() {};
+        map<Agent*, map<string, StrategyCollection>> allCoalitionTransitions; // agent -> localStateHash -> strategy
+        map<string, int> currentStrategyPermutation;
+};
+
 #endif // TYPES_DEPENDENCY
