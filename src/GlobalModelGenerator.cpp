@@ -84,6 +84,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
                 localStates[it]=localTransition->to;
             }            
             auto targetState = this->generateStateFromLocalStates(&localStates, &globalTransition->localTransitions, state);
+            targetState->preimage.insert(state);
             globalTransition->to = targetState;
         }
     }

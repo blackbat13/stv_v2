@@ -82,6 +82,7 @@ $(document).ready(function(){initNavTree('classGlobalModelGenerator.html',''); i
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
@@ -97,6 +98,11 @@ $(document).ready(function(){initNavTree('classGlobalModelGenerator.html',''); i
 
 <p><code>#include &lt;<a class="el" href="GlobalModelGenerator_8hpp_source.html">GlobalModelGenerator.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalModelGenerator_1_1GlobalStateTupleHash.html">GlobalStateTupleHash</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a02e538bcb34f1789e72a6db5eaffdf09"><td class="memItemLeft" align="right" valign="top"><a id="a02e538bcb34f1789e72a6db5eaffdf09"></a>
@@ -113,13 +119,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad9b21fa1580e4dd4479c00d192a97501"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501">expandState</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *state)</td></tr>
 <tr class="memdesc:ad9b21fa1580e4dd4479c00d192a97501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Goes through all <a class="el" href="structGlobalTransition.html" title="Represents a single global transition.">GlobalTransition</a> in a given <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> and creates new GlobalStates connected to the given one.  <a href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501">More...</a><br /></td></tr>
 <tr class="separator:ad9b21fa1580e4dd4479c00d192a97501"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1de661140eb7c06e2c610cd726689b7c"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a1de661140eb7c06e2c610cd726689b7c">expandStateAndReturn</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *state)</td></tr>
-<tr class="memdesc:a1de661140eb7c06e2c610cd726689b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501" title="Goes through all GlobalTransition in a given GlobalState and creates new GlobalStates connected to th...">GlobalModelGenerator::expandState</a> that also additionally returns a vector of newly created states.  <a href="classGlobalModelGenerator.html#a1de661140eb7c06e2c610cd726689b7c">More...</a><br /></td></tr>
-<tr class="separator:a1de661140eb7c06e2c610cd726689b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab671fabf1271b0e5f771bc4e17d0f493"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ab671fabf1271b0e5f771bc4e17d0f493">expandStateAndReturn</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *state, bool returnAnyway=false)</td></tr>
+<tr class="memdesc:ab671fabf1271b0e5f771bc4e17d0f493"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classGlobalModelGenerator.html#ad9b21fa1580e4dd4479c00d192a97501" title="Goes through all GlobalTransition in a given GlobalState and creates new GlobalStates connected to th...">GlobalModelGenerator::expandState</a> that also additionally returns a vector of newly created states.  <a href="classGlobalModelGenerator.html#ab671fabf1271b0e5f771bc4e17d0f493">More...</a><br /></td></tr>
+<tr class="separator:ab671fabf1271b0e5f771bc4e17d0f493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="memItemLeft" align="right" valign="top"><a id="a8f2f18be55f04da04ad4bcd1c9f0eef2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">expandAllStates</a> ()</td></tr>
 <tr class="memdesc:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands the states starting from the initial <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> and continues until there are no more states to expand. <br /></td></tr>
 <tr class="separator:a8f2f18be55f04da04ad4bcd1c9f0eef2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbbf2741211653a24bcbed0c2e8aa5af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#abbbf2741211653a24bcbed0c2e8aa5af">expandAndReduceAllStates</a> ()</td></tr>
+<tr class="memdesc:abbbf2741211653a24bcbed0c2e8aa5af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expands and reduces the states starting from the initial <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> using a DFS-POR algorithm and continues until there are no more states to expand.  <a href="classGlobalModelGenerator.html#abbbf2741211653a24bcbed0c2e8aa5af">More...</a><br /></td></tr>
+<tr class="separator:abbbf2741211653a24bcbed0c2e8aa5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8115d1786015dee46c171e0295c35a4a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGlobalModel.html">GlobalModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a8115d1786015dee46c171e0295c35a4a">getCurrentGlobalModel</a> ()</td></tr>
 <tr class="memdesc:a8115d1786015dee46c171e0295c35a4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get for a <a class="el" href="structGlobalModel.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> used in initialization.  <a href="classGlobalModelGenerator.html#a8115d1786015dee46c171e0295c35a4a">More...</a><br /></td></tr>
 <tr class="separator:a8115d1786015dee46c171e0295c35a4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,6 +144,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:ac167eac5a5d30d4f2cb94d4bf198bf09"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAgent.html">Agent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ac167eac5a5d30d4f2cb94d4bf198bf09">getAgentInstanceByName</a> (string agentName)</td></tr>
 <tr class="memdesc:ac167eac5a5d30d4f2cb94d4bf198bf09"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to an agent by using its name.  <a href="classGlobalModelGenerator.html#ac167eac5a5d30d4f2cb94d4bf198bf09">More...</a><br /></td></tr>
 <tr class="separator:ac167eac5a5d30d4f2cb94d4bf198bf09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5ef72e33e6e912efc25690a62a3c58e"><td class="memItemLeft" align="right" valign="top"><a id="ae5ef72e33e6e912efc25690a62a3c58e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ae5ef72e33e6e912efc25690a62a3c58e">markFormulaAsIncorrect</a> ()</td></tr>
+<tr class="memdesc:ae5ef72e33e6e912efc25690a62a3c58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets formula to an incorrectly written state. <br /></td></tr>
+<tr class="separator:ae5ef72e33e6e912efc25690a62a3c58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9a7a0f5180b72d34c694be0341a0dce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ac9a7a0f5180b72d34c694be0341a0dce">getFormulaCorectness</a> ()</td></tr>
+<tr class="memdesc:ac9a7a0f5180b72d34c694be0341a0dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets formula status.  <a href="classGlobalModelGenerator.html#ac9a7a0f5180b72d34c694be0341a0dce">More...</a><br /></td></tr>
+<tr class="separator:ac9a7a0f5180b72d34c694be0341a0dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -181,6 +197,26 @@ Protected Attributes</h2></td></tr>
 <a class="el" href="structGlobalModel.html">GlobalModel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a714b963d4b205add73e1bef642ff8477">globalModel</a></td></tr>
 <tr class="memdesc:a714b963d4b205add73e1bef642ff8477"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structGlobalModel.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> created in initModel. <br /></td></tr>
 <tr class="separator:a714b963d4b205add73e1bef642ff8477"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6fc1d31bf0c8d558bac06cb0a835271"><td class="memItemLeft" align="right" valign="top"><a id="ad6fc1d31bf0c8d558bac06cb0a835271"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ad6fc1d31bf0c8d558bac06cb0a835271">correctModel</a></td></tr>
+<tr class="memdesc:ad6fc1d31bf0c8d558bac06cb0a835271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag holding info if model is actually correct. <br /></td></tr>
+<tr class="separator:ad6fc1d31bf0c8d558bac06cb0a835271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac23fee3811f6f55b08d9a6a959629f06"><td class="memItemLeft" align="right" valign="top"><a id="ac23fee3811f6f55b08d9a6a959629f06"></a>
+unordered_map&lt; <a class="el" href="structGlobalState.html">GlobalState</a> *, unordered_set&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#ac23fee3811f6f55b08d9a6a959629f06">candidateStateDepths</a></td></tr>
+<tr class="memdesc:ac23fee3811f6f55b08d9a6a959629f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup map containing global states and the depths that the global state is contained in. Used for reductions. <br /></td></tr>
+<tr class="separator:ac23fee3811f6f55b08d9a6a959629f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc94fb1676bdd514e831a448946eb301"><td class="memItemLeft" align="right" valign="top"><a id="afc94fb1676bdd514e831a448946eb301"></a>
+stack&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#afc94fb1676bdd514e831a448946eb301">globalModelCandidates</a></td></tr>
+<tr class="memdesc:afc94fb1676bdd514e831a448946eb301"><td class="mdescLeft">&#160;</td><td class="mdescRight">Candidate states to be used in reductions. Used for reductions. <br /></td></tr>
+<tr class="separator:afc94fb1676bdd514e831a448946eb301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbf190d7646a2f3e7f490513b3ce1d02"><td class="memItemLeft" align="right" valign="top"><a id="acbf190d7646a2f3e7f490513b3ce1d02"></a>
+stack&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#acbf190d7646a2f3e7f490513b3ce1d02">stateDepths</a></td></tr>
+<tr class="memdesc:acbf190d7646a2f3e7f490513b3ce1d02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saved depths of states added to statesToExpand. Used for reductions. <br /></td></tr>
+<tr class="separator:acbf190d7646a2f3e7f490513b3ce1d02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62eeb7858cc74c5527f9af1f8a0f27c8"><td class="memItemLeft" align="right" valign="top"><a id="a62eeb7858cc74c5527f9af1f8a0f27c8"></a>
+unordered_set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGlobalModelGenerator.html#a62eeb7858cc74c5527f9af1f8a0f27c8">addedStates</a></td></tr>
+<tr class="memdesc:a62eeb7858cc74c5527f9af1f8a0f27c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">States that were added to a stack of states. Used for reductions. <br /></td></tr>
+<tr class="separator:a62eeb7858cc74c5527f9af1f8a0f27c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores the local models, formula and a global model. </p>
@@ -265,6 +301,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="abbbf2741211653a24bcbed0c2e8aa5af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbbf2741211653a24bcbed0c2e8aa5af">&#9670;&nbsp;</a></span>expandAndReduceAllStates()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GlobalModelGenerator::expandAndReduceAllStates </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Expands and reduces the states starting from the initial <a class="el" href="structGlobalState.html" title="Represents a single global state.">GlobalState</a> using a DFS-POR algorithm and continues until there are no more states to expand. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">depth</td><td>Current depth of the recursive generation of all states. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad9b21fa1580e4dd4479c00d192a97501"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad9b21fa1580e4dd4479c00d192a97501">&#9670;&nbsp;</a></span>expandState()</h2>
 
@@ -291,8 +352,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1de661140eb7c06e2c610cd726689b7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1de661140eb7c06e2c610cd726689b7c">&#9670;&nbsp;</a></span>expandStateAndReturn()</h2>
+<a id="ab671fabf1271b0e5f771bc4e17d0f493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab671fabf1271b0e5f771bc4e17d0f493">&#9670;&nbsp;</a></span>expandStateAndReturn()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -301,8 +362,18 @@ Protected Attributes</h2></td></tr>
           <td class="memname">vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; GlobalModelGenerator::expandStateAndReturn </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structGlobalState.html">GlobalState</a> *&#160;</td>
-          <td class="paramname"><em>state</em></td><td>)</td>
+          <td class="paramname"><em>state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>returnAnyway</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -650,6 +721,26 @@ Protected Attributes</h2></td></tr>
 
 <p>Get for the <a class="el" href="structFormula.html">Formula</a> used in initialization. </p>
 <dl class="section return"><dt>Returns</dt><dd>Returns a pointer to the formula structure. </dd></dl>
+
+</div>
+</div>
+<a id="ac9a7a0f5180b72d34c694be0341a0dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9a7a0f5180b72d34c694be0341a0dce">&#9670;&nbsp;</a></span>getFormulaCorectness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobalModelGenerator::getFormulaCorectness </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets formula status. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if formula is written correctly, false otherwise. </dd></dl>
 
 </div>
 </div>

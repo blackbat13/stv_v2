@@ -143,6 +143,161 @@ bool Verification::verify() {
     return this->verifyGlobalState(initState, 0);
 }
 
+bool Verification::fixpointVerify() {
+    this->generator->expandAllStates();
+
+    if(this->generator->getFormula()->isF) {
+        return this->minFixpointVerify();
+    } else {
+        return this->maxFixpointVerify();
+    }
+}
+
+bool Verification::minFixpointVerify() {
+    Agent* agent = *(this->generator->getFormula()->coalition.begin());
+    set<GlobalState*> winningStates, previousStep;
+    for(auto state : this->generator->getCurrentGlobalModel()->globalStates) {
+        if(verifyLocalStates(&state->localStatesProjection, state)) {
+            winningStates.insert(state);
+        }
+    }
+
+    previousStep.insert(winningStates.begin(), winningStates.end());
+
+    while(true) {
+        set<GlobalState*> preimage, currentStep;
+        for(auto state : previousStep) {
+            preimage.insert(state->preimage.begin(), state->preimage.end());
+        }
+
+        for(auto state : preimage) {
+            bool isOk = false;
+            map<string, set<GlobalState*>> transitionResult;
+            for(auto epistemicClassEl : state->epistemicClasses[agent]->globalStates) {
+                auto globalState = epistemicClassEl.second;
+                for(auto transition : globalState->globalTransitions) {
+                    bool hasAction = false;
+                    for(auto localTransition : transition->localTransitions) {
+                        if(localTransition->from->agent == agent) {
+                            transitionResult[localTransition->name].insert(transition->to);
+                            hasAction = true;
+                            break;
+                        }
+                    }
+
+                    if(!hasAction) {
+                        transitionResult[""].insert(transition->to);
+                    }
+                }
+            }
+
+            for(auto el : transitionResult) {
+                bool transitionOk = true;
+                for(auto nextState : el.second) {
+                    if(winningStates.find(nextState) == winningStates.end()) {
+                        transitionOk = false;
+                        break;
+                    }
+                }
+
+                if (transitionOk) {
+                    isOk = true;
+                    break;
+                }
+            }
+
+            if(isOk) {
+                currentStep.insert(state);
+            }
+        }
+
+        previousStep = currentStep;
+        set<GlobalState*> newWinningStates;
+        newWinningStates.insert(winningStates.begin(), winningStates.end());
+        newWinningStates.insert(currentStep.begin(), currentStep.end());
+        if(newWinningStates.size() == winningStates.size()) {
+            break;
+        }
+
+        winningStates = newWinningStates;
+    }
+
+    if(winningStates.find(this->generator->getCurrentGlobalModel()->initState) != winningStates.end()) {
+        return true;
+    }
+
+    return false;
+}
+
+bool Verification::maxFixpointVerify() {
+    Agent* agent = *(this->generator->getFormula()->coalition.begin());
+    set<GlobalState*> winningStates, previousStep;
+    for(auto state : this->generator->getCurrentGlobalModel()->globalStates) {
+        if(verifyLocalStates(&state->localStatesProjection, state)) {
+            winningStates.insert(state);
+        }
+    }
+
+    previousStep.insert(winningStates.begin(), winningStates.end());
+
+    while(true) {
+        set<GlobalState*> toKeep;
+
+        for(auto state : winningStates) {
+            bool isOk = false;
+            map<string, set<GlobalState*>> transitionResult;
+            for(auto epistemicClassEl : state->epistemicClasses[agent]->globalStates) {
+                auto globalState = epistemicClassEl.second;
+                for(auto transition : globalState->globalTransitions) {
+                    bool hasAction = false;
+                    for(auto localTransition : transition->localTransitions) {
+                        if(localTransition->from->agent == agent) {
+                            transitionResult[localTransition->name].insert(transition->to);
+                            hasAction = true;
+                            break;
+                        }
+                    }
+
+                    if(!hasAction) {
+                        transitionResult[""].insert(transition->to);
+                    }
+                }
+            }
+
+            for(auto el : transitionResult) {
+                bool transitionOk = true;
+                for(auto nextState : el.second) {
+                    if(winningStates.find(nextState) == winningStates.end()) {
+                        transitionOk = false;
+                        break;
+                    }
+                }
+
+                if (transitionOk) {
+                    isOk = true;
+                    break;
+                }
+            }
+
+            if(isOk) {
+                toKeep.insert(state);
+            }
+        }
+
+        if(toKeep.size() == winningStates.size()) {
+            break;
+        }
+
+        winningStates = toKeep;
+    }
+
+    if(winningStates.find(this->generator->getCurrentGlobalModel()->initState) != winningStates.end()) {
+        return true;
+    }
+
+    return false;
+}
+
 /// @brief Verifies a set of LocalState that a GlobalState is composed of with a hardcoded formula.
 /// @param localStates A pointer to a set of pointers to LocalState.
 /// @return Returns true if there is a LocalState with a specific set of values, fulfilling the criteria, otherwise returns false.

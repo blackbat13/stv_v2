@@ -127,9 +127,13 @@ $(document).ready(function(){initNavTree('Common_8hpp_source.html',''); initResi
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="structCfg.html#a1added5dd2bed4363d43a4006c8c731b">   45</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="structCfg.html#a1added5dd2bed4363d43a4006c8c731b">add_epsilon_transitions</a>; </div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">bool</span> formula_from_parameter;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::string formula;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;};</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="preprocessor">#endif </span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">bool</span> counterexample;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">bool</span> reduce;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">bool</span> reduce_all;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    std::string reduce_args;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif </span></div>
 <div class="ttc" id="aclassAgent_html"><div class="ttname"><a href="classAgent.html">Agent</a></div><div class="ttdoc">Contains all data for a single Agent, including id, name and all of the agents' variables.</div><div class="ttdef"><b>Definition:</b> Agent.hpp:13</div></div>
 <div class="ttc" id="aclassLocalState_html"><div class="ttname"><a href="classLocalState.html">LocalState</a></div><div class="ttdoc">Represents a single LocalState, containing id, name and internal variables.</div><div class="ttdef"><b>Definition:</b> LocalState.hpp:13</div></div>
 <div class="ttc" id="aexpressions_8hpp_html"><div class="ttname"><a href="expressions_8hpp.html">expressions.hpp</a></div><div class="ttdoc">Eval and helper class for expressions. Eval and helper class for expressions.</div></div>
@@ -143,11 +147,11 @@ $(document).ready(function(){initNavTree('Common_8hpp_source.html',''); initResi
 <div class="ttc" id="astructCfg_html_afe7b0d13fc6f88e1cc75a1dba96e001a"><div class="ttname"><a href="structCfg.html#afe7b0d13fc6f88e1cc75a1dba96e001a">Cfg::output_local_models</a></div><div class="ttdeci">bool output_local_models</div><div class="ttdoc">(obsolete) print data on local model</div><div class="ttdef"><b>Definition:</b> Common.hpp:40</div></div>
 <div class="ttc" id="astructCondition_html"><div class="ttname"><a href="structCondition.html">Condition</a></div><div class="ttdoc">Represents a condition for LocalTransition.</div><div class="ttdef"><b>Definition:</b> Types.hpp:52</div></div>
 <div class="ttc" id="astructEpistemicClass_html"><div class="ttname"><a href="structEpistemicClass.html">EpistemicClass</a></div><div class="ttdoc">Represents a single epistemic class.</div><div class="ttdef"><b>Definition:</b> EpistemicClass.hpp:13</div></div>
-<div class="ttc" id="astructFormula_html"><div class="ttname"><a href="structFormula.html">Formula</a></div><div class="ttdef"><b>Definition:</b> Types.hpp:74</div></div>
+<div class="ttc" id="astructFormula_html"><div class="ttname"><a href="structFormula.html">Formula</a></div><div class="ttdef"><b>Definition:</b> Types.hpp:70</div></div>
 <div class="ttc" id="astructGlobalModel_html"><div class="ttname"><a href="structGlobalModel.html">GlobalModel</a></div><div class="ttdoc">Represents a global model, containing agents and a formula.</div><div class="ttdef"><b>Definition:</b> GlobalModel.hpp:13</div></div>
 <div class="ttc" id="astructGlobalState_html"><div class="ttname"><a href="structGlobalState.html">GlobalState</a></div><div class="ttdoc">Represents a single global state.</div><div class="ttdef"><b>Definition:</b> GlobalState.hpp:13</div></div>
 <div class="ttc" id="astructGlobalTransition_html"><div class="ttname"><a href="structGlobalTransition.html">GlobalTransition</a></div><div class="ttdoc">Represents a single global transition.</div><div class="ttdef"><b>Definition:</b> GlobalTransition.hpp:13</div></div>
-<div class="ttc" id="astructLocalModels_html"><div class="ttname"><a href="structLocalModels.html">LocalModels</a></div><div class="ttdoc">Represents a single local model, contains all agents and variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:82</div></div>
+<div class="ttc" id="astructLocalModels_html"><div class="ttname"><a href="structLocalModels.html">LocalModels</a></div><div class="ttdoc">Represents a single local model, contains all agents and variables.</div><div class="ttdef"><b>Definition:</b> Types.hpp:79</div></div>
 <div class="ttc" id="astructLocalTransition_html"><div class="ttname"><a href="structLocalTransition.html">LocalTransition</a></div><div class="ttdoc">Represents a single local transition, containing id, global name, local name, is shared and count of ...</div><div class="ttdef"><b>Definition:</b> LocalTransition.hpp:7</div></div>
 <div class="ttc" id="astructVar_html"><div class="ttname"><a href="structVar.html">Var</a></div><div class="ttdoc">Represents a variable in the model, containing name, initial value and persistence.</div><div class="ttdef"><b>Definition:</b> Types.hpp:37</div></div>
 </div><!-- fragment --></div><!-- contents -->

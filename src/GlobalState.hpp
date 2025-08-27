@@ -31,6 +31,9 @@ struct GlobalState {
     /// @brief Every GlobalTransition in the model.
     set<GlobalTransition*> globalTransitions;
 
+    /// @brief Preimage for the global state, i.e. states from which there is a transition to this state.
+    set<GlobalState*> preimage;
+
     /// @brief Local states of each agent that define this global state.
     vector<LocalState*> localStatesProjection;
 

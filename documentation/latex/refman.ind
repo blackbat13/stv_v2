@@ -3,15 +3,15 @@
   \item {addEdge}
     \subitem {DotGraph}, \hyperpage{20}
   \item {addEntry}
-    \subitem {HistoryDbg}, \hyperpage{55}
+    \subitem {HistoryDbg}, \hyperpage{64}
   \item {addHistoryContext}
-    \subitem {Verification}, \hyperpage{66}
+    \subitem {Verification}, \hyperpage{75}
   \item {addHistoryDecision}
-    \subitem {Verification}, \hyperpage{67}
+    \subitem {Verification}, \hyperpage{76}
   \item {addHistoryMarkDecisionAsInvalid}
-    \subitem {Verification}, \hyperpage{67}
+    \subitem {Verification}, \hyperpage{76}
   \item {addHistoryStateStatus}
-    \subitem {Verification}, \hyperpage{67}
+    \subitem {Verification}, \hyperpage{76}
   \item {addInitial}
     \subitem {AgentTemplate}, \hyperpage{13}
   \item {addLocal}
@@ -25,10 +25,10 @@
   \item {Agent}, \hyperpage{11}
     \subitem {Agent}, \hyperpage{12}
     \subitem {includesState}, \hyperpage{12}
-  \item {Agent.cpp}, \hyperpage{77}
-  \item {Agent.hpp}, \hyperpage{77}
+  \item {Agent.cpp}, \hyperpage{85}
+  \item {Agent.hpp}, \hyperpage{85}
   \item {AGENT\_TEMPLATE}
-    \subitem {DotGraph.hpp}, \hyperpage{79}
+    \subitem {DotGraph.hpp}, \hyperpage{87}
   \item {AgentTemplate}, \hyperpage{12}
     \subitem {addInitial}, \hyperpage{13}
     \subitem {addLocal}, \hyperpage{14}
@@ -38,10 +38,10 @@
     \subitem {setIdent}, \hyperpage{16}
     \subitem {setInitState}, \hyperpage{16}
   \item {agentToString}
-    \subitem {Utils.cpp}, \hyperpage{87}
-    \subitem {Utils.hpp}, \hyperpage{90}
+    \subitem {Utils.cpp}, \hyperpage{96}
+    \subitem {Utils.hpp}, \hyperpage{99}
   \item {areGlobalStatesInTheSameEpistemicClass}
-    \subitem {Verification}, \hyperpage{68}
+    \subitem {Verification}, \hyperpage{77}
   \item {assign}
     \subitem {Assignment}, \hyperpage{18}
   \item {Assignment}, \hyperpage{17}
@@ -50,77 +50,79 @@
 
   \indexspace
 
-  \item {calcHartley}
-    \subitem {Verification}, \hyperpage{68}
   \item {Cfg}, \hyperpage{18}
   \item {checkUncontrolledSet}
-    \subitem {Verification}, \hyperpage{69}
+    \subitem {Verification}, \hyperpage{77}
   \item {cloneEntry}
-    \subitem {HistoryDbg}, \hyperpage{56}
-  \item {Common.hpp}, \hyperpage{78}
+    \subitem {HistoryDbg}, \hyperpage{64}
+  \item {Common.hpp}, \hyperpage{86}
   \item {compare}
-    \subitem {LocalState}, \hyperpage{59}
+    \subitem {LocalState}, \hyperpage{68}
   \item {computeEpistemicClassHash}
-    \subitem {GlobalModelGenerator}, \hyperpage{47}
+    \subitem {GlobalModelGenerator}, \hyperpage{55}
   \item {computeGlobalStateHash}
-    \subitem {GlobalModelGenerator}, \hyperpage{48}
+    \subitem {GlobalModelGenerator}, \hyperpage{56}
   \item {Condition}, \hyperpage{19}
   \item {CONTEXT}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
 
   \indexspace
 
   \item {dbgHistEnt}
-    \subitem {Verification.cpp}, \hyperpage{93}
+    \subitem {Verification.cpp}, \hyperpage{101}
   \item {dbgVerifStatus}
-    \subitem {Verification.cpp}, \hyperpage{93}
+    \subitem {Verification.cpp}, \hyperpage{102}
   \item {DECISION}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
   \item {DotGraph}, \hyperpage{20}
     \subitem {addEdge}, \hyperpage{20}
     \subitem {addNode}, \hyperpage{21}
     \subitem {saveToFile}, \hyperpage{21}
     \subitem {styleString}, \hyperpage{21}
-  \item {DotGraph.cpp}, \hyperpage{78}
-  \item {DotGraph.hpp}, \hyperpage{78}
-    \subitem {AGENT\_TEMPLATE}, \hyperpage{79}
-    \subitem {DotGraphBase}, \hyperpage{79}
-    \subitem {GLOBAL\_MODEL}, \hyperpage{79}
-    \subitem {LOCAL\_MODEL}, \hyperpage{79}
+  \item {DotGraph.cpp}, \hyperpage{86}
+  \item {DotGraph.hpp}, \hyperpage{86}
+    \subitem {AGENT\_TEMPLATE}, \hyperpage{87}
+    \subitem {DotGraphBase}, \hyperpage{87}
+    \subitem {GLOBAL\_MODEL}, \hyperpage{87}
+    \subitem {LOCAL\_MODEL}, \hyperpage{87}
   \item {DotGraphBase}
-    \subitem {DotGraph.hpp}, \hyperpage{79}
+    \subitem {DotGraph.hpp}, \hyperpage{87}
 
   \indexspace
 
   \item {envToString}
-    \subitem {Utils.cpp}, \hyperpage{88}
-    \subitem {Utils.hpp}, \hyperpage{91}
+    \subitem {Utils.cpp}, \hyperpage{96}
+    \subitem {Utils.hpp}, \hyperpage{99}
   \item {EpistemicClass}, \hyperpage{22}
-  \item {EpistemicClass.hpp}, \hyperpage{79}
+  \item {EpistemicClass.hpp}, \hyperpage{87}
   \item {equivalentGlobalTransitions}
-    \subitem {Verification}, \hyperpage{69}
+    \subitem {Verification}, \hyperpage{78}
   \item {eval}
     \subitem {ExprAdd}, \hyperpage{23}
     \subitem {ExprAnd}, \hyperpage{25}
     \subitem {ExprConst}, \hyperpage{26}
     \subitem {ExprDiv}, \hyperpage{27}
-    \subitem {ExprEq}, \hyperpage{28}
+    \subitem {ExprEq}, \hyperpage{29}
     \subitem {ExprGe}, \hyperpage{30}
     \subitem {ExprGt}, \hyperpage{31}
-    \subitem {ExprIdent}, \hyperpage{32}
-    \subitem {ExprLe}, \hyperpage{34}
-    \subitem {ExprLt}, \hyperpage{35}
-    \subitem {ExprMul}, \hyperpage{36}
-    \subitem {ExprNe}, \hyperpage{38}
-    \subitem {ExprNode}, \hyperpage{39}
-    \subitem {ExprNot}, \hyperpage{40}
-    \subitem {ExprOr}, \hyperpage{41}
-    \subitem {ExprRem}, \hyperpage{42}
-    \subitem {ExprSub}, \hyperpage{44}
+    \subitem {ExprHart}, \hyperpage{34}
+    \subitem {ExprIdent}, \hyperpage{35}
+    \subitem {ExprKnow}, \hyperpage{38}
+    \subitem {ExprLe}, \hyperpage{39}
+    \subitem {ExprLt}, \hyperpage{40}
+    \subitem {ExprMul}, \hyperpage{43}
+    \subitem {ExprNe}, \hyperpage{44}
+    \subitem {ExprNode}, \hyperpage{45}
+    \subitem {ExprNot}, \hyperpage{46}
+    \subitem {ExprOr}, \hyperpage{48}
+    \subitem {ExprRem}, \hyperpage{49}
+    \subitem {ExprSub}, \hyperpage{50}
+  \item {expandAndReduceAllStates}
+    \subitem {GlobalModelGenerator}, \hyperpage{56}
   \item {expandState}
-    \subitem {GlobalModelGenerator}, \hyperpage{48}
+    \subitem {GlobalModelGenerator}, \hyperpage{56}
   \item {expandStateAndReturn}
-    \subitem {GlobalModelGenerator}, \hyperpage{48}
+    \subitem {GlobalModelGenerator}, \hyperpage{56}
   \item {ExprAdd}, \hyperpage{22}
     \subitem {eval}, \hyperpage{23}
     \subitem {ExprAdd}, \hyperpage{23}
@@ -129,192 +131,212 @@
     \subitem {ExprAnd}, \hyperpage{24}
   \item {ExprConst}, \hyperpage{25}
     \subitem {eval}, \hyperpage{26}
-    \subitem {ExprConst}, \hyperpage{25}
+    \subitem {ExprConst}, \hyperpage{26}
   \item {ExprDiv}, \hyperpage{26}
     \subitem {eval}, \hyperpage{27}
     \subitem {ExprDiv}, \hyperpage{27}
   \item {ExprEq}, \hyperpage{28}
-    \subitem {eval}, \hyperpage{28}
+    \subitem {eval}, \hyperpage{29}
     \subitem {ExprEq}, \hyperpage{28}
-  \item {expressions.cc}, \hyperpage{80}
-  \item {expressions.hpp}, \hyperpage{80}
+  \item {expressions.cc}, \hyperpage{88}
+  \item {expressions.hpp}, \hyperpage{88}
   \item {ExprGe}, \hyperpage{29}
     \subitem {eval}, \hyperpage{30}
-    \subitem {ExprGe}, \hyperpage{29}
-  \item {ExprGt}, \hyperpage{30}
+    \subitem {ExprGe}, \hyperpage{30}
+  \item {ExprGt}, \hyperpage{31}
     \subitem {eval}, \hyperpage{31}
     \subitem {ExprGt}, \hyperpage{31}
-  \item {ExprIdent}, \hyperpage{32}
-    \subitem {eval}, \hyperpage{32}
-    \subitem {ExprIdent}, \hyperpage{32}
-  \item {ExprLe}, \hyperpage{33}
+  \item {ExprHart}, \hyperpage{33}
     \subitem {eval}, \hyperpage{34}
-    \subitem {ExprLe}, \hyperpage{33}
-  \item {ExprLt}, \hyperpage{34}
+    \subitem {ExprHart}, \hyperpage{33}
+  \item {ExprIdent}, \hyperpage{34}
     \subitem {eval}, \hyperpage{35}
-    \subitem {ExprLt}, \hyperpage{35}
-  \item {ExprMul}, \hyperpage{36}
-    \subitem {eval}, \hyperpage{36}
-    \subitem {ExprMul}, \hyperpage{36}
-  \item {ExprNe}, \hyperpage{37}
+    \subitem {ExprIdent}, \hyperpage{35}
+  \item {ExprKnow}, \hyperpage{37}
     \subitem {eval}, \hyperpage{38}
-    \subitem {ExprNe}, \hyperpage{37}
-  \item {ExprNode}, \hyperpage{38}
+    \subitem {ExprKnow}, \hyperpage{37}
+  \item {ExprLe}, \hyperpage{38}
     \subitem {eval}, \hyperpage{39}
-  \item {ExprNot}, \hyperpage{39}
+    \subitem {ExprLe}, \hyperpage{39}
+  \item {ExprLt}, \hyperpage{40}
     \subitem {eval}, \hyperpage{40}
-    \subitem {ExprNot}, \hyperpage{39}
-  \item {ExprOr}, \hyperpage{40}
-    \subitem {eval}, \hyperpage{41}
-    \subitem {ExprOr}, \hyperpage{41}
-  \item {ExprRem}, \hyperpage{42}
-    \subitem {eval}, \hyperpage{42}
-    \subitem {ExprRem}, \hyperpage{42}
-  \item {ExprSub}, \hyperpage{43}
+    \subitem {ExprLt}, \hyperpage{40}
+  \item {ExprMul}, \hyperpage{42}
+    \subitem {eval}, \hyperpage{43}
+    \subitem {ExprMul}, \hyperpage{42}
+  \item {ExprNe}, \hyperpage{43}
     \subitem {eval}, \hyperpage{44}
-    \subitem {ExprSub}, \hyperpage{43}
+    \subitem {ExprNe}, \hyperpage{44}
+  \item {ExprNode}, \hyperpage{45}
+    \subitem {eval}, \hyperpage{45}
+  \item {ExprNot}, \hyperpage{46}
+    \subitem {eval}, \hyperpage{46}
+    \subitem {ExprNot}, \hyperpage{46}
+  \item {ExprOr}, \hyperpage{47}
+    \subitem {eval}, \hyperpage{48}
+    \subitem {ExprOr}, \hyperpage{47}
+  \item {ExprRem}, \hyperpage{48}
+    \subitem {eval}, \hyperpage{49}
+    \subitem {ExprRem}, \hyperpage{49}
+  \item {ExprSub}, \hyperpage{50}
+    \subitem {eval}, \hyperpage{50}
+    \subitem {ExprSub}, \hyperpage{50}
 
   \indexspace
 
   \item {findGlobalStateInEpistemicClass}
-    \subitem {GlobalModelGenerator}, \hyperpage{49}
+    \subitem {GlobalModelGenerator}, \hyperpage{57}
   \item {findOrCreateEpistemicClass}
-    \subitem {GlobalModelGenerator}, \hyperpage{49}
+    \subitem {GlobalModelGenerator}, \hyperpage{57}
   \item {findOrCreateEpistemicClassForKnowledge}
-    \subitem {GlobalModelGenerator}, \hyperpage{49}
-  \item {Formula}, \hyperpage{44}
-  \item {FormulaTemplate}, \hyperpage{45}
+    \subitem {GlobalModelGenerator}, \hyperpage{58}
+  \item {Formula}, \hyperpage{52}
+  \item {FormulaTemplate}, \hyperpage{52}
 
   \indexspace
 
   \item {generateAgent}
     \subitem {AgentTemplate}, \hyperpage{15}
   \item {generateGlobalTransitions}
-    \subitem {GlobalModelGenerator}, \hyperpage{50}
+    \subitem {GlobalModelGenerator}, \hyperpage{58}
   \item {generateInitState}
-    \subitem {GlobalModelGenerator}, \hyperpage{50}
+    \subitem {GlobalModelGenerator}, \hyperpage{58}
   \item {generateStateFromLocalStates}
-    \subitem {GlobalModelGenerator}, \hyperpage{50}
+    \subitem {GlobalModelGenerator}, \hyperpage{59}
+  \item {getAgentInstanceByName}
+    \subitem {GlobalModelGenerator}, \hyperpage{59}
   \item {getCurrentGlobalModel}
-    \subitem {GlobalModelGenerator}, \hyperpage{52}
+    \subitem {GlobalModelGenerator}, \hyperpage{59}
   \item {getEpistemicClassForGlobalState}
-    \subitem {Verification}, \hyperpage{69}
+    \subitem {Verification}, \hyperpage{78}
   \item {getFormula}
-    \subitem {GlobalModelGenerator}, \hyperpage{52}
+    \subitem {GlobalModelGenerator}, \hyperpage{60}
+  \item {getFormulaCorectness}
+    \subitem {GlobalModelGenerator}, \hyperpage{60}
+  \item {getFormulaSize}
+    \subitem {GlobalModelGenerator}, \hyperpage{60}
+  \item {getGlobalStateEnvironment}
+    \subitem {GlobalState}, \hyperpage{62}
   \item {getLocalStatesSCC}
-    \subitem {Utils.cpp}, \hyperpage{88}
-    \subitem {Utils.hpp}, \hyperpage{91}
+    \subitem {Utils.cpp}, \hyperpage{96}
+    \subitem {Utils.hpp}, \hyperpage{99}
   \item {GLOBAL\_MODEL}
-    \subitem {DotGraph.hpp}, \hyperpage{79}
-  \item {GlobalModel}, \hyperpage{45}
-  \item {GlobalModel.hpp}, \hyperpage{81}
-  \item {GlobalModelGenerator}, \hyperpage{46}
-    \subitem {computeEpistemicClassHash}, \hyperpage{47}
-    \subitem {computeGlobalStateHash}, \hyperpage{48}
-    \subitem {expandState}, \hyperpage{48}
-    \subitem {expandStateAndReturn}, \hyperpage{48}
-    \subitem {findGlobalStateInEpistemicClass}, \hyperpage{49}
-    \subitem {findOrCreateEpistemicClass}, \hyperpage{49}
-    \subitem {findOrCreateEpistemicClassForKnowledge}, \hyperpage{49}
-    \subitem {generateGlobalTransitions}, \hyperpage{50}
-    \subitem {generateInitState}, \hyperpage{50}
-    \subitem {generateStateFromLocalStates}, \hyperpage{50}
-    \subitem {getCurrentGlobalModel}, \hyperpage{52}
-    \subitem {getFormula}, \hyperpage{52}
-    \subitem {initModel}, \hyperpage{52}
-  \item {GlobalModelGenerator.cpp}, \hyperpage{81}
-  \item {GlobalModelGenerator.hpp}, \hyperpage{82}
-  \item {GlobalState}, \hyperpage{53}
-    \subitem {toString}, \hyperpage{53}
-  \item {GlobalState.cpp}, \hyperpage{82}
-  \item {GlobalState.hpp}, \hyperpage{82}
-  \item {GlobalTransition}, \hyperpage{54}
-  \item {GlobalTransition.cpp}, \hyperpage{83}
-  \item {GlobalTransition.hpp}, \hyperpage{83}
+    \subitem {DotGraph.hpp}, \hyperpage{87}
+  \item {GlobalModel}, \hyperpage{53}
+  \item {GlobalModel.hpp}, \hyperpage{89}
+  \item {GlobalModelGenerator}, \hyperpage{53}
+    \subitem {computeEpistemicClassHash}, \hyperpage{55}
+    \subitem {computeGlobalStateHash}, \hyperpage{56}
+    \subitem {expandAndReduceAllStates}, \hyperpage{56}
+    \subitem {expandState}, \hyperpage{56}
+    \subitem {expandStateAndReturn}, \hyperpage{56}
+    \subitem {findGlobalStateInEpistemicClass}, \hyperpage{57}
+    \subitem {findOrCreateEpistemicClass}, \hyperpage{57}
+    \subitem {findOrCreateEpistemicClassForKnowledge}, \hyperpage{58}
+    \subitem {generateGlobalTransitions}, \hyperpage{58}
+    \subitem {generateInitState}, \hyperpage{58}
+    \subitem {generateStateFromLocalStates}, \hyperpage{59}
+    \subitem {getAgentInstanceByName}, \hyperpage{59}
+    \subitem {getCurrentGlobalModel}, \hyperpage{59}
+    \subitem {getFormula}, \hyperpage{60}
+    \subitem {getFormulaCorectness}, \hyperpage{60}
+    \subitem {getFormulaSize}, \hyperpage{60}
+    \subitem {initModel}, \hyperpage{60}
+  \item {GlobalModelGenerator.cpp}, \hyperpage{90}
+  \item {GlobalModelGenerator.hpp}, \hyperpage{90}
+  \item {GlobalModelGenerator::GlobalStateTupleHash}, \hyperpage{62}
+  \item {GlobalState}, \hyperpage{61}
+    \subitem {getGlobalStateEnvironment}, \hyperpage{62}
+    \subitem {toString}, \hyperpage{62}
+  \item {GlobalState.cpp}, \hyperpage{91}
+  \item {GlobalState.hpp}, \hyperpage{91}
+  \item {GlobalTransition}, \hyperpage{63}
+  \item {GlobalTransition.cpp}, \hyperpage{91}
+  \item {GlobalTransition.hpp}, \hyperpage{92}
 
   \indexspace
 
-  \item {HistoryDbg}, \hyperpage{55}
-    \subitem {addEntry}, \hyperpage{55}
-    \subitem {cloneEntry}, \hyperpage{56}
-    \subitem {markEntry}, \hyperpage{56}
-    \subitem {print}, \hyperpage{56}
-  \item {HistoryEntry}, \hyperpage{57}
-    \subitem {toString}, \hyperpage{57}
+  \item {HistoryDbg}, \hyperpage{63}
+    \subitem {addEntry}, \hyperpage{64}
+    \subitem {cloneEntry}, \hyperpage{64}
+    \subitem {markEntry}, \hyperpage{65}
+    \subitem {print}, \hyperpage{65}
+  \item {HistoryEntry}, \hyperpage{65}
+    \subitem {toString}, \hyperpage{66}
   \item {HistoryEntryType}
-    \subitem {Verification.hpp}, \hyperpage{94}
+    \subitem {Verification.hpp}, \hyperpage{103}
 
   \indexspace
 
   \item {includesState}
     \subitem {Agent}, \hyperpage{12}
   \item {initModel}
-    \subitem {GlobalModelGenerator}, \hyperpage{52}
+    \subitem {GlobalModelGenerator}, \hyperpage{60}
   \item {isAgentInCoalition}
-    \subitem {Verification}, \hyperpage{70}
+    \subitem {Verification}, \hyperpage{78}
   \item {isGlobalTransitionControlledByCoalition}
-    \subitem {Verification}, \hyperpage{70}
+    \subitem {Verification}, \hyperpage{79}
 
   \indexspace
 
   \item {LOCAL\_MODEL}
-    \subitem {DotGraph.hpp}, \hyperpage{79}
-  \item {LocalModels}, \hyperpage{58}
+    \subitem {DotGraph.hpp}, \hyperpage{87}
+  \item {LocalModels}, \hyperpage{67}
   \item {localModelsToString}
-    \subitem {Utils.cpp}, \hyperpage{88}
-    \subitem {Utils.hpp}, \hyperpage{91}
-  \item {LocalState}, \hyperpage{58}
-    \subitem {compare}, \hyperpage{59}
-    \subitem {toString}, \hyperpage{59}
-  \item {LocalState.cpp}, \hyperpage{83}
-  \item {LocalState.hpp}, \hyperpage{84}
-  \item {LocalStateTemplate}, \hyperpage{60}
-  \item {LocalTransition}, \hyperpage{60}
+    \subitem {Utils.cpp}, \hyperpage{97}
+    \subitem {Utils.hpp}, \hyperpage{100}
+  \item {LocalState}, \hyperpage{67}
+    \subitem {compare}, \hyperpage{68}
+    \subitem {toString}, \hyperpage{68}
+  \item {LocalState.cpp}, \hyperpage{92}
+  \item {LocalState.hpp}, \hyperpage{92}
+  \item {LocalStateTemplate}, \hyperpage{69}
+  \item {LocalTransition}, \hyperpage{69}
 
   \indexspace
 
   \item {MARK\_DECISION\_AS\_INVALID}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
   \item {markEntry}
-    \subitem {HistoryDbg}, \hyperpage{56}
-  \item {ModelParser}, \hyperpage{61}
-    \subitem {parse}, \hyperpage{62}
-  \item {ModelParser.cc}, \hyperpage{84}
+    \subitem {HistoryDbg}, \hyperpage{65}
+  \item {ModelParser}, \hyperpage{70}
+    \subitem {parse}, \hyperpage{70}
+  \item {ModelParser.cc}, \hyperpage{93}
 
   \indexspace
 
   \item {newHistoryMarkDecisionAsInvalid}
-    \subitem {Verification}, \hyperpage{71}
-  \item {nodes.cc}, \hyperpage{85}
-  \item {nodes.hpp}, \hyperpage{85}
+    \subitem {Verification}, \hyperpage{79}
+  \item {nodes.cc}, \hyperpage{93}
+  \item {nodes.hpp}, \hyperpage{94}
   \item {NORMAL}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
 
   \indexspace
 
   \item {outputGlobalModel}
-    \subitem {Utils.cpp}, \hyperpage{89}
-    \subitem {Utils.hpp}, \hyperpage{92}
+    \subitem {Utils.cpp}, \hyperpage{97}
+    \subitem {Utils.hpp}, \hyperpage{100}
 
   \indexspace
 
   \item {parse}
-    \subitem {ModelParser}, \hyperpage{62}
+    \subitem {ModelParser}, \hyperpage{70}
   \item {print}
-    \subitem {HistoryDbg}, \hyperpage{56}
+    \subitem {HistoryDbg}, \hyperpage{65}
   \item {printCurrentHistory}
-    \subitem {Verification}, \hyperpage{71}
+    \subitem {Verification}, \hyperpage{79}
 
   \indexspace
 
   \item {RESTORE}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
   \item {restoreHistory}
-    \subitem {Verification}, \hyperpage{71}
+    \subitem {Verification}, \hyperpage{80}
   \item {REVERT}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
   \item {revertLastDecision}
-    \subitem {Verification}, \hyperpage{72}
+    \subitem {Verification}, \hyperpage{80}
 
   \indexspace
 
@@ -325,112 +347,108 @@
   \item {setInitState}
     \subitem {AgentTemplate}, \hyperpage{16}
   \item {STATE\_STATUS}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.hpp}, \hyperpage{103}
   \item {styleString}
     \subitem {DotGraph}, \hyperpage{21}
 
   \indexspace
 
   \item {tarjanVisit}
-    \subitem {Utils.cpp}, \hyperpage{89}
-  \item {TestVerif}, \hyperpage{62}
+    \subitem {Utils.cpp}, \hyperpage{97}
+  \item {TestVerif}, \hyperpage{71}
   \item {toString}
-    \subitem {GlobalState}, \hyperpage{53}
-    \subitem {HistoryEntry}, \hyperpage{57}
-    \subitem {LocalState}, \hyperpage{59}
-  \item {TransitionTemplate}, \hyperpage{63}
-    \subitem {TransitionTemplate}, \hyperpage{63}
+    \subitem {GlobalState}, \hyperpage{62}
+    \subitem {HistoryEntry}, \hyperpage{66}
+    \subitem {LocalState}, \hyperpage{68}
+  \item {TransitionTemplate}, \hyperpage{71}
+    \subitem {TransitionTemplate}, \hyperpage{72}
   \item {TraversalMode}
-    \subitem {Verification.hpp}, \hyperpage{95}
-  \item {Types.hpp}, \hyperpage{86}
+    \subitem {Verification.hpp}, \hyperpage{103}
+  \item {Types.hpp}, \hyperpage{94}
 
   \indexspace
 
   \item {undoHistoryUntil}
-    \subitem {Verification}, \hyperpage{72}
+    \subitem {Verification}, \hyperpage{81}
   \item {undoLastHistoryEntry}
-    \subitem {Verification}, \hyperpage{72}
-  \item {Utils.cpp}, \hyperpage{86}
-    \subitem {agentToString}, \hyperpage{87}
-    \subitem {envToString}, \hyperpage{88}
-    \subitem {getLocalStatesSCC}, \hyperpage{88}
-    \subitem {localModelsToString}, \hyperpage{88}
-    \subitem {outputGlobalModel}, \hyperpage{89}
-    \subitem {tarjanVisit}, \hyperpage{89}
-  \item {Utils.hpp}, \hyperpage{90}
-    \subitem {agentToString}, \hyperpage{90}
-    \subitem {envToString}, \hyperpage{91}
-    \subitem {getLocalStatesSCC}, \hyperpage{91}
-    \subitem {localModelsToString}, \hyperpage{91}
-    \subitem {outputGlobalModel}, \hyperpage{92}
+    \subitem {Verification}, \hyperpage{81}
+  \item {Utils.cpp}, \hyperpage{95}
+    \subitem {agentToString}, \hyperpage{96}
+    \subitem {envToString}, \hyperpage{96}
+    \subitem {getLocalStatesSCC}, \hyperpage{96}
+    \subitem {localModelsToString}, \hyperpage{97}
+    \subitem {outputGlobalModel}, \hyperpage{97}
+    \subitem {tarjanVisit}, \hyperpage{97}
+  \item {Utils.hpp}, \hyperpage{98}
+    \subitem {agentToString}, \hyperpage{99}
+    \subitem {envToString}, \hyperpage{99}
+    \subitem {getLocalStatesSCC}, \hyperpage{99}
+    \subitem {localModelsToString}, \hyperpage{100}
+    \subitem {outputGlobalModel}, \hyperpage{100}
 
   \indexspace
 
-  \item {Var}, \hyperpage{64}
-  \item {Verification}, \hyperpage{64}
-    \subitem {addHistoryContext}, \hyperpage{66}
-    \subitem {addHistoryDecision}, \hyperpage{67}
-    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{67}
-    \subitem {addHistoryStateStatus}, \hyperpage{67}
-    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{68}
-    \subitem {calcHartley}, \hyperpage{68}
-    \subitem {checkUncontrolledSet}, \hyperpage{69}
-    \subitem {equivalentGlobalTransitions}, \hyperpage{69}
-    \subitem {getEpistemicClassForGlobalState}, \hyperpage{69}
-    \subitem {isAgentInCoalition}, \hyperpage{70}
-    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{70}
-    \subitem {newHistoryMarkDecisionAsInvalid}, \hyperpage{71}
-    \subitem {printCurrentHistory}, \hyperpage{71}
-    \subitem {restoreHistory}, \hyperpage{71}
-    \subitem {revertLastDecision}, \hyperpage{72}
-    \subitem {undoHistoryUntil}, \hyperpage{72}
-    \subitem {undoLastHistoryEntry}, \hyperpage{72}
-    \subitem {Verification}, \hyperpage{66}
-    \subitem {verify}, \hyperpage{73}
-    \subitem {verifyGlobalState}, \hyperpage{73}
-    \subitem {verifyLocalStates}, \hyperpage{73}
-    \subitem {verifyLocalStatesWithMultipleFormulas}, \hyperpage{74}
-    \subitem {verifyTransitionSets}, \hyperpage{74}
-  \item {Verification.cpp}, \hyperpage{92}
-    \subitem {dbgHistEnt}, \hyperpage{93}
-    \subitem {dbgVerifStatus}, \hyperpage{93}
-    \subitem {verStatusToStr}, \hyperpage{93}
-  \item {Verification.hpp}, \hyperpage{94}
-    \subitem {CONTEXT}, \hyperpage{95}
-    \subitem {DECISION}, \hyperpage{95}
-    \subitem {HistoryEntryType}, \hyperpage{94}
-    \subitem {MARK\_DECISION\_AS\_INVALID}, \hyperpage{95}
-    \subitem {NORMAL}, \hyperpage{95}
-    \subitem {RESTORE}, \hyperpage{95}
-    \subitem {REVERT}, \hyperpage{95}
-    \subitem {STATE\_STATUS}, \hyperpage{95}
-    \subitem {TraversalMode}, \hyperpage{95}
-    \subitem {verStatusToStr}, \hyperpage{95}
+  \item {Var}, \hyperpage{73}
+  \item {Verification}, \hyperpage{73}
+    \subitem {addHistoryContext}, \hyperpage{75}
+    \subitem {addHistoryDecision}, \hyperpage{76}
+    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{76}
+    \subitem {addHistoryStateStatus}, \hyperpage{76}
+    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{77}
+    \subitem {checkUncontrolledSet}, \hyperpage{77}
+    \subitem {equivalentGlobalTransitions}, \hyperpage{78}
+    \subitem {getEpistemicClassForGlobalState}, \hyperpage{78}
+    \subitem {isAgentInCoalition}, \hyperpage{78}
+    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{79}
+    \subitem {newHistoryMarkDecisionAsInvalid}, \hyperpage{79}
+    \subitem {printCurrentHistory}, \hyperpage{79}
+    \subitem {restoreHistory}, \hyperpage{80}
+    \subitem {revertLastDecision}, \hyperpage{80}
+    \subitem {undoHistoryUntil}, \hyperpage{81}
+    \subitem {undoLastHistoryEntry}, \hyperpage{81}
+    \subitem {Verification}, \hyperpage{75}
+    \subitem {verify}, \hyperpage{81}
+    \subitem {verifyGlobalState}, \hyperpage{81}
+    \subitem {verifyLocalStates}, \hyperpage{82}
+    \subitem {verifyTransitionSets}, \hyperpage{82}
+  \item {Verification.cpp}, \hyperpage{101}
+    \subitem {dbgHistEnt}, \hyperpage{101}
+    \subitem {dbgVerifStatus}, \hyperpage{102}
+    \subitem {verStatusToStr}, \hyperpage{102}
+  \item {Verification.hpp}, \hyperpage{102}
+    \subitem {CONTEXT}, \hyperpage{103}
+    \subitem {DECISION}, \hyperpage{103}
+    \subitem {HistoryEntryType}, \hyperpage{103}
+    \subitem {MARK\_DECISION\_AS\_INVALID}, \hyperpage{103}
+    \subitem {NORMAL}, \hyperpage{103}
+    \subitem {RESTORE}, \hyperpage{103}
+    \subitem {REVERT}, \hyperpage{103}
+    \subitem {STATE\_STATUS}, \hyperpage{103}
+    \subitem {TraversalMode}, \hyperpage{103}
+    \subitem {verStatusToStr}, \hyperpage{104}
   \item {verify}
-    \subitem {Verification}, \hyperpage{73}
+    \subitem {Verification}, \hyperpage{81}
   \item {verifyGlobalState}
-    \subitem {Verification}, \hyperpage{73}
+    \subitem {Verification}, \hyperpage{81}
   \item {verifyLocalStates}
-    \subitem {Verification}, \hyperpage{73}
-  \item {verifyLocalStatesWithMultipleFormulas}
-    \subitem {Verification}, \hyperpage{74}
+    \subitem {Verification}, \hyperpage{82}
   \item {verifyTransitionSets}
-    \subitem {Verification}, \hyperpage{74}
+    \subitem {Verification}, \hyperpage{82}
   \item {verStatusToStr}
-    \subitem {Verification.cpp}, \hyperpage{93}
-    \subitem {Verification.hpp}, \hyperpage{95}
+    \subitem {Verification.cpp}, \hyperpage{102}
+    \subitem {Verification.hpp}, \hyperpage{104}
 
   \indexspace
 
   \item {yy\_bs\_column}
-    \subitem {yy\_buffer\_state}, \hyperpage{75}
+    \subitem {yy\_buffer\_state}, \hyperpage{83}
   \item {yy\_bs\_lineno}
-    \subitem {yy\_buffer\_state}, \hyperpage{75}
-  \item {yy\_buffer\_state}, \hyperpage{75}
-    \subitem {yy\_bs\_column}, \hyperpage{75}
-    \subitem {yy\_bs\_lineno}, \hyperpage{75}
-  \item {yy\_trans\_info}, \hyperpage{76}
-  \item {yyalloc}, \hyperpage{76}
-  \item {YYSTYPE}, \hyperpage{76}
+    \subitem {yy\_buffer\_state}, \hyperpage{83}
+  \item {yy\_buffer\_state}, \hyperpage{83}
+    \subitem {yy\_bs\_column}, \hyperpage{83}
+    \subitem {yy\_bs\_lineno}, \hyperpage{83}
+  \item {yy\_trans\_info}, \hyperpage{84}
+  \item {yyalloc}, \hyperpage{84}
+  \item {YYSTYPE}, \hyperpage{84}
 
 \end{theindex}

@@ -11,6 +11,7 @@ var files_dup =
     [ "ConditionOperator.hpp", "ConditionOperator_8hpp_source.html", null ],
     [ "config.h", "config_8h_source.html", null ],
     [ "Constants.hpp", "Constants_8hpp_source.html", null ],
+    [ "ctl_test.h", "ctl__test_8h_source.html", null ],
     [ "DotGraph.cpp", "DotGraph_8cpp.html", null ],
     [ "DotGraph.hpp", "DotGraph_8hpp.html", "DotGraph_8hpp" ],
     [ "EpistemicClass.hpp", "EpistemicClass_8hpp.html", [
@@ -24,7 +25,8 @@ var files_dup =
     ] ],
     [ "GlobalModelGenerator.cpp", "GlobalModelGenerator_8cpp.html", "GlobalModelGenerator_8cpp" ],
     [ "GlobalModelGenerator.hpp", "GlobalModelGenerator_8hpp.html", [
-      [ "GlobalModelGenerator", "classGlobalModelGenerator.html", "classGlobalModelGenerator" ]
+      [ "GlobalModelGenerator", "classGlobalModelGenerator.html", "classGlobalModelGenerator" ],
+      [ "GlobalStateTupleHash", "structGlobalModelGenerator_1_1GlobalStateTupleHash.html", "structGlobalModelGenerator_1_1GlobalStateTupleHash" ]
     ] ],
     [ "GlobalState.cpp", "GlobalState_8cpp.html", null ],
     [ "GlobalState.hpp", "GlobalState_8hpp.html", [
@@ -36,6 +38,7 @@ var files_dup =
       [ "GlobalTransition", "structGlobalTransition.html", "structGlobalTransition" ]
     ] ],
     [ "hartley_test.h", "hartley__test_8h_source.html", null ],
+    [ "input_error_test.h", "input__error__test_8h_source.html", null ],
     [ "knowledge_test.h", "knowledge__test_8h_source.html", null ],
     [ "LocalState.cpp", "LocalState_8cpp.html", null ],
     [ "LocalState.hpp", "LocalState_8hpp.html", [
@@ -53,6 +56,7 @@ var files_dup =
     ] ],
     [ "parser.h", "parser_8h_source.html", null ],
     [ "recursion_test.h", "recursion__test_8h_source.html", null ],
+    [ "reduction_test.h", "reduction__test_8h_source.html", null ],
     [ "simple_voting_run_test.h", "simple__voting__run__test_8h_source.html", null ],
     [ "simple_voting_run_test_but_faster.h", "simple__voting__run__test__but__faster_8h_source.html", null ],
     [ "simple_voting_test.h", "simple__voting__test_8h_source.html", null ],

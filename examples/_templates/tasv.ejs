@@ -1,0 +1,65 @@
+<%#
+PARAMETERS:
+    N_VOTERS - denotes the number of voters
+    N_CANDIDATES - denotes the number candidates on the ballot
+    WITH_FORMULA - flag denoting if formula should be included
+_%>
+<%_ for( let i = 1; i <= N_VOTERS; i++ ) { _%>
+Agent Voter<%=i%>:
+LOCAL: [Voter<%=i%>_vote]
+PERSISTENT: [Voter<%=i%>_vote]
+INITIAL: [Voter<%=i%>_vote:=0]
+init q0
+    <%_ for( let j = 0; j <= N_CANDIDATES; j++ ) { -%>
+    <%_ %>shared[2] vote<%=j%>_Voter<%=i%>[vote<%=j%>_Voter<%=i%>]: q0 -> q1 [Voter<%=i%>_vote:=<%=j%>]
+    <%_ }_%>
+    <%_ for( let j = 0; j <= N_CANDIDATES; j++ ) { -%>
+    <%_ %>shared[2] gv_<%=j%>_Voter<%=i%>[gv_<%=j%>_Voter<%=i%>]: q1 [Voter<%=i%>_vote==<%=j%>] -> q2
+    <%_ }_%>
+skip_vote_Voter<%=i%>: q0 -> q1
+shared[2] ng_Voter<%=i%>[ng_Voter<%=i%>]: q1 -> q2
+shared[2] pun_Voter<%=i%>[pn_Voter<%=i%>]: q2 -> q3
+shared[2] npun_Voter<%=i%>[pn_Voter<%=i%>]: q2 -> q3
+<%_ for( let j = 0; j <= N_CANDIDATES; j++ ) { -%>
+    <%_ for( let jj = 0; (jj <= N_CANDIDATES) ; jj++ ) { -%>
+        <%_ if(jj==j) continue; -%>
+        <%_ %>shared[2] revote<%=jj%>from<%=j%>_Voter<%=i%>[revote<%=jj%>_Voter<%=i%>]: q3[Voter<%=i%>_vote==<%=j%>] -> q4 [Voter<%=i%>_vote:=<%=jj%>]
+    <%_ }_%>
+<%_ }_%>
+skip_revote_Voter<%i%>: q3 -> q4
+    
+<% }_%>
+Agent Authority1:
+LOCAL: [<%=Array.from({length:N_CANDIDATES},(el,ind)=>ind+1).map(x=>`Tally${x}`).join(', ')%>, Freq]
+PERSISTENT: [<%= Array.from({length:N_CANDIDATES},(el,ind)=>ind+1).map(x=>`Tally${x}`).join(', ')%>, Freq]
+INITIAL: [<%= Array.from({length:N_CANDIDATES},(el,ind)=>ind+1).map(x=>`Tally${x}:=0`).join(', ')%>, Freq:=0]
+init q0
+<%_ for( let i = 1; i <= N_VOTERS; i++ ) { _%>
+    <%_ for( let j = 0; j <= N_CANDIDATES; j++ ) { -%>
+    <%_ %>shared[2] vote<%=j%>_Voter<%=i%>[vote_Voter<%=i%>]: q0[Freq<=<%=N_VOTERS%>] -> q0 [Freq:=Freq+1<%= j!=0 ? `, Tally${j}:=Tally${j}+1`:``%>]
+    <%_ }_%>
+    <%_ for( let j = 0; j <= N_CANDIDATES; j++ ) { -%>
+        <%_ for( let jj = 0; (jj <= N_CANDIDATES); jj++ ) { -%>
+            <%_ if(jj==j) continue; -%>
+            <%_ %>shared[2] revote<%=jj%>from<%=j%>_Voter<%=i%>[revote_Voter<%=i%>]: q0[Freq<=<%=N_VOTERS%> <%_ if(j!=0){ _%> <%=' '%>&&<%=' '%> <%_ }_%> <%= j!=0 ? `Tally${j}!=0`: ''%>] -> q0 [<%= j!=0 ? (`Tally${j}:=Tally${j}-1` + (jj!=0 ? `, Tally${jj}:=Tally${jj}+1`: '')) : (`Freq:=Freq+1` + (jj!=0 ? `, Tally${jj}:=Tally${jj}+1` : ''))%>]
+        <%_ }_%>
+    <%_ }_%>
+<% }_%>
+
+Agent Coercer1:
+LOCAL: [<%= Array.from({length: N_VOTERS}, (x, i) => i+1).map(x=>`Coercer1_Voter${x}_vote, Coercer1_Voter${x}_gv, Coercer1_pun${x}, Coercer1_npun${x}`).join(',') %>]
+PERSISTENT: [<%= Array.from({length: N_VOTERS}, (x, i) => i+1).map(x=>`Coercer1_Voter${x}_vote, Coercer1_Voter${x}_gv, Coercer1_pun${x}, Coercer1_npun${x}`).join(',') %>]
+INITIAL: []
+init q0
+<%_ for( let i = 1; i <= N_VOTERS; i++ ) { _%>
+    <%_ for( let j = 0; j <= N_CANDIDATES; j++ ) { _%>
+    <%_ %>shared[2] gv_<%=j%>_Voter<%=i%>[g_Voter<%=i%>]: q<%=i-1%> -> q<%=i%> [Coercer1_Voter<%=i%>_vote:=<%=j%>, Coercer1_Voter<%=i%>_gv:=1]    
+    <%_ }_%>
+shared[2] ng_Voter<%=i%>[g_Voter<%=i%>]: q<%=i-1%> -> q<%=i%> [Coercer1_Voter<%=i%>_gv:=2]
+shared[2] pun_Voter<%=i%>[pun_Voter<%=i%>]: q<%=N_VOTERS+i-1%> -> q<%=N_VOTERS+i%> [Coercer1_pun<%=i%>:=1]
+shared[2] npun_Voter<%=i%>[npun_Voter<%=i%>]: q<%=N_VOTERS+i-1%> -> q<%=N_VOTERS+i%> [Coercer1_npun<%=i%>:=1]
+<% }_%>
+
+<%_ if(typeof WITH_FORMULA!=='undefined' && WITH_FORMULA) { -%>
+FORMULA: <<Coercer1>>[]((Voter1_vote != 1) || (Coercer1_pun1 == 1 && Coercer1_npun1 == 0))
+<%_ } _%>

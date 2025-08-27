@@ -53,6 +53,7 @@ struct Cfg{
     bool reduce;
     bool reduce_all;
     std::string reduce_args;
+    bool fixpoint;
 };
 
 #endif 

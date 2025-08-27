@@ -178,15 +178,44 @@ $(document).ready(function(){initNavTree('config_8h_source.html',''); initResiza
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> result;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;};</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">bool</span> reducedVerify(<span class="keywordtype">string</span> path, <a class="code" href="classGlobalModelGenerator.html">GlobalModelGenerator</a>* generator)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        config.<a class="code" href="structCfg.html#a6859d06595457304810b0de5704341db">fname</a> = path.data();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        config.<a class="code" href="structCfg.html#afe7b0d13fc6f88e1cc75a1dba96e001a">output_local_models</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        config.<a class="code" href="structCfg.html#a04d390956b37d33a3c62d2e482e9b21f">output_global_model</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        config.<a class="code" href="structCfg.html#a25a438f7287fe979f7249f4791a9f05a">stv_mode</a> = 3;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        config.reduce = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        config.reduce_args = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keyword">auto</span> tp = <span class="keyword">new</span> <a class="code" href="classModelParser.html">ModelParser</a>();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        tuple&lt;LocalModels, Formula&gt; desc = tp-&gt;parse(config.<a class="code" href="structCfg.html#a6859d06595457304810b0de5704341db">fname</a>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keyword">auto</span> localModels = &amp;(get&lt;0&gt;(desc));</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keyword">auto</span> formula = &amp;(get&lt;1&gt;(desc));</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        generator-&gt;<a class="code" href="classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6">initModel</a>(localModels, formula);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordtype">bool</span> result = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        generator-&gt;<a class="code" href="classGlobalModelGenerator.html#abbbf2741211653a24bcbed0c2e8aa5af">expandAndReduceAllStates</a>();</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        <span class="keyword">auto</span> verification = <span class="keyword">new</span> <a class="code" href="classVerification.html">Verification</a>(generator);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        result = verification-&gt;verify();</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        </div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aGlobalModelGenerator_8hpp_html"><div class="ttname"><a href="GlobalModelGenerator_8hpp.html">GlobalModelGenerator.hpp</a></div><div class="ttdoc">Generator of a global model. Class for initializing and generating a global model.</div></div>
 <div class="ttc" id="aUtils_8hpp_html"><div class="ttname"><a href="Utils_8hpp.html">Utils.hpp</a></div></div>
 <div class="ttc" id="aVerification_8hpp_html"><div class="ttname"><a href="Verification_8hpp.html">Verification.hpp</a></div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html"><div class="ttname"><a href="classGlobalModelGenerator.html">GlobalModelGenerator</a></div><div class="ttdoc">Stores the local models, formula and a global model.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.hpp:18</div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html_a8f2f18be55f04da04ad4bcd1c9f0eef2"><div class="ttname"><a href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">GlobalModelGenerator::expandAllStates</a></div><div class="ttdeci">void expandAllStates()</div><div class="ttdoc">Expands the states starting from the initial GlobalState and continues until there are no more states...</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:137</div></div>
-<div class="ttc" id="aclassGlobalModelGenerator_html_af8a60f8b1efcd9eb7615c6ed458d81e6"><div class="ttname"><a href="classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6">GlobalModelGenerator::initModel</a></div><div class="ttdeci">GlobalState * initModel(LocalModels *localModels, Formula *formula)</div><div class="ttdoc">Initializes a global model from local models and a formula.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:30</div></div>
+<div class="ttc" id="aclassGlobalModelGenerator_html"><div class="ttname"><a href="classGlobalModelGenerator.html">GlobalModelGenerator</a></div><div class="ttdoc">Stores the local models, formula and a global model.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.hpp:22</div></div>
+<div class="ttc" id="aclassGlobalModelGenerator_html_a8f2f18be55f04da04ad4bcd1c9f0eef2"><div class="ttname"><a href="classGlobalModelGenerator.html#a8f2f18be55f04da04ad4bcd1c9f0eef2">GlobalModelGenerator::expandAllStates</a></div><div class="ttdeci">void expandAllStates()</div><div class="ttdoc">Expands the states starting from the initial GlobalState and continues until there are no more states...</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:162</div></div>
+<div class="ttc" id="aclassGlobalModelGenerator_html_abbbf2741211653a24bcbed0c2e8aa5af"><div class="ttname"><a href="classGlobalModelGenerator.html#abbbf2741211653a24bcbed0c2e8aa5af">GlobalModelGenerator::expandAndReduceAllStates</a></div><div class="ttdeci">void expandAndReduceAllStates()</div><div class="ttdoc">Expands and reduces the states starting from the initial GlobalState using a DFS-POR algorithm and co...</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:189</div></div>
+<div class="ttc" id="aclassGlobalModelGenerator_html_af8a60f8b1efcd9eb7615c6ed458d81e6"><div class="ttname"><a href="classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6">GlobalModelGenerator::initModel</a></div><div class="ttdeci">GlobalState * initModel(LocalModels *localModels, Formula *formula)</div><div class="ttdoc">Initializes a global model from local models and a formula.</div><div class="ttdef"><b>Definition:</b> GlobalModelGenerator.cpp:35</div></div>
 <div class="ttc" id="aclassModelParser_html"><div class="ttname"><a href="classModelParser.html">ModelParser</a></div><div class="ttdoc">A parser for converting a text file into a model.</div><div class="ttdef"><b>Definition:</b> ModelParser.hpp:16</div></div>
 <div class="ttc" id="aclassTestVerif_html"><div class="ttname"><a href="classTestVerif.html">TestVerif</a></div><div class="ttdef"><b>Definition:</b> config.h:17</div></div>
 <div class="ttc" id="aclassVerification_html"><div class="ttname"><a href="classVerification.html">Verification</a></div><div class="ttdoc">A class that verifies if the model fulfills the formula. Also can do some operations on decision hist...</div><div class="ttdef"><b>Definition:</b> Verification.hpp:84</div></div>

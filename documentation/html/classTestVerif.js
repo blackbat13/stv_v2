@@ -3,6 +3,7 @@ var classTestVerif =
     [ "TestVerif", "classTestVerif.html#acf756aebe635f4c8eef73cdb6475633d", null ],
     [ "TestVerif", "classTestVerif.html#a3d77f354ab638b0a950baeb86e64fefd", null ],
     [ "~TestVerif", "classTestVerif.html#ae6c1a5a3f3147377a95450ce9f2f83cd", null ],
+    [ "reducedVerify", "classTestVerif.html#a5a3798040e071c52a9ec120330427435", null ],
     [ "verify", "classTestVerif.html#aa3d60aceea3498a6ff71fc7a8e163712", null ],
     [ "verifyFull", "classTestVerif.html#ad79ccb6bd2c29bdb2458e299792ab8b4", null ],
     [ "generator", "classTestVerif.html#a27fa441bc1799803836d916826fd62f7", null ],

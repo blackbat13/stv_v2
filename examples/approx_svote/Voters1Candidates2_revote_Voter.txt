@@ -1,0 +1,39 @@
+Agent Voter1:
+LOCAL: [Voter1_vote,Voter1_give]
+PERSISTENT: [Voter1_vote,Voter1_give]
+INITIAL: []
+init idle0
+act1: idle0 -> voted1 [Voter1_vote:=1]
+act2: idle0 -> voted2 [Voter1_vote:=2]
+act3: voted1 -> obeyed1 [Voter1_give:=1]
+act4: voted2 -> obeyed2 [Voter1_give:=1]
+act5: voted1 -> disobeyed1 [Voter1_give:=2]
+act5: voted2 -> disobeyed2 [Voter1_give:=2]
+act6: obeyed1 -> idle1
+act6: obeyed2 -> idle2
+act7: disobeyed1 -> idle1
+act7: disobeyed2 -> idle2
+act1: idle1 ->voted1 [Voter1_vote:=1]
+act1: idle2 -> voted1 [Voter1_vote:=1]
+act2: idle1 -> voted2 [Voter1_vote:=2]
+act2: idle2 -> voted2 [Voter1_vote:=2]
+act3: voted1 -> obeyed1 [Voter1_give:=1]
+act4: voted2 -> obeyed2 [Voter1_give:=1]
+act5: voted1 -> disobeyed1 [Voter1_give:=2]
+act5: voted2 -> disobeyed2 [Voter1_give:=2]
+act1: idle0 -> idle0
+act2: idle0 -> idle0
+act3: voted1 -> voted1 [Voter1_vote:=1]
+act5: voted1 -> voted1 [Voter1_vote:=1]
+act4: voted2 -> voted2 [Voter1_vote:=2]
+act5: voted2 -> voted2 [Voter1_vote:=2]
+act6: obeyed1 -> obeyed1 [Voter1_give:=1]
+act6: obeyed2 -> obeyed2 [Voter1_give:=1]
+act7: disobeyed1 -> disobeyed1 [Voter1_give:=2]
+act7: disobeyed2 -> disobeyed2 [Voter1_give:=2]
+act1: idle1 -> idle1
+act2: idle1 -> idle1
+act1: idle2 -> idle2
+act2: idle2 -> idle2
+
+FORMULA: <<Voter1>>[](Voter1_give!=2)

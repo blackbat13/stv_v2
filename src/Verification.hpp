@@ -86,6 +86,7 @@ public:
     Verification(GlobalModelGenerator* generator);
     ~Verification();
     bool verify();
+    bool fixpointVerify();
     void historyDecisionsERR();
 protected:
     /// @brief Current mode of model traversal.
@@ -119,6 +120,8 @@ protected:
     bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
     bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
+    bool minFixpointVerify();
+    bool maxFixpointVerify();
 };
 
 #endif // SELENE_VERIFICATION
