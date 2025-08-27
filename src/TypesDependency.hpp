@@ -111,6 +111,9 @@ class StrategyCollection {
     private:
         map<string, Action> selectedStrategy;
     public:
+        StrategyCollection() {} ;
+        ~StrategyCollection() {};
+        StrategyCollection(string hash, Action action) { selectedStrategy = {{hash, action}}; };
         void addAction(Action action) {
             selectedStrategy[action.hash] = action;
         };
@@ -131,7 +134,7 @@ class ProbabilityStrategyDecisions {
     public:
         ProbabilityStrategyDecisions() {} ;
         ~ProbabilityStrategyDecisions() {};
-        map<Agent*, map<string, StrategyCollection>> allCoalitionTransitions; // agent -> localStateHash -> strategy
+        map<Agent*, map<string, vector<StrategyCollection>>> allCoalitionTransitions; // agent -> localStateHash -> strategy
         map<string, int> currentStrategyPermutation;
 };
 

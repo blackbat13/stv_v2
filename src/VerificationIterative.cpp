@@ -240,9 +240,10 @@ void VerificationIterative::undoLastHistoryEntry() {
 bool VerificationIterative::revertToLastDecision()
 {
     // temporary infinite loop to debug, change later to proper handling of creating a new strategy
-    while (true) {
-        cout << "STOP" << endl;
+    if (config.verify_strategy) {
+        return false;
     }
+    
     // Undo Z->T (including Z, excluding T); find Y while doing that
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
@@ -600,6 +601,10 @@ Result VerificationIterative::verify() {
         if (config.probability && currentState->depth == 0 && currentState->globalState->probabilityResult.returnProbability().probabilityFalse > (1.0 - this->generator->getFormula()->probability)) {
             cout << "ERR1, revert" << endl;
             revertToLastDecision();
+            if (config.verify_strategy) {
+                verificationResult.verificationResult = false;
+                return verificationResult;
+            }
             while (!statesToProcess.empty()) {
                 statesToProcess.pop();
             }
@@ -744,6 +749,10 @@ Result VerificationIterative::verify() {
                         statesToProcess.pop();
                         if (!config.probability) {
                             revertToLastDecision();
+                            if (config.verify_strategy) {
+                                verificationResult.verificationResult = false;
+                                return verificationResult;
+                            }
                         }
                         continue;
                     } else { // initial state is bad already
@@ -877,6 +886,10 @@ Result VerificationIterative::verify() {
                 statesToProcess.pop();
                 undoLastHistoryEntry();
                 revertToLastDecision();
+                if (config.verify_strategy) {
+                    verificationResult.verificationResult = false;
+                    return verificationResult;
+                }
                 continue;
             }
 
@@ -892,6 +905,10 @@ Result VerificationIterative::verify() {
             }
             cout << "ERR2, revert" << endl;
             revertToLastDecision();
+            if (config.verify_strategy) {
+                verificationResult.verificationResult = false;
+                return verificationResult;
+            }
             while (!statesToProcess.empty()) {
                 statesToProcess.pop();
             }
@@ -969,6 +986,10 @@ Result VerificationIterative::verify() {
                     statesToProcess.pop();
                     if (!config.probability) {
                         revertToLastDecision();
+                        if (config.verify_strategy) {
+                            verificationResult.verificationResult = false;
+                            return verificationResult;
+                        }
                     }
                     continue;
                 } else { // got back to root state

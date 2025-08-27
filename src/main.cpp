@@ -111,9 +111,17 @@ int main(int argc, char* argv[]) {
         } else if (config.probability) {
             generator->createIterativeStrategy(localModels);
             config.verify_strategy = true;
-            verifResult2 = verificationIt->verify();
-            verifResult = verifResult2.verificationResult;
-            printf("Probability\nTRUE: %f\nFALSE: %f\n", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);
+            do {
+                printf("Trying next strategy...\n");
+                verificationIt = new VerificationIterative(generator);
+                verifResult2 = verificationIt->verify();
+                verifResult = verifResult2.verificationResult;
+                printf("Probability\nTRUE: %f\nFALSE: %f\n", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);
+                if (verifResult) {
+                    break;
+                }
+                delete verificationIt;
+            } while (generator->nextIterativeStrategy());
         } else {
             // verifResult = verification->verify();
             verifResult = verificationIt->verify().verificationResult;

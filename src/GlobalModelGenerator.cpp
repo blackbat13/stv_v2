@@ -639,7 +639,9 @@ void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
       action.states = new vector<string>(1, trans->from->name);
 
       // add each strategy to a good bucket
-      newProbabilityStrategy.allCoalitionTransitions[agent][action.hash].addAction(action);
+      cout << "Adding action " << action.actionName << " for state " << action.hash << endl;
+      newProbabilityStrategy.allCoalitionTransitions[agent][action.hash].push_back(StrategyCollection(action.hash, action));
+      cout << "Bucket size: " << newProbabilityStrategy.allCoalitionTransitions[agent][action.hash].size() << endl;
       newProbabilityStrategy.currentStrategyPermutation[action.hash] = 0;
       // cout << action.hash << " " << action.actionName << endl;
       //strategyCollection->addAction(action);
@@ -649,7 +651,7 @@ void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
     StrategyCollection* strat = new StrategyCollection();
     // add the first actions from allCoalitionTransitions to strat
     for (auto item : this->probabilityStrategy.currentStrategyPermutation) {
-        auto action = this->probabilityStrategy.allCoalitionTransitions[agent][item.first].getStrategy().begin()->second;
+        auto action = this->probabilityStrategy.allCoalitionTransitions[agent][item.first][0].getStrategy().begin()->second;
         strat->addAction(action);
     }
     this->strategyCollection = strat;
@@ -657,12 +659,19 @@ void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
 
 bool GlobalModelGenerator::nextIterativeStrategy()
 {
+    cout << this->probabilityStrategy.currentStrategyPermutation.rbegin()->first << " " << this->probabilityStrategy.currentStrategyPermutation.rbegin()->second << " / " << endl;
     // increase rightmost counter by 1, if overflow -> increase the previous counter by 1 recursively
     this->probabilityStrategy.currentStrategyPermutation.rbegin()->second += 1;
     auto it = this->probabilityStrategy.currentStrategyPermutation.rbegin();
     while (it != this->probabilityStrategy.currentStrategyPermutation.rend()) {
+        cout << it->first << " " << it->second << " / " << endl;
         auto actionBucket = this->probabilityStrategy.allCoalitionTransitions[*this->formula->coalition.begin()][it->first];
-        if (it->second == static_cast<int>(actionBucket.getStrategy().size())) {
+        cout << static_cast<int>(actionBucket.size()) << endl;
+        for (auto item : actionBucket) {
+            auto itemStrat = item.getStrategy().begin();
+            cout << itemStrat->first << " " << itemStrat->second.actionName << endl;
+        }
+        if (it->second >= static_cast<int>(actionBucket.size())) {
             it->second = 0;
             it++;
             if (it != this->probabilityStrategy.currentStrategyPermutation.rend()) {
@@ -675,15 +684,16 @@ bool GlobalModelGenerator::nextIterativeStrategy()
         }
     }
     if (it == this->probabilityStrategy.currentStrategyPermutation.rend() && this->probabilityStrategy.currentStrategyPermutation.begin()->second == 0) {
+        cout << "THIS" << endl;
         return false;
     }
     
     // create a new strategy from the current permutation and construct a strategy from selected parts
     StrategyCollection* strat = new StrategyCollection();
     for (auto item : this->probabilityStrategy.currentStrategyPermutation) {
-        auto actionIt = this->probabilityStrategy.allCoalitionTransitions[*this->formula->coalition.begin()][item.first].getStrategy().begin();
+        auto actionIt = this->probabilityStrategy.allCoalitionTransitions[*this->formula->coalition.begin()][item.first].begin();
         advance(actionIt, item.second);
-        auto action = actionIt->second;
+        auto action = actionIt->getStrategy().begin()->second;
         strat->addAction(action);
     }
 
