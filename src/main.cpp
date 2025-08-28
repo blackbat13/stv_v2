@@ -113,6 +113,7 @@ int main(int argc, char* argv[]) {
             config.verify_strategy = true;
             do {
                 printf("Trying next strategy...\n");
+                generator->initModel(localModels, formula);
                 verificationIt = new VerificationIterative(generator);
                 verifResult2 = verificationIt->verify();
                 verifResult = verifResult2.verificationResult;

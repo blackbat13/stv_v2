@@ -696,7 +696,7 @@ bool GlobalModelGenerator::nextIterativeStrategy()
         auto action = actionIt->getStrategy().begin()->second;
         strat->addAction(action);
     }
-
+    this->strategyCollection = strat;
     return true;
 }
 
