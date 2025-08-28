@@ -123,6 +123,7 @@ int main(int argc, char* argv[]) {
                 }
                 delete verificationIt;
             } while (generator->nextIterativeStrategy());
+            cout << "No more strategies to try." << endl;
         } else {
             // verifResult = verification->verify();
             verifResult = verificationIt->verify().verificationResult;
@@ -162,7 +163,6 @@ int main(int argc, char* argv[]) {
             // save GlobalModel solution
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
-        delete verificationIt;
         delete verification;
     }
 
