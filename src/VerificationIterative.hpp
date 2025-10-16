@@ -99,6 +99,8 @@ class VerificationIterative {
         EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
         bool areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2);
         string checkIfProbabilistic(GlobalTransition* transitionToCheck);
+        void findLoopedProbabilityTransitions(map<string, set<GlobalTransition*>>* transitionSets);
+        void dissolveLoopedProbabilityTransition(GlobalTransition* transitionToDissolve, set<GlobalTransition*>* probabilityTransitions);
         
         // todo: fix history
         // add and take away from stack the StateVerificationInfo

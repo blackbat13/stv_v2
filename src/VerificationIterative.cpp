@@ -128,6 +128,14 @@ void VerificationIterative::addHistoryProbability(GlobalTransition* decision) {
     newHistoryEntry.globalState = decision->to;
     newHistoryEntry.stateProbabilityPrevious = decision->to->probability;
     float globalTransitionProbability = 1.0;
+    if (decision->from->probabilityLoop != nullptr) {
+        float tempProb = 1.0;
+        for (auto localProbability : decision->from->probabilityLoop->localTransitions) {
+            tempProb *= localProbability->probability;
+        }
+        cout << "TEMP PROB: " << tempProb << endl;
+        globalTransitionProbability /= (1.0 - tempProb);
+    }
     for (auto localProbability : decision->localTransitions) {
         globalTransitionProbability *= localProbability->probability;
     }
@@ -376,6 +384,31 @@ string VerificationIterative::checkIfProbabilistic(GlobalTransition* transitionT
         }
     }
     return "";
+}
+
+void VerificationIterative::findLoopedProbabilityTransitions(map<string, set<GlobalTransition*>>* transitionSets) {
+    cout << "findLoopedProbabilityTransitions: " << transitionSets->size() << endl;
+    for (auto probabilisticTransitionSet : *transitionSets) {
+        GlobalTransition* foundTransition = nullptr;
+        for (GlobalTransition* globalTransition : probabilisticTransitionSet.second) {
+            cout << globalTransition->from->hash << " ^^^ " << globalTransition->to->hash << endl;
+            if (globalTransition->from->hash == globalTransition->to->hash) {
+                foundTransition = globalTransition;
+                break;
+            }
+        }
+        if (foundTransition != nullptr) {
+            cout << "### Found " << foundTransition->from->hash << " -> " << foundTransition->to->hash << endl; 
+            dissolveLoopedProbabilityTransition(foundTransition, &(probabilisticTransitionSet.second));
+            cout << "&&&" << foundTransition->from->probabilityLoop->from->hash << endl;
+        }
+
+    }
+}
+
+void VerificationIterative::dissolveLoopedProbabilityTransition(GlobalTransition* transitionToDissolve, set<GlobalTransition*>* probabilityTransitions)
+{
+    transitionToDissolve->from->probabilityLoop = transitionToDissolve;
 }
 
 /// @brief Checks if two global transitions are made up of the same local transitions
@@ -894,6 +927,15 @@ Result VerificationIterative::verify() {
             }
 
             testForAndFixBadAgents(currentState);
+            findLoopedProbabilityTransitions(&(currentState->controlledProbabilisticTransitionsLeftToProcess));
+            for (auto item2 : currentState->controlledProbabilisticTransitionsLeftToProcess) {
+                for (auto item3 : item2.second) {
+                    if (item3->from->probabilityLoop != nullptr) {
+                        cout << "!!! " << item3->from->probabilityLoop->from->hash.c_str() << endl;
+                    }
+                }
+            }
+            cout << "Size: " << currentState->controlledProbabilisticTransitionsLeftToProcess.size() << endl;
             currentState->processed = true;
         }
 
@@ -1005,6 +1047,10 @@ Result VerificationIterative::verify() {
         // push another state onto the queue, go back and continue or return a value
         if (config.probability && currentState->controlledProbabilisticTransitionsLeftToProcess.size() > 0) {
             for (GlobalTransition* controlledProbabilisticTransition : currentState->controlledProbabilisticTransitionsLeftToProcess.begin()->second) {
+                // skip loops
+                if (controlledProbabilisticTransition->from->hash == controlledProbabilisticTransition->to->hash) {
+                    continue;
+                }
                 StateVerificationInfo newState;
                 newState.globalState = controlledProbabilisticTransition->to;
                 newState.fromState = currentState;

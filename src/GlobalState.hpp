@@ -48,6 +48,9 @@ struct GlobalState {
 
     ProbabilityEntry probabilityResult;
 
+    /// @brief Used to resolve self loops during probability calculation
+    GlobalTransition* probabilityLoop = nullptr;
+
     /// @brief Debug information on the given GlobalState
     /// @param indent - optional indentation string 
     /// @return GlobalState data
