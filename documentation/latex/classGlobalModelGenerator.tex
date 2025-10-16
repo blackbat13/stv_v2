@@ -49,21 +49,16 @@ void \mbox{\hyperlink{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58
 \begin{DoxyCompactList}\small\item\em Sets formula to an incorrectly written state. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}{get\+Formula\+Corectness}} ()
 \begin{DoxyCompactList}\small\item\em Gets formula status. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}\label{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}} 
-void {\bfseries init\+Strategy} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$strat)
-\item 
-\mbox{\Hypertarget{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}\label{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}} 
-void {\bfseries create\+Iterative\+Strategy} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}})
-\item 
-\mbox{\Hypertarget{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}\label{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}} 
-bool {\bfseries next\+Iterative\+Strategy} ()
-\item 
-\mbox{\Hypertarget{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}\label{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}} 
-string {\bfseries get\+Coalition\+Identifier} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
-\item 
-\mbox{\Hypertarget{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}\label{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}} 
-string {\bfseries get\+Action\+Name\+From\+State\+In\+Strategy} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}{init\+Strategy}} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$strat)
+\begin{DoxyCompactList}\small\item\em Initiates the strategy with a given \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}{create\+Iterative\+Strategy}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}})
+\begin{DoxyCompactList}\small\item\em Prepares the strategy generating structures for the probabilistic verification. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}{next\+Iterative\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Generates next set strategy from the memorized coalition transitions for the probabilistic verification. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}{get\+Coalition\+Identifier}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
+\begin{DoxyCompactList}\small\item\em Returns a concatenated name of all given Local\+States. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}{get\+Action\+Name\+From\+State\+In\+Strategy}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Gives next action\textquotesingle{}s name from a given state. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -162,6 +157,21 @@ Creates a hash from a set of \mbox{\hyperlink{classLocalState}{Local\+State}}.
 \begin{DoxyReturn}{Returns}
 Returns a string with a hash. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}\label{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!createIterativeStrategy@{createIterativeStrategy}}
+\index{createIterativeStrategy@{createIterativeStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{createIterativeStrategy()}{createIterativeStrategy()}}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::create\+Iterative\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$}]{local\+Models }\end{DoxyParamCaption})}
+
+
+
+Prepares the strategy generating structures for the probabilistic verification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+Models} & \mbox{\hyperlink{structLocalModels}{Local\+Models}} to generate the coalition transition buckets from. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}\label{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!expandAndReduceAllStates@{expandAndReduceAllStates}}
 \index{expandAndReduceAllStates@{expandAndReduceAllStates}!GlobalModelGenerator@{GlobalModelGenerator}}
@@ -321,6 +331,24 @@ Creates a new \mbox{\hyperlink{structGlobalState}{Global\+State}} using some of 
 \begin{DoxyReturn}{Returns}
 Returns a pointer to a new or already existing in the same epistemic class \mbox{\hyperlink{structGlobalModel}{Global\+Model}}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}\label{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!getActionNameFromStateInStrategy@{getActionNameFromStateInStrategy}}
+\index{getActionNameFromStateInStrategy@{getActionNameFromStateInStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{getActionNameFromStateInStrategy()}{getActionNameFromStateInStrategy()}}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Action\+Name\+From\+State\+In\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
+
+
+
+Gives next action\textquotesingle{}s name from a given state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \mbox{\hyperlink{structGlobalState}{Global\+State}} from which an action name would be retrieved if a set strategy is present. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String containing the action name ending on a semicolon. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}\label{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getAgentInstanceByName@{getAgentInstanceByName}}
 \index{getAgentInstanceByName@{getAgentInstanceByName}!GlobalModelGenerator@{GlobalModelGenerator}}
@@ -338,6 +366,24 @@ Get a pointer to an agent by using its name.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Pointer to an \mbox{\hyperlink{classAgent}{Agent}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}\label{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!getCoalitionIdentifier@{getCoalitionIdentifier}}
+\index{getCoalitionIdentifier@{getCoalitionIdentifier}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{getCoalitionIdentifier()}{getCoalitionIdentifier()}}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Coalition\+Identifier (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States }\end{DoxyParamCaption})}
+
+
+
+Returns a concatenated name of all given Local\+States. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+States} & Vector of Local\+States to concatenate into a single string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classLocalState}{Local\+State}} names separated with semicolons, ending on a semicolon. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}\label{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getCurrentGlobalModel@{getCurrentGlobalModel}}
@@ -410,6 +456,34 @@ Initializes a global model from local models and a formula.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns a pointer to initial state of the global model. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}\label{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!initStrategy@{initStrategy}}
+\index{initStrategy@{initStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{initStrategy()}{initStrategy()}}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::init\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$}]{strat }\end{DoxyParamCaption})}
+
+
+
+Initiates the strategy with a given \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em strat} & \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} to initialize the strategy. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}\label{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!nextIterativeStrategy@{nextIterativeStrategy}}
+\index{nextIterativeStrategy@{nextIterativeStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{nextIterativeStrategy()}{nextIterativeStrategy()}}
+{\footnotesize\ttfamily bool Global\+Model\+Generator\+::next\+Iterative\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Generates next set strategy from the memorized coalition transitions for the probabilistic verification. 
+
+\begin{DoxyReturn}{Returns}
+Returns true if the strategy was generated properly, false if it is the last permutation. 
 \end{DoxyReturn}
 
 

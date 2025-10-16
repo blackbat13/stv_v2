@@ -1,3 +1,9 @@
+/**
+ * @file TypesDependency.hpp
+ * @brief Custom data structures, using other custom data structures.
+ * Data structures and classes containing model data that are using other custom data structures.
+ */
+
 #define STRATEGY_BITS 64
 
 #ifndef TYPES_DEPENDENCY
@@ -44,17 +50,20 @@ enum HistoryEntryType {
     ANSWER_PROBABILITY ///< There's a change in the answer probability.
 };
 
+/// @brief Contains the type of the probability calculation in a given node.
 enum ProbabilityCalculationType {
     SUM_PROBABILITY,
     MIN_PROBABILITY,
     NONE_PROBABILITY
 };
 
+/// @brief Contains probability of a state being in a true or false state.
 struct ProbabilityTrueFalse {
     float probabilityTrue = 0.0;
     float probabilityFalse = 0.0;
 };
 
+/// @brief Class for handling the probability operations during probability verification.
 class ProbabilityEntry {
     public:
         ProbabilityEntry() {} ;
@@ -77,6 +86,7 @@ class ProbabilityEntry {
         ProbabilityTrueFalse minProbability = {1.0, 0.0};
 };
 
+/// @brief Handles all single state verification information during probabilistic verification.
 struct StateVerificationInfo {
     GlobalState* globalState = nullptr;
     StateVerificationInfo* fromState = nullptr;
@@ -98,6 +108,7 @@ struct StateVerificationInfo {
     bool gotResponseFromOtherState = false;
 };
 
+/// @brief Single action template for probabilistic verification.
 struct Action {
     /// @brief 
     vector<string> *states;
@@ -107,6 +118,7 @@ struct Action {
     string actionName;
 };
 
+/// @brief Handles currently selected strategy when the strategy is set.
 class StrategyCollection {
     private:
         map<string, Action> selectedStrategy;
@@ -130,6 +142,7 @@ class StrategyCollection {
         };
 };
 
+/// @brief Structure for the iterative set strategy generation.
 class ProbabilityStrategyDecisions {
     public:
         ProbabilityStrategyDecisions() {} ;

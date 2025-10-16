@@ -1,3 +1,9 @@
+/**
+ * @file LocalTransition.hpp
+ * @brief Class representing a local transition.
+ * Class representing a local transition.
+ */
+
 #ifndef LOCALTRANSITION_H
 #define LOCALTRANSITION_H
 

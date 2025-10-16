@@ -10,325 +10,456 @@
 \contentsline {section}{\numberline {2.1}Class Hierarchy}{5}{section.2.1}%
 \contentsline {chapter}{\numberline {3}Class Index}{7}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Class List}{7}{section.3.1}%
-\contentsline {chapter}{\numberline {4}File Index}{9}{chapter.4}%
-\contentsline {section}{\numberline {4.1}File List}{9}{section.4.1}%
-\contentsline {chapter}{\numberline {5}Class Documentation}{11}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Agent Class Reference}{11}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{11}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Constructor \& Destructor Documentation}{12}{subsection.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.1.2.1}Agent()}{12}{subsubsection.5.1.2.1}%
-\contentsline {subsection}{\numberline {5.1.3}Member Function Documentation}{12}{subsection.5.1.3}%
-\contentsline {subsubsection}{\numberline {5.1.3.1}includesState()}{12}{subsubsection.5.1.3.1}%
-\contentsline {section}{\numberline {5.2}Agent\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{12}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{13}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}Member Function Documentation}{13}{subsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.2.1}addInitial()}{13}{subsubsection.5.2.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2.2}addLocal()}{14}{subsubsection.5.2.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.2.3}addPersistent()}{14}{subsubsection.5.2.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.2.4}addTransition()}{15}{subsubsection.5.2.2.4}%
-\contentsline {subsubsection}{\numberline {5.2.2.5}generateAgent()}{15}{subsubsection.5.2.2.5}%
-\contentsline {subsubsection}{\numberline {5.2.2.6}setIdent()}{16}{subsubsection.5.2.2.6}%
-\contentsline {subsubsection}{\numberline {5.2.2.7}setInitState()}{17}{subsubsection.5.2.2.7}%
-\contentsline {section}{\numberline {5.3}Assignment Class Reference}{17}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{18}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Constructor \& Destructor Documentation}{18}{subsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.2.1}Assignment()}{18}{subsubsection.5.3.2.1}%
-\contentsline {subsection}{\numberline {5.3.3}Member Function Documentation}{18}{subsection.5.3.3}%
-\contentsline {subsubsection}{\numberline {5.3.3.1}assign()}{18}{subsubsection.5.3.3.1}%
-\contentsline {section}{\numberline {5.4}Cfg Struct Reference}{18}{section.5.4}%
-\contentsline {section}{\numberline {5.5}Condition Struct Reference}{19}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{19}{subsection.5.5.1}%
-\contentsline {section}{\numberline {5.6}Dot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph Class Reference}{20}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Member Function Documentation}{20}{subsection.5.6.1}%
-\contentsline {subsubsection}{\numberline {5.6.1.1}addEdge()}{20}{subsubsection.5.6.1.1}%
-\contentsline {subsubsection}{\numberline {5.6.1.2}addNode()}{21}{subsubsection.5.6.1.2}%
-\contentsline {subsubsection}{\numberline {5.6.1.3}saveToFile()}{21}{subsubsection.5.6.1.3}%
-\contentsline {subsection}{\numberline {5.6.2}Member Data Documentation}{21}{subsection.5.6.2}%
-\contentsline {subsubsection}{\numberline {5.6.2.1}styleString}{21}{subsubsection.5.6.2.1}%
-\contentsline {section}{\numberline {5.7}Epistemic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Class Struct Reference}{22}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{22}{subsection.5.7.1}%
-\contentsline {section}{\numberline {5.8}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Add Class Reference}{22}{section.5.8}%
-\contentsline {subsection}{\numberline {5.8.1}Detailed Description}{23}{subsection.5.8.1}%
-\contentsline {subsection}{\numberline {5.8.2}Constructor \& Destructor Documentation}{23}{subsection.5.8.2}%
-\contentsline {subsubsection}{\numberline {5.8.2.1}ExprAdd()}{23}{subsubsection.5.8.2.1}%
-\contentsline {subsection}{\numberline {5.8.3}Member Function Documentation}{23}{subsection.5.8.3}%
-\contentsline {subsubsection}{\numberline {5.8.3.1}eval()}{23}{subsubsection.5.8.3.1}%
-\contentsline {section}{\numberline {5.9}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}And Class Reference}{24}{section.5.9}%
-\contentsline {subsection}{\numberline {5.9.1}Detailed Description}{24}{subsection.5.9.1}%
-\contentsline {subsection}{\numberline {5.9.2}Constructor \& Destructor Documentation}{24}{subsection.5.9.2}%
-\contentsline {subsubsection}{\numberline {5.9.2.1}ExprAnd()}{24}{subsubsection.5.9.2.1}%
-\contentsline {subsection}{\numberline {5.9.3}Member Function Documentation}{25}{subsection.5.9.3}%
-\contentsline {subsubsection}{\numberline {5.9.3.1}eval()}{25}{subsubsection.5.9.3.1}%
-\contentsline {section}{\numberline {5.10}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Const Class Reference}{25}{section.5.10}%
-\contentsline {subsection}{\numberline {5.10.1}Detailed Description}{25}{subsection.5.10.1}%
-\contentsline {subsection}{\numberline {5.10.2}Constructor \& Destructor Documentation}{26}{subsection.5.10.2}%
-\contentsline {subsubsection}{\numberline {5.10.2.1}ExprConst()}{26}{subsubsection.5.10.2.1}%
-\contentsline {subsection}{\numberline {5.10.3}Member Function Documentation}{26}{subsection.5.10.3}%
-\contentsline {subsubsection}{\numberline {5.10.3.1}eval()}{26}{subsubsection.5.10.3.1}%
-\contentsline {section}{\numberline {5.11}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Div Class Reference}{26}{section.5.11}%
-\contentsline {subsection}{\numberline {5.11.1}Detailed Description}{27}{subsection.5.11.1}%
-\contentsline {subsection}{\numberline {5.11.2}Constructor \& Destructor Documentation}{27}{subsection.5.11.2}%
-\contentsline {subsubsection}{\numberline {5.11.2.1}ExprDiv()}{27}{subsubsection.5.11.2.1}%
-\contentsline {subsection}{\numberline {5.11.3}Member Function Documentation}{27}{subsection.5.11.3}%
-\contentsline {subsubsection}{\numberline {5.11.3.1}eval()}{27}{subsubsection.5.11.3.1}%
-\contentsline {section}{\numberline {5.12}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Eq Class Reference}{28}{section.5.12}%
-\contentsline {subsection}{\numberline {5.12.1}Detailed Description}{28}{subsection.5.12.1}%
-\contentsline {subsection}{\numberline {5.12.2}Constructor \& Destructor Documentation}{28}{subsection.5.12.2}%
-\contentsline {subsubsection}{\numberline {5.12.2.1}ExprEq()}{28}{subsubsection.5.12.2.1}%
-\contentsline {subsection}{\numberline {5.12.3}Member Function Documentation}{29}{subsection.5.12.3}%
-\contentsline {subsubsection}{\numberline {5.12.3.1}eval()}{29}{subsubsection.5.12.3.1}%
-\contentsline {section}{\numberline {5.13}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ge Class Reference}{29}{section.5.13}%
-\contentsline {subsection}{\numberline {5.13.1}Detailed Description}{29}{subsection.5.13.1}%
-\contentsline {subsection}{\numberline {5.13.2}Constructor \& Destructor Documentation}{30}{subsection.5.13.2}%
-\contentsline {subsubsection}{\numberline {5.13.2.1}ExprGe()}{30}{subsubsection.5.13.2.1}%
-\contentsline {subsection}{\numberline {5.13.3}Member Function Documentation}{30}{subsection.5.13.3}%
-\contentsline {subsubsection}{\numberline {5.13.3.1}eval()}{30}{subsubsection.5.13.3.1}%
-\contentsline {section}{\numberline {5.14}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Gt Class Reference}{31}{section.5.14}%
-\contentsline {subsection}{\numberline {5.14.1}Detailed Description}{31}{subsection.5.14.1}%
-\contentsline {subsection}{\numberline {5.14.2}Constructor \& Destructor Documentation}{31}{subsection.5.14.2}%
-\contentsline {subsubsection}{\numberline {5.14.2.1}ExprGt()}{31}{subsubsection.5.14.2.1}%
-\contentsline {subsection}{\numberline {5.14.3}Member Function Documentation}{31}{subsection.5.14.3}%
-\contentsline {subsubsection}{\numberline {5.14.3.1}eval()}{31}{subsubsection.5.14.3.1}%
-\contentsline {section}{\numberline {5.15}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Hart Class Reference}{33}{section.5.15}%
-\contentsline {subsection}{\numberline {5.15.1}Detailed Description}{33}{subsection.5.15.1}%
-\contentsline {subsection}{\numberline {5.15.2}Constructor \& Destructor Documentation}{33}{subsection.5.15.2}%
-\contentsline {subsubsection}{\numberline {5.15.2.1}ExprHart()}{33}{subsubsection.5.15.2.1}%
-\contentsline {subsection}{\numberline {5.15.3}Member Function Documentation}{34}{subsection.5.15.3}%
-\contentsline {subsubsection}{\numberline {5.15.3.1}eval()}{34}{subsubsection.5.15.3.1}%
-\contentsline {section}{\numberline {5.16}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ident Class Reference}{34}{section.5.16}%
-\contentsline {subsection}{\numberline {5.16.1}Detailed Description}{35}{subsection.5.16.1}%
-\contentsline {subsection}{\numberline {5.16.2}Constructor \& Destructor Documentation}{35}{subsection.5.16.2}%
-\contentsline {subsubsection}{\numberline {5.16.2.1}ExprIdent()}{35}{subsubsection.5.16.2.1}%
-\contentsline {subsection}{\numberline {5.16.3}Member Function Documentation}{35}{subsection.5.16.3}%
-\contentsline {subsubsection}{\numberline {5.16.3.1}eval()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{35}{subsubsection.5.16.3.1}%
-\contentsline {subsubsection}{\numberline {5.16.3.2}eval()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{35}{subsubsection.5.16.3.2}%
-\contentsline {section}{\numberline {5.17}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Know Class Reference}{37}{section.5.17}%
-\contentsline {subsection}{\numberline {5.17.1}Detailed Description}{37}{subsection.5.17.1}%
-\contentsline {subsection}{\numberline {5.17.2}Constructor \& Destructor Documentation}{37}{subsection.5.17.2}%
-\contentsline {subsubsection}{\numberline {5.17.2.1}ExprKnow()}{37}{subsubsection.5.17.2.1}%
-\contentsline {subsection}{\numberline {5.17.3}Member Function Documentation}{38}{subsection.5.17.3}%
-\contentsline {subsubsection}{\numberline {5.17.3.1}eval()}{38}{subsubsection.5.17.3.1}%
-\contentsline {section}{\numberline {5.18}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Le Class Reference}{38}{section.5.18}%
-\contentsline {subsection}{\numberline {5.18.1}Detailed Description}{39}{subsection.5.18.1}%
-\contentsline {subsection}{\numberline {5.18.2}Constructor \& Destructor Documentation}{39}{subsection.5.18.2}%
-\contentsline {subsubsection}{\numberline {5.18.2.1}ExprLe()}{39}{subsubsection.5.18.2.1}%
-\contentsline {subsection}{\numberline {5.18.3}Member Function Documentation}{39}{subsection.5.18.3}%
-\contentsline {subsubsection}{\numberline {5.18.3.1}eval()}{39}{subsubsection.5.18.3.1}%
-\contentsline {section}{\numberline {5.19}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Lt Class Reference}{40}{section.5.19}%
-\contentsline {subsection}{\numberline {5.19.1}Detailed Description}{40}{subsection.5.19.1}%
-\contentsline {subsection}{\numberline {5.19.2}Constructor \& Destructor Documentation}{40}{subsection.5.19.2}%
-\contentsline {subsubsection}{\numberline {5.19.2.1}ExprLt()}{40}{subsubsection.5.19.2.1}%
-\contentsline {subsection}{\numberline {5.19.3}Member Function Documentation}{40}{subsection.5.19.3}%
-\contentsline {subsubsection}{\numberline {5.19.3.1}eval()}{40}{subsubsection.5.19.3.1}%
-\contentsline {section}{\numberline {5.20}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mul Class Reference}{42}{section.5.20}%
-\contentsline {subsection}{\numberline {5.20.1}Detailed Description}{42}{subsection.5.20.1}%
-\contentsline {subsection}{\numberline {5.20.2}Constructor \& Destructor Documentation}{42}{subsection.5.20.2}%
-\contentsline {subsubsection}{\numberline {5.20.2.1}ExprMul()}{42}{subsubsection.5.20.2.1}%
-\contentsline {subsection}{\numberline {5.20.3}Member Function Documentation}{43}{subsection.5.20.3}%
-\contentsline {subsubsection}{\numberline {5.20.3.1}eval()}{43}{subsubsection.5.20.3.1}%
-\contentsline {section}{\numberline {5.21}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ne Class Reference}{43}{section.5.21}%
-\contentsline {subsection}{\numberline {5.21.1}Detailed Description}{44}{subsection.5.21.1}%
-\contentsline {subsection}{\numberline {5.21.2}Constructor \& Destructor Documentation}{44}{subsection.5.21.2}%
-\contentsline {subsubsection}{\numberline {5.21.2.1}ExprNe()}{44}{subsubsection.5.21.2.1}%
-\contentsline {subsection}{\numberline {5.21.3}Member Function Documentation}{44}{subsection.5.21.3}%
-\contentsline {subsubsection}{\numberline {5.21.3.1}eval()}{44}{subsubsection.5.21.3.1}%
-\contentsline {section}{\numberline {5.22}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{45}{section.5.22}%
-\contentsline {subsection}{\numberline {5.22.1}Detailed Description}{45}{subsection.5.22.1}%
-\contentsline {subsection}{\numberline {5.22.2}Member Function Documentation}{45}{subsection.5.22.2}%
-\contentsline {subsubsection}{\numberline {5.22.2.1}eval()}{45}{subsubsection.5.22.2.1}%
-\contentsline {section}{\numberline {5.23}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Not Class Reference}{46}{section.5.23}%
-\contentsline {subsection}{\numberline {5.23.1}Detailed Description}{46}{subsection.5.23.1}%
-\contentsline {subsection}{\numberline {5.23.2}Constructor \& Destructor Documentation}{46}{subsection.5.23.2}%
-\contentsline {subsubsection}{\numberline {5.23.2.1}ExprNot()}{46}{subsubsection.5.23.2.1}%
-\contentsline {subsection}{\numberline {5.23.3}Member Function Documentation}{46}{subsection.5.23.3}%
-\contentsline {subsubsection}{\numberline {5.23.3.1}eval()}{46}{subsubsection.5.23.3.1}%
-\contentsline {section}{\numberline {5.24}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Or Class Reference}{47}{section.5.24}%
-\contentsline {subsection}{\numberline {5.24.1}Detailed Description}{47}{subsection.5.24.1}%
-\contentsline {subsection}{\numberline {5.24.2}Constructor \& Destructor Documentation}{47}{subsection.5.24.2}%
-\contentsline {subsubsection}{\numberline {5.24.2.1}ExprOr()}{47}{subsubsection.5.24.2.1}%
-\contentsline {subsection}{\numberline {5.24.3}Member Function Documentation}{48}{subsection.5.24.3}%
-\contentsline {subsubsection}{\numberline {5.24.3.1}eval()}{48}{subsubsection.5.24.3.1}%
-\contentsline {section}{\numberline {5.25}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Rem Class Reference}{48}{section.5.25}%
-\contentsline {subsection}{\numberline {5.25.1}Detailed Description}{49}{subsection.5.25.1}%
-\contentsline {subsection}{\numberline {5.25.2}Constructor \& Destructor Documentation}{49}{subsection.5.25.2}%
-\contentsline {subsubsection}{\numberline {5.25.2.1}ExprRem()}{49}{subsubsection.5.25.2.1}%
-\contentsline {subsection}{\numberline {5.25.3}Member Function Documentation}{49}{subsection.5.25.3}%
-\contentsline {subsubsection}{\numberline {5.25.3.1}eval()}{49}{subsubsection.5.25.3.1}%
-\contentsline {section}{\numberline {5.26}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sub Class Reference}{50}{section.5.26}%
-\contentsline {subsection}{\numberline {5.26.1}Detailed Description}{50}{subsection.5.26.1}%
-\contentsline {subsection}{\numberline {5.26.2}Constructor \& Destructor Documentation}{50}{subsection.5.26.2}%
-\contentsline {subsubsection}{\numberline {5.26.2.1}ExprSub()}{50}{subsubsection.5.26.2.1}%
-\contentsline {subsection}{\numberline {5.26.3}Member Function Documentation}{50}{subsection.5.26.3}%
-\contentsline {subsubsection}{\numberline {5.26.3.1}eval()}{50}{subsubsection.5.26.3.1}%
-\contentsline {section}{\numberline {5.27}Formula Struct Reference}{52}{section.5.27}%
-\contentsline {section}{\numberline {5.28}Formula\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Struct Reference}{52}{section.5.28}%
-\contentsline {subsection}{\numberline {5.28.1}Detailed Description}{52}{subsection.5.28.1}%
-\contentsline {section}{\numberline {5.29}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model Struct Reference}{53}{section.5.29}%
-\contentsline {subsection}{\numberline {5.29.1}Detailed Description}{53}{subsection.5.29.1}%
-\contentsline {section}{\numberline {5.30}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator Class Reference}{53}{section.5.30}%
-\contentsline {subsection}{\numberline {5.30.1}Detailed Description}{55}{subsection.5.30.1}%
-\contentsline {subsection}{\numberline {5.30.2}Member Function Documentation}{55}{subsection.5.30.2}%
-\contentsline {subsubsection}{\numberline {5.30.2.1}computeEpistemicClassHash()}{55}{subsubsection.5.30.2.1}%
-\contentsline {subsubsection}{\numberline {5.30.2.2}computeGlobalStateHash()}{56}{subsubsection.5.30.2.2}%
-\contentsline {subsubsection}{\numberline {5.30.2.3}expandAndReduceAllStates()}{56}{subsubsection.5.30.2.3}%
-\contentsline {subsubsection}{\numberline {5.30.2.4}expandState()}{56}{subsubsection.5.30.2.4}%
-\contentsline {subsubsection}{\numberline {5.30.2.5}expandStateAndReturn()}{57}{subsubsection.5.30.2.5}%
-\contentsline {subsubsection}{\numberline {5.30.2.6}findGlobalStateInEpistemicClass()}{57}{subsubsection.5.30.2.6}%
-\contentsline {subsubsection}{\numberline {5.30.2.7}findOrCreateEpistemicClass()}{57}{subsubsection.5.30.2.7}%
-\contentsline {subsubsection}{\numberline {5.30.2.8}findOrCreateEpistemicClassForKnowledge()}{58}{subsubsection.5.30.2.8}%
-\contentsline {subsubsection}{\numberline {5.30.2.9}generateGlobalTransitions()}{58}{subsubsection.5.30.2.9}%
-\contentsline {subsubsection}{\numberline {5.30.2.10}generateInitState()}{58}{subsubsection.5.30.2.10}%
-\contentsline {subsubsection}{\numberline {5.30.2.11}generateStateFromLocalStates()}{59}{subsubsection.5.30.2.11}%
-\contentsline {subsubsection}{\numberline {5.30.2.12}getAgentInstanceByName()}{59}{subsubsection.5.30.2.12}%
-\contentsline {subsubsection}{\numberline {5.30.2.13}getCurrentGlobalModel()}{59}{subsubsection.5.30.2.13}%
-\contentsline {subsubsection}{\numberline {5.30.2.14}getFormula()}{60}{subsubsection.5.30.2.14}%
-\contentsline {subsubsection}{\numberline {5.30.2.15}getFormulaCorectness()}{60}{subsubsection.5.30.2.15}%
-\contentsline {subsubsection}{\numberline {5.30.2.16}getFormulaSize()}{60}{subsubsection.5.30.2.16}%
-\contentsline {subsubsection}{\numberline {5.30.2.17}initModel()}{60}{subsubsection.5.30.2.17}%
-\contentsline {section}{\numberline {5.31}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Struct Reference}{61}{section.5.31}%
-\contentsline {subsection}{\numberline {5.31.1}Detailed Description}{62}{subsection.5.31.1}%
-\contentsline {subsection}{\numberline {5.31.2}Member Function Documentation}{62}{subsection.5.31.2}%
-\contentsline {subsubsection}{\numberline {5.31.2.1}getGlobalStateEnvironment()}{62}{subsubsection.5.31.2.1}%
-\contentsline {subsubsection}{\numberline {5.31.2.2}toString()}{62}{subsubsection.5.31.2.2}%
-\contentsline {section}{\numberline {5.32}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tuple\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Hash Struct Reference}{62}{section.5.32}%
-\contentsline {section}{\numberline {5.33}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition Struct Reference}{63}{section.5.33}%
-\contentsline {subsection}{\numberline {5.33.1}Detailed Description}{63}{subsection.5.33.1}%
-\contentsline {section}{\numberline {5.34}History\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dbg Class Reference}{63}{section.5.34}%
-\contentsline {subsection}{\numberline {5.34.1}Detailed Description}{64}{subsection.5.34.1}%
-\contentsline {subsection}{\numberline {5.34.2}Member Function Documentation}{64}{subsection.5.34.2}%
-\contentsline {subsubsection}{\numberline {5.34.2.1}addEntry()}{64}{subsubsection.5.34.2.1}%
-\contentsline {subsubsection}{\numberline {5.34.2.2}cloneEntry()}{64}{subsubsection.5.34.2.2}%
-\contentsline {subsubsection}{\numberline {5.34.2.3}markEntry()}{65}{subsubsection.5.34.2.3}%
-\contentsline {subsubsection}{\numberline {5.34.2.4}print()}{65}{subsubsection.5.34.2.4}%
-\contentsline {section}{\numberline {5.35}History\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry Struct Reference}{65}{section.5.35}%
-\contentsline {subsection}{\numberline {5.35.1}Detailed Description}{66}{subsection.5.35.1}%
-\contentsline {subsection}{\numberline {5.35.2}Member Function Documentation}{66}{subsection.5.35.2}%
-\contentsline {subsubsection}{\numberline {5.35.2.1}toString()}{66}{subsubsection.5.35.2.1}%
-\contentsline {section}{\numberline {5.36}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Models Struct Reference}{67}{section.5.36}%
-\contentsline {subsection}{\numberline {5.36.1}Detailed Description}{67}{subsection.5.36.1}%
-\contentsline {section}{\numberline {5.37}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{67}{section.5.37}%
-\contentsline {subsection}{\numberline {5.37.1}Detailed Description}{68}{subsection.5.37.1}%
-\contentsline {subsection}{\numberline {5.37.2}Member Function Documentation}{68}{subsection.5.37.2}%
-\contentsline {subsubsection}{\numberline {5.37.2.1}compare()}{68}{subsubsection.5.37.2.1}%
-\contentsline {subsubsection}{\numberline {5.37.2.2}toString()}{68}{subsubsection.5.37.2.2}%
-\contentsline {section}{\numberline {5.38}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{69}{section.5.38}%
-\contentsline {subsection}{\numberline {5.38.1}Detailed Description}{69}{subsection.5.38.1}%
-\contentsline {section}{\numberline {5.39}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition Struct Reference}{69}{section.5.39}%
-\contentsline {subsection}{\numberline {5.39.1}Detailed Description}{70}{subsection.5.39.1}%
-\contentsline {section}{\numberline {5.40}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser Class Reference}{70}{section.5.40}%
-\contentsline {subsection}{\numberline {5.40.1}Detailed Description}{70}{subsection.5.40.1}%
-\contentsline {subsection}{\numberline {5.40.2}Member Function Documentation}{70}{subsection.5.40.2}%
-\contentsline {subsubsection}{\numberline {5.40.2.1}parse()}{70}{subsubsection.5.40.2.1}%
-\contentsline {section}{\numberline {5.41}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Verif Class Reference}{71}{section.5.41}%
-\contentsline {section}{\numberline {5.42}Transition\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{71}{section.5.42}%
-\contentsline {subsection}{\numberline {5.42.1}Detailed Description}{72}{subsection.5.42.1}%
-\contentsline {subsection}{\numberline {5.42.2}Constructor \& Destructor Documentation}{72}{subsection.5.42.2}%
-\contentsline {subsubsection}{\numberline {5.42.2.1}TransitionTemplate()}{72}{subsubsection.5.42.2.1}%
-\contentsline {section}{\numberline {5.43}Var Struct Reference}{73}{section.5.43}%
-\contentsline {subsection}{\numberline {5.43.1}Detailed Description}{73}{subsection.5.43.1}%
-\contentsline {section}{\numberline {5.44}Verification Class Reference}{73}{section.5.44}%
-\contentsline {subsection}{\numberline {5.44.1}Detailed Description}{75}{subsection.5.44.1}%
-\contentsline {subsection}{\numberline {5.44.2}Constructor \& Destructor Documentation}{75}{subsection.5.44.2}%
-\contentsline {subsubsection}{\numberline {5.44.2.1}Verification()}{75}{subsubsection.5.44.2.1}%
-\contentsline {subsection}{\numberline {5.44.3}Member Function Documentation}{75}{subsection.5.44.3}%
-\contentsline {subsubsection}{\numberline {5.44.3.1}addHistoryContext()}{75}{subsubsection.5.44.3.1}%
-\contentsline {subsubsection}{\numberline {5.44.3.2}addHistoryDecision()}{76}{subsubsection.5.44.3.2}%
-\contentsline {subsubsection}{\numberline {5.44.3.3}addHistoryMarkDecisionAsInvalid()}{76}{subsubsection.5.44.3.3}%
-\contentsline {subsubsection}{\numberline {5.44.3.4}addHistoryStateStatus()}{76}{subsubsection.5.44.3.4}%
-\contentsline {subsubsection}{\numberline {5.44.3.5}areGlobalStatesInTheSameEpistemicClass()}{77}{subsubsection.5.44.3.5}%
-\contentsline {subsubsection}{\numberline {5.44.3.6}checkUncontrolledSet()}{77}{subsubsection.5.44.3.6}%
-\contentsline {subsubsection}{\numberline {5.44.3.7}equivalentGlobalTransitions()}{78}{subsubsection.5.44.3.7}%
-\contentsline {subsubsection}{\numberline {5.44.3.8}getEpistemicClassForGlobalState()}{78}{subsubsection.5.44.3.8}%
-\contentsline {subsubsection}{\numberline {5.44.3.9}isAgentInCoalition()}{78}{subsubsection.5.44.3.9}%
-\contentsline {subsubsection}{\numberline {5.44.3.10}isGlobalTransitionControlledByCoalition()}{79}{subsubsection.5.44.3.10}%
-\contentsline {subsubsection}{\numberline {5.44.3.11}newHistoryMarkDecisionAsInvalid()}{79}{subsubsection.5.44.3.11}%
-\contentsline {subsubsection}{\numberline {5.44.3.12}printCurrentHistory()}{80}{subsubsection.5.44.3.12}%
-\contentsline {subsubsection}{\numberline {5.44.3.13}restoreHistory()}{80}{subsubsection.5.44.3.13}%
-\contentsline {subsubsection}{\numberline {5.44.3.14}revertLastDecision()}{80}{subsubsection.5.44.3.14}%
-\contentsline {subsubsection}{\numberline {5.44.3.15}undoHistoryUntil()}{81}{subsubsection.5.44.3.15}%
-\contentsline {subsubsection}{\numberline {5.44.3.16}undoLastHistoryEntry()}{81}{subsubsection.5.44.3.16}%
-\contentsline {subsubsection}{\numberline {5.44.3.17}verify()}{81}{subsubsection.5.44.3.17}%
-\contentsline {subsubsection}{\numberline {5.44.3.18}verifyGlobalState()}{82}{subsubsection.5.44.3.18}%
-\contentsline {subsubsection}{\numberline {5.44.3.19}verifyLocalStates()}{82}{subsubsection.5.44.3.19}%
-\contentsline {subsubsection}{\numberline {5.44.3.20}verifyTransitionSets()}{82}{subsubsection.5.44.3.20}%
-\contentsline {section}{\numberline {5.45}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}buffer\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}state Struct Reference}{83}{section.5.45}%
-\contentsline {subsection}{\numberline {5.45.1}Member Data Documentation}{83}{subsection.5.45.1}%
-\contentsline {subsubsection}{\numberline {5.45.1.1}yy\_bs\_column}{83}{subsubsection.5.45.1.1}%
-\contentsline {subsubsection}{\numberline {5.45.1.2}yy\_bs\_lineno}{84}{subsubsection.5.45.1.2}%
-\contentsline {section}{\numberline {5.46}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}trans\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}info Struct Reference}{84}{section.5.46}%
-\contentsline {section}{\numberline {5.47}yyalloc Union Reference}{84}{section.5.47}%
-\contentsline {section}{\numberline {5.48}YYSTYPE Union Reference}{84}{section.5.48}%
-\contentsline {chapter}{\numberline {6}File Documentation}{85}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Agent.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{85}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Detailed Description}{85}{subsection.6.1.1}%
-\contentsline {section}{\numberline {6.2}Agent.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{85}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Detailed Description}{85}{subsection.6.2.1}%
-\contentsline {section}{\numberline {6.3}Common.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{86}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Detailed Description}{86}{subsection.6.3.1}%
-\contentsline {section}{\numberline {6.4}Dot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{86}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Detailed Description}{86}{subsection.6.4.1}%
-\contentsline {section}{\numberline {6.5}Dot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{86}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Detailed Description}{87}{subsection.6.5.1}%
-\contentsline {subsection}{\numberline {6.5.2}Enumeration Type Documentation}{87}{subsection.6.5.2}%
-\contentsline {subsubsection}{\numberline {6.5.2.1}DotGraphBase}{87}{subsubsection.6.5.2.1}%
-\contentsline {section}{\numberline {6.6}Epistemic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Class.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{87}{section.6.6}%
-\contentsline {subsection}{\numberline {6.6.1}Detailed Description}{87}{subsection.6.6.1}%
-\contentsline {section}{\numberline {6.7}expressions.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{88}{section.6.7}%
-\contentsline {subsection}{\numberline {6.7.1}Detailed Description}{88}{subsection.6.7.1}%
-\contentsline {section}{\numberline {6.8}expressions.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{88}{section.6.8}%
-\contentsline {subsection}{\numberline {6.8.1}Detailed Description}{89}{subsection.6.8.1}%
-\contentsline {section}{\numberline {6.9}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{89}{section.6.9}%
-\contentsline {subsection}{\numberline {6.9.1}Detailed Description}{89}{subsection.6.9.1}%
-\contentsline {section}{\numberline {6.10}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{90}{section.6.10}%
-\contentsline {subsection}{\numberline {6.10.1}Detailed Description}{90}{subsection.6.10.1}%
-\contentsline {section}{\numberline {6.11}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{90}{section.6.11}%
-\contentsline {subsection}{\numberline {6.11.1}Detailed Description}{90}{subsection.6.11.1}%
-\contentsline {section}{\numberline {6.12}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{91}{section.6.12}%
-\contentsline {subsection}{\numberline {6.12.1}Detailed Description}{91}{subsection.6.12.1}%
-\contentsline {section}{\numberline {6.13}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{91}{section.6.13}%
-\contentsline {subsection}{\numberline {6.13.1}Detailed Description}{91}{subsection.6.13.1}%
-\contentsline {section}{\numberline {6.14}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{91}{section.6.14}%
-\contentsline {subsection}{\numberline {6.14.1}Detailed Description}{91}{subsection.6.14.1}%
-\contentsline {section}{\numberline {6.15}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{92}{section.6.15}%
-\contentsline {subsection}{\numberline {6.15.1}Detailed Description}{92}{subsection.6.15.1}%
-\contentsline {section}{\numberline {6.16}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{92}{section.6.16}%
-\contentsline {subsection}{\numberline {6.16.1}Detailed Description}{92}{subsection.6.16.1}%
-\contentsline {section}{\numberline {6.17}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{92}{section.6.17}%
-\contentsline {subsection}{\numberline {6.17.1}Detailed Description}{92}{subsection.6.17.1}%
-\contentsline {section}{\numberline {6.18}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{93}{section.6.18}%
-\contentsline {subsection}{\numberline {6.18.1}Detailed Description}{93}{subsection.6.18.1}%
-\contentsline {section}{\numberline {6.19}nodes.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{93}{section.6.19}%
-\contentsline {subsection}{\numberline {6.19.1}Detailed Description}{93}{subsection.6.19.1}%
-\contentsline {section}{\numberline {6.20}nodes.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{94}{section.6.20}%
-\contentsline {subsection}{\numberline {6.20.1}Detailed Description}{94}{subsection.6.20.1}%
-\contentsline {section}{\numberline {6.21}Types.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{94}{section.6.21}%
-\contentsline {subsection}{\numberline {6.21.1}Detailed Description}{95}{subsection.6.21.1}%
-\contentsline {section}{\numberline {6.22}Utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{95}{section.6.22}%
-\contentsline {subsection}{\numberline {6.22.1}Detailed Description}{96}{subsection.6.22.1}%
-\contentsline {subsection}{\numberline {6.22.2}Function Documentation}{96}{subsection.6.22.2}%
-\contentsline {subsubsection}{\numberline {6.22.2.1}agentToString()}{96}{subsubsection.6.22.2.1}%
-\contentsline {subsubsection}{\numberline {6.22.2.2}envToString()}{96}{subsubsection.6.22.2.2}%
-\contentsline {subsubsection}{\numberline {6.22.2.3}getLocalStatesSCC()}{97}{subsubsection.6.22.2.3}%
-\contentsline {subsubsection}{\numberline {6.22.2.4}localModelsToString()}{97}{subsubsection.6.22.2.4}%
-\contentsline {subsubsection}{\numberline {6.22.2.5}outputGlobalModel()}{97}{subsubsection.6.22.2.5}%
-\contentsline {subsubsection}{\numberline {6.22.2.6}tarjanVisit()}{98}{subsubsection.6.22.2.6}%
-\contentsline {section}{\numberline {6.23}Utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{98}{section.6.23}%
-\contentsline {subsection}{\numberline {6.23.1}Function Documentation}{99}{subsection.6.23.1}%
-\contentsline {subsubsection}{\numberline {6.23.1.1}agentToString()}{99}{subsubsection.6.23.1.1}%
-\contentsline {subsubsection}{\numberline {6.23.1.2}envToString()}{99}{subsubsection.6.23.1.2}%
-\contentsline {subsubsection}{\numberline {6.23.1.3}getLocalStatesSCC()}{100}{subsubsection.6.23.1.3}%
-\contentsline {subsubsection}{\numberline {6.23.1.4}localModelsToString()}{100}{subsubsection.6.23.1.4}%
-\contentsline {subsubsection}{\numberline {6.23.1.5}outputGlobalModel()}{100}{subsubsection.6.23.1.5}%
-\contentsline {section}{\numberline {6.24}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{101}{section.6.24}%
-\contentsline {subsection}{\numberline {6.24.1}Detailed Description}{101}{subsection.6.24.1}%
-\contentsline {subsection}{\numberline {6.24.2}Function Documentation}{101}{subsection.6.24.2}%
-\contentsline {subsubsection}{\numberline {6.24.2.1}dbgHistEnt()}{101}{subsubsection.6.24.2.1}%
-\contentsline {subsubsection}{\numberline {6.24.2.2}dbgVerifStatus()}{102}{subsubsection.6.24.2.2}%
-\contentsline {subsubsection}{\numberline {6.24.2.3}verStatusToStr()}{102}{subsubsection.6.24.2.3}%
-\contentsline {section}{\numberline {6.25}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{102}{section.6.25}%
-\contentsline {subsection}{\numberline {6.25.1}Enumeration Type Documentation}{103}{subsection.6.25.1}%
-\contentsline {subsubsection}{\numberline {6.25.1.1}HistoryEntryType}{103}{subsubsection.6.25.1.1}%
-\contentsline {subsubsection}{\numberline {6.25.1.2}TraversalMode}{103}{subsubsection.6.25.1.2}%
-\contentsline {subsection}{\numberline {6.25.2}Function Documentation}{104}{subsection.6.25.2}%
-\contentsline {subsubsection}{\numberline {6.25.2.1}verStatusToStr()}{104}{subsubsection.6.25.2.1}%
-\contentsline {chapter}{Index}{105}{section*.95}%
+\contentsline {chapter}{\numberline {4}File Index}{11}{chapter.4}%
+\contentsline {section}{\numberline {4.1}File List}{11}{section.4.1}%
+\contentsline {chapter}{\numberline {5}Class Documentation}{15}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Action Struct Reference}{15}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{15}{subsection.5.1.1}%
+\contentsline {section}{\numberline {5.2}Action\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{15}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{16}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Constructor \& Destructor Documentation}{16}{subsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.2.1}ActionTemplate()}{16}{subsubsection.5.2.2.1}%
+\contentsline {section}{\numberline {5.3}Agent Class Reference}{16}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{17}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Constructor \& Destructor Documentation}{17}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}Agent()}{17}{subsubsection.5.3.2.1}%
+\contentsline {subsection}{\numberline {5.3.3}Member Function Documentation}{17}{subsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.3.1}includesState()}{17}{subsubsection.5.3.3.1}%
+\contentsline {section}{\numberline {5.4}Agent\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{18}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{18}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Member Function Documentation}{19}{subsection.5.4.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.1}addInitial()}{19}{subsubsection.5.4.2.1}%
+\contentsline {subsubsection}{\numberline {5.4.2.2}addLocal()}{19}{subsubsection.5.4.2.2}%
+\contentsline {subsubsection}{\numberline {5.4.2.3}addPersistent()}{20}{subsubsection.5.4.2.3}%
+\contentsline {subsubsection}{\numberline {5.4.2.4}addTransition()}{20}{subsubsection.5.4.2.4}%
+\contentsline {subsubsection}{\numberline {5.4.2.5}generateAgent()}{21}{subsubsection.5.4.2.5}%
+\contentsline {subsubsection}{\numberline {5.4.2.6}setIdent()}{21}{subsubsection.5.4.2.6}%
+\contentsline {subsubsection}{\numberline {5.4.2.7}setInitState()}{22}{subsubsection.5.4.2.7}%
+\contentsline {section}{\numberline {5.5}Assignment Class Reference}{23}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{23}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Constructor \& Destructor Documentation}{23}{subsection.5.5.2}%
+\contentsline {subsubsection}{\numberline {5.5.2.1}Assignment()}{23}{subsubsection.5.5.2.1}%
+\contentsline {subsection}{\numberline {5.5.3}Member Function Documentation}{24}{subsection.5.5.3}%
+\contentsline {subsubsection}{\numberline {5.5.3.1}assign()}{24}{subsubsection.5.5.3.1}%
+\contentsline {section}{\numberline {5.6}Cfg Struct Reference}{24}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Condition Struct Reference}{25}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{25}{subsection.5.7.1}%
+\contentsline {section}{\numberline {5.8}Decision\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry Struct Reference}{25}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Dot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph Class Reference}{26}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Member Function Documentation}{27}{subsection.5.9.1}%
+\contentsline {subsubsection}{\numberline {5.9.1.1}addEdge()}{27}{subsubsection.5.9.1.1}%
+\contentsline {subsubsection}{\numberline {5.9.1.2}addNode()}{27}{subsubsection.5.9.1.2}%
+\contentsline {subsubsection}{\numberline {5.9.1.3}saveToFile()}{27}{subsubsection.5.9.1.3}%
+\contentsline {subsection}{\numberline {5.9.2}Member Data Documentation}{28}{subsection.5.9.2}%
+\contentsline {subsubsection}{\numberline {5.9.2.1}styleString}{28}{subsubsection.5.9.2.1}%
+\contentsline {section}{\numberline {5.10}Epistemic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Class Struct Reference}{28}{section.5.10}%
+\contentsline {subsection}{\numberline {5.10.1}Detailed Description}{28}{subsection.5.10.1}%
+\contentsline {section}{\numberline {5.11}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Add Class Reference}{29}{section.5.11}%
+\contentsline {subsection}{\numberline {5.11.1}Detailed Description}{29}{subsection.5.11.1}%
+\contentsline {subsection}{\numberline {5.11.2}Constructor \& Destructor Documentation}{29}{subsection.5.11.2}%
+\contentsline {subsubsection}{\numberline {5.11.2.1}ExprAdd()}{29}{subsubsection.5.11.2.1}%
+\contentsline {subsection}{\numberline {5.11.3}Member Function Documentation}{29}{subsection.5.11.3}%
+\contentsline {subsubsection}{\numberline {5.11.3.1}eval()}{29}{subsubsection.5.11.3.1}%
+\contentsline {section}{\numberline {5.12}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}And Class Reference}{31}{section.5.12}%
+\contentsline {subsection}{\numberline {5.12.1}Detailed Description}{31}{subsection.5.12.1}%
+\contentsline {subsection}{\numberline {5.12.2}Constructor \& Destructor Documentation}{31}{subsection.5.12.2}%
+\contentsline {subsubsection}{\numberline {5.12.2.1}ExprAnd()}{31}{subsubsection.5.12.2.1}%
+\contentsline {subsection}{\numberline {5.12.3}Member Function Documentation}{32}{subsection.5.12.3}%
+\contentsline {subsubsection}{\numberline {5.12.3.1}eval()}{32}{subsubsection.5.12.3.1}%
+\contentsline {section}{\numberline {5.13}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Const Class Reference}{32}{section.5.13}%
+\contentsline {subsection}{\numberline {5.13.1}Detailed Description}{33}{subsection.5.13.1}%
+\contentsline {subsection}{\numberline {5.13.2}Constructor \& Destructor Documentation}{33}{subsection.5.13.2}%
+\contentsline {subsubsection}{\numberline {5.13.2.1}ExprConst()}{33}{subsubsection.5.13.2.1}%
+\contentsline {subsection}{\numberline {5.13.3}Member Function Documentation}{33}{subsection.5.13.3}%
+\contentsline {subsubsection}{\numberline {5.13.3.1}eval()}{33}{subsubsection.5.13.3.1}%
+\contentsline {section}{\numberline {5.14}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Div Class Reference}{34}{section.5.14}%
+\contentsline {subsection}{\numberline {5.14.1}Detailed Description}{34}{subsection.5.14.1}%
+\contentsline {subsection}{\numberline {5.14.2}Constructor \& Destructor Documentation}{34}{subsection.5.14.2}%
+\contentsline {subsubsection}{\numberline {5.14.2.1}ExprDiv()}{34}{subsubsection.5.14.2.1}%
+\contentsline {subsection}{\numberline {5.14.3}Member Function Documentation}{34}{subsection.5.14.3}%
+\contentsline {subsubsection}{\numberline {5.14.3.1}eval()}{34}{subsubsection.5.14.3.1}%
+\contentsline {section}{\numberline {5.15}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Eq Class Reference}{36}{section.5.15}%
+\contentsline {subsection}{\numberline {5.15.1}Detailed Description}{36}{subsection.5.15.1}%
+\contentsline {subsection}{\numberline {5.15.2}Constructor \& Destructor Documentation}{36}{subsection.5.15.2}%
+\contentsline {subsubsection}{\numberline {5.15.2.1}ExprEq()}{36}{subsubsection.5.15.2.1}%
+\contentsline {subsection}{\numberline {5.15.3}Member Function Documentation}{37}{subsection.5.15.3}%
+\contentsline {subsubsection}{\numberline {5.15.3.1}eval()}{37}{subsubsection.5.15.3.1}%
+\contentsline {section}{\numberline {5.16}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ge Class Reference}{37}{section.5.16}%
+\contentsline {subsection}{\numberline {5.16.1}Detailed Description}{38}{subsection.5.16.1}%
+\contentsline {subsection}{\numberline {5.16.2}Constructor \& Destructor Documentation}{38}{subsection.5.16.2}%
+\contentsline {subsubsection}{\numberline {5.16.2.1}ExprGe()}{38}{subsubsection.5.16.2.1}%
+\contentsline {subsection}{\numberline {5.16.3}Member Function Documentation}{38}{subsection.5.16.3}%
+\contentsline {subsubsection}{\numberline {5.16.3.1}eval()}{38}{subsubsection.5.16.3.1}%
+\contentsline {section}{\numberline {5.17}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Gt Class Reference}{39}{section.5.17}%
+\contentsline {subsection}{\numberline {5.17.1}Detailed Description}{39}{subsection.5.17.1}%
+\contentsline {subsection}{\numberline {5.17.2}Constructor \& Destructor Documentation}{39}{subsection.5.17.2}%
+\contentsline {subsubsection}{\numberline {5.17.2.1}ExprGt()}{39}{subsubsection.5.17.2.1}%
+\contentsline {subsection}{\numberline {5.17.3}Member Function Documentation}{39}{subsection.5.17.3}%
+\contentsline {subsubsection}{\numberline {5.17.3.1}eval()}{39}{subsubsection.5.17.3.1}%
+\contentsline {section}{\numberline {5.18}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Hart Class Reference}{41}{section.5.18}%
+\contentsline {subsection}{\numberline {5.18.1}Detailed Description}{41}{subsection.5.18.1}%
+\contentsline {subsection}{\numberline {5.18.2}Constructor \& Destructor Documentation}{41}{subsection.5.18.2}%
+\contentsline {subsubsection}{\numberline {5.18.2.1}ExprHart()}{41}{subsubsection.5.18.2.1}%
+\contentsline {subsection}{\numberline {5.18.3}Member Function Documentation}{42}{subsection.5.18.3}%
+\contentsline {subsubsection}{\numberline {5.18.3.1}eval()}{42}{subsubsection.5.18.3.1}%
+\contentsline {section}{\numberline {5.19}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ident Class Reference}{42}{section.5.19}%
+\contentsline {subsection}{\numberline {5.19.1}Detailed Description}{43}{subsection.5.19.1}%
+\contentsline {subsection}{\numberline {5.19.2}Constructor \& Destructor Documentation}{43}{subsection.5.19.2}%
+\contentsline {subsubsection}{\numberline {5.19.2.1}ExprIdent()}{43}{subsubsection.5.19.2.1}%
+\contentsline {subsection}{\numberline {5.19.3}Member Function Documentation}{43}{subsection.5.19.3}%
+\contentsline {subsubsection}{\numberline {5.19.3.1}eval()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{43}{subsubsection.5.19.3.1}%
+\contentsline {subsubsection}{\numberline {5.19.3.2}eval()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{43}{subsubsection.5.19.3.2}%
+\contentsline {section}{\numberline {5.20}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Know Class Reference}{45}{section.5.20}%
+\contentsline {subsection}{\numberline {5.20.1}Detailed Description}{45}{subsection.5.20.1}%
+\contentsline {subsection}{\numberline {5.20.2}Constructor \& Destructor Documentation}{45}{subsection.5.20.2}%
+\contentsline {subsubsection}{\numberline {5.20.2.1}ExprKnow()}{45}{subsubsection.5.20.2.1}%
+\contentsline {subsection}{\numberline {5.20.3}Member Function Documentation}{46}{subsection.5.20.3}%
+\contentsline {subsubsection}{\numberline {5.20.3.1}eval()}{46}{subsubsection.5.20.3.1}%
+\contentsline {section}{\numberline {5.21}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Le Class Reference}{46}{section.5.21}%
+\contentsline {subsection}{\numberline {5.21.1}Detailed Description}{47}{subsection.5.21.1}%
+\contentsline {subsection}{\numberline {5.21.2}Constructor \& Destructor Documentation}{47}{subsection.5.21.2}%
+\contentsline {subsubsection}{\numberline {5.21.2.1}ExprLe()}{47}{subsubsection.5.21.2.1}%
+\contentsline {subsection}{\numberline {5.21.3}Member Function Documentation}{47}{subsection.5.21.3}%
+\contentsline {subsubsection}{\numberline {5.21.3.1}eval()}{47}{subsubsection.5.21.3.1}%
+\contentsline {section}{\numberline {5.22}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Lt Class Reference}{48}{section.5.22}%
+\contentsline {subsection}{\numberline {5.22.1}Detailed Description}{48}{subsection.5.22.1}%
+\contentsline {subsection}{\numberline {5.22.2}Constructor \& Destructor Documentation}{48}{subsection.5.22.2}%
+\contentsline {subsubsection}{\numberline {5.22.2.1}ExprLt()}{48}{subsubsection.5.22.2.1}%
+\contentsline {subsection}{\numberline {5.22.3}Member Function Documentation}{48}{subsection.5.22.3}%
+\contentsline {subsubsection}{\numberline {5.22.3.1}eval()}{48}{subsubsection.5.22.3.1}%
+\contentsline {section}{\numberline {5.23}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mul Class Reference}{50}{section.5.23}%
+\contentsline {subsection}{\numberline {5.23.1}Detailed Description}{50}{subsection.5.23.1}%
+\contentsline {subsection}{\numberline {5.23.2}Constructor \& Destructor Documentation}{50}{subsection.5.23.2}%
+\contentsline {subsubsection}{\numberline {5.23.2.1}ExprMul()}{50}{subsubsection.5.23.2.1}%
+\contentsline {subsection}{\numberline {5.23.3}Member Function Documentation}{51}{subsection.5.23.3}%
+\contentsline {subsubsection}{\numberline {5.23.3.1}eval()}{51}{subsubsection.5.23.3.1}%
+\contentsline {section}{\numberline {5.24}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ne Class Reference}{51}{section.5.24}%
+\contentsline {subsection}{\numberline {5.24.1}Detailed Description}{52}{subsection.5.24.1}%
+\contentsline {subsection}{\numberline {5.24.2}Constructor \& Destructor Documentation}{52}{subsection.5.24.2}%
+\contentsline {subsubsection}{\numberline {5.24.2.1}ExprNe()}{52}{subsubsection.5.24.2.1}%
+\contentsline {subsection}{\numberline {5.24.3}Member Function Documentation}{52}{subsection.5.24.3}%
+\contentsline {subsubsection}{\numberline {5.24.3.1}eval()}{52}{subsubsection.5.24.3.1}%
+\contentsline {section}{\numberline {5.25}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{53}{section.5.25}%
+\contentsline {subsection}{\numberline {5.25.1}Detailed Description}{53}{subsection.5.25.1}%
+\contentsline {subsection}{\numberline {5.25.2}Member Function Documentation}{53}{subsection.5.25.2}%
+\contentsline {subsubsection}{\numberline {5.25.2.1}eval()}{53}{subsubsection.5.25.2.1}%
+\contentsline {section}{\numberline {5.26}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Not Class Reference}{54}{section.5.26}%
+\contentsline {subsection}{\numberline {5.26.1}Detailed Description}{54}{subsection.5.26.1}%
+\contentsline {subsection}{\numberline {5.26.2}Constructor \& Destructor Documentation}{54}{subsection.5.26.2}%
+\contentsline {subsubsection}{\numberline {5.26.2.1}ExprNot()}{54}{subsubsection.5.26.2.1}%
+\contentsline {subsection}{\numberline {5.26.3}Member Function Documentation}{54}{subsection.5.26.3}%
+\contentsline {subsubsection}{\numberline {5.26.3.1}eval()}{54}{subsubsection.5.26.3.1}%
+\contentsline {section}{\numberline {5.27}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Or Class Reference}{55}{section.5.27}%
+\contentsline {subsection}{\numberline {5.27.1}Detailed Description}{55}{subsection.5.27.1}%
+\contentsline {subsection}{\numberline {5.27.2}Constructor \& Destructor Documentation}{55}{subsection.5.27.2}%
+\contentsline {subsubsection}{\numberline {5.27.2.1}ExprOr()}{55}{subsubsection.5.27.2.1}%
+\contentsline {subsection}{\numberline {5.27.3}Member Function Documentation}{56}{subsection.5.27.3}%
+\contentsline {subsubsection}{\numberline {5.27.3.1}eval()}{56}{subsubsection.5.27.3.1}%
+\contentsline {section}{\numberline {5.28}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Rem Class Reference}{56}{section.5.28}%
+\contentsline {subsection}{\numberline {5.28.1}Detailed Description}{57}{subsection.5.28.1}%
+\contentsline {subsection}{\numberline {5.28.2}Constructor \& Destructor Documentation}{57}{subsection.5.28.2}%
+\contentsline {subsubsection}{\numberline {5.28.2.1}ExprRem()}{57}{subsubsection.5.28.2.1}%
+\contentsline {subsection}{\numberline {5.28.3}Member Function Documentation}{57}{subsection.5.28.3}%
+\contentsline {subsubsection}{\numberline {5.28.3.1}eval()}{57}{subsubsection.5.28.3.1}%
+\contentsline {section}{\numberline {5.29}Expr\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sub Class Reference}{58}{section.5.29}%
+\contentsline {subsection}{\numberline {5.29.1}Detailed Description}{58}{subsection.5.29.1}%
+\contentsline {subsection}{\numberline {5.29.2}Constructor \& Destructor Documentation}{58}{subsection.5.29.2}%
+\contentsline {subsubsection}{\numberline {5.29.2.1}ExprSub()}{58}{subsubsection.5.29.2.1}%
+\contentsline {subsection}{\numberline {5.29.3}Member Function Documentation}{58}{subsection.5.29.3}%
+\contentsline {subsubsection}{\numberline {5.29.3.1}eval()}{58}{subsubsection.5.29.3.1}%
+\contentsline {section}{\numberline {5.30}Formula Struct Reference}{60}{section.5.30}%
+\contentsline {subsection}{\numberline {5.30.1}Detailed Description}{60}{subsection.5.30.1}%
+\contentsline {section}{\numberline {5.31}Formula\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Struct Reference}{60}{section.5.31}%
+\contentsline {subsection}{\numberline {5.31.1}Detailed Description}{61}{subsection.5.31.1}%
+\contentsline {section}{\numberline {5.32}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model Struct Reference}{61}{section.5.32}%
+\contentsline {subsection}{\numberline {5.32.1}Detailed Description}{61}{subsection.5.32.1}%
+\contentsline {section}{\numberline {5.33}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator Class Reference}{62}{section.5.33}%
+\contentsline {subsection}{\numberline {5.33.1}Detailed Description}{64}{subsection.5.33.1}%
+\contentsline {subsection}{\numberline {5.33.2}Member Function Documentation}{64}{subsection.5.33.2}%
+\contentsline {subsubsection}{\numberline {5.33.2.1}computeEpistemicClassHash()}{64}{subsubsection.5.33.2.1}%
+\contentsline {subsubsection}{\numberline {5.33.2.2}computeGlobalStateHash()}{64}{subsubsection.5.33.2.2}%
+\contentsline {subsubsection}{\numberline {5.33.2.3}createIterativeStrategy()}{64}{subsubsection.5.33.2.3}%
+\contentsline {subsubsection}{\numberline {5.33.2.4}expandAndReduceAllStates()}{65}{subsubsection.5.33.2.4}%
+\contentsline {subsubsection}{\numberline {5.33.2.5}expandState()}{65}{subsubsection.5.33.2.5}%
+\contentsline {subsubsection}{\numberline {5.33.2.6}expandStateAndReturn()}{65}{subsubsection.5.33.2.6}%
+\contentsline {subsubsection}{\numberline {5.33.2.7}findGlobalStateInEpistemicClass()}{66}{subsubsection.5.33.2.7}%
+\contentsline {subsubsection}{\numberline {5.33.2.8}findOrCreateEpistemicClass()}{66}{subsubsection.5.33.2.8}%
+\contentsline {subsubsection}{\numberline {5.33.2.9}findOrCreateEpistemicClassForKnowledge()}{66}{subsubsection.5.33.2.9}%
+\contentsline {subsubsection}{\numberline {5.33.2.10}generateGlobalTransitions()}{67}{subsubsection.5.33.2.10}%
+\contentsline {subsubsection}{\numberline {5.33.2.11}generateInitState()}{67}{subsubsection.5.33.2.11}%
+\contentsline {subsubsection}{\numberline {5.33.2.12}generateStateFromLocalStates()}{67}{subsubsection.5.33.2.12}%
+\contentsline {subsubsection}{\numberline {5.33.2.13}getActionNameFromStateInStrategy()}{68}{subsubsection.5.33.2.13}%
+\contentsline {subsubsection}{\numberline {5.33.2.14}getAgentInstanceByName()}{68}{subsubsection.5.33.2.14}%
+\contentsline {subsubsection}{\numberline {5.33.2.15}getCoalitionIdentifier()}{69}{subsubsection.5.33.2.15}%
+\contentsline {subsubsection}{\numberline {5.33.2.16}getCurrentGlobalModel()}{69}{subsubsection.5.33.2.16}%
+\contentsline {subsubsection}{\numberline {5.33.2.17}getFormula()}{69}{subsubsection.5.33.2.17}%
+\contentsline {subsubsection}{\numberline {5.33.2.18}getFormulaCorectness()}{69}{subsubsection.5.33.2.18}%
+\contentsline {subsubsection}{\numberline {5.33.2.19}getFormulaSize()}{70}{subsubsection.5.33.2.19}%
+\contentsline {subsubsection}{\numberline {5.33.2.20}initModel()}{70}{subsubsection.5.33.2.20}%
+\contentsline {subsubsection}{\numberline {5.33.2.21}initStrategy()}{70}{subsubsection.5.33.2.21}%
+\contentsline {subsubsection}{\numberline {5.33.2.22}nextIterativeStrategy()}{70}{subsubsection.5.33.2.22}%
+\contentsline {section}{\numberline {5.34}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Struct Reference}{71}{section.5.34}%
+\contentsline {subsection}{\numberline {5.34.1}Detailed Description}{72}{subsection.5.34.1}%
+\contentsline {subsection}{\numberline {5.34.2}Member Function Documentation}{72}{subsection.5.34.2}%
+\contentsline {subsubsection}{\numberline {5.34.2.1}getGlobalStateEnvironment()}{72}{subsubsection.5.34.2.1}%
+\contentsline {subsubsection}{\numberline {5.34.2.2}toString()}{72}{subsubsection.5.34.2.2}%
+\contentsline {section}{\numberline {5.35}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}::Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tuple\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Hash Struct Reference}{72}{section.5.35}%
+\contentsline {section}{\numberline {5.36}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition Struct Reference}{73}{section.5.36}%
+\contentsline {subsection}{\numberline {5.36.1}Detailed Description}{73}{subsection.5.36.1}%
+\contentsline {subsection}{\numberline {5.36.2}Member Function Documentation}{73}{subsection.5.36.2}%
+\contentsline {subsubsection}{\numberline {5.36.2.1}joinLocalTransitionNames()}{73}{subsubsection.5.36.2.1}%
+\contentsline {section}{\numberline {5.37}History\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dbg Class Reference}{74}{section.5.37}%
+\contentsline {subsection}{\numberline {5.37.1}Detailed Description}{74}{subsection.5.37.1}%
+\contentsline {subsection}{\numberline {5.37.2}Member Function Documentation}{74}{subsection.5.37.2}%
+\contentsline {subsubsection}{\numberline {5.37.2.1}addEntry()}{74}{subsubsection.5.37.2.1}%
+\contentsline {subsubsection}{\numberline {5.37.2.2}cloneEntry()}{75}{subsubsection.5.37.2.2}%
+\contentsline {subsubsection}{\numberline {5.37.2.3}markEntry()}{75}{subsubsection.5.37.2.3}%
+\contentsline {subsubsection}{\numberline {5.37.2.4}print()}{75}{subsubsection.5.37.2.4}%
+\contentsline {section}{\numberline {5.38}History\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry Struct Reference}{76}{section.5.38}%
+\contentsline {subsection}{\numberline {5.38.1}Detailed Description}{76}{subsection.5.38.1}%
+\contentsline {subsection}{\numberline {5.38.2}Member Function Documentation}{76}{subsection.5.38.2}%
+\contentsline {subsubsection}{\numberline {5.38.2.1}toString()}{77}{subsubsection.5.38.2.1}%
+\contentsline {section}{\numberline {5.39}Iterative\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Verif Class Reference}{77}{section.5.39}%
+\contentsline {section}{\numberline {5.40}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Models Struct Reference}{77}{section.5.40}%
+\contentsline {subsection}{\numberline {5.40.1}Detailed Description}{78}{subsection.5.40.1}%
+\contentsline {section}{\numberline {5.41}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State Class Reference}{78}{section.5.41}%
+\contentsline {subsection}{\numberline {5.41.1}Detailed Description}{78}{subsection.5.41.1}%
+\contentsline {subsection}{\numberline {5.41.2}Member Function Documentation}{78}{subsection.5.41.2}%
+\contentsline {subsubsection}{\numberline {5.41.2.1}compare()}{78}{subsubsection.5.41.2.1}%
+\contentsline {subsubsection}{\numberline {5.41.2.2}toString()}{79}{subsubsection.5.41.2.2}%
+\contentsline {section}{\numberline {5.42}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{79}{section.5.42}%
+\contentsline {subsection}{\numberline {5.42.1}Detailed Description}{80}{subsection.5.42.1}%
+\contentsline {section}{\numberline {5.43}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition Struct Reference}{80}{section.5.43}%
+\contentsline {subsection}{\numberline {5.43.1}Detailed Description}{80}{subsection.5.43.1}%
+\contentsline {section}{\numberline {5.44}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser Class Reference}{81}{section.5.44}%
+\contentsline {subsection}{\numberline {5.44.1}Detailed Description}{81}{subsection.5.44.1}%
+\contentsline {subsection}{\numberline {5.44.2}Member Function Documentation}{81}{subsection.5.44.2}%
+\contentsline {subsubsection}{\numberline {5.44.2.1}parse()}{81}{subsubsection.5.44.2.1}%
+\contentsline {subsubsection}{\numberline {5.44.2.2}parseAndOverwriteFormula()}{81}{subsubsection.5.44.2.2}%
+\contentsline {section}{\numberline {5.45}Probability\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry Class Reference}{82}{section.5.45}%
+\contentsline {subsection}{\numberline {5.45.1}Detailed Description}{82}{subsection.5.45.1}%
+\contentsline {section}{\numberline {5.46}Probability\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Decisions Class Reference}{83}{section.5.46}%
+\contentsline {subsection}{\numberline {5.46.1}Detailed Description}{83}{subsection.5.46.1}%
+\contentsline {section}{\numberline {5.47}Probability\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}True\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}False Struct Reference}{83}{section.5.47}%
+\contentsline {subsection}{\numberline {5.47.1}Detailed Description}{83}{subsection.5.47.1}%
+\contentsline {section}{\numberline {5.48}Prob\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Add Class Reference}{83}{section.5.48}%
+\contentsline {subsection}{\numberline {5.48.1}Detailed Description}{84}{subsection.5.48.1}%
+\contentsline {subsection}{\numberline {5.48.2}Constructor \& Destructor Documentation}{84}{subsection.5.48.2}%
+\contentsline {subsubsection}{\numberline {5.48.2.1}ProbAdd()}{84}{subsubsection.5.48.2.1}%
+\contentsline {subsection}{\numberline {5.48.3}Member Function Documentation}{84}{subsection.5.48.3}%
+\contentsline {subsubsection}{\numberline {5.48.3.1}eval()}{84}{subsubsection.5.48.3.1}%
+\contentsline {section}{\numberline {5.49}Prob\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Const Class Reference}{85}{section.5.49}%
+\contentsline {subsection}{\numberline {5.49.1}Detailed Description}{85}{subsection.5.49.1}%
+\contentsline {subsection}{\numberline {5.49.2}Constructor \& Destructor Documentation}{85}{subsection.5.49.2}%
+\contentsline {subsubsection}{\numberline {5.49.2.1}ProbConst()}{85}{subsubsection.5.49.2.1}%
+\contentsline {subsection}{\numberline {5.49.3}Member Function Documentation}{86}{subsection.5.49.3}%
+\contentsline {subsubsection}{\numberline {5.49.3.1}eval()}{86}{subsubsection.5.49.3.1}%
+\contentsline {section}{\numberline {5.50}Prob\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Div Class Reference}{86}{section.5.50}%
+\contentsline {subsection}{\numberline {5.50.1}Detailed Description}{86}{subsection.5.50.1}%
+\contentsline {subsection}{\numberline {5.50.2}Constructor \& Destructor Documentation}{87}{subsection.5.50.2}%
+\contentsline {subsubsection}{\numberline {5.50.2.1}ProbDiv()}{87}{subsubsection.5.50.2.1}%
+\contentsline {subsection}{\numberline {5.50.3}Member Function Documentation}{87}{subsection.5.50.3}%
+\contentsline {subsubsection}{\numberline {5.50.3.1}eval()}{87}{subsubsection.5.50.3.1}%
+\contentsline {section}{\numberline {5.51}Prob\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Mul Class Reference}{87}{section.5.51}%
+\contentsline {subsection}{\numberline {5.51.1}Detailed Description}{88}{subsection.5.51.1}%
+\contentsline {subsection}{\numberline {5.51.2}Constructor \& Destructor Documentation}{88}{subsection.5.51.2}%
+\contentsline {subsubsection}{\numberline {5.51.2.1}ProbMul()}{88}{subsubsection.5.51.2.1}%
+\contentsline {subsection}{\numberline {5.51.3}Member Function Documentation}{88}{subsection.5.51.3}%
+\contentsline {subsubsection}{\numberline {5.51.3.1}eval()}{88}{subsubsection.5.51.3.1}%
+\contentsline {section}{\numberline {5.52}Prob\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Node Class Reference}{89}{section.5.52}%
+\contentsline {subsection}{\numberline {5.52.1}Detailed Description}{89}{subsection.5.52.1}%
+\contentsline {subsection}{\numberline {5.52.2}Member Function Documentation}{89}{subsection.5.52.2}%
+\contentsline {subsubsection}{\numberline {5.52.2.1}eval()}{89}{subsubsection.5.52.2.1}%
+\contentsline {section}{\numberline {5.53}Prob\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Sub Class Reference}{90}{section.5.53}%
+\contentsline {subsection}{\numberline {5.53.1}Detailed Description}{90}{subsection.5.53.1}%
+\contentsline {subsection}{\numberline {5.53.2}Constructor \& Destructor Documentation}{90}{subsection.5.53.2}%
+\contentsline {subsubsection}{\numberline {5.53.2.1}ProbSub()}{90}{subsubsection.5.53.2.1}%
+\contentsline {subsection}{\numberline {5.53.3}Member Function Documentation}{90}{subsection.5.53.3}%
+\contentsline {subsubsection}{\numberline {5.53.3.1}eval()}{90}{subsubsection.5.53.3.1}%
+\contentsline {section}{\numberline {5.54}Result Struct Reference}{91}{section.5.54}%
+\contentsline {section}{\numberline {5.55}State\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Verification\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Info Struct Reference}{91}{section.5.55}%
+\contentsline {subsection}{\numberline {5.55.1}Detailed Description}{92}{subsection.5.55.1}%
+\contentsline {section}{\numberline {5.56}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bits\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Comparator Struct Reference}{92}{section.5.56}%
+\contentsline {subsection}{\numberline {5.56.1}Detailed Description}{92}{subsection.5.56.1}%
+\contentsline {section}{\numberline {5.57}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Collection Class Reference}{92}{section.5.57}%
+\contentsline {subsection}{\numberline {5.57.1}Detailed Description}{92}{subsection.5.57.1}%
+\contentsline {section}{\numberline {5.58}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Collection\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{93}{section.5.58}%
+\contentsline {subsection}{\numberline {5.58.1}Member Function Documentation}{93}{subsection.5.58.1}%
+\contentsline {subsubsection}{\numberline {5.58.1.1}addAction()}{93}{subsubsection.5.58.1.1}%
+\contentsline {section}{\numberline {5.59}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Entry Struct Reference}{93}{section.5.59}%
+\contentsline {section}{\numberline {5.60}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser Class Reference}{94}{section.5.60}%
+\contentsline {subsection}{\numberline {5.60.1}Detailed Description}{94}{subsection.5.60.1}%
+\contentsline {subsection}{\numberline {5.60.2}Member Function Documentation}{94}{subsection.5.60.2}%
+\contentsline {subsubsection}{\numberline {5.60.2.1}parse()}{94}{subsubsection.5.60.2.1}%
+\contentsline {section}{\numberline {5.61}Test\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Verif Class Reference}{95}{section.5.61}%
+\contentsline {section}{\numberline {5.62}Transition\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Template Class Reference}{95}{section.5.62}%
+\contentsline {subsection}{\numberline {5.62.1}Detailed Description}{96}{subsection.5.62.1}%
+\contentsline {subsection}{\numberline {5.62.2}Constructor \& Destructor Documentation}{96}{subsection.5.62.2}%
+\contentsline {subsubsection}{\numberline {5.62.2.1}TransitionTemplate()}{96}{subsubsection.5.62.2.1}%
+\contentsline {section}{\numberline {5.63}Var Struct Reference}{96}{section.5.63}%
+\contentsline {subsection}{\numberline {5.63.1}Detailed Description}{97}{subsection.5.63.1}%
+\contentsline {section}{\numberline {5.64}Verification Class Reference}{97}{section.5.64}%
+\contentsline {subsection}{\numberline {5.64.1}Detailed Description}{99}{subsection.5.64.1}%
+\contentsline {subsection}{\numberline {5.64.2}Constructor \& Destructor Documentation}{99}{subsection.5.64.2}%
+\contentsline {subsubsection}{\numberline {5.64.2.1}Verification()}{99}{subsubsection.5.64.2.1}%
+\contentsline {subsection}{\numberline {5.64.3}Member Function Documentation}{100}{subsection.5.64.3}%
+\contentsline {subsubsection}{\numberline {5.64.3.1}addHistoryContext()}{100}{subsubsection.5.64.3.1}%
+\contentsline {subsubsection}{\numberline {5.64.3.2}addHistoryDecision()}{100}{subsubsection.5.64.3.2}%
+\contentsline {subsubsection}{\numberline {5.64.3.3}addHistoryMarkDecisionAsInvalid()}{101}{subsubsection.5.64.3.3}%
+\contentsline {subsubsection}{\numberline {5.64.3.4}addHistoryStateStatus()}{101}{subsubsection.5.64.3.4}%
+\contentsline {subsubsection}{\numberline {5.64.3.5}addHistoryUncontrolledDecision()}{101}{subsubsection.5.64.3.5}%
+\contentsline {subsubsection}{\numberline {5.64.3.6}areGlobalStatesInTheSameEpistemicClass()}{102}{subsubsection.5.64.3.6}%
+\contentsline {subsubsection}{\numberline {5.64.3.7}checkUncontrolledSet()}{102}{subsubsection.5.64.3.7}%
+\contentsline {subsubsection}{\numberline {5.64.3.8}equivalentGlobalTransitions()}{102}{subsubsection.5.64.3.8}%
+\contentsline {subsubsection}{\numberline {5.64.3.9}getEpistemicClassForGlobalState()}{103}{subsubsection.5.64.3.9}%
+\contentsline {subsubsection}{\numberline {5.64.3.10}getNaturalStrategy()}{103}{subsubsection.5.64.3.10}%
+\contentsline {subsubsection}{\numberline {5.64.3.11}getReducedStrategy()}{103}{subsubsection.5.64.3.11}%
+\contentsline {subsubsection}{\numberline {5.64.3.12}getStrategyComplexity()}{104}{subsubsection.5.64.3.12}%
+\contentsline {subsubsection}{\numberline {5.64.3.13}globalStateToValueBits()}{104}{subsubsection.5.64.3.13}%
+\contentsline {subsubsection}{\numberline {5.64.3.14}increaseProbability()}{104}{subsubsection.5.64.3.14}%
+\contentsline {subsubsection}{\numberline {5.64.3.15}isAgentInCoalition()}{104}{subsubsection.5.64.3.15}%
+\contentsline {subsubsection}{\numberline {5.64.3.16}isGlobalTransitionControlledByCoalition()}{105}{subsubsection.5.64.3.16}%
+\contentsline {subsubsection}{\numberline {5.64.3.17}lowerProbability()}{105}{subsubsection.5.64.3.17}%
+\contentsline {subsubsection}{\numberline {5.64.3.18}newHistoryMarkDecisionAsInvalid()}{106}{subsubsection.5.64.3.18}%
+\contentsline {subsubsection}{\numberline {5.64.3.19}printCurrentHistory()}{106}{subsubsection.5.64.3.19}%
+\contentsline {subsubsection}{\numberline {5.64.3.20}reduceStrategy()}{106}{subsubsection.5.64.3.20}%
+\contentsline {subsubsection}{\numberline {5.64.3.21}restoreHistory()}{107}{subsubsection.5.64.3.21}%
+\contentsline {subsubsection}{\numberline {5.64.3.22}revertLastDecision()}{107}{subsubsection.5.64.3.22}%
+\contentsline {subsubsection}{\numberline {5.64.3.23}undoHistoryUntil()}{108}{subsubsection.5.64.3.23}%
+\contentsline {subsubsection}{\numberline {5.64.3.24}undoLastHistoryEntry()}{108}{subsubsection.5.64.3.24}%
+\contentsline {subsubsection}{\numberline {5.64.3.25}verify()}{108}{subsubsection.5.64.3.25}%
+\contentsline {subsubsection}{\numberline {5.64.3.26}verifyGlobalState()}{108}{subsubsection.5.64.3.26}%
+\contentsline {subsubsection}{\numberline {5.64.3.27}verifyLocalStates()}{109}{subsubsection.5.64.3.27}%
+\contentsline {subsubsection}{\numberline {5.64.3.28}verifyStrategy()}{109}{subsubsection.5.64.3.28}%
+\contentsline {subsubsection}{\numberline {5.64.3.29}verifyTransitionSets()}{109}{subsubsection.5.64.3.29}%
+\contentsline {section}{\numberline {5.65}Verification\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Iterative Class Reference}{110}{section.5.65}%
+\contentsline {subsection}{\numberline {5.65.1}Detailed Description}{112}{subsection.5.65.1}%
+\contentsline {subsection}{\numberline {5.65.2}Constructor \& Destructor Documentation}{112}{subsection.5.65.2}%
+\contentsline {subsubsection}{\numberline {5.65.2.1}VerificationIterative()}{112}{subsubsection.5.65.2.1}%
+\contentsline {subsection}{\numberline {5.65.3}Member Function Documentation}{112}{subsection.5.65.3}%
+\contentsline {subsubsection}{\numberline {5.65.3.1}addHistoryAnswerProbability()}{112}{subsubsection.5.65.3.1}%
+\contentsline {subsubsection}{\numberline {5.65.3.2}addHistoryContext()}{113}{subsubsection.5.65.3.2}%
+\contentsline {subsubsection}{\numberline {5.65.3.3}addHistoryDecision()}{113}{subsubsection.5.65.3.3}%
+\contentsline {subsubsection}{\numberline {5.65.3.4}addHistoryMarkDecisionAsInvalid()}{114}{subsubsection.5.65.3.4}%
+\contentsline {subsubsection}{\numberline {5.65.3.5}addHistoryStateStatus()}{114}{subsubsection.5.65.3.5}%
+\contentsline {subsubsection}{\numberline {5.65.3.6}areGlobalStatesInTheSameEpistemicClass()}{114}{subsubsection.5.65.3.6}%
+\contentsline {subsubsection}{\numberline {5.65.3.7}checkIfProbabilistic()}{115}{subsubsection.5.65.3.7}%
+\contentsline {subsubsection}{\numberline {5.65.3.8}dissolveLoopedProbabilityTransition()}{115}{subsubsection.5.65.3.8}%
+\contentsline {subsubsection}{\numberline {5.65.3.9}equivalentGlobalTransitions()}{115}{subsubsection.5.65.3.9}%
+\contentsline {subsubsection}{\numberline {5.65.3.10}findLoopedProbabilityTransitions()}{116}{subsubsection.5.65.3.10}%
+\contentsline {subsubsection}{\numberline {5.65.3.11}getEpistemicClassForGlobalState()}{116}{subsubsection.5.65.3.11}%
+\contentsline {subsubsection}{\numberline {5.65.3.12}getNaturalStrategy()}{116}{subsubsection.5.65.3.12}%
+\contentsline {subsubsection}{\numberline {5.65.3.13}getReducedStrategy()}{117}{subsubsection.5.65.3.13}%
+\contentsline {subsubsection}{\numberline {5.65.3.14}getStrategyComplexity()}{117}{subsubsection.5.65.3.14}%
+\contentsline {subsubsection}{\numberline {5.65.3.15}globalStateToValueBits()}{117}{subsubsection.5.65.3.15}%
+\contentsline {subsubsection}{\numberline {5.65.3.16}isAgentInCoalition()}{118}{subsubsection.5.65.3.16}%
+\contentsline {subsubsection}{\numberline {5.65.3.17}isGlobalTransitionControlledByCoalition()}{118}{subsubsection.5.65.3.17}%
+\contentsline {subsubsection}{\numberline {5.65.3.18}reduceStrategy()}{118}{subsubsection.5.65.3.18}%
+\contentsline {subsubsection}{\numberline {5.65.3.19}revertToLastDecision()}{119}{subsubsection.5.65.3.19}%
+\contentsline {subsubsection}{\numberline {5.65.3.20}testForAndFixBadAgents()}{119}{subsubsection.5.65.3.20}%
+\contentsline {subsubsection}{\numberline {5.65.3.21}verify()}{119}{subsubsection.5.65.3.21}%
+\contentsline {subsubsection}{\numberline {5.65.3.22}verifyLocalStates()}{119}{subsubsection.5.65.3.22}%
+\contentsline {section}{\numberline {5.66}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}buffer\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}state Struct Reference}{120}{section.5.66}%
+\contentsline {subsection}{\numberline {5.66.1}Member Data Documentation}{120}{subsection.5.66.1}%
+\contentsline {subsubsection}{\numberline {5.66.1.1}yy\_bs\_column}{120}{subsubsection.5.66.1.1}%
+\contentsline {subsubsection}{\numberline {5.66.1.2}yy\_bs\_lineno}{120}{subsubsection.5.66.1.2}%
+\contentsline {section}{\numberline {5.67}yy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}trans\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}info Struct Reference}{121}{section.5.67}%
+\contentsline {section}{\numberline {5.68}yyalloc Union Reference}{121}{section.5.68}%
+\contentsline {section}{\numberline {5.69}YYSTYPE Union Reference}{121}{section.5.69}%
+\contentsline {chapter}{\numberline {6}File Documentation}{123}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Agent.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{123}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Detailed Description}{123}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}Agent.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{123}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Detailed Description}{123}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Common.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{124}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Detailed Description}{124}{subsection.6.3.1}%
+\contentsline {section}{\numberline {6.4}Dot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{124}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Detailed Description}{124}{subsection.6.4.1}%
+\contentsline {section}{\numberline {6.5}Dot\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Graph.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{124}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Detailed Description}{125}{subsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.5.2}Enumeration Type Documentation}{125}{subsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.2.1}DotGraphBase}{125}{subsubsection.6.5.2.1}%
+\contentsline {section}{\numberline {6.6}Epistemic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Class.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{125}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Detailed Description}{125}{subsection.6.6.1}%
+\contentsline {section}{\numberline {6.7}expressions.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{126}{section.6.7}%
+\contentsline {subsection}{\numberline {6.7.1}Detailed Description}{126}{subsection.6.7.1}%
+\contentsline {section}{\numberline {6.8}expressions.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{126}{section.6.8}%
+\contentsline {subsection}{\numberline {6.8.1}Detailed Description}{127}{subsection.6.8.1}%
+\contentsline {section}{\numberline {6.9}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{127}{section.6.9}%
+\contentsline {subsection}{\numberline {6.9.1}Detailed Description}{128}{subsection.6.9.1}%
+\contentsline {section}{\numberline {6.10}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{128}{section.6.10}%
+\contentsline {subsection}{\numberline {6.10.1}Detailed Description}{128}{subsection.6.10.1}%
+\contentsline {section}{\numberline {6.11}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Generator.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{128}{section.6.11}%
+\contentsline {subsection}{\numberline {6.11.1}Detailed Description}{129}{subsection.6.11.1}%
+\contentsline {section}{\numberline {6.12}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{129}{section.6.12}%
+\contentsline {subsection}{\numberline {6.12.1}Detailed Description}{129}{subsection.6.12.1}%
+\contentsline {section}{\numberline {6.13}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{129}{section.6.13}%
+\contentsline {subsection}{\numberline {6.13.1}Detailed Description}{129}{subsection.6.13.1}%
+\contentsline {section}{\numberline {6.14}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{129}{section.6.14}%
+\contentsline {subsection}{\numberline {6.14.1}Detailed Description}{130}{subsection.6.14.1}%
+\contentsline {section}{\numberline {6.15}Global\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{130}{section.6.15}%
+\contentsline {subsection}{\numberline {6.15.1}Detailed Description}{130}{subsection.6.15.1}%
+\contentsline {section}{\numberline {6.16}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{130}{section.6.16}%
+\contentsline {subsection}{\numberline {6.16.1}Detailed Description}{130}{subsection.6.16.1}%
+\contentsline {section}{\numberline {6.17}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}State.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{130}{section.6.17}%
+\contentsline {subsection}{\numberline {6.17.1}Detailed Description}{131}{subsection.6.17.1}%
+\contentsline {section}{\numberline {6.18}Local\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Transition.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{131}{section.6.18}%
+\contentsline {subsection}{\numberline {6.18.1}Detailed Description}{131}{subsection.6.18.1}%
+\contentsline {section}{\numberline {6.19}Model\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{131}{section.6.19}%
+\contentsline {subsection}{\numberline {6.19.1}Detailed Description}{132}{subsection.6.19.1}%
+\contentsline {section}{\numberline {6.20}nodes.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{132}{section.6.20}%
+\contentsline {subsection}{\numberline {6.20.1}Detailed Description}{132}{subsection.6.20.1}%
+\contentsline {section}{\numberline {6.21}nodes.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{132}{section.6.21}%
+\contentsline {subsection}{\numberline {6.21.1}Detailed Description}{132}{subsection.6.21.1}%
+\contentsline {section}{\numberline {6.22}strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Nodes.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{133}{section.6.22}%
+\contentsline {subsection}{\numberline {6.22.1}Detailed Description}{133}{subsection.6.22.1}%
+\contentsline {section}{\numberline {6.23}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cc File Reference}{133}{section.6.23}%
+\contentsline {subsection}{\numberline {6.23.1}Detailed Description}{133}{subsection.6.23.1}%
+\contentsline {section}{\numberline {6.24}Strategy\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Parser.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{134}{section.6.24}%
+\contentsline {subsection}{\numberline {6.24.1}Detailed Description}{134}{subsection.6.24.1}%
+\contentsline {section}{\numberline {6.25}Types.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{134}{section.6.25}%
+\contentsline {subsection}{\numberline {6.25.1}Detailed Description}{135}{subsection.6.25.1}%
+\contentsline {subsection}{\numberline {6.25.2}Enumeration Type Documentation}{135}{subsection.6.25.2}%
+\contentsline {subsubsection}{\numberline {6.25.2.1}ProbabilitySign}{135}{subsubsection.6.25.2.1}%
+\contentsline {section}{\numberline {6.26}Types\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dependency.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{135}{section.6.26}%
+\contentsline {subsection}{\numberline {6.26.1}Detailed Description}{136}{subsection.6.26.1}%
+\contentsline {subsection}{\numberline {6.26.2}Enumeration Type Documentation}{136}{subsection.6.26.2}%
+\contentsline {subsubsection}{\numberline {6.26.2.1}HistoryEntryType}{136}{subsubsection.6.26.2.1}%
+\contentsline {subsubsection}{\numberline {6.26.2.2}StrategyEntryType}{137}{subsubsection.6.26.2.2}%
+\contentsline {section}{\numberline {6.27}Utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{137}{section.6.27}%
+\contentsline {subsection}{\numberline {6.27.1}Detailed Description}{138}{subsection.6.27.1}%
+\contentsline {subsection}{\numberline {6.27.2}Function Documentation}{138}{subsection.6.27.2}%
+\contentsline {subsubsection}{\numberline {6.27.2.1}agentToString()}{138}{subsubsection.6.27.2.1}%
+\contentsline {subsubsection}{\numberline {6.27.2.2}envToString()}{138}{subsubsection.6.27.2.2}%
+\contentsline {subsubsection}{\numberline {6.27.2.3}getLocalStatesSCC()}{139}{subsubsection.6.27.2.3}%
+\contentsline {subsubsection}{\numberline {6.27.2.4}localModelsToString()}{139}{subsubsection.6.27.2.4}%
+\contentsline {subsubsection}{\numberline {6.27.2.5}outputGlobalModel()}{139}{subsubsection.6.27.2.5}%
+\contentsline {subsubsection}{\numberline {6.27.2.6}tarjanVisit()}{140}{subsubsection.6.27.2.6}%
+\contentsline {section}{\numberline {6.28}Utils.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{140}{section.6.28}%
+\contentsline {subsection}{\numberline {6.28.1}Function Documentation}{141}{subsection.6.28.1}%
+\contentsline {subsubsection}{\numberline {6.28.1.1}agentToString()}{141}{subsubsection.6.28.1.1}%
+\contentsline {subsubsection}{\numberline {6.28.1.2}envToString()}{141}{subsubsection.6.28.1.2}%
+\contentsline {subsubsection}{\numberline {6.28.1.3}getLocalStatesSCC()}{142}{subsubsection.6.28.1.3}%
+\contentsline {subsubsection}{\numberline {6.28.1.4}localModelsToString()}{142}{subsubsection.6.28.1.4}%
+\contentsline {subsubsection}{\numberline {6.28.1.5}outputGlobalModel()}{142}{subsubsection.6.28.1.5}%
+\contentsline {section}{\numberline {6.29}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{143}{section.6.29}%
+\contentsline {subsection}{\numberline {6.29.1}Detailed Description}{143}{subsection.6.29.1}%
+\contentsline {subsection}{\numberline {6.29.2}Function Documentation}{143}{subsection.6.29.2}%
+\contentsline {subsubsection}{\numberline {6.29.2.1}dbgHistEnt()}{143}{subsubsection.6.29.2.1}%
+\contentsline {subsubsection}{\numberline {6.29.2.2}dbgVerifStatus()}{144}{subsubsection.6.29.2.2}%
+\contentsline {subsubsection}{\numberline {6.29.2.3}verStatusToStr()}{144}{subsubsection.6.29.2.3}%
+\contentsline {section}{\numberline {6.30}Verification.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{144}{section.6.30}%
+\contentsline {subsection}{\numberline {6.30.1}Enumeration Type Documentation}{145}{subsection.6.30.1}%
+\contentsline {subsubsection}{\numberline {6.30.1.1}TraversalMode}{145}{subsubsection.6.30.1.1}%
+\contentsline {subsection}{\numberline {6.30.2}Function Documentation}{145}{subsection.6.30.2}%
+\contentsline {subsubsection}{\numberline {6.30.2.1}verStatusToStr()}{146}{subsubsection.6.30.2.1}%
+\contentsline {section}{\numberline {6.31}Verification\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Iterative.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}cpp File Reference}{146}{section.6.31}%
+\contentsline {subsection}{\numberline {6.31.1}Detailed Description}{146}{subsection.6.31.1}%
+\contentsline {subsection}{\numberline {6.31.2}Function Documentation}{146}{subsection.6.31.2}%
+\contentsline {subsubsection}{\numberline {6.31.2.1}verifStatusToStr()}{146}{subsubsection.6.31.2.1}%
+\contentsline {section}{\numberline {6.32}Verification\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Iterative.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}hpp File Reference}{147}{section.6.32}%
+\contentsline {subsection}{\numberline {6.32.1}Enumeration Type Documentation}{147}{subsection.6.32.1}%
+\contentsline {subsubsection}{\numberline {6.32.1.1}GraphTraversalMode}{147}{subsubsection.6.32.1.1}%
+\contentsline {subsection}{\numberline {6.32.2}Function Documentation}{148}{subsection.6.32.2}%
+\contentsline {subsubsection}{\numberline {6.32.2.1}verifStatusToStr()}{148}{subsubsection.6.32.2.1}%
+\contentsline {chapter}{Index}{149}{section*.139}%

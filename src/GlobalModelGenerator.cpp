@@ -622,11 +622,15 @@ bool GlobalModelGenerator::getFormulaCorectness() {
     return correctModel;
 }
 
+/// @brief Initiates the strategy with a given StrategyCollection.
+/// @param strat StrategyCollection to initialize the strategy.
 void GlobalModelGenerator::initStrategy(StrategyCollection* strat)
 {
     this->strategyCollection = strat;
 }
 
+/// @brief Prepares the strategy generating structures for the probabilistic verification.
+/// @param localModels LocalModels to generate the coalition transition buckets from.
 void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
 {
     ProbabilityStrategyDecisions newProbabilityStrategy;
@@ -657,6 +661,8 @@ void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
     this->strategyCollection = strat;
 }
 
+/// @brief Generates next set strategy from the memorized coalition transitions for the probabilistic verification.
+/// @return Returns true if the strategy was generated properly, false if it is the last permutation.
 bool GlobalModelGenerator::nextIterativeStrategy()
 {
     cout << this->probabilityStrategy.currentStrategyPermutation.rbegin()->first << " " << this->probabilityStrategy.currentStrategyPermutation.rbegin()->second << " / " << endl;
@@ -700,6 +706,9 @@ bool GlobalModelGenerator::nextIterativeStrategy()
     return true;
 }
 
+/// @brief Gives next action's name from a given state.
+/// @param state GlobalState from which an action name would be retrieved if a set strategy is present.
+/// @return String containing the action name ending on a semicolon.
 string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state) {
     string coalitionLocalStateName = getCoalitionIdentifier(&(state->localStatesProjection));
     try {
@@ -713,6 +722,9 @@ string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state
     return "";
 }
 
+/// @brief Returns a concatenated name of all given LocalStates.
+/// @param localStates Vector of LocalStates to concatenate into a single string.
+/// @return LocalState names separated with semicolons, ending on a semicolon.
 string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
     string hash = "";
     for (const auto localState : *localStates) {

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['outputglobalmodel_485',['outputGlobalModel',['../Utils_8cpp.html#ae45accf23ba6404b9b292d148e3eda27',1,'outputGlobalModel(GlobalModel *globalModel):&#160;Utils.cpp'],['../Utils_8hpp.html#ae45accf23ba6404b9b292d148e3eda27',1,'outputGlobalModel(GlobalModel *globalModel):&#160;Utils.cpp']]]
+  ['newhistorymarkdecisionasinvalid_524',['newHistoryMarkDecisionAsInvalid',['../classVerification.html#a92b87e0dc375f1d17160492a4cb82ce5',1,'Verification']]],
+  ['nextiterativestrategy_525',['nextIterativeStrategy',['../classGlobalModelGenerator.html#a6d3e90da5d787e1596cdfa637ce59c31',1,'GlobalModelGenerator']]]
 ];

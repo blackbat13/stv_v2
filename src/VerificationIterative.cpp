@@ -1,7 +1,7 @@
 /**
  * @file VerificationIterative.cpp
- * @brief Class for verification of the formula on a model.
- * Class for verification of the specified formula on a specified model.
+ * @brief Class for iteratively generated verification of the formula on a model.
+ * Class for iteratively generated verification of the specified formula on a specified model.
  */
 #include "VerificationIterative.hpp"
 #define DEPTH_PREFIX string(depth * 4, ' ')
@@ -245,6 +245,8 @@ void VerificationIterative::undoLastHistoryEntry() {
     history.pop();
 }
 
+/// @brief Reverts the taken actions to the paint of the last decision.
+/// @return True if reverted correctly, false otherwise.
 bool VerificationIterative::revertToLastDecision()
 {
     // temporary infinite loop to debug, change later to proper handling of creating a new strategy
@@ -386,6 +388,8 @@ string VerificationIterative::checkIfProbabilistic(GlobalTransition* transitionT
     return "";
 }
 
+/// @brief Looks for the probability transitions with loops and dissolves them.
+/// @param transitionSets Set of GlobalTransitions to check for the loops.
 void VerificationIterative::findLoopedProbabilityTransitions(map<string, set<GlobalTransition*>>* transitionSets) {
     cout << "findLoopedProbabilityTransitions: " << transitionSets->size() << endl;
     for (auto probabilisticTransitionSet : *transitionSets) {
@@ -406,6 +410,9 @@ void VerificationIterative::findLoopedProbabilityTransitions(map<string, set<Glo
     }
 }
 
+/// @brief Marks a loop as a transition to dissolve.
+/// @param transitionToDissolve GlobalTransition to ignore.
+/// @param probabilityTransitions Set of GlobalTransitions to remove the transition from (unused)
 void VerificationIterative::dissolveLoopedProbabilityTransition(GlobalTransition* transitionToDissolve, set<GlobalTransition*>* probabilityTransitions)
 {
     transitionToDissolve->from->probabilityLoop = transitionToDissolve;
@@ -598,6 +605,8 @@ int VerificationIterative::getStrategyComplexity() {
     return this->reductionComplexityBefore;
 }
 
+/// @brief Verifies a strategy with the previously given models and formula.
+/// @return Result containing data of the verification result.
 Result VerificationIterative::verify() {
     Result verificationResult;
     verificationResult.verificationResult = false;
@@ -1118,6 +1127,9 @@ Result VerificationIterative::verify() {
     return verificationResult;
 }
 
+/// @brief Fixes potentially blocking agent actions.
+/// @param stateVerificationInfo Information for the state verification.
+/// @return True if changed transitions into uncontrolled, false otherwise.
 bool VerificationIterative::testForAndFixBadAgents(StateVerificationInfo* stateVerificationInfo) {
     bool hasMergedTransitionsIntoUncontrolled = false;
     if (stateVerificationInfo->controlled && stateVerificationInfo->uncontrolled) {

@@ -1,0 +1,70 @@
+\hypertarget{VerificationIterative_8hpp}{}\doxysection{Verification\+Iterative.\+hpp File Reference}
+\label{VerificationIterative_8hpp}\index{VerificationIterative.hpp@{VerificationIterative.hpp}}
+{\ttfamily \#include $<$stack$>$}\newline
+{\ttfamily \#include \char`\"{}Types.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Types\+Dependency.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Global\+Model\+Generator.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$bitset$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structDecisionEntry}{Decision\+Entry}}
+\item 
+class \mbox{\hyperlink{classVerificationIterative}{Verification\+Iterative}}
+\begin{DoxyCompactList}\small\item\em A class that verifies if the model fulfills the formula. Also can do some operations on decision history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}{Graph\+Traversal\+Mode}} \{ \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb}{NORMAL\+\_\+\+TRAVERSAL}}
+, \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6a3416153d10de6e14520ee8bf3cb6aa35}{RESTORE\+\_\+\+STATES}}
+ \}
+\begin{DoxyCompactList}\small\item\em Current model traversal mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{VerificationIterative_8hpp_a3c60cdad8f405dea01bf4f112957a082}{verif\+Status\+To\+Str}} (Global\+State\+Verification\+Status status)
+\begin{DoxyCompactList}\small\item\em Converts global verification status into a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}\label{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}} 
+\index{VerificationIterative.hpp@{VerificationIterative.hpp}!GraphTraversalMode@{GraphTraversalMode}}
+\index{GraphTraversalMode@{GraphTraversalMode}!VerificationIterative.hpp@{VerificationIterative.hpp}}
+\doxysubsubsection{\texorpdfstring{GraphTraversalMode}{GraphTraversalMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}{Graph\+Traversal\+Mode}}}
+
+
+
+Current model traversal mode. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORMAL\_TRAVERSAL@{NORMAL\_TRAVERSAL}!VerificationIterative.hpp@{VerificationIterative.hpp}}\index{VerificationIterative.hpp@{VerificationIterative.hpp}!NORMAL\_TRAVERSAL@{NORMAL\_TRAVERSAL}}}\mbox{\Hypertarget{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb}\label{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb}} 
+NORMAL\+\_\+\+TRAVERSAL&Normal model traversal. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RESTORE\_STATES@{RESTORE\_STATES}!VerificationIterative.hpp@{VerificationIterative.hpp}}\index{VerificationIterative.hpp@{VerificationIterative.hpp}!RESTORE\_STATES@{RESTORE\_STATES}}}\mbox{\Hypertarget{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6a3416153d10de6e14520ee8bf3cb6aa35}\label{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6a3416153d10de6e14520ee8bf3cb6aa35}} 
+RESTORE\+\_\+\+STATES&Reconstructing recursion. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{VerificationIterative_8hpp_a3c60cdad8f405dea01bf4f112957a082}\label{VerificationIterative_8hpp_a3c60cdad8f405dea01bf4f112957a082}} 
+\index{VerificationIterative.hpp@{VerificationIterative.hpp}!verifStatusToStr@{verifStatusToStr}}
+\index{verifStatusToStr@{verifStatusToStr}!VerificationIterative.hpp@{VerificationIterative.hpp}}
+\doxysubsubsection{\texorpdfstring{verifStatusToStr()}{verifStatusToStr()}}
+{\footnotesize\ttfamily string verif\+Status\+To\+Str (\begin{DoxyParamCaption}\item[{Global\+State\+Verification\+Status}]{status }\end{DoxyParamCaption})}
+
+
+
+Converts global verification status into a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em status} & Enum value to be converted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classVerification}{Verification}} status converted into a string. 
+\end{DoxyReturn}

@@ -114,8 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad5a15b94c7e35c7e605f714ca0c89602"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#ad5a15b94c7e35c7e605f714ca0c89602">getStrategyComplexity</a> ()</td></tr>
 <tr class="memdesc:ad5a15b94c7e35c7e605f714ca0c89602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1.  <a href="classVerificationIterative.html#ad5a15b94c7e35c7e605f714ca0c89602">More...</a><br /></td></tr>
 <tr class="separator:ad5a15b94c7e35c7e605f714ca0c89602"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a193789572e730e954581ea99c727260c"><td class="memItemLeft" align="right" valign="top"><a id="a193789572e730e954581ea99c727260c"></a>
-<a class="el" href="structResult.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><b>verify</b> ()</td></tr>
+<tr class="memitem:a193789572e730e954581ea99c727260c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structResult.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a193789572e730e954581ea99c727260c">verify</a> ()</td></tr>
+<tr class="memdesc:a193789572e730e954581ea99c727260c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies a strategy with the previously given models and formula.  <a href="classVerificationIterative.html#a193789572e730e954581ea99c727260c">More...</a><br /></td></tr>
 <tr class="separator:a193789572e730e954581ea99c727260c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -138,11 +138,11 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa7d8deb3b8c093593ae0e61a0df6dee6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#aa7d8deb3b8c093593ae0e61a0df6dee6">checkIfProbabilistic</a> (<a class="el" href="structGlobalTransition.html">GlobalTransition</a> *transitionToCheck)</td></tr>
 <tr class="memdesc:aa7d8deb3b8c093593ae0e61a0df6dee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a given transition is a probabilistic one.  <a href="classVerificationIterative.html#aa7d8deb3b8c093593ae0e61a0df6dee6">More...</a><br /></td></tr>
 <tr class="separator:aa7d8deb3b8c093593ae0e61a0df6dee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56703f84e75d7d4bb3b2f8758fca2dd0"><td class="memItemLeft" align="right" valign="top"><a id="a56703f84e75d7d4bb3b2f8758fca2dd0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>findLoopedProbabilityTransitions</b> (map&lt; string, set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&gt; *transitionSets)</td></tr>
+<tr class="memitem:a56703f84e75d7d4bb3b2f8758fca2dd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a56703f84e75d7d4bb3b2f8758fca2dd0">findLoopedProbabilityTransitions</a> (map&lt; string, set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&gt; *transitionSets)</td></tr>
+<tr class="memdesc:a56703f84e75d7d4bb3b2f8758fca2dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks for the probability transitions with loops and dissolves them.  <a href="classVerificationIterative.html#a56703f84e75d7d4bb3b2f8758fca2dd0">More...</a><br /></td></tr>
 <tr class="separator:a56703f84e75d7d4bb3b2f8758fca2dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc79d5885552f891d1365e97df5b641b"><td class="memItemLeft" align="right" valign="top"><a id="adc79d5885552f891d1365e97df5b641b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>dissolveLoopedProbabilityTransition</b> (<a class="el" href="structGlobalTransition.html">GlobalTransition</a> *transitionToDissolve, set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt; *probabilityTransitions)</td></tr>
+<tr class="memitem:adc79d5885552f891d1365e97df5b641b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#adc79d5885552f891d1365e97df5b641b">dissolveLoopedProbabilityTransition</a> (<a class="el" href="structGlobalTransition.html">GlobalTransition</a> *transitionToDissolve, set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt; *probabilityTransitions)</td></tr>
+<tr class="memdesc:adc79d5885552f891d1365e97df5b641b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Marks a loop as a transition to dissolve.  <a href="classVerificationIterative.html#adc79d5885552f891d1365e97df5b641b">More...</a><br /></td></tr>
 <tr class="separator:adc79d5885552f891d1365e97df5b641b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a005b1d3e1d6c33109428ae4f623f0ea6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a005b1d3e1d6c33109428ae4f623f0ea6">addHistoryDecision</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *globalState, <a class="el" href="structGlobalTransition.html">GlobalTransition</a> *decision)</td></tr>
 <tr class="memdesc:a005b1d3e1d6c33109428ae4f623f0ea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structHistoryEntry.html" title="Structure used to save model traversal history.">HistoryEntry</a> of the type DECISION and puts it on top of the stack of the decision history.  <a href="classVerificationIterative.html#a005b1d3e1d6c33109428ae4f623f0ea6">More...</a><br /></td></tr>
@@ -156,14 +156,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>dissolveLoopedProbabi
 <tr class="memitem:a878970fa23f642298f662ee346befc3e"><td class="memItemLeft" align="right" valign="top"><a id="a878970fa23f642298f662ee346befc3e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addHistoryProbability</b> (<a class="el" href="structGlobalTransition.html">GlobalTransition</a> *decision)</td></tr>
 <tr class="separator:a878970fa23f642298f662ee346befc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4a9b1d6fd33a6e0549a9afae564b9a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#ae4a9b1d6fd33a6e0549a9afae564b9a2">addHistoryAnswerProbability</a> (<a class="el" href="structStateVerificationInfo.html">StateVerificationInfo</a> *globalState, ProbabilityCalculationType currentMode, <a class="el" href="structProbabilityTrueFalse.html">ProbabilityTrueFalse</a> newProbabilityValues)</td></tr>
+<tr class="memitem:ae4a9b1d6fd33a6e0549a9afae564b9a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#ae4a9b1d6fd33a6e0549a9afae564b9a2">addHistoryAnswerProbability</a> (<a class="el" href="structStateVerificationInfo.html">StateVerificationInfo</a> *globalState, <a class="el" href="TypesDependency_8hpp.html#a3e5773d6efd4d487175ee990719009df">ProbabilityCalculationType</a> currentMode, <a class="el" href="structProbabilityTrueFalse.html">ProbabilityTrueFalse</a> newProbabilityValues)</td></tr>
 <tr class="memdesc:ae4a9b1d6fd33a6e0549a9afae564b9a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a history entry for the change of probabilistic answer in a particular state.  <a href="classVerificationIterative.html#ae4a9b1d6fd33a6e0549a9afae564b9a2">More...</a><br /></td></tr>
 <tr class="separator:ae4a9b1d6fd33a6e0549a9afae564b9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a958bdb0c0fd77467ef76289248d7ee79"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a958bdb0c0fd77467ef76289248d7ee79">addHistoryMarkDecisionAsInvalid</a> (<a class="el" href="structGlobalState.html">GlobalState</a> *globalState, <a class="el" href="structGlobalTransition.html">GlobalTransition</a> *decision)</td></tr>
 <tr class="memdesc:a958bdb0c0fd77467ef76289248d7ee79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structHistoryEntry.html" title="Structure used to save model traversal history.">HistoryEntry</a> of the type MARK_DECISION_AS_INVALID and puts it to the top of the decision history.  <a href="classVerificationIterative.html#a958bdb0c0fd77467ef76289248d7ee79">More...</a><br /></td></tr>
 <tr class="separator:a958bdb0c0fd77467ef76289248d7ee79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a21926b6f8f0bb5c04ecded1a5e545c"><td class="memItemLeft" align="right" valign="top"><a id="a6a21926b6f8f0bb5c04ecded1a5e545c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>revertToLastDecision</b> ()</td></tr>
+<tr class="memitem:a6a21926b6f8f0bb5c04ecded1a5e545c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a6a21926b6f8f0bb5c04ecded1a5e545c">revertToLastDecision</a> ()</td></tr>
+<tr class="memdesc:a6a21926b6f8f0bb5c04ecded1a5e545c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverts the taken actions to the paint of the last decision.  <a href="classVerificationIterative.html#a6a21926b6f8f0bb5c04ecded1a5e545c">More...</a><br /></td></tr>
 <tr class="separator:a6a21926b6f8f0bb5c04ecded1a5e545c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadbeb6a6fc31d45887af58cf40f2fac8"><td class="memItemLeft" align="right" valign="top"><a id="aadbeb6a6fc31d45887af58cf40f2fac8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#aadbeb6a6fc31d45887af58cf40f2fac8">undoLastHistoryEntry</a> ()</td></tr>
@@ -178,14 +178,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:a12ae6ba0727d8e03f2bab1046c1e98fc"><td class="memItemLeft" align="right" valign="top">vector&lt; tuple&lt; vector&lt; tuple&lt; bool, string &gt; &gt;, string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a12ae6ba0727d8e03f2bab1046c1e98fc">reduceStrategy</a> (vector&lt; tuple&lt; vector&lt; tuple&lt; bool, string &gt;&gt;, string &gt;&gt; strategyEntries, short lockedColumn=0, bool upperHalf=false)</td></tr>
 <tr class="memdesc:a12ae6ba0727d8e03f2bab1046c1e98fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Natural strategy reduction algorithm.  <a href="classVerificationIterative.html#a12ae6ba0727d8e03f2bab1046c1e98fc">More...</a><br /></td></tr>
 <tr class="separator:a12ae6ba0727d8e03f2bab1046c1e98fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1816d9fd67679e5103c415f39285c7d6"><td class="memItemLeft" align="right" valign="top"><a id="a1816d9fd67679e5103c415f39285c7d6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>testForAndFixBadAgents</b> (<a class="el" href="structStateVerificationInfo.html">StateVerificationInfo</a> *stateVerificationInfo)</td></tr>
+<tr class="memitem:a1816d9fd67679e5103c415f39285c7d6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#a1816d9fd67679e5103c415f39285c7d6">testForAndFixBadAgents</a> (<a class="el" href="structStateVerificationInfo.html">StateVerificationInfo</a> *stateVerificationInfo)</td></tr>
+<tr class="memdesc:a1816d9fd67679e5103c415f39285c7d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixes potentially blocking agent actions.  <a href="classVerificationIterative.html#a1816d9fd67679e5103c415f39285c7d6">More...</a><br /></td></tr>
 <tr class="separator:a1816d9fd67679e5103c415f39285c7d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:ae0a5a6a14fbc94223839c327597d4e2c"><td class="memItemLeft" align="right" valign="top"><a id="ae0a5a6a14fbc94223839c327597d4e2c"></a>
-GraphTraversalMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#ae0a5a6a14fbc94223839c327597d4e2c">mode</a> = GraphTraversalMode::NORMAL_TRAVERSAL</td></tr>
+<a class="el" href="VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6">GraphTraversalMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVerificationIterative.html#ae0a5a6a14fbc94223839c327597d4e2c">mode</a> = <a class="el" href="VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb">GraphTraversalMode::NORMAL_TRAVERSAL</a></td></tr>
 <tr class="memdesc:ae0a5a6a14fbc94223839c327597d4e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current mode of model traversal. <br /></td></tr>
 <tr class="separator:ae0a5a6a14fbc94223839c327597d4e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a870c2cd4b6ac51f4d9665d96857dd512"><td class="memItemLeft" align="right" valign="top"><a id="a870c2cd4b6ac51f4d9665d96857dd512"></a>
@@ -268,7 +268,7 @@ stack&lt; <a class="el" href="structStateVerificationInfo.html">StateVerificatio
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">ProbabilityCalculationType&#160;</td>
+          <td class="paramtype"><a class="el" href="TypesDependency_8hpp.html#a3e5773d6efd4d487175ee990719009df">ProbabilityCalculationType</a>&#160;</td>
           <td class="paramname"><em>currentMode</em>, </td>
         </tr>
         <tr>
@@ -586,6 +586,51 @@ stack&lt; <a class="el" href="structStateVerificationInfo.html">StateVerificatio
 
 </div>
 </div>
+<a id="adc79d5885552f891d1365e97df5b641b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc79d5885552f891d1365e97df5b641b">&#9670;&nbsp;</a></span>dissolveLoopedProbabilityTransition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VerificationIterative::dissolveLoopedProbabilityTransition </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structGlobalTransition.html">GlobalTransition</a> *&#160;</td>
+          <td class="paramname"><em>transitionToDissolve</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt; *&#160;</td>
+          <td class="paramname"><em>probabilityTransitions</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Marks a loop as a transition to dissolve. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transitionToDissolve</td><td><a class="el" href="structGlobalTransition.html" title="Represents a single global transition.">GlobalTransition</a> to ignore. </td></tr>
+    <tr><td class="paramname">probabilityTransitions</td><td>Set of GlobalTransitions to remove the transition from (unused) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="adf6e8030b5b8f7be8d7903be8beaf768"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf6e8030b5b8f7be8d7903be8beaf768">&#9670;&nbsp;</a></span>equivalentGlobalTransitions()</h2>
 
@@ -629,6 +674,40 @@ stack&lt; <a class="el" href="structStateVerificationInfo.html">StateVerificatio
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the two global transitions have the same local transitions, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a56703f84e75d7d4bb3b2f8758fca2dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56703f84e75d7d4bb3b2f8758fca2dd0">&#9670;&nbsp;</a></span>findLoopedProbabilityTransitions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void VerificationIterative::findLoopedProbabilityTransitions </td>
+          <td>(</td>
+          <td class="paramtype">map&lt; string, set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&gt; *&#160;</td>
+          <td class="paramname"><em>transitionSets</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Looks for the probability transitions with loops and dissolves them. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transitionSets</td><td>Set of GlobalTransitions to check for the loops. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -882,6 +961,89 @@ stack&lt; <a class="el" href="structStateVerificationInfo.html">StateVerificatio
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of tuples &lt;vector of tuples &lt;variable value, variable name&gt;, action name&gt;. </dd></dl>
+
+</div>
+</div>
+<a id="a6a21926b6f8f0bb5c04ecded1a5e545c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a21926b6f8f0bb5c04ecded1a5e545c">&#9670;&nbsp;</a></span>revertToLastDecision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VerificationIterative::revertToLastDecision </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reverts the taken actions to the paint of the last decision. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if reverted correctly, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a1816d9fd67679e5103c415f39285c7d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1816d9fd67679e5103c415f39285c7d6">&#9670;&nbsp;</a></span>testForAndFixBadAgents()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VerificationIterative::testForAndFixBadAgents </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structStateVerificationInfo.html">StateVerificationInfo</a> *&#160;</td>
+          <td class="paramname"><em>stateVerificationInfo</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fixes potentially blocking agent actions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stateVerificationInfo</td><td>Information for the state verification. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if changed transitions into uncontrolled, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a193789572e730e954581ea99c727260c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a193789572e730e954581ea99c727260c">&#9670;&nbsp;</a></span>verify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structResult.html">Result</a> VerificationIterative::verify </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies a strategy with the previously given models and formula. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structResult.html">Result</a> containing data of the verification result. </dd></dl>
 
 </div>
 </div>

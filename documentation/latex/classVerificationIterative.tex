@@ -23,9 +23,8 @@ vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox
 \begin{DoxyCompactList}\small\item\em Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy()}}. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classVerificationIterative_ad5a15b94c7e35c7e605f714ca0c89602}{get\+Strategy\+Complexity}} ()
 \begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a193789572e730e954581ea99c727260c}\label{classVerificationIterative_a193789572e730e954581ea99c727260c}} 
-\mbox{\hyperlink{structResult}{Result}} {\bfseries verify} ()
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classVerificationIterative_a193789572e730e954581ea99c727260c}{verify}} ()
+\begin{DoxyCompactList}\small\item\em Verifies a strategy with the previously given models and formula. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,12 +40,10 @@ bool \mbox{\hyperlink{classVerificationIterative_ad4d0d8257189c3887e00d17a6ed0ea
 \begin{DoxyCompactList}\small\item\em Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if their \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{classVerificationIterative_aa7d8deb3b8c093593ae0e61a0df6dee6}{check\+If\+Probabilistic}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$transition\+To\+Check)
 \begin{DoxyCompactList}\small\item\em Checks if a given transition is a probabilistic one. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}\label{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}} 
-void {\bfseries find\+Looped\+Probability\+Transitions} (map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$$>$ $\ast$transition\+Sets)
-\item 
-\mbox{\Hypertarget{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}\label{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}} 
-void {\bfseries dissolve\+Looped\+Probability\+Transition} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$transition\+To\+Dissolve, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $\ast$probability\+Transitions)
-\item 
+void \mbox{\hyperlink{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}{find\+Looped\+Probability\+Transitions}} (map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$$>$ $\ast$transition\+Sets)
+\begin{DoxyCompactList}\small\item\em Looks for the probability transitions with loops and dissolves them. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}{dissolve\+Looped\+Probability\+Transition}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$transition\+To\+Dissolve, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $\ast$probability\+Transitions)
+\begin{DoxyCompactList}\small\item\em Marks a loop as a transition to dissolve. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classVerificationIterative_a005b1d3e1d6c33109428ae4f623f0ea6}{add\+History\+Decision}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type DECISION and puts it on top of the stack of the decision history. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classVerificationIterative_a93924408d0ba6332b34905142f0be415}{add\+History\+State\+Status}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, Global\+State\+Verification\+Status prev\+Status, Global\+State\+Verification\+Status new\+Status)
@@ -56,13 +53,12 @@ bool \mbox{\hyperlink{classVerificationIterative_afcedf4ace129dc0b20b2a10bd400c2
 \mbox{\Hypertarget{classVerificationIterative_a878970fa23f642298f662ee346befc3e}\label{classVerificationIterative_a878970fa23f642298f662ee346befc3e}} 
 void {\bfseries add\+History\+Probability} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \item 
-void \mbox{\hyperlink{classVerificationIterative_ae4a9b1d6fd33a6e0549a9afae564b9a2}{add\+History\+Answer\+Probability}} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$global\+State, Probability\+Calculation\+Type current\+Mode, \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Probability\+Values)
+void \mbox{\hyperlink{classVerificationIterative_ae4a9b1d6fd33a6e0549a9afae564b9a2}{add\+History\+Answer\+Probability}} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$global\+State, \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} current\+Mode, \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Probability\+Values)
 \begin{DoxyCompactList}\small\item\em Adds a history entry for the change of probabilistic answer in a particular state. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classVerificationIterative_a958bdb0c0fd77467ef76289248d7ee79}{add\+History\+Mark\+Decision\+As\+Invalid}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID and puts it to the top of the decision history. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}\label{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}} 
-bool {\bfseries revert\+To\+Last\+Decision} ()
-\item 
+bool \mbox{\hyperlink{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}{revert\+To\+Last\+Decision}} ()
+\begin{DoxyCompactList}\small\item\em Reverts the taken actions to the paint of the last decision. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}\label{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}} 
 void \mbox{\hyperlink{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}{undo\+Last\+History\+Entry}} ()
 \begin{DoxyCompactList}\small\item\em Removes the top entry of the history stack. \end{DoxyCompactList}\item 
@@ -72,14 +68,13 @@ bitset$<$ STRATEGY\+\_\+\+BITS $>$ \mbox{\hyperlink{classVerificationIterative_a
 \begin{DoxyCompactList}\small\item\em Changes global\+State variables to a bitset used in natural strategy synthesis. \end{DoxyCompactList}\item 
 vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy}} (vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$$>$, string $>$$>$ strategy\+Entries, short locked\+Column=0, bool upper\+Half=false)
 \begin{DoxyCompactList}\small\item\em Natural strategy reduction algorithm. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}\label{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}} 
-bool {\bfseries test\+For\+And\+Fix\+Bad\+Agents} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$state\+Verification\+Info)
-\end{DoxyCompactItemize}
+bool \mbox{\hyperlink{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}{test\+For\+And\+Fix\+Bad\+Agents}} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$state\+Verification\+Info)
+\begin{DoxyCompactList}\small\item\em Fixes potentially blocking agent actions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}\label{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}} 
-Graph\+Traversal\+Mode \mbox{\hyperlink{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}{mode}} = Graph\+Traversal\+Mode\+::\+NORMAL\+\_\+\+TRAVERSAL
+\mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}{Graph\+Traversal\+Mode}} \mbox{\hyperlink{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}{mode}} = \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb}{Graph\+Traversal\+Mode\+::\+NORMAL\+\_\+\+TRAVERSAL}}
 \begin{DoxyCompactList}\small\item\em Current mode of model traversal. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}\label{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}} 
 \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}{revert\+To\+Global\+State}}
@@ -133,7 +128,7 @@ Constructor for \mbox{\hyperlink{classVerification}{Verification}}.
 \index{VerificationIterative@{VerificationIterative}!addHistoryAnswerProbability@{addHistoryAnswerProbability}}
 \index{addHistoryAnswerProbability@{addHistoryAnswerProbability}!VerificationIterative@{VerificationIterative}}
 \doxysubsubsection{\texorpdfstring{addHistoryAnswerProbability()}{addHistoryAnswerProbability()}}
-{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+Answer\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$}]{state\+Verif\+Info,  }\item[{Probability\+Calculation\+Type}]{current\+Mode,  }\item[{\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}}}]{new\+Probability\+Values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+Answer\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$}]{state\+Verif\+Info,  }\item[{\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}}}]{current\+Mode,  }\item[{\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}}}]{new\+Probability\+Values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -264,6 +259,23 @@ Checks if a given transition is a probabilistic one.
 \begin{DoxyReturn}{Returns}
 Returns concatenated names of local transitions separated with semicolons if true, returns empty string otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}\label{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}} 
+\index{VerificationIterative@{VerificationIterative}!dissolveLoopedProbabilityTransition@{dissolveLoopedProbabilityTransition}}
+\index{dissolveLoopedProbabilityTransition@{dissolveLoopedProbabilityTransition}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{dissolveLoopedProbabilityTransition()}{dissolveLoopedProbabilityTransition()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::dissolve\+Looped\+Probability\+Transition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{transition\+To\+Dissolve,  }\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $\ast$}]{probability\+Transitions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Marks a loop as a transition to dissolve. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transition\+To\+Dissolve} & \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} to ignore. \\
+\hline
+{\em probability\+Transitions} & Set of Global\+Transitions to remove the transition from (unused) \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classVerificationIterative_adf6e8030b5b8f7be8d7903be8beaf768}\label{classVerificationIterative_adf6e8030b5b8f7be8d7903be8beaf768}} 
 \index{VerificationIterative@{VerificationIterative}!equivalentGlobalTransitions@{equivalentGlobalTransitions}}
 \index{equivalentGlobalTransitions@{equivalentGlobalTransitions}!VerificationIterative@{VerificationIterative}}
@@ -284,6 +296,21 @@ Checks if two global transitions are made up of the same local transitions.
 \begin{DoxyReturn}{Returns}
 True if the two global transitions have the same local transitions, false otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}\label{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}} 
+\index{VerificationIterative@{VerificationIterative}!findLoopedProbabilityTransitions@{findLoopedProbabilityTransitions}}
+\index{findLoopedProbabilityTransitions@{findLoopedProbabilityTransitions}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{findLoopedProbabilityTransitions()}{findLoopedProbabilityTransitions()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::find\+Looped\+Probability\+Transitions (\begin{DoxyParamCaption}\item[{map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$$>$ $\ast$}]{transition\+Sets }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Looks for the probability transitions with loops and dissolves them. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transition\+Sets} & Set of Global\+Transitions to check for the loops. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classVerificationIterative_a9bed9e985d2688840a54d01c901f07ae}\label{classVerificationIterative_a9bed9e985d2688840a54d01c901f07ae}} 
 \index{VerificationIterative@{VerificationIterative}!getEpistemicClassForGlobalState@{getEpistemicClassForGlobalState}}
 \index{getEpistemicClassForGlobalState@{getEpistemicClassForGlobalState}!VerificationIterative@{VerificationIterative}}
@@ -417,6 +444,50 @@ Natural strategy reduction algorithm.
 \begin{DoxyReturn}{Returns}
 Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}\label{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}} 
+\index{VerificationIterative@{VerificationIterative}!revertToLastDecision@{revertToLastDecision}}
+\index{revertToLastDecision@{revertToLastDecision}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{revertToLastDecision()}{revertToLastDecision()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::revert\+To\+Last\+Decision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Reverts the taken actions to the paint of the last decision. 
+
+\begin{DoxyReturn}{Returns}
+True if reverted correctly, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}\label{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}} 
+\index{VerificationIterative@{VerificationIterative}!testForAndFixBadAgents@{testForAndFixBadAgents}}
+\index{testForAndFixBadAgents@{testForAndFixBadAgents}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{testForAndFixBadAgents()}{testForAndFixBadAgents()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::test\+For\+And\+Fix\+Bad\+Agents (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$}]{state\+Verification\+Info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Fixes potentially blocking agent actions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+Verification\+Info} & Information for the state verification. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if changed transitions into uncontrolled, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a193789572e730e954581ea99c727260c}\label{classVerificationIterative_a193789572e730e954581ea99c727260c}} 
+\index{VerificationIterative@{VerificationIterative}!verify@{verify}}
+\index{verify@{verify}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{verify()}{verify()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Verification\+Iterative\+::verify (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Verifies a strategy with the previously given models and formula. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structResult}{Result}} containing data of the verification result. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classVerificationIterative_af774405cf4973b9195a4558c3595ed22}\label{classVerificationIterative_af774405cf4973b9195a4558c3595ed22}} 
 \index{VerificationIterative@{VerificationIterative}!verifyLocalStates@{verifyLocalStates}}
 \index{verifyLocalStates@{verifyLocalStates}!VerificationIterative@{VerificationIterative}}
@@ -439,5 +510,5 @@ Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Verification\+Iterative.\+hpp\item 
+\mbox{\hyperlink{VerificationIterative_8hpp}{Verification\+Iterative.\+hpp}}\item 
 \mbox{\hyperlink{VerificationIterative_8cpp}{Verification\+Iterative.\+cpp}}\end{DoxyCompactItemize}

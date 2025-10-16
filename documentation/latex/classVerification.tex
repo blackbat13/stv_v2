@@ -31,9 +31,8 @@ vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox
 \begin{DoxyCompactList}\small\item\em Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerification_a3fd0cea4307a0c055be9cf9313ffada3}{reduce\+Strategy()}}. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classVerification_a51b87c33f4db12b09110a650085d3aef}{get\+Strategy\+Complexity}} ()
 \begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}\label{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}} 
-\mbox{\hyperlink{structResult}{Result}} {\bfseries verify\+Strategy} ()
-\end{DoxyCompactItemize}
+\mbox{\hyperlink{structResult}{Result}} \mbox{\hyperlink{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}{verify\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Verifies a strategy with the previously given models and formula. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -637,6 +636,19 @@ Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with a specific set of values, fulfilling the criteria, otherwise returns false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}\label{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}} 
+\index{Verification@{Verification}!verifyStrategy@{verifyStrategy}}
+\index{verifyStrategy@{verifyStrategy}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{verifyStrategy()}{verifyStrategy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structResult}{Result}} Verification\+::verify\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Verifies a strategy with the previously given models and formula. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structResult}{Result}} containing data of the verification result. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classVerification_a995516fb8335e2a64c1ca9a988e41e96}\label{classVerification_a995516fb8335e2a64c1ca9a988e41e96}} 
 \index{Verification@{Verification}!verifyTransitionSets@{verifyTransitionSets}}

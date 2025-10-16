@@ -42,7 +42,9 @@ var files_dup =
     [ "LocalState.hpp", "LocalState_8hpp.html", [
       [ "LocalState", "classLocalState.html", "classLocalState" ]
     ] ],
-    [ "LocalTransition.hpp", "LocalTransition_8hpp_source.html", null ],
+    [ "LocalTransition.hpp", "LocalTransition_8hpp.html", [
+      [ "LocalTransition", "structLocalTransition.html", "structLocalTransition" ]
+    ] ],
     [ "ModelParser.cc", "ModelParser_8cc.html", "ModelParser_8cc" ],
     [ "ModelParser.hpp", "ModelParser_8hpp_source.html", null ],
     [ "natural_strategy_test.h", "natural__strategy__test_8h_source.html", null ],
@@ -82,11 +84,11 @@ var files_dup =
     [ "trains_with_bridge_test.h", "trains__with__bridge__test_8h_source.html", null ],
     [ "tree_test.h", "tree__test_8h_source.html", null ],
     [ "Types.hpp", "Types_8hpp.html", "Types_8hpp" ],
-    [ "TypesDependency.hpp", "TypesDependency_8hpp_source.html", null ],
+    [ "TypesDependency.hpp", "TypesDependency_8hpp.html", "TypesDependency_8hpp" ],
     [ "Utils.cpp", "Utils_8cpp.html", "Utils_8cpp" ],
     [ "Utils.hpp", "Utils_8hpp.html", "Utils_8hpp" ],
     [ "Verification.cpp", "Verification_8cpp.html", "Verification_8cpp" ],
     [ "Verification.hpp", "Verification_8hpp.html", "Verification_8hpp" ],
     [ "VerificationIterative.cpp", "VerificationIterative_8cpp.html", "VerificationIterative_8cpp" ],
-    [ "VerificationIterative.hpp", "VerificationIterative_8hpp_source.html", null ]
+    [ "VerificationIterative.hpp", "VerificationIterative_8hpp.html", "VerificationIterative_8hpp" ]
 ];

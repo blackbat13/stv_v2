@@ -9,10 +9,14 @@
 
 atomic_uint32_t GlobalTransition::next_id;
 
+/// @brief Constructor for GlobalTransition.
 GlobalTransition::GlobalTransition(){
    id = next_id++;
 }
 
+/// @brief Concatenates local transition names into a string.
+/// @param sep Separator used for separating the transition names.
+/// @return String of transition names joined with the given separator and ending on the separator.
 string GlobalTransition::joinLocalTransitionNames(char sep){
    string res = "";
    for(const auto& trn: localTransitions){

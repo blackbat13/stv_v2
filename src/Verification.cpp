@@ -1659,6 +1659,8 @@ void Verification::lowerProbability(GlobalState* currentStateFrom, GlobalState* 
     currentStateTo->probability -= currentProb;
 }
 
+/// @brief Verifies a strategy with the previously given models and formula.
+/// @return Result containing data of the verification result.
 Result Verification::verifyStrategy() {
     Result verificationResult;
     VerificationFormulaMode formulaMode = this->generator->getFormula()->isF ? VerificationFormulaMode::F : VerificationFormulaMode::G;

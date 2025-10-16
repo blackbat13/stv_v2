@@ -94,6 +94,10 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    return tuple<LocalModels, Formula>{models, formula};
 }
 
+/// @brief Parses a text file in the given file path and internally replaces the verification formula with the given one.
+/// @param fileName Path to the text file.
+/// @param s New formula.
+/// @return Returns a new model generation structure with a replaced formula.
 tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileName, string s) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");

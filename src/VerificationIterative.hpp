@@ -1,5 +1,5 @@
 /**
- * @file Verification.hpp
+ * @file VerificationIterative.hpp
  */
 #ifndef VERIFICATION_ITERATIVE
 #define VERIFICATION_ITERATIVE
