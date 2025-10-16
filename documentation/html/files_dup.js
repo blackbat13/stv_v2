@@ -29,9 +29,7 @@ var files_dup =
       [ "GlobalStateTupleHash", "structGlobalModelGenerator_1_1GlobalStateTupleHash.html", "structGlobalModelGenerator_1_1GlobalStateTupleHash" ]
     ] ],
     [ "GlobalState.cpp", "GlobalState_8cpp.html", null ],
-    [ "GlobalState.hpp", "GlobalState_8hpp.html", [
-      [ "GlobalState", "structGlobalState.html", "structGlobalState" ]
-    ] ],
+    [ "GlobalState.hpp", "GlobalState_8hpp.html", "GlobalState_8hpp" ],
     [ "GlobalStateVerificationStatus.hpp", "GlobalStateVerificationStatus_8hpp_source.html", null ],
     [ "GlobalTransition.cpp", "GlobalTransition_8cpp.html", null ],
     [ "GlobalTransition.hpp", "GlobalTransition_8hpp.html", [
@@ -47,6 +45,13 @@ var files_dup =
     [ "LocalTransition.hpp", "LocalTransition_8hpp_source.html", null ],
     [ "ModelParser.cc", "ModelParser_8cc.html", "ModelParser_8cc" ],
     [ "ModelParser.hpp", "ModelParser_8hpp_source.html", null ],
+    [ "natural_strategy_test.h", "natural__strategy__test_8h_source.html", null ],
+    [ "new_clock_test.h", "new__clock__test_8h_source.html", null ],
+    [ "new_simple_voting_run_test.h", "new__simple__voting__run__test_8h_source.html", null ],
+    [ "new_simple_voting_run_test_but_faster.h", "new__simple__voting__run__test__but__faster_8h_source.html", null ],
+    [ "new_simple_voting_test.h", "new__simple__voting__test_8h_source.html", null ],
+    [ "new_simple_voting_test_but_faster.h", "new__simple__voting__test__but__faster_8h_source.html", null ],
+    [ "new_simple_voting_with_fakes_test.h", "new__simple__voting__with__fakes__test_8h_source.html", null ],
     [ "nodes.cc", "nodes_8cc.html", null ],
     [ "nodes.hpp", "nodes_8hpp.html", [
       [ "Assignment", "classAssignment.html", "classAssignment" ],
@@ -55,6 +60,7 @@ var files_dup =
       [ "AgentTemplate", "classAgentTemplate.html", "classAgentTemplate" ]
     ] ],
     [ "parser.h", "parser_8h_source.html", null ],
+    [ "probability_test.h", "probability__test_8h_source.html", null ],
     [ "recursion_test.h", "recursion__test_8h_source.html", null ],
     [ "reduction_test.h", "reduction__test_8h_source.html", null ],
     [ "simple_voting_run_test.h", "simple__voting__run__test_8h_source.html", null ],
@@ -62,19 +68,25 @@ var files_dup =
     [ "simple_voting_test.h", "simple__voting__test_8h_source.html", null ],
     [ "simple_voting_test_but_faster.h", "simple__voting__test__but__faster_8h_source.html", null ],
     [ "simple_voting_with_fakes_test.h", "simple__voting__with__fakes__test_8h_source.html", null ],
+    [ "strategyNodes.hpp", "strategyNodes_8hpp.html", [
+      [ "ActionTemplate", "classActionTemplate.html", "classActionTemplate" ],
+      [ "StrategyCollectionTemplate", "classStrategyCollectionTemplate.html", "classStrategyCollectionTemplate" ]
+    ] ],
+    [ "StrategyParser.cc", "StrategyParser_8cc.html", "StrategyParser_8cc" ],
+    [ "strategyParser.h", "strategyParser_8h_source.html", null ],
+    [ "StrategyParser.hpp", "StrategyParser_8hpp.html", [
+      [ "StrategyParser", "classStrategyParser.html", "classStrategyParser" ]
+    ] ],
     [ "test_test.h", "test__test_8h_source.html", null ],
     [ "trains_test.h", "trains__test_8h_source.html", null ],
     [ "trains_with_bridge_test.h", "trains__with__bridge__test_8h_source.html", null ],
     [ "tree_test.h", "tree__test_8h_source.html", null ],
-    [ "Types.hpp", "Types_8hpp.html", [
-      [ "Var", "structVar.html", "structVar" ],
-      [ "Condition", "structCondition.html", "structCondition" ],
-      [ "FormulaTemplate", "structFormulaTemplate.html", "structFormulaTemplate" ],
-      [ "Formula", "structFormula.html", "structFormula" ],
-      [ "LocalModels", "structLocalModels.html", "structLocalModels" ]
-    ] ],
+    [ "Types.hpp", "Types_8hpp.html", "Types_8hpp" ],
+    [ "TypesDependency.hpp", "TypesDependency_8hpp_source.html", null ],
     [ "Utils.cpp", "Utils_8cpp.html", "Utils_8cpp" ],
     [ "Utils.hpp", "Utils_8hpp.html", "Utils_8hpp" ],
     [ "Verification.cpp", "Verification_8cpp.html", "Verification_8cpp" ],
-    [ "Verification.hpp", "Verification_8hpp.html", "Verification_8hpp" ]
+    [ "Verification.hpp", "Verification_8hpp.html", "Verification_8hpp" ],
+    [ "VerificationIterative.cpp", "VerificationIterative_8cpp.html", "VerificationIterative_8cpp" ],
+    [ "VerificationIterative.hpp", "VerificationIterative_8hpp_source.html", null ]
 ];

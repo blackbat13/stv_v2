@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mark_5fdecision_5fas_5finvalid_502',['MARK_DECISION_AS_INVALID',['../Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae',1,'Verification.hpp']]]
+  ['restore_628',['RESTORE',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380',1,'Verification.hpp']]],
+  ['revert_629',['REVERT',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf',1,'Verification.hpp']]]
 ];

@@ -48,7 +48,22 @@ set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $\ast$ \mb
 void \mbox{\hyperlink{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}{mark\+Formula\+As\+Incorrect}} ()
 \begin{DoxyCompactList}\small\item\em Sets formula to an incorrectly written state. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}{get\+Formula\+Corectness}} ()
-\begin{DoxyCompactList}\small\item\em Gets formula status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets formula status. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}\label{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}} 
+void {\bfseries init\+Strategy} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$strat)
+\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}\label{classGlobalModelGenerator_adcc7e6e72f106be4e753afe95de9e9ad}} 
+void {\bfseries create\+Iterative\+Strategy} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}})
+\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}\label{classGlobalModelGenerator_a6d3e90da5d787e1596cdfa637ce59c31}} 
+bool {\bfseries next\+Iterative\+Strategy} ()
+\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}\label{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}} 
+string {\bfseries get\+Coalition\+Identifier} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
+\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}\label{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}} 
+string {\bfseries get\+Action\+Name\+From\+State\+In\+Strategy} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -98,7 +113,13 @@ stack$<$ int $>$ \mbox{\hyperlink{classGlobalModelGenerator_acbf190d7646a2f3e7f4
 \begin{DoxyCompactList}\small\item\em Saved depths of states added to states\+To\+Expand. Used for reductions. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}\label{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}} 
 unordered\+\_\+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}{added\+States}}
-\begin{DoxyCompactList}\small\item\em States that were added to a stack of states. Used for reductions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em States that were added to a stack of states. Used for reductions. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}\label{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}} 
+\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}{strategy\+Collection}}
+\begin{DoxyCompactList}\small\item\em Strategy to check during verification (if any) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGlobalModelGenerator_ae461b8fe32e1cbb0fa3df855670f3c13}\label{classGlobalModelGenerator_ae461b8fe32e1cbb0fa3df855670f3c13}} 
+\mbox{\hyperlink{classProbabilityStrategyDecisions}{Probability\+Strategy\+Decisions}} {\bfseries probability\+Strategy}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

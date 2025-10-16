@@ -12,7 +12,7 @@ Represents a meta-\/transition.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classTransitionTemplate_aae4d642b14198edd7c03d72f05ddfb7e}{Transition\+Template}} (int \+\_\+shared, string \+\_\+pattern\+Name, string \+\_\+match\+Name, string \+\_\+start\+State, string \+\_\+end\+State, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+cond, set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$\+\_\+assign)
+\mbox{\hyperlink{classTransitionTemplate_a006140cfed83456e227fbc26e28d6e56}{Transition\+Template}} (int \+\_\+shared, string \+\_\+pattern\+Name, string \+\_\+match\+Name, string \+\_\+start\+State, string \+\_\+end\+State, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+cond, set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$\+\_\+assign, \mbox{\hyperlink{classProbNode}{Prob\+Node}} $\ast$\+\_\+prob)
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classTransitionTemplate}{Transition\+Template}} constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -37,18 +37,21 @@ string \mbox{\hyperlink{classTransitionTemplate_a4ae48c4bee21b96df2d78e79f741104
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structCondition}{Condition}} expression that has do be fulfilled in that transition. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classTransitionTemplate_af0cb55612a1917e5e3ba229794f0842f}\label{classTransitionTemplate_af0cb55612a1917e5e3ba229794f0842f}} 
 set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classTransitionTemplate_af0cb55612a1917e5e3ba229794f0842f}{assignments}}
-\begin{DoxyCompactList}\small\item\em Set of assignments. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set of assignments. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classTransitionTemplate_a255bd583df5d64c84e137596df4d1e7f}\label{classTransitionTemplate_a255bd583df5d64c84e137596df4d1e7f}} 
+\mbox{\hyperlink{classProbNode}{Prob\+Node}} $\ast$ \mbox{\hyperlink{classTransitionTemplate_a255bd583df5d64c84e137596df4d1e7f}{probability}}
+\begin{DoxyCompactList}\small\item\em Probability of executing the action. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Represents a meta-\/transition. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classTransitionTemplate_aae4d642b14198edd7c03d72f05ddfb7e}\label{classTransitionTemplate_aae4d642b14198edd7c03d72f05ddfb7e}} 
+\mbox{\Hypertarget{classTransitionTemplate_a006140cfed83456e227fbc26e28d6e56}\label{classTransitionTemplate_a006140cfed83456e227fbc26e28d6e56}} 
 \index{TransitionTemplate@{TransitionTemplate}!TransitionTemplate@{TransitionTemplate}}
 \index{TransitionTemplate@{TransitionTemplate}!TransitionTemplate@{TransitionTemplate}}
 \doxysubsubsection{\texorpdfstring{TransitionTemplate()}{TransitionTemplate()}}
-{\footnotesize\ttfamily Transition\+Template\+::\+Transition\+Template (\begin{DoxyParamCaption}\item[{int}]{\+\_\+shared,  }\item[{string}]{\+\_\+pattern\+Name,  }\item[{string}]{\+\_\+match\+Name,  }\item[{string}]{\+\_\+start\+State,  }\item[{string}]{\+\_\+end\+State,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+cond,  }\item[{set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$}]{\+\_\+assign }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Transition\+Template\+::\+Transition\+Template (\begin{DoxyParamCaption}\item[{int}]{\+\_\+shared,  }\item[{string}]{\+\_\+pattern\+Name,  }\item[{string}]{\+\_\+match\+Name,  }\item[{string}]{\+\_\+start\+State,  }\item[{string}]{\+\_\+end\+State,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+cond,  }\item[{set$<$ \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$}]{\+\_\+assign,  }\item[{\mbox{\hyperlink{classProbNode}{Prob\+Node}} $\ast$}]{\+\_\+prob }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -69,6 +72,8 @@ Represents a meta-\/transition.
 {\em \+\_\+cond} & \mbox{\hyperlink{structCondition}{Condition}} expression that has do be fulfilled in that transition. \\
 \hline
 {\em \+\_\+assign} & Set of assignments. \\
+\hline
+{\em \+\_\+prob} & Probability of executing the action. \\
 \hline
 \end{DoxyParams}
 

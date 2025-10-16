@@ -19,9 +19,21 @@ A class that verifies if the model fulfills the formula. Also can do some operat
 \begin{DoxyCompactList}\small\item\em Destructor for \mbox{\hyperlink{classVerification}{Verification}}. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_a2bcca3fd98e67e70b3861773221bbe0f}{verify}} ()
 \begin{DoxyCompactList}\small\item\em Starts the process of formula verification on a model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_a52d3d8b2c724174bf5935c536649feec}\label{classVerification_a52d3d8b2c724174bf5935c536649feec}} 
+bool {\bfseries fixpoint\+Verify} ()
+\item 
 \mbox{\Hypertarget{classVerification_ad116509bfb638d11b225fc8097ef14ee}\label{classVerification_ad116509bfb638d11b225fc8097ef14ee}} 
 void \mbox{\hyperlink{classVerification_ad116509bfb638d11b225fc8097ef14ee}{history\+Decisions\+ERR}} ()
-\begin{DoxyCompactList}\small\item\em Prints out the first ERR path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Prints out the first ERR path. \end{DoxyCompactList}\item 
+map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerification_a2e9d3a847ff290d7fcd32e680a2f41ad}{get\+Natural\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Get natural strategy map. \end{DoxyCompactList}\item 
+vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerification_ac16389f280ff991fe2b1114fa941ac8a}{get\+Reduced\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerification_a3fd0cea4307a0c055be9cf9313ffada3}{reduce\+Strategy()}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classVerification_a51b87c33f4db12b09110a650085d3aef}{get\+Strategy\+Complexity}} ()
+\begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}\label{classVerification_a0ab3ff1fac7ad2a7525cfc70630dc641}} 
+\mbox{\hyperlink{structResult}{Result}} {\bfseries verify\+Strategy} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -37,14 +49,16 @@ bool \mbox{\hyperlink{classVerification_a2ccd4e9d525a868217902a15ed93860b}{is\+A
 \begin{DoxyCompactList}\small\item\em Gets the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} for the agent in passed \mbox{\hyperlink{structGlobalState}{Global\+State}}, i.\+e. transitions from indistinguishable state from certain other states for an agent to other states. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_a1f4e545ca07343a09466ad9c8d214240}{are\+Global\+States\+In\+The\+Same\+Epistemic\+Class}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State1, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State2)
 \begin{DoxyCompactList}\small\item\em Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if their \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classVerification_affb58285fe7d8b6f18fa6260acd67d6c}{add\+History\+Decision}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ecision)
+void \mbox{\hyperlink{classVerification_a78db4512651ba57fb6daee1741fc26dd}{add\+History\+Decision}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type DECISION and puts it on top of the stack of the decision history. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classVerification_a4dcd5bfda3f174b6d69a4e34d1a447d2}{add\+History\+State\+Status}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, Global\+State\+Verification\+Status prev\+Status, Global\+State\+Verification\+Status new\+Status)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type STATE\+\_\+\+STATUS and puts it to the top of the decision history. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classVerification_add0805598d4f6e214a7e99355e34765e}{add\+History\+Context}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision, bool global\+Transition\+Controlled)
+bool \mbox{\hyperlink{classVerification_a09f5db00f5239322c9af847d683139b2}{add\+History\+Context}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision, bool global\+Transition\+Controlled)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type CONTEXT and puts it to the top of the decision history. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classVerification_abf842d8eff285c5076e714e7636b0cb3}{add\+History\+Mark\+Decision\+As\+Invalid}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID and puts it to the top of the decision history. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVerification_ae6d5377ba5cd29c98581c77ca742d4a5}{add\+History\+Uncontrolled\+Decision}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type UNCONTROLLED\+\_\+\+DECISION and puts it on top of the stack of the decision history. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ \mbox{\hyperlink{classVerification_a92b87e0dc375f1d17160492a4cb82ce5}{new\+History\+Mark\+Decision\+As\+Invalid}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID and returns it. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_a93f4d9152a29db35e7cee285fd925d83}{revert\+Last\+Decision}} (int depth)
@@ -57,12 +71,26 @@ void \mbox{\hyperlink{classVerification_a11bc6802569c498b8b80a6c7723056d8}{print
 \begin{DoxyCompactList}\small\item\em Prints current history to the console. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_a265b783962885eebe96a4f2182c22577}{equivalent\+Global\+Transitions}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition1, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition2)
 \begin{DoxyCompactList}\small\item\em Checks if two global transitions are made up of the same local transitions. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classVerification_a850053a49cc9a539aa664d0100cb59a8}{check\+Uncontrolled\+Set}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions)
+bool \mbox{\hyperlink{classVerification_ad532d27595ace7a1aeb82613c6462b52}{check\+Uncontrolled\+Set}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions, bool mixed=false)
 \begin{DoxyCompactList}\small\item\em Verifies if each transition from a given state yields a correct result. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classVerification_a1a46f99ee6e8ffc66b966e086e70815c}{verify\+Transition\+Sets}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ controlled\+Global\+Transitions, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions, bool is\+FMode)
+bool \mbox{\hyperlink{classVerification_a995516fb8335e2a64c1ca9a988e41e96}{verify\+Transition\+Sets}} (set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ controlled\+Global\+Transitions, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ uncontrolled\+Global\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, bool has\+Omitted\+Transitions, bool is\+FMode, bool mixed=false)
 \begin{DoxyCompactList}\small\item\em Checks if given transition sets are able to fulfill the formula for its given epistemic class. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}{restore\+History}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition, int depth, bool controlled)
-\begin{DoxyCompactList}\small\item\em Restores the decisions made for a given global state and transition in current recursion depth. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Restores the decisions made for a given global state and transition in current recursion depth. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_a1948cf977c2a776f6aa725ad419407fd}\label{classVerification_a1948cf977c2a776f6aa725ad419407fd}} 
+bool {\bfseries min\+Fixpoint\+Verify} ()
+\item 
+\mbox{\Hypertarget{classVerification_a9276baf6610b688369953ee244ad38b9}\label{classVerification_a9276baf6610b688369953ee244ad38b9}} 
+bool {\bfseries max\+Fixpoint\+Verify} ()
+\item 
+bitset$<$ STRATEGY\+\_\+\+BITS $>$ \mbox{\hyperlink{classVerification_a418cf23e00e56519caf5239c39621194}{global\+State\+To\+Value\+Bits}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Changes global\+State variables to a bitset used in natural strategy synthesis. \end{DoxyCompactList}\item 
+vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerification_a3fd0cea4307a0c055be9cf9313ffada3}{reduce\+Strategy}} (vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$$>$, string $>$$>$ strategy\+Entries, short locked\+Column=0, bool upper\+Half=false)
+\begin{DoxyCompactList}\small\item\em Natural strategy reduction algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVerification_a6b9298a0b7e33996db62d9d950f239be}{increase\+Probability}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$current\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
+\begin{DoxyCompactList}\small\item\em Increases next \mbox{\hyperlink{structGlobalState}{Global\+State}} probability reached through the decision by adding to it a multiplied current\+State probability with the decision probability. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVerification_adfd5ec4a65476b767a5d636b7004145c}{lower\+Probability}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$current\+State\+From, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$current\+State\+To, set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ decision)
+\begin{DoxyCompactList}\small\item\em Decreases previous \mbox{\hyperlink{structGlobalState}{Global\+State}} probability reached from the decision by subtracting from it a multiplied current\+State probability with the decision probability. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -83,7 +111,19 @@ stack$<$ \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ $>$ \mbox{
 \begin{DoxyCompactList}\small\item\em Pointer to the start of model traversal history. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classVerification_accd7b60752d13e14e319544cb6adb2e0}\label{classVerification_accd7b60752d13e14e319544cb6adb2e0}} 
 \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ \mbox{\hyperlink{classVerification_accd7b60752d13e14e319544cb6adb2e0}{history\+End}}
-\begin{DoxyCompactList}\small\item\em Pointer to the end of model traversal history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Pointer to the end of model traversal history. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_a67f0f99015d3d8a88b2ef3c01ebe94fd}\label{classVerification_a67f0f99015d3d8a88b2ef3c01ebe94fd}} 
+map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerification_a67f0f99015d3d8a88b2ef3c01ebe94fd}{natural\+Strategy}}
+\begin{DoxyCompactList}\small\item\em A table of actions paired vith global\+State internal variables state for natural strategy construction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_abe8f2979c0157116f265cd1112733bb8}\label{classVerification_abe8f2979c0157116f265cd1112733bb8}} 
+short \mbox{\hyperlink{classVerification_abe8f2979c0157116f265cd1112733bb8}{strategy\+Variable\+Limit}}
+\begin{DoxyCompactList}\small\item\em Max strategy variables found. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_af38373b273a7a73cfe5d28afcfa03432}\label{classVerification_af38373b273a7a73cfe5d28afcfa03432}} 
+vector$<$ string $>$ \mbox{\hyperlink{classVerification_af38373b273a7a73cfe5d28afcfa03432}{variable\+Names}}
+\begin{DoxyCompactList}\small\item\em Easily readable variable names for natural strategy generation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerification_a1bb60de78b152025f9cbfcadf568d4a1}\label{classVerification_a1bb60de78b152025f9cbfcadf568d4a1}} 
+int \mbox{\hyperlink{classVerification_a1bb60de78b152025f9cbfcadf568d4a1}{reduction\+Complexity\+Before}}
+\begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -108,11 +148,11 @@ Constructor for \mbox{\hyperlink{classVerification}{Verification}}.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classVerification_add0805598d4f6e214a7e99355e34765e}\label{classVerification_add0805598d4f6e214a7e99355e34765e}} 
+\mbox{\Hypertarget{classVerification_a09f5db00f5239322c9af847d683139b2}\label{classVerification_a09f5db00f5239322c9af847d683139b2}} 
 \index{Verification@{Verification}!addHistoryContext@{addHistoryContext}}
 \index{addHistoryContext@{addHistoryContext}!Verification@{Verification}}
 \doxysubsubsection{\texorpdfstring{addHistoryContext()}{addHistoryContext()}}
-{\footnotesize\ttfamily void Verification\+::add\+History\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision,  }\item[{bool}]{global\+Transition\+Controlled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool Verification\+::add\+History\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision,  }\item[{bool}]{global\+Transition\+Controlled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -129,7 +169,10 @@ Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type CONT
 {\em global\+Transition\+Controlled} & True if the \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} is in the set of global transitions controlled by a coalition and it is not a fixed global transition. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classVerification_affb58285fe7d8b6f18fa6260acd67d6c}\label{classVerification_affb58285fe7d8b6f18fa6260acd67d6c}} 
+\begin{DoxyReturn}{Returns}
+Returns true if the natural strategy is good for now. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a78db4512651ba57fb6daee1741fc26dd}\label{classVerification_a78db4512651ba57fb6daee1741fc26dd}} 
 \index{Verification@{Verification}!addHistoryDecision@{addHistoryDecision}}
 \index{addHistoryDecision@{addHistoryDecision}!Verification@{Verification}}
 \doxysubsubsection{\texorpdfstring{addHistoryDecision()}{addHistoryDecision()}}
@@ -182,6 +225,23 @@ Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type STAT
 {\em new\+Status} & New Global\+State\+Verification\+Status to be logged. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classVerification_ae6d5377ba5cd29c98581c77ca742d4a5}\label{classVerification_ae6d5377ba5cd29c98581c77ca742d4a5}} 
+\index{Verification@{Verification}!addHistoryUncontrolledDecision@{addHistoryUncontrolledDecision}}
+\index{addHistoryUncontrolledDecision@{addHistoryUncontrolledDecision}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{addHistoryUncontrolledDecision()}{addHistoryUncontrolledDecision()}}
+{\footnotesize\ttfamily void Verification\+::add\+History\+Uncontrolled\+Decision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type UNCONTROLLED\+\_\+\+DECISION and puts it on top of the stack of the decision history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} of the model. \\
+\hline
+{\em decision} & Pointer to a \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} that is to be recorded in the decision history. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classVerification_a1f4e545ca07343a09466ad9c8d214240}\label{classVerification_a1f4e545ca07343a09466ad9c8d214240}} 
 \index{Verification@{Verification}!areGlobalStatesInTheSameEpistemicClass@{areGlobalStatesInTheSameEpistemicClass}}
 \index{areGlobalStatesInTheSameEpistemicClass@{areGlobalStatesInTheSameEpistemicClass}!Verification@{Verification}}
@@ -202,11 +262,11 @@ Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if t
 \begin{DoxyReturn}{Returns}
 Returns true if the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same for both of the \mbox{\hyperlink{structGlobalState}{Global\+State}}. Returns false if they are different or at least one of them has no \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classVerification_a850053a49cc9a539aa664d0100cb59a8}\label{classVerification_a850053a49cc9a539aa664d0100cb59a8}} 
+\mbox{\Hypertarget{classVerification_ad532d27595ace7a1aeb82613c6462b52}\label{classVerification_ad532d27595ace7a1aeb82613c6462b52}} 
 \index{Verification@{Verification}!checkUncontrolledSet@{checkUncontrolledSet}}
 \index{checkUncontrolledSet@{checkUncontrolledSet}!Verification@{Verification}}
 \doxysubsubsection{\texorpdfstring{checkUncontrolledSet()}{checkUncontrolledSet()}}
-{\footnotesize\ttfamily bool Verification\+::check\+Uncontrolled\+Set (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{uncontrolled\+Global\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{bool}]{has\+Omitted\+Transitions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool Verification\+::check\+Uncontrolled\+Set (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{uncontrolled\+Global\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{bool}]{has\+Omitted\+Transitions,  }\item[{bool}]{mixed = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -264,6 +324,80 @@ Gets the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} for the agent
 \begin{DoxyReturn}{Returns}
 Pointer to the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} that a coalition of agents from the formula belong to. If there is no such \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}, returns false. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a2e9d3a847ff290d7fcd32e680a2f41ad}\label{classVerification_a2e9d3a847ff290d7fcd32e680a2f41ad}} 
+\index{Verification@{Verification}!getNaturalStrategy@{getNaturalStrategy}}
+\index{getNaturalStrategy@{getNaturalStrategy}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{getNaturalStrategy()}{getNaturalStrategy()}}
+{\footnotesize\ttfamily map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ Verification\+::get\+Natural\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get natural strategy map. 
+
+\begin{DoxyReturn}{Returns}
+Map of variable values and action names. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_ac16389f280ff991fe2b1114fa941ac8a}\label{classVerification_ac16389f280ff991fe2b1114fa941ac8a}} 
+\index{Verification@{Verification}!getReducedStrategy@{getReducedStrategy}}
+\index{getReducedStrategy@{getReducedStrategy}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{getReducedStrategy()}{getReducedStrategy()}}
+{\footnotesize\ttfamily vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ Verification\+::get\+Reduced\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerification_a3fd0cea4307a0c055be9cf9313ffada3}{reduce\+Strategy()}}. 
+
+\begin{DoxyReturn}{Returns}
+Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a51b87c33f4db12b09110a650085d3aef}\label{classVerification_a51b87c33f4db12b09110a650085d3aef}} 
+\index{Verification@{Verification}!getStrategyComplexity@{getStrategyComplexity}}
+\index{getStrategyComplexity@{getStrategyComplexity}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{getStrategyComplexity()}{getStrategyComplexity()}}
+{\footnotesize\ttfamily int Verification\+::get\+Strategy\+Complexity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1. 
+
+\begin{DoxyReturn}{Returns}
+Total sum of the natural strategy complexity before reduction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a418cf23e00e56519caf5239c39621194}\label{classVerification_a418cf23e00e56519caf5239c39621194}} 
+\index{Verification@{Verification}!globalStateToValueBits@{globalStateToValueBits}}
+\index{globalStateToValueBits@{globalStateToValueBits}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{globalStateToValueBits()}{globalStateToValueBits()}}
+{\footnotesize\ttfamily bitset$<$ STRATEGY\+\_\+\+BITS $>$ Verification\+::global\+State\+To\+Value\+Bits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Changes global\+State variables to a bitset used in natural strategy synthesis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & State that we want to extractvariable values from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bitset of environment variable values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_a6b9298a0b7e33996db62d9d950f239be}\label{classVerification_a6b9298a0b7e33996db62d9d950f239be}} 
+\index{Verification@{Verification}!increaseProbability@{increaseProbability}}
+\index{increaseProbability@{increaseProbability}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{increaseProbability()}{increaseProbability()}}
+{\footnotesize\ttfamily void Verification\+::increase\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{current\+State,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Increases next \mbox{\hyperlink{structGlobalState}{Global\+State}} probability reached through the decision by adding to it a multiplied current\+State probability with the decision probability. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+State} & From which \mbox{\hyperlink{structGlobalState}{Global\+State}} the action was executed. \\
+\hline
+{\em decision} & \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} containing all transitions in the executed action and the next reachable \mbox{\hyperlink{structGlobalState}{Global\+State}}. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classVerification_a2ccd4e9d525a868217902a15ed93860b}\label{classVerification_a2ccd4e9d525a868217902a15ed93860b}} 
 \index{Verification@{Verification}!isAgentInCoalition@{isAgentInCoalition}}
 \index{isAgentInCoalition@{isAgentInCoalition}!Verification@{Verification}}
@@ -300,6 +434,25 @@ Checks if any of the \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}
 \begin{DoxyReturn}{Returns}
 Returns true if the \mbox{\hyperlink{classAgent}{Agent}} is in coalition in the formula, otherwise returns false. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerification_adfd5ec4a65476b767a5d636b7004145c}\label{classVerification_adfd5ec4a65476b767a5d636b7004145c}} 
+\index{Verification@{Verification}!lowerProbability@{lowerProbability}}
+\index{lowerProbability@{lowerProbability}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{lowerProbability()}{lowerProbability()}}
+{\footnotesize\ttfamily void Verification\+::lower\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{current\+State\+From,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{current\+State\+To,  }\item[{set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$}]{decision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Decreases previous \mbox{\hyperlink{structGlobalState}{Global\+State}} probability reached from the decision by subtracting from it a multiplied current\+State probability with the decision probability. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+State\+From} & From which \mbox{\hyperlink{structGlobalState}{Global\+State}} the action was executed. \\
+\hline
+{\em current\+State\+To} & To which grobal state the action was executed. \\
+\hline
+{\em decision} & Set of \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} containing all transitions in the executed action. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classVerification_a92b87e0dc375f1d17160492a4cb82ce5}\label{classVerification_a92b87e0dc375f1d17160492a4cb82ce5}} 
 \index{Verification@{Verification}!newHistoryMarkDecisionAsInvalid@{newHistoryMarkDecisionAsInvalid}}
 \index{newHistoryMarkDecisionAsInvalid@{newHistoryMarkDecisionAsInvalid}!Verification@{Verification}}
@@ -335,6 +488,28 @@ Prints current history to the console.
 {\em depth} & Integer that will be multiplied by 4 and appended as a prefix to the optional debug log. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classVerification_a3fd0cea4307a0c055be9cf9313ffada3}\label{classVerification_a3fd0cea4307a0c055be9cf9313ffada3}} 
+\index{Verification@{Verification}!reduceStrategy@{reduceStrategy}}
+\index{reduceStrategy@{reduceStrategy}!Verification@{Verification}}
+\doxysubsubsection{\texorpdfstring{reduceStrategy()}{reduceStrategy()}}
+{\footnotesize\ttfamily vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ Verification\+::reduce\+Strategy (\begin{DoxyParamCaption}\item[{vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$$>$, string $>$$>$}]{strategy\+Entries,  }\item[{short}]{locked\+Column = {\ttfamily 0},  }\item[{bool}]{upper\+Half = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Natural strategy reduction algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em strategy\+Entries} & Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$ containing not reduced natural strategy. \\
+\hline
+{\em locked\+Column} & Index of the furthest leftmost locked column. \\
+\hline
+{\em upper\+Half} & Indicates if the first columns of the processed strategy entries can\textquotesingle{}t be shuffled. True if they can\textquotesingle{}t be shuffled, false otherwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}\label{classVerification_ad8f45302a6b2529f626ae0c7a953b57f}} 
 \index{Verification@{Verification}!restoreHistory@{restoreHistory}}
 \index{restoreHistory@{restoreHistory}!Verification@{Verification}}
@@ -463,11 +638,11 @@ Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{
 \begin{DoxyReturn}{Returns}
 Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with a specific set of values, fulfilling the criteria, otherwise returns false. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classVerification_a1a46f99ee6e8ffc66b966e086e70815c}\label{classVerification_a1a46f99ee6e8ffc66b966e086e70815c}} 
+\mbox{\Hypertarget{classVerification_a995516fb8335e2a64c1ca9a988e41e96}\label{classVerification_a995516fb8335e2a64c1ca9a988e41e96}} 
 \index{Verification@{Verification}!verifyTransitionSets@{verifyTransitionSets}}
 \index{verifyTransitionSets@{verifyTransitionSets}!Verification@{Verification}}
 \doxysubsubsection{\texorpdfstring{verifyTransitionSets()}{verifyTransitionSets()}}
-{\footnotesize\ttfamily bool Verification\+::verify\+Transition\+Sets (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{controlled\+Global\+Transitions,  }\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{uncontrolled\+Global\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{bool}]{has\+Omitted\+Transitions,  }\item[{bool}]{is\+FMode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bool Verification\+::verify\+Transition\+Sets (\begin{DoxyParamCaption}\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{controlled\+Global\+Transitions,  }\item[{set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$}]{uncontrolled\+Global\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{bool}]{has\+Omitted\+Transitions,  }\item[{bool}]{is\+FMode,  }\item[{bool}]{mixed\+Transitions = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 

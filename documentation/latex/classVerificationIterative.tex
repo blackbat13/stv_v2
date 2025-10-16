@@ -1,0 +1,443 @@
+\hypertarget{classVerificationIterative}{}\doxysection{Verification\+Iterative Class Reference}
+\label{classVerificationIterative}\index{VerificationIterative@{VerificationIterative}}
+
+
+A class that verifies if the model fulfills the formula. Also can do some operations on decision history.  
+
+
+
+
+{\ttfamily \#include $<$Verification\+Iterative.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVerificationIterative_af3dcd221e2fe7d234b00bf1c274e0451}{Verification\+Iterative}} (\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$\mbox{\hyperlink{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}{generator}})
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classVerification}{Verification}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}\label{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}} 
+\mbox{\hyperlink{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}{$\sim$\+Verification\+Iterative}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \mbox{\hyperlink{classVerification}{Verification}}. \end{DoxyCompactList}\item 
+map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerificationIterative_a9512371768e8ae1756aa333d9ac28307}{get\+Natural\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Get natural strategy map. \end{DoxyCompactList}\item 
+vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerificationIterative_a970ea74fcccb143de90c1e8b2427b078}{get\+Reduced\+Strategy}} ()
+\begin{DoxyCompactList}\small\item\em Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy()}}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classVerificationIterative_ad5a15b94c7e35c7e605f714ca0c89602}{get\+Strategy\+Complexity}} ()
+\begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a193789572e730e954581ea99c727260c}\label{classVerificationIterative_a193789572e730e954581ea99c727260c}} 
+\mbox{\hyperlink{structResult}{Result}} {\bfseries verify} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classVerificationIterative_af774405cf4973b9195a4558c3595ed22}{verify\+Local\+States}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{\hyperlink{structGlobalState}{Global\+State}} is composed of with a hardcoded formula. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerificationIterative_a7ad37cddf86ddf45554216b9e43b446c}{is\+Global\+Transition\+Controlled\+By\+Coalition}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition)
+\begin{DoxyCompactList}\small\item\em Checks if any of the \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} in a given \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} has an \mbox{\hyperlink{classAgent}{Agent}} in a coalition in the formula. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerificationIterative_acffb6d0899d3f72cf5d59b6c6f37379f}{is\+Agent\+In\+Coalition}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agent)
+\begin{DoxyCompactList}\small\item\em Checks if the \mbox{\hyperlink{classAgent}{Agent}} is in a coalition based on the formula in a \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$ \mbox{\hyperlink{classVerificationIterative_a9bed9e985d2688840a54d01c901f07ae}{get\+Epistemic\+Class\+For\+Global\+State}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Gets the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} for the agent in passed \mbox{\hyperlink{structGlobalState}{Global\+State}}, i.\+e. transitions from indistinguishable state from certain other states for an agent to other states. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerificationIterative_ad4d0d8257189c3887e00d17a6ed0eadc}{are\+Global\+States\+In\+The\+Same\+Epistemic\+Class}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State1, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State2)
+\begin{DoxyCompactList}\small\item\em Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if their \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classVerificationIterative_aa7d8deb3b8c093593ae0e61a0df6dee6}{check\+If\+Probabilistic}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$transition\+To\+Check)
+\begin{DoxyCompactList}\small\item\em Checks if a given transition is a probabilistic one. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}\label{classVerificationIterative_a56703f84e75d7d4bb3b2f8758fca2dd0}} 
+void {\bfseries find\+Looped\+Probability\+Transitions} (map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$$>$ $\ast$transition\+Sets)
+\item 
+\mbox{\Hypertarget{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}\label{classVerificationIterative_adc79d5885552f891d1365e97df5b641b}} 
+void {\bfseries dissolve\+Looped\+Probability\+Transition} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$transition\+To\+Dissolve, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $\ast$probability\+Transitions)
+\item 
+void \mbox{\hyperlink{classVerificationIterative_a005b1d3e1d6c33109428ae4f623f0ea6}{add\+History\+Decision}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type DECISION and puts it on top of the stack of the decision history. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVerificationIterative_a93924408d0ba6332b34905142f0be415}{add\+History\+State\+Status}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, Global\+State\+Verification\+Status prev\+Status, Global\+State\+Verification\+Status new\+Status)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type STATE\+\_\+\+STATUS and puts it to the top of the decision history. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerificationIterative_afcedf4ace129dc0b20b2a10bd400c2ef}{add\+History\+Context}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision, bool global\+Transition\+Controlled)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type CONTEXT and puts it to the top of the decision history. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a878970fa23f642298f662ee346befc3e}\label{classVerificationIterative_a878970fa23f642298f662ee346befc3e}} 
+void {\bfseries add\+History\+Probability} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
+\item 
+void \mbox{\hyperlink{classVerificationIterative_ae4a9b1d6fd33a6e0549a9afae564b9a2}{add\+History\+Answer\+Probability}} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$global\+State, Probability\+Calculation\+Type current\+Mode, \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Probability\+Values)
+\begin{DoxyCompactList}\small\item\em Adds a history entry for the change of probabilistic answer in a particular state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classVerificationIterative_a958bdb0c0fd77467ef76289248d7ee79}{add\+History\+Mark\+Decision\+As\+Invalid}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID and puts it to the top of the decision history. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}\label{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}} 
+bool {\bfseries revert\+To\+Last\+Decision} ()
+\item 
+\mbox{\Hypertarget{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}\label{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}} 
+void \mbox{\hyperlink{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}{undo\+Last\+History\+Entry}} ()
+\begin{DoxyCompactList}\small\item\em Removes the top entry of the history stack. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classVerificationIterative_adf6e8030b5b8f7be8d7903be8beaf768}{equivalent\+Global\+Transitions}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition1, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition2)
+\begin{DoxyCompactList}\small\item\em Checks if two global transitions are made up of the same local transitions. \end{DoxyCompactList}\item 
+bitset$<$ STRATEGY\+\_\+\+BITS $>$ \mbox{\hyperlink{classVerificationIterative_a2b8ab885429f393f39ed8484f42f355b}{global\+State\+To\+Value\+Bits}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+\begin{DoxyCompactList}\small\item\em Changes global\+State variables to a bitset used in natural strategy synthesis. \end{DoxyCompactList}\item 
+vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy}} (vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$$>$, string $>$$>$ strategy\+Entries, short locked\+Column=0, bool upper\+Half=false)
+\begin{DoxyCompactList}\small\item\em Natural strategy reduction algorithm. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}\label{classVerificationIterative_a1816d9fd67679e5103c415f39285c7d6}} 
+bool {\bfseries test\+For\+And\+Fix\+Bad\+Agents} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$state\+Verification\+Info)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}\label{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}} 
+Graph\+Traversal\+Mode \mbox{\hyperlink{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}{mode}} = Graph\+Traversal\+Mode\+::\+NORMAL\+\_\+\+TRAVERSAL
+\begin{DoxyCompactList}\small\item\em Current mode of model traversal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}\label{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}} 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}{revert\+To\+Global\+State}}
+\begin{DoxyCompactList}\small\item\em Global state to which revert will rollback to. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}\label{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}} 
+\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$ \mbox{\hyperlink{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}{generator}}
+\begin{DoxyCompactList}\small\item\em Holds current model and formula. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}\label{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}} 
+stack$<$ \mbox{\hyperlink{structDecisionEntry}{Decision\+Entry}} $>$ \mbox{\hyperlink{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}{history}}
+\begin{DoxyCompactList}\small\item\em Stack of decisions made. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}\label{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}} 
+map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}{natural\+Strategy}}
+\begin{DoxyCompactList}\small\item\em A table of actions paired vith global\+State internal variables state for natural strategy construction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}\label{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}} 
+short \mbox{\hyperlink{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}{strategy\+Variable\+Limit}}
+\begin{DoxyCompactList}\small\item\em Max strategy variables found. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}\label{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}} 
+vector$<$ string $>$ \mbox{\hyperlink{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}{variable\+Names}}
+\begin{DoxyCompactList}\small\item\em Easily readable variable names for natural strategy generation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}\label{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}} 
+int \mbox{\hyperlink{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}{reduction\+Complexity\+Before}}
+\begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}\label{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}} 
+stack$<$ \mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $>$ {\bfseries states\+To\+Process}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that verifies if the model fulfills the formula. Also can do some operations on decision history. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classVerificationIterative_af3dcd221e2fe7d234b00bf1c274e0451}\label{classVerificationIterative_af3dcd221e2fe7d234b00bf1c274e0451}} 
+\index{VerificationIterative@{VerificationIterative}!VerificationIterative@{VerificationIterative}}
+\index{VerificationIterative@{VerificationIterative}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{VerificationIterative()}{VerificationIterative()}}
+{\footnotesize\ttfamily Verification\+Iterative\+::\+Verification\+Iterative (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classVerification}{Verification}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em generator} & Pointer to \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classVerificationIterative_ae4a9b1d6fd33a6e0549a9afae564b9a2}\label{classVerificationIterative_ae4a9b1d6fd33a6e0549a9afae564b9a2}} 
+\index{VerificationIterative@{VerificationIterative}!addHistoryAnswerProbability@{addHistoryAnswerProbability}}
+\index{addHistoryAnswerProbability@{addHistoryAnswerProbability}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{addHistoryAnswerProbability()}{addHistoryAnswerProbability()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+Answer\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$}]{state\+Verif\+Info,  }\item[{Probability\+Calculation\+Type}]{current\+Mode,  }\item[{\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}}}]{new\+Probability\+Values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Adds a history entry for the change of probabilistic answer in a particular state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & \\
+\hline
+{\em current\+Mode} & SUM\+\_\+\+PROBABILITY if controlled, MIN\+\_\+\+PROBABILITY if uncontrolled. \\
+\hline
+{\em new\+Probability\+Values} & ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVerificationIterative_afcedf4ace129dc0b20b2a10bd400c2ef}\label{classVerificationIterative_afcedf4ace129dc0b20b2a10bd400c2ef}} 
+\index{VerificationIterative@{VerificationIterative}!addHistoryContext@{addHistoryContext}}
+\index{addHistoryContext@{addHistoryContext}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{addHistoryContext()}{addHistoryContext()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::add\+History\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{int}]{depth,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision,  }\item[{bool}]{global\+Transition\+Controlled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type CONTEXT and puts it to the top of the decision history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} of the model. \\
+\hline
+{\em depth} & Depth of the recursion of the validation algorithm. \\
+\hline
+{\em decision} & Pointer to a transition \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} selected by the algorithm. \\
+\hline
+{\em global\+Transition\+Controlled} & True if the \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} is in the set of global transitions controlled by a coalition and it is not a fixed global transition. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the natural strategy is good for now. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a005b1d3e1d6c33109428ae4f623f0ea6}\label{classVerificationIterative_a005b1d3e1d6c33109428ae4f623f0ea6}} 
+\index{VerificationIterative@{VerificationIterative}!addHistoryDecision@{addHistoryDecision}}
+\index{addHistoryDecision@{addHistoryDecision}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{addHistoryDecision()}{addHistoryDecision()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+Decision (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type DECISION and puts it on top of the stack of the decision history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} of the model. \\
+\hline
+{\em decision} & Pointer to a \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} that is to be recorded in the decision history. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVerificationIterative_a958bdb0c0fd77467ef76289248d7ee79}\label{classVerificationIterative_a958bdb0c0fd77467ef76289248d7ee79}} 
+\index{VerificationIterative@{VerificationIterative}!addHistoryMarkDecisionAsInvalid@{addHistoryMarkDecisionAsInvalid}}
+\index{addHistoryMarkDecisionAsInvalid@{addHistoryMarkDecisionAsInvalid}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{addHistoryMarkDecisionAsInvalid()}{addHistoryMarkDecisionAsInvalid()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+Mark\+Decision\+As\+Invalid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID and puts it to the top of the decision history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} of the model. \\
+\hline
+{\em decision} & Pointer to a transition \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} selected by the algorithm. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVerificationIterative_a93924408d0ba6332b34905142f0be415}\label{classVerificationIterative_a93924408d0ba6332b34905142f0be415}} 
+\index{VerificationIterative@{VerificationIterative}!addHistoryStateStatus@{addHistoryStateStatus}}
+\index{addHistoryStateStatus@{addHistoryStateStatus}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{addHistoryStateStatus()}{addHistoryStateStatus()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+State\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{Global\+State\+Verification\+Status}]{prev\+Status,  }\item[{Global\+State\+Verification\+Status}]{new\+Status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type STATE\+\_\+\+STATUS and puts it to the top of the decision history. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} of the model. \\
+\hline
+{\em prev\+Status} & Previous Global\+State\+Verification\+Status to be logged. \\
+\hline
+{\em new\+Status} & New Global\+State\+Verification\+Status to be logged. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classVerificationIterative_ad4d0d8257189c3887e00d17a6ed0eadc}\label{classVerificationIterative_ad4d0d8257189c3887e00d17a6ed0eadc}} 
+\index{VerificationIterative@{VerificationIterative}!areGlobalStatesInTheSameEpistemicClass@{areGlobalStatesInTheSameEpistemicClass}}
+\index{areGlobalStatesInTheSameEpistemicClass@{areGlobalStatesInTheSameEpistemicClass}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{areGlobalStatesInTheSameEpistemicClass()}{areGlobalStatesInTheSameEpistemicClass()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::are\+Global\+States\+In\+The\+Same\+Epistemic\+Class (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State1,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Compares two \mbox{\hyperlink{structGlobalState}{Global\+State}} and checks if their \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State1} & Pointer to the first \mbox{\hyperlink{structGlobalState}{Global\+State}}. \\
+\hline
+{\em global\+State2} & Pointer to the second \mbox{\hyperlink{structGlobalState}{Global\+State}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} is the same for both of the \mbox{\hyperlink{structGlobalState}{Global\+State}}. Returns false if they are different or at least one of them has no \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_aa7d8deb3b8c093593ae0e61a0df6dee6}\label{classVerificationIterative_aa7d8deb3b8c093593ae0e61a0df6dee6}} 
+\index{VerificationIterative@{VerificationIterative}!checkIfProbabilistic@{checkIfProbabilistic}}
+\index{checkIfProbabilistic@{checkIfProbabilistic}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{checkIfProbabilistic()}{checkIfProbabilistic()}}
+{\footnotesize\ttfamily string Verification\+Iterative\+::check\+If\+Probabilistic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{transition\+To\+Check }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Checks if a given transition is a probabilistic one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transition\+To\+Check} & Transition to be checked if posesses probability != 1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns concatenated names of local transitions separated with semicolons if true, returns empty string otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_adf6e8030b5b8f7be8d7903be8beaf768}\label{classVerificationIterative_adf6e8030b5b8f7be8d7903be8beaf768}} 
+\index{VerificationIterative@{VerificationIterative}!equivalentGlobalTransitions@{equivalentGlobalTransitions}}
+\index{equivalentGlobalTransitions@{equivalentGlobalTransitions}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{equivalentGlobalTransitions()}{equivalentGlobalTransitions()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::equivalent\+Global\+Transitions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{global\+Transition1,  }\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{global\+Transition2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Checks if two global transitions are made up of the same local transitions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+Transition1} & First global transition to compare. \\
+\hline
+{\em global\+Transition2} & Second global transition to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the two global transitions have the same local transitions, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a9bed9e985d2688840a54d01c901f07ae}\label{classVerificationIterative_a9bed9e985d2688840a54d01c901f07ae}} 
+\index{VerificationIterative@{VerificationIterative}!getEpistemicClassForGlobalState@{getEpistemicClassForGlobalState}}
+\index{getEpistemicClassForGlobalState@{getEpistemicClassForGlobalState}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{getEpistemicClassForGlobalState()}{getEpistemicClassForGlobalState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$ Verification\+Iterative\+::get\+Epistemic\+Class\+For\+Global\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gets the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} for the agent in passed \mbox{\hyperlink{structGlobalState}{Global\+State}}, i.\+e. transitions from indistinguishable state from certain other states for an agent to other states. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} of the model. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} that a coalition of agents from the formula belong to. If there is no such \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}, returns false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a9512371768e8ae1756aa333d9ac28307}\label{classVerificationIterative_a9512371768e8ae1756aa333d9ac28307}} 
+\index{VerificationIterative@{VerificationIterative}!getNaturalStrategy@{getNaturalStrategy}}
+\index{getNaturalStrategy@{getNaturalStrategy}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{getNaturalStrategy()}{getNaturalStrategy()}}
+{\footnotesize\ttfamily map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ Verification\+Iterative\+::get\+Natural\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get natural strategy map. 
+
+\begin{DoxyReturn}{Returns}
+Map of variable values and action names. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a970ea74fcccb143de90c1e8b2427b078}\label{classVerificationIterative_a970ea74fcccb143de90c1e8b2427b078}} 
+\index{VerificationIterative@{VerificationIterative}!getReducedStrategy@{getReducedStrategy}}
+\index{getReducedStrategy@{getReducedStrategy}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{getReducedStrategy()}{getReducedStrategy()}}
+{\footnotesize\ttfamily vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ Verification\+Iterative\+::get\+Reduced\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy()}}. 
+
+\begin{DoxyReturn}{Returns}
+Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_ad5a15b94c7e35c7e605f714ca0c89602}\label{classVerificationIterative_ad5a15b94c7e35c7e605f714ca0c89602}} 
+\index{VerificationIterative@{VerificationIterative}!getStrategyComplexity@{getStrategyComplexity}}
+\index{getStrategyComplexity@{getStrategyComplexity}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{getStrategyComplexity()}{getStrategyComplexity()}}
+{\footnotesize\ttfamily int Verification\+Iterative\+::get\+Strategy\+Complexity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1. 
+
+\begin{DoxyReturn}{Returns}
+Total sum of the natural strategy complexity before reduction. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a2b8ab885429f393f39ed8484f42f355b}\label{classVerificationIterative_a2b8ab885429f393f39ed8484f42f355b}} 
+\index{VerificationIterative@{VerificationIterative}!globalStateToValueBits@{globalStateToValueBits}}
+\index{globalStateToValueBits@{globalStateToValueBits}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{globalStateToValueBits()}{globalStateToValueBits()}}
+{\footnotesize\ttfamily bitset$<$ STRATEGY\+\_\+\+BITS $>$ Verification\+Iterative\+::global\+State\+To\+Value\+Bits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Changes global\+State variables to a bitset used in natural strategy synthesis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+State} & State that we want to extractvariable values from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Bitset of environment variable values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_acffb6d0899d3f72cf5d59b6c6f37379f}\label{classVerificationIterative_acffb6d0899d3f72cf5d59b6c6f37379f}} 
+\index{VerificationIterative@{VerificationIterative}!isAgentInCoalition@{isAgentInCoalition}}
+\index{isAgentInCoalition@{isAgentInCoalition}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{isAgentInCoalition()}{isAgentInCoalition()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::is\+Agent\+In\+Coalition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Checks if the \mbox{\hyperlink{classAgent}{Agent}} is in a coalition based on the formula in a \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em agent} & Pointer to an \mbox{\hyperlink{classAgent}{Agent}} that is to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the \mbox{\hyperlink{classAgent}{Agent}} is in a coalition, otherwise returns false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a7ad37cddf86ddf45554216b9e43b446c}\label{classVerificationIterative_a7ad37cddf86ddf45554216b9e43b446c}} 
+\index{VerificationIterative@{VerificationIterative}!isGlobalTransitionControlledByCoalition@{isGlobalTransitionControlledByCoalition}}
+\index{isGlobalTransitionControlledByCoalition@{isGlobalTransitionControlledByCoalition}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{isGlobalTransitionControlledByCoalition()}{isGlobalTransitionControlledByCoalition()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::is\+Global\+Transition\+Controlled\+By\+Coalition (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{global\+Transition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Checks if any of the \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} in a given \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} has an \mbox{\hyperlink{classAgent}{Agent}} in a coalition in the formula. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em global\+Transition} & Pointer to a \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in a model. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if the \mbox{\hyperlink{classAgent}{Agent}} is in coalition in the formula, otherwise returns false. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}\label{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}} 
+\index{VerificationIterative@{VerificationIterative}!reduceStrategy@{reduceStrategy}}
+\index{reduceStrategy@{reduceStrategy}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{reduceStrategy()}{reduceStrategy()}}
+{\footnotesize\ttfamily vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ Verification\+Iterative\+::reduce\+Strategy (\begin{DoxyParamCaption}\item[{vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$$>$, string $>$$>$}]{strategy\+Entries,  }\item[{short}]{locked\+Column = {\ttfamily 0},  }\item[{bool}]{upper\+Half = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Natural strategy reduction algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em strategy\+Entries} & Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$ containing not reduced natural strategy. \\
+\hline
+{\em locked\+Column} & Index of the furthest leftmost locked column. \\
+\hline
+{\em upper\+Half} & Indicates if the first columns of the processed strategy entries can\textquotesingle{}t be shuffled. True if they can\textquotesingle{}t be shuffled, false otherwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of tuples $<$vector of tuples $<$variable value, variable name$>$, action name$>$. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_af774405cf4973b9195a4558c3595ed22}\label{classVerificationIterative_af774405cf4973b9195a4558c3595ed22}} 
+\index{VerificationIterative@{VerificationIterative}!verifyLocalStates@{verifyLocalStates}}
+\index{verifyLocalStates@{verifyLocalStates}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{verifyLocalStates()}{verifyLocalStates()}}
+{\footnotesize\ttfamily bool Verification\+Iterative\+::verify\+Local\+States (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{\hyperlink{structGlobalState}{Global\+State}} is composed of with a hardcoded formula. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+States} & A pointer to a set of pointers to \mbox{\hyperlink{classLocalState}{Local\+State}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with a specific set of values, fulfilling the criteria, otherwise returns false. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Verification\+Iterative.\+hpp\item 
+\mbox{\hyperlink{VerificationIterative_8cpp}{Verification\+Iterative.\+cpp}}\end{DoxyCompactItemize}
