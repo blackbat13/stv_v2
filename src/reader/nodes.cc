@@ -105,9 +105,9 @@ AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
 /// @param _transition Transition to be added.
 /// @return Returns itself.
 AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
-   if (strcmp(transitionCache.patternName.c_str(), "") == 0 || (strcmp(transitionCache.patternName.c_str(), _transition->patternName.c_str()) != 0 && strcmp(_transition->patternName.c_str(), "") != 0)) {
+   if (strcmp(transitionCache.patternName.c_str(), "") == 0 || (strcmp(transitionCache.patternName.c_str(), _transition->patternName.c_str()) != 0 && strcmp(_transition->patternName.c_str(), "") != 0)) { 
+      probabilityCache = 1.0;
       transitionCache = TransitionTemplate(*_transition);
-      probabilityCache = 1.0 - transitionCache.probability->eval();
    } else if (strcmp(_transition->patternName.c_str(), "") == 0) {
       _transition->shared = transitionCache.shared;
       _transition->patternName = transitionCache.patternName;
@@ -117,6 +117,8 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    }
    if (_transition->probability->eval() > 999.0) {
       _transition->probability = new ProbConst(probabilityCache);
+   } else {
+      probabilityCache -= transitionCache.probability->eval();
    }
    
    transitions->insert(_transition);

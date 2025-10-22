@@ -1076,16 +1076,29 @@ Result VerificationIterative::verify() {
             }
             currentState->controlledProbabilisticTransitionsLeftToProcess.erase(currentState->controlledProbabilisticTransitionsLeftToProcess.begin());
         } else if (config.probability && currentState->uncontrolledProbabilisticTransitionsLeftToProcess.size() > 0) {
-            string fixedProbTransName = fixedGlobalTransition->joinLocalTransitionNames();
+            cout << "Got some uncontrolled left: " << currentState->uncontrolledProbabilisticTransitionsLeftToProcess.size() << endl;
+            string fixedProbTransName;
+            if (fixedGlobalTransition != nullptr) { // ???
+                fixedProbTransName = fixedGlobalTransition->joinLocalTransitionNames();
+            } else {
+                auto transPtr = currentState->uncontrolledProbabilisticTransitionsLeftToProcess.begin()->second.begin();
+                fixedProbTransName = (*transPtr)->joinLocalTransitionNames();
+            }
+            cout << "fixed: " << fixedProbTransName << endl;
+            
+            cout << "UNC1" << endl;
             for (GlobalTransition* uncontrolledProbabilisticTransition : currentState->uncontrolledProbabilisticTransitionsLeftToProcess.begin()->second) {
+                cout << "UNC2" << endl;
                 StateVerificationInfo newState;
                 newState.globalState = uncontrolledProbabilisticTransition->to;
                 newState.fromState = currentState;
                 newState.depth = currentState->depth + 1;
+                cout << "UNC3" << endl;
                 this->addHistoryContext(currentState->globalState, currentState->depth, uncontrolledProbabilisticTransition, false);
                 if (fixedGlobalTransition != nullptr && uncontrolledProbabilisticTransition->joinLocalTransitionNames() == fixedProbTransName) {
                     newState.gotThroughPreselectedTransition = true;
                 }
+                cout << "UNC4" << endl;
                 this->addHistoryProbability(uncontrolledProbabilisticTransition);
                 statesToProcess.emplace(newState);
                 cout << "Deployed uncontrolled probabilistic: " << newState.globalState->hash.c_str() << endl;
