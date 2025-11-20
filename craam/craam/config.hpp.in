@@ -1,0 +1,10 @@
+#pragma once 
+
+#define VERSION @VERSION@
+#cmakedefine IS_DEBUG
+
+#ifndef IS_DEBUG
+    #define NDEBUG
+#endif
+
+
