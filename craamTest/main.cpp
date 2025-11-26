@@ -17,12 +17,13 @@ int main() {
 	// transitions for action q1 -> q2, q1 -> q9 (T)
 	actionID++;
     add_transition(mdp, 1, actionID, 2, 1, 0);
-    add_transition(mdp, 1, actionID, 9, 1, 1);
+    actionID++;
+    add_transition(mdp, 1, actionID, 9, 1, -1);
 	
 	// transitions for action q2 -> q3, q2 -> q4 (T)
 	actionID++;
     add_transition(mdp, 2, actionID, 3, 0.3, 0);
-    add_transition(mdp, 2, actionID, 4, 0.7, 1);
+    add_transition(mdp, 2, actionID, 4, 0.7, -1);
 	
 	// transitions for action q4 (T) -> q5 (T)
 	actionID++;
@@ -35,6 +36,7 @@ int main() {
 	// transitions for action q6 (q1 T) -> q7 (q2 T), q6 (q1 T) -> q10 (q9 T)
 	actionID++;
     add_transition(mdp, 6, actionID, 7, 1, 0);
+    actionID++;
     add_transition(mdp, 6, actionID, 10, 1, 0);
 	
 	// transitions for action q7 (q1 T) -> q8 (q2 T), q7 (q1 T) -> q4 (T)
