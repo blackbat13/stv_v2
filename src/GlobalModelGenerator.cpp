@@ -14,6 +14,12 @@
 #include <sstream>
 #include <functional>
 
+#include "craam/RMDP.hpp"
+#include "craam/algorithms/values.hpp"
+#include "craam/modeltools.hpp"
+
+using namespace craam;
+
 extern Cfg config;
 
 /// @brief Constructor for GlobalModelGenerator class.
@@ -862,7 +868,11 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
 }
 
 MDP GlobalModelGenerator::generateNextMDP() {
-    
+    MDP mdp(1);
+
+    int actionID = 0;
+
+    add_transition(mdp, 0, actionID, 1, 1, 0);
 }
 
 /// @brief Generates next set strategy from the memorized coalition transitions for the probabilistic verification.

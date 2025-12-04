@@ -159,14 +159,14 @@ Model& from_csv_general(Model& mdp, istream& input, bool header = true, bool has
 /**
 A specialization of from_csv_general.
  */
-MDP& from_csv(MDP& mdp, istream& input, bool header = true, bool has_outcome = false){
+inline MDP& from_csv(MDP& mdp, istream& input, bool header = true, bool has_outcome = false){
     return from_csv_general(mdp, input, header, has_outcome);
 }
 
 /**
 A specialization of from_csv_general.
  */
-RMDP& from_csv(RMDP& mdp, istream& input, bool header = true, bool has_outcome = true){
+inline RMDP& from_csv(RMDP& mdp, istream& input, bool header = true, bool has_outcome = true){
     return from_csv_general(mdp, input, header, has_outcome);
 }
 
@@ -186,7 +186,7 @@ idstatefrom, idaction, idstateto, probability, reward
 
 \returns The input model
  */
-MDP from_csv_mdp(istream& input, bool header = true, bool has_outcome = false){
+inline MDP from_csv_mdp(istream& input, bool header = true, bool has_outcome = false){
     MDP mdp;
     return from_csv(mdp, input, header, has_outcome);
 }
@@ -208,7 +208,7 @@ Note that underlying nominal distributions are not saved.
 \param header Whether the header should be written as the
       first line of the file represents the header.
 */
-void to_csv(const RMDP& rmdp, ostream& output, bool header = true) {
+inline void to_csv(const RMDP& rmdp, ostream& output, bool header = true) {
 
     //write header if so requested
     if(header){
@@ -256,7 +256,7 @@ but will be marked as invalid in the state.
 \param header Whether the header should be written as the
       first line of the file represents the header.
 */
-void to_csv(const MDP& mdp, ostream& output, bool header = true) {
+inline void to_csv(const MDP& mdp, ostream& output, bool header = true) {
     //write header if so requested
     if(header){
         output << "idstatefrom," << "idaction," << "idstateto," << "probability," << "reward" << endl;

@@ -19,6 +19,7 @@
 
 #include "craam/RMDP.hpp"
 #include "craam/algorithms/values.hpp"
+#include "craam/modeltools.hpp"
 
 using namespace std;
 using namespace craam;

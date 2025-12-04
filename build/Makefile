@@ -112,19 +112,19 @@ gtest_main.a : gtest-all.o gtest_main.o
 # tests here
 
 sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
 
 sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/sample_test.cc
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/sample_test.cc
 
 big_tests : big_tests.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
 
 big_tests.o : $(USER_DIR)/big_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/big_tests.cc
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/big_tests.cc
 
 iterative_tests : iterative_tests.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o strategyParser.o strategyScanner.o strategyNodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
 
 iterative_tests.o : $(USER_DIR)/iterative_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -I../src -c $(USER_DIR)/iterative_tests.cc
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/iterative_tests.cc
