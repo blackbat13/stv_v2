@@ -732,7 +732,8 @@ set<set<string>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* lo
     //         }
     //     }
     // }
-    return getAllPossiblePaths(coalitionTransitions, opponentsTransitions, this->globalModel->initState->hash);
+    this->coalitionStrategy = getAllPossiblePaths(coalitionTransitions, opponentsTransitions, this->globalModel->initState->hash);
+    return this->coalitionStrategy;
 }
 
 /// @brief Generates all possible paths through the transition graph.
@@ -858,6 +859,10 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
     }
 
     return allPaths;
+}
+
+MDP GlobalModelGenerator::generateNextMDP() {
+    
 }
 
 /// @brief Generates next set strategy from the memorized coalition transitions for the probabilistic verification.

@@ -17,7 +17,11 @@
 #include <unordered_map>
 #include <sstream>
 
+#include "craam/RMDP.hpp"
+#include "craam/algorithms/values.hpp"
+
 using namespace std;
+using namespace craam;
 
 /// @brief Stores the local models, formula and a global model.
 class GlobalModelGenerator {
@@ -40,6 +44,7 @@ public:
     void createIterativeStrategy(LocalModels *localModels);
     set<set<string>> createProbabilityStrategy(LocalModels* localModels);
     set<set<string>> getAllPossiblePaths(map<string, map<string, set<GlobalTransition *>>> &coalitionTransitions, map<string, map<string, set<GlobalTransition *>>> &opponentsTransitions, string initialHash);
+    MDP generateNextMDP();
     bool nextIterativeStrategy();
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
     string getActionNameFromStateInStrategy(GlobalState* state);
@@ -81,6 +86,7 @@ protected:
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
     ProbabilityStrategyDecisions probabilityStrategy;
+    set<set<string>> coalitionStrategy;
 
     map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // state, actionName, actual transitions
     map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // state, actionName, actual transitions
