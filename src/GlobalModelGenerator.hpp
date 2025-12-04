@@ -88,6 +88,7 @@ protected:
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
     ProbabilityStrategyDecisions probabilityStrategy;
     set<set<string>> coalitionStrategy;
+    int currentStratID = 0;
 
     map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // state, actionName, actual transitions
     map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // state, actionName, actual transitions

@@ -739,6 +739,11 @@ set<set<string>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* lo
     //     }
     // }
     this->coalitionStrategy = getAllPossiblePaths(coalitionTransitions, opponentsTransitions, this->globalModel->initState->hash);
+    
+    for (auto item : coalitionStrategy) {
+        generateNextMDP();
+    }
+    
     return this->coalitionStrategy;
 }
 
@@ -863,16 +868,182 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
         for (const auto& actionName : path) cout << actionName << " ";
         cout << endl;
     }
-
+    currentStratID = 0;
     return allPaths;
 }
 
 MDP GlobalModelGenerator::generateNextMDP() {
-    MDP mdp(1);
+    MDP newMdp(1);
+    int actionId = 0;
 
-    int actionID = 0;
+    if (currentStratID == -1) {
+        return newMdp;
+    }
 
-    add_transition(mdp, 0, actionID, 1, 1, 0);
+    // union of coalition action names that appear in coalitionStrategy (allowed coalition actions)
+    set<string> allowedCoalitionActions;
+    auto strategyIt = coalitionStrategy.begin(); // first strategy
+    advance(strategyIt, currentStratID);
+    for (const auto &act : *strategyIt) allowedCoalitionActions.insert(act);
+
+    for (const auto &actName : allowedCoalitionActions) {
+        cout << "Allowed: " << actName << endl;
+    }
+
+    // Start with only the initial state in the id map and expand states on the fly
+    map<string,int> stateIdMap;
+    string initHash = this->globalModel->initState->hash;
+    stateIdMap[initHash] = 0;
+    int nextNewStateId = 1;
+
+    // BFS/queue of raw state hashes to process (may include 'T' suffixed terminal duplicates)
+    queue<string> q;
+    q.push(initHash);
+    unordered_set<string> processed; // avoid reprocessing same raw hash
+
+    while (!q.empty()) {
+        string rawStateHash = q.front();
+        q.pop();
+        // skip already processed states
+        if (processed.find(rawStateHash) != processed.end()) {
+            continue;
+        }
+        processed.insert(rawStateHash);
+
+        // check if state is in a chain where the answer was correct somewhere down the line and strip the additional marking if it is the case
+        bool stateWasT = false;
+        string stateHash = rawStateHash;
+        if (!stateHash.empty() && stateHash.back() == 'T') {
+            stateWasT = true;
+            // cout << stateHash << " was T!" << endl;
+            stateHash.pop_back();
+        }
+        string baseHash = stateHash;
+
+        auto coalitionIt = coalitionTransitions.find(baseHash);
+        auto opponentsIt  = opponentsTransitions.find(baseHash);
+
+        // gather action names available in this state (based on baseHash)
+        set<string> actionNames;
+        if (coalitionIt != coalitionTransitions.end()) {
+            for (const auto &p : coalitionIt->second) actionNames.insert(p.first);
+        }
+        if (opponentsIt != opponentsTransitions.end()) {
+            for (const auto &p : opponentsIt->second) actionNames.insert(p.first);
+        }
+
+        // ensure fromStateId exists (we populate stateIdMap as we enqueue)
+        auto fromIt = stateIdMap.find(rawStateHash);
+        if (fromIt == stateIdMap.end()) {
+            // Shouldn't happen because we push only mapped states, but guard anyway
+            stateIdMap[rawStateHash] = nextNewStateId++;
+            fromIt = stateIdMap.find(rawStateHash);
+        }
+        int fromStateId = fromIt->second;
+
+        for (const auto &actionName : actionNames) {
+            // if this is a coalition action, require it to be present in some strategy path
+            bool isCoalitionAction = (coalitionIt != coalitionTransitions.end() && coalitionIt->second.count(actionName));
+            if (isCoalitionAction && allowedCoalitionActions.find(actionName) == allowedCoalitionActions.end()) {
+                continue;
+            }
+
+            // collect all transitions (coalition + opponents) for this action at this state (baseHash used)
+            vector<GlobalTransition*> transitionList;
+            if (coalitionIt != coalitionTransitions.end()) {
+                auto coalitionActionIt = coalitionIt->second.find(actionName);
+                if (coalitionActionIt != coalitionIt->second.end()) {
+                    for (auto *t : coalitionActionIt->second) {
+                        if (t && t->to) {
+                            transitionList.push_back(t);
+                        }
+                    }
+                }
+            }
+            if (opponentsIt != opponentsTransitions.end()) {
+                auto opponentActionIt = opponentsIt->second.find(actionName);
+                if (opponentActionIt != opponentsIt->second.end()) {
+                    for (auto *t : opponentActionIt->second) {
+                        if (t && t->to) {
+                            transitionList.push_back(t);
+                        }
+                    }
+                }
+            }
+            if (transitionList.empty()) continue;
+
+            // add all transitions under a single action id
+            bool transitionsAdded = false;
+            for (auto *transition : transitionList) {
+                auto toHash = transition->to->hash;
+                bool checkToStateResult = checkLocalStates(&transition->to->localStatesProjection, transition->to);
+                // If both the source raw state and the target would be the same 'T'-suffixed hash, skip this transition.
+                // This avoids adding trivial T->T self-transitions.
+                if (stateWasT) {
+                    if (toHash + string("T") == rawStateHash && checkToStateResult == true) {
+                        continue;
+                    }
+                }
+
+                // ensure target state has an id and is scheduled for processing (if unseen)
+                if (stateIdMap.find(toHash) == stateIdMap.end() && checkToStateResult == false) {
+                    stateIdMap[toHash] = nextNewStateId++;
+                    cout << "Pushed " << toHash << endl;
+                    q.push(toHash);
+                }
+                int toStateId = stateIdMap[toHash];
+                double prob = transition->getProbability();
+
+                // skip self-loops with probability 0 or 1 that won't change the state to TRUE
+                if (baseHash == transition->to->hash && (prob == 0.0 || prob == 1.0) && checkToStateResult == false) {
+                    continue;
+                }
+
+                bool isTerminalByCheck = false;
+                // If the currently processed state had a trailing 'T', assume terminal (no need to call checkLocalStates)
+                if (stateWasT) {
+                    isTerminalByCheck = true;
+                } else {
+                    if (checkToStateResult == true) {
+                        isTerminalByCheck = true;
+                    }
+                }
+
+                double reward = 0.0;
+                if (isTerminalByCheck) {
+                    // duplicate target state with 'T' appended and map it if not present
+                    string toHashT = toHash + "T";
+                    if (stateIdMap.find(toHashT) == stateIdMap.end()) {
+                        stateIdMap[toHashT] = nextNewStateId++;
+                        cout << "T-Pushed " << toHashT << endl;
+                        q.push(toHashT);
+                    }
+                    toStateId = stateIdMap[toHashT];
+                    // if the current processed state had 'T', reward must be 0.0
+                    reward = (!stateWasT) ? -1.0 : 0.0;
+                }
+
+                add_transition(newMdp, fromStateId, actionId, toStateId, prob, reward);
+                cout << "(" << actionId << ") " << rawStateHash << " -> " << (isTerminalByCheck ? toHash + "T" : toHash) << " p=" << reward << " " << isTerminalByCheck << endl;
+                transitionsAdded = true;
+            }
+            if (transitionsAdded) {
+                ++actionId;
+            }
+        }
+    }
+
+    if (currentStratID != -1) {
+        currentStratID++;
+    }
+    if (currentStratID >= coalitionStrategy.size()) {
+        currentStratID = -1;
+    }
+
+    auto&& re = algorithms::solve_mpi(newMdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
+    cout << "p=" << -re.valuefunction[0] << endl;
+
+    return newMdp;
 }
 
 /// @brief Generates next set strategy from the memorized coalition transitions for the probabilistic verification.
