@@ -60,7 +60,11 @@ int main(int argc, char* argv[]) {
      * whereas in Verification::verifyGlobalState (called by ::verify) those are expanded on demand (!)
     */
     if(config.output_global_model){
-        generator->expandAllStates();
+        if (!config.probability) {
+            generator->expandAllStates();
+        } else {
+            generator->expandAllStates(true);
+        }
         outputGlobalModel(generator->getCurrentGlobalModel());
     }
 
@@ -79,7 +83,11 @@ int main(int argc, char* argv[]) {
         }
         // save GlobalModel
         if(!config.reduce) {
+            if (!config.probability) {
             generator->expandAllStates();   // todo: add allExpanded flag?
+            } else {
+                generator->expandAllStates(true);
+            }
         }
         DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
@@ -91,7 +99,11 @@ int main(int argc, char* argv[]) {
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
     } else if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
-        generator->expandAllStates();
+        if (!config.probability) {
+            generator->expandAllStates();
+        } else {
+            generator->expandAllStates(true);
+        }
     }
     
     if(config.stv_mode & (1 << 1)){     // mode.binary = /[0,1]*1[0,1]/ (verify)
@@ -109,21 +121,22 @@ int main(int argc, char* argv[]) {
         } else if (config.verify_strategy) {
             verifResult = verificationIt->verify().verificationResult;
         } else if (config.probability) {
-            generator->createIterativeStrategy(localModels);
-            config.verify_strategy = true;
-            do {
-                printf("Trying next strategy...\n");
-                generator->initModel(localModels, formula);
-                verificationIt = new VerificationIterative(generator);
-                verifResult2 = verificationIt->verify();
-                verifResult = verifResult2.verificationResult;
-                printf("Probability\nTRUE: %f\nFALSE: %f\n", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);
-                if (verifResult) {
-                    break;
-                }
-                delete verificationIt;
-            } while (generator->nextIterativeStrategy());
-            cout << "No more strategies to try." << endl;
+            // generator->createIterativeStrategy(localModels);
+            generator->createProbabilityStrategy(localModels);
+            // config.verify_strategy = true;
+            // do {
+            //     printf("Trying next strategy...\n");
+            //     generator->initModel(localModels, formula);
+            //     verificationIt = new VerificationIterative(generator);
+            //     verifResult2 = verificationIt->verify();
+            //     verifResult = verifResult2.verificationResult;
+            //     printf("Probability\nTRUE: %f\nFALSE: %f\n", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);
+            //     if (verifResult) {
+            //         break;
+            //     }
+            //     delete verificationIt;
+            // } while (generator->nextIterativeStrategy());
+            // cout << "No more strategies to try." << endl;
         } else {
             // verifResult = verification->verify();
             verifResult = verificationIt->verify().verificationResult;

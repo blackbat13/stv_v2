@@ -31,6 +31,8 @@ struct GlobalState {
 
     /// @brief Collective probability of the state.
     float probability = config.probability ? 0.0 : 1.0;
+
+    bool goodState = false;
     
     // Bindings
 

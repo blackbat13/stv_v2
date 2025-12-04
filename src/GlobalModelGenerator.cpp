@@ -12,6 +12,7 @@
 #include <string.h>
 #include <iostream>
 #include <sstream>
+#include <functional>
 
 extern Cfg config;
 
@@ -164,7 +165,7 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
 }
 
 /// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
-void GlobalModelGenerator::expandAllStates() {
+void GlobalModelGenerator::expandAllStates(bool additionalProbSplit) {
     if(this->globalModel->initState->isExpanded){
         #if VERBOSE
             printf("\nInitial state %s was already expanded\n", this->globalModel->initState->hash.c_str());
@@ -181,6 +182,31 @@ void GlobalModelGenerator::expandAllStates() {
         #endif
         this->expandState(globalState);
         for (auto transition : globalState->globalTransitions) {
+            // sort transitions into two buckets for probability model generation
+            if (additionalProbSplit) {
+                // // transition switches from a FALSE state to a TRUE state or is from a state that was somewhere correct along the line
+                // bool goodTransition = false;
+                // if (transition->from->goodState || (checkLocalStates(&transition->from->localStatesProjection, transition->from) == false && checkLocalStates(&transition->to->localStatesProjection, transition->to) == true)) {
+                //     goodTransition = true;
+                //     // create a new state here?
+                //     transition->to->goodState = true;
+                // }
+
+                bool isControlled = false;
+                for (const auto localTransition : transition->localTransitions) {
+                    if (formula->coalition.find(localTransition->agent) != formula->coalition.end()) {
+                        if (!localTransition->isShared || localTransition->name == localTransition->localName) {
+                            isControlled = true;
+                            break;
+                        }
+                    }
+                }
+                if (isControlled) {
+                    coalitionTransitions[globalState->hash][transition->joinLocalTransitionNames()].insert(transition);
+                } else {
+                    opponentsTransitions[globalState->hash][transition->joinLocalTransitionNames()].insert(transition);
+                }
+            }
             auto targetGlobalState = transition->to;
             if (!targetGlobalState->isExpanded) {
                 statesToExpand.insert(targetGlobalState);
@@ -659,6 +685,179 @@ void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
         strat->addAction(action);
     }
     this->strategyCollection = strat;
+}
+
+bool GlobalModelGenerator::checkLocalStates(vector<LocalState*>* localStates, GlobalState* globalState) {
+    map<string, int> currEnv;
+
+    for (const auto localState : *localStates) {
+        for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
+            currEnv[it->first] = it->second;
+        }
+    }
+    auto val = *formula->p;
+
+    if (val[0]->eval(currEnv, this, globalState)==1) {
+        return true;
+    }
+    return false;
+}
+
+/// @brief Prepares the strategy generating structures for the probabilistic verification.
+/// @param localModels LocalModels to generate the coalition transition buckets from.
+set<set<string>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* localModels)
+{
+    set<Agent*> coalition = formula->coalition;
+    set<Agent*> opponents;
+    for (Agent* agent : localModels->agents) {
+        if (coalition.find(agent) == coalition.end()) {
+            opponents.emplace(agent);
+        }
+    }
+    // for (auto transitions : coalitionTransitions) {
+    //     cout << "Controlled: " << transitions.first << ":" << endl;
+    //     for (auto transitionName : transitions.second) {
+    //         cout << "\t" << transitionName.first << endl;
+    //         for (auto transition : transitionName.second) {
+    //             cout << "\t\t" << transition->from->hash << " -> " << transition->to->hash << " P=(" << transition->getProbability() << ") " << checkLocalStates(&transition->to->localStatesProjection, transition->to) << endl;
+    //         }
+    //     }
+    // }
+    // for (auto transitions : opponentsTransitions) {
+    //     cout << "Uncontrolled: " << transitions.first << ":" << endl;
+    //     for (auto transitionName : transitions.second) {
+    //         cout << "\t" << transitionName.first << endl;
+    //         for (auto transition : transitionName.second) {
+    //             cout << "\t\t" << transition->from->hash << " -> " << transition->to->hash << " P=(" << transition->getProbability() << ") " << checkLocalStates(&transition->to->localStatesProjection, transition->to) << endl;
+    //         }
+    //     }
+    // }
+    return getAllPossiblePaths(coalitionTransitions, opponentsTransitions, this->globalModel->initState->hash);
+}
+
+/// @brief Generates all possible paths through the transition graph.
+/// @param coalitionTransitions Map of coalition-controlled transitions grouped by state hash and action name.
+/// @param opponentsTransitions Map of opponent-controlled transitions grouped by state hash and action name.
+/// @param initialHash Starting state hash for path exploration.
+/// @return Set of all unique paths, where each path is a set of action names.
+set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<string, set<GlobalTransition*>>>& coalitionTransitions, map<string, map<string, set<GlobalTransition*>>>& opponentsTransitions, string initialHash) {
+
+    set<string> visitedStatesStack; // track current recursion stack for cycle detection
+
+    // DFS returns the set of paths (each path is a set of action names) reachable from stateHash
+    function<set<set<string>>(const string&, int)> dfs = [&](const string& stateHash, int depth) -> set<set<string>> {
+        if (visitedStatesStack.count(stateHash)) {
+            // cycle encountered -> treat as terminal for this branch (return one empty path so callers can add their action if needed)
+            return set<set<string>>{ set<string>() };
+        }
+
+        visitedStatesStack.insert(stateHash);
+        bool hasOutgoingTransitions = false;
+        set<set<string>> resultPaths;
+
+        // Coalition-controlled transitions: for each action name, union results of all transitions for that action,
+        // then add the action name to each path returned for that action.
+        auto coalitionIterator = coalitionTransitions.find(stateHash);
+        if (coalitionIterator != coalitionTransitions.end()) {
+            for (auto& actionPair : coalitionIterator->second) {
+                const string& actionName = actionPair.first;
+                // cout << string(depth*4, ' ') << actionName << endl;
+                vector<set<set<string>>> actionUnionResults; // union of results for all transitions with this action
+                string previousCoalitionLocalStates = "";
+                for (auto* transition : actionPair.second) {
+                    // skip setting actions if the other branch didn't change the coalition LocalStates
+                    if (transition->to) {
+                        string coalitionStateIds;
+                        string coalitionStateNames;
+                        for (auto localState : transition->to->localStatesProjection) {
+                            if (this->formula->coalition.find(localState->agent) != this->formula->coalition.end()) {
+                                coalitionStateIds += to_string(localState->id) + ";";
+                                coalitionStateNames += localState->name + ";";
+                            }
+                        }
+                        if (previousCoalitionLocalStates != coalitionStateIds) {
+                            previousCoalitionLocalStates = coalitionStateIds;
+                        } else {
+                            continue;
+                        }
+                    }
+
+                    hasOutgoingTransitions = true;
+                    auto subPaths = dfs(transition->to->hash, depth+1);
+                    actionUnionResults.push_back(set<set<string>>());
+                    for (auto subPath : subPaths) {
+                        subPath.insert(actionName);
+                        // cout << string(depth*4, ' ') << "subpaths of " << actionPair.first << ": ";
+                        // for (auto item : subPath) {
+                        //     cout << item << " ";
+                        // }
+                        // cout << endl;
+                        actionUnionResults[actionUnionResults.size() - 1].insert(subPath);
+                    }
+                    // cout << string(depth*4, ' ') << "exit1" << endl;
+                }
+                // cout << string(depth*4, ' ') << "exit2" << endl;
+                // add the action name to each path in the union and merge into resultPaths
+                // compute cartesian product of sets in actionUnionResults:
+                // start with one empty accumulation set
+                vector<set<string>> cartesianProduct;
+                cartesianProduct.emplace_back();
+
+                for (const auto &choiceSet : actionUnionResults) {
+                    vector<set<string>> nextProduct;
+                    for (const auto &accumulator : cartesianProduct) {
+                        for (const auto &selectedPath : choiceSet) {
+                            set<string> mergedPaths = accumulator;
+                            mergedPaths.insert(selectedPath.begin(), selectedPath.end());
+                            nextProduct.push_back(std::move(mergedPaths));
+                        }
+                    }
+                    cartesianProduct.swap(nextProduct);
+                }
+
+                // insert all combined results into resultPaths
+                for (const auto &combinedPath : cartesianProduct) {
+                    resultPaths.insert(combinedPath);
+                }
+            }
+        }
+
+        // Opponent-controlled transitions: explore outcomes and union results (do not add action names)
+        auto opponentIterator = opponentsTransitions.find(stateHash);
+        if (opponentIterator != opponentsTransitions.end()) {
+            for (auto& actionPair : opponentIterator->second) {
+                for (auto* transition : actionPair.second) {
+                    hasOutgoingTransitions = true;
+                    auto subPaths = dfs(transition->to->hash, depth+1);
+                    for (auto& subPath : subPaths) {
+                        if (subPath.size() > 0) {
+                            resultPaths.insert(subPath);
+                            // cout << string(depth*4, ' ') << "been here" << endl;
+                        }
+                    }
+                }
+            }
+        }
+
+        // If no outgoing transitions, this is a terminal state: return a single empty path (callers may add actions)
+        if (!hasOutgoingTransitions) {
+            resultPaths.insert(set<string>());
+        }
+
+        visitedStatesStack.erase(stateHash);
+        return resultPaths;
+    };
+
+    // Get all paths from initial state
+    set<set<string>> allPaths = dfs(initialHash, 0);
+
+    // Print resulting paths
+    for (const auto& path : allPaths) {
+        for (const auto& actionName : path) cout << actionName << " ";
+        cout << endl;
+    }
+
+    return allPaths;
 }
 
 /// @brief Generates next set strategy from the memorized coalition transitions for the probabilistic verification.

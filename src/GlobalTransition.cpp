@@ -24,3 +24,11 @@ string GlobalTransition::joinLocalTransitionNames(char sep){
    }
    return res;
 }
+
+float GlobalTransition::getProbability() {
+   float prob = 1.0;
+   for (LocalTransition* transition : localTransitions) {
+      prob *= transition->probability;
+   }
+   return prob;
+}

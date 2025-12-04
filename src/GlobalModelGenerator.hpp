@@ -27,7 +27,7 @@ public:
     GlobalState* initModel(LocalModels* localModels, Formula* formula);
     void expandState(GlobalState* state);
     vector<GlobalState*> expandStateAndReturn(GlobalState* state, bool returnAnyway = false);
-    void expandAllStates();
+    void expandAllStates(bool additionalProbSplit = false);
     void expandAndReduceAllStates();
     GlobalModel* getCurrentGlobalModel();
     Formula* getFormula();
@@ -38,6 +38,8 @@ public:
     bool getFormulaCorectness();
     void initStrategy(StrategyCollection* strat);
     void createIterativeStrategy(LocalModels *localModels);
+    set<set<string>> createProbabilityStrategy(LocalModels* localModels);
+    set<set<string>> getAllPossiblePaths(map<string, map<string, set<GlobalTransition *>>> &coalitionTransitions, map<string, map<string, set<GlobalTransition *>>> &opponentsTransitions, string initialHash);
     bool nextIterativeStrategy();
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
     string getActionNameFromStateInStrategy(GlobalState* state);
@@ -79,6 +81,10 @@ protected:
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
     ProbabilityStrategyDecisions probabilityStrategy;
+
+    map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // state, actionName, actual transitions
+    map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // state, actionName, actual transitions
+    bool checkLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
 };
 
 #endif // SELENE_GLOBAL_MODEL_GENERATOR
