@@ -45,7 +45,7 @@ public:
     void createIterativeStrategy(LocalModels *localModels);
     set<set<string>> createProbabilityStrategy(LocalModels* localModels);
     set<set<string>> getAllPossiblePaths(map<string, map<string, set<GlobalTransition *>>> &coalitionTransitions, map<string, map<string, set<GlobalTransition *>>> &opponentsTransitions, string initialHash);
-    MDP generateNextMDP();
+    MDP generateNextMDP(bool makeOpponentGoMax = false);
     bool nextIterativeStrategy();
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
     string getActionNameFromStateInStrategy(GlobalState* state);

@@ -1855,3 +1855,39 @@ Result Verification::verifyStrategy() {
     }
     return verificationResult;
 }
+
+Result Verification::verifyMDP()
+{
+    Result newResult;
+    newResult.verificationResult = false;
+    float targetProb = generator->getFormula()->probability;
+    ProbabilitySign probSign = generator->getFormula()->probabilitySign;
+    float resultProb = 0.0;
+    while (true)
+    {
+        bool makeOpponentGoMax = false;
+        if (probSign == ProbabilitySign::LE || probSign == ProbabilitySign::LT) {
+            makeOpponentGoMax = true;
+        }
+        MDP mdp = generator->generateNextMDP(makeOpponentGoMax);
+        if (mdp.state_count() == 0) {
+            break;
+        }
+        auto&& re = algorithms::solve_mpi(mdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
+        resultProb = abs(re.valuefunction[0]);
+        if ((probSign == ProbabilitySign::EQ && resultProb != targetProb) ||
+        (probSign == ProbabilitySign::GE && resultProb < targetProb) ||
+        (probSign == ProbabilitySign::GT && resultProb <= targetProb) ||
+        (probSign == ProbabilitySign::LE && resultProb > targetProb) ||
+        (probSign == ProbabilitySign::LT && resultProb >= targetProb) ||
+        (probSign == ProbabilitySign::NE && resultProb == targetProb)) {
+            continue;
+        }
+        newResult.probabilityResult.probabilityTrue = abs(re.valuefunction[0]);
+        newResult.probabilityResult.probabilityFalse = 1.0 - abs(re.valuefunction[0]);
+        newResult.verificationResult = true;
+        break;
+    }
+    
+    return newResult;
+}

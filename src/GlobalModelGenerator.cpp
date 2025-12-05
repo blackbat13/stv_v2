@@ -740,10 +740,6 @@ set<set<string>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* lo
     // }
     this->coalitionStrategy = getAllPossiblePaths(coalitionTransitions, opponentsTransitions, this->globalModel->initState->hash);
     
-    for (auto item : coalitionStrategy) {
-        generateNextMDP();
-    }
-    
     return this->coalitionStrategy;
 }
 
@@ -864,16 +860,16 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
     set<set<string>> allPaths = dfs(initialHash, 0);
 
     // Print resulting paths
-    for (const auto& path : allPaths) {
-        for (const auto& actionName : path) cout << actionName << " ";
-        cout << endl;
-    }
+    // for (const auto& path : allPaths) {
+    //     for (const auto& actionName : path) cout << actionName << " ";
+    //     cout << endl;
+    // }
     currentStratID = 0;
     return allPaths;
 }
 
-MDP GlobalModelGenerator::generateNextMDP() {
-    MDP newMdp(1);
+MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
+    MDP newMdp(0);
     int actionId = 0;
 
     if (currentStratID == -1) {
@@ -887,7 +883,7 @@ MDP GlobalModelGenerator::generateNextMDP() {
     for (const auto &act : *strategyIt) allowedCoalitionActions.insert(act);
 
     for (const auto &actName : allowedCoalitionActions) {
-        cout << "Allowed: " << actName << endl;
+        // cout << "Allowed: " << actName << endl;
     }
 
     // Start with only the initial state in the id map and expand states on the fly
@@ -988,7 +984,7 @@ MDP GlobalModelGenerator::generateNextMDP() {
                 // ensure target state has an id and is scheduled for processing (if unseen)
                 if (stateIdMap.find(toHash) == stateIdMap.end() && checkToStateResult == false) {
                     stateIdMap[toHash] = nextNewStateId++;
-                    cout << "Pushed " << toHash << endl;
+                    // cout << "Pushed " << toHash << endl;
                     q.push(toHash);
                 }
                 int toStateId = stateIdMap[toHash];
@@ -1015,16 +1011,16 @@ MDP GlobalModelGenerator::generateNextMDP() {
                     string toHashT = toHash + "T";
                     if (stateIdMap.find(toHashT) == stateIdMap.end()) {
                         stateIdMap[toHashT] = nextNewStateId++;
-                        cout << "T-Pushed " << toHashT << endl;
+                        // cout << "T-Pushed " << toHashT << endl;
                         q.push(toHashT);
                     }
                     toStateId = stateIdMap[toHashT];
                     // if the current processed state had 'T', reward must be 0.0
-                    reward = (!stateWasT) ? -1.0 : 0.0;
+                    reward = (!stateWasT) ? (makeOpponentGoMax ? 1.0 : -1.0) : 0.0;
                 }
 
                 add_transition(newMdp, fromStateId, actionId, toStateId, prob, reward);
-                cout << "(" << actionId << ") " << rawStateHash << " -> " << (isTerminalByCheck ? toHash + "T" : toHash) << " p=" << reward << " " << isTerminalByCheck << endl;
+                // cout << "(" << actionId << ") " << rawStateHash << " -> " << (isTerminalByCheck ? toHash + "T" : toHash) << " p=" << reward << " " << isTerminalByCheck << endl;
                 transitionsAdded = true;
             }
             if (transitionsAdded) {
@@ -1040,8 +1036,8 @@ MDP GlobalModelGenerator::generateNextMDP() {
         currentStratID = -1;
     }
 
-    auto&& re = algorithms::solve_mpi(newMdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
-    cout << "p=" << -re.valuefunction[0] << endl;
+    // auto&& re = algorithms::solve_mpi(newMdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
+    // cout << "p=" << -re.valuefunction[0] << endl;
 
     return newMdp;
 }

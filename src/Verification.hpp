@@ -92,6 +92,7 @@ public:
     vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
     int getStrategyComplexity();
     Result verifyStrategy();
+    Result verifyMDP();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;

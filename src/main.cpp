@@ -123,6 +123,8 @@ int main(int argc, char* argv[]) {
         } else if (config.probability) {
             // generator->createIterativeStrategy(localModels);
             generator->createProbabilityStrategy(localModels);
+            verifResult2 = verification->verifyMDP();
+            verifResult = verifResult2.verificationResult;
             // config.verify_strategy = true;
             // do {
             //     printf("Trying next strategy...\n");
@@ -142,6 +144,9 @@ int main(int argc, char* argv[]) {
             verifResult = verificationIt->verify().verificationResult;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
+        if (verifResult == true && config.probability) {
+            cout << "p=" << verifResult2.probabilityResult.probabilityTrue << endl;
+        }
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
         }
