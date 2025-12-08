@@ -1016,7 +1016,7 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
                     }
                     toStateId = stateIdMap[toHashT];
                     // if the current processed state had 'T', reward must be 0.0
-                    reward = (!stateWasT) ? (makeOpponentGoMax ? 1.0 : -1.0) : 0.0;
+                    reward = (!stateWasT) ? ((makeOpponentGoMax || opponentsTransitions.size() == 0) ? 1.0 : -1.0) : 0.0;
                 }
 
                 add_transition(newMdp, fromStateId, actionId, toStateId, prob, reward);
