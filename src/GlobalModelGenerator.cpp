@@ -711,7 +711,7 @@ bool GlobalModelGenerator::checkLocalStates(vector<LocalState*>* localStates, Gl
 
 /// @brief Prepares the strategy generating structures for the probabilistic verification.
 /// @param localModels LocalModels to generate the coalition transition buckets from.
-set<set<string>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* localModels)
+set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* localModels)
 {
     set<Agent*> coalition = formula->coalition;
     set<Agent*> opponents;
@@ -744,33 +744,33 @@ set<set<string>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* lo
 }
 
 /// @brief Generates all possible paths through the transition graph.
-/// @param coalitionTransitions Map of coalition-controlled transitions grouped by state hash and action name.
-/// @param opponentsTransitions Map of opponent-controlled transitions grouped by state hash and action name.
+/// @param coalitionTransitions Map of coalition-controlled transitions grouped by state hash and action name. (state, actionName, actual transitions)
+/// @param opponentsTransitions Map of opponent-controlled transitions grouped by state hash and action name. (state, actionName, actual transitions)
 /// @param initialHash Starting state hash for path exploration.
-/// @return Set of all unique paths, where each path is a set of action names.
-set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<string, set<GlobalTransition*>>>& coalitionTransitions, map<string, map<string, set<GlobalTransition*>>>& opponentsTransitions, string initialHash) {
-
+/// @return Set of all unique paths, where each path is a set of tuples (state_hash, action_name).
+set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<string, set<GlobalTransition*>>>& coalitionTransitions, map<string, map<string, set<GlobalTransition*>>>& opponentsTransitions, string initialHash) {
+    //set of tuples
     set<string> visitedStatesStack; // track current recursion stack for cycle detection
 
-    // DFS returns the set of paths (each path is a set of action names) reachable from stateHash
-    function<set<set<string>>(const string&, int)> dfs = [&](const string& stateHash, int depth) -> set<set<string>> {
+    // DFS returns the set of paths (each path is a set of (state_hash, action_name) tuples) reachable from stateHash
+    function<set<set<tuple<string, string>>>(const string&, int)> dfs = [&](const string& stateHash, int depth) -> set<set<tuple<string, string>>> {
         if (visitedStatesStack.count(stateHash)) {
-            // cycle encountered -> treat as terminal for this branch (return one empty path so callers can add their action if needed)
-            return set<set<string>>{ set<string>() };
+            // cycle encountered -> treat as terminal for this branch (return one empty path so callers can add their transition if needed)
+            return set<set<tuple<string, string>>>{ set<tuple<string, string>>() };
         }
 
         visitedStatesStack.insert(stateHash);
         bool hasOutgoingTransitions = false;
-        set<set<string>> resultPaths;
+        set<set<tuple<string, string>>> resultPaths;
 
         // Coalition-controlled transitions: for each action name, union results of all transitions for that action,
-        // then add the action name to each path returned for that action.
+        // then add the (state_hash, action_name) tuple to each path returned for that action.
         auto coalitionIterator = coalitionTransitions.find(stateHash);
         if (coalitionIterator != coalitionTransitions.end()) {
             for (auto& actionPair : coalitionIterator->second) {
                 const string& actionName = actionPair.first;
                 // cout << string(depth*4, ' ') << actionName << endl;
-                vector<set<set<string>>> actionUnionResults; // union of results for all transitions with this action
+                vector<set<set<tuple<string, string>>>> actionUnionResults; // union of results for all transitions with this action
                 string previousCoalitionLocalStates = "";
                 for (auto* transition : actionPair.second) {
                     // skip setting actions if the other branch didn't change the coalition LocalStates
@@ -792,12 +792,12 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
 
                     hasOutgoingTransitions = true;
                     auto subPaths = dfs(transition->to->hash, depth+1);
-                    actionUnionResults.push_back(set<set<string>>());
+                    actionUnionResults.push_back(set<set<tuple<string, string>>>());
                     for (auto subPath : subPaths) {
-                        subPath.insert(actionName);
+                        subPath.insert(make_tuple(transition->from->hash, actionName));
                         // cout << string(depth*4, ' ') << "subpaths of " << actionPair.first << ": ";
                         // for (auto item : subPath) {
-                        //     cout << item << " ";
+                        //     cout << get<0>(item) << ":" << get<1>(item) << " ";
                         // }
                         // cout << endl;
                         actionUnionResults[actionUnionResults.size() - 1].insert(subPath);
@@ -805,17 +805,17 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
                     // cout << string(depth*4, ' ') << "exit1" << endl;
                 }
                 // cout << string(depth*4, ' ') << "exit2" << endl;
-                // add the action name to each path in the union and merge into resultPaths
+                // add the (state_hash, action_name) tuple to each path in the union and merge into resultPaths
                 // compute cartesian product of sets in actionUnionResults:
                 // start with one empty accumulation set
-                vector<set<string>> cartesianProduct;
+                vector<set<tuple<string, string>>> cartesianProduct;
                 cartesianProduct.emplace_back();
 
                 for (const auto &choiceSet : actionUnionResults) {
-                    vector<set<string>> nextProduct;
+                    vector<set<tuple<string, string>>> nextProduct;
                     for (const auto &accumulator : cartesianProduct) {
                         for (const auto &selectedPath : choiceSet) {
-                            set<string> mergedPaths = accumulator;
+                            set<tuple<string, string>> mergedPaths = accumulator;
                             mergedPaths.insert(selectedPath.begin(), selectedPath.end());
                             nextProduct.push_back(std::move(mergedPaths));
                         }
@@ -849,7 +849,7 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
 
         // If no outgoing transitions, this is a terminal state: return a single empty path (callers may add actions)
         if (!hasOutgoingTransitions) {
-            resultPaths.insert(set<string>());
+            resultPaths.insert(set<tuple<string, string>>());
         }
 
         visitedStatesStack.erase(stateHash);
@@ -857,11 +857,11 @@ set<set<string>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<strin
     };
 
     // Get all paths from initial state
-    set<set<string>> allPaths = dfs(initialHash, 0);
+    set<set<tuple<string, string>>> allPaths = dfs(initialHash, 0);
 
     // Print resulting paths
     // for (const auto& path : allPaths) {
-    //     for (const auto& actionName : path) cout << actionName << " ";
+    //     for (const auto& tuple : path) cout << "(" << get<0>(tuple) << "," << get<1>(tuple) << ") ";
     //     cout << endl;
     // }
     currentStratID = 0;
@@ -876,18 +876,20 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
         return newMdp;
     }
 
-    // union of coalition action names that appear in coalitionStrategy (allowed coalition actions)
-    set<string> allowedCoalitionActions;
+    // map of state hash to action name that appear in coalitionStrategy (allowed coalition actions)
+    map<string, string> allowedCoalitionActions;
     auto strategyIt = coalitionStrategy.begin(); // first strategy
     advance(strategyIt, currentStratID);
-    for (const auto &act : *strategyIt) allowedCoalitionActions.insert(act);
-
-    for (const auto &actName : allowedCoalitionActions) {
-        // cout << "Allowed: " << actName << endl;
+    for (const auto &tuple : *strategyIt) {
+        allowedCoalitionActions[get<0>(tuple)] = get<1>(tuple); // map state hash to action name
     }
 
+    // for (const auto &entry : allowedCoalitionActions) {
+    //     cout << "Allowed: " << entry.first << " -> " << entry.second << endl;
+    // }
+
     // Start with only the initial state in the id map and expand states on the fly
-    map<string,int> stateIdMap;
+    map<string, int> stateIdMap;
     string initHash = this->globalModel->initState->hash;
     stateIdMap[initHash] = 0;
     int nextNewStateId = 1;
@@ -938,10 +940,13 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
         int fromStateId = fromIt->second;
 
         for (const auto &actionName : actionNames) {
-            // if this is a coalition action, require it to be present in some strategy path
+            // if this is a coalition action, require it to be present in some strategy path with proper state mapping
             bool isCoalitionAction = (coalitionIt != coalitionTransitions.end() && coalitionIt->second.count(actionName));
-            if (isCoalitionAction && allowedCoalitionActions.find(actionName) == allowedCoalitionActions.end()) {
-                continue;
+            if (isCoalitionAction) {
+                auto allowedIt = allowedCoalitionActions.find(baseHash);
+                if (allowedIt == allowedCoalitionActions.end() || allowedIt->second != actionName) {
+                    continue;
+                }
             }
 
             // collect all transitions (coalition + opponents) for this action at this state (baseHash used)
