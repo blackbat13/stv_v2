@@ -720,24 +720,6 @@ set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(
             opponents.emplace(agent);
         }
     }
-    // for (auto transitions : coalitionTransitions) {
-    //     cout << "Controlled: " << transitions.first << ":" << endl;
-    //     for (auto transitionName : transitions.second) {
-    //         cout << "\t" << transitionName.first << endl;
-    //         for (auto transition : transitionName.second) {
-    //             cout << "\t\t" << transition->from->hash << " -> " << transition->to->hash << " P=(" << transition->getProbability() << ") " << checkLocalStates(&transition->to->localStatesProjection, transition->to) << endl;
-    //         }
-    //     }
-    // }
-    // for (auto transitions : opponentsTransitions) {
-    //     cout << "Uncontrolled: " << transitions.first << ":" << endl;
-    //     for (auto transitionName : transitions.second) {
-    //         cout << "\t" << transitionName.first << endl;
-    //         for (auto transition : transitionName.second) {
-    //             cout << "\t\t" << transition->from->hash << " -> " << transition->to->hash << " P=(" << transition->getProbability() << ") " << checkLocalStates(&transition->to->localStatesProjection, transition->to) << endl;
-    //         }
-    //     }
-    // }
     this->coalitionStrategy = getAllPossiblePaths(coalitionTransitions, opponentsTransitions, this->globalModel->initState->hash);
     
     return this->coalitionStrategy;
@@ -769,12 +751,18 @@ set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<st
         if (coalitionIterator != coalitionTransitions.end()) {
             for (auto& actionPair : coalitionIterator->second) {
                 const string& actionName = actionPair.first;
-                // cout << string(depth*4, ' ') << actionName << endl;
+                // (action sets with no duplicates, multiple strategies layer (actions with no duplicates, single strategy layer (fromHash, actionName)))
+                /*
+                set1{
+                    set2{(0;0;, A), (1;1;, B), (1;2;, D)},  // Strategy 1
+                    set2{(0;0;, A), (1;1;, B), (1;2;, E)},  // Strategy 2
+                    set2{(0;0;, A), (1;1;, C), (1;2;, D)},  // Strategy 3
+                    set2{(0;0;, A), (1;1;, C), (1;2;, E)}   // Strategy 4
+                }
+                */
                 vector<set<set<tuple<string, string>>>> actionUnionResults; // union of results for all transitions with this action
                 for (auto* transition : actionPair.second) {
                     // Always consider every probabilistic branch for the same action.
-                    // Previously we skipped branches that did not change coalition local states,
-                    // which lost outcomes like 0;0; -> 1;2; for action A.
                     hasOutgoingTransitions = true;
                     auto subPaths = dfs(transition->to->hash, depth+1);
                     actionUnionResults.push_back(set<set<tuple<string, string>>>());
@@ -818,7 +806,6 @@ set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<st
                     for (auto& subPath : subPaths) {
                         if (subPath.size() > 0) {
                             resultPaths.insert(subPath);
-                            // cout << string(depth*4, ' ') << "been here" << endl;
                         }
                     }
                 }
@@ -837,11 +824,6 @@ set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<st
     // Get all paths from initial state
     set<set<tuple<string, string>>> allPaths = dfs(initialHash, 0);
 
-    // Print resulting paths
-    // for (const auto& path : allPaths) {
-    //     for (const auto& tuple : path) cout << "(" << get<0>(tuple) << "," << get<1>(tuple) << ") ";
-    //     cout << endl;
-    // }
     currentStratID = 0;
     return allPaths;
 }
@@ -859,14 +841,8 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
     auto strategyIt = coalitionStrategy.begin(); // first strategy
     advance(strategyIt, currentStratID);
     for (const auto &tuple : *strategyIt) {
-        cout << get<0>(tuple) << "-" << get<1>(tuple) << " ";
         allowedCoalitionActions[get<0>(tuple)] = get<1>(tuple); // map state hash to action name
     }
-    cout << endl;
-
-    // for (const auto &entry : allowedCoalitionActions) {
-    //     cout << "Allowed: " << entry.first << " -> " << entry.second << endl;
-    // }
 
     // Start with only the initial state in the id map and expand states on the fly
     map<string, int> stateIdMap;
@@ -893,7 +869,6 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
         string stateHash = rawStateHash;
         if (!stateHash.empty() && stateHash.back() == 'T') {
             stateWasT = true;
-            // cout << stateHash << " was T!" << endl;
             stateHash.pop_back();
         }
         string baseHash = stateHash;
@@ -972,7 +947,6 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
                 // ensure target state has an id and is scheduled for processing (if unseen)
                 if (stateIdMap.find(toHash) == stateIdMap.end() && checkToStateResult == false) {
                     stateIdMap[toHash] = nextNewStateId++;
-                    // cout << "Pushed " << toHash << endl;
                     q.push(toHash);
                 }
                 int toStateId = stateIdMap[toHash];
@@ -999,7 +973,6 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
                     string toHashT = toHash + "T";
                     if (stateIdMap.find(toHashT) == stateIdMap.end()) {
                         stateIdMap[toHashT] = nextNewStateId++;
-                        // cout << "T-Pushed " << toHashT << endl;
                         q.push(toHashT);
                     }
                     toStateId = stateIdMap[toHashT];
@@ -1008,7 +981,6 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
                 }
 
                 add_transition(newMdp, fromStateId, actionId, toStateId, prob, reward);
-                // cout << "(" << actionId << ") " << rawStateHash << " -> " << (isTerminalByCheck ? toHash + "T" : toHash) << " p=" << reward << " " << isTerminalByCheck << endl;
                 transitionsAdded = true;
             }
             if (transitionsAdded) {
@@ -1023,9 +995,6 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
     if (currentStratID >= coalitionStrategy.size()) {
         currentStratID = -1;
     }
-
-    // auto&& re = algorithms::solve_mpi(newMdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
-    // cout << "p=" << -re.valuefunction[0] << endl;
 
     return newMdp;
 }

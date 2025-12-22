@@ -1879,7 +1879,6 @@ Result Verification::verifyMDP()
         auto&& re = algorithms::solve_mpi(mdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
         resultProb = abs(re.valuefunction[0]);
         if (generator->getFormula()->isF == false) {
-            cout << "here" << endl;
             resultProb = 1.0 - resultProb;
         }
         if ((probSign == ProbabilitySign::GE && resultProb < targetProb) ||
