@@ -1866,7 +1866,10 @@ Result Verification::verifyMDP()
     while (true)
     {
         bool makeOpponentGoMax = false;
-        if (probSign == ProbabilitySign::LE || probSign == ProbabilitySign::LT) {
+        if ((generator->getFormula()->isF == true && probSign == ProbabilitySign::LE) ||
+        (generator->getFormula()->isF == true && probSign == ProbabilitySign::LT) ||
+        (generator->getFormula()->isF == false && probSign == ProbabilitySign::GE) ||
+        (generator->getFormula()->isF == false && probSign == ProbabilitySign::GT)) {
             makeOpponentGoMax = true;
         }
         MDP mdp = generator->generateNextMDP(makeOpponentGoMax);
@@ -1875,16 +1878,18 @@ Result Verification::verifyMDP()
         }
         auto&& re = algorithms::solve_mpi(mdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
         resultProb = abs(re.valuefunction[0]);
-        if ((probSign == ProbabilitySign::EQ && resultProb != targetProb) ||
-        (probSign == ProbabilitySign::GE && resultProb < targetProb) ||
+        if (generator->getFormula()->isF == false) {
+            cout << "here" << endl;
+            resultProb = 1.0 - resultProb;
+        }
+        if ((probSign == ProbabilitySign::GE && resultProb < targetProb) ||
         (probSign == ProbabilitySign::GT && resultProb <= targetProb) ||
         (probSign == ProbabilitySign::LE && resultProb > targetProb) ||
-        (probSign == ProbabilitySign::LT && resultProb >= targetProb) ||
-        (probSign == ProbabilitySign::NE && resultProb == targetProb)) {
+        (probSign == ProbabilitySign::LT && resultProb >= targetProb)) {
             continue;
         }
-        newResult.probabilityResult.probabilityTrue = abs(re.valuefunction[0]);
-        newResult.probabilityResult.probabilityFalse = 1.0 - abs(re.valuefunction[0]);
+        newResult.probabilityResult.probabilityTrue = resultProb;
+        newResult.probabilityResult.probabilityFalse = 1.0 - resultProb;
         newResult.verificationResult = true;
         break;
     }

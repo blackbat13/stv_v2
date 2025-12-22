@@ -771,40 +771,18 @@ set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<st
                 const string& actionName = actionPair.first;
                 // cout << string(depth*4, ' ') << actionName << endl;
                 vector<set<set<tuple<string, string>>>> actionUnionResults; // union of results for all transitions with this action
-                string previousCoalitionLocalStates = "";
                 for (auto* transition : actionPair.second) {
-                    // skip setting actions if the other branch didn't change the coalition LocalStates
-                    if (transition->to) {
-                        string coalitionStateIds;
-                        string coalitionStateNames;
-                        for (auto localState : transition->to->localStatesProjection) {
-                            if (this->formula->coalition.find(localState->agent) != this->formula->coalition.end()) {
-                                coalitionStateIds += to_string(localState->id) + ";";
-                                coalitionStateNames += localState->name + ";";
-                            }
-                        }
-                        if (previousCoalitionLocalStates != coalitionStateIds) {
-                            previousCoalitionLocalStates = coalitionStateIds;
-                        } else {
-                            continue;
-                        }
-                    }
-
+                    // Always consider every probabilistic branch for the same action.
+                    // Previously we skipped branches that did not change coalition local states,
+                    // which lost outcomes like 0;0; -> 1;2; for action A.
                     hasOutgoingTransitions = true;
                     auto subPaths = dfs(transition->to->hash, depth+1);
                     actionUnionResults.push_back(set<set<tuple<string, string>>>());
                     for (auto subPath : subPaths) {
                         subPath.insert(make_tuple(transition->from->hash, actionName));
-                        // cout << string(depth*4, ' ') << "subpaths of " << actionPair.first << ": ";
-                        // for (auto item : subPath) {
-                        //     cout << get<0>(item) << ":" << get<1>(item) << " ";
-                        // }
-                        // cout << endl;
                         actionUnionResults[actionUnionResults.size() - 1].insert(subPath);
                     }
-                    // cout << string(depth*4, ' ') << "exit1" << endl;
                 }
-                // cout << string(depth*4, ' ') << "exit2" << endl;
                 // add the (state_hash, action_name) tuple to each path in the union and merge into resultPaths
                 // compute cartesian product of sets in actionUnionResults:
                 // start with one empty accumulation set
@@ -881,8 +859,10 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
     auto strategyIt = coalitionStrategy.begin(); // first strategy
     advance(strategyIt, currentStratID);
     for (const auto &tuple : *strategyIt) {
+        cout << get<0>(tuple) << "-" << get<1>(tuple) << " ";
         allowedCoalitionActions[get<0>(tuple)] = get<1>(tuple); // map state hash to action name
     }
+    cout << endl;
 
     // for (const auto &entry : allowedCoalitionActions) {
     //     cout << "Allowed: " << entry.first << " -> " << entry.second << endl;
@@ -978,6 +958,9 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
             for (auto *transition : transitionList) {
                 auto toHash = transition->to->hash;
                 bool checkToStateResult = checkLocalStates(&transition->to->localStatesProjection, transition->to);
+                if (formula->isF == false) {
+                    checkToStateResult = !checkToStateResult;
+                }
                 // If both the source raw state and the target would be the same 'T'-suffixed hash, skip this transition.
                 // This avoids adding trivial T->T self-transitions.
                 if (stateWasT) {
