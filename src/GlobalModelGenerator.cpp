@@ -732,14 +732,6 @@ set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(
 /// @param opponentsTransitions Map of opponent-controlled transitions grouped by state hash and action name. (state_hash, actionName, actual transitions)
 /// @param initialHash Starting state hash for path exploration.
 /// @return Set of all unique paths, where each path is a set of tuples (coalition_id, action_name).
-/// 
-/// Performance optimizations:
-/// - Memoization: Caches DFS results to avoid recomputing paths from the same state
-/// - Pre-computed coalition IDs: Hash map lookup instead of linear search
-/// - Move semantics: Avoids unnecessary copying of large data structures
-/// - Capacity reservation: Pre-allocates vector memory to reduce reallocations
-/// - Early exit: Compatibility checking exits on first conflict found
-/// - Hash map for compatibility: Uses unordered_map instead of map for faster lookups
 set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<string, set<GlobalTransition*>>>& coalitionTransitions, map<string, map<string, set<GlobalTransition*>>>& opponentsTransitions, string initialHash) {
     set<string> visitedStatesStack;  // Track visited states in current DFS path for cycle detection
     
