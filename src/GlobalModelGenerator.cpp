@@ -1070,10 +1070,10 @@ string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state
 
 /// @brief Returns a concatenated epistemic class ID of all coalition members in given LocalStates.
 /// @param localStates Vector of LocalStates to extract coalition IDs from.
-/// @return LocalState IDs for coalition members separated with semicolons, ending on a semicolon.
+/// @return LocalState names for coalition members separated with semicolons, ending on a semicolon.
 string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
     // Build coalition ID in canonical coalition agent order (by agentIndex)
-    vector<pair<size_t,int>> ordered;
+    vector<pair<size_t,string>> ordered;
     ordered.reserve(formula->coalition.size());
     for (auto *agt : formula->coalition) {
         // find local state for this agent
@@ -1081,7 +1081,7 @@ string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localSt
             if (ls->agent == agt) {
                 auto idxIt = agentIndex.find(agt);
                 size_t idx = (idxIt != agentIndex.end()) ? idxIt->second : 0;
-                ordered.emplace_back(idx, ls->id);
+                ordered.emplace_back(idx, ls->name);
                 break;
             }
         }
@@ -1089,7 +1089,7 @@ string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localSt
     sort(ordered.begin(), ordered.end(), [](const auto& a, const auto& b){ return a.first < b.first; });
     string hash;
     for (const auto &p : ordered) {
-        hash.append(to_string(p.second));
+        hash.append(p.second);
         hash.push_back(';');
     }
     return hash;

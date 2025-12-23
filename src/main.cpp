@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
         if (config.fixpoint) {
             verifResult = verification->fixpointVerify();
         } else if (config.verify_strategy) {
-            verifResult = verificationIt->verify().verificationResult;
+            verifResult = verification->verifyStrategy().verificationResult;
         } else if (config.probability) {
             // generator->createIterativeStrategy(localModels);
             generator->createProbabilityStrategy(localModels);

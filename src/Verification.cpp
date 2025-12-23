@@ -1674,10 +1674,10 @@ Result Verification::verifyStrategy() {
 
     while (!statesToProcess.empty()) {
         currentState = &statesToProcess.top();
-        cout << string(20, '=') << endl;
-        cout << "Stack size: " << statesToProcess.size() << endl;
-        cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
-        cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
+        // cout << string(20, '=') << endl;
+        // cout << "Stack size: " << statesToProcess.size() << endl;
+        // cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
+        // cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
 
         // reached a previously visited state by going forward
         if (currentState->depth > lastDepth) {
