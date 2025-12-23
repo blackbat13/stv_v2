@@ -44,6 +44,9 @@ src/reader/parser.c
 src/reader/parser.h
 src/reader/scanner.c
 src/reader/scanner.h
+src/strategyReader/strategyParser.c
+src/strategyReader/strategyParser.h
+src/strategyReader/strategyScanner.c
 
 # Graphviz related
 *.dot
