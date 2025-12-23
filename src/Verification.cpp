@@ -1479,7 +1479,7 @@ void Verification::historyDecisionsERR() {
 bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalState) {
     LocalState* agentState;
     for(auto agentStates : globalState->localStatesProjection) {
-        if(agentStates->agent->name == (*(this->generator->getFormula()->coalition.begin()))->name) {
+        if(agentStates->agent == (*(this->generator->getFormula()->coalition.begin()))) {
             agentState = agentStates;
             break;
         }

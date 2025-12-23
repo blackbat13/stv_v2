@@ -142,13 +142,4 @@ class StrategyCollection {
         };
 };
 
-/// @brief Structure for the iterative set strategy generation.
-class ProbabilityStrategyDecisions {
-    public:
-        ProbabilityStrategyDecisions() {} ;
-        ~ProbabilityStrategyDecisions() {};
-        map<Agent*, map<string, vector<StrategyCollection>>> allCoalitionTransitions; // agent -> localStateHash -> strategy
-        map<string, int> currentStrategyPermutation;
-};
-
 #endif // TYPES_DEPENDENCY

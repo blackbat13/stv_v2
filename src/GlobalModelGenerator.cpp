@@ -153,8 +153,6 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
             vector<LocalState*> localStates = state->localStatesProjection;
             for (const auto localTransition : globalTransition->localTransitions) {
                 localStates[agentIndex[localTransition->from->agent]]=localTransition->to;
-                // localStates.erase(localTransition->from);
-                // localStates.insert(localTransition->to);
             }
             cardinalityBefore = this->globalModel->globalStates.size();
             // either returns a new state OR an existing one
@@ -210,7 +208,8 @@ void GlobalModelGenerator::expandAllStates(bool additionalProbSplit) {
                 // Index by coalition identifier for coalition transitions, by global hash for opponents
                 if (isControlled) {
                     string coalitionId = getCoalitionIdentifier(&globalState->localStatesProjection);
-                    coalitionTransitions[coalitionId][transition->joinLocalTransitionNames()].insert(transition);
+                    string actionSig = getCoalitionActionSignature(transition);
+                    coalitionTransitions[coalitionId][actionSig].insert(transition);
                 } else {
                     opponentsTransitions[globalState->hash][transition->joinLocalTransitionNames()].insert(transition);
                 }
@@ -290,13 +289,11 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                     cout << "candidate " << localTransitionsInCandidate->from->name << " => " << localTransitionsInCandidate->to->name << endl;
                     auto coalitionAgents = this->getFormula()->coalition;
                     for(auto agent : coalitionAgents) { //11.2 (Checks if any agent from coalition didn't change the place)
-                        if(agent->name == localTransitionsInCandidate->agent->name) { // to change when there's more agents in a coalition
+                        if(agent == localTransitionsInCandidate->agent) {
                             string stateFrom = localTransitionsInCandidate->from->name;
                             string stateTo = localTransitionsInCandidate->to->name;
                             if(stateFrom != stateTo) {
                                 isOk = false;
-                                cout << "[!]state changed[!] ";
-                                cout << agent->name << ": " << stateFrom << " -> " << stateTo << endl;
                                 break;
                             }
                         }
@@ -418,15 +415,6 @@ GlobalState* GlobalModelGenerator::generateInitState() {
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
     initState->probability = 1.0;
-    // Agent* a;
-    // for (auto agt : globalModel->agents) {
-    //     a = agt;
-    //     set<GlobalState*>* states;
-    //     states->insert(initState);
-    //     initState->epistemicClassesAllAgents[a] = states;
-    // }
-    // cout << "----------" << endl;
-
     return initState;
 }
 
@@ -660,38 +648,6 @@ bool GlobalModelGenerator::getFormulaCorectness() {
 /// @param strat StrategyCollection to initialize the strategy.
 void GlobalModelGenerator::initStrategy(StrategyCollection* strat)
 {
-    this->strategyCollection = strat;
-}
-
-/// @brief Prepares the strategy generating structures for the probabilistic verification.
-/// @param localModels LocalModels to generate the coalition transition buckets from.
-void GlobalModelGenerator::createIterativeStrategy(LocalModels* localModels)
-{
-    ProbabilityStrategyDecisions newProbabilityStrategy;
-    Agent* agent = *this->formula->coalition.begin();
-    auto localModel = localModels->agents[agent->id]->localTransitions;
-    for (auto trans : localModel) {
-      Action action;
-      action.actionName = trans->localName;
-      action.hash = trans->from->name + ";";
-      action.states = new vector<string>(1, trans->from->name);
-
-      // add each strategy to a good bucket
-      cout << "Adding action " << action.actionName << " for state " << action.hash << endl;
-      newProbabilityStrategy.allCoalitionTransitions[agent][action.hash].push_back(StrategyCollection(action.hash, action));
-      cout << "Bucket size: " << newProbabilityStrategy.allCoalitionTransitions[agent][action.hash].size() << endl;
-      newProbabilityStrategy.currentStrategyPermutation[action.hash] = 0;
-      // cout << action.hash << " " << action.actionName << endl;
-      //strategyCollection->addAction(action);
-    }
-    this->probabilityStrategy = newProbabilityStrategy;
-    // create the first strategy
-    StrategyCollection* strat = new StrategyCollection();
-    // add the first actions from allCoalitionTransitions to strat
-    for (auto item : this->probabilityStrategy.currentStrategyPermutation) {
-        auto action = this->probabilityStrategy.allCoalitionTransitions[agent][item.first][0].getStrategy().begin()->second;
-        strat->addAction(action);
-    }
     this->strategyCollection = strat;
 }
 
@@ -1096,51 +1052,6 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
     return newMdp;
 }
 
-/// @brief Generates next set strategy from the memorized coalition transitions for the probabilistic verification.
-/// @return Returns true if the strategy was generated properly, false if it is the last permutation.
-bool GlobalModelGenerator::nextIterativeStrategy()
-{
-    cout << this->probabilityStrategy.currentStrategyPermutation.rbegin()->first << " " << this->probabilityStrategy.currentStrategyPermutation.rbegin()->second << " / " << endl;
-    // increase rightmost counter by 1, if overflow -> increase the previous counter by 1 recursively
-    this->probabilityStrategy.currentStrategyPermutation.rbegin()->second += 1;
-    auto it = this->probabilityStrategy.currentStrategyPermutation.rbegin();
-    while (it != this->probabilityStrategy.currentStrategyPermutation.rend()) {
-        cout << it->first << " " << it->second << " / " << endl;
-        auto actionBucket = this->probabilityStrategy.allCoalitionTransitions[*this->formula->coalition.begin()][it->first];
-        cout << static_cast<int>(actionBucket.size()) << endl;
-        for (auto item : actionBucket) {
-            auto itemStrat = item.getStrategy().begin();
-            cout << itemStrat->first << " " << itemStrat->second.actionName << endl;
-        }
-        if (it->second >= static_cast<int>(actionBucket.size())) {
-            it->second = 0;
-            it++;
-            if (it != this->probabilityStrategy.currentStrategyPermutation.rend()) {
-                it->second += 1;
-            } else {
-                break;
-            }
-        } else {                
-            break;
-        }
-    }
-    if (it == this->probabilityStrategy.currentStrategyPermutation.rend() && this->probabilityStrategy.currentStrategyPermutation.begin()->second == 0) {
-        cout << "THIS" << endl;
-        return false;
-    }
-    
-    // create a new strategy from the current permutation and construct a strategy from selected parts
-    StrategyCollection* strat = new StrategyCollection();
-    for (auto item : this->probabilityStrategy.currentStrategyPermutation) {
-        auto actionIt = this->probabilityStrategy.allCoalitionTransitions[*this->formula->coalition.begin()][item.first].begin();
-        advance(actionIt, item.second);
-        auto action = actionIt->getStrategy().begin()->second;
-        strat->addAction(action);
-    }
-    this->strategyCollection = strat;
-    return true;
-}
-
 /// @brief Gives next action's name from a given state.
 /// @param state GlobalState from which an action name would be retrieved if a set strategy is present.
 /// @return String containing the action name ending on a semicolon.
@@ -1161,11 +1072,46 @@ string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state
 /// @param localStates Vector of LocalStates to extract coalition IDs from.
 /// @return LocalState IDs for coalition members separated with semicolons, ending on a semicolon.
 string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
-    string hash = "";
-    for (const auto localState : *localStates) {
-        if (formula->coalition.find(localState->agent) != formula->coalition.end()) {
-            hash += to_string(localState->id) + ";";
+    // Build coalition ID in canonical coalition agent order (by agentIndex)
+    vector<pair<size_t,int>> ordered;
+    ordered.reserve(formula->coalition.size());
+    for (auto *agt : formula->coalition) {
+        // find local state for this agent
+        for (const auto ls : *localStates) {
+            if (ls->agent == agt) {
+                auto idxIt = agentIndex.find(agt);
+                size_t idx = (idxIt != agentIndex.end()) ? idxIt->second : 0;
+                ordered.emplace_back(idx, ls->id);
+                break;
+            }
         }
     }
+    sort(ordered.begin(), ordered.end(), [](const auto& a, const auto& b){ return a.first < b.first; });
+    string hash;
+    for (const auto &p : ordered) {
+        hash.append(to_string(p.second));
+        hash.push_back(';');
+    }
     return hash;
+}
+
+/// @brief Returns coalition-only action signature, ordered by agentIndex and using localName when available
+string GlobalModelGenerator::getCoalitionActionSignature(GlobalTransition* transition, char sep) {
+    vector<pair<size_t,string>> parts;
+    parts.reserve(transition->localTransitions.size());
+    for (const auto lt : transition->localTransitions) {
+        if (formula->coalition.find(lt->agent) != formula->coalition.end()) {
+            auto idxIt = agentIndex.find(lt->agent);
+            size_t idx = (idxIt != agentIndex.end()) ? idxIt->second : 0;
+            const string &nm = (lt->localName.size() > 0 ? lt->localName : lt->name);
+            parts.emplace_back(idx, nm);
+        }
+    }
+    sort(parts.begin(), parts.end(), [](const auto& a, const auto& b){ return a.first < b.first; });
+    string res;
+    for (const auto &p : parts) {
+        res.append(p.second);
+        res.push_back(sep);
+    }
+    return res;
 }

@@ -35,6 +35,9 @@ ModelParser::~ModelParser() {
 tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
+   if (f == nullptr) {
+      throw std::runtime_error("Failed to open model file: " + fileName);
+   }
    // zamapuj go jako wejście dla Fleksa
    yyrestart(f);
    // uruchom parsowanie

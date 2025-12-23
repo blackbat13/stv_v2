@@ -42,12 +42,12 @@ public:
     void markFormulaAsIncorrect();
     bool getFormulaCorectness();
     void initStrategy(StrategyCollection* strat);
-    void createIterativeStrategy(LocalModels *localModels);
     set<set<tuple<string, string>>> createProbabilityStrategy(LocalModels* localModels);
     set<set<tuple<string, string>>> getAllPossiblePaths(map<string, map<string, set<GlobalTransition *>>> &coalitionTransitions, map<string, map<string, set<GlobalTransition *>>> &opponentsTransitions, string initialHash);
     MDP generateNextMDP(bool makeOpponentGoMax = false);
-    bool nextIterativeStrategy();
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
+    // Returns coalition-only action signature, ordered by agentIndex and using localName when available
+    string getCoalitionActionSignature(GlobalTransition* transition, char sep=';');
     string getActionNameFromStateInStrategy(GlobalState* state);
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
@@ -86,7 +86,6 @@ protected:
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
-    ProbabilityStrategyDecisions probabilityStrategy;
     set<set<tuple<string, string>>> coalitionStrategy;
     int currentStratID = 0;
 

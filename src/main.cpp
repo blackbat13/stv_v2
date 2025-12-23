@@ -32,11 +32,16 @@ int main(int argc, char* argv[]) {
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
     tuple<LocalModels, Formula> desc;
     StrategyCollection* strat = new StrategyCollection();
-    if (!config.formula_from_parameter) {
-        desc = tp->parse(config.fname);
-    }
-    else {
-        desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
+    try {
+        if (!config.formula_from_parameter) {
+            desc = tp->parse(config.fname);
+        }
+        else {
+            desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
+        }
+    } catch (const std::exception& ex) {
+        cerr << "Model parse error: " << ex.what() << endl;
+        return 1;
     }
 
     if (config.verify_strategy) {
@@ -140,8 +145,8 @@ int main(int argc, char* argv[]) {
             // } while (generator->nextIterativeStrategy());
             // cout << "No more strategies to try." << endl;
         } else {
-            // verifResult = verification->verify();
-            verifResult = verificationIt->verify().verificationResult;
+            verifResult = verification->verify();
+            // verifResult = verificationIt->verify().verificationResult;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
         if (verifResult == true && config.probability) {
