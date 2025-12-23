@@ -1,4 +1,4 @@
-%name-prefix "strat"
+%define api.prefix {strat}
 %{
 #include <stdio.h>
 #include <string.h>
@@ -14,7 +14,7 @@ using namespace std;
 /* funkcje i zmienne z flexa */
 extern "C" int stratlex();
 void stratrestart( FILE* );
-void straterror( char* );
+void straterror( const char* );
 extern char* strattext;
 typedef struct strat_buffer_state * YY_BUFFER_STATE;
 extern YY_BUFFER_STATE strat_scan_string(const char * str);
@@ -55,7 +55,7 @@ void set_input_string_strat(const char* in) {
 }
 
 // Chwilowa funkcja błędu
-void straterror( char* s ) {
+void straterror( const char* s ) {
   fprintf(stderr,"niespodziewany token: '%s'\n", strattext);
   exit(1);
 }

@@ -14,7 +14,7 @@ using namespace std;
 /* funkcje i zmienne z flexa */
 extern "C" int yylex();
 void yyrestart( FILE* );
-void yyerror( char* );
+void yyerror( const char* );
 extern char* yytext;
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern YY_BUFFER_STATE yy_scan_string(const char * str);
@@ -81,12 +81,12 @@ formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaD
        | T_LT T_GT T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$8; formulaDescription.probability=$6; formulaDescription.probabilitySign=$5; }
        ;
 
-probability_equality: T_EQ { $$="=="; }
-                    | T_NE { $$="!="; }
-                    | T_GT { $$=">"; }
-                    | T_GE { $$=">="; }
-                    | T_LT { $$="<"; }
-                    | T_LE { $$="<="; }
+probability_equality: T_EQ { $$ = const_cast<char*>("=="); }
+                    | T_NE { $$ = const_cast<char*>("!="); }
+                    | T_GT { $$ = const_cast<char*>(">"); }
+                    | T_GE { $$ = const_cast<char*>(">="); }
+                    | T_LT { $$ = const_cast<char*>("<"); }
+                    | T_LE { $$ = const_cast<char*>("<="); }
                     ;
 
 cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
@@ -232,7 +232,7 @@ void set_input_string(const char* in) {
 }
 
 // Chwilowa funkcja błędu
-void yyerror( char* s ) {
+void yyerror( const char* s ) {
   fprintf(stderr,"niespodziewany token: '%s'\n",yytext);
   exit(1);
 }

@@ -263,7 +263,7 @@ int main(int argc, char* argv[]) {
         unsigned long mem2=getMemCap();
         printf("\n\nczas = %lu sec\n\n",czas);
         printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
-        printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
+        printf("\n\nNumber of global states: %lu\n", ((generator->getCurrentGlobalModel())->globalStates).size());
     }
     delete tp;
     delete sp;

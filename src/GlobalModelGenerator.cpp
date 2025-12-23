@@ -376,7 +376,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
             globalModelCandidates.push(newGlobalState);
             auto candidateDepthPtr = candidateStateDepths.find(newGlobalState);
             if(candidateDepthPtr == candidateStateDepths.end()) {
-                candidateStateDepths.insert({newGlobalState, unordered_set<int>({globalModelCandidates.size() - 1})});
+                candidateStateDepths.insert({newGlobalState, unordered_set<int>({static_cast<int>(globalModelCandidates.size() - 1)})});
             } else {
                 candidateDepthPtr->second.insert(globalModelCandidates.size() - 1);
             }
