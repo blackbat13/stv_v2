@@ -207,8 +207,10 @@ void GlobalModelGenerator::expandAllStates(bool additionalProbSplit) {
                         }
                     }
                 }
+                // Index by coalition identifier for coalition transitions, by global hash for opponents
                 if (isControlled) {
-                    coalitionTransitions[globalState->hash][transition->joinLocalTransitionNames()].insert(transition);
+                    string coalitionId = getCoalitionIdentifier(&globalState->localStatesProjection);
+                    coalitionTransitions[coalitionId][transition->joinLocalTransitionNames()].insert(transition);
                 } else {
                     opponentsTransitions[globalState->hash][transition->joinLocalTransitionNames()].insert(transition);
                 }
@@ -726,106 +728,198 @@ set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(
 }
 
 /// @brief Generates all possible paths through the transition graph.
-/// @param coalitionTransitions Map of coalition-controlled transitions grouped by state hash and action name. (state, actionName, actual transitions)
-/// @param opponentsTransitions Map of opponent-controlled transitions grouped by state hash and action name. (state, actionName, actual transitions)
+/// @param coalitionTransitions Map of coalition-controlled transitions grouped by state hash and action name. (state_hash, actionName, actual transitions)
+/// @param opponentsTransitions Map of opponent-controlled transitions grouped by state hash and action name. (state_hash, actionName, actual transitions)
 /// @param initialHash Starting state hash for path exploration.
-/// @return Set of all unique paths, where each path is a set of tuples (state_hash, action_name).
+/// @return Set of all unique paths, where each path is a set of tuples (coalition_id, action_name).
+/// 
+/// Performance optimizations:
+/// - Memoization: Caches DFS results to avoid recomputing paths from the same state
+/// - Pre-computed coalition IDs: Hash map lookup instead of linear search
+/// - Move semantics: Avoids unnecessary copying of large data structures
+/// - Capacity reservation: Pre-allocates vector memory to reduce reallocations
+/// - Early exit: Compatibility checking exits on first conflict found
+/// - Hash map for compatibility: Uses unordered_map instead of map for faster lookups
 set<set<tuple<string, string>>> GlobalModelGenerator::getAllPossiblePaths(map<string, map<string, set<GlobalTransition*>>>& coalitionTransitions, map<string, map<string, set<GlobalTransition*>>>& opponentsTransitions, string initialHash) {
-    //set of tuples
-    set<string> visitedStatesStack; // track current recursion stack for cycle detection
-
-    // DFS returns the set of paths (each path is a set of (state_hash, action_name) tuples) reachable from stateHash
-    function<set<set<tuple<string, string>>>(const string&, int)> dfs = [&](const string& stateHash, int depth) -> set<set<tuple<string, string>>> {
+    set<string> visitedStatesStack;  // Track visited states in current DFS path for cycle detection
+    
+    // Pre-compute coalition ID mappings to avoid repeated linear searches
+    unordered_map<string, string> stateHashToCoalitionId;
+    stateHashToCoalitionId.reserve(this->globalModel->globalStates.size());
+    for (auto *gs : this->globalModel->globalStates) {
+        stateHashToCoalitionId[gs->hash] = getCoalitionIdentifier(&gs->localStatesProjection);
+    }
+    
+    // Memoization cache: stateHash -> set of paths from that state
+    unordered_map<string, set<set<tuple<string, string>>>> memo;
+    
+    /** 
+     * Helper function to check if two paths can be merged without conflicts.
+     * Paths are compatible if they don't assign different actions to the same epistemic class.
+     * Optimized to exit early on first conflict found.
+     */
+    auto areCompatible = [](const set<tuple<string, string>>& path1, const set<tuple<string, string>>& path2) -> bool {
+        // Build choice map from smaller path for efficiency
+        const auto& smallerPath = (path1.size() <= path2.size()) ? path1 : path2;
+        const auto& largerPath = (path1.size() <= path2.size()) ? path2 : path1;
+        
+        unordered_map<string, string> choices;
+        choices.reserve(smallerPath.size());
+        for (const auto& t : smallerPath) {
+            choices[get<0>(t)] = get<1>(t);
+        }
+        
+        // Check for conflicts in larger path
+        for (const auto& t : largerPath) {
+            auto it = choices.find(get<0>(t));
+            if (it != choices.end() && it->second != get<1>(t)) {
+                return false;  // Conflict found
+            }
+        }
+        return true;  // No conflicts
+    };
+    
+    /**
+     * DFS recursively explores all paths through the model, generating all valid coalition strategies.
+     * Each strategy is a set of (epistemic_class_id, action_name) tuples, ensuring exactly one action
+     * per epistemic class (enforced through compatibility checking during Cartesian products).
+     * Uses memoization to cache results and avoid redundant computation.
+     */
+    function<set<set<tuple<string, string>>>(const string&, int)> dfs = 
+        [&](const string& stateHash, int depth) -> set<set<tuple<string, string>>> {
+        
+        // Cycle detection: if we've already visited this state in current path, return empty strategy
         if (visitedStatesStack.count(stateHash)) {
-            // cycle encountered -> treat as terminal for this branch (return one empty path so callers can add their transition if needed)
             return set<set<tuple<string, string>>>{ set<tuple<string, string>>() };
+        }
+        
+        // Check memoization cache
+        auto memoIt = memo.find(stateHash);
+        if (memoIt != memo.end()) {
+            return memoIt->second;
         }
 
         visitedStatesStack.insert(stateHash);
         bool hasOutgoingTransitions = false;
         set<set<tuple<string, string>>> resultPaths;
 
-        // Coalition-controlled transitions: for each action name, union results of all transitions for that action,
-        // then add the (state_hash, action_name) tuple to each path returned for that action.
-        auto coalitionIterator = coalitionTransitions.find(stateHash);
+        // Get the epistemic class identifier for this state (pre-computed for efficiency)
+        const string& coalitionId = stateHashToCoalitionId[stateHash];
+
+        // Each action choice creates ALTERNATIVE strategies (union across actions, product across probabilistic branches)
+        auto coalitionIterator = coalitionTransitions.find(coalitionId);
         if (coalitionIterator != coalitionTransitions.end()) {
+            // Try each available action - each creates separate strategies
             for (auto& actionPair : coalitionIterator->second) {
                 const string& actionName = actionPair.first;
-                // (action sets with no duplicates, multiple strategies layer (actions with no duplicates, single strategy layer (fromHash, actionName)))
-                /*
-                set1{
-                    set2{(0;0;, A), (1;1;, B), (1;2;, D)},  // Strategy 1
-                    set2{(0;0;, A), (1;1;, B), (1;2;, E)},  // Strategy 2
-                    set2{(0;0;, A), (1;1;, C), (1;2;, D)},  // Strategy 3
-                    set2{(0;0;, A), (1;1;, C), (1;2;, E)}   // Strategy 4
-                }
-                */
-                vector<set<set<tuple<string, string>>>> actionUnionResults; // union of results for all transitions with this action
+                hasOutgoingTransitions = true;
+                
+                // Collect paths from all probabilistic branches of this action
+                // (e.g., if action has probability distribution over outcomes)
+                vector<set<set<tuple<string, string>>>> branchResults;
+                branchResults.reserve(actionPair.second.size());  // Pre-allocate capacity
                 for (auto* transition : actionPair.second) {
-                    // Always consider every probabilistic branch for the same action.
-                    hasOutgoingTransitions = true;
                     auto subPaths = dfs(transition->to->hash, depth+1);
-                    actionUnionResults.push_back(set<set<tuple<string, string>>>());
-                    for (auto subPath : subPaths) {
-                        subPath.insert(make_tuple(transition->from->hash, actionName));
-                        actionUnionResults[actionUnionResults.size() - 1].insert(subPath);
+                    // Add current action to all sub-paths from this branch
+                    set<set<tuple<string, string>>> pathsWithAction;
+                    auto actionTuple = make_tuple(coalitionId, actionName);  // Create once
+                    for (auto path : subPaths) {
+                        path.insert(actionTuple);
+                        pathsWithAction.insert(move(path));  // Use move semantics
                     }
+                    branchResults.push_back(move(pathsWithAction));
                 }
-                // add the (state_hash, action_name) tuple to each path in the union and merge into resultPaths
-                // compute cartesian product of sets in actionUnionResults:
-                // start with one empty accumulation set
+                
+                /**
+                 * Compute Cartesian product across probabilistic branches.
+                 * The coalition must make the same action choice in all branches that are part of
+                 * the same strategy, so we only combine paths that are compatible (no conflicting choices).
+                 * This ensures each final strategy has exactly one action per epistemic class.
+                 */
                 vector<set<tuple<string, string>>> cartesianProduct;
-                cartesianProduct.emplace_back();
-
-                for (const auto &choiceSet : actionUnionResults) {
+                cartesianProduct.emplace_back();  // Start with empty path
+                
+                for (const auto& branchPaths : branchResults) {
                     vector<set<tuple<string, string>>> nextProduct;
-                    for (const auto &accumulator : cartesianProduct) {
-                        for (const auto &selectedPath : choiceSet) {
-                            set<tuple<string, string>> mergedPaths = accumulator;
-                            mergedPaths.insert(selectedPath.begin(), selectedPath.end());
-                            nextProduct.push_back(std::move(mergedPaths));
+                    nextProduct.reserve(cartesianProduct.size() * branchPaths.size());  // Pre-allocate
+                    for (const auto& accumulator : cartesianProduct) {
+                        for (const auto& selectedPath : branchPaths) {
+                            // Only merge if paths don't have conflicting action choices
+                            if (areCompatible(accumulator, selectedPath)) {
+                                set<tuple<string, string>> merged = accumulator;
+                                merged.insert(selectedPath.begin(), selectedPath.end());
+                                nextProduct.push_back(move(merged));  // Use move
+                            }
+                            // If incompatible, this combination is skipped (not a valid strategy)
                         }
                     }
-                    cartesianProduct.swap(nextProduct);
+                    cartesianProduct = move(nextProduct);  // Use move instead of swap
                 }
-
-                // insert all combined results into resultPaths
-                for (const auto &combinedPath : cartesianProduct) {
-                    resultPaths.insert(combinedPath);
-                }
+                
+                // Add all valid combinations from this action to result set
+                resultPaths.insert(cartesianProduct.begin(), cartesianProduct.end());
             }
         }
 
-        // Opponent-controlled transitions: explore outcomes and union results (do not add action names)
+        // Opponent actions are not part of coalition strategy, but we must account for all possible outcomes
         auto opponentIterator = opponentsTransitions.find(stateHash);
         if (opponentIterator != opponentsTransitions.end()) {
             for (auto& actionPair : opponentIterator->second) {
+                hasOutgoingTransitions = true;
+                
+                // Collect paths from all probabilistic branches (opponent actions not added to strategy)
+                vector<set<set<tuple<string, string>>>> branchResults;
+                branchResults.reserve(actionPair.second.size());  // Pre-allocate
                 for (auto* transition : actionPair.second) {
-                    hasOutgoingTransitions = true;
-                    auto subPaths = dfs(transition->to->hash, depth+1);
-                    for (auto& subPath : subPaths) {
-                        if (subPath.size() > 0) {
-                            resultPaths.insert(subPath);
+                    branchResults.push_back(dfs(transition->to->hash, depth+1));
+                }
+                
+                /**
+                 * Compute Cartesian product for opponent branches (similar to coalition, but no action added).
+                 * We still need compatibility checking because different branches might involve
+                 * different downstream coalition choices.
+                 */
+                vector<set<tuple<string, string>>> cartesianProduct;
+                cartesianProduct.emplace_back();
+                
+                for (const auto& branchPaths : branchResults) {
+                    vector<set<tuple<string, string>>> nextProduct;
+                    nextProduct.reserve(cartesianProduct.size() * branchPaths.size());  // Pre-allocate
+                    for (const auto& accumulator : cartesianProduct) {
+                        for (const auto& selectedPath : branchPaths) {
+                            // Only merge if paths don't have conflicting action choices
+                            if (areCompatible(accumulator, selectedPath)) {
+                                set<tuple<string, string>> merged = accumulator;
+                                merged.insert(selectedPath.begin(), selectedPath.end());
+                                nextProduct.push_back(move(merged));  // Use move
+                            }
+                            // If incompatible, this combination is skipped (not a valid strategy)
                         }
                     }
+                    cartesianProduct = move(nextProduct);  // Use move instead of swap
                 }
+                
+                resultPaths.insert(cartesianProduct.begin(), cartesianProduct.end());
             }
         }
 
-        // If no outgoing transitions, this is a terminal state: return a single empty path (callers may add actions)
+        // Terminal state (goal or deadlock): return empty path
         if (!hasOutgoingTransitions) {
             resultPaths.insert(set<tuple<string, string>>());
         }
 
         visitedStatesStack.erase(stateHash);
+        
+        // Store in memoization cache before returning
+        memo[stateHash] = resultPaths;
         return resultPaths;
     };
 
-    // Get all paths from initial state
-    set<set<tuple<string, string>>> allPaths = dfs(initialHash, 0);
+    // Generate all strategies starting from initial state
+    auto results = dfs(initialHash, 0);
 
     currentStratID = 0;
-    return allPaths;
+    return results;
 }
 
 MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
@@ -836,13 +930,15 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
         return newMdp;
     }
 
-    // map of state hash to action name that appear in coalitionStrategy (allowed coalition actions)
+    // map of coalition identifier to action name that appear in coalitionStrategy (allowed coalition actions)
     map<string, string> allowedCoalitionActions;
     auto strategyIt = coalitionStrategy.begin(); // first strategy
     advance(strategyIt, currentStratID);
     for (const auto &tuple : *strategyIt) {
-        allowedCoalitionActions[get<0>(tuple)] = get<1>(tuple); // map state hash to action name
+        // cout << "(" << get<0>(tuple) << " - " << get<1>(tuple) << ") ";
+        allowedCoalitionActions[get<0>(tuple)] = get<1>(tuple); // map coalition_id to action name
     }
+    // cout << endl;
 
     // Start with only the initial state in the id map and expand states on the fly
     map<string, int> stateIdMap;
@@ -873,10 +969,19 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
         }
         string baseHash = stateHash;
 
-        auto coalitionIt = coalitionTransitions.find(baseHash);
+        // compute coalition identifier for this baseHash to look up coalition transitions
+        string currentCoalitionId = "";
+        for (auto *gs : this->globalModel->globalStates) {
+            if (gs->hash == baseHash) {
+                currentCoalitionId = getCoalitionIdentifier(&gs->localStatesProjection);
+                break;
+            }
+        }
+
+        auto coalitionIt = coalitionTransitions.find(currentCoalitionId);
         auto opponentsIt  = opponentsTransitions.find(baseHash);
 
-        // gather action names available in this state (based on baseHash)
+        // gather action names available in this state
         set<string> actionNames;
         if (coalitionIt != coalitionTransitions.end()) {
             for (const auto &p : coalitionIt->second) actionNames.insert(p.first);
@@ -895,16 +1000,16 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
         int fromStateId = fromIt->second;
 
         for (const auto &actionName : actionNames) {
-            // if this is a coalition action, require it to be present in some strategy path with proper state mapping
+            // Coalition actions are naturally filtered by coalition identifier lookup
             bool isCoalitionAction = (coalitionIt != coalitionTransitions.end() && coalitionIt->second.count(actionName));
             if (isCoalitionAction) {
-                auto allowedIt = allowedCoalitionActions.find(baseHash);
+                auto allowedIt = allowedCoalitionActions.find(currentCoalitionId);
                 if (allowedIt == allowedCoalitionActions.end() || allowedIt->second != actionName) {
                     continue;
                 }
             }
 
-            // collect all transitions (coalition + opponents) for this action at this state (baseHash used)
+            // collect all transitions (coalition + opponents) for this action at this state
             vector<GlobalTransition*> transitionList;
             if (coalitionIt != coalitionTransitions.end()) {
                 auto coalitionActionIt = coalitionIt->second.find(actionName);
@@ -1060,14 +1165,14 @@ string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state
     return "";
 }
 
-/// @brief Returns a concatenated name of all given LocalStates.
-/// @param localStates Vector of LocalStates to concatenate into a single string.
-/// @return LocalState names separated with semicolons, ending on a semicolon.
+/// @brief Returns a concatenated epistemic class ID of all coalition members in given LocalStates.
+/// @param localStates Vector of LocalStates to extract coalition IDs from.
+/// @return LocalState IDs for coalition members separated with semicolons, ending on a semicolon.
 string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
     string hash = "";
     for (const auto localState : *localStates) {
         if (formula->coalition.find(localState->agent) != formula->coalition.end()) {
-            hash += localState->name + ";";
+            hash += to_string(localState->id) + ";";
         }
     }
     return hash;

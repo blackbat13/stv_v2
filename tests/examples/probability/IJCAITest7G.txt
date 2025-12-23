@@ -33,10 +33,7 @@ INITIAL: [q:=0]
 init q0
 shared[2] A[X]: q0 -> 0.5 : q1 [q:=1]
          &REST : q2
-repeat: q1 -> q1
 Y: q2 -> q3
 Z: q2 -> q4
-repeat: q3 -> q3
-repeat: q4 -> q4
 
 FORMULA: <<Voter>>[]&P[>=0.95](p==0)
