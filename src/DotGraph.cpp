@@ -75,7 +75,7 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
         this->addEdge(
             to_string(t->from->id), 
             to_string(t->to->id), 
-            t->name + (t->isShared ? "\", color=\"blue" : "")
+            t->name + (t->probability != 1 ? ", (p=" + to_string(t->probability) + ")" : "") + (t->isShared ? "\", color=\"blue" : "")
         );
     }
 }
