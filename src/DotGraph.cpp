@@ -72,10 +72,12 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
         }
     }
     for (const auto& t : ag->localTransitions) {
+        string probStr = to_string(t->probability);
+        probStr.erase(probStr.find_last_not_of('0') + 1, std::string::npos);
         this->addEdge(
             to_string(t->from->id), 
             to_string(t->to->id), 
-            t->name + (t->probability != 1 ? ", (p=" + to_string(t->probability) + ")" : "") + (t->isShared ? "\", color=\"blue" : "")
+            t->name + (t->probability != 1 ? ", (p=" + probStr + ")" : "") + (t->isShared ? "\", color=\"blue" : "")
         );
     }
 }
