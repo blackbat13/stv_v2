@@ -43,7 +43,7 @@ public:
     bool getFormulaCorectness();
     void initStrategy(StrategyCollection* strat);
     set<set<tuple<string, string>>> createProbabilityStrategy(LocalModels* localModels);
-    set<set<tuple<string, string>>> getAllPossiblePaths(map<string, map<string, set<GlobalTransition *>>> &coalitionTransitions, map<string, map<string, set<GlobalTransition *>>> &opponentsTransitions, string initialHash);
+    set<tuple<string, string>>* getNextPath();  // Returns next strategy iteratively (one per call)
     MDP generateNextMDP(bool makeOpponentGoMax = false);
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
     // Returns coalition-only action signature, ordered by agentIndex and using localName when available
@@ -86,8 +86,13 @@ protected:
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
-    set<set<tuple<string, string>>> coalitionStrategy;
-    int currentStratID = 0;
+    set<tuple<string, string>> currentStrategy;  // Current strategy being built
+    
+    // For iterative strategy generation: track which action choice (0, 1, 2, ...) at each epistemic class
+    map<string, size_t> choiceIndices;  // coalitionId -> which action choice to try (0-indexed)
+    map<string, size_t> actionCounts;   // coalitionId -> total number of actions available
+    bool strategyGenerationInit = false;
+    bool strategiesExhausted = false;
 
     map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // state, actionName, actual transitions
     map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // state, actionName, actual transitions
