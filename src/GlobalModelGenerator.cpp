@@ -695,10 +695,14 @@ set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(
 set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     // Initialize choice tracking on first call
     if (!strategyGenerationInit) {
+        cout << "[DEBUG] getNextPath: First call, initializing" << endl;
         strategyGenerationInit = true;
         choiceIndices.clear();
         actionCounts.clear();
-        cout << "[DEBUG] getNextPath: First call, initializing" << endl;
+        stateHashMapCache.clear();
+        for (auto *gs : this->globalModel->globalStates) {
+            stateHashMapCache[gs->hash] = gs;
+        }
     }
     
     if (strategiesExhausted) {
@@ -720,6 +724,7 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
         
         // Get coalition ID for this state
         string coalitionId;
+        
         for (auto *gs : this->globalModel->globalStates) {
             if (gs->hash == stateHash) {
                 coalitionId = getCoalitionIdentifier(&gs->localStatesProjection);

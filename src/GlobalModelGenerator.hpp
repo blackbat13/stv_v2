@@ -94,6 +94,9 @@ protected:
     bool strategyGenerationInit = false;
     bool strategiesExhausted = false;
 
+    // Cache for efficient state hash lookups
+    unordered_map<string, GlobalState*> stateHashMapCache;
+
     map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // state, actionName, actual transitions
     map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // state, actionName, actual transitions
     bool checkLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);

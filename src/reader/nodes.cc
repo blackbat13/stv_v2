@@ -118,7 +118,7 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
    if (_transition->probability->eval() > 999.0) {
       _transition->probability = new ProbConst(probabilityCache);
    } else {
-      probabilityCache -= transitionCache.probability->eval();
+      probabilityCache -= _transition->probability->eval();
    }
    
    transitions->insert(_transition);
