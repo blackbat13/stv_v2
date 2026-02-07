@@ -713,8 +713,16 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     // Build one complete strategy using current choice indices
     currentStrategy.clear();
     unordered_set<string> visitingStates;
+    unordered_set<string> visitedAndDecided;  // States where we've already made a decision
     
     function<bool(const string&)> buildStrategy = [&](const string& stateHash) -> bool {
+        cout << "Entered " << stateHash << endl;
+        
+        // If we've already visited and made a decision at this state, we're done
+        if (visitedAndDecided.count(stateHash)) {
+            return true;
+        }
+        
         // Cycle detection
         if (visitingStates.count(stateHash)) {
             return true;  // Cycle is OK, complete this path
@@ -772,6 +780,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
                     currentStrategy.insert(make_tuple(coalitionId, actionName));
                     cout << "[DEBUG] Choice for " << coalitionId << ": action " << actionName << " (choice " << choiceIdx << ")" << endl;
                 }
+                
+                // Mark this state as visited and decided
+                visitedAndDecided.insert(stateHash);
                 
                 // Explore ALL branches of this action
                 auto& transitions = coalitionTransitions[coalitionId][actionName];
@@ -957,17 +968,22 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
 
             // collect all transitions (coalition + opponents) for this action at this state
             vector<GlobalTransition*> transitionList;
+            bool hasCoalitionAction = false;
             if (coalitionIt != coalitionTransitions.end()) {
                 auto coalitionActionIt = coalitionIt->second.find(actionName);
                 if (coalitionActionIt != coalitionIt->second.end()) {
+                    hasCoalitionAction = true;
                     for (auto *t : coalitionActionIt->second) {
-                        if (t && t->to) {
+                        // Only include transitions that actually start from this state
+                        // (coalitionTransitions is indexed only by coalitionId/action, not by source state)
+                        if (t && t->to && t->from->hash == baseHash) {
                             transitionList.push_back(t);
                         }
                     }
                 }
             }
-            if (opponentsIt != opponentsTransitions.end()) {
+            // Only add opponent transitions if there are NO coalition transitions for this action
+            if (!hasCoalitionAction && opponentsIt != opponentsTransitions.end()) {
                 auto opponentActionIt = opponentsIt->second.find(actionName);
                 if (opponentActionIt != opponentsIt->second.end()) {
                     for (auto *t : opponentActionIt->second) {
@@ -1000,7 +1016,14 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
                     stateIdMap[toHash] = nextNewStateId++;
                     q.push(toHash);
                 }
-                int toStateId = stateIdMap[toHash];
+                int toStateId;
+                if (stateIdMap.find(toHash) != stateIdMap.end()) {
+                    toStateId = stateIdMap[toHash];
+                } else {
+                    // State will be added as terminal, so create ID now
+                    stateIdMap[toHash] = nextNewStateId++;
+                    toStateId = stateIdMap[toHash];
+                }
                 double prob = transition->getProbability();
 
                 // skip self-loops with probability 0 or 1 that won't change the state to TRUE
@@ -1031,6 +1054,7 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
                     reward = (!stateWasT) ? ((makeOpponentGoMax || opponentsTransitions.size() == 0) ? 1.0 : -1.0) : 0.0;
                 }
 
+                // cout << "[DEBUG] MDP Transition: from=" << fromStateId << " action=" << actionId << " to=" << toStateId << " prob=" << prob << " reward=" << reward << endl;
                 add_transition(newMdp, fromStateId, actionId, toStateId, prob, reward);
                 transitionsAdded = true;
             }
