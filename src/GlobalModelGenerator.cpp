@@ -684,8 +684,9 @@ set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(
     choiceIndices.clear();
     actionCounts.clear();
     
-    cout << "[DEBUG] createProbabilityStrategy: Initialized for incremental generation" << endl;
-    
+    #if DEBUG_ON
+        cout << "[DEBUG] createProbabilityStrategy: Initialized for incremental generation" << endl;
+    #endif
     return set<set<tuple<string, string>>>();  // Empty, will generate incrementally
 }
 
@@ -695,7 +696,9 @@ set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(
 set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     // Initialize choice tracking on first call
     if (!strategyGenerationInit) {
-        cout << "[DEBUG] getNextPath: First call, initializing" << endl;
+        #if DEBUG_ON
+            cout << "[DEBUG] getNextPath: First call, initializing" << endl;
+        #endif
         strategyGenerationInit = true;
         choiceIndices.clear();
         actionCounts.clear();
@@ -706,7 +709,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     }
     
     if (strategiesExhausted) {
-        cout << "[DEBUG] getNextPath: All strategies exhausted" << endl;
+        #if DEBUG_ON
+            cout << "[DEBUG] getNextPath: All strategies exhausted" << endl;
+        #endif
         return nullptr;
     }
 
@@ -716,7 +721,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     unordered_set<string> visitedAndDecided;  // States where we've already made a decision
     
     function<bool(const string&)> buildStrategy = [&](const string& stateHash) -> bool {
-        cout << "Entered " << stateHash << endl;
+        #if DEBUG_ON
+            cout << "Entered " << stateHash << endl;
+        #endif
         
         // If we've already visited and made a decision at this state, we're done
         if (visitedAndDecided.count(stateHash)) {
@@ -778,7 +785,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
                 
                 if (!alreadyInStrategy) {
                     currentStrategy.insert(make_tuple(coalitionId, actionName));
-                    cout << "[DEBUG] Choice for " << coalitionId << ": action " << actionName << " (choice " << choiceIdx << ")" << endl;
+                    #if DEBUG_ON
+                        cout << "[DEBUG] Choice for " << coalitionId << ": action " << actionName << " (choice " << choiceIdx << ")" << endl;
+                    #endif
                 }
                 
                 // Mark this state as visited and decided
@@ -797,7 +806,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
                 return true;
             } else {
                 // No valid choice at this epistemic class
-                cout << "[DEBUG] No valid choice for " << coalitionId << " at index " << choiceIdx << endl;
+                #if DEBUG_ON
+                    cout << "[DEBUG] No valid choice for " << coalitionId << " at index " << choiceIdx << endl;
+                #endif
                 visitingStates.erase(stateHash);
                 return false;
             }
@@ -826,19 +837,22 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     bool succeeded = buildStrategy(this->globalModel->initState->hash);
     
     if (succeeded && !currentStrategy.empty()) {
-        cout << "[DEBUG] getNextPath: Generated strategy with " << currentStrategy.size() << " decisions" << endl;
+        #if DEBUG_ON
+            cout << "[DEBUG] getNextPath: Generated strategy with " << currentStrategy.size() << " decisions" << endl;
+
+            // Debug: print action counts
+            cout << "[DEBUG] Action counts: ";
         
-        // Debug: print action counts
-        cout << "[DEBUG] Action counts: ";
-        for (const auto& p : actionCounts) {
-            cout << p.first << "=" << p.second << " ";
-        }
-        cout << endl;
-        cout << "[DEBUG] Choice indices before increment: ";
-        for (const auto& p : choiceIndices) {
-            cout << p.first << ":" << p.second << " ";
-        }
-        cout << endl;
+            for (const auto& p : actionCounts) {
+                cout << p.first << "=" << p.second << " ";
+            }
+            cout << endl;
+            cout << "[DEBUG] Choice indices before increment: ";
+            for (const auto& p : choiceIndices) {
+                cout << p.first << ":" << p.second << " ";
+            }
+            cout << endl;
+        #endif
         
         // Increment choice indices for next strategy (like mixed-radix counting)
         // Find rightmost epistemic class and increment its choice
@@ -848,7 +862,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
             // Check if this is still valid
             if (it->second < actionCounts[it->first]) {
                 incremented = true;
-                cout << "[DEBUG] Incremented choice for " << it->first << " to " << it->second << endl;
+                #if DEBUG_ON
+                    cout << "[DEBUG] Incremented choice for " << it->first << " to " << it->second << endl;
+                #endif
                 break;
             } else {
                 // Reset this choice and carry over
@@ -858,7 +874,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
         
         if (!incremented) {
             // No more combinations - exhausted
-            cout << "[DEBUG] All choice combinations exhausted" << endl;
+            #if DEBUG_ON
+                cout << "[DEBUG] All choice combinations exhausted" << endl;
+            #endif
             strategiesExhausted = true;
         }
         
@@ -868,7 +886,9 @@ set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
     }
     
     // First call didn't generate strategy
-    cout << "[DEBUG] Failed to generate strategy" << endl;
+    #if DEBUG_ON
+        cout << "[DEBUG] Failed to generate strategy" << endl;
+    #endif
     strategiesExhausted = true;
     return nullptr;
 }
@@ -880,14 +900,18 @@ MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
     // Get next strategy iteratively
     auto strategyIt = getNextPath();
     if (strategyIt == nullptr) {
-        cout << "[DEBUG] generateNextMDP: All strategies exhausted" << endl;
+        #if DEBUG_ON
+            cout << "[DEBUG] generateNextMDP: All strategies exhausted" << endl;
+        #endif
         return newMdp;
     }
 
-    cout << "Strategy:" << endl;
-    for (auto item : *strategyIt) {
-        cout << get<0>(item) << "; " << get<1>(item) << ";" << endl;
-    }
+    #if DEBUG_ON
+        cout << "Strategy:" << endl;
+        for (auto item : *strategyIt) {
+            cout << get<0>(item) << "; " << get<1>(item) << ";" << endl;
+        }
+    #endif
 
     // map of coalition identifier to action name that appear in strategy (allowed coalition actions)
     map<string, string> allowedCoalitionActions;
