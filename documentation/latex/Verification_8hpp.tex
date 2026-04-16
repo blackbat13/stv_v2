@@ -2,7 +2,9 @@
 \label{Verification_8hpp}\index{Verification.hpp@{Verification.hpp}}
 {\ttfamily \#include $<$stack$>$}\newline
 {\ttfamily \#include \char`\"{}Types.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Types\+Dependency.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Global\+Model\+Generator.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$bitset$>$}\newline
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -12,15 +14,15 @@ class \mbox{\hyperlink{classHistoryDbg}{History\+Dbg}}
 \begin{DoxyCompactList}\small\item\em Stores history and allows displaying it to the console. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classVerification}{Verification}}
 \begin{DoxyCompactList}\small\item\em A class that verifies if the model fulfills the formula. Also can do some operations on decision history. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}\label{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}} 
+\#define {\bfseries STRATEGY\+\_\+\+BITS}~64
+\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} \{ \mbox{\hyperlink{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e}{DECISION}}
-, \mbox{\hyperlink{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492}{STATE\+\_\+\+STATUS}}
-, \mbox{\hyperlink{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}{CONTEXT}}
-, \mbox{\hyperlink{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae}{MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID}}
- \}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} entry type. \end{DoxyCompactList}\item 
 enum \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}{Traversal\+Mode}} \{ \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7}{NORMAL}}
 , \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf}{REVERT}}
 , \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380}{RESTORE}}
@@ -34,34 +36,6 @@ string \mbox{\hyperlink{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}{ver
 
 
 \doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4}\label{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4}} 
-\index{Verification.hpp@{Verification.hpp}!HistoryEntryType@{HistoryEntryType}}
-\index{HistoryEntryType@{HistoryEntryType}!Verification.hpp@{Verification.hpp}}
-\doxysubsubsection{\texorpdfstring{HistoryEntryType}{HistoryEntryType}}
-{\footnotesize\ttfamily enum \mbox{\hyperlink{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}}}
-
-
-
-\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} entry type. 
-
-\begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{DECISION@{DECISION}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!DECISION@{DECISION}}}\mbox{\Hypertarget{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e}\label{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e}} 
-DECISION&Made the decision to go to a state using a transition. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_STATUS@{STATE\_STATUS}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!STATE\_STATUS@{STATE\_STATUS}}}\mbox{\Hypertarget{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492}\label{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492}} 
-STATE\+\_\+\+STATUS&Changed verification status. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{CONTEXT@{CONTEXT}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!CONTEXT@{CONTEXT}}}\mbox{\Hypertarget{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}\label{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}} 
-CONTEXT&Recursion has gone deeper. \\
-\hline
-
-\raisebox{\heightof{T}}[0pt][0pt]{\index{MARK\_DECISION\_AS\_INVALID@{MARK\_DECISION\_AS\_INVALID}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!MARK\_DECISION\_AS\_INVALID@{MARK\_DECISION\_AS\_INVALID}}}\mbox{\Hypertarget{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae}\label{Verification_8hpp_a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae}} 
-MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID&Marking a transition as invalid. \\
-\hline
-
-\end{DoxyEnumFields}
 \mbox{\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}} 
 \index{Verification.hpp@{Verification.hpp}!TraversalMode@{TraversalMode}}
 \index{TraversalMode@{TraversalMode}!Verification.hpp@{Verification.hpp}}

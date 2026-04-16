@@ -107,8 +107,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a2a89f7b51de54422c1873d24d16eb17a"><td class="memItemLeft" align="right" valign="top">tuple&lt; <a class="el" href="structLocalModels.html">LocalModels</a>, <a class="el" href="structFormula.html">Formula</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelParser.html#a2a89f7b51de54422c1873d24d16eb17a">parse</a> (string fileName)</td></tr>
 <tr class="memdesc:a2a89f7b51de54422c1873d24d16eb17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a file with given name into a usable model.  <a href="classModelParser.html#a2a89f7b51de54422c1873d24d16eb17a">More...</a><br /></td></tr>
 <tr class="separator:a2a89f7b51de54422c1873d24d16eb17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bc0d94dd424564ba9d6b4e40ea896d5"><td class="memItemLeft" align="right" valign="top"><a id="a4bc0d94dd424564ba9d6b4e40ea896d5"></a>
-tuple&lt; <a class="el" href="structLocalModels.html">LocalModels</a>, <a class="el" href="structFormula.html">Formula</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>parseAndOverwriteFormula</b> (string fileName, string s)</td></tr>
+<tr class="memitem:a4bc0d94dd424564ba9d6b4e40ea896d5"><td class="memItemLeft" align="right" valign="top">tuple&lt; <a class="el" href="structLocalModels.html">LocalModels</a>, <a class="el" href="structFormula.html">Formula</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classModelParser.html#a4bc0d94dd424564ba9d6b4e40ea896d5">parseAndOverwriteFormula</a> (string fileName, string s)</td></tr>
+<tr class="memdesc:a4bc0d94dd424564ba9d6b4e40ea896d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a text file in the given file path and internally replaces the verification formula with the given one.  <a href="classModelParser.html#a4bc0d94dd424564ba9d6b4e40ea896d5">More...</a><br /></td></tr>
 <tr class="separator:a4bc0d94dd424564ba9d6b4e40ea896d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -138,6 +138,44 @@ tuple&lt; <a class="el" href="structLocalModels.html">LocalModels</a>, <a class=
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to a model created from a given file. </dd></dl>
+
+</div>
+</div>
+<a id="a4bc0d94dd424564ba9d6b4e40ea896d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc0d94dd424564ba9d6b4e40ea896d5">&#9670;&nbsp;</a></span>parseAndOverwriteFormula()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple&lt; <a class="el" href="structLocalModels.html">LocalModels</a>, <a class="el" href="structFormula.html">Formula</a> &gt; ModelParser::parseAndOverwriteFormula </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parses a text file in the given file path and internally replaces the verification formula with the given one. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fileName</td><td>Path to the text file. </td></tr>
+    <tr><td class="paramname">s</td><td>New formula. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a new model generation structure with a replaced formula. </dd></dl>
 
 </div>
 </div>

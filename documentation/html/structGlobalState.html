@@ -119,13 +119,21 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="stru
 <tr class="memdesc:afd4eaea4861b96810c9e1de175a0c35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary. <br /></td></tr>
 <tr class="separator:afd4eaea4861b96810c9e1de175a0c35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7fb8df92923463538071039a0066a6d"><td class="memItemLeft" align="right" valign="top"><a id="ae7fb8df92923463538071039a0066a6d"></a>
-GlobalStateVerificationStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ae7fb8df92923463538071039a0066a6d">verificationStatus</a></td></tr>
+GlobalStateVerificationStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ae7fb8df92923463538071039a0066a6d">verificationStatus</a> = GLOBAL_STATE_VERIFICATION_STATUS::UNVERIFIED</td></tr>
 <tr class="memdesc:ae7fb8df92923463538071039a0066a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current verifivation status of this state. <br /></td></tr>
 <tr class="separator:ae7fb8df92923463538071039a0066a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3961cf4168dc461fed40a80b9cfed059"><td class="memItemLeft" align="right" valign="top"><a id="a3961cf4168dc461fed40a80b9cfed059"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a3961cf4168dc461fed40a80b9cfed059">probability</a> = config.probability ? 0.0 : 1.0</td></tr>
+<tr class="memdesc:a3961cf4168dc461fed40a80b9cfed059"><td class="mdescLeft">&#160;</td><td class="mdescRight">Collective probability of the state. <br /></td></tr>
+<tr class="separator:a3961cf4168dc461fed40a80b9cfed059"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab82eec24f8aae99faf18d6434487d0d7"><td class="memItemLeft" align="right" valign="top"><a id="ab82eec24f8aae99faf18d6434487d0d7"></a>
 set&lt; <a class="el" href="structGlobalTransition.html">GlobalTransition</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ab82eec24f8aae99faf18d6434487d0d7">globalTransitions</a></td></tr>
 <tr class="memdesc:ab82eec24f8aae99faf18d6434487d0d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Every <a class="el" href="structGlobalTransition.html" title="Represents a single global transition.">GlobalTransition</a> in the model. <br /></td></tr>
 <tr class="separator:ab82eec24f8aae99faf18d6434487d0d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa207d612b58c4de8f7744f064db66f5b"><td class="memItemLeft" align="right" valign="top"><a id="aa207d612b58c4de8f7744f064db66f5b"></a>
+set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#aa207d612b58c4de8f7744f064db66f5b">preimage</a></td></tr>
+<tr class="memdesc:aa207d612b58c4de8f7744f064db66f5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Preimage for the global state, i.e. states from which there is a transition to this state. <br /></td></tr>
+<tr class="separator:aa207d612b58c4de8f7744f064db66f5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4baebd90504941bbabd20cbc4b0cfe3"><td class="memItemLeft" align="right" valign="top"><a id="ad4baebd90504941bbabd20cbc4b0cfe3"></a>
 vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ad4baebd90504941bbabd20cbc4b0cfe3">localStatesProjection</a></td></tr>
 <tr class="memdesc:ad4baebd90504941bbabd20cbc4b0cfe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Local states of each agent that define this global state. <br /></td></tr>
@@ -134,6 +142,16 @@ vector&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&#160;
 map&lt; <a class="el" href="classAgent.html">Agent</a> *, set&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#a1f938243faea9600dede94d4e5d2813a">epistemicClassesAllAgents</a></td></tr>
 <tr class="memdesc:a1f938243faea9600dede94d4e5d2813a"><td class="mdescLeft">&#160;</td><td class="mdescRight">States in the same epistemic class as the current one, for KBC. <br /></td></tr>
 <tr class="separator:a1f938243faea9600dede94d4e5d2813a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a086300b0dfa09dcfbb665ecc421cd902"><td class="memItemLeft" align="right" valign="top"><a id="a086300b0dfa09dcfbb665ecc421cd902"></a>
+<a class="el" href="classProbabilityEntry.html">ProbabilityEntry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>probabilityResult</b></td></tr>
+<tr class="separator:a086300b0dfa09dcfbb665ecc421cd902"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1341cdf6488ba06e2a7cefc9d373275"><td class="memItemLeft" align="right" valign="top"><a id="ad1341cdf6488ba06e2a7cefc9d373275"></a>
+<a class="el" href="structGlobalTransition.html">GlobalTransition</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobalState.html#ad1341cdf6488ba06e2a7cefc9d373275">probabilityLoop</a> = nullptr</td></tr>
+<tr class="memdesc:ad1341cdf6488ba06e2a7cefc9d373275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to resolve self loops during probability calculation. <br /></td></tr>
+<tr class="separator:ad1341cdf6488ba06e2a7cefc9d373275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadbe1d90042a343b65fe4bfd52bee6c4"><td class="memItemLeft" align="right" valign="top"><a id="aadbe1d90042a343b65fe4bfd52bee6c4"></a>
+VerifResult&#160;</td><td class="memItemRight" valign="bottom"><b>stateVerifResult</b> = VerifResult::NOT_VERIFIED</td></tr>
+<tr class="separator:aadbe1d90042a343b65fe4bfd52bee6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single global state. </p>

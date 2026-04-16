@@ -33,6 +33,8 @@ struct GlobalTransition {
     set<LocalTransition*> localTransitions;
 
     string joinLocalTransitionNames(char sep=';');
+
+    float getProbability();
 };
 
 #endif // GLOBALTRANSITION_H

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['dotgraph_246',['DotGraph',['../classDotGraph.html',1,'']]]
+  ['decisionentry_335',['DecisionEntry',['../structDecisionEntry.html',1,'']]],
+  ['dotgraph_336',['DotGraph',['../classDotGraph.html',1,'']]]
 ];

@@ -1,6 +1,8 @@
 #include "GlobalModelGenerator.hpp"
 #include "Verification.hpp"
+#include "VerificationIterative.hpp"
 #include "ModelParser.hpp"
+#include "StrategyParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
 #include <fstream>
@@ -26,20 +28,35 @@ int main(int argc, char* argv[]) {
     loadConfigFromArgs(argc,argv);
 
     auto tp = new ModelParser();
+    auto sp = new StrategyParser();
     string fbasename = config.fname.substr(config.fname.find_last_of("/\\") + 1,config.fname.rfind('.')-config.fname.find_last_of("/\\")-1);
     tuple<LocalModels, Formula> desc;
-    if (!config.formula_from_parameter) {
-        desc = tp->parse(config.fname);
+    StrategyCollection* strat = new StrategyCollection();
+    try {
+        if (!config.formula_from_parameter) {
+            desc = tp->parse(config.fname);
+        }
+        else {
+            desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
+        }
+    } catch (const std::exception& ex) {
+        cerr << "Model parse error: " << ex.what() << endl;
+        return 1;
     }
-    else {
-        desc = tp->parseAndOverwriteFormula(config.fname, config.formula);
+
+    if (config.verify_strategy) {
+        strat = sp->parse(config.strategy_file_path);
     }
+
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
+    if (config.verify_strategy) {
+        generator->initStrategy(strat);
+    }
     if(config.output_local_models){
         printf("%s\n", localModelsToString(localModels).c_str());
     }
@@ -48,8 +65,16 @@ int main(int argc, char* argv[]) {
      * whereas in Verification::verifyGlobalState (called by ::verify) those are expanded on demand (!)
     */
     if(config.output_global_model){
-        generator->expandAllStates();
+        if (!config.probability) {
+            generator->expandAllStates();
+        } else {
+            generator->expandAllStates(true);
+        }
         outputGlobalModel(generator->getCurrentGlobalModel());
+    }
+
+    if(config.natural_strategy) {
+        config.stv_mode |= 3;
     }
 
     if(config.output_dot_files){
@@ -63,7 +88,11 @@ int main(int argc, char* argv[]) {
         }
         // save GlobalModel
         if(!config.reduce) {
+            if (!config.probability) {
             generator->expandAllStates();   // todo: add allExpanded flag?
+            } else {
+                generator->expandAllStates(true);
+            }
         }
         DotGraph(generator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-");
     }
@@ -75,31 +104,89 @@ int main(int argc, char* argv[]) {
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
     } else if(config.stv_mode & (1 << 0)){     // mode.binary = /[0,1]*1/ (generate)
-        generator->expandAllStates();
+        if (!config.probability) {
+            generator->expandAllStates();
+        } else {
+            generator->expandAllStates(true);
+        }
     }
     
     if(config.stv_mode & (1 << 1)){     // mode.binary = /[0,1]*1[0,1]/ (verify)
         auto verification = new Verification(generator);
+        auto verificationIt = new VerificationIterative(generator);
         // Show verifications of vars in each global state; to use the following code, make verification->verifyLocalStates public and ensure that generator->expandAllStates() has been called
         // auto gm = generator->getCurrentGlobalModel();
         // for (auto state : gm->globalStates) {
         //     printf(">>>>>> %i; %s; %i\n", state->id, state->hash.c_str(), verification->verifyLocalStates(&state->localStates)?1:0);
         // }
         bool verifResult;
-        if(config.fixpoint) {
+        Result verifResult2;
+        if (config.fixpoint) {
             verifResult = verification->fixpointVerify();
-        }
-        else {
+        } else if (config.verify_strategy) {
+            verifResult = verificationIt->verify().verificationResult;
+        } else if (config.probability) {
+            // generator->createIterativeStrategy(localModels);
+            generator->createProbabilityStrategy(localModels);
+            verifResult2 = verification->verifyMDP();
+            verifResult = verifResult2.verificationResult;
+            // config.verify_strategy = true;
+            // do {
+            //     printf("Trying next strategy...\n");
+            //     generator->initModel(localModels, formula);
+            //     verificationIt = new VerificationIterative(generator);
+            //     verifResult2 = verificationIt->verify();
+            //     verifResult = verifResult2.verificationResult;
+            //     printf("Probability\nTRUE: %f\nFALSE: %f\n", verifResult2.probabilityResult.probabilityTrue, verifResult2.probabilityResult.probabilityFalse);
+            //     if (verifResult) {
+            //         break;
+            //     }
+            //     delete verificationIt;
+            // } while (generator->nextIterativeStrategy());
+            // cout << "No more strategies to try." << endl;
+        } else {
             verifResult = verification->verify();
+            // verifResult = verificationIt->verify().verificationResult;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
+        if (verifResult == true && config.probability) {
+            cout << "p=" << verifResult2.probabilityResult.probabilityTrue << endl;
+        }
         if (!verifResult && config.counterexample) {
             verification->historyDecisionsERR();
+        }
+        if (config.natural_strategy) {
+            if (verifResult) {
+                int reductionComplexityAfter = 0;
+                for (auto item : verification->getReducedStrategy()) {
+                    for (int i = 0; i < get<0>(item).size(); i++) {
+                        cout << (get<0>(get<0>(item)[i]) ? "" : "~") << get<1>(get<0>(item)[i]);
+                        reductionComplexityAfter += (get<0>(get<0>(item)[i]) ? 1 : 2);
+                        if (i + 1 < get<0>(item).size()) {
+                            cout << " & ";
+                        }
+                    }
+                    if (get<0>(item).size() == 0) {
+                        reductionComplexityAfter += 1;
+                        cout << "T";
+                    }
+                    else {
+                        reductionComplexityAfter += ((get<0>(item).size()) - 1);
+                    }
+                    cout << " --> " << get<1>(item) << endl;
+                }
+                cout << "Complexity before reduction: " << verification->getStrategyComplexity() << endl;
+                cout << "Complexity after reduction: " << reductionComplexityAfter << endl;
+            }
+            else {
+                cout << "No natural strategy present." << endl;
+            }
         }
         if(config.output_dot_files && verifResult){
             // save GlobalModel solution
             DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
         }
+        delete verification;
     }
 
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
@@ -181,9 +268,11 @@ int main(int argc, char* argv[]) {
         unsigned long mem2=getMemCap();
         printf("\n\nczas = %lu sec\n\n",czas);
         printf("\n\n%lu - %lu = %lu\n\n",mem2,mem1,mem2-mem1);
-        printf("\n\nNumber of global states: %i\n", ((generator->getCurrentGlobalModel())->globalStates).size());
+        printf("\n\nNumber of global states: %lu\n", ((generator->getCurrentGlobalModel())->globalStates).size());
     }
-
+    delete tp;
+    delete sp;
+    delete strat;
     return 0;
 }
 

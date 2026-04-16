@@ -1,0 +1,3 @@
+q0 -> vote1
+q1 -> gv_1_Voter1
+q3 -> idle

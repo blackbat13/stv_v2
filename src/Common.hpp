@@ -50,6 +50,10 @@ struct Cfg{
     bool reduce_all;
     std::string reduce_args;
     bool fixpoint;
+    bool natural_strategy;
+    bool probability = false;
+    bool verify_strategy;
+    std::string strategy_file_path;
 };
 
 #endif 

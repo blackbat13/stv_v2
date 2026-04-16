@@ -83,6 +83,7 @@ $(document).ready(function(){initNavTree('Verification_8hpp.html',''); initResiz
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -91,7 +92,9 @@ $(document).ready(function(){initNavTree('Verification_8hpp.html',''); initResiz
 <div class="contents">
 <div class="textblock"><code>#include &lt;stack&gt;</code><br />
 <code>#include &quot;<a class="el" href="Types_8hpp_source.html">Types.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="TypesDependency_8hpp_source.html">TypesDependency.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GlobalModelGenerator_8hpp_source.html">GlobalModelGenerator.hpp</a>&quot;</code><br />
+<code>#include &lt;bitset&gt;</code><br />
 </div>
 <p><a href="Verification_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -107,15 +110,14 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class that verifies if the model fulfills the formula. Also can do some operations on decision history.  <a href="classVerification.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a1de2fc36289f8ee7e8341767723ddf49"><td class="memItemLeft" align="right" valign="top"><a id="a1de2fc36289f8ee7e8341767723ddf49"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STRATEGY_BITS</b>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:a1de2fc36289f8ee7e8341767723ddf49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a9b12ccf7d3168e272beda78cf68328a4"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4">HistoryEntryType</a> { <a class="el" href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e">DECISION</a>
-, <a class="el" href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492">STATE_STATUS</a>
-, <a class="el" href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11">CONTEXT</a>
-, <a class="el" href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae">MARK_DECISION_AS_INVALID</a>
- }</td></tr>
-<tr class="memdesc:a9b12ccf7d3168e272beda78cf68328a4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structHistoryEntry.html" title="Structure used to save model traversal history.">HistoryEntry</a> entry type.  <a href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4">More...</a><br /></td></tr>
-<tr class="separator:a9b12ccf7d3168e272beda78cf68328a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac6db21a1425cd1834558047794fc8872"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872">TraversalMode</a> { <a class="el" href="Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7">NORMAL</a>
 , <a class="el" href="Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf">REVERT</a>
 , <a class="el" href="Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380">RESTORE</a>
@@ -130,32 +132,6 @@ Functions</h2></td></tr>
 <tr class="separator:a359b96afed1805b959d60e2c69b373f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a9b12ccf7d3168e272beda78cf68328a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b12ccf7d3168e272beda78cf68328a4">&#9670;&nbsp;</a></span>HistoryEntryType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4">HistoryEntryType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p><a class="el" href="structHistoryEntry.html" title="Structure used to save model traversal history.">HistoryEntry</a> entry type. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e"></a>DECISION&#160;</td><td class="fielddoc"><p>Made the decision to go to a state using a transition. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492"></a>STATE_STATUS&#160;</td><td class="fielddoc"><p>Changed verification status. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11"></a>CONTEXT&#160;</td><td class="fielddoc"><p>Recursion has gone deeper. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae"></a>MARK_DECISION_AS_INVALID&#160;</td><td class="fielddoc"><p>Marking a transition as invalid. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
 <a id="ac6db21a1425cd1834558047794fc8872"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6db21a1425cd1834558047794fc8872">&#9670;&nbsp;</a></span>TraversalMode</h2>
 

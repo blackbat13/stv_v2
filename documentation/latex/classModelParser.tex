@@ -20,9 +20,8 @@ A parser for converting a text file into a model.
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classModelParser}{Model\+Parser}} destructor. \end{DoxyCompactList}\item 
 tuple$<$ \mbox{\hyperlink{structLocalModels}{Local\+Models}}, \mbox{\hyperlink{structFormula}{Formula}} $>$ \mbox{\hyperlink{classModelParser_a2a89f7b51de54422c1873d24d16eb17a}{parse}} (string file\+Name)
 \begin{DoxyCompactList}\small\item\em Parses a file with given name into a usable model. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classModelParser_a4bc0d94dd424564ba9d6b4e40ea896d5}\label{classModelParser_a4bc0d94dd424564ba9d6b4e40ea896d5}} 
-tuple$<$ \mbox{\hyperlink{structLocalModels}{Local\+Models}}, \mbox{\hyperlink{structFormula}{Formula}} $>$ {\bfseries parse\+And\+Overwrite\+Formula} (string file\+Name, string s)
-\end{DoxyCompactItemize}
+tuple$<$ \mbox{\hyperlink{structLocalModels}{Local\+Models}}, \mbox{\hyperlink{structFormula}{Formula}} $>$ \mbox{\hyperlink{classModelParser_a4bc0d94dd424564ba9d6b4e40ea896d5}{parse\+And\+Overwrite\+Formula}} (string file\+Name, string s)
+\begin{DoxyCompactList}\small\item\em Parses a text file in the given file path and internally replaces the verification formula with the given one. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -46,6 +45,26 @@ Parses a file with given name into a usable model.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Pointer to a model created from a given file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classModelParser_a4bc0d94dd424564ba9d6b4e40ea896d5}\label{classModelParser_a4bc0d94dd424564ba9d6b4e40ea896d5}} 
+\index{ModelParser@{ModelParser}!parseAndOverwriteFormula@{parseAndOverwriteFormula}}
+\index{parseAndOverwriteFormula@{parseAndOverwriteFormula}!ModelParser@{ModelParser}}
+\doxysubsubsection{\texorpdfstring{parseAndOverwriteFormula()}{parseAndOverwriteFormula()}}
+{\footnotesize\ttfamily tuple$<$ \mbox{\hyperlink{structLocalModels}{Local\+Models}}, \mbox{\hyperlink{structFormula}{Formula}} $>$ Model\+Parser\+::parse\+And\+Overwrite\+Formula (\begin{DoxyParamCaption}\item[{string}]{file\+Name,  }\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Parses a text file in the given file path and internally replaces the verification formula with the given one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & Path to the text file. \\
+\hline
+{\em s} & New formula. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a new model generation structure with a replaced formula. 
 \end{DoxyReturn}
 
 

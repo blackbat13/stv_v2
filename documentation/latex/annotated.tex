@@ -1,10 +1,13 @@
 \doxysection{Class List}
 Here are the classes, structs, unions and interfaces with brief descriptions\+:\begin{DoxyCompactList}
+\item\contentsline{section}{\mbox{\hyperlink{structAction}{Action}} \\*Single action template for probabilistic verification }{\pageref{structAction}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classActionTemplate}{Action\+Template}} \\*Represents a selected action }{\pageref{classActionTemplate}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classAgent}{Agent}} \\*Contains all data for a single \mbox{\hyperlink{classAgent}{Agent}}, including id, name and all of the agents\textquotesingle{} variables }{\pageref{classAgent}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} \\*Represents a single agent loaded from the description from a file }{\pageref{classAgentTemplate}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classAssignment}{Assignment}} \\*Represents an assingment }{\pageref{classAssignment}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structCfg}{Cfg}} }{\pageref{structCfg}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structCondition}{Condition}} \\*Represents a condition for \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} }{\pageref{structCondition}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structDecisionEntry}{Decision\+Entry}} }{\pageref{structDecisionEntry}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classDotGraph}{Dot\+Graph}} }{\pageref{classDotGraph}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} \\*Represents a single epistemic class }{\pageref{structEpistemicClass}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classExprAdd}{Expr\+Add}} \\*Node for addition }{\pageref{classExprAdd}}{}
@@ -26,7 +29,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions\+:\
 \item\contentsline{section}{\mbox{\hyperlink{classExprOr}{Expr\+Or}} \\*Node for OR operator }{\pageref{classExprOr}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classExprRem}{Expr\+Rem}} \\*Node for modulo }{\pageref{classExprRem}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classExprSub}{Expr\+Sub}} \\*Node for subtraction }{\pageref{classExprSub}}{}
-\item\contentsline{section}{\mbox{\hyperlink{structFormula}{Formula}} }{\pageref{structFormula}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structFormula}{Formula}} \\*Contains the processed verification formula }{\pageref{structFormula}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structFormulaTemplate}{Formula\+Template}} \\*Contains a template for coalition of \mbox{\hyperlink{classAgent}{Agent}} as string from the formula }{\pageref{structFormulaTemplate}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structGlobalModel}{Global\+Model}} \\*Represents a global model, containing agents and a formula }{\pageref{structGlobalModel}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \\*Stores the local models, formula and a global model }{\pageref{classGlobalModelGenerator}}{}
@@ -35,15 +38,33 @@ Here are the classes, structs, unions and interfaces with brief descriptions\+:\
 \item\contentsline{section}{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \\*Represents a single global transition }{\pageref{structGlobalTransition}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classHistoryDbg}{History\+Dbg}} \\*Stores history and allows displaying it to the console }{\pageref{classHistoryDbg}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} \\*Structure used to save model traversal history }{\pageref{structHistoryEntry}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classIterativeVerif}{Iterative\+Verif}} }{\pageref{classIterativeVerif}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structLocalModels}{Local\+Models}} \\*Represents a single local model, contains all agents and variables }{\pageref{structLocalModels}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classLocalState}{Local\+State}} \\*Represents a single \mbox{\hyperlink{classLocalState}{Local\+State}}, containing id, name and internal variables }{\pageref{classLocalState}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classLocalStateTemplate}{Local\+State\+Template}} \\*A template for the local state }{\pageref{classLocalStateTemplate}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \\*Represents a single local transition, containing id, global name, local name, is shared and count of the appearances }{\pageref{structLocalTransition}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classModelParser}{Model\+Parser}} \\*A parser for converting a text file into a model }{\pageref{classModelParser}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbabilityEntry}{Probability\+Entry}} \\*Class for handling the probability operations during probability verification }{\pageref{classProbabilityEntry}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbabilityStrategyDecisions}{Probability\+Strategy\+Decisions}} \\*Structure for the iterative set strategy generation }{\pageref{classProbabilityStrategyDecisions}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} \\*Contains probability of a state being in a true or false state }{\pageref{structProbabilityTrueFalse}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbAdd}{Prob\+Add}} \\*Node for addition }{\pageref{classProbAdd}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbConst}{Prob\+Const}} \\*Node for a constant }{\pageref{classProbConst}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbDiv}{Prob\+Div}} \\*Node for division }{\pageref{classProbDiv}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbMul}{Prob\+Mul}} \\*Node for multiplication }{\pageref{classProbMul}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbNode}{Prob\+Node}} \\*Base node for probability calculations }{\pageref{classProbNode}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classProbSub}{Prob\+Sub}} \\*Node for subtraction }{\pageref{classProbSub}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structResult}{Result}} }{\pageref{structResult}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} \\*Handles all single state verification information during probabilistic verification }{\pageref{structStateVerificationInfo}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} \\*A comparator for two bitsets containing values for the global states }{\pageref{structStrategyBitsComparator}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} \\*Handles currently selected strategy when the strategy is set }{\pageref{classStrategyCollection}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classStrategyCollectionTemplate}{Strategy\+Collection\+Template}} }{\pageref{classStrategyCollectionTemplate}}{}
+\item\contentsline{section}{\mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} }{\pageref{structStrategyEntry}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classStrategyParser}{Strategy\+Parser}} \\*A parser for converting a text file into a strategy }{\pageref{classStrategyParser}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classTestVerif}{Test\+Verif}} }{\pageref{classTestVerif}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classTransitionTemplate}{Transition\+Template}} \\*Represents a meta-\/transition }{\pageref{classTransitionTemplate}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structVar}{Var}} \\*Represents a variable in the model, containing name, initial value and persistence }{\pageref{structVar}}{}
 \item\contentsline{section}{\mbox{\hyperlink{classVerification}{Verification}} \\*A class that verifies if the model fulfills the formula. Also can do some operations on decision history }{\pageref{classVerification}}{}
+\item\contentsline{section}{\mbox{\hyperlink{classVerificationIterative}{Verification\+Iterative}} \\*A class that verifies if the model fulfills the formula. Also can do some operations on decision history }{\pageref{classVerificationIterative}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structyy__buffer__state}{yy\+\_\+buffer\+\_\+state}} }{\pageref{structyy__buffer__state}}{}
 \item\contentsline{section}{\mbox{\hyperlink{structyy__trans__info}{yy\+\_\+trans\+\_\+info}} }{\pageref{structyy__trans__info}}{}
 \item\contentsline{section}{\mbox{\hyperlink{unionyyalloc}{yyalloc}} }{\pageref{unionyyalloc}}{}

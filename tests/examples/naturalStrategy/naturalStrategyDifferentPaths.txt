@@ -1,0 +1,28 @@
+Agent Worker:
+LOCAL: [start, goingLeft, goingRight, state1, state2, combinedState, endState, safeState]
+PERSISTENT: [start, goingLeft, goingRight, state1, state2, combinedState, endState, safeState]
+INITIAL: [start:=1, safeState:=1]
+init start
+shared[2] change_state1[random_state]: start -> state1 [start:=0, goingLeft:=1]
+shared[2] change_state2[random_state]: start -> state2 [start:=0, goingRight:=1]
+goStep1Road1: state1 -> state3 [state1:=1]
+goStep2Road1: state3 -> state4 [state2:=1]
+goStep3Road1: state4 -> combine [combinedState:=1]
+goStep1Road2: state2 -> state5 [state2:=1]
+goStep2Road2: state5 -> state6 [state1:=1]
+goStep3Road2: state6 -> combine [combinedState:=1]
+finish: combine -> end [endState:=1]
+idle: end -> end
+
+Agent Randomizer:
+LOCAL: [goingLeft, goingRight]
+PERSISTENT: [goingLeft, goingRight]
+INITIAL: [goingLeft:=0, goingRight:=0]
+init start
+shared[2] change_state1[change_state]: start -> state1 [goingLeft:=1]
+shared[2] change_state2[change_state2]: start -> state2 [goingRight:=1]
+finish1: state1 -> idle
+finish2: state2 -> idle
+idle: idle -> idle
+
+FORMULA: <<Worker>>[](safeState==1)

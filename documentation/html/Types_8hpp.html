@@ -82,7 +82,8 @@ $(document).ready(function(){initNavTree('Types_8hpp.html',''); initResizable();
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">Types.hpp File Reference</div>  </div>
 </div><!--header-->
@@ -93,11 +94,12 @@ $(document).ready(function(){initNavTree('Types_8hpp.html',''); initResizable();
 <div class="textblock"><code>#include &lt;map&gt;</code><br />
 <code>#include &lt;set&gt;</code><br />
 <code>#include &lt;stack&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="LocalState_8hpp_source.html">LocalState.hpp</a>&quot;</code><br />
-<code>#include &quot;LocalTransition.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="LocalTransition_8hpp_source.html">LocalTransition.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GlobalState_8hpp_source.html">GlobalState.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GlobalTransition_8hpp_source.html">GlobalTransition.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GlobalModel_8hpp_source.html">GlobalModel.hpp</a>&quot;</code><br />
@@ -105,6 +107,7 @@ $(document).ready(function(){initNavTree('Types_8hpp.html',''); initResizable();
 <code>#include &quot;<a class="el" href="Agent_8hpp_source.html">Agent.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="expressions_8hpp_source.html">reader/expressions.hpp</a>&quot;</code><br />
 <code>#include &lt;atomic&gt;</code><br />
+<code>#include &quot;<a class="el" href="TypesDependency_8hpp_source.html">TypesDependency.hpp</a>&quot;</code><br />
 </div>
 <p><a href="Types_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -120,14 +123,71 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains a template for coalition of <a class="el" href="classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables.">Agent</a> as string from the formula.  <a href="structFormulaTemplate.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFormula.html">Formula</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains the processed verification formula.  <a href="structFormula.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLocalModels.html">LocalModels</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single local model, contains all agents and variables.  <a href="structLocalModels.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structResult.html">Result</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a4d3180b8befe7d683a5db6de37ee052e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052e">ProbabilitySign</a> { <br />
+&#160;&#160;<a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2">NONE</a>
+, <a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f">EQ</a>
+, <a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db">NE</a>
+, <a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892">GT</a>
+, <br />
+&#160;&#160;<a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce">GE</a>
+, <a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571">LT</a>
+, <a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61">LE</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a4d3180b8befe7d683a5db6de37ee052e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Probability inequality sign used for the probabilistic verification.  <a href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052e">More...</a><br /></td></tr>
+<tr class="separator:a4d3180b8befe7d683a5db6de37ee052e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f5b98517575f27626510577a4519ff6"><td class="memItemLeft" align="right" valign="top"><a id="a9f5b98517575f27626510577a4519ff6"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>VerificationFormulaMode</b> { <b>NOT_SET</b> = 0
+, <b>F</b> = 1
+, <b>G</b> = 2
+ }</td></tr>
+<tr class="separator:a9f5b98517575f27626510577a4519ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Custom data structures. Data structures and classes containing model data. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a4d3180b8befe7d683a5db6de37ee052e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d3180b8befe7d683a5db6de37ee052e">&#9670;&nbsp;</a></span>ProbabilitySign</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052e">ProbabilitySign</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Probability inequality sign used for the probabilistic verification. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2"></a>NONE&#160;</td><td class="fielddoc"><p>No probability detected. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f"></a>EQ&#160;</td><td class="fielddoc"><p>Equal (==) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db"></a>NE&#160;</td><td class="fielddoc"><p>Not equal (!=) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892"></a>GT&#160;</td><td class="fielddoc"><p>Greater than (&gt;) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce"></a>GE&#160;</td><td class="fielddoc"><p>Greater equal (&gt;=) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571"></a>LT&#160;</td><td class="fielddoc"><p>Less than (&lt;) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61"></a>LE&#160;</td><td class="fielddoc"><p>Less equal (&lt;=) </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

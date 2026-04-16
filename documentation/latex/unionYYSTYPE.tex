@@ -9,6 +9,9 @@ set$<$ class \mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} $\ast$ $>$ $
 \mbox{\Hypertarget{unionYYSTYPE_accd89726912925cdb633ac2913d448e3}\label{unionYYSTYPE_accd89726912925cdb633ac2913d448e3}} 
 class \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$ {\bfseries expr}
 \item 
+\mbox{\Hypertarget{unionYYSTYPE_a3ba7b27f50e882a69043cd0f9ea04ab3}\label{unionYYSTYPE_a3ba7b27f50e882a69043cd0f9ea04ab3}} 
+class \mbox{\hyperlink{classProbNode}{Prob\+Node}} $\ast$ {\bfseries prob}
+\item 
 \mbox{\Hypertarget{unionYYSTYPE_ac9449cf9ddb6918ab6d623503b18886c}\label{unionYYSTYPE_ac9449cf9ddb6918ab6d623503b18886c}} 
 class \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ {\bfseries assign}
 \item 
@@ -21,7 +24,7 @@ class \mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} $\ast$ {\bfseries a
 \mbox{\Hypertarget{unionYYSTYPE_ab895f57d08852fa2103b071174d19a23}\label{unionYYSTYPE_ab895f57d08852fa2103b071174d19a23}} 
 set$<$ class \mbox{\hyperlink{classAssignment}{Assignment}} $\ast$ $>$ $\ast$ {\bfseries assign\+Set}
 \item 
-\mbox{\Hypertarget{unionYYSTYPE_ac444e19a53a52e07dc3e24d801af88ae}\label{unionYYSTYPE_ac444e19a53a52e07dc3e24d801af88ae}} 
+\mbox{\Hypertarget{unionYYSTYPE_a2d2c603fa9d50eb8d09ca289957531e6}\label{unionYYSTYPE_a2d2c603fa9d50eb8d09ca289957531e6}} 
 char $\ast$ {\bfseries ident}
 \item 
 \mbox{\Hypertarget{unionYYSTYPE_a4221dbffae49c01be1a3c99cdfa01eb4}\label{unionYYSTYPE_a4221dbffae49c01be1a3c99cdfa01eb4}} 
@@ -30,11 +33,21 @@ set$<$ string $>$ $\ast$ {\bfseries ident\+Set}
 \mbox{\Hypertarget{unionYYSTYPE_a705742298d080722dd53ffdaa0595af9}\label{unionYYSTYPE_a705742298d080722dd53ffdaa0595af9}} 
 int {\bfseries val}
 \item 
+\mbox{\Hypertarget{unionYYSTYPE_a5a94892f4bb1fc1ee6a39b6c15fd452f}\label{unionYYSTYPE_a5a94892f4bb1fc1ee6a39b6c15fd452f}} 
+float {\bfseries floatno}
+\item 
 \mbox{\Hypertarget{unionYYSTYPE_af072ba1a8615bfbf5a0e471438c4422d}\label{unionYYSTYPE_af072ba1a8615bfbf5a0e471438c4422d}} 
 vector$<$ class \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$ $>$ $\ast$ {\bfseries cond\+List}
+\item 
+\mbox{\Hypertarget{unionYYSTYPE_a10f511ecd47fdc2346d064d6c3f2aa52}\label{unionYYSTYPE_a10f511ecd47fdc2346d064d6c3f2aa52}} 
+char $\ast$ {\bfseries expr}
+\item 
+\mbox{\Hypertarget{unionYYSTYPE_a9e8b5e32cf3ceeda356e86da188637ae}\label{unionYYSTYPE_a9e8b5e32cf3ceeda356e86da188637ae}} 
+vector$<$ string $>$ $\ast$ {\bfseries ident\+List}
 \end{DoxyCompactItemize}
 
 
-The documentation for this union was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this union was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-parser.\+h\end{DoxyCompactItemize}
+parser.\+h\item 
+strategy\+Parser.\+h\end{DoxyCompactItemize}

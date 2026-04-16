@@ -19,5 +19,11 @@ var expressions_8hpp =
     [ "ExprGe", "classExprGe.html", "classExprGe" ],
     [ "ExprKnow", "classExprKnow.html", "classExprKnow" ],
     [ "ExprHart", "classExprHart.html", "classExprHart" ],
+    [ "ProbNode", "classProbNode.html", "classProbNode" ],
+    [ "ProbConst", "classProbConst.html", "classProbConst" ],
+    [ "ProbAdd", "classProbAdd.html", "classProbAdd" ],
+    [ "ProbSub", "classProbSub.html", "classProbSub" ],
+    [ "ProbMul", "classProbMul.html", "classProbMul" ],
+    [ "ProbDiv", "classProbDiv.html", "classProbDiv" ],
     [ "Environment", "expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4", null ]
 ];

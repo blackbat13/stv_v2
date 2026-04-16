@@ -1,0 +1,76 @@
+\hypertarget{structStateVerificationInfo}{}\doxysection{State\+Verification\+Info Struct Reference}
+\label{structStateVerificationInfo}\index{StateVerificationInfo@{StateVerificationInfo}}
+
+
+Handles all single state verification information during probabilistic verification.  
+
+
+
+
+{\ttfamily \#include $<$Types\+Dependency.\+hpp$>$}
+
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2}\label{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2}} 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ {\bfseries global\+State} = nullptr
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a}\label{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a}} 
+\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$ {\bfseries from\+State} = nullptr
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49}\label{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49}} 
+queue$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ {\bfseries controlled\+Transitions\+Left\+To\+Process}
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8}\label{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8}} 
+queue$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ {\bfseries uncontrolled\+Transitions\+Left\+To\+Process}
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121}\label{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121}} 
+map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $>$ {\bfseries controlled\+Probabilistic\+Transitions\+Left\+To\+Process}
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629}\label{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629}} 
+map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $>$ {\bfseries uncontrolled\+Probabilistic\+Transitions\+Left\+To\+Process}
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4}\label{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4}} 
+int {\bfseries depth} = 0
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2}\label{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2}} 
+bool {\bfseries processed} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc}\label{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc}} 
+Verif\+Result {\bfseries verif\+Result} = Verif\+Result\+::\+NOT\+\_\+\+VERIFIED
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85}\label{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85}} 
+bool {\bfseries controlled} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4}\label{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4}} 
+bool {\bfseries uncontrolled} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a}\label{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a}} 
+bool {\bfseries has\+Controlled\+Probabilistic} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e}\label{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e}} 
+bool {\bfseries has\+Uncontrolled\+Probabilistic} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419}\label{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419}} 
+bool {\bfseries has\+Valid\+Controlled\+Transition} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c}\label{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c}} 
+bool {\bfseries has\+Valid\+Uncontrolled\+Transition} = true
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953}\label{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953}} 
+bool {\bfseries is\+Controlled\+By\+Coalition} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c}\label{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c}} 
+bool {\bfseries got\+Through\+Preselected\+Transition} = false
+\item 
+\mbox{\Hypertarget{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4}\label{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4}} 
+bool {\bfseries got\+Response\+From\+Other\+State} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles all single state verification information during probabilistic verification. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{TypesDependency_8hpp}{Types\+Dependency.\+hpp}}\end{DoxyCompactItemize}

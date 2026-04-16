@@ -29,17 +29,32 @@ map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, \mbox{\hyperlink{structEpist
 bool \mbox{\hyperlink{structGlobalState_afd4eaea4861b96810c9e1de175a0c35a}{is\+Expanded}}
 \begin{DoxyCompactList}\small\item\em If false, the state can be still expanded, potentially creating new states, otherwise the expansion of the state already occured and is not necessary. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_ae7fb8df92923463538071039a0066a6d}\label{structGlobalState_ae7fb8df92923463538071039a0066a6d}} 
-Global\+State\+Verification\+Status \mbox{\hyperlink{structGlobalState_ae7fb8df92923463538071039a0066a6d}{verification\+Status}}
+Global\+State\+Verification\+Status \mbox{\hyperlink{structGlobalState_ae7fb8df92923463538071039a0066a6d}{verification\+Status}} = GLOBAL\+\_\+\+STATE\+\_\+\+VERIFICATION\+\_\+\+STATUS\+::\+UNVERIFIED
 \begin{DoxyCompactList}\small\item\em Current verifivation status of this state. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalState_a3961cf4168dc461fed40a80b9cfed059}\label{structGlobalState_a3961cf4168dc461fed40a80b9cfed059}} 
+float \mbox{\hyperlink{structGlobalState_a3961cf4168dc461fed40a80b9cfed059}{probability}} = config.\+probability ? 0.\+0 \+: 1.\+0
+\begin{DoxyCompactList}\small\item\em Collective probability of the state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}\label{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}} 
 set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}{global\+Transitions}}
 \begin{DoxyCompactList}\small\item\em Every \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in the model. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalState_aa207d612b58c4de8f7744f064db66f5b}\label{structGlobalState_aa207d612b58c4de8f7744f064db66f5b}} 
+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_aa207d612b58c4de8f7744f064db66f5b}{preimage}}
+\begin{DoxyCompactList}\small\item\em Preimage for the global state, i.\+e. states from which there is a transition to this state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}\label{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}} 
 vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ \mbox{\hyperlink{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}{local\+States\+Projection}}
 \begin{DoxyCompactList}\small\item\em Local states of each agent that define this global state. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structGlobalState_a1f938243faea9600dede94d4e5d2813a}\label{structGlobalState_a1f938243faea9600dede94d4e5d2813a}} 
 map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $\ast$ $>$ \mbox{\hyperlink{structGlobalState_a1f938243faea9600dede94d4e5d2813a}{epistemic\+Classes\+All\+Agents}}
-\begin{DoxyCompactList}\small\item\em States in the same epistemic class as the current one, for KBC. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em States in the same epistemic class as the current one, for KBC. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalState_a086300b0dfa09dcfbb665ecc421cd902}\label{structGlobalState_a086300b0dfa09dcfbb665ecc421cd902}} 
+\mbox{\hyperlink{classProbabilityEntry}{Probability\+Entry}} {\bfseries probability\+Result}
+\item 
+\mbox{\Hypertarget{structGlobalState_ad1341cdf6488ba06e2a7cefc9d373275}\label{structGlobalState_ad1341cdf6488ba06e2a7cefc9d373275}} 
+\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ \mbox{\hyperlink{structGlobalState_ad1341cdf6488ba06e2a7cefc9d373275}{probability\+Loop}} = nullptr
+\begin{DoxyCompactList}\small\item\em Used to resolve self loops during probability calculation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structGlobalState_aadbe1d90042a343b65fe4bfd52bee6c4}\label{structGlobalState_aadbe1d90042a343b65fe4bfd52bee6c4}} 
+Verif\+Result {\bfseries state\+Verif\+Result} = Verif\+Result\+::\+NOT\+\_\+\+VERIFIED
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

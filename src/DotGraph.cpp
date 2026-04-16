@@ -109,7 +109,14 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
                 }
                 stateLabel.pop_back();
                 stateLabel.pop_back();
-                stateLabel+="}|";    
+                stateLabel+="}|";
+            }
+            if(s->probability != 1.0) {
+                stateLabel+="{";
+                string probStr = to_string(s->probability);
+                probStr.erase(probStr.find_last_not_of('0') + 1, std::string::npos);
+                stateLabel += "(p=" + probStr + ")";
+                stateLabel+="}|";
             }
             stateLabel.pop_back();
             stateLabel+="}\", shape=\"record";
@@ -117,20 +124,28 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
         for (const auto& t : s->globalTransitions) {
             std::string transitionLabel = "";
             bool isShared = false;
+            float probability = 1.0;
             for(const auto& e: t->localTransitions){
+                probability *= e->probability;
                 transitionLabel+=e->name+",";
                 isShared=isShared || e->isShared;
             }
+            if(probability != 1.0) {
+                string probStr = to_string(probability);
+                probStr.erase(probStr.find_last_not_of('0') + 1, std::string::npos);
+                transitionLabel += "(p=" + probStr + "),";
+            }
             transitionLabel.pop_back();  // truncate sep
-            if(!t->from || !t->to)continue;
-                if(correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK) {
-                    this->addEdge(
-                        '"'+t->from->hash+'"', 
-                        '"'+t->to->hash+'"', 
-                        transitionLabel + "\", color=\"red"
-                    ); 
-                }
-                else {
+            if (!t->from || !t->to) {
+                continue;
+            }
+            if (correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
+                this->addEdge(
+                    '"'+t->from->hash+'"', 
+                    '"'+t->to->hash+'"', 
+                    transitionLabel + "\", color=\"red"
+                ); 
+            } else {
                 this->addEdge(
                     '"'+t->from->hash+'"', 
                     '"'+t->to->hash+'"', 

@@ -9,5 +9,10 @@ var structGlobalState =
     [ "hash", "structGlobalState.html#a441ac69c0383abf8feb652daab8b33b7", null ],
     [ "isExpanded", "structGlobalState.html#afd4eaea4861b96810c9e1de175a0c35a", null ],
     [ "localStatesProjection", "structGlobalState.html#ad4baebd90504941bbabd20cbc4b0cfe3", null ],
+    [ "preimage", "structGlobalState.html#aa207d612b58c4de8f7744f064db66f5b", null ],
+    [ "probability", "structGlobalState.html#a3961cf4168dc461fed40a80b9cfed059", null ],
+    [ "probabilityLoop", "structGlobalState.html#ad1341cdf6488ba06e2a7cefc9d373275", null ],
+    [ "probabilityResult", "structGlobalState.html#a086300b0dfa09dcfbb665ecc421cd902", null ],
+    [ "stateVerifResult", "structGlobalState.html#aadbe1d90042a343b65fe4bfd52bee6c4", null ],
     [ "verificationStatus", "structGlobalState.html#ae7fb8df92923463538071039a0066a6d", null ]
 ];

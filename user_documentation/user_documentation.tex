@@ -153,6 +153,14 @@ Avaliable flags:
   \begin{lstlisting}[title={Example reduction with 2 specified agents.}]
     --REDUCE_ALL "Agent1 Agent2"
   \end{lstlisting}
+  \item Generate a natural strategy for the given model:
+  \begin{lstlisting}
+    --NATURAL_STRATEGY
+  \end{lstlisting}
+  \item Set a strategy to the one given in a file:
+  \begin{lstlisting}
+    --STRATEGY_FROM_FILE [file path]
+  \end{lstlisting}
 \end{itemize}
 
 \section{Creating a model}
@@ -194,12 +202,20 @@ First we enter the action name, then after a colon we specify the avaliable acti
 \end{lstlisting}
 
 \subsubsection{Shared actions}
-If the action will be shared with another agent he have to start the action by writing a keyword $shared$. Then in square brackets we have to write and integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual.
+If the action will be shared with another agent it has to start the action by writing a keyword $shared$. Then in square brackets we have to write an integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual.
 \begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent. The current agent will be the one performing the sync.}]
   shared[2] action1[action1]: q0 -> q1
 \end{lstlisting}
 \begin{lstlisting}[title={Creating an action that will synchronize with 2 other agents. The current agent will be the one waiting for sync.}]
   shared[3] action1[someAction]: q0 -> q1
+\end{lstlisting}
+
+\subsubsection{Probabilistic actions}
+If the action is supposed to yield different results in a probabilistic manner, we need to write them similarly to the normal actions but with the addition of the probability as a number with a decimal dot and a colon, which should be between the arrow and the state that we want to reach. Then in each new line we can only use the probability, colon and the state that we want to reach. The precise syntax is as in the following example:
+\begin{lstlisting}[title={Action A that leads from a state q0 to q1 with a probability of 0.8, to q2 with a probability of 0.15 and to q3 with a probability signified by a keyword $\&REST$ which signifies the leftover probability, which in this case would be equal to 0.05.}]
+  A: q0 -> 0.80 : q1
+           0.15 : q2
+           &REST : q3
 \end{lstlisting}
 
 \subsubsection{Conditions}

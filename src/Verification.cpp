@@ -3,13 +3,14 @@
  * @brief Class for verification of the formula on a model.
  * Class for verification of the specified formula on a specified model.
  */
-
 #include "Verification.hpp"
 #define DEPTH_PREFIX string(depth * 4, ' ')
 
 #include <bits/stdc++.h>
 
 extern Cfg config;
+
+// #define VERBOSE 1
 
 /// @brief Converts global verification status into a string.
 /// @param status Enum value to be converted.
@@ -128,6 +129,8 @@ Verification::Verification(GlobalModelGenerator* generator) {
     this->historyStart->next = nullptr;
     
     this->historyEnd = this->historyStart;
+    this->strategyVariableLimit = 0;
+    this->variableNames.clear();
 }
 
 /// @brief Destructor for Verification.
@@ -310,6 +313,7 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates, GlobalSta
         }
     }
     auto val = *this->generator->getFormula()->p;
+
     if (val[0]->eval(currEnv, generator, globalState)==1 && generator->getFormulaCorectness()) {
         return true;
     } else if (!generator->getFormulaCorectness()) {
@@ -368,10 +372,65 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     // 1) verify localStates that the globalState is composed of
     if (isFMode) { // F
         if (this->verifyLocalStates(&globalState->localStatesProjection, globalState)) {
-            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
-            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
-            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
-            return true;
+            if (config.probability) {
+                switch (this->generator->getFormula()->probabilitySign) {
+                    case ProbabilitySign::EQ:
+                        if (globalState->probability == this->generator->getFormula()->probability) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                            return true;
+                        }
+                        break;
+                    case ProbabilitySign::NE:
+                        if (globalState->probability != this->generator->getFormula()->probability) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                            return true;
+                        }
+                        break;
+                    case ProbabilitySign::GT:
+                        if (globalState->probability > this->generator->getFormula()->probability) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                            return true;
+                        }
+                        break;
+                    case ProbabilitySign::GE:
+                        if (globalState->probability >= this->generator->getFormula()->probability) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                            return true;
+                        }
+                        break;
+                    case ProbabilitySign::LT:
+                        if (globalState->probability < this->generator->getFormula()->probability) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                            return true;
+                        }
+                        break;
+                    case ProbabilitySign::LE:
+                        if (globalState->probability <= this->generator->getFormula()->probability) {
+                            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                            return true;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                return true;
+            }
         }
     }
     else { // G
@@ -380,6 +439,60 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
             return false;
+        }
+        if (config.probability) {
+            switch (this->generator->getFormula()->probabilitySign) {
+                case ProbabilitySign::EQ:
+                    if (!(globalState->probability == this->generator->getFormula()->probability)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        return false;
+                    }
+                    break;
+                case ProbabilitySign::NE:
+                    if (!(globalState->probability != this->generator->getFormula()->probability)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        return false;
+                    }
+                    break;
+                case ProbabilitySign::GT:
+                    if (!(globalState->probability > this->generator->getFormula()->probability)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        return false;
+                    }
+                    break;
+                case ProbabilitySign::GE:
+                    if (!(globalState->probability >= this->generator->getFormula()->probability)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        return false;
+                    }
+                    break;
+                case ProbabilitySign::LT:
+                    if (!(globalState->probability < this->generator->getFormula()->probability)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        return false;
+                    }
+                    break;
+                case ProbabilitySign::LE:
+                    if (!(globalState->probability <= this->generator->getFormula()->probability)) {
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                        return false;
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
     
@@ -394,6 +507,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool hasOmittedTransitions = false;
+    bool hasMergedTransitionsIntoUncontrolled = false;
 
     for (const auto globalTransition : globalState->globalTransitions) {
         // if CTL then treat everything as uncontrolled transitions
@@ -403,15 +517,25 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
 
         if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
-            if (fixedGlobalTransition == nullptr) {
+            if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
                 controlledGlobalTransitions.insert(globalTransition);
-            }
-            else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
+            } else if (fixedGlobalTransition == nullptr) {
+                // the decision is invalid, skip it
+            } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
                 // controlled transition that is fixed should be treated as an uncontrolled transition 
                 #if VERBOSE
                     printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
                 #endif
-                uncontrolledGlobalTransitions.insert(globalTransition);
+                if (!config.probability) {
+                    uncontrolledGlobalTransitions.insert(globalTransition);
+                } else {
+                    string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
+                    for (auto globalTransition2 : globalState->globalTransitions) {
+                        if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
+                            uncontrolledGlobalTransitions.insert(globalTransition2);
+                        }
+                    }
+                }
             }
             else {
                 // omit controlled transition that is != fixedGlobalTransition
@@ -482,10 +606,11 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                 uncontrolledGlobalTransitions.insert(tr);
                 controlledGlobalTransitions.erase(tr);
             }
+            hasMergedTransitionsIntoUncontrolled = true;
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled)) {
         return false;
     }
     
@@ -557,6 +682,21 @@ void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition
     newHistoryEntry->decision = decision;
     newHistoryEntry->prev = this->historyEnd;
     newHistoryEntry->next = nullptr;
+    newHistoryEntry->depth = 10;
+    this->historyEnd->next = newHistoryEntry;
+    this->historyEnd = newHistoryEntry;
+}
+
+/// @brief Creates a HistoryEntry of the type UNCONTROLLED_DECISION and puts it on top of the stack of the decision history. 
+/// @param globalState Pointer to a GlobalState of the model.
+/// @param decision Pointer to a GlobalTransition that is to be recorded in the decision history.
+void Verification::addHistoryUncontrolledDecision(GlobalState* globalState, GlobalTransition* decision) {
+    auto newHistoryEntry = new HistoryEntry();
+    newHistoryEntry->type = HistoryEntryType::UNCONTROLLED_DECISION;
+    newHistoryEntry->globalState = globalState;
+    newHistoryEntry->decision = decision;
+    newHistoryEntry->prev = this->historyEnd;
+    newHistoryEntry->next = nullptr;
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
 }
@@ -582,7 +722,8 @@ void Verification::addHistoryStateStatus(GlobalState* globalState, GlobalStateVe
 /// @param depth Depth of the recursion of the validation algorithm.
 /// @param decision Pointer to a transition GlobalTransition selected by the algorithm.
 /// @param globalTransitionControlled True if the GlobalTransition is in the set of global transitions controlled by a coalition and it is not a fixed global transition.
-void Verification::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
+/// @return Returns true if the natural strategy is good for now.
+bool Verification::addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::CONTEXT;
     newHistoryEntry->globalState = globalState;
@@ -591,8 +732,44 @@ void Verification::addHistoryContext(GlobalState* globalState, int depth, Global
     newHistoryEntry->globalTransitionControlled = globalTransitionControlled;
     newHistoryEntry->prev = this->historyEnd;
     newHistoryEntry->next = nullptr;
+    newHistoryEntry->strategy = StrategyEntry();
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
+    
+    if (!globalTransitionControlled) {
+        return true;
+    }
+
+    if (config.natural_strategy) {
+        StrategyEntry strategyEntry = StrategyEntry();
+        strategyEntry.type = ADDED;
+        auto coalition = generator->getFormula()->coalition;
+        string actionName;
+        for(auto item : decision->localTransitions) {
+            if(coalition.find(item->agent) != coalition.end()) {
+                actionName = item->localName;
+                break;
+            }
+        }
+        bitset<STRATEGY_BITS> valueBits = globalStateToValueBits(globalState);
+        auto existingStrategy = naturalStrategy.find(valueBits);
+        if(existingStrategy != naturalStrategy.end()) {
+            if((*existingStrategy).second != actionName) {
+                return false;
+            }
+            strategyEntry.type = NOT_MODIFIED;
+        }
+        naturalStrategy.insert({valueBits, actionName});
+        existingStrategy = naturalStrategy.find(valueBits);
+
+        strategyEntry.actionName = &((*existingStrategy).second);
+        strategyEntry.globalValues = (*existingStrategy).first;
+        newHistoryEntry->strategy = strategyEntry;
+        // cout << "ADDED " << strategyEntry.type << " " << strategyEntry.actionName->c_str() << " " << strategyEntry.globalValues << endl;
+        this->historyEnd->next = newHistoryEntry;
+        this->historyEnd = newHistoryEntry;
+    }
+    return true;
 }
 
 /// @brief Creates a HistoryEntry of the type MARK_DECISION_AS_INVALID and returns it.
@@ -605,6 +782,7 @@ HistoryEntry* Verification::newHistoryMarkDecisionAsInvalid(GlobalState* globalS
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->decision = decision;
     newHistoryEntry->next = nullptr;
+    // cout << decision->from->hash.c_str() << " -> " << decision->to->hash.c_str() << " marked as invalid" << endl;
     return newHistoryEntry;
 }
 
@@ -617,6 +795,7 @@ void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, Glo
     this->historyEnd->next = newHistoryEntry;
     this->historyEnd = newHistoryEntry;
 }
+
 
 /// @brief Reverts GlobalState and history to the previous decision state.
 /// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
@@ -651,6 +830,7 @@ bool Verification::revertLastDecision(int depth) {
         #endif
         this->undoLastHistoryEntry(true);
     }
+    // histDbg.print(DEPTH_PREFIX);
     
     #if VERBOSE
         vector<HistoryEntry*> dbgHEsToDelete;
@@ -760,6 +940,21 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
     else if (this->historyEnd->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
         this->historyEnd->decision->isInvalidDecision = false;
     }
+
+    if (config.probability && this->historyEnd->type == HistoryEntryType::CONTEXT && this->historyEnd->decision->from != this->historyEnd->decision->to) {
+        // remove state probability
+        #if VERBOSE
+            printf("removed probability from %s\n", historyEnd->decision->to->hash.c_str());
+        #endif
+        lowerProbability(historyEnd->decision->from, historyEnd->decision->to, historyEnd->decision->localTransitions);
+    }
+
+    if (this->historyEnd->strategy.type == StrategyEntryType::ADDED) {
+        #if VERBOSE
+            cout << "REMOVED " << this->historyEnd->strategy.type << " " << this->historyEnd->strategy.actionName->c_str() << " " << this->historyEnd->strategy.globalValues << endl;
+        #endif
+        this->naturalStrategy.erase(this->historyEnd->strategy.globalValues);
+    }
     
     auto entry = this->historyEnd;
     this->historyEnd = this->historyEnd->prev;
@@ -843,11 +1038,11 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
-bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions) {
+bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
-            // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
+            // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
             if (!this->restoreHistory(globalState, globalTransition, depth, false)) {
                 continue;
             }
@@ -859,6 +1054,14 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
         #if VERBOSE
             printf("%senter UNcontrolled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
         #endif
+        
+        // add state probability
+        if (config.probability && globalState != globalTransition->to) {
+            #if VERBOSE
+                printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), globalTransition->to->hash.c_str());
+            #endif
+            increaseProbability(globalState, globalTransition);
+        }
         auto isTransitionValid = this->verifyGlobalState(globalTransition->to, depth + 1);
         if (this->mode == TraversalMode::REVERT) {
             // Recursive verifyGlobalState caused REVERT mode
@@ -914,7 +1117,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode) {
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
     bool isMixedControlTransitions = false;
@@ -923,14 +1126,39 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         isMixedControlTransitions = true;
     }
 
+    map<string, set<GlobalTransition*>> probabilityTransitions; //might have some problems with more than 1 probability in one transition
+    set<GlobalTransition*> controlledGlobalTransitionsCopy;
+    
+    if (config.probability) {
+        controlledGlobalTransitionsCopy.insert(controlledGlobalTransitions.begin(), controlledGlobalTransitions.end());
+        for (const auto globalTransition : controlledGlobalTransitionsCopy) {
+            string foundProb = "";
+            for (auto locals : globalTransition->localTransitions) {
+                if (locals->probability != 1.0) {
+                    foundProb = locals->localName.c_str();
+                    if (probabilityTransitions.find(locals->localName.c_str()) == probabilityTransitions.end()) {
+                        probabilityTransitions.emplace(locals->localName.c_str(), set<GlobalTransition*>());
+                    }
+                    for (auto locals2 : globalTransition->localTransitions) {
+                        foundProb = locals2->localName.c_str();
+                        probabilityTransitions[foundProb].insert(globalTransition);
+                        controlledGlobalTransitions.erase(globalTransition);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
-    if (controlledGlobalTransitions.size() > 0) {
+    if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
         bool hasValidControlledTransition = false;
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
             if (this->mode == TraversalMode::RESTORE) {
                 // Skip loop iterations performed before the one from historyToRestore
-                // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalM<odel() calls)
+                // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
+                // cout << depth << endl;
                 if (!this->restoreHistory(globalState, globalTransition, depth, true)) {
                     continue;
                 }
@@ -955,15 +1183,47 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
             
             // About to go deeper - add history entry with type=CONTEXT
-            this->addHistoryContext(globalState, depth, globalTransition, true);
+            bool okStrategy = this->addHistoryContext(globalState, depth, globalTransition, true);
             
             #if VERBOSE
                 printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), globalTransition->from->hash.c_str(), globalTransition->to->hash.c_str());
             #endif
+
+            // add state probability
+            if (config.probability && globalState != globalTransition->to) {
+                #if VERBOSE
+                    printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), globalTransition->to->hash.c_str());
+                #endif
+                increaseProbability(globalState, globalTransition);
+            }
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            if (this->mode == TraversalMode::REVERT && !isFMode) {
-                // Recursive verifyGlobalState caused REVERT mode, just exit
-                return false;
+            if (config.natural_strategy && !okStrategy) {
+                hasValidControlledTransition = false;
+            }
+            if (this->mode == TraversalMode::REVERT) {
+                // Recursive verifyGlobalState caused REVERT mode
+                if (globalState == this->revertToGlobalState) {
+                    // This is the "top" state (first Y in selene-ver2.png) from which recursion should be rebuilt
+                    this->revertToGlobalState = nullptr;
+                    if (this->historyToRestore.empty()) {
+                        this->mode = TraversalMode::NORMAL;
+                        #if VERBOSE
+                            printf("%sset mode=NORMAL\n", DEPTH_PREFIX.c_str());
+                        #endif
+                    }
+                    else {
+                        this->mode = TraversalMode::RESTORE;
+                        #if VERBOSE
+                            printf("%sset mode=RESTORE\n", DEPTH_PREFIX.c_str());
+                        #endif
+                    }
+                    this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
+                    globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                    return this->verifyGlobalState(globalState, depth); // Same state, same depth
+                }
+                else {
+                    return false;
+                }
             }
             if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
                 this->undoHistoryUntil(prevHistoryEnd, false, depth); 
@@ -973,29 +1233,114 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
             if (hasValidControlledTransition) {
                 break;
+            } else if (config.probability && globalState != globalTransition->to) {
+                lowerProbability(globalState, globalTransition->to, globalTransition->localTransitions);
+            }
+        }
+        // Maybe a probabilistic action is an option
+        if (probabilityTransitions.size() > 0) {
+            for (auto currentSet : probabilityTransitions) {
+                GlobalTransition* initialDecision = *(currentSet.second.begin());
+
+                if (this->mode == TraversalMode::RESTORE) {
+                    // Skip loop iterations performed before the one from historyToRestore
+                    // Won't affect iterations to perform after, because mode would have been changed back to NORMAL by then (possibly in recursive verifyGlobalModel() calls)
+                    // cout << depth << endl;
+                    if (!this->restoreHistory(globalState, initialDecision, depth, true)) {
+                        continue;
+                    }
+                }
+                
+                // Ensure that the transtiion wasn't marked as invalid as a part of the RESTORE-REVERT procedure
+                if (initialDecision->isInvalidDecision) { 
+                    #if VERBOSE
+                        printf("%sIGNORE invalidInitialDecision in %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), initialDecision->to->hash.c_str());
+                    #endif
+                    continue;
+                }
+                
+                auto prevHistoryEnd = this->historyEnd;
+                
+                if (epistemicClass && fixedGlobalTransition == nullptr) {
+                    epistemicClass->fixedCoalitionTransition = initialDecision; 
+                    #if VERBOSE
+                        printf("%sDECIDE %s -[%s]-> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), initialDecision->joinLocalTransitionNames().c_str(), initialDecision->to->hash.c_str());
+                    #endif
+                    this->addHistoryDecision(globalState, initialDecision);
+                }
+                
+                // About to go deeper - add history entry with type=CONTEXT
+                bool okStrategy = this->addHistoryContext(globalState, depth, initialDecision, true);
+                
+                #if VERBOSE
+                    printf("%senter controlled %s -> %s\n", DEPTH_PREFIX.c_str(), initialDecision->from->hash.c_str(), initialDecision->to->hash.c_str());
+                #endif
+    
+                // add state probability
+                if (config.probability && globalState != initialDecision->to) {
+                    #if VERBOSE
+                        printf("%sadded probability to %s\n", DEPTH_PREFIX.c_str(), initialDecision->to->hash.c_str());
+                    #endif
+                    increaseProbability(globalState, initialDecision);
+                }
+                hasValidControlledTransition = this->verifyGlobalState(initialDecision->to, depth + 1);
+                if (config.natural_strategy && !okStrategy) {
+                    hasValidControlledTransition = false;
+                }
+                if (this->mode == TraversalMode::REVERT) {
+                    // Recursive verifyGlobalState caused REVERT mode
+                    if (globalState == this->revertToGlobalState) {
+                        // This is the "top" state (first Y in selene-ver2.png) from which recursion should be rebuilt
+                        this->revertToGlobalState = nullptr;
+                        if (this->historyToRestore.empty()) {
+                            this->mode = TraversalMode::NORMAL;
+                            #if VERBOSE
+                                printf("%sset mode=NORMAL\n", DEPTH_PREFIX.c_str());
+                            #endif
+                        }
+                        else {
+                            this->mode = TraversalMode::RESTORE;
+                            #if VERBOSE
+                                printf("%sset mode=RESTORE\n", DEPTH_PREFIX.c_str());
+                            #endif
+                        }
+                        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
+                        globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                        return this->verifyGlobalState(globalState, depth); // Same state, same depth
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
+                    this->undoHistoryUntil(prevHistoryEnd, false, depth); 
+                    #if VERBOSE
+                        printf("%sundoHistoryUntil (inside %s)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
+                    #endif
+                }
+                if (!hasValidControlledTransition) {
+                    continue;
+                }
+                currentSet.second.erase(initialDecision);
+                if (hasValidControlledTransition && this->checkUncontrolledSet(currentSet.second, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
+                    if (epistemicClass && fixedGlobalTransition == nullptr) {
+                        epistemicClass->fixedCoalitionTransition = initialDecision;
+                    }
+                    break;
+                }
             }
         }
         // Maybe a controlled action is an option too
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
-            // for (const auto globalTransition : uncontrolledGlobalTransitions) {
-            //     set<Agent*> agents = generator->getFormula()->coalition;
-            //     for (auto agt : agents) {
-            //         cout << (*globalTransition->localTransitions.begin())->name << " " << (*globalTransition->localTransitions.begin())->agent->name.c_str() << " ? " << agt->name << endl;
-            //         if ((*globalTransition->localTransitions.begin())->agent->name.c_str() != agt->name.c_str()) {
-            //             cout << "uh oh" << endl;
-            //             hasValidChoiceTransition = false;
-            //         }
-            //     }
-            // }
-            if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+            if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
                 hasValidChoiceTransition = false;
             }
             if (epistemicClass && fixedGlobalTransition == nullptr) {
                 epistemicClass->fixedCoalitionTransition = *uncontrolledGlobalTransitions.begin();
             }
         }
-        if (!hasValidControlledTransition && !hasValidChoiceTransition) {
+        if (!hasValidControlledTransition && !hasValidChoiceTransition && !hasValidControlledTransition) {
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!hasValidControlledTransition");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
@@ -1014,7 +1359,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     }
     
     // 2) verify paths not controlled by the coalition (all must be OK)
-    if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions)) {
+    if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
         return false;
     }
     return true;
@@ -1029,6 +1374,12 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
 bool Verification::restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled) {
     // Check if top history entry matches this loop iteration
     auto entry = this->historyToRestore.top();
+    while(entry->type == HistoryEntryType::DECISION) {
+        // cout << "Removed ";
+        // cout << entry->type << " " << entry->globalState->hash.c_str() << " " << entry->depth << " " << entry->decision->to->hash.c_str() << " " << entry->globalTransitionControlled << endl;
+        historyToRestore.pop();
+        entry = this->historyToRestore.top();
+    }
     if (entry->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
         entry->decision->isInvalidDecision = true;
         this->addHistoryMarkDecisionAsInvalid(entry->globalState, entry->decision);
@@ -1120,4 +1471,427 @@ void Verification::historyDecisionsERR() {
             }
         }
     }
+}
+
+/// @brief Changes globalState variables to a bitset used in natural strategy synthesis.
+/// @param globalState State that we want to extractvariable values from.
+/// @return Bitset of environment variable values.
+bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalState) {
+    LocalState* agentState;
+    for(auto agentStates : globalState->localStatesProjection) {
+        if(agentStates->agent == (*(this->generator->getFormula()->coalition.begin()))) {
+            agentState = agentStates;
+            break;
+        }
+    }
+    bitset<STRATEGY_BITS> currentValues = 0;
+    if (this->strategyVariableLimit == 0) {
+        this->variableNames.clear();
+    }
+    int it = 0;
+    for(auto variable : agentState->environment) {
+        currentValues |= ((variable.second ? 1 : 0) << it);
+        if (this->strategyVariableLimit == 0) {
+            this->variableNames.push_back(variable.first);
+        }
+        it++;
+    }
+    if (this->strategyVariableLimit == 0) {
+        strategyVariableLimit = it;
+    }
+    return currentValues;
+}
+
+/// @brief Get natural strategy map.
+/// @return Map of variable values and action names.
+map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> Verification::getNaturalStrategy() {
+    return this->naturalStrategy;
+}
+
+/// @brief Takes natural strategy from memory and reduces it using reduceStrategy().
+/// @return Vector of tuples <vector of tuples <variable value, variable name>, action name>.
+vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrategy() {
+    vector<tuple<vector<tuple<bool, string>>, string>> result;
+    for (auto item : naturalStrategy) {
+        tuple<vector<tuple<bool, string>>, string> newItem = {vector<tuple<bool, string>>(strategyVariableLimit, {false, ""}) , ""};
+        
+        auto values = item.first.to_ulong();
+        for (int i = 0; i < strategyVariableLimit; i++) {
+            if (values & 1) {
+                get<0>(get<0>(newItem)[i]) = true;
+            }
+            values = values >> 1;
+            get<1>(get<0>(newItem)[i]) = variableNames[i];
+        }
+        get<1>(newItem) = item.second;
+        result.push_back(newItem);
+    }
+    this->reductionComplexityBefore = 0;
+    for (auto item : result) {
+        this->reductionComplexityBefore += (strategyVariableLimit - 1);
+        for (auto values : get<0>(item)) {
+            this->reductionComplexityBefore += (get<0>(values) ? 1 : 2);
+        }
+    }
+    auto reduceResult = reduceStrategy(result);
+    auto temp = &get<0>(reduceResult[reduceResult.size() - 1]);
+    tuple<bool, string> t = {true, "T"};
+    temp->clear();
+    temp->push_back(t);
+    return reduceResult;
+}
+
+/// @brief Natural strategy reduction algorithm.
+/// @param strategyEntries Vector of tuples <vector of tuples <variable value, variable name>, action name> containing not reduced natural strategy.
+/// @param lockedColumn Index of the furthest leftmost locked column.
+/// @param upperHalf Indicates if the first columns of the processed strategy entries can't be shuffled. True if they can't be shuffled, false otherwise.
+/// @return Vector of tuples <vector of tuples <variable value, variable name>, action name>.
+vector<tuple<vector<tuple<bool, string>>, string>> Verification::reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn, bool upperHalf) {
+    queue<short> toBeRemoved;
+    short minSum = 999, minSumID = 0, maxSum = 0, maxSumID = 0, maxValue = strategyEntries.size();
+    // remove unnecessary columns
+    for (int i = (!upperHalf ? lockedColumn : lockedColumn + 1); i < get<0>(strategyEntries[0]).size(); i++) {
+        short sum = 0;
+        for (int j = 0; j < strategyEntries.size(); j++) {
+            sum += (get<0>(get<0>(strategyEntries[j])[i]) ? 1 : 0);
+        }
+        if (sum == strategyEntries.size() || sum == 0) {
+            toBeRemoved.push(i);
+        }
+        if (sum > 0 && sum < minSum) {
+            minSum = sum;
+            minSumID = i;
+        }
+        if (sum < strategyEntries.size() && sum > maxSum) {
+            maxSum = sum;
+            maxSumID = i;
+        }
+    }
+    vector<tuple<vector<tuple<bool, string>>, string>> result(strategyEntries.size(), {vector<tuple<bool, string>>(), ""});
+
+    for (int i = 0; i < strategyEntries.size(); i++) {
+        get<1>(result[i]) = get<1>(strategyEntries[i]);
+    }
+    short totalOffsetMin = 0;
+    short totalOffsetMax = 0;
+    for (int i = 0; i < get<0>(strategyEntries[0]).size(); i++) {
+        if (!toBeRemoved.empty() && toBeRemoved.front() == i) {
+            toBeRemoved.pop();
+            if (minSumID > i) {
+                totalOffsetMin++;
+            }
+            if (maxSumID > i) {
+                totalOffsetMax++;
+            }
+            continue;
+        }
+        for (int j = 0; j < strategyEntries.size(); j++) {
+            get<0>(result[j]).push_back(get<0>(strategyEntries[j])[i]);
+        }
+    }
+    minSumID -= totalOffsetMin;
+    maxSumID -= totalOffsetMax;
+
+    if (result.size() == 1 || get<0>(result[0]).size() == 0 || lockedColumn == get<0>(result[0]).size() - 1) {
+        return result;
+    }
+    //get a division point, pick least valued weighted count of 0's and 1's 
+    short winnerID = ((((maxValue - maxSum) * 2) < minSum) ? maxSumID : minSumID);
+
+    bool toLookFor = true;
+    if (minSumID != winnerID) {
+        toLookFor = false;
+    }
+    // bring the defining column to the front
+    for (int i = 0; i < result.size(); i++) {
+        swap(get<0>(result[i])[(!upperHalf ? lockedColumn : lockedColumn + 1)], get<0>(result[i])[winnerID]);
+    }
+
+    //sort by defining value
+    short swapSpot = 0;
+    for (int i = 0; i < result.size(); i++) {
+        if(get<0>(get<0>(result[i])[(!upperHalf ? lockedColumn : lockedColumn + 1)]) == toLookFor) {
+            swap(result[i], result[swapSpot]);
+            swapSpot++;
+        }
+    }
+    
+    vector<tuple<vector<tuple<bool, string>>, string>> finalResult;
+    finalResult.reserve(result.size());
+    vector<tuple<vector<tuple<bool, string>>, string>> upperPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin(), result.begin() + swapSpot);
+    vector<tuple<vector<tuple<bool, string>>, string>> lowerPart = vector<tuple<vector<tuple<bool, string>>, string>>(result.begin() + swapSpot, result.end());
+
+    upperPart = reduceStrategy(upperPart, lockedColumn + 1, true);
+    lowerPart = reduceStrategy(lowerPart, lockedColumn, false);
+
+    finalResult.insert(finalResult.end(), upperPart.begin(), upperPart.end());
+    finalResult.insert(finalResult.end(), lowerPart.begin(), lowerPart.end());
+
+    return finalResult;
+}
+
+/// @brief Natural strategy complexity before reduction. Each variable, negation, and, or are treated as value 1.
+/// @return Total sum of the natural strategy complexity before reduction.
+int Verification::getStrategyComplexity() {
+    return this->reductionComplexityBefore;
+}
+
+/// @brief Increases next GlobalState probability reached through the decision by adding to it a multiplied currentState probability with the decision probability.
+/// @param currentState From which GlobalState the action was executed.
+/// @param decision GlobalTransition containing all transitions in the executed action and the next reachable GlobalState.
+void Verification::increaseProbability(GlobalState* currentState, GlobalTransition* decision) {
+    float currentProb = currentState->probability;
+    for (auto prob : decision->localTransitions) {
+        currentProb *= prob->probability;
+    }
+    decision->to->probability += currentProb;
+}
+
+/// @brief Decreases previous GlobalState probability reached from the decision by subtracting from it a multiplied currentState probability with the decision probability.
+/// @param currentStateFrom From which GlobalState the action was executed.
+/// @param currentStateTo To which grobal state the action was executed.
+/// @param decision Set of LocalTransition containing all transitions in the executed action.
+void Verification::lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision) {
+    float currentProb = currentStateFrom->probability;
+    for (auto prob : decision) {
+        currentProb *= prob->probability;
+    }
+    currentStateTo->probability -= currentProb;
+}
+
+/// @brief Verifies a strategy with the previously given models and formula.
+/// @return Result containing data of the verification result.
+Result Verification::verifyStrategy() {
+    Result verificationResult;
+    VerificationFormulaMode formulaMode = this->generator->getFormula()->isF ? VerificationFormulaMode::F : VerificationFormulaMode::G;
+    stack<StateVerificationInfo> statesToProcess;
+    StateVerificationInfo initState;
+    StateVerificationInfo* currentState;
+    initState.globalState = this->generator->getCurrentGlobalModel()->initState;
+    initState.depth = 0;
+    statesToProcess.emplace(initState);
+    int lastDepth = -1;
+
+    while (!statesToProcess.empty()) {
+        currentState = &statesToProcess.top();
+        cout << string(20, '=') << endl;
+        cout << "Stack size: " << statesToProcess.size() << endl;
+        cout << "Coalition is at: " << generator->getCoalitionIdentifier(&currentState->globalState->localStatesProjection) << endl;
+        cout << "Should execute: " << generator->getActionNameFromStateInStrategy(currentState->globalState) << endl;
+
+        // reached a previously visited state by going forward
+        if (currentState->depth > lastDepth) {
+            lastDepth = currentState->depth;
+            if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_ERR) {
+                if (currentState->fromState != nullptr) {
+                    currentState->fromState->verifResult = VerifResult::FALSE;
+                }
+                // initiate rollback
+                statesToProcess.pop();
+                continue;
+            } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::VERIFIED_OK) {
+                // go on
+                statesToProcess.pop();
+                continue;
+            } else if (currentState->globalState->verificationStatus == GlobalStateVerificationStatus::PENDING) {
+                if (formulaMode == VerificationFormulaMode::F) {
+                    if (currentState->fromState != nullptr) {
+                        currentState->fromState->verifResult = VerifResult::FALSE;
+                    }
+                }
+                // initiate rollback
+                statesToProcess.pop();
+                continue;
+            }
+        }
+        lastDepth = currentState->depth;
+
+        // got back to the state after some other states got taken off the stack and they returned VerifResult::FALSE
+        if (currentState->verifResult == VerifResult::FALSE) {
+            if (currentState->controlled) { // if processing controlled then switch back to VerifResult::NOT_VERIFIED
+                if (!currentState->controlledTransitionsLeftToProcess.empty()) { // there are options
+                    currentState->verifResult = VerifResult::NOT_VERIFIED;
+                } else { // there are no options left
+                    if (currentState->fromState != nullptr) {
+                        currentState->fromState->verifResult = VerifResult::FALSE;
+                    }
+                    // initiate rollback
+                    statesToProcess.pop();
+                    continue;
+                }
+            } else if (currentState->uncontrolled) { // if processing uncontrolled then propagate VerifResult::FALSE and initiate rollback
+                if (currentState->fromState != nullptr) {
+                    currentState->fromState->verifResult = VerifResult::FALSE;
+                }
+                // initiate rollback
+                statesToProcess.pop();
+                continue;
+            }
+        }
+
+        // do some initial processing for the state
+        if (!currentState->processed) {
+            // mark state as pending if haven't visited it yet
+            this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::PENDING);
+            dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::PENDING, "entered state");
+            currentState->globalState->verificationStatus = GlobalStateVerificationStatus::PENDING;
+            // 1) verify localStates that the globalState is composed of
+            if (formulaMode == VerificationFormulaMode::F) { // F
+                if (currentState->globalState->stateVerifResult == VerifResult::TRUE || this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
+                    this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_OK);
+                    dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::VERIFIED_OK, "all passed");
+                    currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_OK;
+                    // cache the result for later
+                    currentState->globalState->stateVerifResult = VerifResult::TRUE;
+                    statesToProcess.pop();
+                    continue;
+                } else {
+                    // cache the result for later
+                    currentState->globalState->stateVerifResult = VerifResult::FALSE;
+                }
+            } else { // G
+                if (currentState->globalState->stateVerifResult == VerifResult::FALSE || !this->verifyLocalStates(&currentState->globalState->localStatesProjection, currentState->globalState)) {
+                    this->addHistoryStateStatus(currentState->globalState, currentState->globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                    dbgVerifStatus(string(currentState->depth * 4, ' '), currentState->globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "localStates verification");
+                    currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                    // cache the result for later
+                    currentState->globalState->stateVerifResult = VerifResult::FALSE;
+                    // trigger revert until last decision
+                    // todo here
+                    continue;
+                } else {
+                    // cache the result for later
+                    currentState->globalState->stateVerifResult = VerifResult::TRUE;
+                }
+            }
+            
+            // 2) ensure that the state is expanded
+            if (!currentState->globalState->isExpanded) {
+                this->generator->expandState(currentState->globalState);
+            }
+
+            // classify transition end global states
+            for (auto globalTransition : currentState->globalState->globalTransitions) {
+                // add CTL support here
+                auto epistemicClass = this->getEpistemicClassForGlobalState(currentState->globalState);
+                auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+                if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
+                    if (!config.verify_strategy) {
+                        if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
+                            currentState->controlledTransitionsLeftToProcess.emplace(globalTransition);
+                        } else if (fixedGlobalTransition == nullptr) {
+                            // the decision is invalid, skip it
+                        } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
+                            // controlled transition that is fixed should be treated as an uncontrolled transition 
+                            #if VERBOSE
+                                printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+                            #endif
+                            if (!config.probability) {
+                                currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
+                            } else {
+                                string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
+                                for (auto globalTransition2 : currentState->globalState->globalTransitions) {
+                                    if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
+                                        currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition2);
+                                    }
+                                }
+                            }
+                        }
+                    } else if (generator->getActionNameFromStateInStrategy(currentState->globalState) != ";" && generator->getActionNameFromStateInStrategy(currentState->globalState) != "") {
+                        if (globalTransition->joinLocalTransitionNames().find(generator->getActionNameFromStateInStrategy(currentState->globalState)) != string::npos) {
+                            // cout << "Should use: " << globalTransition->joinLocalTransitionNames() << endl;
+                            currentState->controlledTransitionsLeftToProcess.emplace(globalTransition);
+                        } else {
+                            // cout << "Shouldn't use: " << globalTransition->joinLocalTransitionNames() << endl;
+                        }
+                        // might need to fix it when there's multiple agents in a coalition
+                    }
+                } else {
+                    currentState->uncontrolledTransitionsLeftToProcess.emplace(globalTransition);
+                }
+            }
+            if (!currentState->controlledTransitionsLeftToProcess.empty()) {
+                currentState->controlled = true;
+            }
+            if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) {
+                currentState->uncontrolled = true;
+            }
+            currentState->processed = true;
+        }
+
+        // push another state onto the queue, go back and continue or return a value
+        if (!currentState->controlledTransitionsLeftToProcess.empty()) { // process controlled states, one by one
+            StateVerificationInfo newState;
+            newState.globalState = currentState->controlledTransitionsLeftToProcess.front()->to;
+            newState.fromState = currentState;
+            newState.depth = currentState->depth + 1;
+            statesToProcess.emplace(newState);
+            currentState->controlledTransitionsLeftToProcess.pop();
+        } else if (!currentState->uncontrolledTransitionsLeftToProcess.empty()) { // process uncontrolled states, one by one
+            StateVerificationInfo newState;
+            newState.globalState = currentState->uncontrolledTransitionsLeftToProcess.front()->to;
+            newState.fromState = currentState;
+            newState.depth = currentState->depth + 1;
+            statesToProcess.emplace(newState);
+            currentState->uncontrolledTransitionsLeftToProcess.pop();
+        } else {
+            // if got back to the state, processed all states and they didn't invalidate parent state, mark it as correct
+            if (currentState->verifResult == VerifResult::NOT_VERIFIED) {
+                currentState->verifResult = VerifResult::TRUE;
+                if (currentState->fromState != nullptr) {
+                    // go on
+                    statesToProcess.pop();
+                    continue;
+                } else { // got back to root state
+                    if (currentState->verifResult == VerifResult::TRUE) {
+                        verificationResult.verificationResult = true;
+                    } else {
+                        verificationResult.verificationResult = false;
+                    }
+                    statesToProcess.pop();
+                }
+            }
+        }
+    }
+    return verificationResult;
+}
+
+Result Verification::verifyMDP()
+{
+    Result newResult;
+    newResult.verificationResult = false;
+    float targetProb = generator->getFormula()->probability;
+    ProbabilitySign probSign = generator->getFormula()->probabilitySign;
+    float resultProb = 0.0;
+    while (true)
+    {
+        bool makeOpponentGoMax = false;
+        if ((generator->getFormula()->isF == true && probSign == ProbabilitySign::LE) ||
+        (generator->getFormula()->isF == true && probSign == ProbabilitySign::LT) ||
+        (generator->getFormula()->isF == false && probSign == ProbabilitySign::GE) ||
+        (generator->getFormula()->isF == false && probSign == ProbabilitySign::GT)) {
+            makeOpponentGoMax = true;
+        }
+        MDP mdp = generator->generateNextMDP(makeOpponentGoMax);
+        if (mdp.state_count() == 0) {
+            break;
+        }
+        auto&& re = algorithms::solve_mpi(mdp, 1, numvec(0), indvec(0), 100, SOLPREC, 100, SOLPREC/2, false);
+        resultProb = abs(re.valuefunction[0]);
+        if (generator->getFormula()->isF == false) {
+            resultProb = 1.0 - resultProb;
+        }
+        if ((probSign == ProbabilitySign::GE && resultProb < targetProb) ||
+        (probSign == ProbabilitySign::GT && resultProb <= targetProb) ||
+        (probSign == ProbabilitySign::LE && resultProb > targetProb) ||
+        (probSign == ProbabilitySign::LT && resultProb >= targetProb)) {
+            continue;
+        }
+        newResult.probabilityResult.probabilityTrue = resultProb;
+        newResult.probabilityResult.probabilityFalse = 1.0 - resultProb;
+        newResult.verificationResult = true;
+        break;
+    }
+    
+    return newResult;
 }
