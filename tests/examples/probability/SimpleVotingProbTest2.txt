@@ -1,0 +1,29 @@
+Agent Voter1:
+LOCAL: [v11, v12, v1c]
+PERSISTENT: [v11, v12, v1c]
+INITIAL: [v11:=0, v12:=0, v1c:=0]
+init q0
+regm: q0 -> q1
+regi: q0 -> q2
+regp: q0 -> q3
+packm: q1 -> q4
+packi: q2 -> q5
+packp: q3 -> q6
+
+vote1m: q4 -> 10/100 : q7 [v11:=1]
+vote1m: q4 -> 90/100 : q13 [v1c:=1]
+
+vote2m: q5 -> 0.1   : q8 [v12:=1,v1c:=1]
+vote2m: q5 -> 1-0.1 : q13 [v1c:=1]
+
+idle: q6 -> q7
+
+idle: q7 -> q7
+idle: q8 -> q8
+idle: q9 -> q9
+idle: q10 -> q10
+idle: q11 -> q11
+idle: q12 -> q12
+idle: q13 -> q13
+
+FORMULA: <<Voter1>>[]&P[>=0.1](v1c>=0)

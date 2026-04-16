@@ -7,6 +7,7 @@ var structLocalTransition =
     [ "isShared", "structLocalTransition.html#aaad00680a812ed1671a65015d4e51754", null ],
     [ "localName", "structLocalTransition.html#afeabf0f7f88c17046e9c984a1f17c972", null ],
     [ "name", "structLocalTransition.html#a71d43959302dac3665c1168a7ecc9bcf", null ],
+    [ "probability", "structLocalTransition.html#a3ab704d30285de8da5f791033702fa9d", null ],
     [ "sharedCount", "structLocalTransition.html#a4bd31c2f99c1ddb41234bf97ab7dfe4a", null ],
     [ "to", "structLocalTransition.html#a3532810736170bc57a6a25aa09a7ee28", null ]
 ];

@@ -8,29 +8,9 @@
 
 #include <stack>
 #include "Types.hpp"
+#include "TypesDependency.hpp"
 #include "GlobalModelGenerator.hpp"
 #include <bitset>
-
-/// @brief StrategyEntry entry type.
-enum StrategyEntryType {
-    NOT_MODIFIED, ///< Entry didn't have to get modified.
-    ADDED, ///< Entry got added to the map.
-};
-
-struct StrategyEntry {
-    StrategyEntryType type = NOT_MODIFIED;
-    bitset<STRATEGY_BITS> globalValues = 0;
-    string* actionName;
-};
-
-/// @brief HistoryEntry entry type.
-enum HistoryEntryType {
-    DECISION, ///< Made the decision to go to a state using a transition.
-    STATE_STATUS, ///< Changed verification status.
-    CONTEXT, ///< Recursion has gone deeper.
-    MARK_DECISION_AS_INVALID, ///< Marking a transition as invalid.
-    UNCONTROLLED_DECISION, ///< One uncontrolled choice from a set, from which all of them has to be OK.
-};
 
 string verStatusToStr(GlobalStateVerificationStatus status);
 
@@ -79,8 +59,6 @@ struct HistoryEntry {
     };
 };
 
-
-
 /// @brief Stores history and allows displaying it to the console.
 class HistoryDbg {
 public:
@@ -102,13 +80,6 @@ enum TraversalMode {
     RESTORE, ///< Backtracking through recursion.
 };
 
-/// @brief A comparator for two bitsets containing values for the global states.
-struct StrategyBitsComparator {
-    bool operator() (const bitset<STRATEGY_BITS> &b1, const bitset<STRATEGY_BITS> &b2) const {
-        return b1.to_ulong() < b2.to_ulong();
-    }
-};
-
 /// @brief A class that verifies if the model fulfills the formula. Also can do some operations on decision history.
 class Verification {
 public:
@@ -120,6 +91,8 @@ public:
     map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
     vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
     int getStrategyComplexity();
+    Result verifyStrategy();
+    Result verifyMDP();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
@@ -166,6 +139,8 @@ protected:
     bool maxFixpointVerify();
     bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
     vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
+    void increaseProbability(GlobalState* currentState, GlobalTransition* decision);
+    void lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision);
 };
 
 #endif // SELENE_VERIFICATION

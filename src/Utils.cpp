@@ -267,6 +267,13 @@ void loadConfigFromArgs(int argc, char** argv) {
                 config.fixpoint = 1;
             } else if (arg == "-NATURAL_STRATEGY" || arg == "--NATURAL_STRATEGY") {
                 config.natural_strategy = 1;
+            } else if (arg == "-STRATEGY_FROM_FILE" || arg == "--STRATEGY_FROM_FILE") {
+                config.verify_strategy = 1;
+                if (i + 1 < argc) {
+                    config.strategy_file_path = argv[++i];
+                } else {
+                    printf("ERR: no file path was specified!\n");
+                }
             }
         }
     }

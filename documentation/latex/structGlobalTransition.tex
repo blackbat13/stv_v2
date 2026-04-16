@@ -12,9 +12,11 @@ Represents a single global transition.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}\label{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}} 
-string {\bfseries join\+Local\+Transition\+Names} (char sep=\textquotesingle{};\textquotesingle{})
-\end{DoxyCompactItemize}
+\mbox{\Hypertarget{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}\label{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}} 
+\mbox{\hyperlink{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}{Global\+Transition}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}{join\+Local\+Transition\+Names}} (char sep=\textquotesingle{};\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em Concatenates local transition names into a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -43,6 +45,27 @@ static atomic\+\_\+uint32\+\_\+t {\bfseries next\+\_\+id}
 
 \doxysubsection{Detailed Description}
 Represents a single global transition. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}\label{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}} 
+\index{GlobalTransition@{GlobalTransition}!joinLocalTransitionNames@{joinLocalTransitionNames}}
+\index{joinLocalTransitionNames@{joinLocalTransitionNames}!GlobalTransition@{GlobalTransition}}
+\doxysubsubsection{\texorpdfstring{joinLocalTransitionNames()}{joinLocalTransitionNames()}}
+{\footnotesize\ttfamily string Global\+Transition\+::join\+Local\+Transition\+Names (\begin{DoxyParamCaption}\item[{char}]{sep = {\ttfamily \textquotesingle{};\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+Concatenates local transition names into a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sep} & Separator used for separating the transition names. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String of transition names joined with the given separator and ending on the separator. 
+\end{DoxyReturn}
+
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

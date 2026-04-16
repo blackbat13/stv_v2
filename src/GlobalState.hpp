@@ -8,6 +8,9 @@
 #define GLOBAL_STATE
 
 #include "Common.hpp"
+#include "TypesDependency.hpp"
+
+extern Cfg config;
 
 /// @brief Represents a single global state.
 struct GlobalState {
@@ -24,7 +27,12 @@ struct GlobalState {
     bool isExpanded;
 
     /// @brief Current verifivation status of this state.
-    GlobalStateVerificationStatus verificationStatus;
+    GlobalStateVerificationStatus verificationStatus = GLOBAL_STATE_VERIFICATION_STATUS::UNVERIFIED;
+
+    /// @brief Collective probability of the state.
+    float probability = config.probability ? 0.0 : 1.0;
+
+    bool goodState = false;
     
     // Bindings
 
@@ -40,6 +48,11 @@ struct GlobalState {
     /// @brief States in the same epistemic class as the current one, for KBC
     map<Agent*, set<GlobalState*>*> epistemicClassesAllAgents;
 
+    ProbabilityEntry probabilityResult;
+
+    /// @brief Used to resolve self loops during probability calculation
+    GlobalTransition* probabilityLoop = nullptr;
+
     /// @brief Debug information on the given GlobalState
     /// @param indent - optional indentation string 
     /// @return GlobalState data
@@ -48,6 +61,8 @@ struct GlobalState {
     /// @brief Get for the environment of a given global state.
     /// @return A map of variable names and their values for the current global state.
     map<string, int> getGlobalStateEnvironment();
+
+    VerifResult stateVerifResult = VerifResult::NOT_VERIFIED;
 };
 
 #endif

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['historyentrytype_495',['HistoryEntryType',['../Verification_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4',1,'Verification.hpp']]]
+  ['graphtraversalmode_660',['GraphTraversalMode',['../VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6',1,'VerificationIterative.hpp']]]
 ];

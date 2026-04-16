@@ -43,6 +43,7 @@ CLI configuration overwrite:
 # --REDUCE_ALL               reduce the amount of states and transitions using a DFS-POR algorithm and select all avaliable transitions
 # --FIXPOINT                 enables fixpoint approximation
 # --NATURAL_STRATEGY         generate a natural strategy for the given model
+# --STRATEGY_FROM_FILE       set a strategy to the one given in a file
 ```
 
 ## Tests

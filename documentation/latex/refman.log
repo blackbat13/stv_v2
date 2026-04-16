@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.8)  28 OCT 2024 19:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2023.5.8)  16 OCT 2025 19:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,9 +874,7 @@ LaTeX Font Info:    Trying to load font information for T1+pcr on input line 16
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [3] [4] [5] [6]
-[7] [8] [9] [10
-
-]
+[7] [8] [9] [10] [11] [12]
 Package hyperref Info: Option `pageanchor' set `true' on input line 171.
 
 Chapter 1.
@@ -904,31 +902,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
 [1
 
+
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
+Underfull \hbox (badness 10000) in paragraph at lines 96--97
 
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+phv on input line 1
-20.
+22.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 8.99994pt on input line 120.
+(Font)              scaled to size 8.99994pt on input line 122.
  [2]
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
 
  []
 
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 166.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 168.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.99994pt on input line 166.
+(Font)              scaled to size 8.99994pt on input line 168.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 166.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 168.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 6.29996pt on input line 166.
+(Font)              scaled to size 6.29996pt on input line 168.
 ) [3] [4
 
 ]
@@ -937,126 +936,163 @@ Chapter 2.
 Chapter 3.
 (./annotated.tex [7
 
-]) [8]
+] [8]) [9] [10
+
+]
 Chapter 4.
 (./files.tex
 
-LaTeX Warning: Reference `clock__test_8h' on page 9 undefined on input line 5.
+LaTeX Warning: Reference `clock__test_8h' on page 11 undefined on input line 5.
 
 
-LaTeX Warning: Reference `ConditionOperator_8hpp' on page 9 undefined on input 
-line 7.
+
+LaTeX Warning: Reference `ConditionOperator_8hpp' on page 11 undefined on input
+ line 7.
 
 
-LaTeX Warning: Reference `config_8h' on page 9 undefined on input line 8.
+LaTeX Warning: Reference `config_8h' on page 11 undefined on input line 8.
 
 
-LaTeX Warning: Reference `Constants_8hpp' on page 9 undefined on input line 9.
+LaTeX Warning: Reference `Constants_8hpp' on page 11 undefined on input line 9.
 
 
-LaTeX Warning: Reference `ctl__test_8h' on page 9 undefined on input line 10.
+
+LaTeX Warning: Reference `ctl__test_8h' on page 11 undefined on input line 10.
 
 
-LaTeX Warning: Reference `general__test_8h' on page 9 undefined on input line 1
-6.
+LaTeX Warning: Reference `general__test_8h' on page 11 undefined on input line 
+16.
 
 
-LaTeX Warning: Reference `GlobalStateVerificationStatus_8hpp' on page 9 undefin
-ed on input line 22.
+LaTeX Warning: Reference `GlobalStateVerificationStatus_8hpp' on page 11 undefi
+ned on input line 22.
 
-[9
+[11]
 
-]
-
-LaTeX Warning: Reference `hartley__test_8h' on page 10 undefined on input line 
+LaTeX Warning: Reference `hartley__test_8h' on page 12 undefined on input line 
 25.
 
 
-LaTeX Warning: Reference `input__error__test_8h' on page 10 undefined on input 
+LaTeX Warning: Reference `input__error__test_8h' on page 12 undefined on input 
 line 26.
 
 
-LaTeX Warning: Reference `knowledge__test_8h' on page 10 undefined on input lin
+LaTeX Warning: Reference `knowledge__test_8h' on page 12 undefined on input lin
 e 27.
 
 
-LaTeX Warning: Reference `LocalTransition_8hpp' on page 10 undefined on input l
-ine 30.
-
-
-LaTeX Warning: Reference `ModelParser_8hpp' on page 10 undefined on input line 
+LaTeX Warning: Reference `ModelParser_8hpp' on page 12 undefined on input line 
 32.
 
 
-LaTeX Warning: Reference `parser_8h' on page 10 undefined on input line 35.
+LaTeX Warning: Reference `natural__strategy__test_8h' on page 12 undefined on i
+nput line 33.
 
 
-LaTeX Warning: Reference `recursion__test_8h' on page 10 undefined on input lin
-e 36.
+LaTeX Warning: Reference `new__clock__test_8h' on page 12 undefined on input li
+ne 34.
 
 
-LaTeX Warning: Reference `reduction__test_8h' on page 10 undefined on input lin
-e 37.
+LaTeX Warning: Reference `new__simple__voting__run__test_8h' on page 12 undefin
+ed on input line 35.
 
 
-LaTeX Warning: Reference `simple__voting__run__test_8h' on page 10 undefined on
- input line 38.
+LaTeX Warning: Reference `new__simple__voting__run__test__but__faster_8h' on pa
+ge 12 undefined on input line 36.
 
 
-LaTeX Warning: Reference `simple__voting__run__test__but__faster_8h' on page 10
+LaTeX Warning: Reference `new__simple__voting__test_8h' on page 12 undefined on
+ input line 37.
+
+
+LaTeX Warning: Reference `new__simple__voting__test__but__faster_8h' on page 12
+ undefined on input line 38.
+
+
+LaTeX Warning: Reference `new__simple__voting__with__fakes__test_8h' on page 12
  undefined on input line 39.
 
 
-LaTeX Warning: Reference `simple__voting__test_8h' on page 10 undefined on inpu
-t line 40.
+LaTeX Warning: Reference `parser_8h' on page 12 undefined on input line 42.
 
 
-LaTeX Warning: Reference `simple__voting__test__but__faster_8h' on page 10 unde
-fined on input line 41.
+LaTeX Warning: Reference `probability__test_8h' on page 12 undefined on input l
+ine 43.
 
 
-LaTeX Warning: Reference `simple__voting__with__fakes__test_8h' on page 10 unde
-fined on input line 42.
+LaTeX Warning: Reference `recursion__test_8h' on page 12 undefined on input lin
+e 44.
 
 
-LaTeX Warning: Reference `test__test_8h' on page 10 undefined on input line 43.
+LaTeX Warning: Reference `reduction__test_8h' on page 12 undefined on input lin
+e 45.
+
+
+LaTeX Warning: Reference `simple__voting__run__test_8h' on page 12 undefined on
+ input line 46.
+
+
+LaTeX Warning: Reference `simple__voting__run__test__but__faster_8h' on page 12
+ undefined on input line 47.
+
+
+LaTeX Warning: Reference `simple__voting__test_8h' on page 12 undefined on inpu
+t line 48.
+
+
+LaTeX Warning: Reference `simple__voting__test__but__faster_8h' on page 12 unde
+fined on input line 49.
+
+
+LaTeX Warning: Reference `simple__voting__with__fakes__test_8h' on page 12 unde
+fined on input line 50.
+
+
+LaTeX Warning: Reference `strategyParser_8h' on page 12 undefined on input line
+ 53.
+
+
+LaTeX Warning: Reference `test__test_8h' on page 12 undefined on input line 55.
 
 
 
-LaTeX Warning: Reference `trains__test_8h' on page 10 undefined on input line 4
-4.
+LaTeX Warning: Reference `trains__test_8h' on page 12 undefined on input line 5
+6.
 
 
-LaTeX Warning: Reference `trains__with__bridge__test_8h' on page 10 undefined o
-n input line 45.
+LaTeX Warning: Reference `trains__with__bridge__test_8h' on page 12 undefined o
+n input line 57.
 
 
-LaTeX Warning: Reference `tree__test_8h' on page 10 undefined on input line 46.
+LaTeX Warning: Reference `tree__test_8h' on page 12 undefined on input line 58.
 
 
-) [10]
+[12]) [13] [14
+
+]
 Chapter 5.
-(./classAgent.tex
+(./structAction.tex
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 12.
+) (./classActionTemplate.tex
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 8.09995pt on input line 16.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 16.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 8.09995pt on input line 16.
+ [15]
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 50.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 39.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 50.
- [11
-
-]
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 39.
+) (./classAgent.tex
+[16] [17]
 Underfull \hbox (badness 10000) detected at line 81
 [][][]
  []
 
-) (./classAgentTemplate.tex [12] [13]
+) (./classAgentTemplate.tex [18]
 Underfull \hbox (badness 10000) detected at line 61
 [][][]
  []
@@ -1071,12 +1107,12 @@ Underfull \hbox (badness 10000) detected at line 89
 [][][]
  []
 
-
+[19]
 Underfull \hbox (badness 10000) detected at line 97
 [][][]
  []
 
-[14]
+
 Underfull \hbox (badness 10000) detected at line 117
 [][][]
  []
@@ -1086,7 +1122,7 @@ Underfull \hbox (badness 10000) detected at line 125
 [][][]
  []
 
-
+[20]
 Underfull \hbox (badness 10000) detected at line 145
 [][][]
  []
@@ -1096,7 +1132,7 @@ Underfull \hbox (badness 10000) detected at line 153
 [][][]
  []
 
-[15]
+
 Underfull \hbox (badness 10000) detected at line 173
 [][][]
  []
@@ -1106,7 +1142,7 @@ Underfull \hbox (badness 10000) detected at line 181
 [][][]
  []
 
-
+[21]
 Underfull \hbox (badness 10000) detected at line 201
 [][][]
  []
@@ -1116,7 +1152,7 @@ Underfull \hbox (badness 10000) detected at line 209
 [][][]
  []
 
-[16]
+
 Underfull \hbox (badness 10000) detected at line 229
 [][][]
  []
@@ -1126,57 +1162,57 @@ Underfull \hbox (badness 10000) detected at line 237
 [][][]
  []
 
-) (./classAssignment.tex [17]) (./structCfg.tex [18]
+[22]) (./classAssignment.tex [23]) (./structCfg.tex
 LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
 (Font)              Font shape `TS1/phv/m/sl' tried instead on input line 29.
 LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
 (Font)              scaled to size 8.09995pt on input line 29.
-) (./structCondition.tex)
-(./classDotGraph.tex [19]
+) (./structCondition.tex
+[24]) (./structDecisionEntry.tex [25]) (./classDotGraph.tex
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <9> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 19.
- [20] [21]) (./structEpistemicClass.tex)
-(./classExprAdd.tex [22] [23]
+ [26] [27])
+(./structEpistemicClass.tex) (./classExprAdd.tex [28] [29] [30]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprAnd.tex [24]
+) (./classExprAnd.tex [31]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprConst.tex [25]
+) (./classExprConst.tex [32]
 Underfull \hbox (badness 10000) detected at line 61
 [][][]
  []
 
-) (./classExprDiv.tex [26] [27]
+) (./classExprDiv.tex [33] [34] [35]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprEq.tex [28]
+) (./classExprEq.tex [36]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprGe.tex [29]
+) (./classExprGe.tex [37]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprGt.tex [30] [31] [32]
+) (./classExprGt.tex [38] [39] [40]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprHart.tex [33]
+) (./classExprHart.tex [41]
 Underfull \hbox (badness 10000) detected at line 67
 [][][]
  []
 
-) (./classExprIdent.tex [34]
+) (./classExprIdent.tex [42]
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 7.19995pt on input line 48.
 
@@ -1189,156 +1225,190 @@ Underfull \hbox (badness 10000) in paragraph at lines 57--58
 
  []
 
-[35] [36]
+[43] [44]
 Underfull \hbox (badness 10000) detected at line 79
 [][][]
  []
 
-) (./classExprKnow.tex [37]
+) (./classExprKnow.tex [45]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprLe.tex [38]
+) (./classExprLe.tex [46]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprLt.tex [39] [40] [41]
+) (./classExprLt.tex [47] [48] [49]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprMul.tex [42]
+) (./classExprMul.tex [50]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprNe.tex [43]
+) (./classExprNe.tex [51]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprNode.tex [44]
+) (./classExprNode.tex [52]
 Underfull \hbox (badness 10000) detected at line 41
 [][][]
  []
 
-) (./classExprNot.tex [45] [46]
+) (./classExprNot.tex [53] [54]
 Underfull \hbox (badness 10000) detected at line 61
 [][][]
  []
 
-) (./classExprOr.tex [47]
+) (./classExprOr.tex [55]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprRem.tex [48]
+) (./classExprRem.tex [56]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./classExprSub.tex [49] [50] [51]
+) (./classExprSub.tex [57] [58] [59]
 Underfull \hbox (badness 10000) detected at line 63
 [][][]
  []
 
-) (./structFormula.tex) (./structFormulaTemplate.tex) (./structGlobalModel.tex
-[52]) (./classGlobalModelGenerator.tex [53]
-Underfull \hbox (badness 776) in paragraph at lines 73--74
+) (./structFormula.tex) (./structFormulaTemplate.tex [60])
+(./structGlobalModel.tex) (./classGlobalModelGenerator.tex [61] [62]
+Underfull \hbox (badness 776) in paragraph at lines 83--84
 [][] $\OMS/cmsy/m/n/10 ^^C$ [] \T1/phv/m/n/10 (vector$\OML/cmm/m/it/10 <$ [] $\
 OMS/cmsy/m/n/10 ^^C$ $\OML/cmm/m/it/10 >$ $\OMS/cmsy/m/n/10 ^^C$\T1/phv/m/n/10 
 local[]States, []
  []
 
-[54] [55]
-Underfull \hbox (badness 10000) detected at line 123
+[63]
+Underfull \hbox (badness 10000) detected at line 139
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 141
+Underfull \hbox (badness 10000) detected at line 157
 [][][]
  []
 
-[56]
-Underfull \hbox (badness 10000) detected at line 206
-[][][]
- []
-
-[57]
-Underfull \hbox (badness 10000) detected at line 226
+[64] [65]
+Underfull \hbox (badness 10000) detected at line 237
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 246
+Underfull \hbox (badness 10000) detected at line 257
 [][][]
  []
 
-[58]
-Underfull \hbox (badness 10000) detected at line 278
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 300
+[66]
+Underfull \hbox (badness 10000) detected at line 277
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 318
+Underfull \hbox (badness 10000) detected at line 309
 [][][]
  []
 
-[59]
+[67]
 Underfull \hbox (badness 10000) detected at line 331
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 344
+Underfull \hbox (badness 10000) detected at line 349
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 357
+Underfull \hbox (badness 10000) detected at line 367
+[][][]
+ []
+
+[68]
+Underfull \hbox (badness 10000) detected at line 385
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 370
-[][][]
- []
-
-[60]
-Underfull \hbox (badness 10000) detected at line 390
-[][][]
- []
-
-) (./structGlobalState.tex [61]
-Underfull \hbox (badness 10000) detected at line 59
+Underfull \hbox (badness 10000) detected at line 398
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 77
+Underfull \hbox (badness 10000) detected at line 411
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 424
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 437
+[][][]
+ []
+
+[69]
+Underfull \hbox (badness 10000) detected at line 457
+[][][]
+ []
+
+[70]
+Underfull \hbox (badness 10000) detected at line 485
+[][][]
+ []
+
+) (./structGlobalState.tex [71]
+Underfull \hbox (badness 10000) detected at line 74
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 92
 [][][]
  []
 
 ) (./structGlobalModelGenerator_1_1GlobalStateTupleHash.tex)
-(./structGlobalTransition.tex [62]) (./classHistoryDbg.tex [63] [64]
+(./structGlobalTransition.tex [72]
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 5
+4.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+)
+LaTeX Font Info:    Font shape `TS1/pcr/m/it' in size <8> not available
+(Font)              Font shape `TS1/pcr/m/sl' tried instead on input line 54.
+ [73]
+Underfull \hbox (badness 10000) detected at line 65
+[][][]
+ []
+
+) (./classHistoryDbg.tex [74]
 Underfull \hbox (badness 10000) detected at line 71
 [][][]
  []
 
-) (./structHistoryEntry.tex [65]
-Underfull \hbox (badness 10000) detected at line 63
+
+Overfull \vbox (9.6564pt too high) has occurred while \output is active []
+
+
+[75]) (./structHistoryEntry.tex [76]
+Underfull \hbox (badness 10000) detected at line 66
 [][][]
  []
 
-) (./structLocalModels.tex [66]) (./classLocalState.tex [67]
+) (./classIterativeVerif.tex) (./structLocalModels.tex) (./classLocalState.tex
+[77] [78]
 Underfull \hbox (badness 10000) detected at line 61
 [][][]
  []
@@ -1348,85 +1418,292 @@ Underfull \hbox (badness 10000) detected at line 79
 [][][]
  []
 
-) (./classLocalStateTemplate.tex [68]) (./structLocalTransition.tex)
-(./classModelParser.tex [69] [70]
-Underfull \hbox (badness 10000) detected at line 47
-[][][]
- []
-
-) (./classTestVerif.tex) (./classTransitionTemplate.tex [71] [72])
-(./structVar.tex) (./classVerification.tex [73] [74] [75] [76]
-Underfull \hbox (badness 10000) detected at line 202
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 226
-[][][]
- []
-
-[77]
-Underfull \hbox (badness 10000) detected at line 246
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 264
-[][][]
- []
-
-[78]
-Underfull \hbox (badness 10000) detected at line 282
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 300
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 320
-[][][]
- []
-
-[79]
-Underfull \hbox (badness 10000) detected at line 359
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 360--361
-
- []
-
-[80]
-Underfull \hbox (badness 10000) detected at line 378
-[][][]
- []
-
-
-Underfull \hbox (badness 10000) detected at line 425
+) (./classLocalStateTemplate.tex) (./structLocalTransition.tex [79])
+(./classModelParser.tex [80]
+Underfull \hbox (badness 10000) detected at line 46
 [][][]
  []
 
 [81]
-Underfull \hbox (badness 10000) detected at line 445
+Underfull \hbox (badness 10000) detected at line 66
+[][][]
+ []
+
+) (./classProbabilityEntry.tex) (./classProbabilityStrategyDecisions.tex
+[82]) (./structProbabilityTrueFalse.tex) (./classProbAdd.tex [83] [84]
+Underfull \hbox (badness 10000) detected at line 63
+[][][]
+ []
+
+) (./classProbConst.tex [85]
+Underfull \hbox (badness 10000) detected at line 61
+[][][]
+ []
+
+) (./classProbDiv.tex [86]
+Underfull \hbox (badness 10000) detected at line 63
+[][][]
+ []
+
+) (./classProbMul.tex [87] [88]
+Underfull \hbox (badness 10000) detected at line 63
+[][][]
+ []
+
+) (./classProbNode.tex
+Underfull \hbox (badness 10000) detected at line 36
+[][][]
+ []
+
+) (./classProbSub.tex [89] [90]
+Underfull \hbox (badness 10000) detected at line 63
+[][][]
+ []
+
+) (./structResult.tex) (./structStateVerificationInfo.tex [91])
+(./structStrategyBitsComparator.tex) (./classStrategyCollection.tex)
+(./classStrategyCollectionTemplate.tex [92]) (./structStrategyEntry.tex)
+(./classStrategyParser.tex [93]
+Underfull \hbox (badness 10000) detected at line 44
+[][][]
+ []
+
+) (./classTestVerif.tex [94]) (./classTransitionTemplate.tex [95])
+(./structVar.tex [96]) (./classVerification.tex [97] [98] [99]
+Underfull \hbox (badness 10000) detected at line 171
+[][][]
+ []
+
+[100] [101]
+Underfull \hbox (badness 10000) detected at line 261
 [][][]
  []
 
 
-Underfull \hbox (badness 10000) detected at line 463
+Underfull \hbox (badness 10000) detected at line 285
 [][][]
  []
 
-[82]
-Underfull \hbox (badness 10000) detected at line 489
+[102]
+Underfull \hbox (badness 10000) detected at line 305
 [][][]
  []
 
-) (./structyy__buffer__state.tex) (./structyy__trans__info.tex [83])
-(./unionyyalloc.tex) (./unionYYSTYPE.tex) [84]
+
+Underfull \hbox (badness 10000) detected at line 323
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 330--331
+\T1/pcr/m/n/8 map$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 bitset$\OML/cmm/m/it/8 <$ \T
+1/pcr/m/n/8 STRATEGY[]_[][]BITS $\OML/cmm/m/it/8 >$\T1/pcr/m/n/8 , string, [] $
+\OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 Verification[]::get[]Natural[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 336
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 343--344
+\T1/pcr/m/n/8 vector$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 tuple$\OML/cmm/m/it/8 <$ 
+\T1/pcr/m/n/8 vector$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 tuple$\OML/cmm/m/it/8 <$ 
+\T1/pcr/m/n/8 bool, string $\OML/cmm/m/it/8 >$ $>$\T1/pcr/m/n/8 , string $\OML/
+cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 Verification[]::get[]Reduced[]Strategy
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 349
+[][][]
+ []
+
+[103]
+Underfull \hbox (badness 10000) detected at line 362
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 380
+[][][]
+ []
+
+[104]
+Underfull \hbox (badness 10000) detected at line 415
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 433
+[][][]
+ []
+
+[105]
+Underfull \hbox (badness 10000) detected at line 472
+[][][]
+ []
+
+[106]
+Underfull \hbox (badness 10000) detected at line 509
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 533
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 534--535
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 552
+[][][]
+ []
+
+[107]
+Underfull \hbox (badness 10000) detected at line 599
+[][][]
+ []
+
+[108]
+Underfull \hbox (badness 10000) detected at line 619
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 637
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 650
+[][][]
+ []
+
+[109]
+Underfull \hbox (badness 10000) detected at line 676
+[][][]
+ []
+
+) (./classVerificationIterative.tex [110] [111] [112]
+Underfull \hbox (badness 10000) detected at line 168
+[][][]
+ []
+
+
+Overfull \vbox (3.53958pt too high) has occurred while \output is active []
+
+
+[113] [114]
+Underfull \hbox (badness 10000) detected at line 241
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 259
+[][][]
+ []
+
+[115]
+Underfull \hbox (badness 10000) detected at line 296
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 329
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
+\T1/pcr/m/n/8 map$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 bitset$\OML/cmm/m/it/8 <$ \T
+1/pcr/m/n/8 STRATEGY[]_[][]BITS $\OML/cmm/m/it/8 >$\T1/pcr/m/n/8 , string, [] $
+\OML/cmm/m/it/8 >$ \T1/pcr/m/n/8 Verification[]Iterative[]::get[]
+ []
+
+[116]
+Underfull \hbox (badness 10000) detected at line 342
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--350
+\T1/pcr/m/n/8 vector$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 tuple$\OML/cmm/m/it/8 <$ 
+\T1/pcr/m/n/8 vector$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 tuple$\OML/cmm/m/it/8 <$ 
+\T1/pcr/m/n/8 bool, string $\OML/cmm/m/it/8 >$ $>$\T1/pcr/m/n/8 , string $\OML/
+cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 Verification[]Iterative[]::get[]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 355
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 368
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 386
+[][][]
+ []
+
+[117]
+Underfull \hbox (badness 10000) detected at line 404
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 422
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--430
+\T1/pcr/m/n/8 vector$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 tuple$\OML/cmm/m/it/8 <$ 
+\T1/pcr/m/n/8 vector$\OML/cmm/m/it/8 <$ \T1/pcr/m/n/8 tuple$\OML/cmm/m/it/8 <$ 
+\T1/pcr/m/n/8 bool, string $\OML/cmm/m/it/8 >$ $>$\T1/pcr/m/n/8 , string $\OML/
+cmm/m/it/8 >$ $>$ \T1/pcr/m/n/8 Verification[]Iterative[]::reduce[]
+ []
+
+
+Overfull \vbox (24.14067pt too high) has occurred while \output is active []
+
+
+[118]
+Underfull \hbox (badness 10000) detected at line 444
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 457
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 475
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 488
+[][][]
+ []
+
+[119]
+Underfull \hbox (badness 10000) detected at line 506
+[][][]
+ []
+
+) (./structyy__buffer__state.tex) (./structyy__trans__info.tex [120])
+(./unionyyalloc.tex) (./unionYYSTYPE.tex) [121] [122
+
+]
 Chapter 6.
 (./Agent_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
@@ -1443,9 +1720,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--18
 
  []
 
-[85
-
-]) (./DotGraph_8cpp.tex
+[123]) (./DotGraph_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
@@ -1455,7 +1730,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--12
 
  []
 
-[86]) (./EpistemicClass_8hpp.tex
+[124]) (./EpistemicClass_8hpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
@@ -1465,23 +1740,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-[87]) (./expressions_8hpp.tex
+[125]) (./expressions_8hpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--11
 
  []
 
-[88]) (./GlobalModel_8hpp.tex
+[126]) (./GlobalModel_8hpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-) (./GlobalModelGenerator_8cpp.tex
+) (./GlobalModelGenerator_8cpp.tex [127]
 Underfull \hbox (badness 10000) in paragraph at lines 8--15
 
  []
 
-[89]) (./GlobalModelGenerator_8hpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 8--15
+) (./GlobalModelGenerator_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
 
  []
 
@@ -1490,8 +1765,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-) (./GlobalState_8hpp.tex [90]
-Underfull \hbox (badness 10000) in paragraph at lines 8--9
+[128]) (./GlobalState_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
@@ -1505,7 +1780,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-) (./LocalState_8cpp.tex [91]
+[129]) (./LocalState_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
@@ -1515,42 +1790,67 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-) (./ModelParser_8cc.tex
+) (./LocalTransition_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+[130]) (./ModelParser_8cc.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--14
 
  []
 
-[92]) (./nodes_8cc.tex
-Underfull \hbox (badness 10000) in paragraph at lines 8--12
-
- []
-
-) (./nodes_8hpp.tex
+) (./nodes_8cc.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--13
 
  []
 
-[93]) (./Types_8hpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 8--23
+[131]) (./nodes_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--13
 
  []
 
-[94]) (./Utils_8cpp.tex
+) (./strategyNodes_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--12
+
+ []
+
+[132]) (./StrategyParser_8cc.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--14
+
+ []
+
+) (./StrategyParser_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+[133]) (./Types_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--25
+
+ []
+
+[134]) (./TypesDependency_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+[135] [136]) (./Utils_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--15
 
  []
 
-[95]
+[137]
 Underfull \hbox (badness 10000) detected at line 71
 [][][]
  []
 
-
+[138]
 Underfull \hbox (badness 10000) detected at line 89
 [][][]
  []
 
-[96]
+
 Underfull \hbox (badness 10000) detected at line 107
 [][][]
  []
@@ -1560,22 +1860,22 @@ Underfull \hbox (badness 10000) detected at line 125
 [][][]
  []
 
-[97]) (./Utils_8hpp.tex
+[139]) (./Utils_8hpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--11
 
  []
 
-[98]
+[140]
 Underfull \hbox (badness 10000) detected at line 54
 [][][]
  []
 
-
+[141]
 Underfull \hbox (badness 10000) detected at line 72
 [][][]
  []
 
-[99]
+
 Underfull \hbox (badness 10000) detected at line 90
 [][][]
  []
@@ -1585,47 +1885,66 @@ Underfull \hbox (badness 10000) detected at line 108
 [][][]
  []
 
-) (./Verification_8cpp.tex [100]
+[142]) (./Verification_8cpp.tex
 Underfull \hbox (badness 10000) in paragraph at lines 8--10
 
  []
 
-[101]
+[143]
 Underfull \hbox (badness 10000) detected at line 92
 [][][]
  []
 
 ) (./Verification_8hpp.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--6
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
  []
 
-[102]
-Overfull \vbox (17.22078pt too high) has occurred while \output is active []
-
-
-[103]
-Underfull \hbox (badness 10000) detected at line 107
+[144] [145]
+Underfull \hbox (badness 10000) detected at line 81
 [][][]
  []
 
-) [104] (./refman.ind [105
+) (./VerificationIterative_8cpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--10
+
+ []
+
+[146]
+Underfull \hbox (badness 10000) detected at line 50
+[][][]
+ []
+
+) (./VerificationIterative_8hpp.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+
+ []
+
+[147]
+Underfull \hbox (badness 10000) detected at line 68
+[][][]
+ []
+
+) [148] (./refman.ind [149
 
 
 
-] [106] [107] [108]) (./refman.aux)
+] [150] [151] [152] [153] [154
+
+]) (./refman.aux)
 
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 8E75C36B8E86D1A146D26C3A2DE03DD7;72090.
+(rerunfilecheck)             Checksum: 24FE4C75D4495CC9B263551CBCD35B6A;103081.
+
  ) 
 Here is how much of TeX's memory you used:
- 19579 strings out of 478287
- 338316 string characters out of 5849290
- 693420 words of memory out of 5000000
- 36221 multiletter control sequences out of 15000+600000
- 533611 words of font info for 111 fonts, out of 8000000 for 9000
+ 20672 strings out of 478287
+ 374947 string characters out of 5849290
+ 743366 words of memory out of 5000000
+ 36749 multiletter control sequences out of 15000+600000
+ 533923 words of font info for 112 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,16n,117p,1470b,633s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1642,10 +1961,10 @@ f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/helvetic/uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
 helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhv
 ro8a.pfb>
-Output written on refman.pdf (120 pages, 423233 bytes).
+Output written on refman.pdf (168 pages, 554124 bytes).
 PDF statistics:
- 4864 PDF objects out of 5155 (max. 8388607)
- 4562 compressed objects within 46 object streams
- 1071 named destinations out of 1200 (max. 500000)
- 2665 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6931 PDF objects out of 7423 (max. 8388607)
+ 6505 compressed objects within 66 object streams
+ 1576 named destinations out of 1728 (max. 500000)
+ 3713 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,132 @@
+\hypertarget{TypesDependency_8hpp}{}\doxysection{Types\+Dependency.\+hpp File Reference}
+\label{TypesDependency_8hpp}\index{TypesDependency.hpp@{TypesDependency.hpp}}
+
+
+Custom data structures, using other custom data structures. Data structures and classes containing model data that are using other custom data structures.  
+
+
+{\ttfamily \#include $<$bitset$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}}
+\item 
+struct \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}}
+\begin{DoxyCompactList}\small\item\em A comparator for two bitsets containing values for the global states. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}}
+\begin{DoxyCompactList}\small\item\em Contains probability of a state being in a true or false state. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classProbabilityEntry}{Probability\+Entry}}
+\begin{DoxyCompactList}\small\item\em Class for handling the probability operations during probability verification. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}}
+\begin{DoxyCompactList}\small\item\em Handles all single state verification information during probabilistic verification. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structAction}{Action}}
+\begin{DoxyCompactList}\small\item\em Single action template for probabilistic verification. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}
+\begin{DoxyCompactList}\small\item\em Handles currently selected strategy when the strategy is set. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classProbabilityStrategyDecisions}{Probability\+Strategy\+Decisions}}
+\begin{DoxyCompactList}\small\item\em Structure for the iterative set strategy generation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{TypesDependency_8hpp_a1de2fc36289f8ee7e8341767723ddf49}\label{TypesDependency_8hpp_a1de2fc36289f8ee7e8341767723ddf49}} 
+\#define {\bfseries STRATEGY\+\_\+\+BITS}~64
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{TypesDependency_8hpp_aa749f3f38fe65011cde5c039cf5a3e71}\label{TypesDependency_8hpp_aa749f3f38fe65011cde5c039cf5a3e71}} 
+enum {\bfseries Verif\+Result} \{ {\bfseries NOT\+\_\+\+VERIFIED} = 0
+, {\bfseries TRUE} = 1
+, {\bfseries FALSE} = 2
+ \}
+\item 
+enum \mbox{\hyperlink{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aa}{Strategy\+Entry\+Type}} \{ \mbox{\hyperlink{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aaaf20295dca57082fa3849c8537ace8f3a}{NOT\+\_\+\+MODIFIED}}
+, \mbox{\hyperlink{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aaaf9af5c7fe2ac629ae2626907f8251c38}{ADDED}}
+ \}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} entry type. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} \{ \newline
+\mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e}{DECISION}}
+, \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492}{STATE\+\_\+\+STATUS}}
+, \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}{CONTEXT}}
+, \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae}{MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID}}
+, \newline
+\mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a30f72f46fa57748178fe219ec09355f0}{UNCONTROLLED\+\_\+\+DECISION}}
+, \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a75e0d9a230aa82a7e53939b27afc576a}{PROBABILITY}}
+, \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4aa6c90d42be21b7b97bf663dea1d36fbe}{ANSWER\+\_\+\+PROBABILITY}}
+ \}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} entry type. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}\label{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}} 
+enum \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} \{ {\bfseries SUM\+\_\+\+PROBABILITY}
+, {\bfseries MIN\+\_\+\+PROBABILITY}
+, {\bfseries NONE\+\_\+\+PROBABILITY}
+ \}
+\begin{DoxyCompactList}\small\item\em Contains the type of the probability calculation in a given node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Custom data structures, using other custom data structures. Data structures and classes containing model data that are using other custom data structures. 
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}} 
+\index{TypesDependency.hpp@{TypesDependency.hpp}!HistoryEntryType@{HistoryEntryType}}
+\index{HistoryEntryType@{HistoryEntryType}!TypesDependency.hpp@{TypesDependency.hpp}}
+\doxysubsubsection{\texorpdfstring{HistoryEntryType}{HistoryEntryType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}}}
+
+
+
+\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} entry type. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DECISION@{DECISION}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!DECISION@{DECISION}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e}} 
+DECISION&Made the decision to go to a state using a transition. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STATE\_STATUS@{STATE\_STATUS}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!STATE\_STATUS@{STATE\_STATUS}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492}} 
+STATE\+\_\+\+STATUS&Changed verification status. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONTEXT@{CONTEXT}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!CONTEXT@{CONTEXT}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}} 
+CONTEXT&Recursion has gone deeper. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MARK\_DECISION\_AS\_INVALID@{MARK\_DECISION\_AS\_INVALID}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!MARK\_DECISION\_AS\_INVALID@{MARK\_DECISION\_AS\_INVALID}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae}} 
+MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID&Marking a transition as invalid. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNCONTROLLED\_DECISION@{UNCONTROLLED\_DECISION}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!UNCONTROLLED\_DECISION@{UNCONTROLLED\_DECISION}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a30f72f46fa57748178fe219ec09355f0}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a30f72f46fa57748178fe219ec09355f0}} 
+UNCONTROLLED\+\_\+\+DECISION&One uncontrolled choice from a set, from which all of them has to be OK. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PROBABILITY@{PROBABILITY}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!PROBABILITY@{PROBABILITY}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a75e0d9a230aa82a7e53939b27afc576a}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a75e0d9a230aa82a7e53939b27afc576a}} 
+PROBABILITY&There\textquotesingle{}s a change in probability. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ANSWER\_PROBABILITY@{ANSWER\_PROBABILITY}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!ANSWER\_PROBABILITY@{ANSWER\_PROBABILITY}}}\mbox{\Hypertarget{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4aa6c90d42be21b7b97bf663dea1d36fbe}\label{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4aa6c90d42be21b7b97bf663dea1d36fbe}} 
+ANSWER\+\_\+\+PROBABILITY&There\textquotesingle{}s a change in the answer probability. \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aa}\label{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aa}} 
+\index{TypesDependency.hpp@{TypesDependency.hpp}!StrategyEntryType@{StrategyEntryType}}
+\index{StrategyEntryType@{StrategyEntryType}!TypesDependency.hpp@{TypesDependency.hpp}}
+\doxysubsubsection{\texorpdfstring{StrategyEntryType}{StrategyEntryType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aa}{Strategy\+Entry\+Type}}}
+
+
+
+\mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} entry type. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_MODIFIED@{NOT\_MODIFIED}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!NOT\_MODIFIED@{NOT\_MODIFIED}}}\mbox{\Hypertarget{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aaaf20295dca57082fa3849c8537ace8f3a}\label{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aaaf20295dca57082fa3849c8537ace8f3a}} 
+NOT\+\_\+\+MODIFIED&Entry didn\textquotesingle{}t have to get modified. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ADDED@{ADDED}!TypesDependency.hpp@{TypesDependency.hpp}}\index{TypesDependency.hpp@{TypesDependency.hpp}!ADDED@{ADDED}}}\mbox{\Hypertarget{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aaaf9af5c7fe2ac629ae2626907f8251c38}\label{TypesDependency_8hpp_a014b4b1825e0cdd1e420331f51c073aaaf9af5c7fe2ac629ae2626907f8251c38}} 
+ADDED&Entry got added to the map. \\
+\hline
+
+\end{DoxyEnumFields}
