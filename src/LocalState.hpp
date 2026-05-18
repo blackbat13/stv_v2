@@ -42,6 +42,10 @@ class LocalState {
         /// @param indent - optional indentation string 
         /// @return LocalState data
         string toString(string indent="");
+
+        /// @brief Returns deterministic hash-like serialization of environment values.
+        /// @return String in sorted key order, e.g. "a=1;b=2;".
+        string environmentHash() const;
 };
 
 #endif // LOCALSTATE_H

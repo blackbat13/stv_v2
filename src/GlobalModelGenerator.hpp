@@ -34,7 +34,9 @@ public:
     vector<GlobalState*> expandStateAndReturn(GlobalState* state, bool returnAnyway = false);
     void expandAllStates(bool additionalProbSplit = false);
     void expandAndReduceAllStates();
-    GlobalModel* getCurrentGlobalModel();
+    void partialReduction(const vector<string>& variableNames);
+    void dissolveStatesWithIdenticalProjections();
+    GlobalModel *getCurrentGlobalModel();
     Formula* getFormula();
     int getFormulaSize();
     set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);

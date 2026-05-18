@@ -214,8 +214,7 @@ void loadConfigFromFile(string filename) {
     }
 };
 
-void loadConfigFromArgs(int argc, char** argv) {
-    // overwrite the default config values (if provided on the input)
+void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default config values (if provided on the input)
     if (argc >= 2) {
         for (int i = 1; i < argc; i++) {
             string arg = argv[i];
@@ -274,6 +273,20 @@ void loadConfigFromArgs(int argc, char** argv) {
                 } else {
                     printf("ERR: no file path was specified!\n");
                 }
+            } else if (arg == "-PARTIAL_REDUCTION" || arg == "--PARTIAL_REDUCTION") {
+                config.partial_reduction = 1;
+                config.partial_reduction_args.clear();
+                int j = i + 1;
+                while (j < argc && argv[j][0] != '-') {
+                    config.partial_reduction_args.push_back(argv[j]);
+                    ++j;
+                }
+                i = j - 1;
+                if (config.partial_reduction_args.empty()) {
+                    printf("ERR: no variable names were specified for PARTIAL_REDUCTION!\n");
+                }
+            } else if (arg == "-PARTIAL_REDUCTION_AGENT" || arg == "--PARTIAL_REDUCTION_AGENT") {
+                config.partial_reduction_agent = argv[++i];
             }
         }
     }

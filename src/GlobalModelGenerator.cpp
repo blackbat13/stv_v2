@@ -388,6 +388,103 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     globalModelCandidates.pop(); //20
 }
 
+/// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
+void GlobalModelGenerator::partialReduction(const vector<string>& variableNames) {
+    if (this->globalModel == nullptr || this->globalModel->initState == nullptr || variableNames.empty()) {
+        return;
+    }
+
+    queue<GlobalState*> toVisit;
+    unordered_set<GlobalState*> visitedStates;
+
+    toVisit.push(this->globalModel->initState);
+    visitedStates.insert(this->globalModel->initState);
+
+    while (!toVisit.empty()) {
+        auto state = toVisit.front();
+        toVisit.pop();
+
+        // GlobalState environment is derived from projected local states,
+        // so remove requested variables from each local environment.
+        for (auto localState : state->localStatesProjection) {
+            for (const auto& variableName : variableNames) {
+                localState->environment.erase(variableName);
+            }
+        }
+
+        if (!state->isExpanded) {
+            this->expandState(state);
+        }
+
+        for (const auto transition : state->globalTransitions) {
+            if (transition->to != nullptr && visitedStates.insert(transition->to).second) {
+                toVisit.push(transition->to);
+            }
+        }
+    }
+    dissolveStatesWithIdenticalProjections();
+}
+
+/// @brief Merges states with identical projections and removes duplicate transitions.
+void GlobalModelGenerator::dissolveStatesWithIdenticalProjections() {
+    unordered_map<string, GlobalState*> projectionMap;
+    vector<GlobalState*> mergedStates;
+    for (auto state : this->globalModel->globalStates) {
+        cout << "Checking state " << state->hash << " with projection: " << endl;
+        string projectionHash = "";
+        for (const auto localState : state->localStatesProjection) {
+            projectionHash += "[" + localState->agent->name + "] (" + localState->name + "):" + localState->environmentHash() + "|";
+        }
+        cout << projectionHash << endl;
+        if (projectionMap.count(projectionHash) == 0) {
+            projectionMap[projectionHash] = state;
+        } else {
+            auto existingState = projectionMap[projectionHash];
+            // Redirect transitions to the existing state
+            for (const auto transition : state->globalTransitions) {
+                transition->from = existingState;
+                existingState->globalTransitions.insert(transition);
+            }
+            for (const auto preimageState : state->preimage) {
+                for (const auto transition : preimageState->globalTransitions) {
+                    if (transition->to == state) {
+                        transition->to = existingState;
+                    }
+                }
+                existingState->preimage.insert(preimageState);
+            }
+            mergedStates.push_back(state);
+        }
+    }
+
+    if (!mergedStates.empty()) {
+        this->globalModel->globalStates.erase(
+            remove_if(
+                this->globalModel->globalStates.begin(),
+                this->globalModel->globalStates.end(),
+                [&](GlobalState* s) {
+                    return find(mergedStates.begin(), mergedStates.end(), s) != mergedStates.end();
+                }
+            ),
+            this->globalModel->globalStates.end()
+        );
+    }
+
+    // Remove duplicate transition names per state
+    for (auto state : this->globalModel->globalStates) {
+        unordered_set<string> seenNames;
+        for (auto it = state->globalTransitions.begin(); it != state->globalTransitions.end();) {
+            auto transition = *it;
+            string transitionName = transition->joinLocalTransitionNames();
+            if (!seenNames.insert(transitionName).second) {
+                it = state->globalTransitions.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+}
+
 /// @brief Get for a GlobalModel used in initialization.
 /// @return Returns a pointer to a global model.
 GlobalModel* GlobalModelGenerator::getCurrentGlobalModel() {
@@ -423,7 +520,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
 /// @param viaLocalTransitions Pointer to a set of pointers to LocalTransition from which the changes in variables, as a result of traversing through the transition, will be made in a new GlobalState.
 /// @param prevGlobalState Pointer to GlobalState from which all persistent variables will be copied over from to the new GlobalState.
 /// @return Returns a pointer to a new or already existing in the same epistemic class GlobalModel.
-GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {   
+GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {
     // Find/create EpistemicClass, check if an identical GlobalState is already present in that EpistemicClass
     auto agent = *this->formula->coalition.begin();
     auto epistemicClass = this->findOrCreateEpistemicClass(localStates, agent);
@@ -445,7 +542,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
 
     // Reserve vector capacity
     globalState->localStatesProjection.reserve(localStates->size());
-    
+
     // globalState->localStates: copy from localStates argument
     for (const auto localState : *localStates) {
         globalState->localStatesProjection.push_back(localState);

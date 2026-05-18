@@ -54,6 +54,16 @@ int main(int argc, char* argv[]) {
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
+
+    if (config.partial_reduction) {
+        cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
+        for (auto item : config.partial_reduction_args) {
+            cout << "Partial reduction variable: " << item << endl;
+        }
+        generator->expandAllStates();
+        generator->partialReduction(config.partial_reduction_args);
+    }
+    
     if (config.verify_strategy) {
         generator->initStrategy(strat);
     }

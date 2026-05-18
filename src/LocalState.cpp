@@ -58,3 +58,13 @@ string LocalState::toString(string indent){
    res+= + "\n" + indent + "]";
    return res;
 }
+
+/// @brief Generates a hash of the environment variables.
+/// @return A string representing the hash of the environment.
+string LocalState::environmentHash() const {
+   string hash;
+   for (const auto& item : this->environment) {
+      hash += to_string(item.second) + ";";
+   }
+   return hash;
+}
