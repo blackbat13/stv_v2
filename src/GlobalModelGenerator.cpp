@@ -433,7 +433,8 @@ void GlobalModelGenerator::dissolveStatesWithIdenticalProjections() {
         cout << "Checking state " << state->hash << " with projection: " << endl;
         string projectionHash = "";
         for (const auto localState : state->localStatesProjection) {
-            projectionHash += "[" + localState->agent->name + "] (" + localState->name + "):" + localState->environmentHash() + "|";
+            projectionHash += localState->name + ":";
+            projectionHash += localState->environmentHash() + "|";
         }
         cout << projectionHash << endl;
         if (projectionMap.count(projectionHash) == 0) {
