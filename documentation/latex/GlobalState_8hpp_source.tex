@@ -1,0 +1,53 @@
+\doxysection{Global\+State.\+hpp}
+\hypertarget{GlobalState_8hpp_source}{}\label{GlobalState_8hpp_source}\index{GlobalState.hpp@{GlobalState.hpp}}
+\mbox{\hyperlink{GlobalState_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ GLOBAL\_STATE}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ GLOBAL\_STATE}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Common_8hpp}{Common.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TypesDependency_8hpp}{TypesDependency.hpp}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{structCfg}{Cfg}}\ config;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGlobalState}{GlobalState}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{structGlobalState}{GlobalState}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{hash}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{map<Agent*,\ EpistemicClass*>}}\ \mbox{\hyperlink{structGlobalState_ae5d81b1f8e057f2ae62513f1471ba0c1}{epistemicClasses}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structGlobalState_afd4eaea4861b96810c9e1de175a0c35a}{isExpanded}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ GlobalStateVerificationStatus\ \mbox{\hyperlink{structGlobalState_ae7fb8df92923463538071039a0066a6d}{verificationStatus}}\ =\ GLOBAL\_STATE\_VERIFICATION\_STATUS::UNVERIFIED;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structGlobalState_a3961cf4168dc461fed40a80b9cfed059}{probability}}\ =\ config.probability\ ?\ 0.0\ :\ 1.0;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ goodState\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00036\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{set<GlobalTransition*>}}\ \mbox{\hyperlink{structGlobalState_ab82eec24f8aae99faf18d6434487d0d7}{globalTransitions}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{set<GlobalState*>}}\ \mbox{\hyperlink{structGlobalState_aa207d612b58c4de8f7744f064db66f5b}{preimage}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{vector<LocalState*>}}\ \mbox{\hyperlink{structGlobalState_ad4baebd90504941bbabd20cbc4b0cfe3}{localStatesProjection}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{map<Agent*,\ set<GlobalState*>}}*>\ \mbox{\hyperlink{structGlobalState_a1f938243faea9600dede94d4e5d2813a}{epistemicClassesAllAgents}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classProbabilityEntry}{ProbabilityEntry}}\ probabilityResult;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{structGlobalTransition}{GlobalTransition}}*\ \mbox{\hyperlink{structGlobalState_ad1341cdf6488ba06e2a7cefc9d373275}{probabilityLoop}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::string\ \mbox{\hyperlink{structGlobalState_a5e2c53ae6d50c58d9b54d4dd0ba34f74}{toString}}(\textcolor{keywordtype}{string}\ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{indent}}=\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{structGlobalState_a441ac69c0383abf8feb652daab8b33b7}{map<string,\ int>}}\ \mbox{\hyperlink{structGlobalState_a102da8b349dd138c16fe376fbb4ba8d8}{getGlobalStateEnvironment}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ VerifResult\ stateVerifResult\ =\ VerifResult::NOT\_VERIFIED;}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

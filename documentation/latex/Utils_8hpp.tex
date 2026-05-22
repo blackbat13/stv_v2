@@ -1,46 +1,46 @@
-\hypertarget{Utils_8hpp}{}\doxysection{Utils.\+hpp File Reference}
-\label{Utils_8hpp}\index{Utils.hpp@{Utils.hpp}}
-{\ttfamily \#include \char`\"{}Types.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}Constants.\+hpp\char`\"{}}\newline
+\doxysection{Utils.\+hpp File Reference}
+\hypertarget{Utils_8hpp}{}\label{Utils_8hpp}\index{Utils.hpp@{Utils.hpp}}
+{\ttfamily \#include "{}Types.\+hpp"{}}\newline
+{\ttfamily \#include "{}Constants.\+hpp"{}}\newline
 {\ttfamily \#include $<$map$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
 {\ttfamily \#include $<$sys/time.\+h$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$fstream$>$}\newline
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 string \mbox{\hyperlink{Utils_8hpp_a22d647952e3ec6ef55ac70197d7b613c}{env\+To\+String}} (map$<$ string, int $>$ env)
 \begin{DoxyCompactList}\small\item\em Converts a map of string and int to a string. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{Utils_8hpp_afc39e476fc50026d8b3da7fc9298b001}{agent\+To\+String}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+string \mbox{\hyperlink{Utils_8hpp_afc39e476fc50026d8b3da7fc9298b001}{agent\+To\+String}} (\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}agt)
 \begin{DoxyCompactList}\small\item\em Converts pointer to an Agant into a string containing name of the agent, its initial state, transitions with their local and global names, shared count and conditions. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}{local\+Models\+To\+String}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$lm)
-\begin{DoxyCompactList}\small\item\em Converts pointer to the \mbox{\hyperlink{structLocalModels}{Local\+Models}} into a string cointaining all \mbox{\hyperlink{classAgent}{Agent}} instances from the model, initial values of the variables and names of the persistent values. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}{output\+Global\+Model}} (\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$global\+Model)
-\begin{DoxyCompactList}\small\item\em Prints the whole \mbox{\hyperlink{structGlobalModel}{Global\+Model}} into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{Utils_8hpp_a5cfa822422f5ca06a58b1d0443ac8b8b}\label{Utils_8hpp_a5cfa822422f5ca06a58b1d0443ac8b8b}} 
+string \mbox{\hyperlink{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}{local\+Models\+To\+String}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}lm)
+\begin{DoxyCompactList}\small\item\em Converts pointer to the \doxylink{structLocalModels}{Local\+Models} into a string cointaining all \doxylink{classAgent}{Agent} instances from the model, initial values of the variables and names of the persistent values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}{output\+Global\+Model}} (\mbox{\hyperlink{structGlobalModel}{Global\+Model}} \texorpdfstring{$\ast$}{*}global\+Model)
+\begin{DoxyCompactList}\small\item\em Prints the whole \doxylink{structGlobalModel}{Global\+Model} into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. \end{DoxyCompactList}\item 
+\Hypertarget{Utils_8hpp_a5cfa822422f5ca06a58b1d0443ac8b8b}\label{Utils_8hpp_a5cfa822422f5ca06a58b1d0443ac8b8b} 
 unsigned long {\bfseries get\+Mem\+Cap} ()
 \item 
-vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $>$ \mbox{\hyperlink{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}{get\+Local\+States\+SCC}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ $>$ \mbox{\hyperlink{Utils_8hpp_a569926d252ea03861c575c606d090536}{get\+Local\+States\+SCC}} (\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}agt)
 \begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{Utils_8hpp_a4998007a3beac1408262f8c5bd9c637d}\label{Utils_8hpp_a4998007a3beac1408262f8c5bd9c637d}} 
-map$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$, vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $>$ {\bfseries get\+Context\+Model} (\mbox{\hyperlink{structFormula}{Formula}} $\ast$formula, \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$local\+Models, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+\Hypertarget{Utils_8hpp_aa5409fa719bf8b039a38f8d0e52b607c}\label{Utils_8hpp_aa5409fa719bf8b039a38f8d0e52b607c} 
+map$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*}, vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ $>$ {\bfseries get\+Context\+Model} (\mbox{\hyperlink{structFormula}{Formula}} \texorpdfstring{$\ast$}{*}formula, \mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}local\+Models, \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}agt)
 \item 
-\mbox{\Hypertarget{Utils_8hpp_af3e68dc19a5fd43208b033e88cfe9fb1}\label{Utils_8hpp_af3e68dc19a5fd43208b033e88cfe9fb1}} 
-void {\bfseries load\+Config\+From\+File} (string filename=\char`\"{}config.\+txt\char`\"{})
+\Hypertarget{Utils_8hpp_af3e68dc19a5fd43208b033e88cfe9fb1}\label{Utils_8hpp_af3e68dc19a5fd43208b033e88cfe9fb1} 
+void {\bfseries load\+Config\+From\+File} (string filename="{}config.\+txt"{})
 \item 
-\mbox{\Hypertarget{Utils_8hpp_a09a7988a2599103af311e927c494b8e1}\label{Utils_8hpp_a09a7988a2599103af311e927c494b8e1}} 
-void {\bfseries load\+Config\+From\+Args} (int argc, char $\ast$$\ast$argv)
+\Hypertarget{Utils_8hpp_a09a7988a2599103af311e927c494b8e1}\label{Utils_8hpp_a09a7988a2599103af311e927c494b8e1} 
+void {\bfseries load\+Config\+From\+Args} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{Utils_8hpp_afc39e476fc50026d8b3da7fc9298b001}\label{Utils_8hpp_afc39e476fc50026d8b3da7fc9298b001}} 
+\Hypertarget{Utils_8hpp_afc39e476fc50026d8b3da7fc9298b001}\label{Utils_8hpp_afc39e476fc50026d8b3da7fc9298b001} 
 \index{Utils.hpp@{Utils.hpp}!agentToString@{agentToString}}
 \index{agentToString@{agentToString}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{agentToString()}{agentToString()}}
-{\footnotesize\ttfamily string agent\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily string agent\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}}]{agt }\end{DoxyParamCaption})}
 
 
 
@@ -48,13 +48,13 @@ Converts pointer to an Agant into a string containing name of the agent, its ini
 
 
 \begin{DoxyParams}{Parameters}
-{\em agt} & Pointer to an \mbox{\hyperlink{classAgent}{Agent}} to parse into a string. \\
+{\em agt} & Pointer to an \doxylink{classAgent}{Agent} to parse into a string. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-String containing all of \mbox{\hyperlink{classAgent}{Agent}} data. 
+String containing all of \doxylink{classAgent}{Agent} data. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{Utils_8hpp_a22d647952e3ec6ef55ac70197d7b613c}\label{Utils_8hpp_a22d647952e3ec6ef55ac70197d7b613c}} 
+\Hypertarget{Utils_8hpp_a22d647952e3ec6ef55ac70197d7b613c}\label{Utils_8hpp_a22d647952e3ec6ef55ac70197d7b613c} 
 \index{Utils.hpp@{Utils.hpp}!envToString@{envToString}}
 \index{envToString@{envToString}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{envToString()}{envToString()}}
@@ -70,13 +70,13 @@ Converts a map of string and int to a string.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Returns string \char`\"{} (first\+\_\+name, second\+\_\+name, ..., last\+\_\+name=int\+\_\+value)\char`\"{} 
+Returns string "{} (first\+\_\+name, second\+\_\+name, ..., last\+\_\+name=int\+\_\+value)"{} 
 \end{DoxyReturn}
-\mbox{\Hypertarget{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}\label{Utils_8hpp_a4073ec29a638e918c58e44dfe345e842}} 
+\Hypertarget{Utils_8hpp_a569926d252ea03861c575c606d090536}\label{Utils_8hpp_a569926d252ea03861c575c606d090536} 
 \index{Utils.hpp@{Utils.hpp}!getLocalStatesSCC@{getLocalStatesSCC}}
 \index{getLocalStatesSCC@{getLocalStatesSCC}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{getLocalStatesSCC()}{getLocalStatesSCC()}}
-{\footnotesize\ttfamily vector$<$set$<$\mbox{\hyperlink{classLocalState}{Local\+State}}$\ast$$>$ $>$ get\+Local\+States\+SCC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agt }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ $>$ get\+Local\+States\+SCC (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}}]{agt }\end{DoxyParamCaption})}
 
 
 
@@ -90,15 +90,15 @@ a quick implementation of a Tarjan SCC algorithm (based on DFS)
 \begin{DoxyReturn}{Returns}
 local\+States partition in a form of the vector, where each set correponds to a SCC 
 \end{DoxyReturn}
-\mbox{\Hypertarget{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}\label{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}} 
+\Hypertarget{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30}\label{Utils_8hpp_a7eba8577045f3559f063d6327dcc7f30} 
 \index{Utils.hpp@{Utils.hpp}!localModelsToString@{localModelsToString}}
 \index{localModelsToString@{localModelsToString}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{localModelsToString()}{localModelsToString()}}
-{\footnotesize\ttfamily string local\+Models\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$}]{lm }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily string local\+Models\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}}]{lm }\end{DoxyParamCaption})}
 
 
 
-Converts pointer to the \mbox{\hyperlink{structLocalModels}{Local\+Models}} into a string cointaining all \mbox{\hyperlink{classAgent}{Agent}} instances from the model, initial values of the variables and names of the persistent values. 
+Converts pointer to the \doxylink{structLocalModels}{Local\+Models} into a string cointaining all \doxylink{classAgent}{Agent} instances from the model, initial values of the variables and names of the persistent values. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -106,20 +106,20 @@ Converts pointer to the \mbox{\hyperlink{structLocalModels}{Local\+Models}} into
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-String containing all of \mbox{\hyperlink{structLocalModels}{Local\+Models}} data. 
+String containing all of \doxylink{structLocalModels}{Local\+Models} data. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}\label{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}} 
+\Hypertarget{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27}\label{Utils_8hpp_ae45accf23ba6404b9b292d148e3eda27} 
 \index{Utils.hpp@{Utils.hpp}!outputGlobalModel@{outputGlobalModel}}
 \index{outputGlobalModel@{outputGlobalModel}!Utils.hpp@{Utils.hpp}}
 \doxysubsubsection{\texorpdfstring{outputGlobalModel()}{outputGlobalModel()}}
-{\footnotesize\ttfamily void output\+Global\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$}]{global\+Model }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void output\+Global\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalModel}{Global\+Model}} \texorpdfstring{$\ast$}{*}}]{global\+Model }\end{DoxyParamCaption})}
 
 
 
-Prints the whole \mbox{\hyperlink{structGlobalModel}{Global\+Model}} into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. 
+Prints the whole \doxylink{structGlobalModel}{Global\+Model} into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em global\+Model} & Pointer to a \mbox{\hyperlink{structGlobalModel}{Global\+Model}} to print into the console. \\
+{\em global\+Model} & Pointer to a \doxylink{structGlobalModel}{Global\+Model} to print into the console. \\
 \hline
 \end{DoxyParams}

@@ -1,17 +1,12 @@
 var searchData=
 [
-  ['id_164',['id',['../classAgent.html#ae67c3dc91bafcf4354e1394ec5ba2662',1,'Agent::id()'],['../structGlobalTransition.html#a0091cb21aedcbc1811591fe3cdfcc2a0',1,'GlobalTransition::id()'],['../classLocalState.html#a1d1b3e3cb13308d208822c22e4af8f41',1,'LocalState::id()'],['../structLocalTransition.html#af0317d03188c22a2c4ec8189d5da85b5',1,'LocalTransition::id()']]],
-  ['ident_165',['ident',['../classAssignment.html#a621d132a9a8f73a5397cad74c66e24af',1,'Assignment']]],
-  ['includesstate_166',['includesState',['../classAgent.html#a6002c6cab389405d351c0e203905728e',1,'Agent']]],
-  ['increaseprobability_167',['increaseProbability',['../classVerification.html#a6b9298a0b7e33996db62d9d950f239be',1,'Verification']]],
-  ['initialvalue_168',['initialValue',['../structVar.html#a0e10d54a8a5f415596585a5bce72bcae',1,'Var']]],
-  ['initmodel_169',['initModel',['../classGlobalModelGenerator.html#af8a60f8b1efcd9eb7615c6ed458d81e6',1,'GlobalModelGenerator']]],
-  ['initstate_170',['initState',['../classAgent.html#a68852d497fd3ddbfd1a3d007c5ca6b36',1,'Agent::initState()'],['../structGlobalModel.html#ac35dbc225f644f077866f377aa41efb6',1,'GlobalModel::initState()']]],
-  ['initstrategy_171',['initStrategy',['../classGlobalModelGenerator.html#a17ea8526fe4458edb6781d9171612f2f',1,'GlobalModelGenerator']]],
-  ['isagentincoalition_172',['isAgentInCoalition',['../classVerification.html#a2ccd4e9d525a868217902a15ed93860b',1,'Verification::isAgentInCoalition()'],['../classVerificationIterative.html#acffb6d0899d3f72cf5d59b6c6f37379f',1,'VerificationIterative::isAgentInCoalition()']]],
-  ['isexpanded_173',['isExpanded',['../structGlobalState.html#afd4eaea4861b96810c9e1de175a0c35a',1,'GlobalState']]],
-  ['isglobaltransitioncontrolledbycoalition_174',['isGlobalTransitionControlledByCoalition',['../classVerification.html#a500beadd751b6513289f3916cf3f8501',1,'Verification::isGlobalTransitionControlledByCoalition()'],['../classVerificationIterative.html#a7ad37cddf86ddf45554216b9e43b446c',1,'VerificationIterative::isGlobalTransitionControlledByCoalition()']]],
-  ['isinvaliddecision_175',['isInvalidDecision',['../structGlobalTransition.html#a042d1bace6ff8fd7a037408698efe2bb',1,'GlobalTransition']]],
-  ['isshared_176',['isShared',['../structLocalTransition.html#aaad00680a812ed1671a65015d4e51754',1,'LocalTransition']]],
-  ['iterativeverif_177',['IterativeVerif',['../classIterativeVerif.html',1,'']]]
+  ['hash_0',['hash',['../structEpistemicClass.html#a861627f16e0a71ff8a12ede2324be9c1',1,'EpistemicClass::hash'],['../structGlobalState.html#a441ac69c0383abf8feb652daab8b33b7',1,'GlobalState::hash'],['../classActionTemplate.html#af0b2d36657aef3e8e0fa938049369c2a',1,'ActionTemplate::hash']]],
+  ['history_1',['history',['../classVerificationIterative.html#a9841344546c210c0cd2840cfb997fbac',1,'VerificationIterative']]],
+  ['historydbg_2',['historydbg',['../classHistoryDbg.html',1,'HistoryDbg'],['../classHistoryDbg.html#a5dd006716d8389df4313ac9b8996f132',1,'HistoryDbg::HistoryDbg()']]],
+  ['historydecisionserr_3',['historyDecisionsERR',['../classVerification.html#ad116509bfb638d11b225fc8097ef14ee',1,'Verification']]],
+  ['historyend_4',['historyEnd',['../classVerification.html#accd7b60752d13e14e319544cb6adb2e0',1,'Verification']]],
+  ['historyentry_5',['HistoryEntry',['../structHistoryEntry.html',1,'']]],
+  ['historyentrytype_6',['HistoryEntryType',['../TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4',1,'TypesDependency.hpp']]],
+  ['historystart_7',['historyStart',['../classVerification.html#a0c99d888d26d30df16342201fc4b2e75',1,'Verification']]],
+  ['historytorestore_8',['historyToRestore',['../classVerification.html#a0ee06d27394d4a35a23605f3b17a9783',1,'Verification']]]
 ];

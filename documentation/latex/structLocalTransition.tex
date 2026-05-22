@@ -1,5 +1,5 @@
-\hypertarget{structLocalTransition}{}\doxysection{Local\+Transition Struct Reference}
-\label{structLocalTransition}\index{LocalTransition@{LocalTransition}}
+\doxysection{Local\+Transition Struct Reference}
+\hypertarget{structLocalTransition}{}\label{structLocalTransition}\index{LocalTransition@{LocalTransition}}
 
 
 Represents a single local transition, containing id, global name, local name, is shared and count of the appearances.  
@@ -9,39 +9,39 @@ Represents a single local transition, containing id, global name, local name, is
 
 {\ttfamily \#include $<$Local\+Transition.\+hpp$>$}
 
-\doxysubsection*{Public Attributes}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structLocalTransition_af0317d03188c22a2c4ec8189d5da85b5}\label{structLocalTransition_af0317d03188c22a2c4ec8189d5da85b5}} 
-int \mbox{\hyperlink{structLocalTransition_af0317d03188c22a2c4ec8189d5da85b5}{id}}
+\Hypertarget{structLocalTransition_af0317d03188c22a2c4ec8189d5da85b5}\label{structLocalTransition_af0317d03188c22a2c4ec8189d5da85b5} 
+int {\bfseries id}
 \begin{DoxyCompactList}\small\item\em Identifier of the transition. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_a71d43959302dac3665c1168a7ecc9bcf}\label{structLocalTransition_a71d43959302dac3665c1168a7ecc9bcf}} 
-string \mbox{\hyperlink{structLocalTransition_a71d43959302dac3665c1168a7ecc9bcf}{name}}
+\Hypertarget{structLocalTransition_a71d43959302dac3665c1168a7ecc9bcf}\label{structLocalTransition_a71d43959302dac3665c1168a7ecc9bcf} 
+string {\bfseries name}
 \begin{DoxyCompactList}\small\item\em Name of the transition (global). \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_afeabf0f7f88c17046e9c984a1f17c972}\label{structLocalTransition_afeabf0f7f88c17046e9c984a1f17c972}} 
-string \mbox{\hyperlink{structLocalTransition_afeabf0f7f88c17046e9c984a1f17c972}{local\+Name}}
+\Hypertarget{structLocalTransition_afeabf0f7f88c17046e9c984a1f17c972}\label{structLocalTransition_afeabf0f7f88c17046e9c984a1f17c972} 
+string {\bfseries local\+Name}
 \begin{DoxyCompactList}\small\item\em Name of the transition (local). \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_aaad00680a812ed1671a65015d4e51754}\label{structLocalTransition_aaad00680a812ed1671a65015d4e51754}} 
-bool \mbox{\hyperlink{structLocalTransition_aaad00680a812ed1671a65015d4e51754}{is\+Shared}}
+\Hypertarget{structLocalTransition_aaad00680a812ed1671a65015d4e51754}\label{structLocalTransition_aaad00680a812ed1671a65015d4e51754} 
+bool {\bfseries is\+Shared}
 \begin{DoxyCompactList}\small\item\em Is the transition appearing somewhere else, true if yes, false if no. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}\label{structLocalTransition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}} 
-int \mbox{\hyperlink{structLocalTransition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}{shared\+Count}}
+\Hypertarget{structLocalTransition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}\label{structLocalTransition_a4bd31c2f99c1ddb41234bf97ab7dfe4a} 
+int {\bfseries shared\+Count}
 \begin{DoxyCompactList}\small\item\em Count of recurring appearances of this transition. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_a4340db4bd83de2e26da7fbb03c5d91b9}\label{structLocalTransition_a4340db4bd83de2e26da7fbb03c5d91b9}} 
-set$<$ \mbox{\hyperlink{structCondition}{Condition}} $\ast$ $>$ \mbox{\hyperlink{structLocalTransition_a4340db4bd83de2e26da7fbb03c5d91b9}{conditions}}
+\Hypertarget{structLocalTransition_a4340db4bd83de2e26da7fbb03c5d91b9}\label{structLocalTransition_a4340db4bd83de2e26da7fbb03c5d91b9} 
+set$<$ \mbox{\hyperlink{structCondition}{Condition}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries conditions}
 \begin{DoxyCompactList}\small\item\em Conditions that have to be fulfilled for the transition to be avaliable. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_a3ab704d30285de8da5f791033702fa9d}\label{structLocalTransition_a3ab704d30285de8da5f791033702fa9d}} 
-float \mbox{\hyperlink{structLocalTransition_a3ab704d30285de8da5f791033702fa9d}{probability}}
-\begin{DoxyCompactList}\small\item\em Used for probability formula verification. The probability of this \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} executing. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_acba4a9838fb8ae0cdfa23b8d581c7a49}\label{structLocalTransition_acba4a9838fb8ae0cdfa23b8d581c7a49}} 
-\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{structLocalTransition_acba4a9838fb8ae0cdfa23b8d581c7a49}{agent}}
-\begin{DoxyCompactList}\small\item\em Binding to an \mbox{\hyperlink{classAgent}{Agent}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_a8db6a207cd85580c50b42d45a28e0471}\label{structLocalTransition_a8db6a207cd85580c50b42d45a28e0471}} 
-\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ \mbox{\hyperlink{structLocalTransition_a8db6a207cd85580c50b42d45a28e0471}{from}}
-\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{classLocalState}{Local\+State}} from which this transition goes from. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structLocalTransition_a3532810736170bc57a6a25aa09a7ee28}\label{structLocalTransition_a3532810736170bc57a6a25aa09a7ee28}} 
-\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ \mbox{\hyperlink{structLocalTransition_a3532810736170bc57a6a25aa09a7ee28}{to}}
-\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{classLocalState}{Local\+State}} from which this transition goes to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\Hypertarget{structLocalTransition_a3ab704d30285de8da5f791033702fa9d}\label{structLocalTransition_a3ab704d30285de8da5f791033702fa9d} 
+float {\bfseries probability}
+\begin{DoxyCompactList}\small\item\em Used for probability formula verification. The probability of this \doxylink{structLocalTransition}{Local\+Transition} executing. \end{DoxyCompactList}\item 
+\Hypertarget{structLocalTransition_acba4a9838fb8ae0cdfa23b8d581c7a49}\label{structLocalTransition_acba4a9838fb8ae0cdfa23b8d581c7a49} 
+\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*} {\bfseries agent}
+\begin{DoxyCompactList}\small\item\em Binding to an \doxylink{classAgent}{Agent}. \end{DoxyCompactList}\item 
+\Hypertarget{structLocalTransition_a8db6a207cd85580c50b42d45a28e0471}\label{structLocalTransition_a8db6a207cd85580c50b42d45a28e0471} 
+\mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} {\bfseries from}
+\begin{DoxyCompactList}\small\item\em Binding to a \doxylink{classLocalState}{Local\+State} from which this transition goes from. \end{DoxyCompactList}\item 
+\Hypertarget{structLocalTransition_a3532810736170bc57a6a25aa09a7ee28}\label{structLocalTransition_a3532810736170bc57a6a25aa09a7ee28} 
+\mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} {\bfseries to}
+\begin{DoxyCompactList}\small\item\em Binding to a \doxylink{classLocalState}{Local\+State} from which this transition goes to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}

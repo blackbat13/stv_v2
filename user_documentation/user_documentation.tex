@@ -251,8 +251,21 @@ Formula description starts in a new line with a keyword $FORMULA$. After a colon
 Additionally you can specify the following knowledge operators:
 \begin{itemize}
   \item $\&K{\_}agent(formula)$ -- Knowledge (Agent name needed after the "{\_}". Lastly, you write the formula that you want to check in round brackets.)
-  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy (Agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Lastly, you write the formulas that you want to check in round brackets. Allows for listing more than one formula, separated with commas, each formula encapsulated within round brackets.)
+  \item $\&H{\_}agent[<=k/>=k]((formula1), (formula2), ...)$ -- Hartley entropy (Agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Lastly, you write the formulas that you want to check in round brackets. Allows for listing more than one formula, separated with commas, each formula encapsulated within round brackets.)
 \end{itemize}
+
+\subsubsection{Probabilistic formulas}
+Probabilistic verification is enabled automatically when the formula contains a probability constraint. Use the \verb|&P[op value]| fragment between the temporal operator and the formula body, where \verb|op| is one of:
+\begin{lstlisting}
+>  >=  <  <=
+\end{lstlisting}
+
+\begin{lstlisting}[title={Examples of probabilistic formulas.}]
+FORMULA: <<Agent1>><>&P[>=0.75](goal==1)
+FORMULA: <<Agent1>>[]&P[<0.20](error==1)
+\end{lstlisting}
+
+Probabilistic formulas are evaluated over probabilistic transitions (see Probabilistic actions). For a satisfied query, the tool prints both the boolean verdict and the computed value (\verb|p=...|).
 \begin{lstlisting}[title={A formula that checks if there is a strategy that globally Agent1 could take such actions that the value will be always equal to 1 or 7777.}]
   FORMULA: <<Agent1>>[](value==1 || value==7777)
 \end{lstlisting}
@@ -283,7 +296,8 @@ List of avaliable operators for conditions, variable changes and formula descrip
   \item \verb+/+ -- Division of two variables, returns an integer.
   \item \verb+%+ -- Modulo of two variables.
   \item $\&K{\_}agent(formula)$ -- Knowledge
-  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy
+  \item $\&H{\_}agent[<=k/>=k]((formula1), (formula2), ...)$ -- Hartley entropy
+  \item $\&P[==/!=/>/>=/</<=value]$ -- Probability threshold for a formula
 \end{itemize}
 
 

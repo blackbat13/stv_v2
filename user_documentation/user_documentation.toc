@@ -15,6 +15,7 @@
 \contentsline {subsubsection}{\numberline {3.1.6}Variable change}{8}{subsubsection.3.1.6}%
 \contentsline {subsubsection}{\numberline {3.1.7}Comments}{8}{subsubsection.3.1.7}%
 \contentsline {subsection}{\numberline {3.2}Formula description}{9}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Probabilistic formulas}{9}{subsubsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.3}Avaliable operators}{10}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}Running a specific model}{11}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}Example model}{11}{subsection.3.5}%

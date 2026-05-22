@@ -1,0 +1,116 @@
+\doxysection{strategy\+Parser.\+h}
+\hypertarget{strategyParser_8h_source}{}\label{strategyParser_8h_source}\index{strategyParser.h@{strategyParser.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ A\ Bison\ parser,\ made\ by\ GNU\ Bison\ 3.8.2.\ \ */}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{/*\ Bison\ interface\ for\ Yacc-\/like\ parsers\ in\ C}}
+\DoxyCodeLine{00004\ \textcolor{comment}{}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ \ \ Copyright\ (C)\ 1984,\ 1989-\/1990,\ 2000-\/2015,\ 2018-\/2021\ Free\ Software\ Foundation,}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ \ \ Inc.}}
+\DoxyCodeLine{00007\ \textcolor{comment}{}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ \ \ This\ program\ is\ free\ software:\ you\ can\ redistribute\ it\ and/or\ modify}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ it\ under\ the\ terms\ of\ the\ GNU\ General\ Public\ License\ as\ published\ by}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ the\ Free\ Software\ Foundation,\ either\ version\ 3\ of\ the\ License,\ or}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ \ (at\ your\ option)\ any\ later\ version.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ This\ program\ is\ distributed\ in\ the\ hope\ that\ it\ will\ be\ useful,}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ but\ WITHOUT\ ANY\ WARRANTY;\ without\ even\ the\ implied\ warranty\ of}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ MERCHANTABILITY\ or\ FITNESS\ FOR\ A\ PARTICULAR\ PURPOSE.\ \ See\ the}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ GNU\ General\ Public\ License\ for\ more\ details.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ You\ should\ have\ received\ a\ copy\ of\ the\ GNU\ General\ Public\ License}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ along\ with\ this\ program.\ \ If\ not,\ see\ <https://www.gnu.org/licenses/>.\ \ */}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ As\ a\ special\ exception,\ you\ may\ create\ a\ larger\ work\ that\ contains}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ part\ or\ all\ of\ the\ Bison\ parser\ skeleton\ and\ distribute\ that\ work}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ under\ terms\ of\ your\ choice,\ so\ long\ as\ that\ work\ isn't\ itself\ a}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ parser\ generator\ using\ the\ skeleton\ or\ a\ modified\ version\ thereof}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ \ \ as\ a\ parser\ skeleton.\ \ Alternatively,\ if\ you\ modify\ or\ redistribute}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ \ \ the\ parser\ skeleton\ itself,\ you\ may\ (at\ your\ option)\ remove\ this}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ \ \ special\ exception,\ which\ will\ cause\ the\ skeleton\ and\ the\ resulting}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ \ \ Bison\ output\ files\ to\ be\ licensed\ under\ the\ GNU\ General\ Public}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ \ \ License\ without\ this\ special\ exception.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ \ \ This\ special\ exception\ was\ added\ by\ the\ Free\ Software\ Foundation\ in}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ \ \ version\ 2.2\ of\ Bison.\ \ */}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{/*\ DO\ NOT\ RELY\ ON\ FEATURES\ THAT\ ARE\ NOT\ DOCUMENTED\ in\ the\ manual,}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ especially\ those\ whose\ name\ start\ with\ YY\_\ or\ yy\_.\ \ They\ are}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ private\ implementation\ details\ that\ can\ be\ changed\ or\ removed.\ \ */}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifndef\ YY\_STRAT\_SRC\_STRATEGYREADER\_STRATEGYPARSER\_H\_INCLUDED}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#\ define\ YY\_STRAT\_SRC\_STRATEGYREADER\_STRATEGYPARSER\_H\_INCLUDED}}
+\DoxyCodeLine{00040\ \textcolor{comment}{/*\ Debug\ traces.\ \ */}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#ifndef\ STRATDEBUG}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#\ if\ defined\ YYDEBUG}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#if\ YYDEBUG}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#\ \ \ define\ STRATDEBUG\ 1}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#\ \ else}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#\ \ \ define\ STRATDEBUG\ 0}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#\ \ endif}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#\ else\ }\textcolor{comment}{/*\ !\ defined\ YYDEBUG\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#\ \ define\ STRATDEBUG\ 0}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#\ endif\ }\textcolor{comment}{/*\ !\ defined\ YYDEBUG\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{/*\ !\ defined\ STRATDEBUG\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#if\ STRATDEBUG}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{int}\ stratdebug;}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{/*\ Token\ kinds.\ \ */}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#ifndef\ STRATTOKENTYPE}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#\ define\ STRATTOKENTYPE}}
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{enum}\ strattokentype}
+\DoxyCodeLine{00060\ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ STRATEMPTY\ =\ -\/2,}
+\DoxyCodeLine{00062\ \ \ \ \ STRATEOF\ =\ 0,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ "{}end\ of\ file"{}\ \ */}}
+\DoxyCodeLine{00063\ \ \ \ \ STRATerror\ =\ 256,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ error\ \ */}}
+\DoxyCodeLine{00064\ \ \ \ \ STRATUNDEF\ =\ 257,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ "{}invalid\ token"{}\ \ */}}
+\DoxyCodeLine{00065\ \ \ \ \ T\_TO\ =\ 258,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_TO\ \ */}}
+\DoxyCodeLine{00066\ \ \ \ \ T\_ASSIGN\ =\ 259,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_ASSIGN\ \ */}}
+\DoxyCodeLine{00067\ \ \ \ \ T\_OR\ =\ 260,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_OR\ \ */}}
+\DoxyCodeLine{00068\ \ \ \ \ T\_AND\ =\ 261,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_AND\ \ */}}
+\DoxyCodeLine{00069\ \ \ \ \ T\_EQ\ =\ 262,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_EQ\ \ */}}
+\DoxyCodeLine{00070\ \ \ \ \ T\_NE\ =\ 263,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_NE\ \ */}}
+\DoxyCodeLine{00071\ \ \ \ \ T\_GT\ =\ 264,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_GT\ \ */}}
+\DoxyCodeLine{00072\ \ \ \ \ T\_GE\ =\ 265,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_GE\ \ */}}
+\DoxyCodeLine{00073\ \ \ \ \ T\_LT\ =\ 266,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_LT\ \ */}}
+\DoxyCodeLine{00074\ \ \ \ \ T\_LE\ =\ 267,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_LE\ \ */}}
+\DoxyCodeLine{00075\ \ \ \ \ T\_NUM\ =\ 268,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_NUM\ \ */}}
+\DoxyCodeLine{00076\ \ \ \ \ T\_SHARED\ =\ 269,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_SHARED\ \ */}}
+\DoxyCodeLine{00077\ \ \ \ \ T\_FLOAT\ =\ 270,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_FLOAT\ \ */}}
+\DoxyCodeLine{00078\ \ \ \ \ T\_IDENT\ =\ 271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ T\_IDENT\ \ */}}
+\DoxyCodeLine{00079\ \ \ \};}
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ strattokentype\ strattoken\_kind\_t;}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{/*\ Value\ type.\ \ */}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#if\ !\ defined\ STRATSTYPE\ \&\&\ !\ defined\ STRATSTYPE\_IS\_DECLARED}}
+\DoxyCodeLine{00085\ \textcolor{keyword}{union\ }\mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}}}
+\DoxyCodeLine{00086\ \{}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#line\ 26\ "{}../src/strategyReader/strategyParser.y"{}}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expr;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ val;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ floatno;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ident;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ vector<string>*\ \ \ \ \ \ \ \ \ \ \ \ \ identList;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#line\ 96\ "{}../src/strategyReader/strategyParser.h"{}}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}}\ \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}};}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#\ define\ STRATSTYPE\_IS\_TRIVIAL\ 1}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#\ define\ STRATSTYPE\_IS\_DECLARED\ 1}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}}\ stratlval;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{int}\ stratparse\ (\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !YY\_STRAT\_SRC\_STRATEGYREADER\_STRATEGYPARSER\_H\_INCLUDED\ \ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

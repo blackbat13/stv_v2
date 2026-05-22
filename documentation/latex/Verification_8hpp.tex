@@ -1,11 +1,11 @@
-\hypertarget{Verification_8hpp}{}\doxysection{Verification.\+hpp File Reference}
-\label{Verification_8hpp}\index{Verification.hpp@{Verification.hpp}}
+\doxysection{Verification.\+hpp File Reference}
+\hypertarget{Verification_8hpp}{}\label{Verification_8hpp}\index{Verification.hpp@{Verification.hpp}}
 {\ttfamily \#include $<$stack$>$}\newline
-{\ttfamily \#include \char`\"{}Types.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}Types\+Dependency.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}Global\+Model\+Generator.\+hpp\char`\"{}}\newline
+{\ttfamily \#include "{}Types.\+hpp"{}}\newline
+{\ttfamily \#include "{}Types\+Dependency.\+hpp"{}}\newline
+{\ttfamily \#include "{}Global\+Model\+Generator.\+hpp"{}}\newline
 {\ttfamily \#include $<$bitset$>$}\newline
-\doxysubsection*{Classes}
+\doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}
@@ -14,13 +14,13 @@ class \mbox{\hyperlink{classHistoryDbg}{History\+Dbg}}
 \begin{DoxyCompactList}\small\item\em Stores history and allows displaying it to the console. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classVerification}{Verification}}
 \begin{DoxyCompactList}\small\item\em A class that verifies if the model fulfills the formula. Also can do some operations on decision history. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Macros}
+\doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}\label{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}} 
+\Hypertarget{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}\label{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49} 
 \#define {\bfseries STRATEGY\+\_\+\+BITS}~64
 \end{DoxyCompactItemize}
-\doxysubsection*{Enumerations}
+\doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}{Traversal\+Mode}} \{ \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7}{NORMAL}}
@@ -28,7 +28,7 @@ enum \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}{Trave
 , \mbox{\hyperlink{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380}{RESTORE}}
  \}
 \begin{DoxyCompactList}\small\item\em Current model traversal mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 string \mbox{\hyperlink{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}{ver\+Status\+To\+Str}} (Global\+State\+Verification\+Status status)
@@ -36,7 +36,7 @@ string \mbox{\hyperlink{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}{ver
 
 
 \doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}} 
+\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872} 
 \index{Verification.hpp@{Verification.hpp}!TraversalMode@{TraversalMode}}
 \index{TraversalMode@{TraversalMode}!Verification.hpp@{Verification.hpp}}
 \doxysubsubsection{\texorpdfstring{TraversalMode}{TraversalMode}}
@@ -47,15 +47,15 @@ string \mbox{\hyperlink{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}{ver
 Current model traversal mode. 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NORMAL@{NORMAL}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!NORMAL@{NORMAL}}}\mbox{\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORMAL@{NORMAL}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!NORMAL@{NORMAL}}}\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7} 
 NORMAL&Normal model traversal. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{REVERT@{REVERT}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!REVERT@{REVERT}}}\mbox{\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REVERT@{REVERT}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!REVERT@{REVERT}}}\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf} 
 REVERT&Backtracking through recursion with state rollback. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{RESTORE@{RESTORE}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!RESTORE@{RESTORE}}}\mbox{\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380}} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RESTORE@{RESTORE}!Verification.hpp@{Verification.hpp}}\index{Verification.hpp@{Verification.hpp}!RESTORE@{RESTORE}}}\Hypertarget{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380}\label{Verification_8hpp_ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380} 
 RESTORE&Backtracking through recursion. \\
 \hline
 
@@ -63,7 +63,7 @@ RESTORE&Backtracking through recursion. \\
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}\label{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}} 
+\Hypertarget{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5}\label{Verification_8hpp_a359b96afed1805b959d60e2c69b373f5} 
 \index{Verification.hpp@{Verification.hpp}!verStatusToStr@{verStatusToStr}}
 \index{verStatusToStr@{verStatusToStr}!Verification.hpp@{Verification.hpp}}
 \doxysubsubsection{\texorpdfstring{verStatusToStr()}{verStatusToStr()}}
@@ -79,5 +79,5 @@ Converts global verification status into a string.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\mbox{\hyperlink{classVerification}{Verification}} status converted into a string. 
+\doxylink{classVerification}{Verification} status converted into a string. 
 \end{DoxyReturn}

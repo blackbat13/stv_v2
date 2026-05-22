@@ -1,0 +1,100 @@
+\doxysection{Types.\+hpp}
+\hypertarget{Types_8hpp_source}{}\label{Types_8hpp_source}\index{Types.hpp@{Types.hpp}}
+\mbox{\hyperlink{Types_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ SELENE\_TYPES}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ SELENE\_TYPES}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{LocalState_8hpp}{LocalState.hpp}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{LocalTransition_8hpp}{LocalTransition.hpp}}"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GlobalState_8hpp}{GlobalState.hpp}}"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GlobalTransition_8hpp}{GlobalTransition.hpp}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GlobalModel_8hpp}{GlobalModel.hpp}}"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{EpistemicClass_8hpp}{EpistemicClass.hpp}}"{}}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Agent_8hpp}{Agent.hpp}}"{}}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{expressions_8hpp}{reader/expressions.hpp}}"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <atomic>}\ \textcolor{comment}{//std::atomic\_uint32\_t}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TypesDependency_8hpp}{TypesDependency.hpp}}"{}}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}{ProbabilitySign}}\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2}{NONE}},\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f}{EQ}},\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db}{NE}},\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892}{GT}},\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce}{GE}},\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571}{LT}},\ }
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61}{LE}}\ }
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structVar}{Var}}\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structVar_a4f203af1d57ced7e80b3c02e2120e7c4}{name}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structVar_a0e10d54a8a5f415596585a5bce72bcae}{initialValue}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structVar_aa32055d36c033ef3c9961aed76cb85d6}{persistent}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classAgent}{Agent}}\ *\mbox{\hyperlink{structVar_a64fab7d68a7961c69e843742f46b4b85}{agent}};}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCondition}{Condition}}\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{structVar}{Var}}*\ \mbox{\hyperlink{structCondition_aa6cd0cae0f61e0bb0969cecf01229dc6}{var}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \ \ ConditionOperator\ \mbox{\hyperlink{structCondition_a79a98a26f53ae59130bd0669164a7529}{conditionOperator}};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structCondition_a147c5a008a9e4afe82876e7ca9ec932d}{comparedValue}};}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFormulaTemplate}{FormulaTemplate}}\ \{}
+\DoxyCodeLine{00077\ \ \ \ \ set<string>*\ coalition;\ \textcolor{comment}{//\ this\ will\ be\ replaced\ by\ an\ Agent\ pointer\ upon\ instantiation\ of\ a\ formula}}
+\DoxyCodeLine{00078\ \ \ \ \ vector<ExprNode*>*\ formula;}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ isF;}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classProbNode}{ProbNode}}*\ probability;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{string}\ probabilitySign\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFormula}{Formula}}\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ set<Agent*>\ \mbox{\hyperlink{structFormula_add7c79b6d4907e5d466ede2718907e5a}{coalition}};}
+\DoxyCodeLine{00088\ \ \ \ \ vector<ExprNode*>*\ p;\ \textcolor{comment}{//\ [YK]:\ temporary\ solution\ to\ encode\ <<coalution>>\ G\ p}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ isF;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ isCTL;}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{float}\ probability\ =\ 1;}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}{ProbabilitySign}}\ probabilitySign\ =\ \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2}{ProbabilitySign::NONE}};}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structLocalModels}{LocalModels}}\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ vector<Agent*>\ \mbox{\hyperlink{structLocalModels_aa63e5349d321ace9b841aaab6054350e}{agents}};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ agents[i].id\ ==\ i}}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structResult}{Result}}\ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificationResult\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{structProbabilityTrueFalse}{ProbabilityTrueFalse}}\ probabilityResult;}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{keyword}{enum}\ VerificationFormulaMode\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ NOT\_SET\ =\ 0,}
+\DoxyCodeLine{00110\ \ \ \ \ F\ =\ 1,}
+\DoxyCodeLine{00111\ \ \ \ \ G\ =\ 2}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SELENE\_TYPES}}
+
+\end{DoxyCode}

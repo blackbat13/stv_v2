@@ -1,5 +1,5 @@
-\hypertarget{structGlobalTransition}{}\doxysection{Global\+Transition Struct Reference}
-\label{structGlobalTransition}\index{GlobalTransition@{GlobalTransition}}
+\doxysection{Global\+Transition Struct Reference}
+\hypertarget{structGlobalTransition}{}\label{structGlobalTransition}\index{GlobalTransition@{GlobalTransition}}
 
 
 Represents a single global transition.  
@@ -9,36 +9,39 @@ Represents a single global transition.
 
 {\ttfamily \#include $<$Global\+Transition.\+hpp$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}\label{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}} 
-\mbox{\hyperlink{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}{Global\+Transition}} ()
-\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}. \end{DoxyCompactList}\item 
+\Hypertarget{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0}\label{structGlobalTransition_ad4dd0dec2a4428d0b6d149ee73f6c3d0} 
+{\bfseries Global\+Transition} ()
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{structGlobalTransition}{Global\+Transition}. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}{join\+Local\+Transition\+Names}} (char sep=\textquotesingle{};\textquotesingle{})
-\begin{DoxyCompactList}\small\item\em Concatenates local transition names into a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em Concatenates local transition names into a string. \end{DoxyCompactList}\item 
+\Hypertarget{structGlobalTransition_a26cacb7d7f596e3dc40ff2ee73e17d01}\label{structGlobalTransition_a26cacb7d7f596e3dc40ff2ee73e17d01} 
+float {\bfseries get\+Probability} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structGlobalTransition_a0091cb21aedcbc1811591fe3cdfcc2a0}\label{structGlobalTransition_a0091cb21aedcbc1811591fe3cdfcc2a0}} 
-uint32\+\_\+t \mbox{\hyperlink{structGlobalTransition_a0091cb21aedcbc1811591fe3cdfcc2a0}{id}}
+\Hypertarget{structGlobalTransition_a0091cb21aedcbc1811591fe3cdfcc2a0}\label{structGlobalTransition_a0091cb21aedcbc1811591fe3cdfcc2a0} 
+uint32\+\_\+t {\bfseries id}
 \begin{DoxyCompactList}\small\item\em Identifier of the transition. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}\label{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}} 
-bool \mbox{\hyperlink{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}{is\+Invalid\+Decision}}
+\Hypertarget{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb}\label{structGlobalTransition_a042d1bace6ff8fd7a037408698efe2bb} 
+bool {\bfseries is\+Invalid\+Decision}
 \begin{DoxyCompactList}\small\item\em Marks if the transition is invalid, true if there is no point in traversing that transition, otherwise false. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}\label{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}} 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}{from}}
-\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{structGlobalState}{Global\+State}} from which this transition goes from. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalTransition_a10d5f899585856e47372c315a4029681}\label{structGlobalTransition_a10d5f899585856e47372c315a4029681}} 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structGlobalTransition_a10d5f899585856e47372c315a4029681}{to}}
-\begin{DoxyCompactList}\small\item\em Binding to a \mbox{\hyperlink{structGlobalState}{Global\+State}} from which this transition goes to. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}\label{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}} 
-set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}{local\+Transitions}}
+\Hypertarget{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44}\label{structGlobalTransition_afddc8aac033d574baa819a491e5c7e44} 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} {\bfseries from}
+\begin{DoxyCompactList}\small\item\em Binding to a \doxylink{structGlobalState}{Global\+State} from which this transition goes from. \end{DoxyCompactList}\item 
+\Hypertarget{structGlobalTransition_a10d5f899585856e47372c315a4029681}\label{structGlobalTransition_a10d5f899585856e47372c315a4029681} 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} {\bfseries to}
+\begin{DoxyCompactList}\small\item\em Binding to a \doxylink{structGlobalState}{Global\+State} from which this transition goes to. \end{DoxyCompactList}\item 
+\Hypertarget{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c}\label{structGlobalTransition_a9e68bf0bab1148c6e20cb6cd5502c38c} 
+set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries local\+Transitions}
 \begin{DoxyCompactList}\small\item\em Local transitions that define this global transition. A single transition or more in case of shared transitions. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Static Public Attributes}
+\doxysubsubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structGlobalTransition_a9cd560d7bedb69f6f890d9993dc783b6}\label{structGlobalTransition_a9cd560d7bedb69f6f890d9993dc783b6}} 
+\Hypertarget{structGlobalTransition_a9cd560d7bedb69f6f890d9993dc783b6}\label{structGlobalTransition_a9cd560d7bedb69f6f890d9993dc783b6} 
 static atomic\+\_\+uint32\+\_\+t {\bfseries next\+\_\+id}
 \end{DoxyCompactItemize}
 
@@ -47,7 +50,7 @@ static atomic\+\_\+uint32\+\_\+t {\bfseries next\+\_\+id}
 Represents a single global transition. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}\label{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}} 
+\Hypertarget{structGlobalTransition_ae35df90140166dec569474ee28c6d81f}\label{structGlobalTransition_ae35df90140166dec569474ee28c6d81f} 
 \index{GlobalTransition@{GlobalTransition}!joinLocalTransitionNames@{joinLocalTransitionNames}}
 \index{joinLocalTransitionNames@{joinLocalTransitionNames}!GlobalTransition@{GlobalTransition}}
 \doxysubsubsection{\texorpdfstring{joinLocalTransitionNames()}{joinLocalTransitionNames()}}

@@ -1,5 +1,5 @@
-\hypertarget{structEpistemicClass}{}\doxysection{Epistemic\+Class Struct Reference}
-\label{structEpistemicClass}\index{EpistemicClass@{EpistemicClass}}
+\doxysection{Epistemic\+Class Struct Reference}
+\hypertarget{structEpistemicClass}{}\label{structEpistemicClass}\index{EpistemicClass@{EpistemicClass}}
 
 
 Represents a single epistemic class.  
@@ -9,17 +9,17 @@ Represents a single epistemic class.
 
 {\ttfamily \#include $<$Epistemic\+Class.\+hpp$>$}
 
-\doxysubsection*{Public Attributes}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1}\label{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1}} 
-string \mbox{\hyperlink{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1}{hash}}
+\Hypertarget{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1}\label{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1} 
+string {\bfseries hash}
 \begin{DoxyCompactList}\small\item\em Hash of that epistemic class. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structEpistemicClass_a9c472fb5f4678b5145d6b9d66f0d8bfe}\label{structEpistemicClass_a9c472fb5f4678b5145d6b9d66f0d8bfe}} 
-map$<$ string, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{structEpistemicClass_a9c472fb5f4678b5145d6b9d66f0d8bfe}{global\+States}}
-\begin{DoxyCompactList}\small\item\em Map of \mbox{\hyperlink{structGlobalState}{Global\+State}} hashes to according \mbox{\hyperlink{structGlobalState}{Global\+State}} pointers bound to this epistemic class. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{structEpistemicClass_ae7c2c74fe23704110fef34c85a684d30}\label{structEpistemicClass_ae7c2c74fe23704110fef34c85a684d30}} 
-\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ \mbox{\hyperlink{structEpistemicClass_ae7c2c74fe23704110fef34c85a684d30}{fixed\+Coalition\+Transition}}
+\Hypertarget{structEpistemicClass_a9c472fb5f4678b5145d6b9d66f0d8bfe}\label{structEpistemicClass_a9c472fb5f4678b5145d6b9d66f0d8bfe} 
+\mbox{\hyperlink{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1}{map}}$<$ \mbox{\hyperlink{structEpistemicClass_a861627f16e0a71ff8a12ede2324be9c1}{string}}, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries global\+States}
+\begin{DoxyCompactList}\small\item\em Map of \doxylink{structGlobalState}{Global\+State} hashes to according \doxylink{structGlobalState}{Global\+State} pointers bound to this epistemic class. \end{DoxyCompactList}\item 
+\Hypertarget{structEpistemicClass_ae7c2c74fe23704110fef34c85a684d30}\label{structEpistemicClass_ae7c2c74fe23704110fef34c85a684d30} 
+\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} {\bfseries fixed\+Coalition\+Transition}
 \begin{DoxyCompactList}\small\item\em Transition that was already selected in this epistemic class. Model has to choose this transition if it is already set. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 

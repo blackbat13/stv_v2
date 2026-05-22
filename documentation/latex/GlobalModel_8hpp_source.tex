@@ -1,0 +1,35 @@
+\doxysection{Global\+Model.\+hpp}
+\hypertarget{GlobalModel_8hpp_source}{}\label{GlobalModel_8hpp_source}\index{GlobalModel.hpp@{GlobalModel.hpp}}
+\mbox{\hyperlink{GlobalModel_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ GLOBALMODEL\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ GLOBALMODEL\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Common_8hpp}{Common.hpp}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGlobalModel}{GlobalModel}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ \ \ \ \ vector<Agent*>\ \mbox{\hyperlink{structGlobalModel_ab814012ebb0a3f98b0f7bd3ebdc5d87d}{agents}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ agents[i].id\ ==\ i}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{structFormula}{Formula}}*\ \mbox{\hyperlink{structGlobalModel_a773186cb6a70d9d68b279d59f804b49d}{formula}};}
+\DoxyCodeLine{00022\ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{structGlobalState}{GlobalState}}*\ \mbox{\hyperlink{structGlobalModel_ac35dbc225f644f077866f377aa41efb6}{initState}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00029\ \ \ \ \ vector<GlobalState*>\ \mbox{\hyperlink{structGlobalModel_adc5b27422d2f1f31cb1fbe251855ff6e}{globalStates}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ globalStates[i].id\ ==\ i}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ map<Agent*,\ map<string,\ EpistemicClass*>>\ \mbox{\hyperlink{structGlobalModel_a60eb7ac94bb32e1b2deeb9b19a4b61f3}{epistemicClasses}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ map<Agent*,\ map<string,\ set<GlobalState*>>>\ \mbox{\hyperlink{structGlobalModel_abe331c17cec932b9bc8b29ade4624eaa}{epistemicClassesKnowledge}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Agent*\ =>\ (EpistemicClass-\/>hash\ =>\ EpistemicClass*)}}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GLOBALMODEL\_H}}
+
+\end{DoxyCode}

@@ -25,13 +25,15 @@
 var NAVTREE =
 [
   [ "stv_v2", "index.html", [
-    [ "STV2 - StraTegic Verifier 2", "md__home_mathis_repositories_stv_v2_README.html", [
-      [ "Usage", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md1", null ],
-      [ "Tests", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md2", null ],
-      [ "Performance estimation", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md3", null ],
-      [ "Specification", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md4", null ],
-      [ "Examples and templates", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md5", null ],
-      [ "Misc", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md6", null ]
+    [ "STV2 - StraTegic Verifier version 2", "md__2home_2repos_2stv__v2_2README.html", [
+      [ "Usage", "md__2home_2repos_2stv__v2_2README.html#autotoc_md1", null ],
+      [ "Tests", "md__2home_2repos_2stv__v2_2README.html#autotoc_md2", null ],
+      [ "Performance estimation", "md__2home_2repos_2stv__v2_2README.html#autotoc_md3", null ],
+      [ "Specification", "md__2home_2repos_2stv__v2_2README.html#autotoc_md4", null ],
+      [ "Examples and templates", "md__2home_2repos_2stv__v2_2README.html#autotoc_md5", null ],
+      [ "Misc", "md__2home_2repos_2stv__v2_2README.html#autotoc_md6", null ],
+      [ "Web interface", "md__2home_2repos_2stv__v2_2README.html#autotoc_md7", null ],
+      [ "Credits", "md__2home_2repos_2stv__v2_2README.html#autotoc_md8", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -59,9 +61,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Agent_8cpp.html",
-"classGlobalModelGenerator.html#a02e538bcb34f1789e72a6db5eaffdf09",
-"functions_c.html",
-"unionYYSTYPE.html#afb485eb0bf6da8ecd785eab79ec79b6d"
+"classModelParser.html#a2a89f7b51de54422c1873d24d16eb17a",
+"structLocalTransition.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

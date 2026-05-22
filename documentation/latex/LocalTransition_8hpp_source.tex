@@ -1,0 +1,41 @@
+\doxysection{Local\+Transition.\+hpp}
+\hypertarget{LocalTransition_8hpp_source}{}\label{LocalTransition_8hpp_source}\index{LocalTransition.hpp@{LocalTransition.hpp}}
+\mbox{\hyperlink{LocalTransition_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ LOCALTRANSITION\_H}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ LOCALTRANSITION\_H}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Common_8hpp}{Common.hpp}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structLocalTransition}{LocalTransition}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{comment}{//\ Data}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structLocalTransition_af0317d03188c22a2c4ec8189d5da85b5}{id}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structLocalTransition_a71d43959302dac3665c1168a7ecc9bcf}{name}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{structLocalTransition_afeabf0f7f88c17046e9c984a1f17c972}{localName}};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ if\ empty\ =>\ same\ as\ name}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structLocalTransition_aaad00680a812ed1671a65015d4e51754}{isShared}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structLocalTransition_a4bd31c2f99c1ddb41234bf97ab7dfe4a}{sharedCount}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \ \ \ \ set<Condition*>\ \mbox{\hyperlink{structLocalTransition_a4340db4bd83de2e26da7fbb03c5d91b9}{conditions}};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structLocalTransition_a3ab704d30285de8da5f791033702fa9d}{probability}};}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ Bindings}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classAgent}{Agent}}*\ \mbox{\hyperlink{structLocalTransition_acba4a9838fb8ae0cdfa23b8d581c7a49}{agent}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classLocalState}{LocalState}}*\ \mbox{\hyperlink{structLocalTransition_a8db6a207cd85580c50b42d45a28e0471}{from}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classLocalState}{LocalState}}*\ \mbox{\hyperlink{structLocalTransition_a3532810736170bc57a6a25aa09a7ee28}{to}};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOCALTRANSITION\_H}}
+
+\end{DoxyCode}

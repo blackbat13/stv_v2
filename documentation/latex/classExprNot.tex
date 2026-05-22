@@ -1,5 +1,5 @@
-\hypertarget{classExprNot}{}\doxysection{Expr\+Not Class Reference}
-\label{classExprNot}\index{ExprNot@{ExprNot}}
+\doxysection{Expr\+Not Class Reference}
+\hypertarget{classExprNot}{}\label{classExprNot}\index{ExprNot@{ExprNot}}
 
 
 Node for NOT operator.  
@@ -9,15 +9,14 @@ Node for NOT operator.
 
 {\ttfamily \#include $<$expressions.\+hpp$>$}
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classExprNot_a02682d358e2d05486e06c579511c1666}{Expr\+Not}} (\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+arg)
+\mbox{\hyperlink{classExprNot_a02682d358e2d05486e06c579511c1666}{Expr\+Not}} (\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}\+\_\+arg)
 \begin{DoxyCompactList}\small\item\em Logic NOT expression constructor. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classExprNot_af28d7286ff72cb05357a65429a362285}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+virtual int \mbox{\hyperlink{classExprNot_af28d7286ff72cb05357a65429a362285}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \texorpdfstring{$\ast$}{*}generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}global\+State)
 \begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classExprNot_ae662985b83e9bc3b8de58544512fb2bd}\label{classExprNot_ae662985b83e9bc3b8de58544512fb2bd}} 
-virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+virtual int \mbox{\hyperlink{classExprNot_ae662985b83e9bc3b8de58544512fb2bd}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
 \end{DoxyCompactItemize}
 
 
@@ -25,11 +24,11 @@ virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010
 Node for NOT operator. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classExprNot_a02682d358e2d05486e06c579511c1666}\label{classExprNot_a02682d358e2d05486e06c579511c1666}} 
+\Hypertarget{classExprNot_a02682d358e2d05486e06c579511c1666}\label{classExprNot_a02682d358e2d05486e06c579511c1666} 
 \index{ExprNot@{ExprNot}!ExprNot@{ExprNot}}
 \index{ExprNot@{ExprNot}!ExprNot@{ExprNot}}
 \doxysubsubsection{\texorpdfstring{ExprNot()}{ExprNot()}}
-{\footnotesize\ttfamily Expr\+Not\+::\+Expr\+Not (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Expr\+Not\+::\+Expr\+Not (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}}]{\+\_\+arg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -43,11 +42,21 @@ Logic NOT expression constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classExprNot_af28d7286ff72cb05357a65429a362285}\label{classExprNot_af28d7286ff72cb05357a65429a362285}} 
+\Hypertarget{classExprNot_ae662985b83e9bc3b8de58544512fb2bd}\label{classExprNot_ae662985b83e9bc3b8de58544512fb2bd} 
 \index{ExprNot@{ExprNot}!eval@{eval}}
 \index{eval@{eval}!ExprNot@{ExprNot}}
-\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
-{\footnotesize\ttfamily int Expr\+Not\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int Expr\+Not\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classExprNode}{Expr\+Node}}.
+
+\Hypertarget{classExprNot_af28d7286ff72cb05357a65429a362285}\label{classExprNot_af28d7286ff72cb05357a65429a362285} 
+\index{ExprNot@{ExprNot}!eval@{eval}}
+\index{eval@{eval}!ExprNot@{ExprNot}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int Expr\+Not\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \texorpdfstring{$\ast$}{*}}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 

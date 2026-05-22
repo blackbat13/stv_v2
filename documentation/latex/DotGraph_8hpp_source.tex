@@ -1,0 +1,41 @@
+\doxysection{Dot\+Graph.\+hpp}
+\hypertarget{DotGraph_8hpp_source}{}\label{DotGraph_8hpp_source}\index{DotGraph.hpp@{DotGraph.hpp}}
+\mbox{\hyperlink{DotGraph_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifndef\ DOT\_PARSER}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ DOT\_PARSER}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Types_8hpp}{Types.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Utils_8hpp}{Utils.hpp}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{nodes_8hpp}{reader/nodes.hpp}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{DotGraphBase}}\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591a3ef1a3b9eca108cbfdc7a35487463723}{LOCAL\_MODEL}},\ }
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591aa80d23d925f4035d91562c2b3bdbfe69}{GLOBAL\_MODEL}},\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591ad538e4a985b93b58065d4d97940cb0e1}{AGENT\_TEMPLATE}},\ }
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDotGraph}{DotGraph}}\{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ std::vector<std::string>\ nodes;}
+\DoxyCodeLine{00026\ \ \ \ \ std::vector<std::string>\ edges;}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ graphName;}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{DotGraphBase}}\ graphBase;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{classDotGraph_a02b23bbc3defedf86bfe2f6a8ca8a55c}{styleString}};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}{DotGraph}}();}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}{DotGraph}}(\mbox{\hyperlink{structGlobalModel}{GlobalModel}}\ *\textcolor{keyword}{const}\ gm,\ \textcolor{keywordtype}{bool}\ extended=\textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ correct=\textcolor{keyword}{false});}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}{DotGraph}}(\mbox{\hyperlink{classAgent}{Agent}}\ *\textcolor{keyword}{const}\ ag,\ \textcolor{keywordtype}{bool}\ extended=\textcolor{keyword}{false});}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}{DotGraph}}(\mbox{\hyperlink{classAgentTemplate}{AgentTemplate}}\ *\textcolor{keyword}{const}\ at);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}{saveToFile}}(std::string\ pathprefix,\ std::string\ nameprefix,\ std::string\ basename=\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00035\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDotGraph_a1fd5b39a11c73582439a164c82610565}{addNode}}(std::string\ \textcolor{keywordtype}{id},\ std::string\ name);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classDotGraph_a1d2cb25d1d4964b9fc600b1b0c844b1b}{addEdge}}(std::string\ src,\ std::string\ trg,\ std::string\ label);}
+\DoxyCodeLine{00038\ \};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
