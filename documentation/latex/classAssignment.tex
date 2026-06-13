@@ -1,5 +1,5 @@
-\doxysection{Assignment Class Reference}
-\hypertarget{classAssignment}{}\label{classAssignment}\index{Assignment@{Assignment}}
+\hypertarget{classAssignment}{}\doxysection{Assignment Class Reference}
+\label{classAssignment}\index{Assignment@{Assignment}}
 
 
 Represents an assingment.  
@@ -9,21 +9,29 @@ Represents an assingment.
 
 {\ttfamily \#include $<$nodes.\+hpp$>$}
 
-\doxysubsubsection*{Public Member Functions}
+
+
+Collaboration diagram for Assignment\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classAssignment__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classAssignment_a1d1f798145468d43615695a571564568}{Assignment}} (string \+\_\+ident, \mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}\+\_\+exp)
-\begin{DoxyCompactList}\small\item\em Constructor for an \doxylink{classAssignment}{Assignment} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAssignment_a1d1f798145468d43615695a571564568}{Assignment}} (string \+\_\+ident, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+exp)
+\begin{DoxyCompactList}\small\item\em Constructor for an \mbox{\hyperlink{classAssignment}{Assignment}} class. \end{DoxyCompactList}\item 
 virtual void \mbox{\hyperlink{classAssignment_afe2932c47e89dac72810398258ed017d}{assign}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
 \begin{DoxyCompactList}\small\item\em Make an assignment in a given environment. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classAssignment_a621d132a9a8f73a5397cad74c66e24af}\label{classAssignment_a621d132a9a8f73a5397cad74c66e24af} 
-string {\bfseries ident}
+string \mbox{\hyperlink{classAssignment_a621d132a9a8f73a5397cad74c66e24af}{ident}}
 \begin{DoxyCompactList}\small\item\em To what we should assign a value. \end{DoxyCompactList}\item 
-\Hypertarget{classAssignment_a5fc5bac99d35d4d85a17d6dac036a27a}\label{classAssignment_a5fc5bac99d35d4d85a17d6dac036a27a} 
-\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries value}
+\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$ \mbox{\hyperlink{classAssignment_a5fc5bac99d35d4d85a17d6dac036a27a}{value}}
 \begin{DoxyCompactList}\small\item\em A value to be assigned. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -31,15 +39,15 @@ string {\bfseries ident}
 Represents an assingment. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classAssignment_a1d1f798145468d43615695a571564568}\label{classAssignment_a1d1f798145468d43615695a571564568} 
+\mbox{\Hypertarget{classAssignment_a1d1f798145468d43615695a571564568}\label{classAssignment_a1d1f798145468d43615695a571564568}} 
 \index{Assignment@{Assignment}!Assignment@{Assignment}}
 \index{Assignment@{Assignment}!Assignment@{Assignment}}
 \doxysubsubsection{\texorpdfstring{Assignment()}{Assignment()}}
-{\footnotesize\ttfamily Assignment\+::\+Assignment (\begin{DoxyParamCaption}\item[{string}]{\+\_\+ident,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}}]{\+\_\+exp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Assignment\+::\+Assignment (\begin{DoxyParamCaption}\item[{string}]{\+\_\+ident,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+exp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Constructor for an \doxylink{classAssignment}{Assignment} class. 
+Constructor for an \mbox{\hyperlink{classAssignment}{Assignment}} class. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -51,7 +59,7 @@ Constructor for an \doxylink{classAssignment}{Assignment} class.
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classAssignment_afe2932c47e89dac72810398258ed017d}\label{classAssignment_afe2932c47e89dac72810398258ed017d} 
+\mbox{\Hypertarget{classAssignment_afe2932c47e89dac72810398258ed017d}\label{classAssignment_afe2932c47e89dac72810398258ed017d}} 
 \index{Assignment@{Assignment}!assign@{assign}}
 \index{assign@{assign}!Assignment@{Assignment}}
 \doxysubsubsection{\texorpdfstring{assign()}{assign()}}
@@ -66,6 +74,29 @@ Make an assignment in a given environment.
 {\em env} & Environment in which to make an assignment. \\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classAssignment_a621d132a9a8f73a5397cad74c66e24af}\label{classAssignment_a621d132a9a8f73a5397cad74c66e24af}} 
+\index{Assignment@{Assignment}!ident@{ident}}
+\index{ident@{ident}!Assignment@{Assignment}}
+\doxysubsubsection{\texorpdfstring{ident}{ident}}
+{\footnotesize\ttfamily string Assignment\+::ident}
+
+
+
+To what we should assign a value. 
+
+\mbox{\Hypertarget{classAssignment_a5fc5bac99d35d4d85a17d6dac036a27a}\label{classAssignment_a5fc5bac99d35d4d85a17d6dac036a27a}} 
+\index{Assignment@{Assignment}!value@{value}}
+\index{value@{value}!Assignment@{Assignment}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classExprNode}{Expr\+Node}}$\ast$ Assignment\+::value}
+
+
+
+A value to be assigned. 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

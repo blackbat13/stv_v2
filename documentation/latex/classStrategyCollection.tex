@@ -1,5 +1,5 @@
-\doxysection{Strategy\+Collection Class Reference}
-\hypertarget{classStrategyCollection}{}\label{classStrategyCollection}\index{StrategyCollection@{StrategyCollection}}
+\hypertarget{classStrategyCollection}{}\doxysection{Strategy\+Collection Class Reference}
+\label{classStrategyCollection}\index{StrategyCollection@{StrategyCollection}}
 
 
 Handles currently selected strategy when the strategy is set.  
@@ -9,28 +9,85 @@ Handles currently selected strategy when the strategy is set.
 
 {\ttfamily \#include $<$Types\+Dependency.\+hpp$>$}
 
-\doxysubsubsection*{Public Member Functions}
+
+
+Collaboration diagram for Strategy\+Collection\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classStrategyCollection__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classStrategyCollection_a1da3590b29af56c80844dfd2bfab6f07}\label{classStrategyCollection_a1da3590b29af56c80844dfd2bfab6f07} 
-{\bfseries Strategy\+Collection} (string hash, \mbox{\hyperlink{structAction}{Action}} action)
+\mbox{\hyperlink{classStrategyCollection_a66664b19405bdb0ff866885343935bbe}{Strategy\+Collection}} ()
 \item 
-\Hypertarget{classStrategyCollection_a738810e48ab06cc2f35701bee240e119}\label{classStrategyCollection_a738810e48ab06cc2f35701bee240e119} 
-void {\bfseries add\+Action} (\mbox{\hyperlink{structAction}{Action}} action)
+\mbox{\hyperlink{classStrategyCollection_aafaace17a381990c67a10d571e331a20}{$\sim$\+Strategy\+Collection}} ()
 \item 
-\Hypertarget{classStrategyCollection_a4068b28135dc1c0a017473226d5c3d1f}\label{classStrategyCollection_a4068b28135dc1c0a017473226d5c3d1f} 
-void {\bfseries add\+Strategy} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} strategy)
+\mbox{\hyperlink{classStrategyCollection_a1da3590b29af56c80844dfd2bfab6f07}{Strategy\+Collection}} (string hash, \mbox{\hyperlink{structAction}{Action}} action)
 \item 
-\Hypertarget{classStrategyCollection_af7a90b4e2d69f0b24e605a4b8acd68c4}\label{classStrategyCollection_af7a90b4e2d69f0b24e605a4b8acd68c4} 
-void {\bfseries clear} ()
+void \mbox{\hyperlink{classStrategyCollection_a738810e48ab06cc2f35701bee240e119}{add\+Action}} (\mbox{\hyperlink{structAction}{Action}} action)
 \item 
-\Hypertarget{classStrategyCollection_a74c46c4596259e064e0375489627c826}\label{classStrategyCollection_a74c46c4596259e064e0375489627c826} 
-map$<$ string, \mbox{\hyperlink{structAction}{Action}} $>$ {\bfseries get\+Strategy} ()
+void \mbox{\hyperlink{classStrategyCollection_a4068b28135dc1c0a017473226d5c3d1f}{add\+Strategy}} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} strategy)
+\item 
+void \mbox{\hyperlink{classStrategyCollection_af7a90b4e2d69f0b24e605a4b8acd68c4}{clear}} ()
+\item 
+map$<$ string, \mbox{\hyperlink{structAction}{Action}} $>$ \mbox{\hyperlink{classStrategyCollection_a44412bbb3f498bbbe0496fd48d84ed6c}{get\+Strategy}} ()
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Handles currently selected strategy when the strategy is set. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classStrategyCollection_a66664b19405bdb0ff866885343935bbe}\label{classStrategyCollection_a66664b19405bdb0ff866885343935bbe}} 
+\index{StrategyCollection@{StrategyCollection}!StrategyCollection@{StrategyCollection}}
+\index{StrategyCollection@{StrategyCollection}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{StrategyCollection()}{StrategyCollection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Strategy\+Collection\+::\+Strategy\+Collection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStrategyCollection_aafaace17a381990c67a10d571e331a20}\label{classStrategyCollection_aafaace17a381990c67a10d571e331a20}} 
+\index{StrategyCollection@{StrategyCollection}!````~StrategyCollection@{$\sim$StrategyCollection}}
+\index{````~StrategyCollection@{$\sim$StrategyCollection}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{$\sim$StrategyCollection()}{~StrategyCollection()}}
+{\footnotesize\ttfamily Strategy\+Collection\+::$\sim$\+Strategy\+Collection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStrategyCollection_a1da3590b29af56c80844dfd2bfab6f07}\label{classStrategyCollection_a1da3590b29af56c80844dfd2bfab6f07}} 
+\index{StrategyCollection@{StrategyCollection}!StrategyCollection@{StrategyCollection}}
+\index{StrategyCollection@{StrategyCollection}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{StrategyCollection()}{StrategyCollection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Strategy\+Collection\+::\+Strategy\+Collection (\begin{DoxyParamCaption}\item[{string}]{hash,  }\item[{\mbox{\hyperlink{structAction}{Action}}}]{action }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classStrategyCollection_a738810e48ab06cc2f35701bee240e119}\label{classStrategyCollection_a738810e48ab06cc2f35701bee240e119}} 
+\index{StrategyCollection@{StrategyCollection}!addAction@{addAction}}
+\index{addAction@{addAction}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{addAction()}{addAction()}}
+{\footnotesize\ttfamily void Strategy\+Collection\+::add\+Action (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAction}{Action}}}]{action }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStrategyCollection_a4068b28135dc1c0a017473226d5c3d1f}\label{classStrategyCollection_a4068b28135dc1c0a017473226d5c3d1f}} 
+\index{StrategyCollection@{StrategyCollection}!addStrategy@{addStrategy}}
+\index{addStrategy@{addStrategy}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{addStrategy()}{addStrategy()}}
+{\footnotesize\ttfamily void Strategy\+Collection\+::add\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}}]{strategy }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStrategyCollection_af7a90b4e2d69f0b24e605a4b8acd68c4}\label{classStrategyCollection_af7a90b4e2d69f0b24e605a4b8acd68c4}} 
+\index{StrategyCollection@{StrategyCollection}!clear@{clear}}
+\index{clear@{clear}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void Strategy\+Collection\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classStrategyCollection_a44412bbb3f498bbbe0496fd48d84ed6c}\label{classStrategyCollection_a44412bbb3f498bbbe0496fd48d84ed6c}} 
+\index{StrategyCollection@{StrategyCollection}!getStrategy@{getStrategy}}
+\index{getStrategy@{getStrategy}!StrategyCollection@{StrategyCollection}}
+\doxysubsubsection{\texorpdfstring{getStrategy()}{getStrategy()}}
+{\footnotesize\ttfamily map$<$string, \mbox{\hyperlink{structAction}{Action}}$>$ Strategy\+Collection\+::get\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

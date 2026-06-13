@@ -1,65 +1,205 @@
-\doxysection{Cfg Struct Reference}
-\hypertarget{structCfg}{}\label{structCfg}\index{Cfg@{Cfg}}
-\doxysubsubsection*{Public Attributes}
+\hypertarget{structCfg}{}\doxysection{Cfg Struct Reference}
+\label{structCfg}\index{Cfg@{Cfg}}
+
+
+{\ttfamily \#include $<$Common.\+hpp$>$}
+
+
+
+Collaboration diagram for Cfg\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structCfg__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{structCfg_a6859d06595457304810b0de5704341db}\label{structCfg_a6859d06595457304810b0de5704341db} 
-std\+::string {\bfseries fname}
+std\+::string \mbox{\hyperlink{structCfg_a6859d06595457304810b0de5704341db}{fname}}
 \begin{DoxyCompactList}\small\item\em path to input file with system specification \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_a25a438f7287fe979f7249f4791a9f05a}\label{structCfg_a25a438f7287fe979f7249f4791a9f05a} 
-int {\bfseries stv\+\_\+mode}
+int \mbox{\hyperlink{structCfg_a25a438f7287fe979f7249f4791a9f05a}{stv\+\_\+mode}}
 \begin{DoxyCompactList}\small\item\em stv\+\_\+code as sum/combination of (1 -\/ expand\+All\+States, 2 -\/ verify, 4 -\/ print metadata, 8 -\/ run experiments) \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_afe7b0d13fc6f88e1cc75a1dba96e001a}\label{structCfg_afe7b0d13fc6f88e1cc75a1dba96e001a} 
-bool {\bfseries output\+\_\+local\+\_\+models}
+bool \mbox{\hyperlink{structCfg_afe7b0d13fc6f88e1cc75a1dba96e001a}{output\+\_\+local\+\_\+models}}
 \begin{DoxyCompactList}\small\item\em (obsolete) print data on local model \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_a04d390956b37d33a3c62d2e482e9b21f}\label{structCfg_a04d390956b37d33a3c62d2e482e9b21f} 
-bool {\bfseries output\+\_\+global\+\_\+model}
+bool \mbox{\hyperlink{structCfg_a04d390956b37d33a3c62d2e482e9b21f}{output\+\_\+global\+\_\+model}}
 \begin{DoxyCompactList}\small\item\em (obsolete) print data on local model \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_a0c2ee0e48b6ca67924161287deefcc6f}\label{structCfg_a0c2ee0e48b6ca67924161287deefcc6f} 
-bool {\bfseries output\+\_\+dot\+\_\+files}
+bool \mbox{\hyperlink{structCfg_a0c2ee0e48b6ca67924161287deefcc6f}{output\+\_\+dot\+\_\+files}}
 \begin{DoxyCompactList}\small\item\em flag for .dot export (by default exports templates and local/global models) \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_a24c35a9bea24df2ae7d1b80c6cc17b35}\label{structCfg_a24c35a9bea24df2ae7d1b80c6cc17b35} 
-std\+::string {\bfseries dotdir}
+std\+::string \mbox{\hyperlink{structCfg_a24c35a9bea24df2ae7d1b80c6cc17b35}{dotdir}}
 \begin{DoxyCompactList}\small\item\em pathprefix for .dot files export \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_a233b78528aee4648733c5fee7db8da4a}\label{structCfg_a233b78528aee4648733c5fee7db8da4a} 
-int {\bfseries model\+\_\+id}
+int \mbox{\hyperlink{structCfg_a233b78528aee4648733c5fee7db8da4a}{model\+\_\+id}}
 \item 
-\Hypertarget{structCfg_a1added5dd2bed4363d43a4006c8c731b}\label{structCfg_a1added5dd2bed4363d43a4006c8c731b} 
-bool {\bfseries add\+\_\+epsilon\+\_\+transitions}
+bool \mbox{\hyperlink{structCfg_a1added5dd2bed4363d43a4006c8c731b}{add\+\_\+epsilon\+\_\+transitions}}
 \begin{DoxyCompactList}\small\item\em add epsilon transitions to the states in the model when it\textquotesingle{}s blocked for some reason \end{DoxyCompactList}\item 
-\Hypertarget{structCfg_ae290f2ef66777398b5ebf070e014a560}\label{structCfg_ae290f2ef66777398b5ebf070e014a560} 
-bool {\bfseries formula\+\_\+from\+\_\+parameter}
+bool \mbox{\hyperlink{structCfg_ae290f2ef66777398b5ebf070e014a560}{formula\+\_\+from\+\_\+parameter}}
 \item 
-\Hypertarget{structCfg_ab158dfce74a060e7e2d637a9ba7dccbf}\label{structCfg_ab158dfce74a060e7e2d637a9ba7dccbf} 
-std\+::string {\bfseries formula}
+std\+::string \mbox{\hyperlink{structCfg_ab158dfce74a060e7e2d637a9ba7dccbf}{formula}}
 \item 
-\Hypertarget{structCfg_a0c5d5cb22de4617bdd2f2f69e086bc4c}\label{structCfg_a0c5d5cb22de4617bdd2f2f69e086bc4c} 
-bool {\bfseries counterexample}
+bool \mbox{\hyperlink{structCfg_a0c5d5cb22de4617bdd2f2f69e086bc4c}{counterexample}}
 \item 
-\Hypertarget{structCfg_ac033fc9b3704920dd6957c973bccc967}\label{structCfg_ac033fc9b3704920dd6957c973bccc967} 
-bool {\bfseries reduce}
+bool \mbox{\hyperlink{structCfg_ac033fc9b3704920dd6957c973bccc967}{reduce}}
 \item 
-\Hypertarget{structCfg_ac00357c4cf430eff524bc962466aee23}\label{structCfg_ac00357c4cf430eff524bc962466aee23} 
-bool {\bfseries reduce\+\_\+all}
+bool \mbox{\hyperlink{structCfg_ac00357c4cf430eff524bc962466aee23}{reduce\+\_\+all}}
 \item 
-\Hypertarget{structCfg_a9da627ff6b9b66a12c239b1d4f275a92}\label{structCfg_a9da627ff6b9b66a12c239b1d4f275a92} 
-std\+::string {\bfseries reduce\+\_\+args}
+std\+::string \mbox{\hyperlink{structCfg_a9da627ff6b9b66a12c239b1d4f275a92}{reduce\+\_\+args}}
 \item 
-\Hypertarget{structCfg_a4a1ab038139564ec910d8e172fd2eec1}\label{structCfg_a4a1ab038139564ec910d8e172fd2eec1} 
-bool {\bfseries fixpoint}
+bool \mbox{\hyperlink{structCfg_a4a1ab038139564ec910d8e172fd2eec1}{fixpoint}}
 \item 
-\Hypertarget{structCfg_a0f51ef91685601367046761a0aeb3fc0}\label{structCfg_a0f51ef91685601367046761a0aeb3fc0} 
-bool {\bfseries natural\+\_\+strategy}
+bool \mbox{\hyperlink{structCfg_a0f51ef91685601367046761a0aeb3fc0}{natural\+\_\+strategy}}
 \item 
-\Hypertarget{structCfg_a7f0999a0fc9892b55ada95f1c789c774}\label{structCfg_a7f0999a0fc9892b55ada95f1c789c774} 
-bool {\bfseries probability} = false
+bool \mbox{\hyperlink{structCfg_a7f0999a0fc9892b55ada95f1c789c774}{probability}} = false
 \item 
-\Hypertarget{structCfg_aa1e1ec7e7281476a9cc29963b7cde41e}\label{structCfg_aa1e1ec7e7281476a9cc29963b7cde41e} 
-bool {\bfseries verify\+\_\+strategy}
+bool \mbox{\hyperlink{structCfg_aa1e1ec7e7281476a9cc29963b7cde41e}{verify\+\_\+strategy}}
 \item 
-\Hypertarget{structCfg_a1c7eb9364c6fa51379bfb4b0a0726526}\label{structCfg_a1c7eb9364c6fa51379bfb4b0a0726526} 
-std\+::string {\bfseries strategy\+\_\+file\+\_\+path}
+std\+::string \mbox{\hyperlink{structCfg_a1c7eb9364c6fa51379bfb4b0a0726526}{strategy\+\_\+file\+\_\+path}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structCfg_a1added5dd2bed4363d43a4006c8c731b}\label{structCfg_a1added5dd2bed4363d43a4006c8c731b}} 
+\index{Cfg@{Cfg}!add\_epsilon\_transitions@{add\_epsilon\_transitions}}
+\index{add\_epsilon\_transitions@{add\_epsilon\_transitions}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{add\_epsilon\_transitions}{add\_epsilon\_transitions}}
+{\footnotesize\ttfamily bool Cfg\+::add\+\_\+epsilon\+\_\+transitions}
+
+
+
+add epsilon transitions to the states in the model when it\textquotesingle{}s blocked for some reason 
+
+\mbox{\Hypertarget{structCfg_a0c5d5cb22de4617bdd2f2f69e086bc4c}\label{structCfg_a0c5d5cb22de4617bdd2f2f69e086bc4c}} 
+\index{Cfg@{Cfg}!counterexample@{counterexample}}
+\index{counterexample@{counterexample}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{counterexample}{counterexample}}
+{\footnotesize\ttfamily bool Cfg\+::counterexample}
+
+\mbox{\Hypertarget{structCfg_a24c35a9bea24df2ae7d1b80c6cc17b35}\label{structCfg_a24c35a9bea24df2ae7d1b80c6cc17b35}} 
+\index{Cfg@{Cfg}!dotdir@{dotdir}}
+\index{dotdir@{dotdir}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{dotdir}{dotdir}}
+{\footnotesize\ttfamily std\+::string Cfg\+::dotdir}
+
+
+
+pathprefix for .dot files export 
+
+\mbox{\Hypertarget{structCfg_a4a1ab038139564ec910d8e172fd2eec1}\label{structCfg_a4a1ab038139564ec910d8e172fd2eec1}} 
+\index{Cfg@{Cfg}!fixpoint@{fixpoint}}
+\index{fixpoint@{fixpoint}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{fixpoint}{fixpoint}}
+{\footnotesize\ttfamily bool Cfg\+::fixpoint}
+
+\mbox{\Hypertarget{structCfg_a6859d06595457304810b0de5704341db}\label{structCfg_a6859d06595457304810b0de5704341db}} 
+\index{Cfg@{Cfg}!fname@{fname}}
+\index{fname@{fname}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{fname}{fname}}
+{\footnotesize\ttfamily std\+::string Cfg\+::fname}
+
+
+
+path to input file with system specification 
+
+\mbox{\Hypertarget{structCfg_ab158dfce74a060e7e2d637a9ba7dccbf}\label{structCfg_ab158dfce74a060e7e2d637a9ba7dccbf}} 
+\index{Cfg@{Cfg}!formula@{formula}}
+\index{formula@{formula}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{formula}{formula}}
+{\footnotesize\ttfamily std\+::string Cfg\+::formula}
+
+\mbox{\Hypertarget{structCfg_ae290f2ef66777398b5ebf070e014a560}\label{structCfg_ae290f2ef66777398b5ebf070e014a560}} 
+\index{Cfg@{Cfg}!formula\_from\_parameter@{formula\_from\_parameter}}
+\index{formula\_from\_parameter@{formula\_from\_parameter}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{formula\_from\_parameter}{formula\_from\_parameter}}
+{\footnotesize\ttfamily bool Cfg\+::formula\+\_\+from\+\_\+parameter}
+
+\mbox{\Hypertarget{structCfg_a233b78528aee4648733c5fee7db8da4a}\label{structCfg_a233b78528aee4648733c5fee7db8da4a}} 
+\index{Cfg@{Cfg}!model\_id@{model\_id}}
+\index{model\_id@{model\_id}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{model\_id}{model\_id}}
+{\footnotesize\ttfamily int Cfg\+::model\+\_\+id}
+
+\mbox{\Hypertarget{structCfg_a0f51ef91685601367046761a0aeb3fc0}\label{structCfg_a0f51ef91685601367046761a0aeb3fc0}} 
+\index{Cfg@{Cfg}!natural\_strategy@{natural\_strategy}}
+\index{natural\_strategy@{natural\_strategy}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{natural\_strategy}{natural\_strategy}}
+{\footnotesize\ttfamily bool Cfg\+::natural\+\_\+strategy}
+
+\mbox{\Hypertarget{structCfg_a0c2ee0e48b6ca67924161287deefcc6f}\label{structCfg_a0c2ee0e48b6ca67924161287deefcc6f}} 
+\index{Cfg@{Cfg}!output\_dot\_files@{output\_dot\_files}}
+\index{output\_dot\_files@{output\_dot\_files}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{output\_dot\_files}{output\_dot\_files}}
+{\footnotesize\ttfamily bool Cfg\+::output\+\_\+dot\+\_\+files}
+
+
+
+flag for .dot export (by default exports templates and local/global models) 
+
+\mbox{\Hypertarget{structCfg_a04d390956b37d33a3c62d2e482e9b21f}\label{structCfg_a04d390956b37d33a3c62d2e482e9b21f}} 
+\index{Cfg@{Cfg}!output\_global\_model@{output\_global\_model}}
+\index{output\_global\_model@{output\_global\_model}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{output\_global\_model}{output\_global\_model}}
+{\footnotesize\ttfamily bool Cfg\+::output\+\_\+global\+\_\+model}
+
+
+
+(obsolete) print data on local model 
+
+\mbox{\Hypertarget{structCfg_afe7b0d13fc6f88e1cc75a1dba96e001a}\label{structCfg_afe7b0d13fc6f88e1cc75a1dba96e001a}} 
+\index{Cfg@{Cfg}!output\_local\_models@{output\_local\_models}}
+\index{output\_local\_models@{output\_local\_models}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{output\_local\_models}{output\_local\_models}}
+{\footnotesize\ttfamily bool Cfg\+::output\+\_\+local\+\_\+models}
+
+
+
+(obsolete) print data on local model 
+
+\mbox{\Hypertarget{structCfg_a7f0999a0fc9892b55ada95f1c789c774}\label{structCfg_a7f0999a0fc9892b55ada95f1c789c774}} 
+\index{Cfg@{Cfg}!probability@{probability}}
+\index{probability@{probability}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{probability}{probability}}
+{\footnotesize\ttfamily bool Cfg\+::probability = false}
+
+\mbox{\Hypertarget{structCfg_ac033fc9b3704920dd6957c973bccc967}\label{structCfg_ac033fc9b3704920dd6957c973bccc967}} 
+\index{Cfg@{Cfg}!reduce@{reduce}}
+\index{reduce@{reduce}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{reduce}{reduce}}
+{\footnotesize\ttfamily bool Cfg\+::reduce}
+
+\mbox{\Hypertarget{structCfg_ac00357c4cf430eff524bc962466aee23}\label{structCfg_ac00357c4cf430eff524bc962466aee23}} 
+\index{Cfg@{Cfg}!reduce\_all@{reduce\_all}}
+\index{reduce\_all@{reduce\_all}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{reduce\_all}{reduce\_all}}
+{\footnotesize\ttfamily bool Cfg\+::reduce\+\_\+all}
+
+\mbox{\Hypertarget{structCfg_a9da627ff6b9b66a12c239b1d4f275a92}\label{structCfg_a9da627ff6b9b66a12c239b1d4f275a92}} 
+\index{Cfg@{Cfg}!reduce\_args@{reduce\_args}}
+\index{reduce\_args@{reduce\_args}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{reduce\_args}{reduce\_args}}
+{\footnotesize\ttfamily std\+::string Cfg\+::reduce\+\_\+args}
+
+\mbox{\Hypertarget{structCfg_a1c7eb9364c6fa51379bfb4b0a0726526}\label{structCfg_a1c7eb9364c6fa51379bfb4b0a0726526}} 
+\index{Cfg@{Cfg}!strategy\_file\_path@{strategy\_file\_path}}
+\index{strategy\_file\_path@{strategy\_file\_path}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{strategy\_file\_path}{strategy\_file\_path}}
+{\footnotesize\ttfamily std\+::string Cfg\+::strategy\+\_\+file\+\_\+path}
+
+\mbox{\Hypertarget{structCfg_a25a438f7287fe979f7249f4791a9f05a}\label{structCfg_a25a438f7287fe979f7249f4791a9f05a}} 
+\index{Cfg@{Cfg}!stv\_mode@{stv\_mode}}
+\index{stv\_mode@{stv\_mode}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{stv\_mode}{stv\_mode}}
+{\footnotesize\ttfamily int Cfg\+::stv\+\_\+mode}
+
+
+
+stv\+\_\+code as sum/combination of (1 -\/ expand\+All\+States, 2 -\/ verify, 4 -\/ print metadata, 8 -\/ run experiments) 
+
+\mbox{\Hypertarget{structCfg_aa1e1ec7e7281476a9cc29963b7cde41e}\label{structCfg_aa1e1ec7e7281476a9cc29963b7cde41e}} 
+\index{Cfg@{Cfg}!verify\_strategy@{verify\_strategy}}
+\index{verify\_strategy@{verify\_strategy}!Cfg@{Cfg}}
+\doxysubsubsection{\texorpdfstring{verify\_strategy}{verify\_strategy}}
+{\footnotesize\ttfamily bool Cfg\+::verify\+\_\+strategy}
+
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

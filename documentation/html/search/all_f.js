@@ -1,13 +1,19 @@
 var searchData=
 [
-  ['reducestrategy_0',['reducestrategy',['../classVerification.html#ab8db620a9f9f887d24f61c256debf67a',1,'Verification::reduceStrategy()'],['../classVerificationIterative.html#a907458bb8be7de3bef5290ab06281274',1,'VerificationIterative::reduceStrategy()']]],
-  ['reductioncomplexitybefore_1',['reductioncomplexitybefore',['../classVerification.html#a1bb60de78b152025f9cbfcadf568d4a1',1,'Verification::reductionComplexityBefore'],['../classVerificationIterative.html#a68bd908fce3bcb857c66235e3b0c1dcd',1,'VerificationIterative::reductionComplexityBefore']]],
-  ['restore_2',['RESTORE',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380',1,'Verification.hpp']]],
-  ['restore_5fstates_3',['RESTORE_STATES',['../VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6a3416153d10de6e14520ee8bf3cb6aa35',1,'VerificationIterative.hpp']]],
-  ['restorehistory_4',['restoreHistory',['../classVerification.html#ad8f45302a6b2529f626ae0c7a953b57f',1,'Verification']]],
-  ['result_5',['Result',['../structResult.html',1,'']]],
-  ['revert_6',['REVERT',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf',1,'Verification.hpp']]],
-  ['revertlastdecision_7',['revertLastDecision',['../classVerification.html#a93f4d9152a29db35e7cee285fd925d83',1,'Verification']]],
-  ['reverttoglobalstate_8',['reverttoglobalstate',['../classVerification.html#a7065922fca10a441a01ae63500a2d529',1,'Verification::revertToGlobalState'],['../classVerificationIterative.html#a870c2cd4b6ac51f4d9665d96857dd512',1,'VerificationIterative::revertToGlobalState']]],
-  ['reverttolastdecision_9',['revertToLastDecision',['../classVerificationIterative.html#a6a21926b6f8f0bb5c04ecded1a5e545c',1,'VerificationIterative']]]
+  ['readme_2emd_363',['README.md',['../README_8md.html',1,'']]],
+  ['reduce_364',['reduce',['../structCfg.html#ac033fc9b3704920dd6957c973bccc967',1,'Cfg']]],
+  ['reduce_5fall_365',['reduce_all',['../structCfg.html#ac00357c4cf430eff524bc962466aee23',1,'Cfg']]],
+  ['reduce_5fargs_366',['reduce_args',['../structCfg.html#a9da627ff6b9b66a12c239b1d4f275a92',1,'Cfg']]],
+  ['reducestrategy_367',['reduceStrategy',['../classVerification.html#a3fd0cea4307a0c055be9cf9313ffada3',1,'Verification::reduceStrategy()'],['../classVerificationIterative.html#a12ae6ba0727d8e03f2bab1046c1e98fc',1,'VerificationIterative::reduceStrategy()']]],
+  ['reductioncomplexitybefore_368',['reductionComplexityBefore',['../classVerification.html#a1bb60de78b152025f9cbfcadf568d4a1',1,'Verification::reductionComplexityBefore()'],['../classVerificationIterative.html#a68bd908fce3bcb857c66235e3b0c1dcd',1,'VerificationIterative::reductionComplexityBefore()']]],
+  ['reject_369',['REJECT',['../strategyScanner_8c.html#a835f10dd1ab4bf9a80c4cd80ee6e3058',1,'REJECT():&#160;strategyScanner.c'],['../scanner_8c.html#a835f10dd1ab4bf9a80c4cd80ee6e3058',1,'REJECT():&#160;scanner.c']]],
+  ['restore_370',['RESTORE',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380',1,'Verification.hpp']]],
+  ['restore_5fstates_371',['RESTORE_STATES',['../VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6a3416153d10de6e14520ee8bf3cb6aa35',1,'VerificationIterative.hpp']]],
+  ['restorehistory_372',['restoreHistory',['../classVerification.html#ad8f45302a6b2529f626ae0c7a953b57f',1,'Verification']]],
+  ['result_373',['Result',['../structResult.html',1,'']]],
+  ['returnprobability_374',['returnProbability',['../classProbabilityEntry.html#a0f127452a3d99d68d276ba65e1eeff44',1,'ProbabilityEntry']]],
+  ['revert_375',['REVERT',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf',1,'Verification.hpp']]],
+  ['revertlastdecision_376',['revertLastDecision',['../classVerification.html#a93f4d9152a29db35e7cee285fd925d83',1,'Verification']]],
+  ['reverttoglobalstate_377',['revertToGlobalState',['../classVerificationIterative.html#a870c2cd4b6ac51f4d9665d96857dd512',1,'VerificationIterative::revertToGlobalState()'],['../classVerification.html#a7065922fca10a441a01ae63500a2d529',1,'Verification::revertToGlobalState()']]],
+  ['reverttolastdecision_378',['revertToLastDecision',['../classVerificationIterative.html#a6a21926b6f8f0bb5c04ecded1a5e545c',1,'VerificationIterative']]]
 ];

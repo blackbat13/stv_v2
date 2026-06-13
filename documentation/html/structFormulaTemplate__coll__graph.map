@@ -1,0 +1,8 @@
+<map id="FormulaTemplate" name="FormulaTemplate">
+<area shape="rect" id="node1" title="Contains a template for coalition of Agent as string from the formula." alt="" coords="255,160,390,237"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,125,90"/>
+<area shape="rect" id="node3" title=" " alt="" coords="149,13,208,90"/>
+<area shape="rect" id="node4" title=" " alt="" coords="264,13,315,90"/>
+<area shape="rect" id="node5" title=" " alt="" coords="339,13,517,90"/>
+<area shape="rect" id="node6" href="$classProbNode.html" title="Base node for probability calculations." alt="" coords="541,5,627,97"/>
+</map>

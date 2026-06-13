@@ -1,43 +1,49 @@
-\doxysection{Dot\+Graph Class Reference}
-\hypertarget{classDotGraph}{}\label{classDotGraph}\index{DotGraph@{DotGraph}}
-\doxysubsubsection*{Public Member Functions}
+\hypertarget{classDotGraph}{}\doxysection{Dot\+Graph Class Reference}
+\label{classDotGraph}\index{DotGraph@{DotGraph}}
+
+
+{\ttfamily \#include $<$Dot\+Graph.\+hpp$>$}
+
+
+
+Collaboration diagram for Dot\+Graph\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDotGraph__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}\label{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c} 
-{\bfseries Dot\+Graph} ()
+\mbox{\hyperlink{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}{Dot\+Graph}} ()
 \begin{DoxyCompactList}\small\item\em empty graph \end{DoxyCompactList}\item 
-\Hypertarget{classDotGraph_ace2637f03e79c0a465d9d28d3bb903ce}\label{classDotGraph_ace2637f03e79c0a465d9d28d3bb903ce} 
-{\bfseries Dot\+Graph} (\mbox{\hyperlink{structGlobalModel}{Global\+Model}} \texorpdfstring{$\ast$}{*}const gm, bool extended=false, bool correct=false)
+\mbox{\hyperlink{classDotGraph_ace2637f03e79c0a465d9d28d3bb903ce}{Dot\+Graph}} (\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$const gm, bool extended=false, bool correct=false)
 \begin{DoxyCompactList}\small\item\em parses the transitions/states templates into nodes/edges \end{DoxyCompactList}\item 
-\Hypertarget{classDotGraph_a5d0cbc2c679cd95940ba29beb52e5787}\label{classDotGraph_a5d0cbc2c679cd95940ba29beb52e5787} 
-{\bfseries Dot\+Graph} (\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}const ag, bool extended=false)
+\mbox{\hyperlink{classDotGraph_a5d0cbc2c679cd95940ba29beb52e5787}{Dot\+Graph}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$const ag, bool extended=false)
 \begin{DoxyCompactList}\small\item\em parses the local transitions/states templates into nodes/edges \end{DoxyCompactList}\item 
-\Hypertarget{classDotGraph_af729d471e72486912d422d96ad7276a9}\label{classDotGraph_af729d471e72486912d422d96ad7276a9} 
-{\bfseries Dot\+Graph} (\mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} \texorpdfstring{$\ast$}{*}const at)
+\mbox{\hyperlink{classDotGraph_af729d471e72486912d422d96ad7276a9}{Dot\+Graph}} (\mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} $\ast$const at)
 \begin{DoxyCompactList}\small\item\em parses the edge/state templates into nodes/edges \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}{save\+To\+File}} (std\+::string pathprefix, std\+::string nameprefix, std\+::string basename="{}"{})
+void \mbox{\hyperlink{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}{save\+To\+File}} (std\+::string pathprefix, std\+::string nameprefix, std\+::string basename=\char`\"{}\char`\"{})
 \begin{DoxyCompactList}\small\item\em creates a {\ttfamily .dot} file \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classDotGraph_af0ac34b4931fae973f724c1faf5453a2}\label{classDotGraph_af0ac34b4931fae973f724c1faf5453a2} 
-std\+::vector$<$ std\+::string $>$ {\bfseries nodes}
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classDotGraph_af0ac34b4931fae973f724c1faf5453a2}{nodes}}
 \item 
-\Hypertarget{classDotGraph_a87709043cda8c808af92f859bc8fe09b}\label{classDotGraph_a87709043cda8c808af92f859bc8fe09b} 
-std\+::vector$<$ std\+::string $>$ {\bfseries edges}
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classDotGraph_a87709043cda8c808af92f859bc8fe09b}{edges}}
 \item 
-\Hypertarget{classDotGraph_afb6a27b53d5923ebf49d891bca687871}\label{classDotGraph_afb6a27b53d5923ebf49d891bca687871} 
-std\+::string {\bfseries graph\+Name}
+std\+::string \mbox{\hyperlink{classDotGraph_afb6a27b53d5923ebf49d891bca687871}{graph\+Name}}
 \item 
-\Hypertarget{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad}\label{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad} 
-\mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{Dot\+Graph\+Base}} {\bfseries graph\+Base}
+\mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{Dot\+Graph\+Base}} \mbox{\hyperlink{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad}{graph\+Base}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Static Public Attributes}
+\doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 static string \mbox{\hyperlink{classDotGraph_a02b23bbc3defedf86bfe2f6a8ca8a55c}{style\+String}}
 \begin{DoxyCompactList}\small\item\em (temporary hard-\/coded) graphviz visual configuration \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Protected Member Functions}
+\doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classDotGraph_a1fd5b39a11c73582439a164c82610565}{add\+Node}} (std\+::string id, std\+::string name)
@@ -46,8 +52,51 @@ void \mbox{\hyperlink{classDotGraph_a1d2cb25d1d4964b9fc600b1b0c844b1b}{add\+Edge
 \begin{DoxyCompactList}\small\item\em creates an edge string in graphviz syntax \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}\label{classDotGraph_a418216c836cb63ef4a243bfb3bc5a81c}} 
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{DotGraph()}{DotGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Dot\+Graph\+::\+Dot\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+empty graph 
+
+\mbox{\Hypertarget{classDotGraph_ace2637f03e79c0a465d9d28d3bb903ce}\label{classDotGraph_ace2637f03e79c0a465d9d28d3bb903ce}} 
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{DotGraph()}{DotGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Dot\+Graph\+::\+Dot\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$const}]{gm,  }\item[{bool}]{extended = {\ttfamily false},  }\item[{bool}]{correct = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+parses the transitions/states templates into nodes/edges 
+
+\mbox{\Hypertarget{classDotGraph_a5d0cbc2c679cd95940ba29beb52e5787}\label{classDotGraph_a5d0cbc2c679cd95940ba29beb52e5787}} 
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{DotGraph()}{DotGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Dot\+Graph\+::\+Dot\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$const}]{ag,  }\item[{bool}]{extended = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+parses the local transitions/states templates into nodes/edges 
+
+\mbox{\Hypertarget{classDotGraph_af729d471e72486912d422d96ad7276a9}\label{classDotGraph_af729d471e72486912d422d96ad7276a9}} 
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\index{DotGraph@{DotGraph}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{DotGraph()}{DotGraph()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Dot\+Graph\+::\+Dot\+Graph (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} $\ast$const}]{at }\end{DoxyParamCaption})}
+
+
+
+parses the edge/state templates into nodes/edges 
+
+
+
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classDotGraph_a1d2cb25d1d4964b9fc600b1b0c844b1b}\label{classDotGraph_a1d2cb25d1d4964b9fc600b1b0c844b1b} 
+\mbox{\Hypertarget{classDotGraph_a1d2cb25d1d4964b9fc600b1b0c844b1b}\label{classDotGraph_a1d2cb25d1d4964b9fc600b1b0c844b1b}} 
 \index{DotGraph@{DotGraph}!addEdge@{addEdge}}
 \index{addEdge@{addEdge}!DotGraph@{DotGraph}}
 \doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
@@ -66,7 +115,7 @@ creates an edge string in graphviz syntax
 {\em label} & edge label and, possibly, extra attributes \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classDotGraph_a1fd5b39a11c73582439a164c82610565}\label{classDotGraph_a1fd5b39a11c73582439a164c82610565} 
+\mbox{\Hypertarget{classDotGraph_a1fd5b39a11c73582439a164c82610565}\label{classDotGraph_a1fd5b39a11c73582439a164c82610565}} 
 \index{DotGraph@{DotGraph}!addNode@{addNode}}
 \index{addNode@{addNode}!DotGraph@{DotGraph}}
 \doxysubsubsection{\texorpdfstring{addNode()}{addNode()}}
@@ -83,11 +132,11 @@ creates a node string in graphviz syntax
 {\em name} & displayed node label/name \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}\label{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98} 
+\mbox{\Hypertarget{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}\label{classDotGraph_aab5b20a15540e7e62b9628a665dc4b98}} 
 \index{DotGraph@{DotGraph}!saveToFile@{saveToFile}}
 \index{saveToFile@{saveToFile}!DotGraph@{DotGraph}}
 \doxysubsubsection{\texorpdfstring{saveToFile()}{saveToFile()}}
-{\footnotesize\ttfamily void Dot\+Graph\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{pathprefix,  }\item[{std\+::string}]{nameprefix,  }\item[{std\+::string}]{basename = {\ttfamily "{}"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Dot\+Graph\+::save\+To\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{pathprefix,  }\item[{std\+::string}]{nameprefix,  }\item[{std\+::string}]{basename = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
 
 
 
@@ -101,7 +150,31 @@ creates a {\ttfamily .dot} file
 
 
 \doxysubsection{Member Data Documentation}
-\Hypertarget{classDotGraph_a02b23bbc3defedf86bfe2f6a8ca8a55c}\label{classDotGraph_a02b23bbc3defedf86bfe2f6a8ca8a55c} 
+\mbox{\Hypertarget{classDotGraph_a87709043cda8c808af92f859bc8fe09b}\label{classDotGraph_a87709043cda8c808af92f859bc8fe09b}} 
+\index{DotGraph@{DotGraph}!edges@{edges}}
+\index{edges@{edges}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{edges}{edges}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ Dot\+Graph\+::edges}
+
+\mbox{\Hypertarget{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad}\label{classDotGraph_a2012f6d59fa71f3d5b9831e9fa8999ad}} 
+\index{DotGraph@{DotGraph}!graphBase@{graphBase}}
+\index{graphBase@{graphBase}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{graphBase}{graphBase}}
+{\footnotesize\ttfamily \mbox{\hyperlink{DotGraph_8hpp_af87eedfdc6f5102a5c2105e9d097a591}{Dot\+Graph\+Base}} Dot\+Graph\+::graph\+Base}
+
+\mbox{\Hypertarget{classDotGraph_afb6a27b53d5923ebf49d891bca687871}\label{classDotGraph_afb6a27b53d5923ebf49d891bca687871}} 
+\index{DotGraph@{DotGraph}!graphName@{graphName}}
+\index{graphName@{graphName}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{graphName}{graphName}}
+{\footnotesize\ttfamily std\+::string Dot\+Graph\+::graph\+Name}
+
+\mbox{\Hypertarget{classDotGraph_af0ac34b4931fae973f724c1faf5453a2}\label{classDotGraph_af0ac34b4931fae973f724c1faf5453a2}} 
+\index{DotGraph@{DotGraph}!nodes@{nodes}}
+\index{nodes@{nodes}!DotGraph@{DotGraph}}
+\doxysubsubsection{\texorpdfstring{nodes}{nodes}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ Dot\+Graph\+::nodes}
+
+\mbox{\Hypertarget{classDotGraph_a02b23bbc3defedf86bfe2f6a8ca8a55c}\label{classDotGraph_a02b23bbc3defedf86bfe2f6a8ca8a55c}} 
 \index{DotGraph@{DotGraph}!styleString@{styleString}}
 \index{styleString@{styleString}!DotGraph@{DotGraph}}
 \doxysubsubsection{\texorpdfstring{styleString}{styleString}}
@@ -109,20 +182,20 @@ creates a {\ttfamily .dot} file
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{=\ }
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)tedge[fontsize=\(\backslash\)"{}10\(\backslash\)"{}]\(\backslash\)n"{}}\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)tnode\ [\(\backslash\)n"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tshape=circle,\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ }
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)twidth=auto,\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tcolor=\(\backslash\)"{}black\(\backslash\)"{},\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tfillcolor=\(\backslash\)"{}\#eeeeee\(\backslash\)"{},\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tstyle=\(\backslash\)"{}filled,solid\(\backslash\)"{},\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tfontsize=8,\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tfontname=\(\backslash\)"{}Roboto\(\backslash\)"{}\(\backslash\)n"{}}}
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t]\(\backslash\)n"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)tfontname=Consolas\(\backslash\)n"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)tlayout=dot\(\backslash\)n"{}}}
+\DoxyCodeLine{= }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)tedge[fontsize=\(\backslash\)"{}10\(\backslash\)"{}]\(\backslash\)n"{}}         }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)tnode [\(\backslash\)n"{}}                        }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tshape=circle,\(\backslash\)n"{}}}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)twidth=auto,\(\backslash\)n"{}}}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tcolor=\(\backslash\)"{}black\(\backslash\)"{},\(\backslash\)n"{}}}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tfillcolor=\(\backslash\)"{}\#eeeeee\(\backslash\)"{},\(\backslash\)n"{}}}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tstyle=\(\backslash\)"{}filled,solid\(\backslash\)"{},\(\backslash\)n"{}}}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tfontsize=8,\(\backslash\)n"{}}}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t\(\backslash\)tfontname=\(\backslash\)"{}Roboto\(\backslash\)"{}\(\backslash\)n"{}}}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)t]\(\backslash\)n"{}}                                                               }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)tfontname=Consolas\(\backslash\)n"{}}             }
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}\(\backslash\)tlayout=dot\(\backslash\)n"{}}}
 
 \end{DoxyCode}
 

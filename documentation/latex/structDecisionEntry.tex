@@ -1,50 +1,183 @@
-\doxysection{Decision\+Entry Struct Reference}
-\hypertarget{structDecisionEntry}{}\label{structDecisionEntry}\index{DecisionEntry@{DecisionEntry}}
-\doxysubsubsection*{Public Member Functions}
+\hypertarget{structDecisionEntry}{}\doxysection{Decision\+Entry Struct Reference}
+\label{structDecisionEntry}\index{DecisionEntry@{DecisionEntry}}
+
+
+{\ttfamily \#include $<$Verification\+Iterative.\+hpp$>$}
+
+
+
+Collaboration diagram for Decision\+Entry\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structDecisionEntry__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{structDecisionEntry_abcfab473226b66ebc13299f71d8d6264}\label{structDecisionEntry_abcfab473226b66ebc13299f71d8d6264} 
-string {\bfseries to\+String} ()
+string \mbox{\hyperlink{structDecisionEntry_abcfab473226b66ebc13299f71d8d6264}{to\+String}} ()
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{structDecisionEntry_af0479350edd95b5c43c677d6917322c9}\label{structDecisionEntry_af0479350edd95b5c43c677d6917322c9} 
-\mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} {\bfseries type} = \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}{History\+Entry\+Type\+::\+CONTEXT}}
+\mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} \mbox{\hyperlink{structDecisionEntry_af0479350edd95b5c43c677d6917322c9}{type}} = \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}{History\+Entry\+Type\+::\+CONTEXT}}
 \begin{DoxyCompactList}\small\item\em Type of the history record. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_a40f1cad251addc18b31ae43edbf36ab8}\label{structDecisionEntry_a40f1cad251addc18b31ae43edbf36ab8} 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} {\bfseries global\+State} = nullptr
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structDecisionEntry_a40f1cad251addc18b31ae43edbf36ab8}{global\+State}} = nullptr
 \begin{DoxyCompactList}\small\item\em Saved global state. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_a8912b512925e569d74b4fd5e59bc4871}\label{structDecisionEntry_a8912b512925e569d74b4fd5e59bc4871} 
-\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} {\bfseries decision} = nullptr
+\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ \mbox{\hyperlink{structDecisionEntry_a8912b512925e569d74b4fd5e59bc4871}{decision}} = nullptr
 \begin{DoxyCompactList}\small\item\em Selected transition. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_a52aa7af39253fe295262afd92436eb31}\label{structDecisionEntry_a52aa7af39253fe295262afd92436eb31} 
-bool {\bfseries global\+Transition\+Controlled} = false
+bool \mbox{\hyperlink{structDecisionEntry_a52aa7af39253fe295262afd92436eb31}{global\+Transition\+Controlled}} = false
 \begin{DoxyCompactList}\small\item\em Is the transition controlled by an agent in coalition. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_a185af6663a4f86b559f33c0c198f1e8e}\label{structDecisionEntry_a185af6663a4f86b559f33c0c198f1e8e} 
-Global\+State\+Verification\+Status {\bfseries prev\+Status} = Global\+State\+Verification\+Status\+::\+UNVERIFIED
+\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} \mbox{\hyperlink{structDecisionEntry_a185af6663a4f86b559f33c0c198f1e8e}{prev\+Status}} = \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}{Global\+State\+Verification\+Status\+::\+UNVERIFIED}}
 \begin{DoxyCompactList}\small\item\em Previous model verification state. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_af34e77987a7610f449e820ab18981020}\label{structDecisionEntry_af34e77987a7610f449e820ab18981020} 
-Global\+State\+Verification\+Status {\bfseries new\+Status} = Global\+State\+Verification\+Status\+::\+UNVERIFIED
+\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} \mbox{\hyperlink{structDecisionEntry_af34e77987a7610f449e820ab18981020}{new\+Status}} = \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}{Global\+State\+Verification\+Status\+::\+UNVERIFIED}}
 \begin{DoxyCompactList}\small\item\em Next model verification state. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_aa30bd2c1f5d8d653bc846618ae401701}\label{structDecisionEntry_aa30bd2c1f5d8d653bc846618ae401701} 
-int {\bfseries depth} = 0
+int \mbox{\hyperlink{structDecisionEntry_aa30bd2c1f5d8d653bc846618ae401701}{depth}} = 0
 \begin{DoxyCompactList}\small\item\em Iteration depth. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_afd8df8fd39e623eb29195071a4d04265}\label{structDecisionEntry_afd8df8fd39e623eb29195071a4d04265} 
-\mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} {\bfseries strategy} = \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}}()
+\mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} \mbox{\hyperlink{structDecisionEntry_afd8df8fd39e623eb29195071a4d04265}{strategy}} = \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}}()
 \begin{DoxyCompactList}\small\item\em Holds currently processed strategy for the current state. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_aae439c098770c45c673416b86efdc6c5}\label{structDecisionEntry_aae439c098770c45c673416b86efdc6c5} 
-float {\bfseries state\+Probability\+Previous} = 0.\+0
-\begin{DoxyCompactList}\small\item\em Holds previous \doxylink{structGlobalState}{Global\+State} probability. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_a29cebc4efda089c264679103e705f26c}\label{structDecisionEntry_a29cebc4efda089c264679103e705f26c} 
-\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} {\bfseries previous\+Probability\+Entry\+Type} = Probability\+Calculation\+Type\+::\+NONE\+\_\+\+PROBABILITY
+float \mbox{\hyperlink{structDecisionEntry_aae439c098770c45c673416b86efdc6c5}{state\+Probability\+Previous}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Holds previous \mbox{\hyperlink{structGlobalState}{Global\+State}} probability. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} \mbox{\hyperlink{structDecisionEntry_a29cebc4efda089c264679103e705f26c}{previous\+Probability\+Entry\+Type}} = \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009dfac98183b0d3ec4de61729f34926494a6b}{Probability\+Calculation\+Type\+::\+NONE\+\_\+\+PROBABILITY}}
 \begin{DoxyCompactList}\small\item\em Holds previous probability answer calculation method. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_a50b8aa0ca37438795dfa91f734fe9edb}\label{structDecisionEntry_a50b8aa0ca37438795dfa91f734fe9edb} 
-\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} {\bfseries active\+Probability\+Entry\+Type} = Probability\+Calculation\+Type\+::\+SUM\+\_\+\+PROBABILITY
+\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} \mbox{\hyperlink{structDecisionEntry_a50b8aa0ca37438795dfa91f734fe9edb}{active\+Probability\+Entry\+Type}} = \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009dfa36d54abdacfde2afa8b0ad60606c7b28}{Probability\+Calculation\+Type\+::\+SUM\+\_\+\+PROBABILITY}}
 \begin{DoxyCompactList}\small\item\em Holds currently used probability calculation method, used to rollback correct probability value. \end{DoxyCompactList}\item 
-\Hypertarget{structDecisionEntry_ac6f936041ae2f0cf5509f4e6fc5e9588}\label{structDecisionEntry_ac6f936041ae2f0cf5509f4e6fc5e9588} 
-\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} {\bfseries previous\+Probability\+Answer\+Values}
+\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} \mbox{\hyperlink{structDecisionEntry_ac6f936041ae2f0cf5509f4e6fc5e9588}{previous\+Probability\+Answer\+Values}}
 \begin{DoxyCompactList}\small\item\em Holds previous true/false probability. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structDecisionEntry_abcfab473226b66ebc13299f71d8d6264}\label{structDecisionEntry_abcfab473226b66ebc13299f71d8d6264}} 
+\index{DecisionEntry@{DecisionEntry}!toString@{toString}}
+\index{toString@{toString}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily string Decision\+Entry\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structDecisionEntry_a50b8aa0ca37438795dfa91f734fe9edb}\label{structDecisionEntry_a50b8aa0ca37438795dfa91f734fe9edb}} 
+\index{DecisionEntry@{DecisionEntry}!activeProbabilityEntryType@{activeProbabilityEntryType}}
+\index{activeProbabilityEntryType@{activeProbabilityEntryType}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{activeProbabilityEntryType}{activeProbabilityEntryType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} Decision\+Entry\+::active\+Probability\+Entry\+Type = \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009dfa36d54abdacfde2afa8b0ad60606c7b28}{Probability\+Calculation\+Type\+::\+SUM\+\_\+\+PROBABILITY}}}
+
+
+
+Holds currently used probability calculation method, used to rollback correct probability value. 
+
+\mbox{\Hypertarget{structDecisionEntry_a8912b512925e569d74b4fd5e59bc4871}\label{structDecisionEntry_a8912b512925e569d74b4fd5e59bc4871}} 
+\index{DecisionEntry@{DecisionEntry}!decision@{decision}}
+\index{decision@{decision}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{decision}{decision}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$ Decision\+Entry\+::decision = nullptr}
+
+
+
+Selected transition. 
+
+\mbox{\Hypertarget{structDecisionEntry_aa30bd2c1f5d8d653bc846618ae401701}\label{structDecisionEntry_aa30bd2c1f5d8d653bc846618ae401701}} 
+\index{DecisionEntry@{DecisionEntry}!depth@{depth}}
+\index{depth@{depth}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{depth}{depth}}
+{\footnotesize\ttfamily int Decision\+Entry\+::depth = 0}
+
+
+
+Iteration depth. 
+
+\mbox{\Hypertarget{structDecisionEntry_a40f1cad251addc18b31ae43edbf36ab8}\label{structDecisionEntry_a40f1cad251addc18b31ae43edbf36ab8}} 
+\index{DecisionEntry@{DecisionEntry}!globalState@{globalState}}
+\index{globalState@{globalState}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{globalState}{globalState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$ Decision\+Entry\+::global\+State = nullptr}
+
+
+
+Saved global state. 
+
+\mbox{\Hypertarget{structDecisionEntry_a52aa7af39253fe295262afd92436eb31}\label{structDecisionEntry_a52aa7af39253fe295262afd92436eb31}} 
+\index{DecisionEntry@{DecisionEntry}!globalTransitionControlled@{globalTransitionControlled}}
+\index{globalTransitionControlled@{globalTransitionControlled}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{globalTransitionControlled}{globalTransitionControlled}}
+{\footnotesize\ttfamily bool Decision\+Entry\+::global\+Transition\+Controlled = false}
+
+
+
+Is the transition controlled by an agent in coalition. 
+
+\mbox{\Hypertarget{structDecisionEntry_af34e77987a7610f449e820ab18981020}\label{structDecisionEntry_af34e77987a7610f449e820ab18981020}} 
+\index{DecisionEntry@{DecisionEntry}!newStatus@{newStatus}}
+\index{newStatus@{newStatus}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{newStatus}{newStatus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} Decision\+Entry\+::new\+Status = \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}{Global\+State\+Verification\+Status\+::\+UNVERIFIED}}}
+
+
+
+Next model verification state. 
+
+\mbox{\Hypertarget{structDecisionEntry_ac6f936041ae2f0cf5509f4e6fc5e9588}\label{structDecisionEntry_ac6f936041ae2f0cf5509f4e6fc5e9588}} 
+\index{DecisionEntry@{DecisionEntry}!previousProbabilityAnswerValues@{previousProbabilityAnswerValues}}
+\index{previousProbabilityAnswerValues@{previousProbabilityAnswerValues}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{previousProbabilityAnswerValues}{previousProbabilityAnswerValues}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} Decision\+Entry\+::previous\+Probability\+Answer\+Values}
+
+
+
+Holds previous true/false probability. 
+
+\mbox{\Hypertarget{structDecisionEntry_a29cebc4efda089c264679103e705f26c}\label{structDecisionEntry_a29cebc4efda089c264679103e705f26c}} 
+\index{DecisionEntry@{DecisionEntry}!previousProbabilityEntryType@{previousProbabilityEntryType}}
+\index{previousProbabilityEntryType@{previousProbabilityEntryType}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{previousProbabilityEntryType}{previousProbabilityEntryType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} Decision\+Entry\+::previous\+Probability\+Entry\+Type = \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009dfac98183b0d3ec4de61729f34926494a6b}{Probability\+Calculation\+Type\+::\+NONE\+\_\+\+PROBABILITY}}}
+
+
+
+Holds previous probability answer calculation method. 
+
+\mbox{\Hypertarget{structDecisionEntry_a185af6663a4f86b559f33c0c198f1e8e}\label{structDecisionEntry_a185af6663a4f86b559f33c0c198f1e8e}} 
+\index{DecisionEntry@{DecisionEntry}!prevStatus@{prevStatus}}
+\index{prevStatus@{prevStatus}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{prevStatus}{prevStatus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} Decision\+Entry\+::prev\+Status = \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048a749a6d4485a80deb25c920c7a46b7428}{Global\+State\+Verification\+Status\+::\+UNVERIFIED}}}
+
+
+
+Previous model verification state. 
+
+\mbox{\Hypertarget{structDecisionEntry_aae439c098770c45c673416b86efdc6c5}\label{structDecisionEntry_aae439c098770c45c673416b86efdc6c5}} 
+\index{DecisionEntry@{DecisionEntry}!stateProbabilityPrevious@{stateProbabilityPrevious}}
+\index{stateProbabilityPrevious@{stateProbabilityPrevious}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{stateProbabilityPrevious}{stateProbabilityPrevious}}
+{\footnotesize\ttfamily float Decision\+Entry\+::state\+Probability\+Previous = 0.\+0}
+
+
+
+Holds previous \mbox{\hyperlink{structGlobalState}{Global\+State}} probability. 
+
+\mbox{\Hypertarget{structDecisionEntry_afd8df8fd39e623eb29195071a4d04265}\label{structDecisionEntry_afd8df8fd39e623eb29195071a4d04265}} 
+\index{DecisionEntry@{DecisionEntry}!strategy@{strategy}}
+\index{strategy@{strategy}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{strategy}{strategy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} Decision\+Entry\+::strategy = \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}}()}
+
+
+
+Holds currently processed strategy for the current state. 
+
+\mbox{\Hypertarget{structDecisionEntry_af0479350edd95b5c43c677d6917322c9}\label{structDecisionEntry_af0479350edd95b5c43c677d6917322c9}} 
+\index{DecisionEntry@{DecisionEntry}!type@{type}}
+\index{type@{type}!DecisionEntry@{DecisionEntry}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} Decision\+Entry\+::type = \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4a7f06283f0d1a4d167be6c37a3d24fd11}{History\+Entry\+Type\+::\+CONTEXT}}}
+
+
+
+Type of the history record. 
+
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

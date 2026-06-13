@@ -1,36 +1,70 @@
-\doxysection{Strategy\+Parser.\+cc File Reference}
-\hypertarget{StrategyParser_8cc}{}\label{StrategyParser_8cc}\index{StrategyParser.cc@{StrategyParser.cc}}
+\hypertarget{StrategyParser_8cc}{}\doxysection{Strategy\+Parser.\+cc File Reference}
+\label{StrategyParser_8cc}\index{StrategyParser.cc@{StrategyParser.cc}}
 
 
 A strategy file parser. A parser for converting a text file into a strategy.  
 
 
-{\ttfamily \#include "{}Strategy\+Parser.\+hpp"{}}\newline
-{\ttfamily \#include "{}strategy\+Reader/strategy\+Nodes.\+hpp"{}}\newline
+{\ttfamily \#include \char`\"{}Strategy\+Parser.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}strategy\+Reader/strategy\+Nodes.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$tuple$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
-\doxysubsubsection*{Functions}
+Include dependency graph for Strategy\+Parser.\+cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{StrategyParser_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{StrategyParser_8cc_a33d5392b4f62498fa806276a13531b39}\label{StrategyParser_8cc_a33d5392b4f62498fa806276a13531b39} 
-int {\bfseries stratparse} ()
+int \mbox{\hyperlink{StrategyParser_8cc_a33d5392b4f62498fa806276a13531b39}{stratparse}} ()
 \item 
-\Hypertarget{StrategyParser_8cc_a527eb7dcccdad03d206de58a40c85cd7}\label{StrategyParser_8cc_a527eb7dcccdad03d206de58a40c85cd7} 
-void {\bfseries stratrestart} (FILE \texorpdfstring{$\ast$}{*})
+void \mbox{\hyperlink{StrategyParser_8cc_a527eb7dcccdad03d206de58a40c85cd7}{stratrestart}} (FILE $\ast$)
 \item 
-\Hypertarget{StrategyParser_8cc_a8a6cc006ea97c60d565215db81ee5caa}\label{StrategyParser_8cc_a8a6cc006ea97c60d565215db81ee5caa} 
-void {\bfseries set\+\_\+input\+\_\+string\+\_\+strat} (const char \texorpdfstring{$\ast$}{*}in)
+void \mbox{\hyperlink{StrategyParser_8cc_a8a6cc006ea97c60d565215db81ee5caa}{set\+\_\+input\+\_\+string\+\_\+strat}} (const char $\ast$in)
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{StrategyParser_8cc_a3b8ed16fddfca9a5b6586a65afb2d8d9}\label{StrategyParser_8cc_a3b8ed16fddfca9a5b6586a65afb2d8d9} 
-\mbox{\hyperlink{classStrategyCollectionTemplate}{Strategy\+Collection\+Template}} {\bfseries strategy\+Collection\+Template}
+\mbox{\hyperlink{classStrategyCollectionTemplate}{Strategy\+Collection\+Template}} \mbox{\hyperlink{StrategyParser_8cc_a3b8ed16fddfca9a5b6586a65afb2d8d9}{strategy\+Collection\+Template}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 A strategy file parser. A parser for converting a text file into a strategy. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{StrategyParser_8cc_a8a6cc006ea97c60d565215db81ee5caa}\label{StrategyParser_8cc_a8a6cc006ea97c60d565215db81ee5caa}} 
+\index{StrategyParser.cc@{StrategyParser.cc}!set\_input\_string\_strat@{set\_input\_string\_strat}}
+\index{set\_input\_string\_strat@{set\_input\_string\_strat}!StrategyParser.cc@{StrategyParser.cc}}
+\doxysubsubsection{\texorpdfstring{set\_input\_string\_strat()}{set\_input\_string\_strat()}}
+{\footnotesize\ttfamily void set\+\_\+input\+\_\+string\+\_\+strat (\begin{DoxyParamCaption}\item[{const char $\ast$}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{StrategyParser_8cc_a33d5392b4f62498fa806276a13531b39}\label{StrategyParser_8cc_a33d5392b4f62498fa806276a13531b39}} 
+\index{StrategyParser.cc@{StrategyParser.cc}!stratparse@{stratparse}}
+\index{stratparse@{stratparse}!StrategyParser.cc@{StrategyParser.cc}}
+\doxysubsubsection{\texorpdfstring{stratparse()}{stratparse()}}
+{\footnotesize\ttfamily int stratparse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{StrategyParser_8cc_a527eb7dcccdad03d206de58a40c85cd7}\label{StrategyParser_8cc_a527eb7dcccdad03d206de58a40c85cd7}} 
+\index{StrategyParser.cc@{StrategyParser.cc}!stratrestart@{stratrestart}}
+\index{stratrestart@{stratrestart}!StrategyParser.cc@{StrategyParser.cc}}
+\doxysubsubsection{\texorpdfstring{stratrestart()}{stratrestart()}}
+{\footnotesize\ttfamily void stratrestart (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{StrategyParser_8cc_a3b8ed16fddfca9a5b6586a65afb2d8d9}\label{StrategyParser_8cc_a3b8ed16fddfca9a5b6586a65afb2d8d9}} 
+\index{StrategyParser.cc@{StrategyParser.cc}!strategyCollectionTemplate@{strategyCollectionTemplate}}
+\index{strategyCollectionTemplate@{strategyCollectionTemplate}!StrategyParser.cc@{StrategyParser.cc}}
+\doxysubsubsection{\texorpdfstring{strategyCollectionTemplate}{strategyCollectionTemplate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classStrategyCollectionTemplate}{Strategy\+Collection\+Template}} strategy\+Collection\+Template}
 

@@ -1,5 +1,5 @@
-\doxysection{Global\+Model\+Generator Class Reference}
-\hypertarget{classGlobalModelGenerator}{}\label{classGlobalModelGenerator}\index{GlobalModelGenerator@{GlobalModelGenerator}}
+\hypertarget{classGlobalModelGenerator}{}\doxysection{Global\+Model\+Generator Class Reference}
+\label{classGlobalModelGenerator}\index{GlobalModelGenerator@{GlobalModelGenerator}}
 
 
 Stores the local models, formula and a global model.  
@@ -9,189 +9,203 @@ Stores the local models, formula and a global model.
 
 {\ttfamily \#include $<$Global\+Model\+Generator.\+hpp$>$}
 
-\doxysubsubsection*{Classes}
+
+
+Collaboration diagram for Global\+Model\+Generator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGlobalModelGenerator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structGlobalModelGenerator_1_1GlobalStateTupleHash}{Global\+State\+Tuple\+Hash}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Public Member Functions}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classGlobalModelGenerator_a02e538bcb34f1789e72a6db5eaffdf09}\label{classGlobalModelGenerator_a02e538bcb34f1789e72a6db5eaffdf09} 
-{\bfseries Global\+Model\+Generator} ()
-\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classGlobalModelGenerator}{Global\+Model\+Generator} class. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_af74ebdc07cadf0e75cdb007eec15c704}\label{classGlobalModelGenerator_af74ebdc07cadf0e75cdb007eec15c704} 
-{\bfseries \texorpdfstring{$\sim$}{\string~}\+Global\+Model\+Generator} ()
-\begin{DoxyCompactList}\small\item\em Destructor for \doxylink{classGlobalModelGenerator}{Global\+Model\+Generator} class. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}{init\+Model}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}}, \mbox{\hyperlink{structFormula}{Formula}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d}{formula}})
+\mbox{\hyperlink{classGlobalModelGenerator_a02e538bcb34f1789e72a6db5eaffdf09}{Global\+Model\+Generator}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGlobalModelGenerator_af74ebdc07cadf0e75cdb007eec15c704}{$\sim$\+Global\+Model\+Generator}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}{init\+Model}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}}, \mbox{\hyperlink{structFormula}{Formula}} $\ast$\mbox{\hyperlink{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d}{formula}})
 \begin{DoxyCompactList}\small\item\em Initializes a global model from local models and a formula. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{expand\+State}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}state)
-\begin{DoxyCompactList}\small\item\em Goes through all \doxylink{structGlobalTransition}{Global\+Transition} in a given \doxylink{structGlobalState}{Global\+State} and creates new Global\+States connected to the given one. \end{DoxyCompactList}\item 
-vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}{expand\+State\+And\+Return}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}state, bool return\+Anyway=false)
-\begin{DoxyCompactList}\small\item\em \doxylink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{Global\+Model\+Generator\+::expand\+State} that also additionally returns a vector of newly created states. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_ac3b64fff2e30003646ca40f5181e01cf}\label{classGlobalModelGenerator_ac3b64fff2e30003646ca40f5181e01cf} 
-void {\bfseries expand\+All\+States} (bool additional\+Prob\+Split=false)
-\begin{DoxyCompactList}\small\item\em Expands the states starting from the initial \doxylink{structGlobalState}{Global\+State} and continues until there are no more states to expand. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{expand\+State}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
+\begin{DoxyCompactList}\small\item\em Goes through all \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in a given \mbox{\hyperlink{structGlobalState}{Global\+State}} and creates new Global\+States connected to the given one. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}{expand\+State\+And\+Return}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state, bool return\+Anyway=false)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{Global\+Model\+Generator\+::expand\+State}} that also additionally returns a vector of newly created states. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGlobalModelGenerator_ac3b64fff2e30003646ca40f5181e01cf}{expand\+All\+States}} (bool additional\+Prob\+Split=false)
+\begin{DoxyCompactList}\small\item\em Expands the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} and continues until there are no more states to expand. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}{expand\+And\+Reduce\+All\+States}} ()
-\begin{DoxyCompactList}\small\item\em Expands and reduces the states starting from the initial \doxylink{structGlobalState}{Global\+State} using a DFS-\/\+POR algorithm and continues until there are no more states to expand. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structGlobalModel}{Global\+Model}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}{get\+Current\+Global\+Model}} ()
-\begin{DoxyCompactList}\small\item\em Get for a \doxylink{structGlobalModel}{Global\+Model} used in initialization. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structFormula}{Formula}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}{get\+Formula}} ()
-\begin{DoxyCompactList}\small\item\em Get for the \doxylink{structFormula}{Formula} used in initialization. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Expands and reduces the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} using a DFS-\/\+POR algorithm and continues until there are no more states to expand. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}{get\+Current\+Global\+Model}} ()
+\begin{DoxyCompactList}\small\item\em Get for a \mbox{\hyperlink{structGlobalModel}{Global\+Model}} used in initialization. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structFormula}{Formula}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}{get\+Formula}} ()
+\begin{DoxyCompactList}\small\item\em Get for the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}{get\+Formula\+Size}} ()
-\begin{DoxyCompactList}\small\item\em Get size of the \doxylink{structFormula}{Formula} used in initialization. \end{DoxyCompactList}\item 
-set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}{find\+Or\+Create\+Epistemic\+Class\+For\+Knowledge}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}global\+State, \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}agent)
-\begin{DoxyCompactList}\small\item\em Checks if a vector of \doxylink{classLocalState}{Local\+State} is already an epistemic class for a given \doxylink{classAgent}{Agent}, if not, creates a new one. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}{get\+Agent\+Instance\+By\+Name}} (string agent\+Name)
+\begin{DoxyCompactList}\small\item\em Get size of the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. \end{DoxyCompactList}\item 
+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}{find\+Or\+Create\+Epistemic\+Class\+For\+Knowledge}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agent)
+\begin{DoxyCompactList}\small\item\em Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}{get\+Agent\+Instance\+By\+Name}} (string agent\+Name)
 \begin{DoxyCompactList}\small\item\em Get a pointer to an agent by using its name. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}\label{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e} 
-void {\bfseries mark\+Formula\+As\+Incorrect} ()
+void \mbox{\hyperlink{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}{mark\+Formula\+As\+Incorrect}} ()
 \begin{DoxyCompactList}\small\item\em Sets formula to an incorrectly written state. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}{get\+Formula\+Corectness}} ()
 \begin{DoxyCompactList}\small\item\em Gets formula status. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}{init\+Strategy}} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} \texorpdfstring{$\ast$}{*}strat)
-\begin{DoxyCompactList}\small\item\em Initiates the strategy with a given \doxylink{classStrategyCollection}{Strategy\+Collection}. \end{DoxyCompactList}\item 
-set$<$ set$<$ tuple$<$ string, string $>$ $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ad8793f7ed97d807c279f68679398bbe2}{create\+Probability\+Strategy}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}})
+void \mbox{\hyperlink{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}{init\+Strategy}} (\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$strat)
+\begin{DoxyCompactList}\small\item\em Initiates the strategy with a given \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}. \end{DoxyCompactList}\item 
+set$<$ set$<$ tuple$<$ string, string $>$ $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ad8793f7ed97d807c279f68679398bbe2}{create\+Probability\+Strategy}} (\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$\mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}})
 \begin{DoxyCompactList}\small\item\em Prepares the strategy generating structures for the probabilistic verification. \end{DoxyCompactList}\item 
-set$<$ tuple$<$ string, string $>$ $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a28a56f9fdf01570a1aa41e4341121106}{get\+Next\+Path}} ()
+set$<$ tuple$<$ string, string $>$ $>$ $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a28a56f9fdf01570a1aa41e4341121106}{get\+Next\+Path}} ()
 \begin{DoxyCompactList}\small\item\em Retrieves the next strategy one at a time (iteratively). Systematically tries all combinations of action choices at each epistemic class. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a2a467d31aeeea7e27bdff5f460c25b04}\label{classGlobalModelGenerator_a2a467d31aeeea7e27bdff5f460c25b04} 
-MDP {\bfseries generate\+Next\+MDP} (bool make\+Opponent\+Go\+Max=false)
+MDP \mbox{\hyperlink{classGlobalModelGenerator_a2a467d31aeeea7e27bdff5f460c25b04}{generate\+Next\+MDP}} (bool make\+Opponent\+Go\+Max=false)
 \item 
-string \mbox{\hyperlink{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}{get\+Coalition\+Identifier}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States)
+string \mbox{\hyperlink{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}{get\+Coalition\+Identifier}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
 \begin{DoxyCompactList}\small\item\em Returns a concatenated epistemic class ID of all coalition members in given Local\+States. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a6e3bbd23906fca8b9813b51a050f54d8}\label{classGlobalModelGenerator_a6e3bbd23906fca8b9813b51a050f54d8} 
-string {\bfseries get\+Coalition\+Action\+Signature} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*}transition, char sep=\textquotesingle{};\textquotesingle{})
+string \mbox{\hyperlink{classGlobalModelGenerator_a6e3bbd23906fca8b9813b51a050f54d8}{get\+Coalition\+Action\+Signature}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$transition, char sep=\textquotesingle{};\textquotesingle{})
 \begin{DoxyCompactList}\small\item\em Returns coalition-\/only action signature, ordered by agent\+Index and using local\+Name when available. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}{get\+Action\+Name\+From\+State\+In\+Strategy}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}state)
+string \mbox{\hyperlink{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}{get\+Action\+Name\+From\+State\+In\+Strategy}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$state)
 \begin{DoxyCompactList}\small\item\em Gives next action\textquotesingle{}s name from a given state. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classGlobalModelGenerator_a4547365e456449e61e08cbd6e18791d0}\label{classGlobalModelGenerator_a4547365e456449e61e08cbd6e18791d0} 
-map$<$ \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}, size\+\_\+t $>$ {\bfseries agent\+Index}
-\begin{DoxyCompactList}\small\item\em auxiliary variable mapping \doxylink{classAgent}{Agent} pointer to its index (replace size\+\_\+t with if needed later) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Protected Member Functions}
+map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, size\+\_\+t $>$ \mbox{\hyperlink{classGlobalModelGenerator_a4547365e456449e61e08cbd6e18791d0}{agent\+Index}}
+\begin{DoxyCompactList}\small\item\em auxiliary variable mapping \mbox{\hyperlink{classAgent}{Agent}} pointer to its index (replace size\+\_\+t with if needed later) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a3b233fda6152b674804997ccbbb838ee}{generate\+Init\+State}} ()
-\begin{DoxyCompactList}\small\item\em Generates initial state of the model from \doxylink{structGlobalModel}{Global\+Model} in memory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a5d8f01cdcd20893ae23260a090b04315}{generate\+State\+From\+Local\+States}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States, set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}via\+Local\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}prev\+Global\+State)
-\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{structGlobalState}{Global\+State} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGlobalModelGenerator_ae39a5696671934e19af0c81b1b00bd99}{generate\+Global\+Transitions}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}from\+Global\+State, set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$ local\+Transitions, map$<$ \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}, vector$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$ $>$ transitions\+By\+Agent)
-\begin{DoxyCompactList}\small\item\em Adds all shared global transitions to a \doxylink{structGlobalState}{Global\+State}. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{classGlobalModelGenerator_a131f493e5990ea53a56117a1c6a58fb7}{compute\+Epistemic\+Class\+Hash}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States, \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}agent)
-\begin{DoxyCompactList}\small\item\em Creates a hash from a set of \doxylink{classLocalState}{Local\+State} and an \doxylink{classAgent}{Agent}. \end{DoxyCompactList}\item 
-string \mbox{\hyperlink{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b26c}{compute\+Global\+State\+Hash}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States)
-\begin{DoxyCompactList}\small\item\em Creates a hash from a set of \doxylink{classLocalState}{Local\+State}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_acc24910b5193e1916aea16926d0374bf}{find\+Or\+Create\+Epistemic\+Class}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States, \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}agent)
-\begin{DoxyCompactList}\small\item\em Checks if a vector of \doxylink{classLocalState}{Local\+State} is already an epistemic class for a given \doxylink{classAgent}{Agent}, if not, creates a new one. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classGlobalModelGenerator_a71726acc560329d3bd9a0b178857d0a8}{find\+Global\+State\+In\+Epistemic\+Class}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States, \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} \texorpdfstring{$\ast$}{*}epistemic\+Class)
-\begin{DoxyCompactList}\small\item\em Gets a \doxylink{structGlobalState}{Global\+State} from an \doxylink{structEpistemicClass}{Epistemic\+Class} if it exists in that episcemic class. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a934e4ff4950f2127d85ef30588fb34d4}\label{classGlobalModelGenerator_a934e4ff4950f2127d85ef30588fb34d4} 
-bool {\bfseries check\+Local\+States} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}global\+State)
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a3b233fda6152b674804997ccbbb838ee}{generate\+Init\+State}} ()
+\begin{DoxyCompactList}\small\item\em Generates initial state of the model from \mbox{\hyperlink{structGlobalModel}{Global\+Model}} in memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a5d8f01cdcd20893ae23260a090b04315}{generate\+State\+From\+Local\+States}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ $\ast$via\+Local\+Transitions, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$prev\+Global\+State)
+\begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{structGlobalState}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGlobalModelGenerator_aac718e108f277e27fac26566e69626a3}{generate\+Global\+Transitions}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$from\+Global\+State, set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ local\+Transitions, map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, vector$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$$>$ transitions\+By\+Agent)
+\begin{DoxyCompactList}\small\item\em Adds all shared global transitions to a \mbox{\hyperlink{structGlobalState}{Global\+State}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classGlobalModelGenerator_a131f493e5990ea53a56117a1c6a58fb7}{compute\+Epistemic\+Class\+Hash}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agent)
+\begin{DoxyCompactList}\small\item\em Creates a hash from a set of \mbox{\hyperlink{classLocalState}{Local\+State}} and an \mbox{\hyperlink{classAgent}{Agent}}. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b26c}{compute\+Global\+State\+Hash}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States)
+\begin{DoxyCompactList}\small\item\em Creates a hash from a set of \mbox{\hyperlink{classLocalState}{Local\+State}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_acc24910b5193e1916aea16926d0374bf}{find\+Or\+Create\+Epistemic\+Class}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agent)
+\begin{DoxyCompactList}\small\item\em Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a71726acc560329d3bd9a0b178857d0a8}{find\+Global\+State\+In\+Epistemic\+Class}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$epistemic\+Class)
+\begin{DoxyCompactList}\small\item\em Gets a \mbox{\hyperlink{structGlobalState}{Global\+State}} from an \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} if it exists in that episcemic class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGlobalModelGenerator_a934e4ff4950f2127d85ef30588fb34d4}{check\+Local\+States}} (vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$local\+States, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Protected Attributes}
+\doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classGlobalModelGenerator_a0349c579912afc45e958776118103086}\label{classGlobalModelGenerator_a0349c579912afc45e958776118103086} 
-\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*} {\bfseries local\+Models}
-\begin{DoxyCompactList}\small\item\em \doxylink{structLocalModels}{Local\+Models} used in init\+Model. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d}\label{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d} 
-\mbox{\hyperlink{structFormula}{Formula}} \texorpdfstring{$\ast$}{*} {\bfseries formula}
-\begin{DoxyCompactList}\small\item\em \doxylink{structFormula}{Formula} used in init\+Model. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}\label{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477} 
-\mbox{\hyperlink{structGlobalModel}{Global\+Model}} \texorpdfstring{$\ast$}{*} {\bfseries global\+Model}
-\begin{DoxyCompactList}\small\item\em \doxylink{structGlobalModel}{Global\+Model} created in init\+Model. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}\label{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271} 
-bool {\bfseries correct\+Model}
+\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a0349c579912afc45e958776118103086}{local\+Models}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structLocalModels}{Local\+Models}} used in init\+Model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structFormula}{Formula}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d}{formula}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structFormula}{Formula}} used in init\+Model. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}{global\+Model}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structGlobalModel}{Global\+Model}} created in init\+Model. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}{correct\+Model}}
 \begin{DoxyCompactList}\small\item\em Flag holding info if model is actually correct. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}\label{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06} 
-unordered\+\_\+map$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}, unordered\+\_\+set$<$ int $>$ $>$ {\bfseries candidate\+State\+Depths}
+unordered\+\_\+map$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$, unordered\+\_\+set$<$ int $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}{candidate\+State\+Depths}}
 \begin{DoxyCompactList}\small\item\em Lookup map containing global states and the depths that the global state is contained in. Used for reductions. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}\label{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301} 
-stack$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries global\+Model\+Candidates}
+stack$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}{global\+Model\+Candidates}}
 \begin{DoxyCompactList}\small\item\em Candidate states to be used in reductions. Used for reductions. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}\label{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02} 
-stack$<$ int $>$ {\bfseries state\+Depths}
+stack$<$ int $>$ \mbox{\hyperlink{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}{state\+Depths}}
 \begin{DoxyCompactList}\small\item\em Saved depths of states added to states\+To\+Expand. Used for reductions. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}\label{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8} 
-unordered\+\_\+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries added\+States}
+unordered\+\_\+set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}{added\+States}}
 \begin{DoxyCompactList}\small\item\em States that were added to a stack of states. Used for reductions. \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}\label{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c} 
-\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} \texorpdfstring{$\ast$}{*} {\bfseries strategy\+Collection}
+\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$ \mbox{\hyperlink{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}{strategy\+Collection}}
 \begin{DoxyCompactList}\small\item\em Strategy to check during verification (if any) \end{DoxyCompactList}\item 
-\Hypertarget{classGlobalModelGenerator_a3ce7a6b2924448afe5503c699ac58f91}\label{classGlobalModelGenerator_a3ce7a6b2924448afe5503c699ac58f91} 
-set$<$ tuple$<$ string, string $>$ $>$ {\bfseries current\+Strategy}
+set$<$ tuple$<$ string, string $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a3ce7a6b2924448afe5503c699ac58f91}{current\+Strategy}}
 \item 
-\Hypertarget{classGlobalModelGenerator_af5ae6f95e29faa6aa1188038492db803}\label{classGlobalModelGenerator_af5ae6f95e29faa6aa1188038492db803} 
-map$<$ string, size\+\_\+t $>$ {\bfseries choice\+Indices}
+map$<$ string, size\+\_\+t $>$ \mbox{\hyperlink{classGlobalModelGenerator_af5ae6f95e29faa6aa1188038492db803}{choice\+Indices}}
 \item 
-\Hypertarget{classGlobalModelGenerator_a9d62533c8788dbc9786648a124827d81}\label{classGlobalModelGenerator_a9d62533c8788dbc9786648a124827d81} 
-map$<$ string, size\+\_\+t $>$ {\bfseries action\+Counts}
+map$<$ string, size\+\_\+t $>$ \mbox{\hyperlink{classGlobalModelGenerator_a9d62533c8788dbc9786648a124827d81}{action\+Counts}}
 \item 
-\Hypertarget{classGlobalModelGenerator_a29932bfa082db663f228cf089ec68b09}\label{classGlobalModelGenerator_a29932bfa082db663f228cf089ec68b09} 
-bool {\bfseries strategy\+Generation\+Init} = false
+bool \mbox{\hyperlink{classGlobalModelGenerator_a29932bfa082db663f228cf089ec68b09}{strategy\+Generation\+Init}} = false
 \item 
-\Hypertarget{classGlobalModelGenerator_abc77ca7492f68935db695c3d13e98eb6}\label{classGlobalModelGenerator_abc77ca7492f68935db695c3d13e98eb6} 
-bool {\bfseries strategies\+Exhausted} = false
+bool \mbox{\hyperlink{classGlobalModelGenerator_abc77ca7492f68935db695c3d13e98eb6}{strategies\+Exhausted}} = false
 \item 
-\Hypertarget{classGlobalModelGenerator_ae91e19594f521425721566f3fb471cc8}\label{classGlobalModelGenerator_ae91e19594f521425721566f3fb471cc8} 
-unordered\+\_\+map$<$ string, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries state\+Hash\+Map\+Cache}
+unordered\+\_\+map$<$ string, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_ae91e19594f521425721566f3fb471cc8}{state\+Hash\+Map\+Cache}}
 \item 
-\Hypertarget{classGlobalModelGenerator_a8beb3b7580ada844976ecc61bd945e7f}\label{classGlobalModelGenerator_a8beb3b7580ada844976ecc61bd945e7f} 
-map$<$ string, map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} $>$ $>$ $>$ {\bfseries coalition\+Transitions}
+map$<$ string, map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a8beb3b7580ada844976ecc61bd945e7f}{coalition\+Transitions}}
 \item 
-\Hypertarget{classGlobalModelGenerator_a4f4e0f5421191040415a9e2acec9b75a}\label{classGlobalModelGenerator_a4f4e0f5421191040415a9e2acec9b75a} 
-map$<$ string, map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} $>$ $>$ $>$ {\bfseries opponents\+Transitions}
+map$<$ string, map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $>$ $>$ \mbox{\hyperlink{classGlobalModelGenerator_a4f4e0f5421191040415a9e2acec9b75a}{opponents\+Transitions}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Stores the local models, formula and a global model. 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGlobalModelGenerator_a02e538bcb34f1789e72a6db5eaffdf09}\label{classGlobalModelGenerator_a02e538bcb34f1789e72a6db5eaffdf09}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!GlobalModelGenerator@{GlobalModelGenerator}}
+\index{GlobalModelGenerator@{GlobalModelGenerator}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{GlobalModelGenerator()}{GlobalModelGenerator()}}
+{\footnotesize\ttfamily Global\+Model\+Generator\+::\+Global\+Model\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor for \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} class. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_af74ebdc07cadf0e75cdb007eec15c704}\label{classGlobalModelGenerator_af74ebdc07cadf0e75cdb007eec15c704}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!````~GlobalModelGenerator@{$\sim$GlobalModelGenerator}}
+\index{````~GlobalModelGenerator@{$\sim$GlobalModelGenerator}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{$\sim$GlobalModelGenerator()}{~GlobalModelGenerator()}}
+{\footnotesize\ttfamily Global\+Model\+Generator\+::$\sim$\+Global\+Model\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor for \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} class. 
+
+
+
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classGlobalModelGenerator_a131f493e5990ea53a56117a1c6a58fb7}\label{classGlobalModelGenerator_a131f493e5990ea53a56117a1c6a58fb7} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a934e4ff4950f2127d85ef30588fb34d4}\label{classGlobalModelGenerator_a934e4ff4950f2127d85ef30588fb34d4}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!checkLocalStates@{checkLocalStates}}
+\index{checkLocalStates@{checkLocalStates}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{checkLocalStates()}{checkLocalStates()}}
+{\footnotesize\ttfamily bool Global\+Model\+Generator\+::check\+Local\+States (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a131f493e5990ea53a56117a1c6a58fb7}\label{classGlobalModelGenerator_a131f493e5990ea53a56117a1c6a58fb7}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!computeEpistemicClassHash@{computeEpistemicClassHash}}
 \index{computeEpistemicClassHash@{computeEpistemicClassHash}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{computeEpistemicClassHash()}{computeEpistemicClassHash()}}
-{\footnotesize\ttfamily string Global\+Model\+Generator\+::compute\+Epistemic\+Class\+Hash (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}}]{agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::compute\+Epistemic\+Class\+Hash (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Creates a hash from a set of \doxylink{classLocalState}{Local\+State} and an \doxylink{classAgent}{Agent}. 
+Creates a hash from a set of \mbox{\hyperlink{classLocalState}{Local\+State}} and an \mbox{\hyperlink{classAgent}{Agent}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+States} & Pointer to a vector of pointers of \doxylink{classLocalState}{Local\+State} and pointer to and \doxylink{classAgent}{Agent} to turn into a hash. \\
+{\em local\+States} & Pointer to a vector of pointers of \mbox{\hyperlink{classLocalState}{Local\+State}} and pointer to and \mbox{\hyperlink{classAgent}{Agent}} to turn into a hash. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns a string with a hash. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b26c}\label{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b26c} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b26c}\label{classGlobalModelGenerator_ac6e324a3bad67d1e80614e6fb1b9b26c}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!computeGlobalStateHash@{computeGlobalStateHash}}
 \index{computeGlobalStateHash@{computeGlobalStateHash}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{computeGlobalStateHash()}{computeGlobalStateHash()}}
-{\footnotesize\ttfamily string Global\+Model\+Generator\+::compute\+Global\+State\+Hash (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::compute\+Global\+State\+Hash (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Creates a hash from a set of \doxylink{classLocalState}{Local\+State}. 
+Creates a hash from a set of \mbox{\hyperlink{classLocalState}{Local\+State}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+States} & Pointer to a vector of pointers of \doxylink{classLocalState}{Local\+State} to turn into a hash. \\
+{\em local\+States} & Pointer to a vector of pointers of \mbox{\hyperlink{classLocalState}{Local\+State}} to turn into a hash. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns a string with a hash. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_ad8793f7ed97d807c279f68679398bbe2}\label{classGlobalModelGenerator_ad8793f7ed97d807c279f68679398bbe2} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ad8793f7ed97d807c279f68679398bbe2}\label{classGlobalModelGenerator_ad8793f7ed97d807c279f68679398bbe2}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!createProbabilityStrategy@{createProbabilityStrategy}}
 \index{createProbabilityStrategy@{createProbabilityStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{createProbabilityStrategy()}{createProbabilityStrategy()}}
-{\footnotesize\ttfamily set$<$ set$<$ tuple$<$ string, string $>$ $>$ $>$ Global\+Model\+Generator\+::create\+Probability\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}}]{local\+Models }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily set$<$ set$<$ tuple$<$ string, string $>$ $>$ $>$ Global\+Model\+Generator\+::create\+Probability\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$}]{local\+Models }\end{DoxyParamCaption})}
 
 
 
@@ -199,10 +213,20 @@ Prepares the strategy generating structures for the probabilistic verification.
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+Models} & \doxylink{structLocalModels}{Local\+Models} to generate the coalition transition buckets from. \\
+{\em local\+Models} & \mbox{\hyperlink{structLocalModels}{Local\+Models}} to generate the coalition transition buckets from. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}\label{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ac3b64fff2e30003646ca40f5181e01cf}\label{classGlobalModelGenerator_ac3b64fff2e30003646ca40f5181e01cf}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!expandAllStates@{expandAllStates}}
+\index{expandAllStates@{expandAllStates}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{expandAllStates()}{expandAllStates()}}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::expand\+All\+States (\begin{DoxyParamCaption}\item[{bool}]{additional\+Prob\+Split = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Expands the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} and continues until there are no more states to expand. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}\label{classGlobalModelGenerator_abbbf2741211653a24bcbed0c2e8aa5af}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!expandAndReduceAllStates@{expandAndReduceAllStates}}
 \index{expandAndReduceAllStates@{expandAndReduceAllStates}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{expandAndReduceAllStates()}{expandAndReduceAllStates()}}
@@ -210,112 +234,112 @@ Prepares the strategy generating structures for the probabilistic verification.
 
 
 
-Expands and reduces the states starting from the initial \doxylink{structGlobalState}{Global\+State} using a DFS-\/\+POR algorithm and continues until there are no more states to expand. 
+Expands and reduces the states starting from the initial \mbox{\hyperlink{structGlobalState}{Global\+State}} using a DFS-\/\+POR algorithm and continues until there are no more states to expand. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em depth} & Current depth of the recursive generation of all states. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}\label{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}\label{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!expandState@{expandState}}
 \index{expandState@{expandState}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{expandState()}{expandState()}}
-{\footnotesize\ttfamily void Global\+Model\+Generator\+::expand\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{state }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::expand\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
 
 
 
-Goes through all \doxylink{structGlobalTransition}{Global\+Transition} in a given \doxylink{structGlobalState}{Global\+State} and creates new Global\+States connected to the given one. 
+Goes through all \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} in a given \mbox{\hyperlink{structGlobalState}{Global\+State}} and creates new Global\+States connected to the given one. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em state} & A state from which the expansion should start. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}\label{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}\label{classGlobalModelGenerator_ab671fabf1271b0e5f771bc4e17d0f493}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!expandStateAndReturn@{expandStateAndReturn}}
 \index{expandStateAndReturn@{expandStateAndReturn}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{expandStateAndReturn()}{expandStateAndReturn()}}
-{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ Global\+Model\+Generator\+::expand\+State\+And\+Return (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{state,  }\item[{bool}]{return\+Anyway = {\ttfamily false} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ Global\+Model\+Generator\+::expand\+State\+And\+Return (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{state,  }\item[{bool}]{return\+Anyway = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
 
-\doxylink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{Global\+Model\+Generator\+::expand\+State} that also additionally returns a vector of newly created states. 
+\mbox{\hyperlink{classGlobalModelGenerator_ad9b21fa1580e4dd4479c00d192a97501}{Global\+Model\+Generator\+::expand\+State}} that also additionally returns a vector of newly created states. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em state} & A state from which the expansion should start. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classGlobalModelGenerator_a71726acc560329d3bd9a0b178857d0a8}\label{classGlobalModelGenerator_a71726acc560329d3bd9a0b178857d0a8} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a71726acc560329d3bd9a0b178857d0a8}\label{classGlobalModelGenerator_a71726acc560329d3bd9a0b178857d0a8}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!findGlobalStateInEpistemicClass@{findGlobalStateInEpistemicClass}}
 \index{findGlobalStateInEpistemicClass@{findGlobalStateInEpistemicClass}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{findGlobalStateInEpistemicClass()}{findGlobalStateInEpistemicClass()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::find\+Global\+State\+In\+Epistemic\+Class (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States,  }\item[{\mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} \texorpdfstring{$\ast$}{*}}]{epistemic\+Class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ Global\+Model\+Generator\+::find\+Global\+State\+In\+Epistemic\+Class (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$}]{epistemic\+Class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Gets a \doxylink{structGlobalState}{Global\+State} from an \doxylink{structEpistemicClass}{Epistemic\+Class} if it exists in that episcemic class. 
+Gets a \mbox{\hyperlink{structGlobalState}{Global\+State}} from an \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} if it exists in that episcemic class. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+States} & Pointer to a vector of pointers to \doxylink{classLocalState}{Local\+State}, from which will be generated a global state hash. \\
+{\em local\+States} & Pointer to a vector of pointers to \mbox{\hyperlink{classLocalState}{Local\+State}}, from which will be generated a global state hash. \\
 \hline
-{\em epistemic\+Class} & Epistemic class in which to check if a \doxylink{structGlobalState}{Global\+State} exists. \\
+{\em epistemic\+Class} & Epistemic class in which to check if a \mbox{\hyperlink{structGlobalState}{Global\+State}} exists. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Returns a pointer to a \doxylink{structGlobalState}{Global\+State} if it exists in given epistemic class, otherwise returns nullptr. 
+Returns a pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}} if it exists in given epistemic class, otherwise returns nullptr. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_acc24910b5193e1916aea16926d0374bf}\label{classGlobalModelGenerator_acc24910b5193e1916aea16926d0374bf} 
+\mbox{\Hypertarget{classGlobalModelGenerator_acc24910b5193e1916aea16926d0374bf}\label{classGlobalModelGenerator_acc24910b5193e1916aea16926d0374bf}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!findOrCreateEpistemicClass@{findOrCreateEpistemicClass}}
 \index{findOrCreateEpistemicClass@{findOrCreateEpistemicClass}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{findOrCreateEpistemicClass()}{findOrCreateEpistemicClass()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::find\+Or\+Create\+Epistemic\+Class (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}}]{agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} $\ast$ Global\+Model\+Generator\+::find\+Or\+Create\+Epistemic\+Class (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Checks if a vector of \doxylink{classLocalState}{Local\+State} is already an epistemic class for a given \doxylink{classAgent}{Agent}, if not, creates a new one. 
+Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em local\+States} & Local states from agent. \\
 \hline
-{\em agent} & \doxylink{classAgent}{Agent} for which to check the existence of an epistemic class. \\
+{\em agent} & \mbox{\hyperlink{classAgent}{Agent}} for which to check the existence of an epistemic class. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A pointer to a new or existing \doxylink{structEpistemicClass}{Epistemic\+Class}. 
+A pointer to a new or existing \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}\label{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}\label{classGlobalModelGenerator_a89a7825f93f972dc94468598cf35382b}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!findOrCreateEpistemicClassForKnowledge@{findOrCreateEpistemicClassForKnowledge}}
 \index{findOrCreateEpistemicClassForKnowledge@{findOrCreateEpistemicClassForKnowledge}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{findOrCreateEpistemicClassForKnowledge()}{findOrCreateEpistemicClassForKnowledge()}}
-{\footnotesize\ttfamily set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::find\+Or\+Create\+Epistemic\+Class\+For\+Knowledge (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{global,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}}]{agent }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $\ast$ Global\+Model\+Generator\+::find\+Or\+Create\+Epistemic\+Class\+For\+Knowledge (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agent }\end{DoxyParamCaption})}
 
 
 
-Checks if a vector of \doxylink{classLocalState}{Local\+State} is already an epistemic class for a given \doxylink{classAgent}{Agent}, if not, creates a new one. 
+Checks if a vector of \mbox{\hyperlink{classLocalState}{Local\+State}} is already an epistemic class for a given \mbox{\hyperlink{classAgent}{Agent}}, if not, creates a new one. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em local\+States} & Local states from agent. \\
 \hline
-{\em agent} & \doxylink{classAgent}{Agent} for which to check the existence of an epistemic class. \\
+{\em agent} & \mbox{\hyperlink{classAgent}{Agent}} for which to check the existence of an epistemic class. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A pointer to a new or existing \doxylink{structEpistemicClass}{Epistemic\+Class}. 
+A pointer to a new or existing \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}}. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_ae39a5696671934e19af0c81b1b00bd99}\label{classGlobalModelGenerator_ae39a5696671934e19af0c81b1b00bd99} 
+\mbox{\Hypertarget{classGlobalModelGenerator_aac718e108f277e27fac26566e69626a3}\label{classGlobalModelGenerator_aac718e108f277e27fac26566e69626a3}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!generateGlobalTransitions@{generateGlobalTransitions}}
 \index{generateGlobalTransitions@{generateGlobalTransitions}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{generateGlobalTransitions()}{generateGlobalTransitions()}}
-{\footnotesize\ttfamily void Global\+Model\+Generator\+::generate\+Global\+Transitions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{from\+Global\+State,  }\item[{set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$}]{local\+Transitions,  }\item[{map$<$ \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*}, vector$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$ $>$}]{transitions\+By\+Agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::generate\+Global\+Transitions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{from\+Global\+State,  }\item[{set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$}]{local\+Transitions,  }\item[{map$<$ \mbox{\hyperlink{classAgent}{Agent}} $\ast$, vector$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$$>$}]{transitions\+By\+Agent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Adds all shared global transitions to a \doxylink{structGlobalState}{Global\+State}. 
+Adds all shared global transitions to a \mbox{\hyperlink{structGlobalState}{Global\+State}}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -326,46 +350,52 @@ Adds all shared global transitions to a \doxylink{structGlobalState}{Global\+Sta
 {\em transitions\+By\+Agent} & Mapped transitions to an agent, only with transitions avaliable for the agent at this moment. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classGlobalModelGenerator_a3b233fda6152b674804997ccbbb838ee}\label{classGlobalModelGenerator_a3b233fda6152b674804997ccbbb838ee} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a3b233fda6152b674804997ccbbb838ee}\label{classGlobalModelGenerator_a3b233fda6152b674804997ccbbb838ee}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!generateInitState@{generateInitState}}
 \index{generateInitState@{generateInitState}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{generateInitState()}{generateInitState()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::generate\+Init\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ Global\+Model\+Generator\+::generate\+Init\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Generates initial state of the model from \doxylink{structGlobalModel}{Global\+Model} in memory. 
+Generates initial state of the model from \mbox{\hyperlink{structGlobalModel}{Global\+Model}} in memory. 
 
 \begin{DoxyReturn}{Returns}
-Returns a pointer to an initial \doxylink{structGlobalState}{Global\+State}. 
+Returns a pointer to an initial \mbox{\hyperlink{structGlobalState}{Global\+State}}. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a5d8f01cdcd20893ae23260a090b04315}\label{classGlobalModelGenerator_a5d8f01cdcd20893ae23260a090b04315} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a2a467d31aeeea7e27bdff5f460c25b04}\label{classGlobalModelGenerator_a2a467d31aeeea7e27bdff5f460c25b04}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!generateNextMDP@{generateNextMDP}}
+\index{generateNextMDP@{generateNextMDP}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{generateNextMDP()}{generateNextMDP()}}
+{\footnotesize\ttfamily MDP Global\+Model\+Generator\+::generate\+Next\+MDP (\begin{DoxyParamCaption}\item[{bool}]{make\+Opponent\+Go\+Max = {\ttfamily false} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a5d8f01cdcd20893ae23260a090b04315}\label{classGlobalModelGenerator_a5d8f01cdcd20893ae23260a090b04315}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!generateStateFromLocalStates@{generateStateFromLocalStates}}
 \index{generateStateFromLocalStates@{generateStateFromLocalStates}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{generateStateFromLocalStates()}{generateStateFromLocalStates()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::generate\+State\+From\+Local\+States (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States,  }\item[{set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{via\+Local\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{prev\+Global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ Global\+Model\+Generator\+::generate\+State\+From\+Local\+States (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States,  }\item[{set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ $\ast$}]{via\+Local\+Transitions,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{prev\+Global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
-Creates a new \doxylink{structGlobalState}{Global\+State} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. 
+Creates a new \mbox{\hyperlink{structGlobalState}{Global\+State}} using some of the internally known model data and given local states, transitions that were uset to get there and the previous global state. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+States} & Local\+States from which the new \doxylink{structGlobalState}{Global\+State} will be built. \\
+{\em local\+States} & Local\+States from which the new \mbox{\hyperlink{structGlobalState}{Global\+State}} will be built. \\
 \hline
-{\em via\+Local\+Transitions} & Pointer to a set of pointers to \doxylink{structLocalTransition}{Local\+Transition} from which the changes in variables, as a result of traversing through the transition, will be made in a new \doxylink{structGlobalState}{Global\+State}. \\
+{\em via\+Local\+Transitions} & Pointer to a set of pointers to \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} from which the changes in variables, as a result of traversing through the transition, will be made in a new \mbox{\hyperlink{structGlobalState}{Global\+State}}. \\
 \hline
-{\em prev\+Global\+State} & Pointer to \doxylink{structGlobalState}{Global\+State} from which all persistent variables will be copied over from to the new \doxylink{structGlobalState}{Global\+State}. \\
+{\em prev\+Global\+State} & Pointer to \mbox{\hyperlink{structGlobalState}{Global\+State}} from which all persistent variables will be copied over from to the new \mbox{\hyperlink{structGlobalState}{Global\+State}}. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Returns a pointer to a new or already existing in the same epistemic class \doxylink{structGlobalModel}{Global\+Model}. 
+Returns a pointer to a new or already existing in the same epistemic class \mbox{\hyperlink{structGlobalModel}{Global\+Model}}. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}\label{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}\label{classGlobalModelGenerator_a84a0226a90a167cf9a4becd1aaca6ac0}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getActionNameFromStateInStrategy@{getActionNameFromStateInStrategy}}
 \index{getActionNameFromStateInStrategy@{getActionNameFromStateInStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getActionNameFromStateInStrategy()}{getActionNameFromStateInStrategy()}}
-{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Action\+Name\+From\+State\+In\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{state }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Action\+Name\+From\+State\+In\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{state }\end{DoxyParamCaption})}
 
 
 
@@ -373,17 +403,17 @@ Gives next action\textquotesingle{}s name from a given state.
 
 
 \begin{DoxyParams}{Parameters}
-{\em state} & \doxylink{structGlobalState}{Global\+State} from which an action name would be retrieved if a set strategy is present. \\
+{\em state} & \mbox{\hyperlink{structGlobalState}{Global\+State}} from which an action name would be retrieved if a set strategy is present. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 String containing the action name ending on a semicolon. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}\label{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}\label{classGlobalModelGenerator_ac167eac5a5d30d4f2cb94d4bf198bf09}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getAgentInstanceByName@{getAgentInstanceByName}}
 \index{getAgentInstanceByName@{getAgentInstanceByName}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getAgentInstanceByName()}{getAgentInstanceByName()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::get\+Agent\+Instance\+By\+Name (\begin{DoxyParamCaption}\item[{string}]{agent\+Name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}} $\ast$ Global\+Model\+Generator\+::get\+Agent\+Instance\+By\+Name (\begin{DoxyParamCaption}\item[{string}]{agent\+Name }\end{DoxyParamCaption})}
 
 
 
@@ -391,17 +421,27 @@ Get a pointer to an agent by using its name.
 
 
 \begin{DoxyParams}{Parameters}
-{\em agent\+Name} & Name of an \doxylink{classAgent}{Agent} that we want to get its instance. \\
+{\em agent\+Name} & Name of an \mbox{\hyperlink{classAgent}{Agent}} that we want to get its instance. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Pointer to an \doxylink{classAgent}{Agent}. 
+Pointer to an \mbox{\hyperlink{classAgent}{Agent}}. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}\label{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a6e3bbd23906fca8b9813b51a050f54d8}\label{classGlobalModelGenerator_a6e3bbd23906fca8b9813b51a050f54d8}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!getCoalitionActionSignature@{getCoalitionActionSignature}}
+\index{getCoalitionActionSignature@{getCoalitionActionSignature}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{getCoalitionActionSignature()}{getCoalitionActionSignature()}}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Coalition\+Action\+Signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{transition,  }\item[{char}]{sep = {\ttfamily \textquotesingle{};\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+Returns coalition-\/only action signature, ordered by agent\+Index and using local\+Name when available. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}\label{classGlobalModelGenerator_a33d89a6656674d1e26d2591bde74bf2e}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getCoalitionIdentifier@{getCoalitionIdentifier}}
 \index{getCoalitionIdentifier@{getCoalitionIdentifier}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getCoalitionIdentifier()}{getCoalitionIdentifier()}}
-{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Coalition\+Identifier (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*}}]{local\+States }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily string Global\+Model\+Generator\+::get\+Coalition\+Identifier (\begin{DoxyParamCaption}\item[{vector$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$}]{local\+States }\end{DoxyParamCaption})}
 
 
 
@@ -413,35 +453,35 @@ Returns a concatenated epistemic class ID of all coalition members in given Loca
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\doxylink{classLocalState}{Local\+State} IDs for coalition members separated with semicolons, ending on a semicolon. 
+\mbox{\hyperlink{classLocalState}{Local\+State}} IDs for coalition members separated with semicolons, ending on a semicolon. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}\label{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}\label{classGlobalModelGenerator_a8115d1786015dee46c171e0295c35a4a}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getCurrentGlobalModel@{getCurrentGlobalModel}}
 \index{getCurrentGlobalModel@{getCurrentGlobalModel}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getCurrentGlobalModel()}{getCurrentGlobalModel()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalModel}{Global\+Model}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::get\+Current\+Global\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$ Global\+Model\+Generator\+::get\+Current\+Global\+Model (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Get for a \doxylink{structGlobalModel}{Global\+Model} used in initialization. 
+Get for a \mbox{\hyperlink{structGlobalModel}{Global\+Model}} used in initialization. 
 
 \begin{DoxyReturn}{Returns}
 Returns a pointer to a global model. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}\label{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}\label{classGlobalModelGenerator_a9bf572d8e168df504b19f14a1833097e}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getFormula@{getFormula}}
 \index{getFormula@{getFormula}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getFormula()}{getFormula()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structFormula}{Formula}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::get\+Formula (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structFormula}{Formula}} $\ast$ Global\+Model\+Generator\+::get\+Formula (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
-Get for the \doxylink{structFormula}{Formula} used in initialization. 
+Get for the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. 
 
 \begin{DoxyReturn}{Returns}
 Returns a pointer to the formula structure. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}\label{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce} 
+\mbox{\Hypertarget{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}\label{classGlobalModelGenerator_ac9a7a0f5180b72d34c694be0341a0dce}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getFormulaCorectness@{getFormulaCorectness}}
 \index{getFormulaCorectness@{getFormulaCorectness}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getFormulaCorectness()}{getFormulaCorectness()}}
@@ -454,7 +494,7 @@ Gets formula status.
 \begin{DoxyReturn}{Returns}
 True if formula is written correctly, false otherwise. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}\label{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}\label{classGlobalModelGenerator_a1183af0cbdab1e223ff06508bf43a318}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getFormulaSize@{getFormulaSize}}
 \index{getFormulaSize@{getFormulaSize}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getFormulaSize()}{getFormulaSize()}}
@@ -462,16 +502,16 @@ True if formula is written correctly, false otherwise.
 
 
 
-Get size of the \doxylink{structFormula}{Formula} used in initialization. 
+Get size of the \mbox{\hyperlink{structFormula}{Formula}} used in initialization. 
 
 \begin{DoxyReturn}{Returns}
 Returns the formula size. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a28a56f9fdf01570a1aa41e4341121106}\label{classGlobalModelGenerator_a28a56f9fdf01570a1aa41e4341121106} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a28a56f9fdf01570a1aa41e4341121106}\label{classGlobalModelGenerator_a28a56f9fdf01570a1aa41e4341121106}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!getNextPath@{getNextPath}}
 \index{getNextPath@{getNextPath}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{getNextPath()}{getNextPath()}}
-{\footnotesize\ttfamily set$<$ tuple$<$ string, string $>$ $>$ \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::get\+Next\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily set$<$ tuple$<$ string, string $>$ $>$ $\ast$ Global\+Model\+Generator\+::get\+Next\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -480,11 +520,11 @@ Retrieves the next strategy one at a time (iteratively). Systematically tries al
 \begin{DoxyReturn}{Returns}
 Pointer to next strategy, or nullptr if all exhausted. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}\label{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6} 
+\mbox{\Hypertarget{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}\label{classGlobalModelGenerator_af8a60f8b1efcd9eb7615c6ed458d81e6}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!initModel@{initModel}}
 \index{initModel@{initModel}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{initModel()}{initModel()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} Global\+Model\+Generator\+::init\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} \texorpdfstring{$\ast$}{*}}]{local\+Models,  }\item[{\mbox{\hyperlink{structFormula}{Formula}} \texorpdfstring{$\ast$}{*}}]{formula }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ Global\+Model\+Generator\+::init\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$}]{local\+Models,  }\item[{\mbox{\hyperlink{structFormula}{Formula}} $\ast$}]{formula }\end{DoxyParamCaption})}
 
 
 
@@ -492,29 +532,190 @@ Initializes a global model from local models and a formula.
 
 
 \begin{DoxyParams}{Parameters}
-{\em local\+Models} & Pointer to \doxylink{structLocalModels}{Local\+Models} that will construct a global model. \\
+{\em local\+Models} & Pointer to \mbox{\hyperlink{structLocalModels}{Local\+Models}} that will construct a global model. \\
 \hline
-{\em formula} & Pointer to a \doxylink{structFormula}{Formula} to include into the model. \\
+{\em formula} & Pointer to a \mbox{\hyperlink{structFormula}{Formula}} to include into the model. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Returns a pointer to initial state of the global model. 
 \end{DoxyReturn}
-\Hypertarget{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}\label{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f} 
+\mbox{\Hypertarget{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}\label{classGlobalModelGenerator_a17ea8526fe4458edb6781d9171612f2f}} 
 \index{GlobalModelGenerator@{GlobalModelGenerator}!initStrategy@{initStrategy}}
 \index{initStrategy@{initStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
 \doxysubsubsection{\texorpdfstring{initStrategy()}{initStrategy()}}
-{\footnotesize\ttfamily void Global\+Model\+Generator\+::init\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} \texorpdfstring{$\ast$}{*}}]{strat }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::init\+Strategy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} $\ast$}]{strat }\end{DoxyParamCaption})}
 
 
 
-Initiates the strategy with a given \doxylink{classStrategyCollection}{Strategy\+Collection}. 
+Initiates the strategy with a given \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em strat} & \doxylink{classStrategyCollection}{Strategy\+Collection} to initialize the strategy. \\
+{\em strat} & \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}} to initialize the strategy. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}\label{classGlobalModelGenerator_ae5ef72e33e6e912efc25690a62a3c58e}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!markFormulaAsIncorrect@{markFormulaAsIncorrect}}
+\index{markFormulaAsIncorrect@{markFormulaAsIncorrect}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{markFormulaAsIncorrect()}{markFormulaAsIncorrect()}}
+{\footnotesize\ttfamily void Global\+Model\+Generator\+::mark\+Formula\+As\+Incorrect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets formula to an incorrectly written state. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classGlobalModelGenerator_a9d62533c8788dbc9786648a124827d81}\label{classGlobalModelGenerator_a9d62533c8788dbc9786648a124827d81}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!actionCounts@{actionCounts}}
+\index{actionCounts@{actionCounts}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{actionCounts}{actionCounts}}
+{\footnotesize\ttfamily map$<$string, size\+\_\+t$>$ Global\+Model\+Generator\+::action\+Counts\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}\label{classGlobalModelGenerator_a62eeb7858cc74c5527f9af1f8a0f27c8}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!addedStates@{addedStates}}
+\index{addedStates@{addedStates}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{addedStates}{addedStates}}
+{\footnotesize\ttfamily unordered\+\_\+set$<$\mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$$>$ Global\+Model\+Generator\+::added\+States\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+States that were added to a stack of states. Used for reductions. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a4547365e456449e61e08cbd6e18791d0}\label{classGlobalModelGenerator_a4547365e456449e61e08cbd6e18791d0}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!agentIndex@{agentIndex}}
+\index{agentIndex@{agentIndex}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{agentIndex}{agentIndex}}
+{\footnotesize\ttfamily map$<$\mbox{\hyperlink{classAgent}{Agent}}$\ast$,size\+\_\+t$>$ Global\+Model\+Generator\+::agent\+Index}
+
+
+
+auxiliary variable mapping \mbox{\hyperlink{classAgent}{Agent}} pointer to its index (replace size\+\_\+t with if needed later) 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}\label{classGlobalModelGenerator_ac23fee3811f6f55b08d9a6a959629f06}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!candidateStateDepths@{candidateStateDepths}}
+\index{candidateStateDepths@{candidateStateDepths}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{candidateStateDepths}{candidateStateDepths}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$\mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$, unordered\+\_\+set$<$int$>$ $>$ Global\+Model\+Generator\+::candidate\+State\+Depths\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Lookup map containing global states and the depths that the global state is contained in. Used for reductions. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_af5ae6f95e29faa6aa1188038492db803}\label{classGlobalModelGenerator_af5ae6f95e29faa6aa1188038492db803}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!choiceIndices@{choiceIndices}}
+\index{choiceIndices@{choiceIndices}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{choiceIndices}{choiceIndices}}
+{\footnotesize\ttfamily map$<$string, size\+\_\+t$>$ Global\+Model\+Generator\+::choice\+Indices\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a8beb3b7580ada844976ecc61bd945e7f}\label{classGlobalModelGenerator_a8beb3b7580ada844976ecc61bd945e7f}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!coalitionTransitions@{coalitionTransitions}}
+\index{coalitionTransitions@{coalitionTransitions}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{coalitionTransitions}{coalitionTransitions}}
+{\footnotesize\ttfamily map$<$string, map$<$string, set$<$\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$$>$ $>$ $>$ Global\+Model\+Generator\+::coalition\+Transitions\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}\label{classGlobalModelGenerator_ad6fc1d31bf0c8d558bac06cb0a835271}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!correctModel@{correctModel}}
+\index{correctModel@{correctModel}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{correctModel}{correctModel}}
+{\footnotesize\ttfamily bool Global\+Model\+Generator\+::correct\+Model\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Flag holding info if model is actually correct. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a3ce7a6b2924448afe5503c699ac58f91}\label{classGlobalModelGenerator_a3ce7a6b2924448afe5503c699ac58f91}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!currentStrategy@{currentStrategy}}
+\index{currentStrategy@{currentStrategy}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{currentStrategy}{currentStrategy}}
+{\footnotesize\ttfamily set$<$tuple$<$string, string$>$ $>$ Global\+Model\+Generator\+::current\+Strategy\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d}\label{classGlobalModelGenerator_af800f446f14a7de7350dc7c3b980872d}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!formula@{formula}}
+\index{formula@{formula}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{formula}{formula}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structFormula}{Formula}}$\ast$ Global\+Model\+Generator\+::formula\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{structFormula}{Formula}} used in init\+Model. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}\label{classGlobalModelGenerator_a714b963d4b205add73e1bef642ff8477}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!globalModel@{globalModel}}
+\index{globalModel@{globalModel}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{globalModel}{globalModel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalModel}{Global\+Model}}$\ast$ Global\+Model\+Generator\+::global\+Model\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{structGlobalModel}{Global\+Model}} created in init\+Model. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}\label{classGlobalModelGenerator_afc94fb1676bdd514e831a448946eb301}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!globalModelCandidates@{globalModelCandidates}}
+\index{globalModelCandidates@{globalModelCandidates}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{globalModelCandidates}{globalModelCandidates}}
+{\footnotesize\ttfamily stack$<$\mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$$>$ Global\+Model\+Generator\+::global\+Model\+Candidates\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Candidate states to be used in reductions. Used for reductions. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a0349c579912afc45e958776118103086}\label{classGlobalModelGenerator_a0349c579912afc45e958776118103086}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!localModels@{localModels}}
+\index{localModels@{localModels}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{localModels}{localModels}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structLocalModels}{Local\+Models}}$\ast$ Global\+Model\+Generator\+::local\+Models\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{structLocalModels}{Local\+Models}} used in init\+Model. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a4f4e0f5421191040415a9e2acec9b75a}\label{classGlobalModelGenerator_a4f4e0f5421191040415a9e2acec9b75a}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!opponentsTransitions@{opponentsTransitions}}
+\index{opponentsTransitions@{opponentsTransitions}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{opponentsTransitions}{opponentsTransitions}}
+{\footnotesize\ttfamily map$<$string, map$<$string, set$<$\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$$>$ $>$ $>$ Global\+Model\+Generator\+::opponents\+Transitions\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}\label{classGlobalModelGenerator_acbf190d7646a2f3e7f490513b3ce1d02}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!stateDepths@{stateDepths}}
+\index{stateDepths@{stateDepths}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{stateDepths}{stateDepths}}
+{\footnotesize\ttfamily stack$<$int$>$ Global\+Model\+Generator\+::state\+Depths\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Saved depths of states added to states\+To\+Expand. Used for reductions. 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_ae91e19594f521425721566f3fb471cc8}\label{classGlobalModelGenerator_ae91e19594f521425721566f3fb471cc8}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!stateHashMapCache@{stateHashMapCache}}
+\index{stateHashMapCache@{stateHashMapCache}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{stateHashMapCache}{stateHashMapCache}}
+{\footnotesize\ttfamily unordered\+\_\+map$<$string, \mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$$>$ Global\+Model\+Generator\+::state\+Hash\+Map\+Cache\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_abc77ca7492f68935db695c3d13e98eb6}\label{classGlobalModelGenerator_abc77ca7492f68935db695c3d13e98eb6}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!strategiesExhausted@{strategiesExhausted}}
+\index{strategiesExhausted@{strategiesExhausted}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{strategiesExhausted}{strategiesExhausted}}
+{\footnotesize\ttfamily bool Global\+Model\+Generator\+::strategies\+Exhausted = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}\label{classGlobalModelGenerator_a40d66cf0a457a8cb8cd4f8eccdbcac0c}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!strategyCollection@{strategyCollection}}
+\index{strategyCollection@{strategyCollection}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{strategyCollection}{strategyCollection}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classStrategyCollection}{Strategy\+Collection}}$\ast$ Global\+Model\+Generator\+::strategy\+Collection\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Strategy to check during verification (if any) 
+
+\mbox{\Hypertarget{classGlobalModelGenerator_a29932bfa082db663f228cf089ec68b09}\label{classGlobalModelGenerator_a29932bfa082db663f228cf089ec68b09}} 
+\index{GlobalModelGenerator@{GlobalModelGenerator}!strategyGenerationInit@{strategyGenerationInit}}
+\index{strategyGenerationInit@{strategyGenerationInit}!GlobalModelGenerator@{GlobalModelGenerator}}
+\doxysubsubsection{\texorpdfstring{strategyGenerationInit}{strategyGenerationInit}}
+{\footnotesize\ttfamily bool Global\+Model\+Generator\+::strategy\+Generation\+Init = false\hspace{0.3cm}{\ttfamily [protected]}}
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

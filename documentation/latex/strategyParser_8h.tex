@@ -1,0 +1,214 @@
+\hypertarget{strategyParser_8h}{}\doxysection{strategy\+Parser.\+h File Reference}
+\label{strategyParser_8h}\index{strategyParser.h@{strategyParser.h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{strategyParser_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{strategyParser_8h_a7faab36c2e3962e32424b0a3462955a4}{STRATDEBUG}}~0
+\item 
+\#define \mbox{\hyperlink{strategyParser_8h_a17c38ffb7d35c7480e81bdcaee249000}{STRATTOKENTYPE}}
+\item 
+\#define \mbox{\hyperlink{strategyParser_8h_a777792cf35e0c51f65870e9633a0e5b9}{STRATSTYPE\+\_\+\+IS\+\_\+\+TRIVIAL}}~1
+\item 
+\#define \mbox{\hyperlink{strategyParser_8h_afbeeded38a73e7d26b6e406fe8fefa73}{STRATSTYPE\+\_\+\+IS\+\_\+\+DECLARED}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5}{strattokentype}} \mbox{\hyperlink{strategyParser_8h_af53fa4c10f84c3b8e45774dcb660269a}{strattoken\+\_\+kind\+\_\+t}}
+\item 
+typedef union \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}} \mbox{\hyperlink{strategyParser_8h_aef8f00a0770bb7921ee574ca7ff68bc2}{STRATSTYPE}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5}{strattokentype}} \{ \newline
+\mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a6a7773cf9e3f0afa4775f6812cdba6d6}{STRATEMPTY}} = -\/2
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a130b252c1e1011fa97e2745a358fde0a}{STRATEOF}} = 0
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a5d4062d70ec04e3f862287b98eb105d6}{STRATerror}} = 256
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a62f7a5fadaf3c91a4707b042fec67ce4}{STRATUNDEF}} = 257
+, \newline
+\mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ab3784d74bcdf1b563834eb799eb35980}{T\+\_\+\+TO}} = 258
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5abfcd8d771490f5e44b29e69cad5bf720}{T\+\_\+\+ASSIGN}} = 259
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aee13d53546c9358e6b15a455f1c81fb6}{T\+\_\+\+OR}} = 260
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a09d3f67b151bc1e002a78de682fc1c8b}{T\+\_\+\+AND}} = 261
+, \newline
+\mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ab7d851f556edd050fb517b60fd31a1ad}{T\+\_\+\+EQ}} = 262
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aadc6db413ddbbde318f43f7117bee5b6}{T\+\_\+\+NE}} = 263
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ac869f90f0fc081ae0e4a1c7746c11f3d}{T\+\_\+\+GT}} = 264
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a66a427caab1c1fa0e9799929f87785df}{T\+\_\+\+GE}} = 265
+, \newline
+\mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a9e53bc57aabd3d3baa91aed85cb9f0fc}{T\+\_\+\+LT}} = 266
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aa2fbee07f3776bb841fe1ac13629eb9d}{T\+\_\+\+LE}} = 267
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a368ba65e0bf0f76505c831f6516d17fc}{T\+\_\+\+NUM}} = 268
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a29f3441cd4c0c6ee4e5473280537bb50}{T\+\_\+\+SHARED}} = 269
+, \newline
+\mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5afa49937803703ecf8a7c66d2457041d4}{T\+\_\+\+FLOAT}} = 270
+, \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a6388740222806f973e6c27e4f1afe0be}{T\+\_\+\+IDENT}} = 271
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{strategyParser_8h_a8034e0308c2b9f987490065c8dc8caac}{stratparse}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}} \mbox{\hyperlink{strategyParser_8h_ab3d4b80553cd858259e2115ea83d689b}{stratlval}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{strategyParser_8h_a7faab36c2e3962e32424b0a3462955a4}\label{strategyParser_8h_a7faab36c2e3962e32424b0a3462955a4}} 
+\index{strategyParser.h@{strategyParser.h}!STRATDEBUG@{STRATDEBUG}}
+\index{STRATDEBUG@{STRATDEBUG}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{STRATDEBUG}{STRATDEBUG}}
+{\footnotesize\ttfamily \#define STRATDEBUG~0}
+
+\mbox{\Hypertarget{strategyParser_8h_afbeeded38a73e7d26b6e406fe8fefa73}\label{strategyParser_8h_afbeeded38a73e7d26b6e406fe8fefa73}} 
+\index{strategyParser.h@{strategyParser.h}!STRATSTYPE\_IS\_DECLARED@{STRATSTYPE\_IS\_DECLARED}}
+\index{STRATSTYPE\_IS\_DECLARED@{STRATSTYPE\_IS\_DECLARED}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{STRATSTYPE\_IS\_DECLARED}{STRATSTYPE\_IS\_DECLARED}}
+{\footnotesize\ttfamily \#define STRATSTYPE\+\_\+\+IS\+\_\+\+DECLARED~1}
+
+\mbox{\Hypertarget{strategyParser_8h_a777792cf35e0c51f65870e9633a0e5b9}\label{strategyParser_8h_a777792cf35e0c51f65870e9633a0e5b9}} 
+\index{strategyParser.h@{strategyParser.h}!STRATSTYPE\_IS\_TRIVIAL@{STRATSTYPE\_IS\_TRIVIAL}}
+\index{STRATSTYPE\_IS\_TRIVIAL@{STRATSTYPE\_IS\_TRIVIAL}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{STRATSTYPE\_IS\_TRIVIAL}{STRATSTYPE\_IS\_TRIVIAL}}
+{\footnotesize\ttfamily \#define STRATSTYPE\+\_\+\+IS\+\_\+\+TRIVIAL~1}
+
+\mbox{\Hypertarget{strategyParser_8h_a17c38ffb7d35c7480e81bdcaee249000}\label{strategyParser_8h_a17c38ffb7d35c7480e81bdcaee249000}} 
+\index{strategyParser.h@{strategyParser.h}!STRATTOKENTYPE@{STRATTOKENTYPE}}
+\index{STRATTOKENTYPE@{STRATTOKENTYPE}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{STRATTOKENTYPE}{STRATTOKENTYPE}}
+{\footnotesize\ttfamily \#define STRATTOKENTYPE}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{strategyParser_8h_aef8f00a0770bb7921ee574ca7ff68bc2}\label{strategyParser_8h_aef8f00a0770bb7921ee574ca7ff68bc2}} 
+\index{strategyParser.h@{strategyParser.h}!STRATSTYPE@{STRATSTYPE}}
+\index{STRATSTYPE@{STRATSTYPE}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{STRATSTYPE}{STRATSTYPE}}
+{\footnotesize\ttfamily typedef union \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}} \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}}}
+
+\mbox{\Hypertarget{strategyParser_8h_af53fa4c10f84c3b8e45774dcb660269a}\label{strategyParser_8h_af53fa4c10f84c3b8e45774dcb660269a}} 
+\index{strategyParser.h@{strategyParser.h}!strattoken\_kind\_t@{strattoken\_kind\_t}}
+\index{strattoken\_kind\_t@{strattoken\_kind\_t}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{strattoken\_kind\_t}{strattoken\_kind\_t}}
+{\footnotesize\ttfamily typedef enum \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5}{strattokentype}} \mbox{\hyperlink{strategyParser_8h_af53fa4c10f84c3b8e45774dcb660269a}{strattoken\+\_\+kind\+\_\+t}}}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5}} 
+\index{strategyParser.h@{strategyParser.h}!strattokentype@{strattokentype}}
+\index{strattokentype@{strattokentype}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{strattokentype}{strattokentype}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5}{strattokentype}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STRATEMPTY@{STRATEMPTY}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!STRATEMPTY@{STRATEMPTY}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a6a7773cf9e3f0afa4775f6812cdba6d6}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a6a7773cf9e3f0afa4775f6812cdba6d6}} 
+STRATEMPTY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STRATEOF@{STRATEOF}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!STRATEOF@{STRATEOF}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a130b252c1e1011fa97e2745a358fde0a}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a130b252c1e1011fa97e2745a358fde0a}} 
+STRATEOF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STRATerror@{STRATerror}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!STRATerror@{STRATerror}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a5d4062d70ec04e3f862287b98eb105d6}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a5d4062d70ec04e3f862287b98eb105d6}} 
+STRATerror&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STRATUNDEF@{STRATUNDEF}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!STRATUNDEF@{STRATUNDEF}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a62f7a5fadaf3c91a4707b042fec67ce4}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a62f7a5fadaf3c91a4707b042fec67ce4}} 
+STRATUNDEF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_TO@{T\_TO}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_TO@{T\_TO}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ab3784d74bcdf1b563834eb799eb35980}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ab3784d74bcdf1b563834eb799eb35980}} 
+T\+\_\+\+TO&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_ASSIGN@{T\_ASSIGN}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_ASSIGN@{T\_ASSIGN}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5abfcd8d771490f5e44b29e69cad5bf720}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5abfcd8d771490f5e44b29e69cad5bf720}} 
+T\+\_\+\+ASSIGN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_OR@{T\_OR}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_OR@{T\_OR}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aee13d53546c9358e6b15a455f1c81fb6}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aee13d53546c9358e6b15a455f1c81fb6}} 
+T\+\_\+\+OR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_AND@{T\_AND}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_AND@{T\_AND}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a09d3f67b151bc1e002a78de682fc1c8b}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a09d3f67b151bc1e002a78de682fc1c8b}} 
+T\+\_\+\+AND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_EQ@{T\_EQ}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_EQ@{T\_EQ}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ab7d851f556edd050fb517b60fd31a1ad}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ab7d851f556edd050fb517b60fd31a1ad}} 
+T\+\_\+\+EQ&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_NE@{T\_NE}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_NE@{T\_NE}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aadc6db413ddbbde318f43f7117bee5b6}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aadc6db413ddbbde318f43f7117bee5b6}} 
+T\+\_\+\+NE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_GT@{T\_GT}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_GT@{T\_GT}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ac869f90f0fc081ae0e4a1c7746c11f3d}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5ac869f90f0fc081ae0e4a1c7746c11f3d}} 
+T\+\_\+\+GT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_GE@{T\_GE}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_GE@{T\_GE}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a66a427caab1c1fa0e9799929f87785df}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a66a427caab1c1fa0e9799929f87785df}} 
+T\+\_\+\+GE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_LT@{T\_LT}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_LT@{T\_LT}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a9e53bc57aabd3d3baa91aed85cb9f0fc}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a9e53bc57aabd3d3baa91aed85cb9f0fc}} 
+T\+\_\+\+LT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_LE@{T\_LE}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_LE@{T\_LE}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aa2fbee07f3776bb841fe1ac13629eb9d}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5aa2fbee07f3776bb841fe1ac13629eb9d}} 
+T\+\_\+\+LE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_NUM@{T\_NUM}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_NUM@{T\_NUM}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a368ba65e0bf0f76505c831f6516d17fc}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a368ba65e0bf0f76505c831f6516d17fc}} 
+T\+\_\+\+NUM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_SHARED@{T\_SHARED}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_SHARED@{T\_SHARED}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a29f3441cd4c0c6ee4e5473280537bb50}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a29f3441cd4c0c6ee4e5473280537bb50}} 
+T\+\_\+\+SHARED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_FLOAT@{T\_FLOAT}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_FLOAT@{T\_FLOAT}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5afa49937803703ecf8a7c66d2457041d4}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5afa49937803703ecf8a7c66d2457041d4}} 
+T\+\_\+\+FLOAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{T\_IDENT@{T\_IDENT}!strategyParser.h@{strategyParser.h}}\index{strategyParser.h@{strategyParser.h}!T\_IDENT@{T\_IDENT}}}\mbox{\Hypertarget{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a6388740222806f973e6c27e4f1afe0be}\label{strategyParser_8h_aae70717d2c80a4c84a0817ff4dc912b5a6388740222806f973e6c27e4f1afe0be}} 
+T\+\_\+\+IDENT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{strategyParser_8h_a8034e0308c2b9f987490065c8dc8caac}\label{strategyParser_8h_a8034e0308c2b9f987490065c8dc8caac}} 
+\index{strategyParser.h@{strategyParser.h}!stratparse@{stratparse}}
+\index{stratparse@{stratparse}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{stratparse()}{stratparse()}}
+{\footnotesize\ttfamily int stratparse (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{strategyParser_8h_ab3d4b80553cd858259e2115ea83d689b}\label{strategyParser_8h_ab3d4b80553cd858259e2115ea83d689b}} 
+\index{strategyParser.h@{strategyParser.h}!stratlval@{stratlval}}
+\index{stratlval@{stratlval}!strategyParser.h@{strategyParser.h}}
+\doxysubsubsection{\texorpdfstring{stratlval}{stratlval}}
+{\footnotesize\ttfamily \mbox{\hyperlink{unionSTRATSTYPE}{STRATSTYPE}} stratlval\hspace{0.3cm}{\ttfamily [extern]}}
+

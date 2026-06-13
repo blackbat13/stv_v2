@@ -1,12 +1,19 @@
 var searchData=
 [
-  ['patternname_0',['patternName',['../classTransitionTemplate.html#ac3fc56220e83b1b8f5e1661b3b5d5ab0',1,'TransitionTemplate']]],
-  ['persistent_1',['persistent',['../structVar.html#aa32055d36c033ef3c9961aed76cb85d6',1,'Var']]],
-  ['preimage_2',['preimage',['../structGlobalState.html#aa207d612b58c4de8f7744f064db66f5b',1,'GlobalState']]],
-  ['prev_3',['prev',['../structHistoryEntry.html#aa07d62eba982b1671b3abcbf0ce9ba9c',1,'HistoryEntry']]],
-  ['previousprobabilityanswervalues_4',['previousProbabilityAnswerValues',['../structDecisionEntry.html#ac6f936041ae2f0cf5509f4e6fc5e9588',1,'DecisionEntry']]],
-  ['previousprobabilityentrytype_5',['previousProbabilityEntryType',['../structDecisionEntry.html#a29cebc4efda089c264679103e705f26c',1,'DecisionEntry']]],
-  ['prevstatus_6',['prevstatus',['../structHistoryEntry.html#a99e34ecadba76fd7a1d47e8e47891df5',1,'HistoryEntry::prevStatus'],['../structDecisionEntry.html#a185af6663a4f86b559f33c0c198f1e8e',1,'DecisionEntry::prevStatus']]],
-  ['probability_7',['probability',['../structGlobalState.html#a3961cf4168dc461fed40a80b9cfed059',1,'GlobalState::probability'],['../structLocalTransition.html#a3ab704d30285de8da5f791033702fa9d',1,'LocalTransition::probability'],['../classTransitionTemplate.html#a255bd583df5d64c84e137596df4d1e7f',1,'TransitionTemplate::probability']]],
-  ['probabilityloop_8',['probabilityLoop',['../structGlobalState.html#ad1341cdf6488ba06e2a7cefc9d373275',1,'GlobalState']]]
+  ['p_1266',['p',['../structFormula.html#a05d2d56db6367f63f81a8af9494d666a',1,'Formula']]],
+  ['patternname_1267',['patternName',['../classTransitionTemplate.html#ac3fc56220e83b1b8f5e1661b3b5d5ab0',1,'TransitionTemplate']]],
+  ['persistent_1268',['persistent',['../structVar.html#aa32055d36c033ef3c9961aed76cb85d6',1,'Var']]],
+  ['preimage_1269',['preimage',['../structGlobalState.html#aa207d612b58c4de8f7744f064db66f5b',1,'GlobalState']]],
+  ['prev_1270',['prev',['../structHistoryEntry.html#aa07d62eba982b1671b3abcbf0ce9ba9c',1,'HistoryEntry']]],
+  ['previousprobabilityanswervalues_1271',['previousProbabilityAnswerValues',['../structDecisionEntry.html#ac6f936041ae2f0cf5509f4e6fc5e9588',1,'DecisionEntry']]],
+  ['previousprobabilityentrytype_1272',['previousProbabilityEntryType',['../structDecisionEntry.html#a29cebc4efda089c264679103e705f26c',1,'DecisionEntry']]],
+  ['prevstatus_1273',['prevStatus',['../structHistoryEntry.html#a99e34ecadba76fd7a1d47e8e47891df5',1,'HistoryEntry::prevStatus()'],['../structDecisionEntry.html#a185af6663a4f86b559f33c0c198f1e8e',1,'DecisionEntry::prevStatus()']]],
+  ['prob_1274',['prob',['../unionYYSTYPE.html#a3ba7b27f50e882a69043cd0f9ea04ab3',1,'YYSTYPE']]],
+  ['probability_1275',['probability',['../structLocalTransition.html#a3ab704d30285de8da5f791033702fa9d',1,'LocalTransition::probability()'],['../structFormula.html#a4b35ee574928fae5f3ec6e39058372bc',1,'Formula::probability()'],['../structFormulaTemplate.html#a61565d0b9a2c8a5effe4419af03cdc6d',1,'FormulaTemplate::probability()'],['../classTransitionTemplate.html#a255bd583df5d64c84e137596df4d1e7f',1,'TransitionTemplate::probability()'],['../structGlobalState.html#a3961cf4168dc461fed40a80b9cfed059',1,'GlobalState::probability()'],['../structCfg.html#a7f0999a0fc9892b55ada95f1c789c774',1,'Cfg::probability()']]],
+  ['probabilityfalse_1276',['probabilityFalse',['../structProbabilityTrueFalse.html#ab1b54194a934037505c8e5eb859040f7',1,'ProbabilityTrueFalse']]],
+  ['probabilityloop_1277',['probabilityLoop',['../structGlobalState.html#ad1341cdf6488ba06e2a7cefc9d373275',1,'GlobalState']]],
+  ['probabilityresult_1278',['probabilityResult',['../structGlobalState.html#a086300b0dfa09dcfbb665ecc421cd902',1,'GlobalState::probabilityResult()'],['../structResult.html#a80a94911f7fbd2ab9aca7de8f9f65b05',1,'Result::probabilityResult()']]],
+  ['probabilitysign_1279',['probabilitySign',['../structFormulaTemplate.html#af9341ea3c7db8a981052948e47771d12',1,'FormulaTemplate::probabilitySign()'],['../structFormula.html#ac2464f4a0af2fc78c3ba1359cf1d8fc1',1,'Formula::probabilitySign()']]],
+  ['probabilitytrue_1280',['probabilityTrue',['../structProbabilityTrueFalse.html#a9fb8c8c237da58c9dad4149f136ebec9',1,'ProbabilityTrueFalse']]],
+  ['processed_1281',['processed',['../structStateVerificationInfo.html#aaecc2241bbc8df075168aadaef8bf8a2',1,'StateVerificationInfo']]]
 ];

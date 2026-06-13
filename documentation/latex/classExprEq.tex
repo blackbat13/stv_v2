@@ -1,34 +1,54 @@
-\doxysection{Expr\+Eq Class Reference}
-\hypertarget{classExprEq}{}\label{classExprEq}\index{ExprEq@{ExprEq}}
+\hypertarget{classExprEq}{}\doxysection{Expr\+Eq Class Reference}
+\label{classExprEq}\index{ExprEq@{ExprEq}}
 
 
-Node for "{}=="{} operator.  
+Node for \char`\"{}==\char`\"{} operator.  
 
 
 
 
 {\ttfamily \#include $<$expressions.\+hpp$>$}
 
-\doxysubsubsection*{Public Member Functions}
+
+
+Inheritance diagram for Expr\+Eq\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=149pt]{classExprEq__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Expr\+Eq\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=149pt]{classExprEq__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classExprEq_afec2d83d8c16c890ebd52af89b46b90b}{Expr\+Eq}} (\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}\+\_\+larg, \mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}\+\_\+rarg)
+\mbox{\hyperlink{classExprEq_afec2d83d8c16c890ebd52af89b46b90b}{Expr\+Eq}} (\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+larg, \mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$\+\_\+rarg)
 \begin{DoxyCompactList}\small\item\em Equals expression constructor. \end{DoxyCompactList}\item 
-virtual int \mbox{\hyperlink{classExprEq_adb2a1291e71379f0cea58c9d5fec3248}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \texorpdfstring{$\ast$}{*}generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}global\+State)
+virtual int \mbox{\hyperlink{classExprEq_adb2a1291e71379f0cea58c9d5fec3248}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
 \begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classExprEq_a64362fb0c713a9186b339f2984656b3d}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Node for "{}=="{} operator. 
+Node for \char`\"{}==\char`\"{} operator. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\Hypertarget{classExprEq_afec2d83d8c16c890ebd52af89b46b90b}\label{classExprEq_afec2d83d8c16c890ebd52af89b46b90b} 
+\mbox{\Hypertarget{classExprEq_afec2d83d8c16c890ebd52af89b46b90b}\label{classExprEq_afec2d83d8c16c890ebd52af89b46b90b}} 
 \index{ExprEq@{ExprEq}!ExprEq@{ExprEq}}
 \index{ExprEq@{ExprEq}!ExprEq@{ExprEq}}
 \doxysubsubsection{\texorpdfstring{ExprEq()}{ExprEq()}}
-{\footnotesize\ttfamily Expr\+Eq\+::\+Expr\+Eq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}}]{\+\_\+larg,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} \texorpdfstring{$\ast$}{*}}]{\+\_\+rarg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Expr\+Eq\+::\+Expr\+Eq (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+larg,  }\item[{\mbox{\hyperlink{classExprNode}{Expr\+Node}} $\ast$}]{\+\_\+rarg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -44,7 +64,7 @@ Equals expression constructor.
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classExprEq_a64362fb0c713a9186b339f2984656b3d}\label{classExprEq_a64362fb0c713a9186b339f2984656b3d} 
+\mbox{\Hypertarget{classExprEq_a64362fb0c713a9186b339f2984656b3d}\label{classExprEq_a64362fb0c713a9186b339f2984656b3d}} 
 \index{ExprEq@{ExprEq}!eval@{eval}}
 \index{eval@{eval}!ExprEq@{ExprEq}}
 \doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
@@ -52,13 +72,13 @@ Equals expression constructor.
 
 
 
-Implements \mbox{\hyperlink{classExprNode}{Expr\+Node}}.
+Implements \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
 
-\Hypertarget{classExprEq_adb2a1291e71379f0cea58c9d5fec3248}\label{classExprEq_adb2a1291e71379f0cea58c9d5fec3248} 
+\mbox{\Hypertarget{classExprEq_adb2a1291e71379f0cea58c9d5fec3248}\label{classExprEq_adb2a1291e71379f0cea58c9d5fec3248}} 
 \index{ExprEq@{ExprEq}!eval@{eval}}
 \index{eval@{eval}!ExprEq@{ExprEq}}
 \doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily int Expr\+Eq\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \texorpdfstring{$\ast$}{*}}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily int Expr\+Eq\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 
 

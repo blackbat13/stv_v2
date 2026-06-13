@@ -25,15 +25,15 @@
 var NAVTREE =
 [
   [ "stv_v2", "index.html", [
-    [ "STV2 - StraTegic Verifier version 2", "md__2home_2repos_2stv__v2_2README.html", [
-      [ "Usage", "md__2home_2repos_2stv__v2_2README.html#autotoc_md1", null ],
-      [ "Tests", "md__2home_2repos_2stv__v2_2README.html#autotoc_md2", null ],
-      [ "Performance estimation", "md__2home_2repos_2stv__v2_2README.html#autotoc_md3", null ],
-      [ "Specification", "md__2home_2repos_2stv__v2_2README.html#autotoc_md4", null ],
-      [ "Examples and templates", "md__2home_2repos_2stv__v2_2README.html#autotoc_md5", null ],
-      [ "Misc", "md__2home_2repos_2stv__v2_2README.html#autotoc_md6", null ],
-      [ "Web interface", "md__2home_2repos_2stv__v2_2README.html#autotoc_md7", null ],
-      [ "Credits", "md__2home_2repos_2stv__v2_2README.html#autotoc_md8", null ]
+    [ "STV2 - StraTegic Verifier version 2", "md__home_mathis_repositories_stv_v2_README.html", [
+      [ "Usage", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md1", null ],
+      [ "Tests", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md2", null ],
+      [ "Performance estimation", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md3", null ],
+      [ "Specification", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md4", null ],
+      [ "Examples and templates", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md5", null ],
+      [ "Misc", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md6", null ],
+      [ "Web interface", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md7", null ],
+      [ "Credits", "md__home_mathis_repositories_stv_v2_README.html#autotoc_md8", null ]
     ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -41,18 +41,21 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
         [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ]
+        [ "Enumerator", "globals_eval.html", null ],
+        [ "Macros", "globals_defs.html", "globals_defs" ]
       ] ]
     ] ]
   ] ]
@@ -61,8 +64,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "Agent_8cpp.html",
-"classModelParser.html#a2a89f7b51de54422c1873d24d16eb17a",
-"structLocalTransition.html"
+"classExprNot.html#af28d7286ff72cb05357a65429a362285",
+"functions_func_f.html",
+"parser_8c.html#a20a769e9b8f129abf35d03d3904ec0e5aeb6659dcb08439b5d0e9b64773faf088",
+"strategyNodes_8cc.html",
+"strategyScanner_8c.html#a818c67c94b8747f80b0254cad47cce14",
+"structVar.html#a4f203af1d57ced7e80b3c02e2120e7c4"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

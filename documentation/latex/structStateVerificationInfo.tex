@@ -1,5 +1,5 @@
-\doxysection{State\+Verification\+Info Struct Reference}
-\hypertarget{structStateVerificationInfo}{}\label{structStateVerificationInfo}\index{StateVerificationInfo@{StateVerificationInfo}}
+\hypertarget{structStateVerificationInfo}{}\doxysection{State\+Verification\+Info Struct Reference}
+\label{structStateVerificationInfo}\index{StateVerificationInfo@{StateVerificationInfo}}
 
 
 Handles all single state verification information during probabilistic verification.  
@@ -9,67 +9,170 @@ Handles all single state verification information during probabilistic verificat
 
 {\ttfamily \#include $<$Types\+Dependency.\+hpp$>$}
 
-\doxysubsubsection*{Public Attributes}
+
+
+Collaboration diagram for State\+Verification\+Info\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structStateVerificationInfo__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2}\label{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2} 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} {\bfseries global\+State} = nullptr
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2}{global\+State}} = nullptr
 \item 
-\Hypertarget{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a}\label{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a} 
-\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} \texorpdfstring{$\ast$}{*} {\bfseries from\+State} = nullptr
+\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$ \mbox{\hyperlink{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a}{from\+State}} = nullptr
 \item 
-\Hypertarget{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49}\label{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49} 
-queue$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries controlled\+Transitions\+Left\+To\+Process}
+queue$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49}{controlled\+Transitions\+Left\+To\+Process}}
 \item 
-\Hypertarget{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8}\label{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8} 
-queue$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries uncontrolled\+Transitions\+Left\+To\+Process}
+queue$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ \mbox{\hyperlink{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8}{uncontrolled\+Transitions\+Left\+To\+Process}}
 \item 
-\Hypertarget{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121}\label{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121} 
-map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} $>$ $>$ {\bfseries controlled\+Probabilistic\+Transitions\+Left\+To\+Process}
+map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $>$ \mbox{\hyperlink{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121}{controlled\+Probabilistic\+Transitions\+Left\+To\+Process}}
 \item 
-\Hypertarget{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629}\label{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629} 
-map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} $>$ $>$ {\bfseries uncontrolled\+Probabilistic\+Transitions\+Left\+To\+Process}
+map$<$ string, set$<$ \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ $>$ $>$ \mbox{\hyperlink{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629}{uncontrolled\+Probabilistic\+Transitions\+Left\+To\+Process}}
 \item 
-\Hypertarget{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4}\label{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4} 
-int {\bfseries depth} = 0
+int \mbox{\hyperlink{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4}{depth}} = 0
 \item 
-\Hypertarget{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2}\label{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2} 
-bool {\bfseries processed} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2}{processed}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc}\label{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc} 
-Verif\+Result {\bfseries verif\+Result} = Verif\+Result\+::\+NOT\+\_\+\+VERIFIED
+\mbox{\hyperlink{TypesDependency_8hpp_aa749f3f38fe65011cde5c039cf5a3e71}{Verif\+Result}} \mbox{\hyperlink{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc}{verif\+Result}} = \mbox{\hyperlink{TypesDependency_8hpp_aa749f3f38fe65011cde5c039cf5a3e71a7e17ca3ed06e094d62e6aedf2471b1f1}{Verif\+Result\+::\+NOT\+\_\+\+VERIFIED}}
 \item 
-\Hypertarget{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85}\label{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85} 
-bool {\bfseries controlled} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85}{controlled}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4}\label{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4} 
-bool {\bfseries uncontrolled} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4}{uncontrolled}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a}\label{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a} 
-bool {\bfseries has\+Controlled\+Probabilistic} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a}{has\+Controlled\+Probabilistic}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e}\label{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e} 
-bool {\bfseries has\+Uncontrolled\+Probabilistic} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e}{has\+Uncontrolled\+Probabilistic}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419}\label{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419} 
-bool {\bfseries has\+Valid\+Controlled\+Transition} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419}{has\+Valid\+Controlled\+Transition}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c}\label{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c} 
-bool {\bfseries has\+Valid\+Uncontrolled\+Transition} = true
+bool \mbox{\hyperlink{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c}{has\+Valid\+Uncontrolled\+Transition}} = true
 \item 
-\Hypertarget{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953}\label{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953} 
-bool {\bfseries is\+Controlled\+By\+Coalition} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953}{is\+Controlled\+By\+Coalition}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c}\label{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c} 
-bool {\bfseries got\+Through\+Preselected\+Transition} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c}{got\+Through\+Preselected\+Transition}} = false
 \item 
-\Hypertarget{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4}\label{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4} 
-bool {\bfseries got\+Response\+From\+Other\+State} = false
+bool \mbox{\hyperlink{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4}{got\+Response\+From\+Other\+State}} = false
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Handles all single state verification information during probabilistic verification. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85}\label{structStateVerificationInfo_ac1049374dff0fed99c38e56b5946ed85}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!controlled@{controlled}}
+\index{controlled@{controlled}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{controlled}{controlled}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::controlled = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121}\label{structStateVerificationInfo_aa5e4b85ff3b03453b468af59fdd8f121}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!controlledProbabilisticTransitionsLeftToProcess@{controlledProbabilisticTransitionsLeftToProcess}}
+\index{controlledProbabilisticTransitionsLeftToProcess@{controlledProbabilisticTransitionsLeftToProcess}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{controlledProbabilisticTransitionsLeftToProcess}{controlledProbabilisticTransitionsLeftToProcess}}
+{\footnotesize\ttfamily map$<$string, set$<$\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$$>$ $>$ State\+Verification\+Info\+::controlled\+Probabilistic\+Transitions\+Left\+To\+Process}
+
+\mbox{\Hypertarget{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49}\label{structStateVerificationInfo_ae8e18bfe64c40529174ed02ca441da49}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!controlledTransitionsLeftToProcess@{controlledTransitionsLeftToProcess}}
+\index{controlledTransitionsLeftToProcess@{controlledTransitionsLeftToProcess}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{controlledTransitionsLeftToProcess}{controlledTransitionsLeftToProcess}}
+{\footnotesize\ttfamily queue$<$\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$$>$ State\+Verification\+Info\+::controlled\+Transitions\+Left\+To\+Process}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4}\label{structStateVerificationInfo_a93d2216d7342275f472ae05b3065a4d4}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!depth@{depth}}
+\index{depth@{depth}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{depth}{depth}}
+{\footnotesize\ttfamily int State\+Verification\+Info\+::depth = 0}
+
+\mbox{\Hypertarget{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a}\label{structStateVerificationInfo_afb95b6761c4fd0403e9ac02ed83b766a}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!fromState@{fromState}}
+\index{fromState@{fromState}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{fromState}{fromState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}}$\ast$ State\+Verification\+Info\+::from\+State = nullptr}
+
+\mbox{\Hypertarget{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2}\label{structStateVerificationInfo_aecd6bdd9554a94a870447c11317758d2}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!globalState@{globalState}}
+\index{globalState@{globalState}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{globalState}{globalState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$ State\+Verification\+Info\+::global\+State = nullptr}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4}\label{structStateVerificationInfo_a71b26d8887c74a668192fff09110d6a4}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!gotResponseFromOtherState@{gotResponseFromOtherState}}
+\index{gotResponseFromOtherState@{gotResponseFromOtherState}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{gotResponseFromOtherState}{gotResponseFromOtherState}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::got\+Response\+From\+Other\+State = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c}\label{structStateVerificationInfo_a780cb9cb409c422389f1542441151f2c}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!gotThroughPreselectedTransition@{gotThroughPreselectedTransition}}
+\index{gotThroughPreselectedTransition@{gotThroughPreselectedTransition}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{gotThroughPreselectedTransition}{gotThroughPreselectedTransition}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::got\+Through\+Preselected\+Transition = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a}\label{structStateVerificationInfo_aad705a7ee4b2670c1d9c4b0ad059c85a}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!hasControlledProbabilistic@{hasControlledProbabilistic}}
+\index{hasControlledProbabilistic@{hasControlledProbabilistic}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{hasControlledProbabilistic}{hasControlledProbabilistic}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::has\+Controlled\+Probabilistic = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e}\label{structStateVerificationInfo_a4f67970e6584a0b7a7f46fdfd545669e}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!hasUncontrolledProbabilistic@{hasUncontrolledProbabilistic}}
+\index{hasUncontrolledProbabilistic@{hasUncontrolledProbabilistic}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{hasUncontrolledProbabilistic}{hasUncontrolledProbabilistic}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::has\+Uncontrolled\+Probabilistic = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419}\label{structStateVerificationInfo_aeb3c5636603f213bea4db1f77f1ea419}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!hasValidControlledTransition@{hasValidControlledTransition}}
+\index{hasValidControlledTransition@{hasValidControlledTransition}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{hasValidControlledTransition}{hasValidControlledTransition}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::has\+Valid\+Controlled\+Transition = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c}\label{structStateVerificationInfo_a101abbe7ac598da9ae4a98640a348e7c}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!hasValidUncontrolledTransition@{hasValidUncontrolledTransition}}
+\index{hasValidUncontrolledTransition@{hasValidUncontrolledTransition}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{hasValidUncontrolledTransition}{hasValidUncontrolledTransition}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::has\+Valid\+Uncontrolled\+Transition = true}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953}\label{structStateVerificationInfo_a8d7c52345be7fa8fdca10831f03db953}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!isControlledByCoalition@{isControlledByCoalition}}
+\index{isControlledByCoalition@{isControlledByCoalition}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{isControlledByCoalition}{isControlledByCoalition}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::is\+Controlled\+By\+Coalition = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2}\label{structStateVerificationInfo_aaecc2241bbc8df075168aadaef8bf8a2}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!processed@{processed}}
+\index{processed@{processed}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{processed}{processed}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::processed = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4}\label{structStateVerificationInfo_a47198d806f88c01e0f91ea4872702ae4}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!uncontrolled@{uncontrolled}}
+\index{uncontrolled@{uncontrolled}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{uncontrolled}{uncontrolled}}
+{\footnotesize\ttfamily bool State\+Verification\+Info\+::uncontrolled = false}
+
+\mbox{\Hypertarget{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629}\label{structStateVerificationInfo_a24c742ff3409178e25e40baafb867629}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!uncontrolledProbabilisticTransitionsLeftToProcess@{uncontrolledProbabilisticTransitionsLeftToProcess}}
+\index{uncontrolledProbabilisticTransitionsLeftToProcess@{uncontrolledProbabilisticTransitionsLeftToProcess}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{uncontrolledProbabilisticTransitionsLeftToProcess}{uncontrolledProbabilisticTransitionsLeftToProcess}}
+{\footnotesize\ttfamily map$<$string, set$<$\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$$>$ $>$ State\+Verification\+Info\+::uncontrolled\+Probabilistic\+Transitions\+Left\+To\+Process}
+
+\mbox{\Hypertarget{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8}\label{structStateVerificationInfo_ab06289b865ed4228ef0e9274054feaa8}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!uncontrolledTransitionsLeftToProcess@{uncontrolledTransitionsLeftToProcess}}
+\index{uncontrolledTransitionsLeftToProcess@{uncontrolledTransitionsLeftToProcess}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{uncontrolledTransitionsLeftToProcess}{uncontrolledTransitionsLeftToProcess}}
+{\footnotesize\ttfamily queue$<$\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$$>$ State\+Verification\+Info\+::uncontrolled\+Transitions\+Left\+To\+Process}
+
+\mbox{\Hypertarget{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc}\label{structStateVerificationInfo_ac51905db44c255dcf4c0d2653319f1dc}} 
+\index{StateVerificationInfo@{StateVerificationInfo}!verifResult@{verifResult}}
+\index{verifResult@{verifResult}!StateVerificationInfo@{StateVerificationInfo}}
+\doxysubsubsection{\texorpdfstring{verifResult}{verifResult}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TypesDependency_8hpp_aa749f3f38fe65011cde5c039cf5a3e71}{Verif\+Result}} State\+Verification\+Info\+::verif\+Result = \mbox{\hyperlink{TypesDependency_8hpp_aa749f3f38fe65011cde5c039cf5a3e71a7e17ca3ed06e094d62e6aedf2471b1f1}{Verif\+Result\+::\+NOT\+\_\+\+VERIFIED}}}
+
+
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
