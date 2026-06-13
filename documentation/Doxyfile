@@ -2785,5 +2785,5 @@ GENERATE_LEGEND        = YES
 # The default value is: YES.
 
 DOT_CLEANUP            = YES
-DOT_TRANSPARENT        = YES
+DOT_TRANSPARENT        = NO
 DOT_IMAGE_FORMAT       = svg
