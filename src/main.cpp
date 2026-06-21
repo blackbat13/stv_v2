@@ -2,6 +2,7 @@
 #include "Verification.hpp"
 #include "VerificationIterative.hpp"
 #include "ModelParser.hpp"
+#include "ModelSerializer.hpp"
 #include "StrategyParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
@@ -51,18 +52,28 @@ int main(int argc, char* argv[]) {
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
+    if (config.partial_reduction) {
+        cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
+        for (const auto& item : config.partial_reduction_args) {
+            cout << "Partial reduction variable: " << item << endl;
+        }
+
+        for (auto agent : localModels->agents) {
+            if (!config.partial_reduction_agent.empty() && agent->name != config.partial_reduction_agent) {
+                continue;
+            }
+            agent->partialReduceModel(config.partial_reduction_args);
+        }
+        if (config.serialize_model) {
+            ModelSerializer serializer;
+            serializer.print(localModels, formula);
+        }
+    }
+
+
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
-
-    if (config.partial_reduction) {
-        cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
-        for (auto item : config.partial_reduction_args) {
-            cout << "Partial reduction variable: " << item << endl;
-        }
-        generator->expandAllStates();
-        generator->partialReduction(config.partial_reduction_args);
-    }
     
     if (config.verify_strategy) {
         generator->initStrategy(strat);

@@ -44,6 +44,9 @@ CLI configuration overwrite:
 # --FIXPOINT                 enables fixpoint approximation
 # --NATURAL_STRATEGY         generate a natural strategy for the given model
 # --STRATEGY_FROM_FILE       set a strategy to the one given in a file
+# --PARTIAL_REDUCTION        select variables that should be reduced from the initial model
+# --PARTIAL_REDUCTION_AGENT  select agents for whom the reduction from --PARTIAL_REDUCTION should happen
+# --SERIALIZE_MODEL          convert the local models back into an input file
 ```
 
 ## Tests

@@ -34,8 +34,6 @@ public:
     vector<GlobalState*> expandStateAndReturn(GlobalState* state, bool returnAnyway = false);
     void expandAllStates(bool additionalProbSplit = false);
     void expandAndReduceAllStates();
-    void partialReduction(const vector<string>& variableNames);
-    void dissolveStatesWithIdenticalProjections();
     GlobalModel *getCurrentGlobalModel();
     Formula* getFormula();
     int getFormulaSize();

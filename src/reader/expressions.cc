@@ -241,3 +241,36 @@ float ProbMul::eval( GlobalModelGenerator *generator, GlobalState *globalState )
 float ProbDiv::eval( GlobalModelGenerator *generator, GlobalState *globalState ) {
    return larg->eval(generator, globalState) / rarg->eval(generator, globalState);
 }
+
+// ---- ExprNode::toString() implementations ----
+
+string ExprConst::toString() const { return to_string(val); }
+string ExprIdent::toString() const { return ident; }
+string ExprAdd::toString() const { return "(" + larg->toString() + " + " + rarg->toString() + ")"; }
+string ExprSub::toString() const { return "(" + larg->toString() + " - " + rarg->toString() + ")"; }
+string ExprMul::toString() const { return "(" + larg->toString() + " * " + rarg->toString() + ")"; }
+string ExprDiv::toString() const { return "(" + larg->toString() + " / " + rarg->toString() + ")"; }
+string ExprRem::toString() const { return "(" + larg->toString() + " % " + rarg->toString() + ")"; }
+string ExprAnd::toString() const { return "(" + larg->toString() + " && " + rarg->toString() + ")"; }
+string ExprOr::toString()  const { return "(" + larg->toString() + " || " + rarg->toString() + ")"; }
+string ExprNot::toString() const { return "!" + arg->toString(); }
+string ExprEq::toString()  const { return "(" + larg->toString() + " == " + rarg->toString() + ")"; }
+string ExprNe::toString()  const { return "(" + larg->toString() + " != " + rarg->toString() + ")"; }
+string ExprLt::toString()  const { return "(" + larg->toString() + " < "  + rarg->toString() + ")"; }
+string ExprLe::toString()  const { return "(" + larg->toString() + " <= " + rarg->toString() + ")"; }
+string ExprGt::toString()  const { return "(" + larg->toString() + " > "  + rarg->toString() + ")"; }
+string ExprGe::toString()  const { return "(" + larg->toString() + " >= " + rarg->toString() + ")"; }
+
+string ExprKnow::toString() const {
+   return "&K_" + agentName + "(" + arg->toString() + ")";
+}
+
+string ExprHart::toString() const {
+   string result = "&H_" + agentName + "[" + (le ? "<=" : ">=") + to_string(val) + "](";
+   for (size_t i = 0; i < arg->size(); ++i) {
+      if (i > 0) result += ", ";
+      result += "(" + (*arg)[i]->toString() + ")";
+   }
+   result += ")";
+   return result;
+}

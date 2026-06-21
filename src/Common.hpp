@@ -57,6 +57,7 @@ struct Cfg{
     bool partial_reduction = false;   ///< enable partial reduction (reduce only specified variables)
     std::vector<std::string> partial_reduction_args; ///< variable names for partial reduction
     std::string partial_reduction_agent; ///< agent name for partial reduction
+    bool serialize_model = false;          ///< serialize the model to a file (for debugging or analysis)
 };
 
 #endif 

@@ -287,6 +287,8 @@ void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default con
                 }
             } else if (arg == "-PARTIAL_REDUCTION_AGENT" || arg == "--PARTIAL_REDUCTION_AGENT") {
                 config.partial_reduction_agent = argv[++i];
+            } else if (arg == "-SERIALIZE_MODEL" || arg == "--SERIALIZE_MODEL") {
+                config.serialize_model = true;
             }
         }
     }

@@ -38,6 +38,11 @@ class Agent {
         // sprawdź, czy stan nie został już wygenerowany.
         
         LocalState* includesState(LocalState *state);
+
+        /// @brief Reduces this agent local model by forgetting selected variables
+        ///        and merging equivalent local states.
+        /// @param variableNames Variables to forget from local-state environments.
+        void partialReduceModel(const vector<string>& variableNames);
 };
 
 #endif // AGENT_H
