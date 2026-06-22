@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['ne_0',['NE',['../Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db',1,'Types.hpp']]],
-  ['none_1',['NONE',['../Types_8hpp.html#a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2',1,'Types.hpp']]],
-  ['normal_2',['NORMAL',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a50d1448013c6f17125caee18aa418af7',1,'Verification.hpp']]],
-  ['normal_5ftraversal_3',['NORMAL_TRAVERSAL',['../VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb',1,'VerificationIterative.hpp']]],
-  ['not_5fmodified_4',['NOT_MODIFIED',['../TypesDependency_8hpp.html#a014b4b1825e0cdd1e420331f51c073aaaf20295dca57082fa3849c8537ace8f3a',1,'TypesDependency.hpp']]]
+  ['mark_5fdecision_5fas_5finvalid_1405',['MARK_DECISION_AS_INVALID',['../TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4adb650cb695f3532292d73c01a8e87cae',1,'TypesDependency.hpp']]],
+  ['min_5fprobability_1406',['MIN_PROBABILITY',['../TypesDependency_8hpp.html#a3e5773d6efd4d487175ee990719009dfa6e6a986e0bb4e5a900e71fccf9642fdd',1,'TypesDependency.hpp']]]
 ];

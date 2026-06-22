@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['strategynodes_2ehpp_0',['strategyNodes.hpp',['../strategyNodes_8hpp.html',1,'']]],
-  ['strategyparser_2ecc_1',['StrategyParser.cc',['../StrategyParser_8cc.html',1,'']]],
-  ['strategyparser_2ehpp_2',['StrategyParser.hpp',['../StrategyParser_8hpp.html',1,'']]]
+  ['parser_2ec_930',['parser.c',['../parser_8c.html',1,'']]],
+  ['parser_2eh_931',['parser.h',['../parser_8h.html',1,'']]]
 ];

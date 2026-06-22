@@ -1,0 +1,5 @@
+<map id="ActionTemplate" name="ActionTemplate">
+<area shape="rect" id="node1" title="Represents a selected action." alt="" coords="23,160,171,237"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,64,83"/>
+<area shape="rect" id="node3" title=" " alt="" coords="89,5,231,83"/>
+</map>

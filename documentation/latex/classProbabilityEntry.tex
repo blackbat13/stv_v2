@@ -1,5 +1,5 @@
-\doxysection{Probability\+Entry Class Reference}
-\hypertarget{classProbabilityEntry}{}\label{classProbabilityEntry}\index{ProbabilityEntry@{ProbabilityEntry}}
+\hypertarget{classProbabilityEntry}{}\doxysection{Probability\+Entry Class Reference}
+\label{classProbabilityEntry}\index{ProbabilityEntry@{ProbabilityEntry}}
 
 
 Class for handling the probability operations during probability verification.  
@@ -9,49 +9,141 @@ Class for handling the probability operations during probability verification.
 
 {\ttfamily \#include $<$Types\+Dependency.\+hpp$>$}
 
-\doxysubsubsection*{Public Member Functions}
+
+
+Collaboration diagram for Probability\+Entry\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{classProbabilityEntry__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classProbabilityEntry_a46fd05fdf4c3c1ff54f987b6ba22da13}\label{classProbabilityEntry_a46fd05fdf4c3c1ff54f987b6ba22da13} 
-{\bfseries Probability\+Entry} (\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} mode)
+\mbox{\hyperlink{classProbabilityEntry_a59e45dd0714e8c53c54e1d8593991bb0}{Probability\+Entry}} ()
 \item 
-\Hypertarget{classProbabilityEntry_a8d2a35b1c4a911dc2e1d14d6adcd837e}\label{classProbabilityEntry_a8d2a35b1c4a911dc2e1d14d6adcd837e} 
-void {\bfseries change\+Verification\+Mode} (\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} mode)
+\mbox{\hyperlink{classProbabilityEntry_a46fd05fdf4c3c1ff54f987b6ba22da13}{Probability\+Entry}} (\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} mode)
 \item 
-\Hypertarget{classProbabilityEntry_aea236c5571346fe3e3a4ff42433fc200}\label{classProbabilityEntry_aea236c5571346fe3e3a4ff42433fc200} 
-\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} {\bfseries get\+Verification\+Mode} ()
+\mbox{\hyperlink{classProbabilityEntry_adbe91dcc1730ac0d8d46b0a52d7f8e07}{$\sim$\+Probability\+Entry}} ()
 \item 
-\Hypertarget{classProbabilityEntry_aa198497c3347b09a283d10506934702e}\label{classProbabilityEntry_aa198497c3347b09a283d10506934702e} 
-void {\bfseries change\+Sum\+Probability\+True} (float change\+Probability\+By)
+void \mbox{\hyperlink{classProbabilityEntry_a8d2a35b1c4a911dc2e1d14d6adcd837e}{change\+Verification\+Mode}} (\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} mode)
 \item 
-\Hypertarget{classProbabilityEntry_a085fe545b15cc5ae74fa8b4a2e532bef}\label{classProbabilityEntry_a085fe545b15cc5ae74fa8b4a2e532bef} 
-void {\bfseries change\+Sum\+Probability\+False} (float change\+Probability\+By)
+\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} \mbox{\hyperlink{classProbabilityEntry_aea236c5571346fe3e3a4ff42433fc200}{get\+Verification\+Mode}} ()
 \item 
-\Hypertarget{classProbabilityEntry_a0e9a01d3b47683dc5222779173ccdd4f}\label{classProbabilityEntry_a0e9a01d3b47683dc5222779173ccdd4f} 
-\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} {\bfseries get\+Sum\+Probability} ()
+void \mbox{\hyperlink{classProbabilityEntry_aa198497c3347b09a283d10506934702e}{change\+Sum\+Probability\+True}} (float change\+Probability\+By)
 \item 
-\Hypertarget{classProbabilityEntry_a0813a0cb9aaee491537c8b012350356a}\label{classProbabilityEntry_a0813a0cb9aaee491537c8b012350356a} 
-void {\bfseries set\+Sum\+Probability} (\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Sum\+Probability)
+void \mbox{\hyperlink{classProbabilityEntry_a085fe545b15cc5ae74fa8b4a2e532bef}{change\+Sum\+Probability\+False}} (float change\+Probability\+By)
 \item 
-\Hypertarget{classProbabilityEntry_abbf15530c730052f7d62832e2e8c4c89}\label{classProbabilityEntry_abbf15530c730052f7d62832e2e8c4c89} 
-void {\bfseries change\+Min\+Probability\+True} (float new\+Probability)
+\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} \mbox{\hyperlink{classProbabilityEntry_a0e9a01d3b47683dc5222779173ccdd4f}{get\+Sum\+Probability}} ()
 \item 
-\Hypertarget{classProbabilityEntry_a1c48063ed8a0c20ec58a48423049a7e5}\label{classProbabilityEntry_a1c48063ed8a0c20ec58a48423049a7e5} 
-void {\bfseries change\+Min\+Probability\+False} (float new\+Probability)
+void \mbox{\hyperlink{classProbabilityEntry_a0813a0cb9aaee491537c8b012350356a}{set\+Sum\+Probability}} (\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Sum\+Probability)
 \item 
-\Hypertarget{classProbabilityEntry_aa6667cef8969304c0f0aeedae39bd11d}\label{classProbabilityEntry_aa6667cef8969304c0f0aeedae39bd11d} 
-\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} {\bfseries get\+Min\+Probability} ()
+void \mbox{\hyperlink{classProbabilityEntry_abbf15530c730052f7d62832e2e8c4c89}{change\+Min\+Probability\+True}} (float new\+Probability)
 \item 
-\Hypertarget{classProbabilityEntry_a12df701ea9b08c03eafcd06038d5aad6}\label{classProbabilityEntry_a12df701ea9b08c03eafcd06038d5aad6} 
-void {\bfseries set\+Min\+Probability} (\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Min\+Probability)
+void \mbox{\hyperlink{classProbabilityEntry_a1c48063ed8a0c20ec58a48423049a7e5}{change\+Min\+Probability\+False}} (float new\+Probability)
 \item 
-\Hypertarget{classProbabilityEntry_a0f127452a3d99d68d276ba65e1eeff44}\label{classProbabilityEntry_a0f127452a3d99d68d276ba65e1eeff44} 
-\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} {\bfseries return\+Probability} ()
+\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} \mbox{\hyperlink{classProbabilityEntry_aa6667cef8969304c0f0aeedae39bd11d}{get\+Min\+Probability}} ()
+\item 
+void \mbox{\hyperlink{classProbabilityEntry_a12df701ea9b08c03eafcd06038d5aad6}{set\+Min\+Probability}} (\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Min\+Probability)
+\item 
+\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} \mbox{\hyperlink{classProbabilityEntry_a0f127452a3d99d68d276ba65e1eeff44}{return\+Probability}} ()
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class for handling the probability operations during probability verification. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classProbabilityEntry_a59e45dd0714e8c53c54e1d8593991bb0}\label{classProbabilityEntry_a59e45dd0714e8c53c54e1d8593991bb0}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!ProbabilityEntry@{ProbabilityEntry}}
+\index{ProbabilityEntry@{ProbabilityEntry}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{ProbabilityEntry()}{ProbabilityEntry()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Probability\+Entry\+::\+Probability\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a46fd05fdf4c3c1ff54f987b6ba22da13}\label{classProbabilityEntry_a46fd05fdf4c3c1ff54f987b6ba22da13}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!ProbabilityEntry@{ProbabilityEntry}}
+\index{ProbabilityEntry@{ProbabilityEntry}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{ProbabilityEntry()}{ProbabilityEntry()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Probability\+Entry\+::\+Probability\+Entry (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}}}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_adbe91dcc1730ac0d8d46b0a52d7f8e07}\label{classProbabilityEntry_adbe91dcc1730ac0d8d46b0a52d7f8e07}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!````~ProbabilityEntry@{$\sim$ProbabilityEntry}}
+\index{````~ProbabilityEntry@{$\sim$ProbabilityEntry}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{$\sim$ProbabilityEntry()}{~ProbabilityEntry()}}
+{\footnotesize\ttfamily Probability\+Entry\+::$\sim$\+Probability\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classProbabilityEntry_a1c48063ed8a0c20ec58a48423049a7e5}\label{classProbabilityEntry_a1c48063ed8a0c20ec58a48423049a7e5}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!changeMinProbabilityFalse@{changeMinProbabilityFalse}}
+\index{changeMinProbabilityFalse@{changeMinProbabilityFalse}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{changeMinProbabilityFalse()}{changeMinProbabilityFalse()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::change\+Min\+Probability\+False (\begin{DoxyParamCaption}\item[{float}]{new\+Probability }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_abbf15530c730052f7d62832e2e8c4c89}\label{classProbabilityEntry_abbf15530c730052f7d62832e2e8c4c89}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!changeMinProbabilityTrue@{changeMinProbabilityTrue}}
+\index{changeMinProbabilityTrue@{changeMinProbabilityTrue}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{changeMinProbabilityTrue()}{changeMinProbabilityTrue()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::change\+Min\+Probability\+True (\begin{DoxyParamCaption}\item[{float}]{new\+Probability }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a085fe545b15cc5ae74fa8b4a2e532bef}\label{classProbabilityEntry_a085fe545b15cc5ae74fa8b4a2e532bef}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!changeSumProbabilityFalse@{changeSumProbabilityFalse}}
+\index{changeSumProbabilityFalse@{changeSumProbabilityFalse}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{changeSumProbabilityFalse()}{changeSumProbabilityFalse()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::change\+Sum\+Probability\+False (\begin{DoxyParamCaption}\item[{float}]{change\+Probability\+By }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_aa198497c3347b09a283d10506934702e}\label{classProbabilityEntry_aa198497c3347b09a283d10506934702e}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!changeSumProbabilityTrue@{changeSumProbabilityTrue}}
+\index{changeSumProbabilityTrue@{changeSumProbabilityTrue}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{changeSumProbabilityTrue()}{changeSumProbabilityTrue()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::change\+Sum\+Probability\+True (\begin{DoxyParamCaption}\item[{float}]{change\+Probability\+By }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a8d2a35b1c4a911dc2e1d14d6adcd837e}\label{classProbabilityEntry_a8d2a35b1c4a911dc2e1d14d6adcd837e}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!changeVerificationMode@{changeVerificationMode}}
+\index{changeVerificationMode@{changeVerificationMode}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{changeVerificationMode()}{changeVerificationMode()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::change\+Verification\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}}}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_aa6667cef8969304c0f0aeedae39bd11d}\label{classProbabilityEntry_aa6667cef8969304c0f0aeedae39bd11d}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!getMinProbability@{getMinProbability}}
+\index{getMinProbability@{getMinProbability}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{getMinProbability()}{getMinProbability()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} Probability\+Entry\+::get\+Min\+Probability (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a0e9a01d3b47683dc5222779173ccdd4f}\label{classProbabilityEntry_a0e9a01d3b47683dc5222779173ccdd4f}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!getSumProbability@{getSumProbability}}
+\index{getSumProbability@{getSumProbability}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{getSumProbability()}{getSumProbability()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} Probability\+Entry\+::get\+Sum\+Probability (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_aea236c5571346fe3e3a4ff42433fc200}\label{classProbabilityEntry_aea236c5571346fe3e3a4ff42433fc200}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!getVerificationMode@{getVerificationMode}}
+\index{getVerificationMode@{getVerificationMode}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{getVerificationMode()}{getVerificationMode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} Probability\+Entry\+::get\+Verification\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a0f127452a3d99d68d276ba65e1eeff44}\label{classProbabilityEntry_a0f127452a3d99d68d276ba65e1eeff44}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!returnProbability@{returnProbability}}
+\index{returnProbability@{returnProbability}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{returnProbability()}{returnProbability()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} Probability\+Entry\+::return\+Probability (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a12df701ea9b08c03eafcd06038d5aad6}\label{classProbabilityEntry_a12df701ea9b08c03eafcd06038d5aad6}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!setMinProbability@{setMinProbability}}
+\index{setMinProbability@{setMinProbability}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{setMinProbability()}{setMinProbability()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::set\+Min\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}}}]{new\+Min\+Probability }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classProbabilityEntry_a0813a0cb9aaee491537c8b012350356a}\label{classProbabilityEntry_a0813a0cb9aaee491537c8b012350356a}} 
+\index{ProbabilityEntry@{ProbabilityEntry}!setSumProbability@{setSumProbability}}
+\index{setSumProbability@{setSumProbability}!ProbabilityEntry@{ProbabilityEntry}}
+\doxysubsubsection{\texorpdfstring{setSumProbability()}{setSumProbability()}}
+{\footnotesize\ttfamily void Probability\+Entry\+::set\+Sum\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}}}]{new\+Sum\+Probability }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

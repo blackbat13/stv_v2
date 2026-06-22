@@ -1,0 +1,4 @@
+<map id="ExprMul" name="ExprMul">
+<area shape="rect" id="node1" title="Node for multiplication." alt="" coords="5,145,105,252"/>
+<area shape="rect" id="node2" href="$classExprNode.html" title="Base node for expressions." alt="" coords="13,5,98,97"/>
+</map>

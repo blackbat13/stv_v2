@@ -1,5 +1,5 @@
-\doxysection{Types.\+hpp File Reference}
-\hypertarget{Types_8hpp}{}\label{Types_8hpp}\index{Types.hpp@{Types.hpp}}
+\hypertarget{Types_8hpp}{}\doxysection{Types.\+hpp File Reference}
+\label{Types_8hpp}\index{Types.hpp@{Types.hpp}}
 
 
 Custom data structures. Data structures and classes containing model data.  
@@ -12,32 +12,48 @@ Custom data structures. Data structures and classes containing model data.
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$utility$>$}\newline
 {\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include "{}Local\+State.\+hpp"{}}\newline
-{\ttfamily \#include "{}Local\+Transition.\+hpp"{}}\newline
-{\ttfamily \#include "{}Global\+State.\+hpp"{}}\newline
-{\ttfamily \#include "{}Global\+Transition.\+hpp"{}}\newline
-{\ttfamily \#include "{}Global\+Model.\+hpp"{}}\newline
-{\ttfamily \#include "{}Epistemic\+Class.\+hpp"{}}\newline
-{\ttfamily \#include "{}Agent.\+hpp"{}}\newline
-{\ttfamily \#include "{}reader/expressions.\+hpp"{}}\newline
+{\ttfamily \#include \char`\"{}Local\+State.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Local\+Transition.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Global\+State.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Global\+Transition.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Global\+Model.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Epistemic\+Class.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Agent.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reader/expressions.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$atomic$>$}\newline
-{\ttfamily \#include "{}Types\+Dependency.\+hpp"{}}\newline
-\doxysubsubsection*{Classes}
+{\ttfamily \#include \char`\"{}Types\+Dependency.\+hpp\char`\"{}}\newline
+Include dependency graph for Types.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Types_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Types_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structVar}{Var}}
 \begin{DoxyCompactList}\small\item\em Represents a variable in the model, containing name, initial value and persistence. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structCondition}{Condition}}
-\begin{DoxyCompactList}\small\item\em Represents a condition for \doxylink{structLocalTransition}{Local\+Transition}. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Represents a condition for \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structFormulaTemplate}{Formula\+Template}}
-\begin{DoxyCompactList}\small\item\em Contains a template for coalition of \doxylink{classAgent}{Agent} as string from the formula. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Contains a template for coalition of \mbox{\hyperlink{classAgent}{Agent}} as string from the formula. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structFormula}{Formula}}
 \begin{DoxyCompactList}\small\item\em Contains the processed verification formula. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structLocalModels}{Local\+Models}}
 \begin{DoxyCompactList}\small\item\em Represents a single local model, contains all agents and variables. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structResult}{Result}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Enumerations}
+\doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 enum \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}{Probability\+Sign}} \{ \newline
@@ -51,10 +67,9 @@ enum \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}{Probability\
 , \mbox{\hyperlink{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61}{LE}}
  \}
 \begin{DoxyCompactList}\small\item\em Probability inequality sign used for the probabilistic verification. \end{DoxyCompactList}\item 
-\Hypertarget{Types_8hpp_a9f5b98517575f27626510577a4519ff6}\label{Types_8hpp_a9f5b98517575f27626510577a4519ff6} 
-enum {\bfseries Verification\+Formula\+Mode} \{ {\bfseries NOT\+\_\+\+SET} = 0
-, {\bfseries F} = 1
-, {\bfseries G} = 2
+enum \mbox{\hyperlink{Types_8hpp_a9f5b98517575f27626510577a4519ff6}{Verification\+Formula\+Mode}} \{ \mbox{\hyperlink{Types_8hpp_a9f5b98517575f27626510577a4519ff6a759c34a99344306429e887634b2d688e}{NOT\+\_\+\+SET}} = 0
+, \mbox{\hyperlink{Types_8hpp_a9f5b98517575f27626510577a4519ff6af382a63cc3d6491bf26b59e66f46826d}{F}} = 1
+, \mbox{\hyperlink{Types_8hpp_a9f5b98517575f27626510577a4519ff6a2fe993340f6abb2234e543cd427df70b}{G}} = 2
  \}
 \end{DoxyCompactItemize}
 
@@ -65,7 +80,7 @@ Custom data structures. Data structures and classes containing model data.
 
 
 \doxysubsection{Enumeration Type Documentation}
-\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e} 
+\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052e}} 
 \index{Types.hpp@{Types.hpp}!ProbabilitySign@{ProbabilitySign}}
 \index{ProbabilitySign@{ProbabilitySign}!Types.hpp@{Types.hpp}}
 \doxysubsubsection{\texorpdfstring{ProbabilitySign}{ProbabilitySign}}
@@ -76,32 +91,52 @@ Custom data structures. Data structures and classes containing model data.
 Probability inequality sign used for the probabilistic verification. 
 
 \begin{DoxyEnumFields}{Enumerator}
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!NONE@{NONE}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NONE@{NONE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!NONE@{NONE}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052eac157bdf0b85a40d2619cbc8bc1ae5fe2}} 
 NONE&No probability detected. \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{EQ@{EQ}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!EQ@{EQ}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EQ@{EQ}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!EQ@{EQ}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea9efdc855f3c1477957fb50affec07f8f}} 
 EQ&Equal (==) \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{NE@{NE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!NE@{NE}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db} 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NE@{NE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!NE@{NE}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea4d3f872f5054b256b01ee4f2c8cf51db}} 
 NE&Not equal (!=) \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{GT@{GT}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!GT@{GT}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892} 
-GT&Greater than (\texorpdfstring{$>$}{>}) \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GT@{GT}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!GT@{GT}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea12f5476fa04803e6cc72f2198730d892}} 
+GT&Greater than ($>$) \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{GE@{GE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!GE@{GE}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce} 
-GE&Greater equal (\texorpdfstring{$>$}{>}=) \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GE@{GE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!GE@{GE}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea558711b4a2a25070b970d85f5926d5ce}} 
+GE&Greater equal ($>$=) \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LT@{LT}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!LT@{LT}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571} 
-LT&Less than (\texorpdfstring{$<$}{<}) \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LT@{LT}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!LT@{LT}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea486aa221ceeeac475326e85d3d37f571}} 
+LT&Less than ($<$) \\
 \hline
 
-\raisebox{\heightof{T}}[0pt][0pt]{\index{LE@{LE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!LE@{LE}}}\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61} 
-LE&Less equal (\texorpdfstring{$<$}{<}=) \\
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LE@{LE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!LE@{LE}}}\mbox{\Hypertarget{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61}\label{Types_8hpp_a4d3180b8befe7d683a5db6de37ee052ea662ed4b51721a45f07d645d4ca099a61}} 
+LE&Less equal ($<$=) \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{Types_8hpp_a9f5b98517575f27626510577a4519ff6}\label{Types_8hpp_a9f5b98517575f27626510577a4519ff6}} 
+\index{Types.hpp@{Types.hpp}!VerificationFormulaMode@{VerificationFormulaMode}}
+\index{VerificationFormulaMode@{VerificationFormulaMode}!Types.hpp@{Types.hpp}}
+\doxysubsubsection{\texorpdfstring{VerificationFormulaMode}{VerificationFormulaMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{Types_8hpp_a9f5b98517575f27626510577a4519ff6}{Verification\+Formula\+Mode}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_SET@{NOT\_SET}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!NOT\_SET@{NOT\_SET}}}\mbox{\Hypertarget{Types_8hpp_a9f5b98517575f27626510577a4519ff6a759c34a99344306429e887634b2d688e}\label{Types_8hpp_a9f5b98517575f27626510577a4519ff6a759c34a99344306429e887634b2d688e}} 
+NOT\+\_\+\+SET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{F@{F}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!F@{F}}}\mbox{\Hypertarget{Types_8hpp_a9f5b98517575f27626510577a4519ff6af382a63cc3d6491bf26b59e66f46826d}\label{Types_8hpp_a9f5b98517575f27626510577a4519ff6af382a63cc3d6491bf26b59e66f46826d}} 
+F&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G@{G}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!G@{G}}}\mbox{\Hypertarget{Types_8hpp_a9f5b98517575f27626510577a4519ff6a2fe993340f6abb2234e543cd427df70b}\label{Types_8hpp_a9f5b98517575f27626510577a4519ff6a2fe993340f6abb2234e543cd427df70b}} 
+G&\\
 \hline
 
 \end{DoxyEnumFields}

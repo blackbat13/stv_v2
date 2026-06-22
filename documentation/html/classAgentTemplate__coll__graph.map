@@ -1,0 +1,3 @@
+<map id="AgentTemplate" name="AgentTemplate">
+<area shape="rect" id="node1" title="Represents a single agent loaded from the description from a file." alt="" coords="5,5,151,185"/>
+</map>

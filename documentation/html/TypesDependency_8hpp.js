@@ -1,12 +1,13 @@
 var TypesDependency_8hpp =
 [
-    [ "StrategyEntry", "structStrategyEntry.html", null ],
-    [ "StrategyBitsComparator", "structStrategyBitsComparator.html", null ],
-    [ "ProbabilityTrueFalse", "structProbabilityTrueFalse.html", null ],
-    [ "ProbabilityEntry", "classProbabilityEntry.html", null ],
-    [ "StateVerificationInfo", "structStateVerificationInfo.html", null ],
-    [ "Action", "structAction.html", null ],
-    [ "StrategyCollection", "classStrategyCollection.html", null ],
+    [ "StrategyEntry", "structStrategyEntry.html", "structStrategyEntry" ],
+    [ "StrategyBitsComparator", "structStrategyBitsComparator.html", "structStrategyBitsComparator" ],
+    [ "ProbabilityTrueFalse", "structProbabilityTrueFalse.html", "structProbabilityTrueFalse" ],
+    [ "ProbabilityEntry", "classProbabilityEntry.html", "classProbabilityEntry" ],
+    [ "StateVerificationInfo", "structStateVerificationInfo.html", "structStateVerificationInfo" ],
+    [ "Action", "structAction.html", "structAction" ],
+    [ "StrategyCollection", "classStrategyCollection.html", "classStrategyCollection" ],
+    [ "STRATEGY_BITS", "TypesDependency_8hpp.html#a1de2fc36289f8ee7e8341767723ddf49", null ],
     [ "HistoryEntryType", "TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4", [
       [ "DECISION", "TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e", null ],
       [ "STATE_STATUS", "TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a4d578d667f5dff9856f6a5062c2bd492", null ],
@@ -24,5 +25,10 @@ var TypesDependency_8hpp =
     [ "StrategyEntryType", "TypesDependency_8hpp.html#a014b4b1825e0cdd1e420331f51c073aa", [
       [ "NOT_MODIFIED", "TypesDependency_8hpp.html#a014b4b1825e0cdd1e420331f51c073aaaf20295dca57082fa3849c8537ace8f3a", null ],
       [ "ADDED", "TypesDependency_8hpp.html#a014b4b1825e0cdd1e420331f51c073aaaf9af5c7fe2ac629ae2626907f8251c38", null ]
+    ] ],
+    [ "VerifResult", "TypesDependency_8hpp.html#aa749f3f38fe65011cde5c039cf5a3e71", [
+      [ "NOT_VERIFIED", "TypesDependency_8hpp.html#aa749f3f38fe65011cde5c039cf5a3e71a7e17ca3ed06e094d62e6aedf2471b1f1", null ],
+      [ "TRUE", "TypesDependency_8hpp.html#aa749f3f38fe65011cde5c039cf5a3e71aa82764c3079aea4e60c80e45befbb839", null ],
+      [ "FALSE", "TypesDependency_8hpp.html#aa749f3f38fe65011cde5c039cf5a3e71aa1e095cc966dbecf6a0d8aad75348d1a", null ]
     ] ]
 ];

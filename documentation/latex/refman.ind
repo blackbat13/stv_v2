@@ -1,668 +1,3246 @@
 \begin{theindex}
 
-  \item {Action}, \hyperpage{13}
-  \item {ActionTemplate}, \hyperpage{13}
-    \subitem {ActionTemplate}, \hyperpage{14}
-  \item {addAction}
-    \subitem {StrategyCollectionTemplate}, \hyperpage{83}
-  \item {ADDED}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
-  \item {addEdge}
-    \subitem {DotGraph}, \hyperpage{24}
-  \item {addEntry}
-    \subitem {HistoryDbg}, \hyperpage{66}
-  \item {addHistoryAnswerProbability}
-    \subitem {VerificationIterative}, \hyperpage{103}
-  \item {addHistoryContext}
-    \subitem {Verification}, \hyperpage{90}
-    \subitem {VerificationIterative}, \hyperpage{104}
-  \item {addHistoryDecision}
-    \subitem {Verification}, \hyperpage{90}
-    \subitem {VerificationIterative}, \hyperpage{104}
-  \item {addHistoryMarkDecisionAsInvalid}
-    \subitem {Verification}, \hyperpage{90}
-    \subitem {VerificationIterative}, \hyperpage{104}
-  \item {addHistoryStateStatus}
-    \subitem {Verification}, \hyperpage{92}
-    \subitem {VerificationIterative}, \hyperpage{105}
-  \item {addHistoryUncontrolledDecision}
-    \subitem {Verification}, \hyperpage{92}
-  \item {addInitial}
-    \subitem {AgentTemplate}, \hyperpage{16}
-  \item {addLocal}
-    \subitem {AgentTemplate}, \hyperpage{17}
-  \item {addNode}
-    \subitem {DotGraph}, \hyperpage{24}
-  \item {addPersistent}
-    \subitem {AgentTemplate}, \hyperpage{17}
-  \item {addTransition}
-    \subitem {AgentTemplate}, \hyperpage{18}
-  \item {Agent}, \hyperpage{14}
-    \subitem {Agent}, \hyperpage{15}
-    \subitem {includesState}, \hyperpage{15}
-  \item {Agent.cpp}, \hyperpage{113}
-  \item {Agent.hpp}, \hyperpage{113, 114}
-  \item {AGENT\_TEMPLATE}
-    \subitem {DotGraph.hpp}, \hyperpage{117}
-  \item {AgentTemplate}, \hyperpage{16}
-    \subitem {addInitial}, \hyperpage{16}
-    \subitem {addLocal}, \hyperpage{17}
-    \subitem {addPersistent}, \hyperpage{17}
-    \subitem {addTransition}, \hyperpage{18}
-    \subitem {generateAgent}, \hyperpage{18}
-    \subitem {setIdent}, \hyperpage{19}
-    \subitem {setInitState}, \hyperpage{19}
-  \item {agentToString}
-    \subitem {Utils.cpp}, \hyperpage{147}
-    \subitem {Utils.hpp}, \hyperpage{149}
-  \item {ANSWER\_PROBABILITY}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
-  \item {areGlobalStatesInTheSameEpistemicClass}
-    \subitem {Verification}, \hyperpage{92}
-    \subitem {VerificationIterative}, \hyperpage{105}
-  \item {assign}
-    \subitem {Assignment}, \hyperpage{21}
-  \item {Assignment}, \hyperpage{20}
-    \subitem {assign}, \hyperpage{21}
-    \subitem {Assignment}, \hyperpage{20}
+  \item {$\sim$GlobalModelGenerator}
+    \subitem {GlobalModelGenerator}, \hyperpage{97}
+  \item {$\sim$HistoryDbg}
+    \subitem {HistoryDbg}, \hyperpage{118}
+  \item {$\sim$ModelParser}
+    \subitem {ModelParser}, \hyperpage{132}
+  \item {$\sim$ProbabilityEntry}
+    \subitem {ProbabilityEntry}, \hyperpage{134}
+  \item {$\sim$StrategyCollection}
+    \subitem {StrategyCollection}, \hyperpage{157}
+  \item {$\sim$StrategyParser}
+    \subitem {StrategyParser}, \hyperpage{162}
+  \item {$\sim$Verification}
+    \subitem {Verification}, \hyperpage{172}
+  \item {$\sim$VerificationIterative}
+    \subitem {VerificationIterative}, \hyperpage{187}
 
   \indexspace
 
-  \item {Cfg}, \hyperpage{21}
+  \item {Action}, \hyperpage{13}
+    \subitem {actionName}, \hyperpage{14}
+    \subitem {hash}, \hyperpage{14}
+    \subitem {states}, \hyperpage{14}
+  \item {actionCounts}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {actionName}
+    \subitem {Action}, \hyperpage{14}
+    \subitem {ActionTemplate}, \hyperpage{15}
+    \subitem {StrategyEntry}, \hyperpage{161}
+  \item {ActionTemplate}, \hyperpage{14}
+    \subitem {actionName}, \hyperpage{15}
+    \subitem {ActionTemplate}, \hyperpage{15}
+    \subitem {hash}, \hyperpage{15}
+    \subitem {states}, \hyperpage{16}
+  \item {activeProbabilityEntryType}
+    \subitem {DecisionEntry}, \hyperpage{33}
+  \item {add\_epsilon\_transitions}
+    \subitem {Cfg}, \hyperpage{28}
+  \item {addAction}
+    \subitem {StrategyCollection}, \hyperpage{158}
+    \subitem {StrategyCollectionTemplate}, \hyperpage{159}
+  \item {ADDED}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {addEdge}
+    \subitem {DotGraph}, \hyperpage{38}
+  \item {addedStates}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {addEntry}
+    \subitem {HistoryDbg}, \hyperpage{118}
+  \item {addHistoryAnswerProbability}
+    \subitem {VerificationIterative}, \hyperpage{188}
+  \item {addHistoryContext}
+    \subitem {Verification}, \hyperpage{172}
+    \subitem {VerificationIterative}, \hyperpage{188}
+  \item {addHistoryDecision}
+    \subitem {Verification}, \hyperpage{172}
+    \subitem {VerificationIterative}, \hyperpage{188}
+  \item {addHistoryMarkDecisionAsInvalid}
+    \subitem {Verification}, \hyperpage{173}
+    \subitem {VerificationIterative}, \hyperpage{189}
+  \item {addHistoryProbability}
+    \subitem {VerificationIterative}, \hyperpage{189}
+  \item {addHistoryStateStatus}
+    \subitem {Verification}, \hyperpage{173}
+    \subitem {VerificationIterative}, \hyperpage{189}
+  \item {addHistoryUncontrolledDecision}
+    \subitem {Verification}, \hyperpage{173}
+  \item {addInitial}
+    \subitem {AgentTemplate}, \hyperpage{20}
+  \item {addLocal}
+    \subitem {AgentTemplate}, \hyperpage{21}
+  \item {addNode}
+    \subitem {DotGraph}, \hyperpage{38}
+  \item {addPersistent}
+    \subitem {AgentTemplate}, \hyperpage{21}
+  \item {addStrategy}
+    \subitem {StrategyCollection}, \hyperpage{158}
+  \item {addTransition}
+    \subitem {AgentTemplate}, \hyperpage{22}
+  \item {Agent}, \hyperpage{16}
+    \subitem {Agent}, \hyperpage{17}
+    \subitem {id}, \hyperpage{18}
+    \subitem {includesState}, \hyperpage{17}
+    \subitem {initState}, \hyperpage{18}
+    \subitem {localStates}, \hyperpage{18}
+    \subitem {localTransitions}, \hyperpage{18}
+    \subitem {name}, \hyperpage{18}
+    \subitem {vars}, \hyperpage{19}
+  \item {agent}
+    \subitem {LocalState}, \hyperpage{126}
+    \subitem {LocalTransition}, \hyperpage{129}
+    \subitem {Var}, \hyperpage{168}
+    \subitem {YYSTYPE}, \hyperpage{202}
+  \item {Agent.cpp}, \hyperpage{205}
+  \item {Agent.hpp}, \hyperpage{205}
+  \item {AGENT\_TEMPLATE}
+    \subitem {DotGraph.hpp}, \hyperpage{210}
+  \item {agentIndex}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {agents}
+    \subitem {GlobalModel}, \hyperpage{93}
+    \subitem {LocalModels}, \hyperpage{124}
+  \item {AgentTemplate}, \hyperpage{19}
+    \subitem {addInitial}, \hyperpage{20}
+    \subitem {addLocal}, \hyperpage{21}
+    \subitem {addPersistent}, \hyperpage{21}
+    \subitem {addTransition}, \hyperpage{22}
+    \subitem {AgentTemplate}, \hyperpage{20}
+    \subitem {DotGraph}, \hyperpage{24}
+    \subitem {generateAgent}, \hyperpage{22}
+    \subitem {setIdent}, \hyperpage{23}
+    \subitem {setInitState}, \hyperpage{24}
+  \item {agentToString}
+    \subitem {Utils.cpp}, \hyperpage{332}
+    \subitem {Utils.hpp}, \hyperpage{336}
+  \item {ANSWER\_PROBABILITY}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {areGlobalStatesInTheSameEpistemicClass}
+    \subitem {Verification}, \hyperpage{174}
+    \subitem {VerificationIterative}, \hyperpage{189}
+  \item {assign}
+    \subitem {Assignment}, \hyperpage{26}
+    \subitem {YYSTYPE}, \hyperpage{202}
+  \item {Assignment}, \hyperpage{25}
+    \subitem {assign}, \hyperpage{26}
+    \subitem {Assignment}, \hyperpage{26}
+    \subitem {ident}, \hyperpage{26}
+    \subitem {value}, \hyperpage{26}
+  \item {assignments}
+    \subitem {TransitionTemplate}, \hyperpage{166}
+  \item {assignSet}
+    \subitem {YYSTYPE}, \hyperpage{202}
+
+  \indexspace
+
+  \item {BEGIN}
+    \subitem {scanner.c}, \hyperpage{252}
+    \subitem {strategyScanner.c}, \hyperpage{300}
+
+  \indexspace
+
+  \item {candidateStateDepths}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {Cfg}, \hyperpage{27}
+    \subitem {add\_epsilon\_transitions}, \hyperpage{28}
+    \subitem {counterexample}, \hyperpage{28}
+    \subitem {dotdir}, \hyperpage{28}
+    \subitem {fixpoint}, \hyperpage{28}
+    \subitem {fname}, \hyperpage{29}
+    \subitem {formula}, \hyperpage{29}
+    \subitem {formula\_from\_parameter}, \hyperpage{29}
+    \subitem {model\_id}, \hyperpage{29}
+    \subitem {natural\_strategy}, \hyperpage{29}
+    \subitem {output\_dot\_files}, \hyperpage{29}
+    \subitem {output\_global\_model}, \hyperpage{29}
+    \subitem {output\_local\_models}, \hyperpage{30}
+    \subitem {probability}, \hyperpage{30}
+    \subitem {reduce}, \hyperpage{30}
+    \subitem {reduce\_all}, \hyperpage{30}
+    \subitem {reduce\_args}, \hyperpage{30}
+    \subitem {strategy\_file\_path}, \hyperpage{30}
+    \subitem {stv\_mode}, \hyperpage{30}
+    \subitem {verify\_strategy}, \hyperpage{31}
+  \item {changeMinProbabilityFalse}
+    \subitem {ProbabilityEntry}, \hyperpage{134}
+  \item {changeMinProbabilityTrue}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
+  \item {changeSumProbabilityFalse}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
+  \item {changeSumProbabilityTrue}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
+  \item {changeVerificationMode}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
   \item {checkIfProbabilistic}
-    \subitem {VerificationIterative}, \hyperpage{105}
+    \subitem {VerificationIterative}, \hyperpage{190}
+  \item {checkLocalStates}
+    \subitem {GlobalModelGenerator}, \hyperpage{98}
   \item {checkUncontrolledSet}
-    \subitem {Verification}, \hyperpage{93}
+    \subitem {Verification}, \hyperpage{174}
+  \item {choiceIndices}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {clear}
+    \subitem {StrategyCollection}, \hyperpage{158}
   \item {cloneEntry}
-    \subitem {HistoryDbg}, \hyperpage{67}
-  \item {Common.hpp}, \hyperpage{114, 115}
+    \subitem {HistoryDbg}, \hyperpage{118}
+  \item {coalition}
+    \subitem {Formula}, \hyperpage{90}
+    \subitem {FormulaTemplate}, \hyperpage{92}
+  \item {coalitionTransitions}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {Common.hpp}, \hyperpage{206}
   \item {compare}
-    \subitem {LocalState}, \hyperpage{70}
+    \subitem {LocalState}, \hyperpage{125}
+  \item {comparedValue}
+    \subitem {Condition}, \hyperpage{32}
   \item {computeEpistemicClassHash}
-    \subitem {GlobalModelGenerator}, \hyperpage{56}
+    \subitem {GlobalModelGenerator}, \hyperpage{98}
   \item {computeGlobalStateHash}
-    \subitem {GlobalModelGenerator}, \hyperpage{57}
-  \item {Condition}, \hyperpage{22}
-  \item {ConditionOperator.hpp}, \hyperpage{117}
-  \item {Constants.hpp}, \hyperpage{115}
+    \subitem {GlobalModelGenerator}, \hyperpage{98}
+  \item {Condition}, \hyperpage{31}
+    \subitem {comparedValue}, \hyperpage{32}
+    \subitem {conditionOperator}, \hyperpage{32}
+    \subitem {var}, \hyperpage{32}
+  \item {condition}
+    \subitem {TransitionTemplate}, \hyperpage{166}
+  \item {ConditionOperator}
+    \subitem {ConditionOperator.hpp}, \hyperpage{208}
+  \item {conditionOperator}
+    \subitem {Condition}, \hyperpage{32}
+  \item {ConditionOperator.hpp}, \hyperpage{207}
+    \subitem {ConditionOperator}, \hyperpage{208}
+    \subitem {Equals}, \hyperpage{208}
+    \subitem {NotEquals}, \hyperpage{208}
+  \item {conditions}
+    \subitem {LocalTransition}, \hyperpage{129}
+  \item {condList}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {config}
+    \subitem {GlobalModelGenerator.cpp}, \hyperpage{215}
+    \subitem {GlobalState.hpp}, \hyperpage{218}
+    \subitem {main.cpp}, \hyperpage{223}
+    \subitem {test.cpp}, \hyperpage{326}
+    \subitem {Utils.cpp}, \hyperpage{335}
+    \subitem {Verification.cpp}, \hyperpage{340}
+    \subitem {VerificationIterative.cpp}, \hyperpage{344}
+  \item {Constants.hpp}, \hyperpage{208}
+    \subitem {DEBUG\_ON}, \hyperpage{208}
+    \subitem {VERBOSE}, \hyperpage{208}
   \item {CONTEXT}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {controlled}
+    \subitem {StateVerificationInfo}, \hyperpage{153}
+  \item {controlledProbabilisticTransitionsLeftToProcess}
+    \subitem {StateVerificationInfo}, \hyperpage{153}
+  \item {controlledTransitionsLeftToProcess}
+    \subitem {StateVerificationInfo}, \hyperpage{153}
+  \item {correctModel}
+    \subitem {GlobalModelGenerator}, \hyperpage{106}
+  \item {counterexample}
+    \subitem {Cfg}, \hyperpage{28}
   \item {createProbabilityStrategy}
-    \subitem {GlobalModelGenerator}, \hyperpage{57}
+    \subitem {GlobalModelGenerator}, \hyperpage{98}
+  \item {currentStrategy}
+    \subitem {GlobalModelGenerator}, \hyperpage{107}
 
   \indexspace
 
   \item {dbgHistEnt}
-    \subitem {Verification.cpp}, \hyperpage{152}
+    \subitem {Verification.cpp}, \hyperpage{339}
   \item {dbgVerifStatus}
-    \subitem {Verification.cpp}, \hyperpage{152}
+    \subitem {Verification.cpp}, \hyperpage{340}
+  \item {DEBUG\_ON}
+    \subitem {Constants.hpp}, \hyperpage{208}
   \item {DECISION}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
-  \item {DecisionEntry}, \hyperpage{22}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {decision}
+    \subitem {DecisionEntry}, \hyperpage{34}
+    \subitem {HistoryEntry}, \hyperpage{121}
+  \item {DecisionEntry}, \hyperpage{32}
+    \subitem {activeProbabilityEntryType}, \hyperpage{33}
+    \subitem {decision}, \hyperpage{34}
+    \subitem {depth}, \hyperpage{34}
+    \subitem {globalState}, \hyperpage{34}
+    \subitem {globalTransitionControlled}, \hyperpage{34}
+    \subitem {newStatus}, \hyperpage{34}
+    \subitem {previousProbabilityAnswerValues}, \hyperpage{34}
+    \subitem {previousProbabilityEntryType}, \hyperpage{35}
+    \subitem {prevStatus}, \hyperpage{35}
+    \subitem {stateProbabilityPrevious}, \hyperpage{35}
+    \subitem {strategy}, \hyperpage{35}
+    \subitem {toString}, \hyperpage{33}
+    \subitem {type}, \hyperpage{35}
+  \item {depth}
+    \subitem {DecisionEntry}, \hyperpage{34}
+    \subitem {HistoryEntry}, \hyperpage{121}
+    \subitem {StateVerificationInfo}, \hyperpage{153}
+  \item {DEPTH\_PREFIX}
+    \subitem {Verification.cpp}, \hyperpage{339}
+    \subitem {VerificationIterative.cpp}, \hyperpage{343}
   \item {dissolveLoopedProbabilityTransition}
-    \subitem {VerificationIterative}, \hyperpage{106}
-  \item {DotGraph}, \hyperpage{23}
-    \subitem {addEdge}, \hyperpage{24}
-    \subitem {addNode}, \hyperpage{24}
-    \subitem {saveToFile}, \hyperpage{25}
-    \subitem {styleString}, \hyperpage{25}
-  \item {DotGraph.cpp}, \hyperpage{116}
-  \item {DotGraph.hpp}, \hyperpage{116, 117}
-    \subitem {AGENT\_TEMPLATE}, \hyperpage{117}
-    \subitem {DotGraphBase}, \hyperpage{116}
-    \subitem {GLOBAL\_MODEL}, \hyperpage{117}
-    \subitem {LOCAL\_MODEL}, \hyperpage{117}
+    \subitem {VerificationIterative}, \hyperpage{190}
+  \item {dotdir}
+    \subitem {Cfg}, \hyperpage{28}
+  \item {DotGraph}, \hyperpage{36}
+    \subitem {addEdge}, \hyperpage{38}
+    \subitem {addNode}, \hyperpage{38}
+    \subitem {AgentTemplate}, \hyperpage{24}
+    \subitem {DotGraph}, \hyperpage{37}
+    \subitem {edges}, \hyperpage{39}
+    \subitem {graphBase}, \hyperpage{39}
+    \subitem {graphName}, \hyperpage{39}
+    \subitem {nodes}, \hyperpage{39}
+    \subitem {saveToFile}, \hyperpage{38}
+    \subitem {styleString}, \hyperpage{39}
+  \item {DotGraph.cpp}, \hyperpage{209}
+  \item {DotGraph.hpp}, \hyperpage{209}
+    \subitem {AGENT\_TEMPLATE}, \hyperpage{210}
+    \subitem {DotGraphBase}, \hyperpage{210}
+    \subitem {GLOBAL\_MODEL}, \hyperpage{210}
+    \subitem {LOCAL\_MODEL}, \hyperpage{210}
   \item {DotGraphBase}
-    \subitem {DotGraph.hpp}, \hyperpage{116}
+    \subitem {DotGraph.hpp}, \hyperpage{210}
 
   \indexspace
 
+  \item {ECHO}
+    \subitem {scanner.c}, \hyperpage{252}
+    \subitem {strategyScanner.c}, \hyperpage{300}
+  \item {edges}
+    \subitem {DotGraph}, \hyperpage{39}
+  \item {endState}
+    \subitem {TransitionTemplate}, \hyperpage{166}
+  \item {entries}
+    \subitem {HistoryDbg}, \hyperpage{119}
+  \item {Environment}
+    \subitem {expressions.hpp}, \hyperpage{214}
+  \item {environment}
+    \subitem {LocalState}, \hyperpage{126}
   \item {envToString}
-    \subitem {Utils.cpp}, \hyperpage{147}
-    \subitem {Utils.hpp}, \hyperpage{150}
-  \item {EpistemicClass}, \hyperpage{25}
-  \item {EpistemicClass.hpp}, \hyperpage{118}
+    \subitem {Utils.cpp}, \hyperpage{332}
+    \subitem {Utils.hpp}, \hyperpage{336}
+  \item {EOB\_ACT\_CONTINUE\_SCAN}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{300}
+  \item {EOB\_ACT\_END\_OF\_FILE}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{300}
+  \item {EOB\_ACT\_LAST\_MATCH}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{300}
+  \item {EpistemicClass}, \hyperpage{40}
+    \subitem {fixedCoalitionTransition}, \hyperpage{41}
+    \subitem {globalStates}, \hyperpage{41}
+    \subitem {hash}, \hyperpage{41}
+  \item {EpistemicClass.hpp}, \hyperpage{211}
+  \item {epistemicClasses}
+    \subitem {GlobalModel}, \hyperpage{93}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {epistemicClassesAllAgents}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {epistemicClassesKnowledge}
+    \subitem {GlobalModel}, \hyperpage{94}
+  \item {epistemicGlobalStates}
+    \subitem {LocalState}, \hyperpage{126}
   \item {EQ}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
+  \item {Equals}
+    \subitem {ConditionOperator.hpp}, \hyperpage{208}
   \item {equivalentGlobalTransitions}
-    \subitem {Verification}, \hyperpage{93}
-    \subitem {VerificationIterative}, \hyperpage{106}
+    \subitem {Verification}, \hyperpage{175}
+    \subitem {VerificationIterative}, \hyperpage{191}
   \item {eval}
-    \subitem {ExprAdd}, \hyperpage{27}
-    \subitem {ExprAnd}, \hyperpage{28}
-    \subitem {ExprConst}, \hyperpage{29}
-    \subitem {ExprDiv}, \hyperpage{31}
-    \subitem {ExprEq}, \hyperpage{32}
-    \subitem {ExprGe}, \hyperpage{34}
-    \subitem {ExprGt}, \hyperpage{35}
-    \subitem {ExprHart}, \hyperpage{36, 37}
-    \subitem {ExprIdent}, \hyperpage{38}
-    \subitem {ExprKnow}, \hyperpage{39}
-    \subitem {ExprLe}, \hyperpage{41}
-    \subitem {ExprLt}, \hyperpage{42}
-    \subitem {ExprMul}, \hyperpage{44}
-    \subitem {ExprNe}, \hyperpage{45}
-    \subitem {ExprNode}, \hyperpage{46}
-    \subitem {ExprNot}, \hyperpage{47}
-    \subitem {ExprOr}, \hyperpage{49}
-    \subitem {ExprRem}, \hyperpage{50}
-    \subitem {ExprSub}, \hyperpage{52}
-    \subitem {ProbAdd}, \hyperpage{75}
-    \subitem {ProbConst}, \hyperpage{76}
-    \subitem {ProbDiv}, \hyperpage{77}
-    \subitem {ProbMul}, \hyperpage{79}
-    \subitem {ProbNode}, \hyperpage{80}
-    \subitem {ProbSub}, \hyperpage{81}
+    \subitem {ExprAdd}, \hyperpage{43}
+    \subitem {ExprAnd}, \hyperpage{47}
+    \subitem {ExprConst}, \hyperpage{49}
+    \subitem {ExprDiv}, \hyperpage{52}
+    \subitem {ExprEq}, \hyperpage{54}
+    \subitem {ExprGe}, \hyperpage{57}
+    \subitem {ExprGt}, \hyperpage{59}
+    \subitem {ExprHart}, \hyperpage{62}
+    \subitem {ExprIdent}, \hyperpage{64, 65}
+    \subitem {ExprKnow}, \hyperpage{67}
+    \subitem {ExprLe}, \hyperpage{70}
+    \subitem {ExprLt}, \hyperpage{72}
+    \subitem {ExprMul}, \hyperpage{75}
+    \subitem {ExprNe}, \hyperpage{77}
+    \subitem {ExprNode}, \hyperpage{79}
+    \subitem {ExprNot}, \hyperpage{81}
+    \subitem {ExprOr}, \hyperpage{84}
+    \subitem {ExprRem}, \hyperpage{86}
+    \subitem {ExprSub}, \hyperpage{89}
+    \subitem {ProbAdd}, \hyperpage{139}
+    \subitem {ProbConst}, \hyperpage{141}
+    \subitem {ProbDiv}, \hyperpage{144}
+    \subitem {ProbMul}, \hyperpage{146}
+    \subitem {ProbNode}, \hyperpage{148}
+    \subitem {ProbSub}, \hyperpage{150}
+  \item {expandAllStates}
+    \subitem {GlobalModelGenerator}, \hyperpage{99}
   \item {expandAndReduceAllStates}
-    \subitem {GlobalModelGenerator}, \hyperpage{57}
+    \subitem {GlobalModelGenerator}, \hyperpage{99}
   \item {expandState}
-    \subitem {GlobalModelGenerator}, \hyperpage{57}
+    \subitem {GlobalModelGenerator}, \hyperpage{99}
   \item {expandStateAndReturn}
-    \subitem {GlobalModelGenerator}, \hyperpage{58}
-  \item {ExprAdd}, \hyperpage{26}
-    \subitem {eval}, \hyperpage{27}
-    \subitem {ExprAdd}, \hyperpage{26}
-  \item {ExprAnd}, \hyperpage{27}
-    \subitem {eval}, \hyperpage{28}
-    \subitem {ExprAnd}, \hyperpage{28}
-  \item {ExprConst}, \hyperpage{29}
-    \subitem {eval}, \hyperpage{29}
-    \subitem {ExprConst}, \hyperpage{29}
-  \item {ExprDiv}, \hyperpage{30}
-    \subitem {eval}, \hyperpage{31}
-    \subitem {ExprDiv}, \hyperpage{30}
-  \item {ExprEq}, \hyperpage{31}
-    \subitem {eval}, \hyperpage{32}
-    \subitem {ExprEq}, \hyperpage{32}
-  \item {expressions.cc}, \hyperpage{126}
-  \item {expressions.hpp}, \hyperpage{127, 128}
-  \item {ExprGe}, \hyperpage{33}
-    \subitem {eval}, \hyperpage{34}
-    \subitem {ExprGe}, \hyperpage{33}
-  \item {ExprGt}, \hyperpage{34}
-    \subitem {eval}, \hyperpage{35}
-    \subitem {ExprGt}, \hyperpage{35}
-  \item {ExprHart}, \hyperpage{36}
-    \subitem {eval}, \hyperpage{36, 37}
-    \subitem {ExprHart}, \hyperpage{36}
-  \item {ExprIdent}, \hyperpage{37}
-    \subitem {eval}, \hyperpage{38}
-    \subitem {ExprIdent}, \hyperpage{37}
-  \item {ExprKnow}, \hyperpage{39}
-    \subitem {eval}, \hyperpage{39}
-    \subitem {ExprKnow}, \hyperpage{39}
-  \item {ExprLe}, \hyperpage{40}
-    \subitem {eval}, \hyperpage{41}
-    \subitem {ExprLe}, \hyperpage{40}
-  \item {ExprLt}, \hyperpage{41}
-    \subitem {eval}, \hyperpage{42}
-    \subitem {ExprLt}, \hyperpage{42}
-  \item {ExprMul}, \hyperpage{43}
-    \subitem {eval}, \hyperpage{44}
-    \subitem {ExprMul}, \hyperpage{43}
-  \item {ExprNe}, \hyperpage{44}
-    \subitem {eval}, \hyperpage{45}
-    \subitem {ExprNe}, \hyperpage{45}
-  \item {ExprNode}, \hyperpage{46}
-    \subitem {eval}, \hyperpage{46}
-  \item {ExprNot}, \hyperpage{47}
+    \subitem {GlobalModelGenerator}, \hyperpage{99}
+  \item {expr}
+    \subitem {STRATSTYPE}, \hyperpage{163}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {ExprAdd}, \hyperpage{42}
+    \subitem {eval}, \hyperpage{43}
+    \subitem {ExprAdd}, \hyperpage{43}
+  \item {ExprAnd}, \hyperpage{45}
     \subitem {eval}, \hyperpage{47}
-    \subitem {ExprNot}, \hyperpage{47}
-  \item {ExprOr}, \hyperpage{48}
+    \subitem {ExprAnd}, \hyperpage{46}
+  \item {ExprConst}, \hyperpage{47}
     \subitem {eval}, \hyperpage{49}
-    \subitem {ExprOr}, \hyperpage{48}
-  \item {ExprRem}, \hyperpage{49}
-    \subitem {eval}, \hyperpage{50}
-    \subitem {ExprRem}, \hyperpage{50}
-  \item {ExprSub}, \hyperpage{51}
+    \subitem {ExprConst}, \hyperpage{49}
+  \item {ExprDiv}, \hyperpage{50}
     \subitem {eval}, \hyperpage{52}
-    \subitem {ExprSub}, \hyperpage{51}
+    \subitem {ExprDiv}, \hyperpage{51}
+  \item {ExprEq}, \hyperpage{52}
+    \subitem {eval}, \hyperpage{54}
+    \subitem {ExprEq}, \hyperpage{54}
+  \item {expressions.cc}, \hyperpage{211}
+  \item {expressions.hpp}, \hyperpage{212}
+    \subitem {Environment}, \hyperpage{214}
+  \item {ExprGe}, \hyperpage{55}
+    \subitem {eval}, \hyperpage{57}
+    \subitem {ExprGe}, \hyperpage{56}
+  \item {ExprGt}, \hyperpage{57}
+    \subitem {eval}, \hyperpage{59}
+    \subitem {ExprGt}, \hyperpage{59}
+  \item {ExprHart}, \hyperpage{60}
+    \subitem {eval}, \hyperpage{62}
+    \subitem {ExprHart}, \hyperpage{61}
+  \item {ExprIdent}, \hyperpage{63}
+    \subitem {eval}, \hyperpage{64, 65}
+    \subitem {ExprIdent}, \hyperpage{64}
+  \item {ExprKnow}, \hyperpage{65}
+    \subitem {eval}, \hyperpage{67}
+    \subitem {ExprKnow}, \hyperpage{67}
+  \item {ExprLe}, \hyperpage{68}
+    \subitem {eval}, \hyperpage{70}
+    \subitem {ExprLe}, \hyperpage{69}
+  \item {ExprLt}, \hyperpage{70}
+    \subitem {eval}, \hyperpage{72}
+    \subitem {ExprLt}, \hyperpage{72}
+  \item {ExprMul}, \hyperpage{73}
+    \subitem {eval}, \hyperpage{75}
+    \subitem {ExprMul}, \hyperpage{74}
+  \item {ExprNe}, \hyperpage{75}
+    \subitem {eval}, \hyperpage{77}
+    \subitem {ExprNe}, \hyperpage{77}
+  \item {ExprNode}, \hyperpage{78}
+    \subitem {eval}, \hyperpage{79}
+  \item {ExprNot}, \hyperpage{79}
+    \subitem {eval}, \hyperpage{81}
+    \subitem {ExprNot}, \hyperpage{81}
+  \item {ExprOr}, \hyperpage{82}
+    \subitem {eval}, \hyperpage{84}
+    \subitem {ExprOr}, \hyperpage{83}
+  \item {ExprRem}, \hyperpage{84}
+    \subitem {eval}, \hyperpage{86}
+    \subitem {ExprRem}, \hyperpage{86}
+  \item {ExprSub}, \hyperpage{87}
+    \subitem {eval}, \hyperpage{89}
+    \subitem {ExprSub}, \hyperpage{88}
 
   \indexspace
 
+  \item {F}
+    \subitem {Types.hpp}, \hyperpage{328}
+  \item {FALSE}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
   \item {findGlobalStateInEpistemicClass}
-    \subitem {GlobalModelGenerator}, \hyperpage{58}
+    \subitem {GlobalModelGenerator}, \hyperpage{100}
   \item {findLoopedProbabilityTransitions}
-    \subitem {VerificationIterative}, \hyperpage{106}
+    \subitem {VerificationIterative}, \hyperpage{191}
   \item {findOrCreateEpistemicClass}
-    \subitem {GlobalModelGenerator}, \hyperpage{58}
+    \subitem {GlobalModelGenerator}, \hyperpage{100}
   \item {findOrCreateEpistemicClassForKnowledge}
-    \subitem {GlobalModelGenerator}, \hyperpage{59}
-  \item {Formula}, \hyperpage{52}
-  \item {FormulaTemplate}, \hyperpage{53}
+    \subitem {GlobalModelGenerator}, \hyperpage{101}
+  \item {fixedCoalitionTransition}
+    \subitem {EpistemicClass}, \hyperpage{41}
+  \item {fixpoint}
+    \subitem {Cfg}, \hyperpage{28}
+  \item {fixpointVerify}
+    \subitem {Verification}, \hyperpage{175}
+  \item {FLEX\_BETA}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{300}
+  \item {flex\_int16\_t}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{319}
+  \item {flex\_int32\_t}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{319}
+  \item {flex\_int8\_t}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{319}
+  \item {FLEX\_SCANNER}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {flex\_uint16\_t}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{319}
+  \item {flex\_uint32\_t}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{320}
+  \item {flex\_uint8\_t}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{320}
+  \item {FLEXINT\_H}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {floatno}
+    \subitem {STRATSTYPE}, \hyperpage{164}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {fname}
+    \subitem {Cfg}, \hyperpage{29}
+  \item {Formula}, \hyperpage{89}
+    \subitem {coalition}, \hyperpage{90}
+    \subitem {isCTL}, \hyperpage{90}
+    \subitem {isF}, \hyperpage{90}
+    \subitem {p}, \hyperpage{91}
+    \subitem {probability}, \hyperpage{91}
+    \subitem {probabilitySign}, \hyperpage{91}
+  \item {formula}
+    \subitem {Cfg}, \hyperpage{29}
+    \subitem {FormulaTemplate}, \hyperpage{92}
+    \subitem {GlobalModel}, \hyperpage{94}
+    \subitem {GlobalModelGenerator}, \hyperpage{107}
+  \item {formula\_from\_parameter}
+    \subitem {Cfg}, \hyperpage{29}
+  \item {formulaDescription}
+    \subitem {main.cpp}, \hyperpage{223}
+    \subitem {ModelParser.cc}, \hyperpage{225}
+    \subitem {parser.c}, \hyperpage{245}
+  \item {FormulaTemplate}, \hyperpage{91}
+    \subitem {coalition}, \hyperpage{92}
+    \subitem {formula}, \hyperpage{92}
+    \subitem {isF}, \hyperpage{92}
+    \subitem {probability}, \hyperpage{92}
+    \subitem {probabilitySign}, \hyperpage{92}
+  \item {free}
+    \subitem {parser.c}, \hyperpage{244}
+    \subitem {strategyParser.c}, \hyperpage{289}
+  \item {from}
+    \subitem {GlobalTransition}, \hyperpage{115}
+    \subitem {LocalTransition}, \hyperpage{129}
+  \item {fromState}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
 
   \indexspace
 
+  \item {G}
+    \subitem {Types.hpp}, \hyperpage{328}
   \item {GE}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
   \item {generateAgent}
-    \subitem {AgentTemplate}, \hyperpage{18}
+    \subitem {AgentTemplate}, \hyperpage{22}
   \item {generateGlobalTransitions}
-    \subitem {GlobalModelGenerator}, \hyperpage{59}
+    \subitem {GlobalModelGenerator}, \hyperpage{101}
   \item {generateInitState}
-    \subitem {GlobalModelGenerator}, \hyperpage{59}
+    \subitem {GlobalModelGenerator}, \hyperpage{101}
+  \item {generateNextMDP}
+    \subitem {GlobalModelGenerator}, \hyperpage{102}
   \item {generateStateFromLocalStates}
-    \subitem {GlobalModelGenerator}, \hyperpage{59}
+    \subitem {GlobalModelGenerator}, \hyperpage{102}
+  \item {generator}
+    \subitem {Verification}, \hyperpage{183}
+    \subitem {VerificationIterative}, \hyperpage{195}
   \item {getActionNameFromStateInStrategy}
-    \subitem {GlobalModelGenerator}, \hyperpage{60}
+    \subitem {GlobalModelGenerator}, \hyperpage{102}
   \item {getAgentInstanceByName}
-    \subitem {GlobalModelGenerator}, \hyperpage{60}
+    \subitem {GlobalModelGenerator}, \hyperpage{103}
+  \item {getCoalitionActionSignature}
+    \subitem {GlobalModelGenerator}, \hyperpage{103}
   \item {getCoalitionIdentifier}
-    \subitem {GlobalModelGenerator}, \hyperpage{61}
+    \subitem {GlobalModelGenerator}, \hyperpage{103}
+  \item {getContextModel}
+    \subitem {Utils.cpp}, \hyperpage{332}
+    \subitem {Utils.hpp}, \hyperpage{337}
   \item {getCurrentGlobalModel}
-    \subitem {GlobalModelGenerator}, \hyperpage{61}
+    \subitem {GlobalModelGenerator}, \hyperpage{103}
   \item {getEpistemicClassForGlobalState}
-    \subitem {Verification}, \hyperpage{93}
-    \subitem {VerificationIterative}, \hyperpage{107}
+    \subitem {Verification}, \hyperpage{175}
+    \subitem {VerificationIterative}, \hyperpage{191}
   \item {getFormula}
-    \subitem {GlobalModelGenerator}, \hyperpage{61}
+    \subitem {GlobalModelGenerator}, \hyperpage{104}
   \item {getFormulaCorectness}
-    \subitem {GlobalModelGenerator}, \hyperpage{61}
+    \subitem {GlobalModelGenerator}, \hyperpage{104}
   \item {getFormulaSize}
-    \subitem {GlobalModelGenerator}, \hyperpage{61}
+    \subitem {GlobalModelGenerator}, \hyperpage{104}
   \item {getGlobalStateEnvironment}
-    \subitem {GlobalState}, \hyperpage{64}
+    \subitem {GlobalState}, \hyperpage{110}
   \item {getLocalStatesSCC}
-    \subitem {Utils.cpp}, \hyperpage{147}
-    \subitem {Utils.hpp}, \hyperpage{150}
+    \subitem {Utils.cpp}, \hyperpage{333}
+    \subitem {Utils.hpp}, \hyperpage{337}
+  \item {getMemCap}
+    \subitem {Utils.cpp}, \hyperpage{333}
+    \subitem {Utils.hpp}, \hyperpage{337}
+  \item {getMinProbability}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
   \item {getNaturalStrategy}
-    \subitem {Verification}, \hyperpage{95}
-    \subitem {VerificationIterative}, \hyperpage{107}
+    \subitem {Verification}, \hyperpage{175}
+    \subitem {VerificationIterative}, \hyperpage{192}
   \item {getNextPath}
-    \subitem {GlobalModelGenerator}, \hyperpage{62}
+    \subitem {GlobalModelGenerator}, \hyperpage{104}
+  \item {getProbability}
+    \subitem {GlobalTransition}, \hyperpage{115}
   \item {getReducedStrategy}
-    \subitem {Verification}, \hyperpage{95}
-    \subitem {VerificationIterative}, \hyperpage{107}
+    \subitem {Verification}, \hyperpage{176}
+    \subitem {VerificationIterative}, \hyperpage{192}
+  \item {getStrategy}
+    \subitem {StrategyCollection}, \hyperpage{158}
   \item {getStrategyComplexity}
-    \subitem {Verification}, \hyperpage{95}
-    \subitem {VerificationIterative}, \hyperpage{107}
+    \subitem {Verification}, \hyperpage{176}
+    \subitem {VerificationIterative}, \hyperpage{192}
+  \item {getSumProbability}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
+  \item {getVerificationMode}
+    \subitem {ProbabilityEntry}, \hyperpage{135}
   \item {GLOBAL\_MODEL}
-    \subitem {DotGraph.hpp}, \hyperpage{117}
-  \item {GlobalModel}, \hyperpage{53}
-  \item {GlobalModel.hpp}, \hyperpage{118, 119}
-  \item {GlobalModelGenerator}, \hyperpage{54}
-    \subitem {computeEpistemicClassHash}, \hyperpage{56}
-    \subitem {computeGlobalStateHash}, \hyperpage{57}
-    \subitem {createProbabilityStrategy}, \hyperpage{57}
-    \subitem {expandAndReduceAllStates}, \hyperpage{57}
-    \subitem {expandState}, \hyperpage{57}
-    \subitem {expandStateAndReturn}, \hyperpage{58}
-    \subitem {findGlobalStateInEpistemicClass}, \hyperpage{58}
-    \subitem {findOrCreateEpistemicClass}, \hyperpage{58}
-    \subitem {findOrCreateEpistemicClassForKnowledge}, \hyperpage{59}
-    \subitem {generateGlobalTransitions}, \hyperpage{59}
-    \subitem {generateInitState}, \hyperpage{59}
-    \subitem {generateStateFromLocalStates}, \hyperpage{59}
-    \subitem {getActionNameFromStateInStrategy}, \hyperpage{60}
-    \subitem {getAgentInstanceByName}, \hyperpage{60}
-    \subitem {getCoalitionIdentifier}, \hyperpage{61}
-    \subitem {getCurrentGlobalModel}, \hyperpage{61}
-    \subitem {getFormula}, \hyperpage{61}
-    \subitem {getFormulaCorectness}, \hyperpage{61}
-    \subitem {getFormulaSize}, \hyperpage{61}
-    \subitem {getNextPath}, \hyperpage{62}
-    \subitem {initModel}, \hyperpage{62}
-    \subitem {initStrategy}, \hyperpage{62}
-  \item {GlobalModelGenerator.cpp}, \hyperpage{119}
-  \item {GlobalModelGenerator.hpp}, \hyperpage{120}
-  \item {GlobalModelGenerator::GlobalStateTupleHash}, \hyperpage{64}
-  \item {GlobalState}, \hyperpage{63}
-    \subitem {getGlobalStateEnvironment}, \hyperpage{64}
-    \subitem {toString}, \hyperpage{64}
-  \item {GlobalState.cpp}, \hyperpage{121}
-  \item {GlobalState.hpp}, \hyperpage{122}
+    \subitem {DotGraph.hpp}, \hyperpage{210}
+  \item {GlobalModel}, \hyperpage{93}
+    \subitem {agents}, \hyperpage{93}
+    \subitem {epistemicClasses}, \hyperpage{93}
+    \subitem {epistemicClassesKnowledge}, \hyperpage{94}
+    \subitem {formula}, \hyperpage{94}
+    \subitem {globalStates}, \hyperpage{94}
+    \subitem {initState}, \hyperpage{94}
+  \item {globalModel}
+    \subitem {GlobalModelGenerator}, \hyperpage{107}
+  \item {GlobalModel.hpp}, \hyperpage{214}
+  \item {globalModelCandidates}
+    \subitem {GlobalModelGenerator}, \hyperpage{107}
+  \item {GlobalModelGenerator}, \hyperpage{95}
+    \subitem {$\sim$GlobalModelGenerator}, \hyperpage{97}
+    \subitem {actionCounts}, \hyperpage{106}
+    \subitem {addedStates}, \hyperpage{106}
+    \subitem {agentIndex}, \hyperpage{106}
+    \subitem {candidateStateDepths}, \hyperpage{106}
+    \subitem {checkLocalStates}, \hyperpage{98}
+    \subitem {choiceIndices}, \hyperpage{106}
+    \subitem {coalitionTransitions}, \hyperpage{106}
+    \subitem {computeEpistemicClassHash}, \hyperpage{98}
+    \subitem {computeGlobalStateHash}, \hyperpage{98}
+    \subitem {correctModel}, \hyperpage{106}
+    \subitem {createProbabilityStrategy}, \hyperpage{98}
+    \subitem {currentStrategy}, \hyperpage{107}
+    \subitem {expandAllStates}, \hyperpage{99}
+    \subitem {expandAndReduceAllStates}, \hyperpage{99}
+    \subitem {expandState}, \hyperpage{99}
+    \subitem {expandStateAndReturn}, \hyperpage{99}
+    \subitem {findGlobalStateInEpistemicClass}, \hyperpage{100}
+    \subitem {findOrCreateEpistemicClass}, \hyperpage{100}
+    \subitem {findOrCreateEpistemicClassForKnowledge}, \hyperpage{101}
+    \subitem {formula}, \hyperpage{107}
+    \subitem {generateGlobalTransitions}, \hyperpage{101}
+    \subitem {generateInitState}, \hyperpage{101}
+    \subitem {generateNextMDP}, \hyperpage{102}
+    \subitem {generateStateFromLocalStates}, \hyperpage{102}
+    \subitem {getActionNameFromStateInStrategy}, \hyperpage{102}
+    \subitem {getAgentInstanceByName}, \hyperpage{103}
+    \subitem {getCoalitionActionSignature}, \hyperpage{103}
+    \subitem {getCoalitionIdentifier}, \hyperpage{103}
+    \subitem {getCurrentGlobalModel}, \hyperpage{103}
+    \subitem {getFormula}, \hyperpage{104}
+    \subitem {getFormulaCorectness}, \hyperpage{104}
+    \subitem {getFormulaSize}, \hyperpage{104}
+    \subitem {getNextPath}, \hyperpage{104}
+    \subitem {globalModel}, \hyperpage{107}
+    \subitem {globalModelCandidates}, \hyperpage{107}
+    \subitem {GlobalModelGenerator}, \hyperpage{97}
+    \subitem {initModel}, \hyperpage{105}
+    \subitem {initStrategy}, \hyperpage{105}
+    \subitem {localModels}, \hyperpage{107}
+    \subitem {markFormulaAsIncorrect}, \hyperpage{105}
+    \subitem {opponentsTransitions}, \hyperpage{107}
+    \subitem {stateDepths}, \hyperpage{108}
+    \subitem {stateHashMapCache}, \hyperpage{108}
+    \subitem {strategiesExhausted}, \hyperpage{108}
+    \subitem {strategyCollection}, \hyperpage{108}
+    \subitem {strategyGenerationInit}, \hyperpage{108}
+  \item {GlobalModelGenerator.cpp}, \hyperpage{215}
+    \subitem {config}, \hyperpage{215}
+  \item {GlobalModelGenerator.hpp}, \hyperpage{216}
+  \item {GlobalModelGenerator::GlobalStateTupleHash}, \hyperpage{113}
+    \subitem {operator()}, \hyperpage{113}
+  \item {GlobalState}, \hyperpage{109}
+    \subitem {epistemicClasses}, \hyperpage{111}
+    \subitem {epistemicClassesAllAgents}, \hyperpage{111}
+    \subitem {getGlobalStateEnvironment}, \hyperpage{110}
+    \subitem {GlobalState}, \hyperpage{110}
+    \subitem {globalTransitions}, \hyperpage{111}
+    \subitem {goodState}, \hyperpage{111}
+    \subitem {hash}, \hyperpage{111}
+    \subitem {isExpanded}, \hyperpage{111}
+    \subitem {localStatesProjection}, \hyperpage{111}
+    \subitem {preimage}, \hyperpage{112}
+    \subitem {probability}, \hyperpage{112}
+    \subitem {probabilityLoop}, \hyperpage{112}
+    \subitem {probabilityResult}, \hyperpage{112}
+    \subitem {stateVerifResult}, \hyperpage{112}
+    \subitem {toString}, \hyperpage{110}
+    \subitem {verificationStatus}, \hyperpage{112}
+  \item {globalState}
+    \subitem {DecisionEntry}, \hyperpage{34}
+    \subitem {HistoryEntry}, \hyperpage{121}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {GlobalState.cpp}, \hyperpage{217}
+  \item {GlobalState.hpp}, \hyperpage{217}
+    \subitem {config}, \hyperpage{218}
+  \item {globalStates}
+    \subitem {EpistemicClass}, \hyperpage{41}
+    \subitem {GlobalModel}, \hyperpage{94}
   \item {globalStateToValueBits}
-    \subitem {Verification}, \hyperpage{95}
-    \subitem {VerificationIterative}, \hyperpage{108}
-  \item {GlobalStateVerificationStatus.hpp}, \hyperpage{117}
-  \item {GlobalTransition}, \hyperpage{64}
-    \subitem {joinLocalTransitionNames}, \hyperpage{65}
-  \item {GlobalTransition.cpp}, \hyperpage{123}
-  \item {GlobalTransition.hpp}, \hyperpage{123}
+    \subitem {Verification}, \hyperpage{176}
+    \subitem {VerificationIterative}, \hyperpage{192}
+  \item {GlobalStateVerificationStatus}
+    \subitem {GlobalStateVerificationStatus.hpp}, \hyperpage{218}
+  \item {GlobalStateVerificationStatus.hpp}, \hyperpage{218}
+    \subitem {GlobalStateVerificationStatus}, \hyperpage{218}
+    \subitem {PENDING}, \hyperpage{219}
+    \subitem {UNVERIFIED}, \hyperpage{219}
+    \subitem {VERIFIED\_ERR}, \hyperpage{219}
+    \subitem {VERIFIED\_OK}, \hyperpage{219}
+  \item {GlobalTransition}, \hyperpage{114}
+    \subitem {from}, \hyperpage{115}
+    \subitem {getProbability}, \hyperpage{115}
+    \subitem {GlobalTransition}, \hyperpage{115}
+    \subitem {id}, \hyperpage{115}
+    \subitem {isInvalidDecision}, \hyperpage{116}
+    \subitem {joinLocalTransitionNames}, \hyperpage{115}
+    \subitem {localTransitions}, \hyperpage{116}
+    \subitem {next\_id}, \hyperpage{116}
+    \subitem {to}, \hyperpage{116}
+  \item {GlobalTransition.cpp}, \hyperpage{219}
+  \item {GlobalTransition.hpp}, \hyperpage{219}
+  \item {globalTransitionControlled}
+    \subitem {DecisionEntry}, \hyperpage{34}
+    \subitem {HistoryEntry}, \hyperpage{121}
+  \item {globalTransitions}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {globalValues}
+    \subitem {StrategyEntry}, \hyperpage{161}
+  \item {goodState}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {gotResponseFromOtherState}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {gotThroughPreselectedTransition}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {graphBase}
+    \subitem {DotGraph}, \hyperpage{39}
+  \item {graphName}
+    \subitem {DotGraph}, \hyperpage{39}
   \item {GraphTraversalMode}
-    \subitem {VerificationIterative.hpp}, \hyperpage{157}
+    \subitem {VerificationIterative.hpp}, \hyperpage{345}
   \item {GT}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
 
   \indexspace
 
-  \item {HistoryDbg}, \hyperpage{66}
-    \subitem {addEntry}, \hyperpage{66}
-    \subitem {cloneEntry}, \hyperpage{67}
-    \subitem {markEntry}, \hyperpage{67}
-    \subitem {print}, \hyperpage{67}
-  \item {HistoryEntry}, \hyperpage{67}
-    \subitem {toString}, \hyperpage{68}
+  \item {hasControlledProbabilistic}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {hash}
+    \subitem {Action}, \hyperpage{14}
+    \subitem {ActionTemplate}, \hyperpage{15}
+    \subitem {EpistemicClass}, \hyperpage{41}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {hasUncontrolledProbabilistic}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {hasValidControlledTransition}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {hasValidUncontrolledTransition}
+    \subitem {StateVerificationInfo}, \hyperpage{154}
+  \item {history}
+    \subitem {VerificationIterative}, \hyperpage{195}
+  \item {HistoryDbg}, \hyperpage{117}
+    \subitem {$\sim$HistoryDbg}, \hyperpage{118}
+    \subitem {addEntry}, \hyperpage{118}
+    \subitem {cloneEntry}, \hyperpage{118}
+    \subitem {entries}, \hyperpage{119}
+    \subitem {HistoryDbg}, \hyperpage{118}
+    \subitem {markEntry}, \hyperpage{119}
+    \subitem {print}, \hyperpage{119}
+  \item {historyDecisionsERR}
+    \subitem {Verification}, \hyperpage{177}
+  \item {historyEnd}
+    \subitem {Verification}, \hyperpage{183}
+  \item {HistoryEntry}, \hyperpage{120}
+    \subitem {decision}, \hyperpage{121}
+    \subitem {depth}, \hyperpage{121}
+    \subitem {globalState}, \hyperpage{121}
+    \subitem {globalTransitionControlled}, \hyperpage{121}
+    \subitem {newStatus}, \hyperpage{122}
+    \subitem {next}, \hyperpage{122}
+    \subitem {prev}, \hyperpage{122}
+    \subitem {prevStatus}, \hyperpage{122}
+    \subitem {strategy}, \hyperpage{122}
+    \subitem {toString}, \hyperpage{121}
+    \subitem {type}, \hyperpage{122}
   \item {HistoryEntryType}
-    \subitem {TypesDependency.hpp}, \hyperpage{143}
+    \subitem {TypesDependency.hpp}, \hyperpage{329}
+  \item {historyStart}
+    \subitem {Verification}, \hyperpage{183}
+  \item {historyToRestore}
+    \subitem {Verification}, \hyperpage{183}
 
   \indexspace
 
+  \item {id}
+    \subitem {Agent}, \hyperpage{18}
+    \subitem {GlobalTransition}, \hyperpage{115}
+    \subitem {LocalState}, \hyperpage{126}
+    \subitem {LocalTransition}, \hyperpage{130}
+  \item {ident}
+    \subitem {Assignment}, \hyperpage{26}
+    \subitem {STRATSTYPE}, \hyperpage{164}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {identList}
+    \subitem {STRATSTYPE}, \hyperpage{164}
+  \item {identSet}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {if}
+    \subitem {scanner.c}, \hyperpage{265}
+    \subitem {strategyScanner.c}, \hyperpage{320}
   \item {includesState}
-    \subitem {Agent}, \hyperpage{15}
+    \subitem {Agent}, \hyperpage{17}
   \item {increaseProbability}
-    \subitem {Verification}, \hyperpage{96}
+    \subitem {Verification}, \hyperpage{177}
+  \item {INITIAL}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {initialValue}
+    \subitem {Var}, \hyperpage{168}
   \item {initModel}
-    \subitem {GlobalModelGenerator}, \hyperpage{62}
+    \subitem {GlobalModelGenerator}, \hyperpage{105}
+  \item {initState}
+    \subitem {Agent}, \hyperpage{18}
+    \subitem {GlobalModel}, \hyperpage{94}
   \item {initStrategy}
-    \subitem {GlobalModelGenerator}, \hyperpage{62}
+    \subitem {GlobalModelGenerator}, \hyperpage{105}
+  \item {INT16\_MAX}
+    \subitem {scanner.c}, \hyperpage{253}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {INT16\_MIN}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {INT32\_MAX}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {INT32\_MIN}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {INT8\_MAX}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{301}
+  \item {INT8\_MIN}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{302}
   \item {isAgentInCoalition}
-    \subitem {Verification}, \hyperpage{96}
-    \subitem {VerificationIterative}, \hyperpage{108}
+    \subitem {Verification}, \hyperpage{177}
+    \subitem {VerificationIterative}, \hyperpage{193}
+  \item {isControlledByCoalition}
+    \subitem {StateVerificationInfo}, \hyperpage{155}
+  \item {isCTL}
+    \subitem {Formula}, \hyperpage{90}
+  \item {isExpanded}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {isF}
+    \subitem {Formula}, \hyperpage{90}
+    \subitem {FormulaTemplate}, \hyperpage{92}
   \item {isGlobalTransitionControlledByCoalition}
-    \subitem {Verification}, \hyperpage{96}
-    \subitem {VerificationIterative}, \hyperpage{108}
+    \subitem {Verification}, \hyperpage{177}
+    \subitem {VerificationIterative}, \hyperpage{193}
+  \item {isInvalidDecision}
+    \subitem {GlobalTransition}, \hyperpage{116}
+  \item {isShared}
+    \subitem {LocalTransition}, \hyperpage{130}
 
   \indexspace
 
   \item {joinLocalTransitionNames}
-    \subitem {GlobalTransition}, \hyperpage{65}
+    \subitem {GlobalTransition}, \hyperpage{115}
 
   \indexspace
 
   \item {LE}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
+  \item {loadConfigFromArgs}
+    \subitem {Utils.cpp}, \hyperpage{333}
+    \subitem {Utils.hpp}, \hyperpage{337}
+  \item {loadConfigFromFile}
+    \subitem {Utils.cpp}, \hyperpage{333}
+    \subitem {Utils.hpp}, \hyperpage{337}
   \item {LOCAL\_MODEL}
-    \subitem {DotGraph.hpp}, \hyperpage{117}
-  \item {LocalModels}, \hyperpage{69}
+    \subitem {DotGraph.hpp}, \hyperpage{210}
+  \item {LocalModels}, \hyperpage{123}
+    \subitem {agents}, \hyperpage{124}
+  \item {localModels}
+    \subitem {GlobalModelGenerator}, \hyperpage{107}
   \item {localModelsToString}
-    \subitem {Utils.cpp}, \hyperpage{148}
-    \subitem {Utils.hpp}, \hyperpage{150}
-  \item {LocalState}, \hyperpage{69}
-    \subitem {compare}, \hyperpage{70}
-    \subitem {toString}, \hyperpage{70}
-  \item {LocalState.cpp}, \hyperpage{124}
-  \item {LocalState.hpp}, \hyperpage{124}
-  \item {LocalStateTemplate}, \hyperpage{70}
-  \item {LocalTransition}, \hyperpage{71}
-  \item {LocalTransition.hpp}, \hyperpage{125}
+    \subitem {Utils.cpp}, \hyperpage{333}
+    \subitem {Utils.hpp}, \hyperpage{338}
+  \item {localName}
+    \subitem {LocalTransition}, \hyperpage{130}
+  \item {LocalState}, \hyperpage{124}
+    \subitem {agent}, \hyperpage{126}
+    \subitem {compare}, \hyperpage{125}
+    \subitem {environment}, \hyperpage{126}
+    \subitem {epistemicGlobalStates}, \hyperpage{126}
+    \subitem {id}, \hyperpage{126}
+    \subitem {localTransitions}, \hyperpage{126}
+    \subitem {name}, \hyperpage{127}
+    \subitem {toString}, \hyperpage{125}
+  \item {LocalState.cpp}, \hyperpage{220}
+  \item {LocalState.hpp}, \hyperpage{221}
+  \item {localStates}
+    \subitem {Agent}, \hyperpage{18}
+  \item {localStatesProjection}
+    \subitem {GlobalState}, \hyperpage{111}
+  \item {LocalStateTemplate}, \hyperpage{127}
+    \subitem {name}, \hyperpage{128}
+    \subitem {transitions}, \hyperpage{128}
+  \item {LocalTransition}, \hyperpage{128}
+    \subitem {agent}, \hyperpage{129}
+    \subitem {conditions}, \hyperpage{129}
+    \subitem {from}, \hyperpage{129}
+    \subitem {id}, \hyperpage{130}
+    \subitem {isShared}, \hyperpage{130}
+    \subitem {localName}, \hyperpage{130}
+    \subitem {name}, \hyperpage{130}
+    \subitem {probability}, \hyperpage{130}
+    \subitem {sharedCount}, \hyperpage{130}
+    \subitem {to}, \hyperpage{131}
+  \item {LocalTransition.hpp}, \hyperpage{221}
+  \item {localTransitions}
+    \subitem {Agent}, \hyperpage{18}
+    \subitem {GlobalTransition}, \hyperpage{116}
+    \subitem {LocalState}, \hyperpage{126}
   \item {lowerProbability}
-    \subitem {Verification}, \hyperpage{97}
+    \subitem {Verification}, \hyperpage{178}
   \item {LT}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
 
   \indexspace
 
+  \item {main}
+    \subitem {main.cpp}, \hyperpage{223}
+    \subitem {test.cpp}, \hyperpage{325}
+  \item {main.cpp}, \hyperpage{222}
+    \subitem {config}, \hyperpage{223}
+    \subitem {formulaDescription}, \hyperpage{223}
+    \subitem {main}, \hyperpage{223}
+    \subitem {modelDescription}, \hyperpage{223}
+  \item {main2}
+    \subitem {parser.c}, \hyperpage{244}
+  \item {malloc}
+    \subitem {parser.c}, \hyperpage{244}
+    \subitem {strategyParser.c}, \hyperpage{289}
   \item {MARK\_DECISION\_AS\_INVALID}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
   \item {markEntry}
-    \subitem {HistoryDbg}, \hyperpage{67}
-  \item {ModelParser}, \hyperpage{72}
-    \subitem {parse}, \hyperpage{72}
-    \subitem {parseAndOverwriteFormula}, \hyperpage{72}
-  \item {ModelParser.cc}, \hyperpage{125}
-  \item {ModelParser.hpp}, \hyperpage{126}
+    \subitem {HistoryDbg}, \hyperpage{119}
+  \item {markFormulaAsIncorrect}
+    \subitem {GlobalModelGenerator}, \hyperpage{105}
+  \item {matchName}
+    \subitem {TransitionTemplate}, \hyperpage{166}
+  \item {maxFixpointVerify}
+    \subitem {Verification}, \hyperpage{178}
+  \item {MIN\_PROBABILITY}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {minFixpointVerify}
+    \subitem {Verification}, \hyperpage{178}
+  \item {mode}
+    \subitem {Verification}, \hyperpage{184}
+    \subitem {VerificationIterative}, \hyperpage{196}
+  \item {model}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {model\_id}
+    \subitem {Cfg}, \hyperpage{29}
+  \item {modelDescription}
+    \subitem {main.cpp}, \hyperpage{223}
+    \subitem {ModelParser.cc}, \hyperpage{225}
+    \subitem {parser.c}, \hyperpage{245}
+  \item {ModelParser}, \hyperpage{131}
+    \subitem {$\sim$ModelParser}, \hyperpage{132}
+    \subitem {ModelParser}, \hyperpage{132}
+    \subitem {parse}, \hyperpage{132}
+    \subitem {parseAndOverwriteFormula}, \hyperpage{132}
+  \item {ModelParser.cc}, \hyperpage{224}
+    \subitem {formulaDescription}, \hyperpage{225}
+    \subitem {modelDescription}, \hyperpage{225}
+    \subitem {set\_input\_string}, \hyperpage{224}
+    \subitem {yyparse}, \hyperpage{224}
+    \subitem {yyrestart}, \hyperpage{225}
+  \item {ModelParser.hpp}, \hyperpage{225}
 
   \indexspace
 
+  \item {name}
+    \subitem {Agent}, \hyperpage{18}
+    \subitem {LocalState}, \hyperpage{127}
+    \subitem {LocalStateTemplate}, \hyperpage{128}
+    \subitem {LocalTransition}, \hyperpage{130}
+    \subitem {Var}, \hyperpage{168}
+  \item {natural\_strategy}
+    \subitem {Cfg}, \hyperpage{29}
+  \item {naturalStrategy}
+    \subitem {Verification}, \hyperpage{184}
+    \subitem {VerificationIterative}, \hyperpage{196}
   \item {NE}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
   \item {newHistoryMarkDecisionAsInvalid}
-    \subitem {Verification}, \hyperpage{97}
-  \item {nodes.cc}, \hyperpage{132}
-  \item {nodes.hpp}, \hyperpage{133}
+    \subitem {Verification}, \hyperpage{178}
+  \item {newStatus}
+    \subitem {DecisionEntry}, \hyperpage{34}
+    \subitem {HistoryEntry}, \hyperpage{122}
+  \item {next}
+    \subitem {HistoryEntry}, \hyperpage{122}
+  \item {next\_id}
+    \subitem {GlobalTransition}, \hyperpage{116}
+  \item {nodes}
+    \subitem {DotGraph}, \hyperpage{39}
+  \item {nodes.cc}, \hyperpage{226}
+  \item {nodes.hpp}, \hyperpage{227}
   \item {NONE}
-    \subitem {Types.hpp}, \hyperpage{141}
+    \subitem {Types.hpp}, \hyperpage{327}
+  \item {NONE\_PROBABILITY}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
   \item {NORMAL}
-    \subitem {Verification.hpp}, \hyperpage{154}
+    \subitem {Verification.hpp}, \hyperpage{342}
   \item {NORMAL\_TRAVERSAL}
-    \subitem {VerificationIterative.hpp}, \hyperpage{158}
+    \subitem {VerificationIterative.hpp}, \hyperpage{345}
   \item {NOT\_MODIFIED}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {NOT\_SET}
+    \subitem {Types.hpp}, \hyperpage{328}
+  \item {NOT\_VERIFIED}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {NotEquals}
+    \subitem {ConditionOperator.hpp}, \hyperpage{208}
 
   \indexspace
 
+  \item {operator()}
+    \subitem {GlobalModelGenerator::GlobalStateTupleHash}, 
+		\hyperpage{113}
+    \subitem {StrategyBitsComparator}, \hyperpage{156}
+  \item {opponentsTransitions}
+    \subitem {GlobalModelGenerator}, \hyperpage{107}
+  \item {output\_dot\_files}
+    \subitem {Cfg}, \hyperpage{29}
+  \item {output\_global\_model}
+    \subitem {Cfg}, \hyperpage{29}
+  \item {output\_local\_models}
+    \subitem {Cfg}, \hyperpage{30}
   \item {outputGlobalModel}
-    \subitem {Utils.cpp}, \hyperpage{148}
-    \subitem {Utils.hpp}, \hyperpage{151}
+    \subitem {Utils.cpp}, \hyperpage{334}
+    \subitem {Utils.hpp}, \hyperpage{338}
 
   \indexspace
 
+  \item {p}
+    \subitem {Formula}, \hyperpage{91}
   \item {parse}
-    \subitem {ModelParser}, \hyperpage{72}
-    \subitem {StrategyParser}, \hyperpage{84}
+    \subitem {ModelParser}, \hyperpage{132}
+    \subitem {StrategyParser}, \hyperpage{162}
   \item {parseAndOverwriteFormula}
-    \subitem {ModelParser}, \hyperpage{72}
-  \item {parser.h}, \hyperpage{135}
+    \subitem {ModelParser}, \hyperpage{132}
+  \item {parser.c}, \hyperpage{228}
+    \subitem {formulaDescription}, \hyperpage{245}
+    \subitem {free}, \hyperpage{244}
+    \subitem {main2}, \hyperpage{244}
+    \subitem {malloc}, \hyperpage{244}
+    \subitem {modelDescription}, \hyperpage{245}
+    \subitem {set\_input\_string}, \hyperpage{244}
+    \subitem {YY\_}, \hyperpage{231}
+    \subitem {YY\_ACCESSING\_SYMBOL}, \hyperpage{231}
+    \subitem {YY\_ASSERT}, \hyperpage{231}
+    \subitem {YY\_ATTRIBUTE\_PURE}, \hyperpage{231}
+    \subitem {YY\_ATTRIBUTE\_UNUSED}, \hyperpage{231}
+    \subitem {YY\_BUFFER\_STATE}, \hyperpage{240}
+    \subitem {YY\_CAST}, \hyperpage{231}
+    \subitem {YY\_IGNORE\_MAYBE\_UNINITIALIZED\_BEGIN}, \hyperpage{232}
+    \subitem {YY\_IGNORE\_MAYBE\_UNINITIALIZED\_END}, \hyperpage{232}
+    \subitem {YY\_IGNORE\_USELESS\_CAST\_BEGIN}, \hyperpage{232}
+    \subitem {YY\_IGNORE\_USELESS\_CAST\_END}, \hyperpage{232}
+    \subitem {YY\_INITIAL\_VALUE}, \hyperpage{232}
+    \subitem {YY\_NULLPTR}, \hyperpage{232}
+    \subitem {YY\_REDUCE\_PRINT}, \hyperpage{232}
+    \subitem {YY\_REINTERPRET\_CAST}, \hyperpage{233}
+    \subitem {yy\_scan\_string}, \hyperpage{244}
+    \subitem {YY\_STACK\_PRINT}, \hyperpage{233}
+    \subitem {yy\_state\_fast\_t}, \hyperpage{241}
+    \subitem {yy\_state\_t}, \hyperpage{241}
+    \subitem {YY\_SYMBOL\_PRINT}, \hyperpage{233}
+    \subitem {YY\_USE}, \hyperpage{233}
+    \subitem {YYABORT}, \hyperpage{233}
+    \subitem {YYACCEPT}, \hyperpage{233}
+    \subitem {YYBACKUP}, \hyperpage{234}
+    \subitem {YYBISON}, \hyperpage{234}
+    \subitem {YYBISON\_VERSION}, \hyperpage{234}
+    \subitem {yychar}, \hyperpage{245}
+    \subitem {yyclearin}, \hyperpage{234}
+    \subitem {YYCOPY}, \hyperpage{234}
+    \subitem {YYCOPY\_NEEDED}, \hyperpage{235}
+    \subitem {YYDPRINTF}, \hyperpage{235}
+    \subitem {YYENOMEM}, \hyperpage{242}
+    \subitem {YYERRCODE}, \hyperpage{235}
+    \subitem {yyerrok}, \hyperpage{235}
+    \subitem {YYERROR}, \hyperpage{235}
+    \subitem {yyerror}, \hyperpage{244}
+    \subitem {YYFINAL}, \hyperpage{235}
+    \subitem {YYFREE}, \hyperpage{236}
+    \subitem {YYINITDEPTH}, \hyperpage{236}
+    \subitem {YYLAST}, \hyperpage{236}
+    \subitem {yylex}, \hyperpage{245}
+    \subitem {yylval}, \hyperpage{245}
+    \subitem {YYMALLOC}, \hyperpage{236}
+    \subitem {YYMAXDEPTH}, \hyperpage{236}
+    \subitem {YYMAXUTOK}, \hyperpage{236}
+    \subitem {yynerrs}, \hyperpage{246}
+    \subitem {YYNNTS}, \hyperpage{236}
+    \subitem {YYNOMEM}, \hyperpage{236}
+    \subitem {YYNRULES}, \hyperpage{237}
+    \subitem {YYNSTATES}, \hyperpage{237}
+    \subitem {YYNTOKENS}, \hyperpage{237}
+    \subitem {YYPACT\_NINF}, \hyperpage{237}
+    \subitem {yypact\_value\_is\_default}, \hyperpage{237}
+    \subitem {yyparse}, \hyperpage{245}
+    \subitem {YYPOPSTACK}, \hyperpage{237}
+    \subitem {YYPTRDIFF\_MAXIMUM}, \hyperpage{237}
+    \subitem {YYPTRDIFF\_T}, \hyperpage{238}
+    \subitem {YYPULL}, \hyperpage{238}
+    \subitem {YYPURE}, \hyperpage{238}
+    \subitem {YYPUSH}, \hyperpage{238}
+    \subitem {YYRECOVERING}, \hyperpage{238}
+    \subitem {yyrestart}, \hyperpage{245}
+    \subitem {YYSIZE\_MAXIMUM}, \hyperpage{238}
+    \subitem {YYSIZE\_T}, \hyperpage{238}
+    \subitem {YYSIZEOF}, \hyperpage{239}
+    \subitem {YYSKELETON\_NAME}, \hyperpage{239}
+    \subitem {YYSTACK\_ALLOC}, \hyperpage{239}
+    \subitem {YYSTACK\_ALLOC\_MAXIMUM}, \hyperpage{239}
+    \subitem {YYSTACK\_BYTES}, \hyperpage{239}
+    \subitem {YYSTACK\_FREE}, \hyperpage{239}
+    \subitem {YYSTACK\_GAP\_MAXIMUM}, \hyperpage{239}
+    \subitem {YYSTACK\_RELOCATE}, \hyperpage{240}
+    \subitem {YYSYMBOL\_17\_}, \hyperpage{244}
+    \subitem {YYSYMBOL\_27\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_28\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_29\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_30\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_31\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_32\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_33\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_34\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_35\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_36\_}, \hyperpage{242}
+    \subitem {YYSYMBOL\_37\_}, \hyperpage{243}
+    \subitem {YYSYMBOL\_38\_}, \hyperpage{243}
+    \subitem {YYSYMBOL\_agent}, \hyperpage{243}
+    \subitem {YYSYMBOL\_assign\_list}, \hyperpage{243}
+    \subitem {YYSYMBOL\_assignment}, \hyperpage{243}
+    \subitem {YYSYMBOL\_assignments}, \hyperpage{243}
+    \subitem {YYSYMBOL\_coalition}, \hyperpage{243}
+    \subitem {YYSYMBOL\_cond}, \hyperpage{243}
+    \subitem {YYSYMBOL\_cond\_and}, \hyperpage{243}
+    \subitem {YYSYMBOL\_cond\_elem}, \hyperpage{243}
+    \subitem {YYSYMBOL\_cond\_list}, \hyperpage{243}
+    \subitem {YYSYMBOL\_condition}, \hyperpage{243}
+    \subitem {YYSYMBOL\_description}, \hyperpage{243}
+    \subitem {YYSYMBOL\_formula}, \hyperpage{243}
+    \subitem {YYSYMBOL\_ident\_list}, \hyperpage{243, 244}
+    \subitem {YYSYMBOL\_initial}, \hyperpage{243}
+    \subitem {yysymbol\_kind\_t}, \hyperpage{241, 242}
+    \subitem {YYSYMBOL\_local}, \hyperpage{243}
+    \subitem {YYSYMBOL\_model}, \hyperpage{243}
+    \subitem {YYSYMBOL\_num\_elem}, \hyperpage{243}
+    \subitem {YYSYMBOL\_num\_exp}, \hyperpage{243}
+    \subitem {YYSYMBOL\_num\_mul}, \hyperpage{243}
+    \subitem {YYSYMBOL\_persistent}, \hyperpage{243}
+    \subitem {YYSYMBOL\_prob\_elem}, \hyperpage{243}
+    \subitem {YYSYMBOL\_prob\_exp}, \hyperpage{243}
+    \subitem {YYSYMBOL\_prob\_mul}, \hyperpage{243}
+    \subitem {YYSYMBOL\_probability\_equality}, \hyperpage{243}
+    \subitem {YYSYMBOL\_query}, \hyperpage{243}
+    \subitem {YYSYMBOL\_shared}, \hyperpage{243}
+    \subitem {YYSYMBOL\_spec}, \hyperpage{243}
+    \subitem {YYSYMBOL\_strat}, \hyperpage{244}
+    \subitem {YYSYMBOL\_T\_AGENT}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_AND}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_ASSIGN}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_EQ}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_FLOAT}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_FORMULA}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_GE}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_GT}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_HARTLEY}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_IDENT}, \hyperpage{242}, \hyperpage{244}
+    \subitem {YYSYMBOL\_T\_INIT}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_INITIAL}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_KNOW}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_LE}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_LOCAL}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_LT}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_NE}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_NUM}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_OR}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_PERSISTENT}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_PROB}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_REST}, \hyperpage{242}
+    \subitem {YYSYMBOL\_T\_SHARED}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_T\_TO}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_transition}, \hyperpage{243}
+    \subitem {YYSYMBOL\_YYACCEPT}, \hyperpage{243, 244}
+    \subitem {YYSYMBOL\_YYEMPTY}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_YYEOF}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_YYerror}, \hyperpage{242, 243}
+    \subitem {YYSYMBOL\_YYUNDEF}, \hyperpage{242, 243}
+    \subitem {YYTABLE\_NINF}, \hyperpage{240}
+    \subitem {yytable\_value\_is\_error}, \hyperpage{240}
+    \subitem {yytext}, \hyperpage{246}
+    \subitem {YYTRANSLATE}, \hyperpage{240}
+    \subitem {yytype\_int16}, \hyperpage{241}
+    \subitem {yytype\_int8}, \hyperpage{241}
+    \subitem {yytype\_uint16}, \hyperpage{241}
+    \subitem {yytype\_uint8}, \hyperpage{241}
+  \item {parser.h}, \hyperpage{246}
+    \subitem {T\_AGENT}, \hyperpage{248}
+    \subitem {T\_AND}, \hyperpage{248}
+    \subitem {T\_ASSIGN}, \hyperpage{248}
+    \subitem {T\_EQ}, \hyperpage{248}
+    \subitem {T\_FLOAT}, \hyperpage{249}
+    \subitem {T\_FORMULA}, \hyperpage{248}
+    \subitem {T\_GE}, \hyperpage{248}
+    \subitem {T\_GT}, \hyperpage{248}
+    \subitem {T\_HARTLEY}, \hyperpage{249}
+    \subitem {T\_IDENT}, \hyperpage{249}
+    \subitem {T\_INIT}, \hyperpage{248}
+    \subitem {T\_INITIAL}, \hyperpage{248}
+    \subitem {T\_KNOW}, \hyperpage{249}
+    \subitem {T\_LE}, \hyperpage{249}
+    \subitem {T\_LOCAL}, \hyperpage{248}
+    \subitem {T\_LT}, \hyperpage{249}
+    \subitem {T\_NE}, \hyperpage{248}
+    \subitem {T\_NUM}, \hyperpage{249}
+    \subitem {T\_OR}, \hyperpage{248}
+    \subitem {T\_PERSISTENT}, \hyperpage{248}
+    \subitem {T\_PROB}, \hyperpage{249}
+    \subitem {T\_REST}, \hyperpage{249}
+    \subitem {T\_SHARED}, \hyperpage{249}
+    \subitem {T\_TO}, \hyperpage{248}
+    \subitem {YYDEBUG}, \hyperpage{247}
+    \subitem {YYEMPTY}, \hyperpage{248}
+    \subitem {YYEOF}, \hyperpage{248}
+    \subitem {YYerror}, \hyperpage{248}
+    \subitem {yylval}, \hyperpage{249}
+    \subitem {yyparse}, \hyperpage{249}
+    \subitem {YYSTYPE}, \hyperpage{248}
+    \subitem {YYSTYPE\_IS\_DECLARED}, \hyperpage{247}
+    \subitem {YYSTYPE\_IS\_TRIVIAL}, \hyperpage{247}
+    \subitem {yytoken\_kind\_t}, \hyperpage{248}
+    \subitem {YYTOKENTYPE}, \hyperpage{247}
+    \subitem {yytokentype}, \hyperpage{248}
+    \subitem {YYUNDEF}, \hyperpage{248}
+  \item {patternName}
+    \subitem {TransitionTemplate}, \hyperpage{166}
+  \item {PENDING}
+    \subitem {GlobalStateVerificationStatus.hpp}, \hyperpage{219}
+  \item {persistent}
+    \subitem {Var}, \hyperpage{168}
+  \item {preimage}
+    \subitem {GlobalState}, \hyperpage{112}
+  \item {prev}
+    \subitem {HistoryEntry}, \hyperpage{122}
+  \item {previousProbabilityAnswerValues}
+    \subitem {DecisionEntry}, \hyperpage{34}
+  \item {previousProbabilityEntryType}
+    \subitem {DecisionEntry}, \hyperpage{35}
+  \item {prevStatus}
+    \subitem {DecisionEntry}, \hyperpage{35}
+    \subitem {HistoryEntry}, \hyperpage{122}
   \item {print}
-    \subitem {HistoryDbg}, \hyperpage{67}
+    \subitem {HistoryDbg}, \hyperpage{119}
   \item {printCurrentHistory}
-    \subitem {Verification}, \hyperpage{97}
+    \subitem {Verification}, \hyperpage{179}
+  \item {prob}
+    \subitem {YYSTYPE}, \hyperpage{203}
   \item {PROBABILITY}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
-  \item {ProbabilityEntry}, \hyperpage{73}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {probability}
+    \subitem {Cfg}, \hyperpage{30}
+    \subitem {Formula}, \hyperpage{91}
+    \subitem {FormulaTemplate}, \hyperpage{92}
+    \subitem {GlobalState}, \hyperpage{112}
+    \subitem {LocalTransition}, \hyperpage{130}
+    \subitem {TransitionTemplate}, \hyperpage{167}
+  \item {ProbabilityCalculationType}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {ProbabilityEntry}, \hyperpage{133}
+    \subitem {$\sim$ProbabilityEntry}, \hyperpage{134}
+    \subitem {changeMinProbabilityFalse}, \hyperpage{134}
+    \subitem {changeMinProbabilityTrue}, \hyperpage{135}
+    \subitem {changeSumProbabilityFalse}, \hyperpage{135}
+    \subitem {changeSumProbabilityTrue}, \hyperpage{135}
+    \subitem {changeVerificationMode}, \hyperpage{135}
+    \subitem {getMinProbability}, \hyperpage{135}
+    \subitem {getSumProbability}, \hyperpage{135}
+    \subitem {getVerificationMode}, \hyperpage{135}
+    \subitem {ProbabilityEntry}, \hyperpage{134}
+    \subitem {returnProbability}, \hyperpage{136}
+    \subitem {setMinProbability}, \hyperpage{136}
+    \subitem {setSumProbability}, \hyperpage{136}
+  \item {probabilityFalse}
+    \subitem {ProbabilityTrueFalse}, \hyperpage{137}
+  \item {probabilityLoop}
+    \subitem {GlobalState}, \hyperpage{112}
+  \item {probabilityResult}
+    \subitem {GlobalState}, \hyperpage{112}
+    \subitem {Result}, \hyperpage{152}
   \item {ProbabilitySign}
-    \subitem {Types.hpp}, \hyperpage{141}
-  \item {ProbabilityTrueFalse}, \hyperpage{74}
-  \item {ProbAdd}, \hyperpage{74}
-    \subitem {eval}, \hyperpage{75}
-    \subitem {ProbAdd}, \hyperpage{74}
-  \item {ProbConst}, \hyperpage{75}
-    \subitem {eval}, \hyperpage{76}
-    \subitem {ProbConst}, \hyperpage{76}
-  \item {ProbDiv}, \hyperpage{77}
-    \subitem {eval}, \hyperpage{77}
-    \subitem {ProbDiv}, \hyperpage{77}
-  \item {ProbMul}, \hyperpage{78}
-    \subitem {eval}, \hyperpage{79}
-    \subitem {ProbMul}, \hyperpage{78}
-  \item {ProbNode}, \hyperpage{79}
-    \subitem {eval}, \hyperpage{80}
-  \item {ProbSub}, \hyperpage{80}
-    \subitem {eval}, \hyperpage{81}
-    \subitem {ProbSub}, \hyperpage{80}
+    \subitem {Types.hpp}, \hyperpage{327}
+  \item {probabilitySign}
+    \subitem {Formula}, \hyperpage{91}
+    \subitem {FormulaTemplate}, \hyperpage{92}
+  \item {probabilityTrue}
+    \subitem {ProbabilityTrueFalse}, \hyperpage{137}
+  \item {ProbabilityTrueFalse}, \hyperpage{136}
+    \subitem {probabilityFalse}, \hyperpage{137}
+    \subitem {probabilityTrue}, \hyperpage{137}
+  \item {ProbAdd}, \hyperpage{137}
+    \subitem {eval}, \hyperpage{139}
+    \subitem {ProbAdd}, \hyperpage{138}
+  \item {ProbConst}, \hyperpage{139}
+    \subitem {eval}, \hyperpage{141}
+    \subitem {ProbConst}, \hyperpage{141}
+  \item {ProbDiv}, \hyperpage{142}
+    \subitem {eval}, \hyperpage{144}
+    \subitem {ProbDiv}, \hyperpage{143}
+  \item {ProbMul}, \hyperpage{144}
+    \subitem {eval}, \hyperpage{146}
+    \subitem {ProbMul}, \hyperpage{146}
+  \item {ProbNode}, \hyperpage{147}
+    \subitem {eval}, \hyperpage{148}
+  \item {ProbSub}, \hyperpage{149}
+    \subitem {eval}, \hyperpage{150}
+    \subitem {ProbSub}, \hyperpage{150}
+  \item {processed}
+    \subitem {StateVerificationInfo}, \hyperpage{155}
 
   \indexspace
 
+  \item {README.md}, \hyperpage{249}
+  \item {reduce}
+    \subitem {Cfg}, \hyperpage{30}
+  \item {reduce\_all}
+    \subitem {Cfg}, \hyperpage{30}
+  \item {reduce\_args}
+    \subitem {Cfg}, \hyperpage{30}
   \item {reduceStrategy}
-    \subitem {Verification}, \hyperpage{98}
-    \subitem {VerificationIterative}, \hyperpage{109}
+    \subitem {Verification}, \hyperpage{179}
+    \subitem {VerificationIterative}, \hyperpage{193}
+  \item {reductionComplexityBefore}
+    \subitem {Verification}, \hyperpage{184}
+    \subitem {VerificationIterative}, \hyperpage{196}
+  \item {REJECT}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{302}
   \item {RESTORE}
-    \subitem {Verification.hpp}, \hyperpage{154}
+    \subitem {Verification.hpp}, \hyperpage{342}
   \item {RESTORE\_STATES}
-    \subitem {VerificationIterative.hpp}, \hyperpage{158}
+    \subitem {VerificationIterative.hpp}, \hyperpage{345}
   \item {restoreHistory}
-    \subitem {Verification}, \hyperpage{98}
-  \item {Result}, \hyperpage{81}
+    \subitem {Verification}, \hyperpage{180}
+  \item {Result}, \hyperpage{151}
+    \subitem {probabilityResult}, \hyperpage{152}
+    \subitem {verificationResult}, \hyperpage{152}
+  \item {returnProbability}
+    \subitem {ProbabilityEntry}, \hyperpage{136}
   \item {REVERT}
-    \subitem {Verification.hpp}, \hyperpage{154}
+    \subitem {Verification.hpp}, \hyperpage{342}
   \item {revertLastDecision}
-    \subitem {Verification}, \hyperpage{98}
+    \subitem {Verification}, \hyperpage{180}
+  \item {revertToGlobalState}
+    \subitem {Verification}, \hyperpage{184}
+    \subitem {VerificationIterative}, \hyperpage{196}
   \item {revertToLastDecision}
-    \subitem {VerificationIterative}, \hyperpage{109}
+    \subitem {VerificationIterative}, \hyperpage{194}
 
   \indexspace
 
   \item {saveToFile}
-    \subitem {DotGraph}, \hyperpage{25}
+    \subitem {DotGraph}, \hyperpage{38}
+  \item {scanner.c}, \hyperpage{249}
+    \subitem {BEGIN}, \hyperpage{252}
+    \subitem {ECHO}, \hyperpage{252}
+    \subitem {EOB\_ACT\_CONTINUE\_SCAN}, \hyperpage{253}
+    \subitem {EOB\_ACT\_END\_OF\_FILE}, \hyperpage{253}
+    \subitem {EOB\_ACT\_LAST\_MATCH}, \hyperpage{253}
+    \subitem {FLEX\_BETA}, \hyperpage{253}
+    \subitem {flex\_int16\_t}, \hyperpage{263}
+    \subitem {flex\_int32\_t}, \hyperpage{264}
+    \subitem {flex\_int8\_t}, \hyperpage{264}
+    \subitem {FLEX\_SCANNER}, \hyperpage{253}
+    \subitem {flex\_uint16\_t}, \hyperpage{264}
+    \subitem {flex\_uint32\_t}, \hyperpage{264}
+    \subitem {flex\_uint8\_t}, \hyperpage{264}
+    \subitem {FLEXINT\_H}, \hyperpage{253}
+    \subitem {if}, \hyperpage{265}
+    \subitem {INITIAL}, \hyperpage{253}
+    \subitem {INT16\_MAX}, \hyperpage{253}
+    \subitem {INT16\_MIN}, \hyperpage{254}
+    \subitem {INT32\_MAX}, \hyperpage{254}
+    \subitem {INT32\_MIN}, \hyperpage{254}
+    \subitem {INT8\_MAX}, \hyperpage{254}
+    \subitem {INT8\_MIN}, \hyperpage{254}
+    \subitem {REJECT}, \hyperpage{254}
+    \subitem {SIZE\_MAX}, \hyperpage{254}
+    \subitem {UINT16\_MAX}, \hyperpage{254}
+    \subitem {UINT32\_MAX}, \hyperpage{255}
+    \subitem {UINT8\_MAX}, \hyperpage{255}
+    \subitem {unput}, \hyperpage{255}
+    \subitem {yy\_act}, \hyperpage{269}
+    \subitem {YY\_AT\_BOL}, \hyperpage{255}
+    \subitem {yy\_bp}, \hyperpage{269}
+    \subitem {YY\_BREAK}, \hyperpage{255}
+    \subitem {YY\_BUF\_SIZE}, \hyperpage{255}
+    \subitem {YY\_BUFFER\_EOF\_PENDING}, \hyperpage{255}
+    \subitem {YY\_BUFFER\_NEW}, \hyperpage{256}
+    \subitem {YY\_BUFFER\_NORMAL}, \hyperpage{256}
+    \subitem {YY\_BUFFER\_STATE}, \hyperpage{264}
+    \subitem {YY\_CHAR}, \hyperpage{264}
+    \subitem {yy\_cp}, \hyperpage{269}
+    \subitem {yy\_create\_buffer}, \hyperpage{265}
+    \subitem {YY\_CURRENT\_BUFFER}, \hyperpage{256}
+    \subitem {YY\_CURRENT\_BUFFER\_LVALUE}, \hyperpage{256}
+    \subitem {YY\_DECL}, \hyperpage{256}, \hyperpage{269}
+    \subitem {YY\_DECL\_IS\_OURS}, \hyperpage{256}
+    \subitem {yy\_delete\_buffer}, \hyperpage{265}
+    \subitem {YY\_DO\_BEFORE\_ACTION}, \hyperpage{256}
+    \subitem {YY\_END\_OF\_BUFFER}, \hyperpage{257}
+    \subitem {YY\_END\_OF\_BUFFER\_CHAR}, \hyperpage{257}
+    \subitem {YY\_EXIT\_FAILURE}, \hyperpage{257}
+    \subitem {YY\_EXTRA\_TYPE}, \hyperpage{257}
+    \subitem {YY\_FATAL\_ERROR}, \hyperpage{257}
+    \subitem {yy\_flex\_debug}, \hyperpage{270}
+    \subitem {YY\_FLEX\_MAJOR\_VERSION}, \hyperpage{257}
+    \subitem {YY\_FLEX\_MINOR\_VERSION}, \hyperpage{257}
+    \subitem {YY\_FLEX\_SUBMINOR\_VERSION}, \hyperpage{258}
+    \subitem {YY\_FLUSH\_BUFFER}, \hyperpage{258}
+    \subitem {yy\_flush\_buffer}, \hyperpage{265}
+    \subitem {YY\_INPUT}, \hyperpage{258}
+    \subitem {YY\_INT\_ALIGNED}, \hyperpage{258}
+    \subitem {YY\_LESS\_LINENO}, \hyperpage{258}
+    \subitem {YY\_LINENO\_REWIND\_TO}, \hyperpage{259}
+    \subitem {YY\_MORE\_ADJ}, \hyperpage{259}
+    \subitem {yy\_new\_buffer}, \hyperpage{259}
+    \subitem {YY\_NEW\_FILE}, \hyperpage{259}
+    \subitem {YY\_NULL}, \hyperpage{259}
+    \subitem {YY\_NUM\_RULES}, \hyperpage{259}
+    \subitem {YY\_READ\_BUF\_SIZE}, \hyperpage{259}
+    \subitem {YY\_RESTORE\_YY\_MORE\_OFFSET}, \hyperpage{260}
+    \subitem {YY\_RULE\_SETUP}, \hyperpage{260}
+    \subitem {YY\_SC\_TO\_UI}, \hyperpage{260}
+    \subitem {yy\_scan\_buffer}, \hyperpage{265}
+    \subitem {yy\_scan\_bytes}, \hyperpage{266}
+    \subitem {yy\_scan\_string}, \hyperpage{266}
+    \subitem {yy\_set\_bol}, \hyperpage{260}
+    \subitem {yy\_set\_interactive}, \hyperpage{260}
+    \subitem {yy\_size\_t}, \hyperpage{264}
+    \subitem {YY\_SKIP\_YYWRAP}, \hyperpage{260}
+    \subitem {YY\_START}, \hyperpage{261}
+    \subitem {YY\_START\_STACK\_INCR}, \hyperpage{261}
+    \subitem {YY\_STATE\_BUF\_SIZE}, \hyperpage{261}
+    \subitem {YY\_STATE\_EOF}, \hyperpage{261}
+    \subitem {yy\_state\_type}, \hyperpage{265}
+    \subitem {YY\_STRUCT\_YY\_BUFFER\_STATE}, \hyperpage{261}
+    \subitem {yy\_switch\_to\_buffer}, \hyperpage{266}
+    \subitem {YY\_TYPEDEF\_YY\_BUFFER\_STATE}, \hyperpage{261}
+    \subitem {YY\_TYPEDEF\_YY\_SIZE\_T}, \hyperpage{261}
+    \subitem {YY\_USER\_ACTION}, \hyperpage{262}
+    \subitem {yyalloc}, \hyperpage{266}
+    \subitem {yyconst}, \hyperpage{262}
+    \subitem {yyfree}, \hyperpage{266}
+    \subitem {yyget\_debug}, \hyperpage{266}
+    \subitem {yyget\_extra}, \hyperpage{266}
+    \subitem {yyget\_in}, \hyperpage{267}
+    \subitem {yyget\_leng}, \hyperpage{267}
+    \subitem {yyget\_lineno}, \hyperpage{267}
+    \subitem {yyget\_out}, \hyperpage{267}
+    \subitem {yyget\_text}, \hyperpage{267}
+    \subitem {yyin}, \hyperpage{270}
+    \subitem {yyleng}, \hyperpage{270}
+    \subitem {yyless}, \hyperpage{262}
+    \subitem {yylex}, \hyperpage{267}
+    \subitem {yylex\_destroy}, \hyperpage{267}
+    \subitem {yylineno}, \hyperpage{270}
+    \subitem {yymore}, \hyperpage{262}
+    \subitem {yynoreturn}, \hyperpage{263}
+    \subitem {yyout}, \hyperpage{270}
+    \subitem {yypop\_buffer\_state}, \hyperpage{268}
+    \subitem {yypush\_buffer\_state}, \hyperpage{268}
+    \subitem {yyrealloc}, \hyperpage{268}
+    \subitem {yyrestart}, \hyperpage{268}
+    \subitem {yyset\_debug}, \hyperpage{268}
+    \subitem {yyset\_extra}, \hyperpage{268}
+    \subitem {yyset\_in}, \hyperpage{268}
+    \subitem {yyset\_lineno}, \hyperpage{269}
+    \subitem {yyset\_out}, \hyperpage{269}
+    \subitem {YYSTATE}, \hyperpage{263}
+    \subitem {YYTABLES\_NAME}, \hyperpage{263}
+    \subitem {yyterminate}, \hyperpage{263}
+    \subitem {yytext}, \hyperpage{270}
+    \subitem {yytext\_ptr}, \hyperpage{263}
+    \subitem {yywrap}, \hyperpage{263}
+  \item {scanner.l}, \hyperpage{271}
+  \item {selectedStrategy}
+    \subitem {StrategyCollectionTemplate}, \hyperpage{160}
+  \item {set\_input\_string}
+    \subitem {ModelParser.cc}, \hyperpage{224}
+    \subitem {parser.c}, \hyperpage{244}
+  \item {set\_input\_string\_strat}
+    \subitem {strategyParser.c}, \hyperpage{289}
+    \subitem {StrategyParser.cc}, \hyperpage{291}
   \item {setIdent}
-    \subitem {AgentTemplate}, \hyperpage{19}
+    \subitem {AgentTemplate}, \hyperpage{23}
   \item {setInitState}
-    \subitem {AgentTemplate}, \hyperpage{19}
+    \subitem {AgentTemplate}, \hyperpage{24}
+  \item {setMinProbability}
+    \subitem {ProbabilityEntry}, \hyperpage{136}
+  \item {setSumProbability}
+    \subitem {ProbabilityEntry}, \hyperpage{136}
+  \item {shared}
+    \subitem {TransitionTemplate}, \hyperpage{167}
+  \item {sharedCount}
+    \subitem {LocalTransition}, \hyperpage{130}
+  \item {SIZE\_MAX}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{302}
+  \item {startState}
+    \subitem {TransitionTemplate}, \hyperpage{167}
   \item {STATE\_STATUS}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
-  \item {StateVerificationInfo}, \hyperpage{82}
-  \item {StrategyBitsComparator}, \hyperpage{82}
-  \item {StrategyCollection}, \hyperpage{83}
-  \item {StrategyCollectionTemplate}, \hyperpage{83}
-    \subitem {addAction}, \hyperpage{83}
-  \item {StrategyEntry}, \hyperpage{84}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {stateDepths}
+    \subitem {GlobalModelGenerator}, \hyperpage{108}
+  \item {stateHashMapCache}
+    \subitem {GlobalModelGenerator}, \hyperpage{108}
+  \item {stateProbabilityPrevious}
+    \subitem {DecisionEntry}, \hyperpage{35}
+  \item {states}
+    \subitem {Action}, \hyperpage{14}
+    \subitem {ActionTemplate}, \hyperpage{16}
+  \item {statesToProcess}
+    \subitem {VerificationIterative}, \hyperpage{196}
+  \item {StateVerificationInfo}, \hyperpage{152}
+    \subitem {controlled}, \hyperpage{153}
+    \subitem {controlledProbabilisticTransitionsLeftToProcess}, 
+		\hyperpage{153}
+    \subitem {controlledTransitionsLeftToProcess}, \hyperpage{153}
+    \subitem {depth}, \hyperpage{153}
+    \subitem {fromState}, \hyperpage{154}
+    \subitem {globalState}, \hyperpage{154}
+    \subitem {gotResponseFromOtherState}, \hyperpage{154}
+    \subitem {gotThroughPreselectedTransition}, \hyperpage{154}
+    \subitem {hasControlledProbabilistic}, \hyperpage{154}
+    \subitem {hasUncontrolledProbabilistic}, \hyperpage{154}
+    \subitem {hasValidControlledTransition}, \hyperpage{154}
+    \subitem {hasValidUncontrolledTransition}, \hyperpage{154}
+    \subitem {isControlledByCoalition}, \hyperpage{155}
+    \subitem {processed}, \hyperpage{155}
+    \subitem {uncontrolled}, \hyperpage{155}
+    \subitem {uncontrolledProbabilisticTransitionsLeftToProcess}, 
+		\hyperpage{155}
+    \subitem {uncontrolledTransitionsLeftToProcess}, \hyperpage{155}
+    \subitem {verifResult}, \hyperpage{155}
+  \item {stateVerifResult}
+    \subitem {GlobalState}, \hyperpage{112}
+  \item {strat\_create\_buffer\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{302}
+  \item {strat\_delete\_buffer\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{302}
+  \item {strat\_flex\_debug\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{302}
+  \item {strat\_flush\_buffer\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{302}
+  \item {strat\_init\_buffer\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{302}
+  \item {strat\_load\_buffer\_state\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {strat\_scan\_buffer\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {strat\_scan\_bytes\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {strat\_scan\_string}
+    \subitem {strategyParser.c}, \hyperpage{289}
+  \item {strat\_scan\_string\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {strat\_switch\_to\_buffer\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {stratalloc\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {STRATDEBUG}
+    \subitem {strategyParser.h}, \hyperpage{293}
+  \item {strategiesExhausted}
+    \subitem {GlobalModelGenerator}, \hyperpage{108}
+  \item {strategy}
+    \subitem {DecisionEntry}, \hyperpage{35}
+    \subitem {HistoryEntry}, \hyperpage{122}
+  \item {STRATEGY\_BITS}
+    \subitem {TypesDependency.hpp}, \hyperpage{329}
+    \subitem {Verification.hpp}, \hyperpage{342}
+  \item {strategy\_file\_path}
+    \subitem {Cfg}, \hyperpage{30}
+  \item {StrategyBitsComparator}, \hyperpage{156}
+    \subitem {operator()}, \hyperpage{156}
+  \item {StrategyCollection}, \hyperpage{157}
+    \subitem {$\sim$StrategyCollection}, \hyperpage{157}
+    \subitem {addAction}, \hyperpage{158}
+    \subitem {addStrategy}, \hyperpage{158}
+    \subitem {clear}, \hyperpage{158}
+    \subitem {getStrategy}, \hyperpage{158}
+    \subitem {StrategyCollection}, \hyperpage{157, 158}
+  \item {strategyCollection}
+    \subitem {GlobalModelGenerator}, \hyperpage{108}
+  \item {StrategyCollectionTemplate}, \hyperpage{159}
+    \subitem {addAction}, \hyperpage{159}
+    \subitem {selectedStrategy}, \hyperpage{160}
+    \subitem {StrategyCollectionTemplate}, \hyperpage{159}
+  \item {strategyCollectionTemplate}
+    \subitem {strategyParser.c}, \hyperpage{290}
+    \subitem {StrategyParser.cc}, \hyperpage{292}
+  \item {StrategyEntry}, \hyperpage{160}
+    \subitem {actionName}, \hyperpage{161}
+    \subitem {globalValues}, \hyperpage{161}
+    \subitem {type}, \hyperpage{161}
   \item {StrategyEntryType}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
-  \item {strategyNodes.hpp}, \hyperpage{138}
-  \item {StrategyParser}, \hyperpage{84}
-    \subitem {parse}, \hyperpage{84}
-  \item {StrategyParser.cc}, \hyperpage{136}
-  \item {strategyParser.h}, \hyperpage{139}
-  \item {StrategyParser.hpp}, \hyperpage{137}
-  \item {STRATSTYPE}, \hyperpage{85}
-  \item {STV2 -\/ StraTegic Verifier version 2}, \hyperpage{1}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {strategyGenerationInit}
+    \subitem {GlobalModelGenerator}, \hyperpage{108}
+  \item {strategyNodes.cc}, \hyperpage{271}
+  \item {strategyNodes.hpp}, \hyperpage{271}
+  \item {StrategyParser}, \hyperpage{161}
+    \subitem {$\sim$StrategyParser}, \hyperpage{162}
+    \subitem {parse}, \hyperpage{162}
+    \subitem {StrategyParser}, \hyperpage{162}
+  \item {strategyParser.c}, \hyperpage{272}
+    \subitem {free}, \hyperpage{289}
+    \subitem {malloc}, \hyperpage{289}
+    \subitem {set\_input\_string\_strat}, \hyperpage{289}
+    \subitem {strat\_scan\_string}, \hyperpage{289}
+    \subitem {strategyCollectionTemplate}, \hyperpage{290}
+    \subitem {straterror}, \hyperpage{289}
+    \subitem {stratlex}, \hyperpage{289}
+    \subitem {stratrestart}, \hyperpage{290}
+    \subitem {strattext}, \hyperpage{290}
+    \subitem {YY\_}, \hyperpage{275}
+    \subitem {YY\_ACCESSING\_SYMBOL}, \hyperpage{275}
+    \subitem {YY\_ASSERT}, \hyperpage{275}
+    \subitem {YY\_ATTRIBUTE\_PURE}, \hyperpage{275}
+    \subitem {YY\_ATTRIBUTE\_UNUSED}, \hyperpage{276}
+    \subitem {YY\_BUFFER\_STATE}, \hyperpage{286}
+    \subitem {YY\_CAST}, \hyperpage{276}
+    \subitem {YY\_IGNORE\_MAYBE\_UNINITIALIZED\_BEGIN}, \hyperpage{276}
+    \subitem {YY\_IGNORE\_MAYBE\_UNINITIALIZED\_END}, \hyperpage{276}
+    \subitem {YY\_IGNORE\_USELESS\_CAST\_BEGIN}, \hyperpage{276}
+    \subitem {YY\_IGNORE\_USELESS\_CAST\_END}, \hyperpage{276}
+    \subitem {YY\_INITIAL\_VALUE}, \hyperpage{276}
+    \subitem {YY\_NULLPTR}, \hyperpage{277}
+    \subitem {YY\_REDUCE\_PRINT}, \hyperpage{277}
+    \subitem {YY\_REINTERPRET\_CAST}, \hyperpage{277}
+    \subitem {YY\_STACK\_PRINT}, \hyperpage{277}
+    \subitem {yy\_state\_fast\_t}, \hyperpage{286}
+    \subitem {yy\_state\_t}, \hyperpage{286}
+    \subitem {YY\_SYMBOL\_PRINT}, \hyperpage{277}
+    \subitem {YY\_USE}, \hyperpage{277}
+    \subitem {YYABORT}, \hyperpage{278}
+    \subitem {YYACCEPT}, \hyperpage{278}
+    \subitem {YYBACKUP}, \hyperpage{278}
+    \subitem {YYBISON}, \hyperpage{278}
+    \subitem {YYBISON\_VERSION}, \hyperpage{278}
+    \subitem {yychar}, \hyperpage{278}, \hyperpage{290}
+    \subitem {yyclearin}, \hyperpage{279}
+    \subitem {YYCOPY}, \hyperpage{279}
+    \subitem {YYCOPY\_NEEDED}, \hyperpage{279}
+    \subitem {yydebug}, \hyperpage{279}
+    \subitem {YYDPRINTF}, \hyperpage{279}
+    \subitem {YYENOMEM}, \hyperpage{287}
+    \subitem {YYERRCODE}, \hyperpage{279}
+    \subitem {yyerrok}, \hyperpage{280}
+    \subitem {YYERROR}, \hyperpage{280}
+    \subitem {yyerror}, \hyperpage{280}
+    \subitem {YYFINAL}, \hyperpage{280}
+    \subitem {YYFREE}, \hyperpage{280}
+    \subitem {YYINITDEPTH}, \hyperpage{280}
+    \subitem {YYLAST}, \hyperpage{280}
+    \subitem {yylex}, \hyperpage{280}
+    \subitem {yylval}, \hyperpage{281}, \hyperpage{290}
+    \subitem {YYMALLOC}, \hyperpage{281}
+    \subitem {YYMAXDEPTH}, \hyperpage{281}
+    \subitem {YYMAXUTOK}, \hyperpage{281}
+    \subitem {yynerrs}, \hyperpage{281}, \hyperpage{290}
+    \subitem {YYNNTS}, \hyperpage{281}
+    \subitem {YYNOMEM}, \hyperpage{281}
+    \subitem {YYNRULES}, \hyperpage{281}
+    \subitem {YYNSTATES}, \hyperpage{282}
+    \subitem {YYNTOKENS}, \hyperpage{282}
+    \subitem {YYPACT\_NINF}, \hyperpage{282}
+    \subitem {yypact\_value\_is\_default}, \hyperpage{282}
+    \subitem {yyparse}, \hyperpage{282}
+    \subitem {YYPOPSTACK}, \hyperpage{282}
+    \subitem {YYPTRDIFF\_MAXIMUM}, \hyperpage{282}
+    \subitem {YYPTRDIFF\_T}, \hyperpage{283}
+    \subitem {YYPULL}, \hyperpage{283}
+    \subitem {YYPURE}, \hyperpage{283}
+    \subitem {YYPUSH}, \hyperpage{283}
+    \subitem {YYRECOVERING}, \hyperpage{283}
+    \subitem {YYSIZE\_MAXIMUM}, \hyperpage{283}
+    \subitem {YYSIZE\_T}, \hyperpage{283}
+    \subitem {YYSIZEOF}, \hyperpage{284}
+    \subitem {YYSKELETON\_NAME}, \hyperpage{284}
+    \subitem {YYSTACK\_ALLOC}, \hyperpage{284}
+    \subitem {YYSTACK\_ALLOC\_MAXIMUM}, \hyperpage{284}
+    \subitem {YYSTACK\_BYTES}, \hyperpage{284}
+    \subitem {YYSTACK\_FREE}, \hyperpage{284}
+    \subitem {YYSTACK\_GAP\_MAXIMUM}, \hyperpage{284}
+    \subitem {YYSTACK\_RELOCATE}, \hyperpage{285}
+    \subitem {YYSTYPE}, \hyperpage{285}
+    \subitem {YYSYMBOL\_17\_}, \hyperpage{289}
+    \subitem {YYSYMBOL\_27\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_28\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_29\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_30\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_31\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_32\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_33\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_34\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_35\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_36\_}, \hyperpage{287}
+    \subitem {YYSYMBOL\_37\_}, \hyperpage{288}
+    \subitem {YYSYMBOL\_38\_}, \hyperpage{288}
+    \subitem {YYSYMBOL\_agent}, \hyperpage{288}
+    \subitem {YYSYMBOL\_assign\_list}, \hyperpage{288}
+    \subitem {YYSYMBOL\_assignment}, \hyperpage{288}
+    \subitem {YYSYMBOL\_assignments}, \hyperpage{288}
+    \subitem {YYSYMBOL\_coalition}, \hyperpage{288}
+    \subitem {YYSYMBOL\_cond}, \hyperpage{288}
+    \subitem {YYSYMBOL\_cond\_and}, \hyperpage{288}
+    \subitem {YYSYMBOL\_cond\_elem}, \hyperpage{288}
+    \subitem {YYSYMBOL\_cond\_list}, \hyperpage{288}
+    \subitem {YYSYMBOL\_condition}, \hyperpage{288}
+    \subitem {YYSYMBOL\_description}, \hyperpage{288}
+    \subitem {YYSYMBOL\_formula}, \hyperpage{288}
+    \subitem {YYSYMBOL\_ident\_list}, \hyperpage{288, 289}
+    \subitem {YYSYMBOL\_initial}, \hyperpage{288}
+    \subitem {yysymbol\_kind\_t}, \hyperpage{286, 287}
+    \subitem {YYSYMBOL\_local}, \hyperpage{288}
+    \subitem {YYSYMBOL\_model}, \hyperpage{288}
+    \subitem {YYSYMBOL\_num\_elem}, \hyperpage{288}
+    \subitem {YYSYMBOL\_num\_exp}, \hyperpage{288}
+    \subitem {YYSYMBOL\_num\_mul}, \hyperpage{288}
+    \subitem {YYSYMBOL\_persistent}, \hyperpage{288}
+    \subitem {YYSYMBOL\_prob\_elem}, \hyperpage{288}
+    \subitem {YYSYMBOL\_prob\_exp}, \hyperpage{288}
+    \subitem {YYSYMBOL\_prob\_mul}, \hyperpage{288}
+    \subitem {YYSYMBOL\_probability\_equality}, \hyperpage{288}
+    \subitem {YYSYMBOL\_query}, \hyperpage{288}
+    \subitem {YYSYMBOL\_shared}, \hyperpage{288}
+    \subitem {YYSYMBOL\_spec}, \hyperpage{288}
+    \subitem {YYSYMBOL\_strat}, \hyperpage{289}
+    \subitem {YYSYMBOL\_T\_AGENT}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_AND}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_ASSIGN}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_EQ}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_FLOAT}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_FORMULA}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_GE}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_GT}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_HARTLEY}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_IDENT}, \hyperpage{287}, \hyperpage{289}
+    \subitem {YYSYMBOL\_T\_INIT}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_INITIAL}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_KNOW}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_LE}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_LOCAL}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_LT}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_NE}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_NUM}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_OR}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_PERSISTENT}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_PROB}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_REST}, \hyperpage{287}
+    \subitem {YYSYMBOL\_T\_SHARED}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_T\_TO}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_transition}, \hyperpage{288}
+    \subitem {YYSYMBOL\_YYACCEPT}, \hyperpage{288, 289}
+    \subitem {YYSYMBOL\_YYEMPTY}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_YYEOF}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_YYerror}, \hyperpage{287, 288}
+    \subitem {YYSYMBOL\_YYUNDEF}, \hyperpage{287, 288}
+    \subitem {YYTABLE\_NINF}, \hyperpage{285}
+    \subitem {yytable\_value\_is\_error}, \hyperpage{285}
+    \subitem {YYTRANSLATE}, \hyperpage{285}
+    \subitem {yytype\_int16}, \hyperpage{286}
+    \subitem {yytype\_int8}, \hyperpage{286}
+    \subitem {yytype\_uint16}, \hyperpage{286}
+    \subitem {yytype\_uint8}, \hyperpage{286}
+  \item {StrategyParser.cc}, \hyperpage{291}
+    \subitem {set\_input\_string\_strat}, \hyperpage{291}
+    \subitem {strategyCollectionTemplate}, \hyperpage{292}
+    \subitem {stratparse}, \hyperpage{291}
+    \subitem {stratrestart}, \hyperpage{292}
+  \item {strategyParser.h}, \hyperpage{292}
+    \subitem {STRATDEBUG}, \hyperpage{293}
+    \subitem {STRATEMPTY}, \hyperpage{294}
+    \subitem {STRATEOF}, \hyperpage{294}
+    \subitem {STRATerror}, \hyperpage{294}
+    \subitem {stratlval}, \hyperpage{295}
+    \subitem {stratparse}, \hyperpage{295}
+    \subitem {STRATSTYPE}, \hyperpage{294}
+    \subitem {STRATSTYPE\_IS\_DECLARED}, \hyperpage{293}
+    \subitem {STRATSTYPE\_IS\_TRIVIAL}, \hyperpage{293}
+    \subitem {strattoken\_kind\_t}, \hyperpage{294}
+    \subitem {STRATTOKENTYPE}, \hyperpage{293}
+    \subitem {strattokentype}, \hyperpage{294}
+    \subitem {STRATUNDEF}, \hyperpage{294}
+    \subitem {T\_AND}, \hyperpage{294}
+    \subitem {T\_ASSIGN}, \hyperpage{294}
+    \subitem {T\_EQ}, \hyperpage{294}
+    \subitem {T\_FLOAT}, \hyperpage{294}
+    \subitem {T\_GE}, \hyperpage{294}
+    \subitem {T\_GT}, \hyperpage{294}
+    \subitem {T\_IDENT}, \hyperpage{294}
+    \subitem {T\_LE}, \hyperpage{294}
+    \subitem {T\_LT}, \hyperpage{294}
+    \subitem {T\_NE}, \hyperpage{294}
+    \subitem {T\_NUM}, \hyperpage{294}
+    \subitem {T\_OR}, \hyperpage{294}
+    \subitem {T\_SHARED}, \hyperpage{294}
+    \subitem {T\_TO}, \hyperpage{294}
+  \item {StrategyParser.hpp}, \hyperpage{295}
+  \item {strategyScanner.c}, \hyperpage{296}
+    \subitem {BEGIN}, \hyperpage{300}
+    \subitem {ECHO}, \hyperpage{300}
+    \subitem {EOB\_ACT\_CONTINUE\_SCAN}, \hyperpage{300}
+    \subitem {EOB\_ACT\_END\_OF\_FILE}, \hyperpage{300}
+    \subitem {EOB\_ACT\_LAST\_MATCH}, \hyperpage{300}
+    \subitem {FLEX\_BETA}, \hyperpage{300}
+    \subitem {flex\_int16\_t}, \hyperpage{319}
+    \subitem {flex\_int32\_t}, \hyperpage{319}
+    \subitem {flex\_int8\_t}, \hyperpage{319}
+    \subitem {FLEX\_SCANNER}, \hyperpage{301}
+    \subitem {flex\_uint16\_t}, \hyperpage{319}
+    \subitem {flex\_uint32\_t}, \hyperpage{320}
+    \subitem {flex\_uint8\_t}, \hyperpage{320}
+    \subitem {FLEXINT\_H}, \hyperpage{301}
+    \subitem {if}, \hyperpage{320}
+    \subitem {INITIAL}, \hyperpage{301}
+    \subitem {INT16\_MAX}, \hyperpage{301}
+    \subitem {INT16\_MIN}, \hyperpage{301}
+    \subitem {INT32\_MAX}, \hyperpage{301}
+    \subitem {INT32\_MIN}, \hyperpage{301}
+    \subitem {INT8\_MAX}, \hyperpage{301}
+    \subitem {INT8\_MIN}, \hyperpage{302}
+    \subitem {REJECT}, \hyperpage{302}
+    \subitem {SIZE\_MAX}, \hyperpage{302}
+    \subitem {strat\_create\_buffer\_ALREADY\_DEFINED}, \hyperpage{302}
+    \subitem {strat\_delete\_buffer\_ALREADY\_DEFINED}, \hyperpage{302}
+    \subitem {strat\_flex\_debug\_ALREADY\_DEFINED}, \hyperpage{302}
+    \subitem {strat\_flush\_buffer\_ALREADY\_DEFINED}, \hyperpage{302}
+    \subitem {strat\_init\_buffer\_ALREADY\_DEFINED}, \hyperpage{302}
+    \subitem {strat\_load\_buffer\_state\_ALREADY\_DEFINED}, 
+		\hyperpage{303}
+    \subitem {strat\_scan\_buffer\_ALREADY\_DEFINED}, \hyperpage{303}
+    \subitem {strat\_scan\_bytes\_ALREADY\_DEFINED}, \hyperpage{303}
+    \subitem {strat\_scan\_string\_ALREADY\_DEFINED}, \hyperpage{303}
+    \subitem {strat\_switch\_to\_buffer\_ALREADY\_DEFINED}, 
+		\hyperpage{303}
+    \subitem {stratalloc\_ALREADY\_DEFINED}, \hyperpage{303}
+    \subitem {stratensure\_buffer\_stack\_ALREADY\_DEFINED}, 
+		\hyperpage{303}
+    \subitem {stratfree\_ALREADY\_DEFINED}, \hyperpage{303}
+    \subitem {stratin\_ALREADY\_DEFINED}, \hyperpage{304}
+    \subitem {stratleng\_ALREADY\_DEFINED}, \hyperpage{304}
+    \subitem {stratlex}, \hyperpage{321}
+    \subitem {stratlex\_ALREADY\_DEFINED}, \hyperpage{304}
+    \subitem {stratlineno\_ALREADY\_DEFINED}, \hyperpage{304}
+    \subitem {stratout\_ALREADY\_DEFINED}, \hyperpage{304}
+    \subitem {stratpop\_buffer\_state\_ALREADY\_DEFINED}, 
+		\hyperpage{304}
+    \subitem {stratpush\_buffer\_state\_ALREADY\_DEFINED}, 
+		\hyperpage{304}
+    \subitem {stratrealloc\_ALREADY\_DEFINED}, \hyperpage{304}
+    \subitem {stratrestart\_ALREADY\_DEFINED}, \hyperpage{305}
+    \subitem {strattext\_ALREADY\_DEFINED}, \hyperpage{305}
+    \subitem {stratwrap}, \hyperpage{305}
+    \subitem {stratwrap\_ALREADY\_DEFINED}, \hyperpage{305}
+    \subitem {UINT16\_MAX}, \hyperpage{305}
+    \subitem {UINT32\_MAX}, \hyperpage{305}
+    \subitem {UINT8\_MAX}, \hyperpage{305}
+    \subitem {unput}, \hyperpage{305}
+    \subitem {yy\_act}, \hyperpage{323}
+    \subitem {YY\_AT\_BOL}, \hyperpage{306}
+    \subitem {yy\_bp}, \hyperpage{323}
+    \subitem {YY\_BREAK}, \hyperpage{306}
+    \subitem {YY\_BUF\_SIZE}, \hyperpage{306}
+    \subitem {YY\_BUFFER\_EOF\_PENDING}, \hyperpage{306}
+    \subitem {YY\_BUFFER\_NEW}, \hyperpage{306}
+    \subitem {YY\_BUFFER\_NORMAL}, \hyperpage{306}
+    \subitem {YY\_BUFFER\_STATE}, \hyperpage{320}
+    \subitem {YY\_CHAR}, \hyperpage{320}
+    \subitem {yy\_cp}, \hyperpage{324}
+    \subitem {yy\_create\_buffer}, \hyperpage{306}, \hyperpage{321}
+    \subitem {YY\_CURRENT\_BUFFER}, \hyperpage{307}
+    \subitem {YY\_CURRENT\_BUFFER\_LVALUE}, \hyperpage{307}
+    \subitem {YY\_DECL}, \hyperpage{307}, \hyperpage{324}
+    \subitem {YY\_DECL\_IS\_OURS}, \hyperpage{307}
+    \subitem {yy\_delete\_buffer}, \hyperpage{307}, \hyperpage{321}
+    \subitem {YY\_DO\_BEFORE\_ACTION}, \hyperpage{307}
+    \subitem {YY\_END\_OF\_BUFFER}, \hyperpage{307}
+    \subitem {YY\_END\_OF\_BUFFER\_CHAR}, \hyperpage{308}
+    \subitem {YY\_EXIT\_FAILURE}, \hyperpage{308}
+    \subitem {YY\_EXTRA\_TYPE}, \hyperpage{308}
+    \subitem {YY\_FATAL\_ERROR}, \hyperpage{308}
+    \subitem {yy\_flex\_debug}, \hyperpage{308}, \hyperpage{324}
+    \subitem {YY\_FLEX\_MAJOR\_VERSION}, \hyperpage{308}
+    \subitem {YY\_FLEX\_MINOR\_VERSION}, \hyperpage{308}
+    \subitem {YY\_FLEX\_SUBMINOR\_VERSION}, \hyperpage{309}
+    \subitem {YY\_FLUSH\_BUFFER}, \hyperpage{309}
+    \subitem {yy\_flush\_buffer}, \hyperpage{309}, \hyperpage{321}
+    \subitem {yy\_init\_buffer}, \hyperpage{309}
+    \subitem {YY\_INPUT}, \hyperpage{309}
+    \subitem {YY\_INT\_ALIGNED}, \hyperpage{309}
+    \subitem {YY\_LESS\_LINENO}, \hyperpage{310}
+    \subitem {YY\_LINENO\_REWIND\_TO}, \hyperpage{310}
+    \subitem {yy\_load\_buffer\_state}, \hyperpage{310}
+    \subitem {YY\_MORE\_ADJ}, \hyperpage{310}
+    \subitem {yy\_new\_buffer}, \hyperpage{310}
+    \subitem {YY\_NEW\_FILE}, \hyperpage{310}
+    \subitem {YY\_NULL}, \hyperpage{310}
+    \subitem {YY\_NUM\_RULES}, \hyperpage{311}
+    \subitem {YY\_READ\_BUF\_SIZE}, \hyperpage{311}
+    \subitem {YY\_RESTORE\_YY\_MORE\_OFFSET}, \hyperpage{311}
+    \subitem {YY\_RULE\_SETUP}, \hyperpage{311}
+    \subitem {YY\_SC\_TO\_UI}, \hyperpage{311}
+    \subitem {yy\_scan\_buffer}, \hyperpage{311}, \hyperpage{321}
+    \subitem {yy\_scan\_bytes}, \hyperpage{311}, \hyperpage{321}
+    \subitem {yy\_scan\_string}, \hyperpage{312}, \hyperpage{321}
+    \subitem {yy\_set\_bol}, \hyperpage{312}
+    \subitem {yy\_set\_interactive}, \hyperpage{312}
+    \subitem {yy\_size\_t}, \hyperpage{320}
+    \subitem {YY\_SKIP\_YYWRAP}, \hyperpage{312}
+    \subitem {YY\_START}, \hyperpage{312}
+    \subitem {YY\_START\_STACK\_INCR}, \hyperpage{313}
+    \subitem {YY\_STATE\_BUF\_SIZE}, \hyperpage{313}
+    \subitem {YY\_STATE\_EOF}, \hyperpage{313}
+    \subitem {yy\_state\_type}, \hyperpage{320}
+    \subitem {YY\_STRUCT\_YY\_BUFFER\_STATE}, \hyperpage{313}
+    \subitem {yy\_switch\_to\_buffer}, \hyperpage{313}, \hyperpage{322}
+    \subitem {YY\_TYPEDEF\_YY\_BUFFER\_STATE}, \hyperpage{313}
+    \subitem {YY\_TYPEDEF\_YY\_SIZE\_T}, \hyperpage{313}
+    \subitem {YY\_USER\_ACTION}, \hyperpage{314}
+    \subitem {yyalloc}, \hyperpage{314}, \hyperpage{322}
+    \subitem {yyconst}, \hyperpage{314}
+    \subitem {yyensure\_buffer\_stack}, \hyperpage{314}
+    \subitem {yyfree}, \hyperpage{314}, \hyperpage{322}
+    \subitem {yyget\_debug}, \hyperpage{314}
+    \subitem {yyget\_extra}, \hyperpage{314}
+    \subitem {yyget\_in}, \hyperpage{314}
+    \subitem {yyget\_leng}, \hyperpage{315}
+    \subitem {yyget\_lineno}, \hyperpage{315}
+    \subitem {yyget\_out}, \hyperpage{315}
+    \subitem {yyget\_text}, \hyperpage{315}
+    \subitem {yyin}, \hyperpage{315}, \hyperpage{324}
+    \subitem {yyleng}, \hyperpage{315}, \hyperpage{324}
+    \subitem {yyless}, \hyperpage{315, 316}
+    \subitem {yylex}, \hyperpage{316}
+    \subitem {yylex\_destroy}, \hyperpage{316}
+    \subitem {yylex\_init}, \hyperpage{316}
+    \subitem {yylex\_init\_extra}, \hyperpage{316}
+    \subitem {yylineno}, \hyperpage{317}, \hyperpage{324}
+    \subitem {yymore}, \hyperpage{317}
+    \subitem {yynoreturn}, \hyperpage{317}
+    \subitem {yyout}, \hyperpage{317}, \hyperpage{324}
+    \subitem {yypop\_buffer\_state}, \hyperpage{317}
+    \subitem {yypush\_buffer\_state}, \hyperpage{317}, \hyperpage{322}
+    \subitem {yyrealloc}, \hyperpage{317}, \hyperpage{322}
+    \subitem {yyrestart}, \hyperpage{317}, \hyperpage{322}
+    \subitem {yyset\_debug}, \hyperpage{318}, \hyperpage{322}
+    \subitem {yyset\_extra}, \hyperpage{318}, \hyperpage{323}
+    \subitem {yyset\_in}, \hyperpage{318}, \hyperpage{323}
+    \subitem {yyset\_lineno}, \hyperpage{318}, \hyperpage{323}
+    \subitem {yyset\_out}, \hyperpage{318}, \hyperpage{323}
+    \subitem {YYSTATE}, \hyperpage{318}
+    \subitem {YYTABLES\_NAME}, \hyperpage{318}
+    \subitem {yyterminate}, \hyperpage{318}
+    \subitem {yytext}, \hyperpage{319}, \hyperpage{325}
+    \subitem {yytext\_ptr}, \hyperpage{319}
+    \subitem {yywrap}, \hyperpage{319}
+  \item {strategyScanner.l}, \hyperpage{325}
+  \item {strategyVariableLimit}
+    \subitem {Verification}, \hyperpage{184}
+    \subitem {VerificationIterative}, \hyperpage{196}
+  \item {STRATEMPTY}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {stratensure\_buffer\_stack\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {STRATEOF}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {STRATerror}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {straterror}
+    \subitem {strategyParser.c}, \hyperpage{289}
+  \item {stratfree\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{303}
+  \item {stratin\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratleng\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratlex}
+    \subitem {strategyParser.c}, \hyperpage{289}
+    \subitem {strategyScanner.c}, \hyperpage{321}
+  \item {stratlex\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratlineno\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratlval}
+    \subitem {strategyParser.h}, \hyperpage{295}
+  \item {stratout\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratparse}
+    \subitem {StrategyParser.cc}, \hyperpage{291}
+    \subitem {strategyParser.h}, \hyperpage{295}
+  \item {stratpop\_buffer\_state\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratpush\_buffer\_state\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratrealloc\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{304}
+  \item {stratrestart}
+    \subitem {strategyParser.c}, \hyperpage{290}
+    \subitem {StrategyParser.cc}, \hyperpage{292}
+  \item {stratrestart\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {STRATSTYPE}, \hyperpage{163}
+    \subitem {expr}, \hyperpage{163}
+    \subitem {floatno}, \hyperpage{164}
+    \subitem {ident}, \hyperpage{164}
+    \subitem {identList}, \hyperpage{164}
+    \subitem {strategyParser.h}, \hyperpage{294}
+    \subitem {val}, \hyperpage{164}
+  \item {STRATSTYPE\_IS\_DECLARED}
+    \subitem {strategyParser.h}, \hyperpage{293}
+  \item {STRATSTYPE\_IS\_TRIVIAL}
+    \subitem {strategyParser.h}, \hyperpage{293}
+  \item {strattext}
+    \subitem {strategyParser.c}, \hyperpage{290}
+  \item {strattext\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {strattoken\_kind\_t}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {STRATTOKENTYPE}
+    \subitem {strategyParser.h}, \hyperpage{293}
+  \item {strattokentype}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {STRATUNDEF}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {stratwrap}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {stratwrap\_ALREADY\_DEFINED}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {stv\_mode}
+    \subitem {Cfg}, \hyperpage{30}
   \item {styleString}
-    \subitem {DotGraph}, \hyperpage{25}
+    \subitem {DotGraph}, \hyperpage{39}
+  \item {SUM\_PROBABILITY}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
 
   \indexspace
 
+  \item {T\_AGENT}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {T\_AND}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_ASSIGN}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_EQ}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_FLOAT}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_FORMULA}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {T\_GE}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_GT}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_HARTLEY}
+    \subitem {parser.h}, \hyperpage{249}
+  \item {T\_IDENT}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_INIT}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {T\_INITIAL}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {T\_KNOW}
+    \subitem {parser.h}, \hyperpage{249}
+  \item {T\_LE}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_LOCAL}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {T\_LT}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_NE}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_NUM}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_OR}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_PERSISTENT}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {T\_PROB}
+    \subitem {parser.h}, \hyperpage{249}
+  \item {T\_REST}
+    \subitem {parser.h}, \hyperpage{249}
+  \item {T\_SHARED}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.h}, \hyperpage{294}
+  \item {T\_TO}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {strategyParser.h}, \hyperpage{294}
   \item {tarjanVisit}
-    \subitem {Utils.cpp}, \hyperpage{148}
+    \subitem {Utils.cpp}, \hyperpage{334}
+  \item {test.cpp}, \hyperpage{325}
+    \subitem {config}, \hyperpage{326}
+    \subitem {main}, \hyperpage{325}
   \item {testForAndFixBadAgents}
-    \subitem {VerificationIterative}, \hyperpage{109}
+    \subitem {VerificationIterative}, \hyperpage{194}
+  \item {to}
+    \subitem {GlobalTransition}, \hyperpage{116}
+    \subitem {LocalTransition}, \hyperpage{131}
   \item {toString}
-    \subitem {GlobalState}, \hyperpage{64}
-    \subitem {HistoryEntry}, \hyperpage{68}
-    \subitem {LocalState}, \hyperpage{70}
-  \item {TransitionTemplate}, \hyperpage{85}
-    \subitem {TransitionTemplate}, \hyperpage{86}
+    \subitem {DecisionEntry}, \hyperpage{33}
+    \subitem {GlobalState}, \hyperpage{110}
+    \subitem {HistoryEntry}, \hyperpage{121}
+    \subitem {LocalState}, \hyperpage{125}
+  \item {trans}
+    \subitem {YYSTYPE}, \hyperpage{203}
+  \item {transitions}
+    \subitem {LocalStateTemplate}, \hyperpage{128}
+  \item {TransitionTemplate}, \hyperpage{164}
+    \subitem {assignments}, \hyperpage{166}
+    \subitem {condition}, \hyperpage{166}
+    \subitem {endState}, \hyperpage{166}
+    \subitem {matchName}, \hyperpage{166}
+    \subitem {patternName}, \hyperpage{166}
+    \subitem {probability}, \hyperpage{167}
+    \subitem {shared}, \hyperpage{167}
+    \subitem {startState}, \hyperpage{167}
+    \subitem {TransitionTemplate}, \hyperpage{165}
   \item {TraversalMode}
-    \subitem {Verification.hpp}, \hyperpage{154}
-  \item {Types.hpp}, \hyperpage{140, 141}
-    \subitem {EQ}, \hyperpage{141}
-    \subitem {GE}, \hyperpage{141}
-    \subitem {GT}, \hyperpage{141}
-    \subitem {LE}, \hyperpage{141}
-    \subitem {LT}, \hyperpage{141}
-    \subitem {NE}, \hyperpage{141}
-    \subitem {NONE}, \hyperpage{141}
-    \subitem {ProbabilitySign}, \hyperpage{141}
-  \item {TypesDependency.hpp}, \hyperpage{142}, \hyperpage{144}
-    \subitem {ADDED}, \hyperpage{144}
-    \subitem {ANSWER\_PROBABILITY}, \hyperpage{144}
-    \subitem {CONTEXT}, \hyperpage{144}
-    \subitem {DECISION}, \hyperpage{144}
-    \subitem {HistoryEntryType}, \hyperpage{143}
-    \subitem {MARK\_DECISION\_AS\_INVALID}, \hyperpage{144}
-    \subitem {NOT\_MODIFIED}, \hyperpage{144}
-    \subitem {PROBABILITY}, \hyperpage{144}
-    \subitem {STATE\_STATUS}, \hyperpage{144}
-    \subitem {StrategyEntryType}, \hyperpage{144}
-    \subitem {UNCONTROLLED\_DECISION}, \hyperpage{144}
+    \subitem {Verification.hpp}, \hyperpage{342}
+  \item {TRUE}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {type}
+    \subitem {DecisionEntry}, \hyperpage{35}
+    \subitem {HistoryEntry}, \hyperpage{122}
+    \subitem {StrategyEntry}, \hyperpage{161}
+  \item {Types.hpp}, \hyperpage{326}
+    \subitem {EQ}, \hyperpage{327}
+    \subitem {F}, \hyperpage{328}
+    \subitem {G}, \hyperpage{328}
+    \subitem {GE}, \hyperpage{327}
+    \subitem {GT}, \hyperpage{327}
+    \subitem {LE}, \hyperpage{327}
+    \subitem {LT}, \hyperpage{327}
+    \subitem {NE}, \hyperpage{327}
+    \subitem {NONE}, \hyperpage{327}
+    \subitem {NOT\_SET}, \hyperpage{328}
+    \subitem {ProbabilitySign}, \hyperpage{327}
+    \subitem {VerificationFormulaMode}, \hyperpage{328}
+  \item {TypesDependency.hpp}, \hyperpage{328}
+    \subitem {ADDED}, \hyperpage{330}
+    \subitem {ANSWER\_PROBABILITY}, \hyperpage{330}
+    \subitem {CONTEXT}, \hyperpage{330}
+    \subitem {DECISION}, \hyperpage{330}
+    \subitem {FALSE}, \hyperpage{330}
+    \subitem {HistoryEntryType}, \hyperpage{329}
+    \subitem {MARK\_DECISION\_AS\_INVALID}, \hyperpage{330}
+    \subitem {MIN\_PROBABILITY}, \hyperpage{330}
+    \subitem {NONE\_PROBABILITY}, \hyperpage{330}
+    \subitem {NOT\_MODIFIED}, \hyperpage{330}
+    \subitem {NOT\_VERIFIED}, \hyperpage{330}
+    \subitem {PROBABILITY}, \hyperpage{330}
+    \subitem {ProbabilityCalculationType}, \hyperpage{330}
+    \subitem {STATE\_STATUS}, \hyperpage{330}
+    \subitem {STRATEGY\_BITS}, \hyperpage{329}
+    \subitem {StrategyEntryType}, \hyperpage{330}
+    \subitem {SUM\_PROBABILITY}, \hyperpage{330}
+    \subitem {TRUE}, \hyperpage{330}
+    \subitem {UNCONTROLLED\_DECISION}, \hyperpage{330}
+    \subitem {VerifResult}, \hyperpage{330}
 
   \indexspace
 
+  \item {UINT16\_MAX}
+    \subitem {scanner.c}, \hyperpage{254}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {UINT32\_MAX}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {UINT8\_MAX}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {uncontrolled}
+    \subitem {StateVerificationInfo}, \hyperpage{155}
   \item {UNCONTROLLED\_DECISION}
-    \subitem {TypesDependency.hpp}, \hyperpage{144}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {uncontrolledProbabilisticTransitionsLeftToProcess}
+    \subitem {StateVerificationInfo}, \hyperpage{155}
+  \item {uncontrolledTransitionsLeftToProcess}
+    \subitem {StateVerificationInfo}, \hyperpage{155}
   \item {undoHistoryUntil}
-    \subitem {Verification}, \hyperpage{99}
+    \subitem {Verification}, \hyperpage{180}
   \item {undoLastHistoryEntry}
-    \subitem {Verification}, \hyperpage{99}
-  \item {Utils.cpp}, \hyperpage{146}
-    \subitem {agentToString}, \hyperpage{147}
-    \subitem {envToString}, \hyperpage{147}
-    \subitem {getLocalStatesSCC}, \hyperpage{147}
-    \subitem {localModelsToString}, \hyperpage{148}
-    \subitem {outputGlobalModel}, \hyperpage{148}
-    \subitem {tarjanVisit}, \hyperpage{148}
-  \item {Utils.hpp}, \hyperpage{149}, \hyperpage{151}
-    \subitem {agentToString}, \hyperpage{149}
-    \subitem {envToString}, \hyperpage{150}
-    \subitem {getLocalStatesSCC}, \hyperpage{150}
-    \subitem {localModelsToString}, \hyperpage{150}
-    \subitem {outputGlobalModel}, \hyperpage{151}
+    \subitem {Verification}, \hyperpage{181}
+    \subitem {VerificationIterative}, \hyperpage{194}
+  \item {unput}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{305}
+  \item {UNVERIFIED}
+    \subitem {GlobalStateVerificationStatus.hpp}, \hyperpage{219}
+  \item {Utils.cpp}, \hyperpage{331}
+    \subitem {agentToString}, \hyperpage{332}
+    \subitem {config}, \hyperpage{335}
+    \subitem {envToString}, \hyperpage{332}
+    \subitem {getContextModel}, \hyperpage{332}
+    \subitem {getLocalStatesSCC}, \hyperpage{333}
+    \subitem {getMemCap}, \hyperpage{333}
+    \subitem {loadConfigFromArgs}, \hyperpage{333}
+    \subitem {loadConfigFromFile}, \hyperpage{333}
+    \subitem {localModelsToString}, \hyperpage{333}
+    \subitem {outputGlobalModel}, \hyperpage{334}
+    \subitem {tarjanVisit}, \hyperpage{334}
+  \item {Utils.hpp}, \hyperpage{335}
+    \subitem {agentToString}, \hyperpage{336}
+    \subitem {envToString}, \hyperpage{336}
+    \subitem {getContextModel}, \hyperpage{337}
+    \subitem {getLocalStatesSCC}, \hyperpage{337}
+    \subitem {getMemCap}, \hyperpage{337}
+    \subitem {loadConfigFromArgs}, \hyperpage{337}
+    \subitem {loadConfigFromFile}, \hyperpage{337}
+    \subitem {localModelsToString}, \hyperpage{338}
+    \subitem {outputGlobalModel}, \hyperpage{338}
 
   \indexspace
 
-  \item {Var}, \hyperpage{87}
-  \item {Verification}, \hyperpage{87}
-    \subitem {addHistoryContext}, \hyperpage{90}
-    \subitem {addHistoryDecision}, \hyperpage{90}
-    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{90}
-    \subitem {addHistoryStateStatus}, \hyperpage{92}
-    \subitem {addHistoryUncontrolledDecision}, \hyperpage{92}
-    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{92}
-    \subitem {checkUncontrolledSet}, \hyperpage{93}
-    \subitem {equivalentGlobalTransitions}, \hyperpage{93}
-    \subitem {getEpistemicClassForGlobalState}, \hyperpage{93}
-    \subitem {getNaturalStrategy}, \hyperpage{95}
-    \subitem {getReducedStrategy}, \hyperpage{95}
-    \subitem {getStrategyComplexity}, \hyperpage{95}
-    \subitem {globalStateToValueBits}, \hyperpage{95}
-    \subitem {increaseProbability}, \hyperpage{96}
-    \subitem {isAgentInCoalition}, \hyperpage{96}
-    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{96}
-    \subitem {lowerProbability}, \hyperpage{97}
-    \subitem {newHistoryMarkDecisionAsInvalid}, \hyperpage{97}
-    \subitem {printCurrentHistory}, \hyperpage{97}
-    \subitem {reduceStrategy}, \hyperpage{98}
-    \subitem {restoreHistory}, \hyperpage{98}
-    \subitem {revertLastDecision}, \hyperpage{98}
-    \subitem {undoHistoryUntil}, \hyperpage{99}
-    \subitem {undoLastHistoryEntry}, \hyperpage{99}
-    \subitem {Verification}, \hyperpage{89}
-    \subitem {verify}, \hyperpage{99}
-    \subitem {verifyGlobalState}, \hyperpage{100}
-    \subitem {verifyLocalStates}, \hyperpage{100}
-    \subitem {verifyStrategy}, \hyperpage{100}
-    \subitem {verifyTransitionSets}, \hyperpage{100}
-  \item {Verification.cpp}, \hyperpage{151}
-    \subitem {dbgHistEnt}, \hyperpage{152}
-    \subitem {dbgVerifStatus}, \hyperpage{152}
-    \subitem {verStatusToStr}, \hyperpage{153}
-  \item {Verification.hpp}, \hyperpage{153, 154}
-    \subitem {NORMAL}, \hyperpage{154}
-    \subitem {RESTORE}, \hyperpage{154}
-    \subitem {REVERT}, \hyperpage{154}
-    \subitem {TraversalMode}, \hyperpage{154}
-    \subitem {verStatusToStr}, \hyperpage{154}
-  \item {VerificationIterative}, \hyperpage{101}
-    \subitem {addHistoryAnswerProbability}, \hyperpage{103}
-    \subitem {addHistoryContext}, \hyperpage{104}
-    \subitem {addHistoryDecision}, \hyperpage{104}
-    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{104}
-    \subitem {addHistoryStateStatus}, \hyperpage{105}
-    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{105}
-    \subitem {checkIfProbabilistic}, \hyperpage{105}
-    \subitem {dissolveLoopedProbabilityTransition}, \hyperpage{106}
-    \subitem {equivalentGlobalTransitions}, \hyperpage{106}
-    \subitem {findLoopedProbabilityTransitions}, \hyperpage{106}
-    \subitem {getEpistemicClassForGlobalState}, \hyperpage{107}
-    \subitem {getNaturalStrategy}, \hyperpage{107}
-    \subitem {getReducedStrategy}, \hyperpage{107}
-    \subitem {getStrategyComplexity}, \hyperpage{107}
-    \subitem {globalStateToValueBits}, \hyperpage{108}
-    \subitem {isAgentInCoalition}, \hyperpage{108}
-    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{108}
-    \subitem {reduceStrategy}, \hyperpage{109}
-    \subitem {revertToLastDecision}, \hyperpage{109}
-    \subitem {testForAndFixBadAgents}, \hyperpage{109}
-    \subitem {VerificationIterative}, \hyperpage{103}
-    \subitem {verify}, \hyperpage{110}
-    \subitem {verifyLocalStates}, \hyperpage{110}
-  \item {VerificationIterative.cpp}, \hyperpage{156}
-    \subitem {verifStatusToStr}, \hyperpage{157}
-  \item {VerificationIterative.hpp}, \hyperpage{157, 158}
-    \subitem {GraphTraversalMode}, \hyperpage{157}
-    \subitem {NORMAL\_TRAVERSAL}, \hyperpage{158}
-    \subitem {RESTORE\_STATES}, \hyperpage{158}
-    \subitem {verifStatusToStr}, \hyperpage{158}
+  \item {val}
+    \subitem {STRATSTYPE}, \hyperpage{164}
+    \subitem {YYSTYPE}, \hyperpage{204}
+  \item {value}
+    \subitem {Assignment}, \hyperpage{26}
+  \item {Var}, \hyperpage{167}
+    \subitem {agent}, \hyperpage{168}
+    \subitem {initialValue}, \hyperpage{168}
+    \subitem {name}, \hyperpage{168}
+    \subitem {persistent}, \hyperpage{168}
+  \item {var}
+    \subitem {Condition}, \hyperpage{32}
+  \item {variableNames}
+    \subitem {Verification}, \hyperpage{184}
+    \subitem {VerificationIterative}, \hyperpage{197}
+  \item {vars}
+    \subitem {Agent}, \hyperpage{19}
+  \item {VERBOSE}
+    \subitem {Constants.hpp}, \hyperpage{208}
+  \item {Verification}, \hyperpage{169}
+    \subitem {$\sim$Verification}, \hyperpage{172}
+    \subitem {addHistoryContext}, \hyperpage{172}
+    \subitem {addHistoryDecision}, \hyperpage{172}
+    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{173}
+    \subitem {addHistoryStateStatus}, \hyperpage{173}
+    \subitem {addHistoryUncontrolledDecision}, \hyperpage{173}
+    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{174}
+    \subitem {checkUncontrolledSet}, \hyperpage{174}
+    \subitem {equivalentGlobalTransitions}, \hyperpage{175}
+    \subitem {fixpointVerify}, \hyperpage{175}
+    \subitem {generator}, \hyperpage{183}
+    \subitem {getEpistemicClassForGlobalState}, \hyperpage{175}
+    \subitem {getNaturalStrategy}, \hyperpage{175}
+    \subitem {getReducedStrategy}, \hyperpage{176}
+    \subitem {getStrategyComplexity}, \hyperpage{176}
+    \subitem {globalStateToValueBits}, \hyperpage{176}
+    \subitem {historyDecisionsERR}, \hyperpage{177}
+    \subitem {historyEnd}, \hyperpage{183}
+    \subitem {historyStart}, \hyperpage{183}
+    \subitem {historyToRestore}, \hyperpage{183}
+    \subitem {increaseProbability}, \hyperpage{177}
+    \subitem {isAgentInCoalition}, \hyperpage{177}
+    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{177}
+    \subitem {lowerProbability}, \hyperpage{178}
+    \subitem {maxFixpointVerify}, \hyperpage{178}
+    \subitem {minFixpointVerify}, \hyperpage{178}
+    \subitem {mode}, \hyperpage{184}
+    \subitem {naturalStrategy}, \hyperpage{184}
+    \subitem {newHistoryMarkDecisionAsInvalid}, \hyperpage{178}
+    \subitem {printCurrentHistory}, \hyperpage{179}
+    \subitem {reduceStrategy}, \hyperpage{179}
+    \subitem {reductionComplexityBefore}, \hyperpage{184}
+    \subitem {restoreHistory}, \hyperpage{180}
+    \subitem {revertLastDecision}, \hyperpage{180}
+    \subitem {revertToGlobalState}, \hyperpage{184}
+    \subitem {strategyVariableLimit}, \hyperpage{184}
+    \subitem {undoHistoryUntil}, \hyperpage{180}
+    \subitem {undoLastHistoryEntry}, \hyperpage{181}
+    \subitem {variableNames}, \hyperpage{184}
+    \subitem {Verification}, \hyperpage{171}
+    \subitem {verify}, \hyperpage{181}
+    \subitem {verifyGlobalState}, \hyperpage{181}
+    \subitem {verifyLocalStates}, \hyperpage{182}
+    \subitem {verifyMDP}, \hyperpage{182}
+    \subitem {verifyStrategy}, \hyperpage{182}
+    \subitem {verifyTransitionSets}, \hyperpage{182}
+  \item {Verification.cpp}, \hyperpage{338}
+    \subitem {config}, \hyperpage{340}
+    \subitem {dbgHistEnt}, \hyperpage{339}
+    \subitem {dbgVerifStatus}, \hyperpage{340}
+    \subitem {DEPTH\_PREFIX}, \hyperpage{339}
+    \subitem {verStatusToStr}, \hyperpage{340}
+  \item {Verification.hpp}, \hyperpage{341}
+    \subitem {NORMAL}, \hyperpage{342}
+    \subitem {RESTORE}, \hyperpage{342}
+    \subitem {REVERT}, \hyperpage{342}
+    \subitem {STRATEGY\_BITS}, \hyperpage{342}
+    \subitem {TraversalMode}, \hyperpage{342}
+    \subitem {verStatusToStr}, \hyperpage{342}
+  \item {VerificationFormulaMode}
+    \subitem {Types.hpp}, \hyperpage{328}
+  \item {VerificationIterative}, \hyperpage{185}
+    \subitem {$\sim$VerificationIterative}, \hyperpage{187}
+    \subitem {addHistoryAnswerProbability}, \hyperpage{188}
+    \subitem {addHistoryContext}, \hyperpage{188}
+    \subitem {addHistoryDecision}, \hyperpage{188}
+    \subitem {addHistoryMarkDecisionAsInvalid}, \hyperpage{189}
+    \subitem {addHistoryProbability}, \hyperpage{189}
+    \subitem {addHistoryStateStatus}, \hyperpage{189}
+    \subitem {areGlobalStatesInTheSameEpistemicClass}, \hyperpage{189}
+    \subitem {checkIfProbabilistic}, \hyperpage{190}
+    \subitem {dissolveLoopedProbabilityTransition}, \hyperpage{190}
+    \subitem {equivalentGlobalTransitions}, \hyperpage{191}
+    \subitem {findLoopedProbabilityTransitions}, \hyperpage{191}
+    \subitem {generator}, \hyperpage{195}
+    \subitem {getEpistemicClassForGlobalState}, \hyperpage{191}
+    \subitem {getNaturalStrategy}, \hyperpage{192}
+    \subitem {getReducedStrategy}, \hyperpage{192}
+    \subitem {getStrategyComplexity}, \hyperpage{192}
+    \subitem {globalStateToValueBits}, \hyperpage{192}
+    \subitem {history}, \hyperpage{195}
+    \subitem {isAgentInCoalition}, \hyperpage{193}
+    \subitem {isGlobalTransitionControlledByCoalition}, \hyperpage{193}
+    \subitem {mode}, \hyperpage{196}
+    \subitem {naturalStrategy}, \hyperpage{196}
+    \subitem {reduceStrategy}, \hyperpage{193}
+    \subitem {reductionComplexityBefore}, \hyperpage{196}
+    \subitem {revertToGlobalState}, \hyperpage{196}
+    \subitem {revertToLastDecision}, \hyperpage{194}
+    \subitem {statesToProcess}, \hyperpage{196}
+    \subitem {strategyVariableLimit}, \hyperpage{196}
+    \subitem {testForAndFixBadAgents}, \hyperpage{194}
+    \subitem {undoLastHistoryEntry}, \hyperpage{194}
+    \subitem {variableNames}, \hyperpage{197}
+    \subitem {VerificationIterative}, \hyperpage{187}
+    \subitem {verify}, \hyperpage{195}
+    \subitem {verifyLocalStates}, \hyperpage{195}
+  \item {VerificationIterative.cpp}, \hyperpage{343}
+    \subitem {config}, \hyperpage{344}
+    \subitem {DEPTH\_PREFIX}, \hyperpage{343}
+    \subitem {verifStatusToStr}, \hyperpage{344}
+  \item {VerificationIterative.hpp}, \hyperpage{344}
+    \subitem {GraphTraversalMode}, \hyperpage{345}
+    \subitem {NORMAL\_TRAVERSAL}, \hyperpage{345}
+    \subitem {RESTORE\_STATES}, \hyperpage{345}
+    \subitem {verifStatusToStr}, \hyperpage{346}
+  \item {verificationResult}
+    \subitem {Result}, \hyperpage{152}
+  \item {verificationStatus}
+    \subitem {GlobalState}, \hyperpage{112}
+  \item {VERIFIED\_ERR}
+    \subitem {GlobalStateVerificationStatus.hpp}, \hyperpage{219}
+  \item {VERIFIED\_OK}
+    \subitem {GlobalStateVerificationStatus.hpp}, \hyperpage{219}
+  \item {VerifResult}
+    \subitem {TypesDependency.hpp}, \hyperpage{330}
+  \item {verifResult}
+    \subitem {StateVerificationInfo}, \hyperpage{155}
   \item {verifStatusToStr}
-    \subitem {VerificationIterative.cpp}, \hyperpage{157}
-    \subitem {VerificationIterative.hpp}, \hyperpage{158}
+    \subitem {VerificationIterative.cpp}, \hyperpage{344}
+    \subitem {VerificationIterative.hpp}, \hyperpage{346}
   \item {verify}
-    \subitem {Verification}, \hyperpage{99}
-    \subitem {VerificationIterative}, \hyperpage{110}
+    \subitem {Verification}, \hyperpage{181}
+    \subitem {VerificationIterative}, \hyperpage{195}
+  \item {verify\_strategy}
+    \subitem {Cfg}, \hyperpage{31}
   \item {verifyGlobalState}
-    \subitem {Verification}, \hyperpage{100}
+    \subitem {Verification}, \hyperpage{181}
   \item {verifyLocalStates}
-    \subitem {Verification}, \hyperpage{100}
-    \subitem {VerificationIterative}, \hyperpage{110}
+    \subitem {Verification}, \hyperpage{182}
+    \subitem {VerificationIterative}, \hyperpage{195}
+  \item {verifyMDP}
+    \subitem {Verification}, \hyperpage{182}
   \item {verifyStrategy}
-    \subitem {Verification}, \hyperpage{100}
+    \subitem {Verification}, \hyperpage{182}
   \item {verifyTransitionSets}
-    \subitem {Verification}, \hyperpage{100}
+    \subitem {Verification}, \hyperpage{182}
   \item {verStatusToStr}
-    \subitem {Verification.cpp}, \hyperpage{153}
-    \subitem {Verification.hpp}, \hyperpage{154}
+    \subitem {Verification.cpp}, \hyperpage{340}
+    \subitem {Verification.hpp}, \hyperpage{342}
 
   \indexspace
 
+  \item {YY\_}
+    \subitem {parser.c}, \hyperpage{231}
+    \subitem {strategyParser.c}, \hyperpage{275}
+  \item {YY\_ACCESSING\_SYMBOL}
+    \subitem {parser.c}, \hyperpage{231}
+    \subitem {strategyParser.c}, \hyperpage{275}
+  \item {yy\_act}
+    \subitem {scanner.c}, \hyperpage{269}
+    \subitem {strategyScanner.c}, \hyperpage{323}
+  \item {YY\_ASSERT}
+    \subitem {parser.c}, \hyperpage{231}
+    \subitem {strategyParser.c}, \hyperpage{275}
+  \item {YY\_AT\_BOL}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{306}
+  \item {yy\_at\_bol}
+    \subitem {yy\_buffer\_state}, \hyperpage{198}
+  \item {YY\_ATTRIBUTE\_PURE}
+    \subitem {parser.c}, \hyperpage{231}
+    \subitem {strategyParser.c}, \hyperpage{275}
+  \item {YY\_ATTRIBUTE\_UNUSED}
+    \subitem {parser.c}, \hyperpage{231}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {yy\_bp}
+    \subitem {scanner.c}, \hyperpage{269}
+    \subitem {strategyScanner.c}, \hyperpage{323}
+  \item {YY\_BREAK}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{306}
   \item {yy\_bs\_column}
-    \subitem {yy\_buffer\_state}, \hyperpage{111}
+    \subitem {yy\_buffer\_state}, \hyperpage{198}
   \item {yy\_bs\_lineno}
-    \subitem {yy\_buffer\_state}, \hyperpage{111}
-  \item {yy\_buffer\_state}, \hyperpage{110}
-    \subitem {yy\_bs\_column}, \hyperpage{111}
-    \subitem {yy\_bs\_lineno}, \hyperpage{111}
-  \item {yy\_trans\_info}, \hyperpage{111}
-  \item {yyalloc}, \hyperpage{112}
-  \item {YYSTYPE}, \hyperpage{112}
+    \subitem {yy\_buffer\_state}, \hyperpage{198}
+  \item {yy\_buf\_pos}
+    \subitem {yy\_buffer\_state}, \hyperpage{198}
+  \item {YY\_BUF\_SIZE}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{306}
+  \item {yy\_buf\_size}
+    \subitem {yy\_buffer\_state}, \hyperpage{198}
+  \item {YY\_BUFFER\_EOF\_PENDING}
+    \subitem {scanner.c}, \hyperpage{255}
+    \subitem {strategyScanner.c}, \hyperpage{306}
+  \item {YY\_BUFFER\_NEW}
+    \subitem {scanner.c}, \hyperpage{256}
+    \subitem {strategyScanner.c}, \hyperpage{306}
+  \item {YY\_BUFFER\_NORMAL}
+    \subitem {scanner.c}, \hyperpage{256}
+    \subitem {strategyScanner.c}, \hyperpage{306}
+  \item {YY\_BUFFER\_STATE}
+    \subitem {parser.c}, \hyperpage{240}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyParser.c}, \hyperpage{286}
+    \subitem {strategyScanner.c}, \hyperpage{320}
+  \item {yy\_buffer\_state}, \hyperpage{197}
+    \subitem {yy\_at\_bol}, \hyperpage{198}
+    \subitem {yy\_bs\_column}, \hyperpage{198}
+    \subitem {yy\_bs\_lineno}, \hyperpage{198}
+    \subitem {yy\_buf\_pos}, \hyperpage{198}
+    \subitem {yy\_buf\_size}, \hyperpage{198}
+    \subitem {yy\_buffer\_status}, \hyperpage{198}
+    \subitem {yy\_ch\_buf}, \hyperpage{199}
+    \subitem {yy\_fill\_buffer}, \hyperpage{199}
+    \subitem {yy\_input\_file}, \hyperpage{199}
+    \subitem {yy\_is\_interactive}, \hyperpage{199}
+    \subitem {yy\_is\_our\_buffer}, \hyperpage{199}
+    \subitem {yy\_n\_chars}, \hyperpage{199}
+  \item {yy\_buffer\_status}
+    \subitem {yy\_buffer\_state}, \hyperpage{198}
+  \item {YY\_CAST}
+    \subitem {parser.c}, \hyperpage{231}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {yy\_ch\_buf}
+    \subitem {yy\_buffer\_state}, \hyperpage{199}
+  \item {YY\_CHAR}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{320}
+  \item {yy\_cp}
+    \subitem {scanner.c}, \hyperpage{269}
+    \subitem {strategyScanner.c}, \hyperpage{324}
+  \item {yy\_create\_buffer}
+    \subitem {scanner.c}, \hyperpage{265}
+    \subitem {strategyScanner.c}, \hyperpage{306}, \hyperpage{321}
+  \item {YY\_CURRENT\_BUFFER}
+    \subitem {scanner.c}, \hyperpage{256}
+    \subitem {strategyScanner.c}, \hyperpage{307}
+  \item {YY\_CURRENT\_BUFFER\_LVALUE}
+    \subitem {scanner.c}, \hyperpage{256}
+    \subitem {strategyScanner.c}, \hyperpage{307}
+  \item {YY\_DECL}
+    \subitem {scanner.c}, \hyperpage{256}, \hyperpage{269}
+    \subitem {strategyScanner.c}, \hyperpage{307}, \hyperpage{324}
+  \item {YY\_DECL\_IS\_OURS}
+    \subitem {scanner.c}, \hyperpage{256}
+    \subitem {strategyScanner.c}, \hyperpage{307}
+  \item {yy\_delete\_buffer}
+    \subitem {scanner.c}, \hyperpage{265}
+    \subitem {strategyScanner.c}, \hyperpage{307}, \hyperpage{321}
+  \item {YY\_DO\_BEFORE\_ACTION}
+    \subitem {scanner.c}, \hyperpage{256}
+    \subitem {strategyScanner.c}, \hyperpage{307}
+  \item {YY\_END\_OF\_BUFFER}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{307}
+  \item {YY\_END\_OF\_BUFFER\_CHAR}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{308}
+  \item {YY\_EXIT\_FAILURE}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{308}
+  \item {YY\_EXTRA\_TYPE}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{308}
+  \item {YY\_FATAL\_ERROR}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{308}
+  \item {yy\_fill\_buffer}
+    \subitem {yy\_buffer\_state}, \hyperpage{199}
+  \item {yy\_flex\_debug}
+    \subitem {scanner.c}, \hyperpage{270}
+    \subitem {strategyScanner.c}, \hyperpage{308}, \hyperpage{324}
+  \item {YY\_FLEX\_MAJOR\_VERSION}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{308}
+  \item {YY\_FLEX\_MINOR\_VERSION}
+    \subitem {scanner.c}, \hyperpage{257}
+    \subitem {strategyScanner.c}, \hyperpage{308}
+  \item {YY\_FLEX\_SUBMINOR\_VERSION}
+    \subitem {scanner.c}, \hyperpage{258}
+    \subitem {strategyScanner.c}, \hyperpage{309}
+  \item {YY\_FLUSH\_BUFFER}
+    \subitem {scanner.c}, \hyperpage{258}
+    \subitem {strategyScanner.c}, \hyperpage{309}
+  \item {yy\_flush\_buffer}
+    \subitem {scanner.c}, \hyperpage{265}
+    \subitem {strategyScanner.c}, \hyperpage{309}, \hyperpage{321}
+  \item {YY\_IGNORE\_MAYBE\_UNINITIALIZED\_BEGIN}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {YY\_IGNORE\_MAYBE\_UNINITIALIZED\_END}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {YY\_IGNORE\_USELESS\_CAST\_BEGIN}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {YY\_IGNORE\_USELESS\_CAST\_END}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {yy\_init\_buffer}
+    \subitem {strategyScanner.c}, \hyperpage{309}
+  \item {YY\_INITIAL\_VALUE}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{276}
+  \item {YY\_INPUT}
+    \subitem {scanner.c}, \hyperpage{258}
+    \subitem {strategyScanner.c}, \hyperpage{309}
+  \item {yy\_input\_file}
+    \subitem {yy\_buffer\_state}, \hyperpage{199}
+  \item {YY\_INT\_ALIGNED}
+    \subitem {scanner.c}, \hyperpage{258}
+    \subitem {strategyScanner.c}, \hyperpage{309}
+  \item {yy\_is\_interactive}
+    \subitem {yy\_buffer\_state}, \hyperpage{199}
+  \item {yy\_is\_our\_buffer}
+    \subitem {yy\_buffer\_state}, \hyperpage{199}
+  \item {YY\_LESS\_LINENO}
+    \subitem {scanner.c}, \hyperpage{258}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {YY\_LINENO\_REWIND\_TO}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {yy\_load\_buffer\_state}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {YY\_MORE\_ADJ}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {yy\_n\_chars}
+    \subitem {yy\_buffer\_state}, \hyperpage{199}
+  \item {yy\_new\_buffer}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {YY\_NEW\_FILE}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {YY\_NULL}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{310}
+  \item {YY\_NULLPTR}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{277}
+  \item {YY\_NUM\_RULES}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{311}
+  \item {yy\_nxt}
+    \subitem {yy\_trans\_info}, \hyperpage{200}
+  \item {YY\_READ\_BUF\_SIZE}
+    \subitem {scanner.c}, \hyperpage{259}
+    \subitem {strategyScanner.c}, \hyperpage{311}
+  \item {YY\_REDUCE\_PRINT}
+    \subitem {parser.c}, \hyperpage{232}
+    \subitem {strategyParser.c}, \hyperpage{277}
+  \item {YY\_REINTERPRET\_CAST}
+    \subitem {parser.c}, \hyperpage{233}
+    \subitem {strategyParser.c}, \hyperpage{277}
+  \item {YY\_RESTORE\_YY\_MORE\_OFFSET}
+    \subitem {scanner.c}, \hyperpage{260}
+    \subitem {strategyScanner.c}, \hyperpage{311}
+  \item {YY\_RULE\_SETUP}
+    \subitem {scanner.c}, \hyperpage{260}
+    \subitem {strategyScanner.c}, \hyperpage{311}
+  \item {YY\_SC\_TO\_UI}
+    \subitem {scanner.c}, \hyperpage{260}
+    \subitem {strategyScanner.c}, \hyperpage{311}
+  \item {yy\_scan\_buffer}
+    \subitem {scanner.c}, \hyperpage{265}
+    \subitem {strategyScanner.c}, \hyperpage{311}, \hyperpage{321}
+  \item {yy\_scan\_bytes}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{311}, \hyperpage{321}
+  \item {yy\_scan\_string}
+    \subitem {parser.c}, \hyperpage{244}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{312}, \hyperpage{321}
+  \item {yy\_set\_bol}
+    \subitem {scanner.c}, \hyperpage{260}
+    \subitem {strategyScanner.c}, \hyperpage{312}
+  \item {yy\_set\_interactive}
+    \subitem {scanner.c}, \hyperpage{260}
+    \subitem {strategyScanner.c}, \hyperpage{312}
+  \item {yy\_size\_t}
+    \subitem {scanner.c}, \hyperpage{264}
+    \subitem {strategyScanner.c}, \hyperpage{320}
+  \item {YY\_SKIP\_YYWRAP}
+    \subitem {scanner.c}, \hyperpage{260}
+    \subitem {strategyScanner.c}, \hyperpage{312}
+  \item {YY\_STACK\_PRINT}
+    \subitem {parser.c}, \hyperpage{233}
+    \subitem {strategyParser.c}, \hyperpage{277}
+  \item {YY\_START}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{312}
+  \item {YY\_START\_STACK\_INCR}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{313}
+  \item {YY\_STATE\_BUF\_SIZE}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{313}
+  \item {YY\_STATE\_EOF}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{313}
+  \item {yy\_state\_fast\_t}
+    \subitem {parser.c}, \hyperpage{241}
+    \subitem {strategyParser.c}, \hyperpage{286}
+  \item {yy\_state\_t}
+    \subitem {parser.c}, \hyperpage{241}
+    \subitem {strategyParser.c}, \hyperpage{286}
+  \item {yy\_state\_type}
+    \subitem {scanner.c}, \hyperpage{265}
+    \subitem {strategyScanner.c}, \hyperpage{320}
+  \item {YY\_STRUCT\_YY\_BUFFER\_STATE}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{313}
+  \item {yy\_switch\_to\_buffer}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{313}, \hyperpage{322}
+  \item {YY\_SYMBOL\_PRINT}
+    \subitem {parser.c}, \hyperpage{233}
+    \subitem {strategyParser.c}, \hyperpage{277}
+  \item {yy\_trans\_info}, \hyperpage{200}
+    \subitem {yy\_nxt}, \hyperpage{200}
+    \subitem {yy\_verify}, \hyperpage{200}
+  \item {YY\_TYPEDEF\_YY\_BUFFER\_STATE}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{313}
+  \item {YY\_TYPEDEF\_YY\_SIZE\_T}
+    \subitem {scanner.c}, \hyperpage{261}
+    \subitem {strategyScanner.c}, \hyperpage{313}
+  \item {YY\_USE}
+    \subitem {parser.c}, \hyperpage{233}
+    \subitem {strategyParser.c}, \hyperpage{277}
+  \item {YY\_USER\_ACTION}
+    \subitem {scanner.c}, \hyperpage{262}
+    \subitem {strategyScanner.c}, \hyperpage{314}
+  \item {yy\_verify}
+    \subitem {yy\_trans\_info}, \hyperpage{200}
+  \item {YYABORT}
+    \subitem {parser.c}, \hyperpage{233}
+    \subitem {strategyParser.c}, \hyperpage{278}
+  \item {YYACCEPT}
+    \subitem {parser.c}, \hyperpage{233}
+    \subitem {strategyParser.c}, \hyperpage{278}
+  \item {yyalloc}, \hyperpage{201}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{314}, \hyperpage{322}
+    \subitem {yyss\_alloc}, \hyperpage{201}
+    \subitem {yyvs\_alloc}, \hyperpage{201}
+  \item {YYBACKUP}
+    \subitem {parser.c}, \hyperpage{234}
+    \subitem {strategyParser.c}, \hyperpage{278}
+  \item {YYBISON}
+    \subitem {parser.c}, \hyperpage{234}
+    \subitem {strategyParser.c}, \hyperpage{278}
+  \item {YYBISON\_VERSION}
+    \subitem {parser.c}, \hyperpage{234}
+    \subitem {strategyParser.c}, \hyperpage{278}
+  \item {yychar}
+    \subitem {parser.c}, \hyperpage{245}
+    \subitem {strategyParser.c}, \hyperpage{278}, \hyperpage{290}
+  \item {yyclearin}
+    \subitem {parser.c}, \hyperpage{234}
+    \subitem {strategyParser.c}, \hyperpage{279}
+  \item {yyconst}
+    \subitem {scanner.c}, \hyperpage{262}
+    \subitem {strategyScanner.c}, \hyperpage{314}
+  \item {YYCOPY}
+    \subitem {parser.c}, \hyperpage{234}
+    \subitem {strategyParser.c}, \hyperpage{279}
+  \item {YYCOPY\_NEEDED}
+    \subitem {parser.c}, \hyperpage{235}
+    \subitem {strategyParser.c}, \hyperpage{279}
+  \item {YYDEBUG}
+    \subitem {parser.h}, \hyperpage{247}
+  \item {yydebug}
+    \subitem {strategyParser.c}, \hyperpage{279}
+  \item {YYDPRINTF}
+    \subitem {parser.c}, \hyperpage{235}
+    \subitem {strategyParser.c}, \hyperpage{279}
+  \item {YYEMPTY}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {YYENOMEM}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {yyensure\_buffer\_stack}
+    \subitem {strategyScanner.c}, \hyperpage{314}
+  \item {YYEOF}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {YYERRCODE}
+    \subitem {parser.c}, \hyperpage{235}
+    \subitem {strategyParser.c}, \hyperpage{279}
+  \item {yyerrok}
+    \subitem {parser.c}, \hyperpage{235}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {YYERROR}
+    \subitem {parser.c}, \hyperpage{235}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {YYerror}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {yyerror}
+    \subitem {parser.c}, \hyperpage{244}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {YYFINAL}
+    \subitem {parser.c}, \hyperpage{235}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {YYFREE}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {yyfree}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{314}, \hyperpage{322}
+  \item {yyget\_debug}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{314}
+  \item {yyget\_extra}
+    \subitem {scanner.c}, \hyperpage{266}
+    \subitem {strategyScanner.c}, \hyperpage{314}
+  \item {yyget\_in}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyScanner.c}, \hyperpage{314}
+  \item {yyget\_leng}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyScanner.c}, \hyperpage{315}
+  \item {yyget\_lineno}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyScanner.c}, \hyperpage{315}
+  \item {yyget\_out}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyScanner.c}, \hyperpage{315}
+  \item {yyget\_text}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyScanner.c}, \hyperpage{315}
+  \item {yyin}
+    \subitem {scanner.c}, \hyperpage{270}
+    \subitem {strategyScanner.c}, \hyperpage{315}, \hyperpage{324}
+  \item {YYINITDEPTH}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {YYLAST}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{280}
+  \item {yyleng}
+    \subitem {scanner.c}, \hyperpage{270}
+    \subitem {strategyScanner.c}, \hyperpage{315}, \hyperpage{324}
+  \item {yyless}
+    \subitem {scanner.c}, \hyperpage{262}
+    \subitem {strategyScanner.c}, \hyperpage{315, 316}
+  \item {yylex}
+    \subitem {parser.c}, \hyperpage{245}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyParser.c}, \hyperpage{280}
+    \subitem {strategyScanner.c}, \hyperpage{316}
+  \item {yylex\_destroy}
+    \subitem {scanner.c}, \hyperpage{267}
+    \subitem {strategyScanner.c}, \hyperpage{316}
+  \item {yylex\_init}
+    \subitem {strategyScanner.c}, \hyperpage{316}
+  \item {yylex\_init\_extra}
+    \subitem {strategyScanner.c}, \hyperpage{316}
+  \item {yylineno}
+    \subitem {scanner.c}, \hyperpage{270}
+    \subitem {strategyScanner.c}, \hyperpage{317}, \hyperpage{324}
+  \item {yylval}
+    \subitem {parser.c}, \hyperpage{245}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.c}, \hyperpage{281}, \hyperpage{290}
+  \item {YYMALLOC}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{281}
+  \item {YYMAXDEPTH}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{281}
+  \item {YYMAXUTOK}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{281}
+  \item {yymore}
+    \subitem {scanner.c}, \hyperpage{262}
+    \subitem {strategyScanner.c}, \hyperpage{317}
+  \item {yynerrs}
+    \subitem {parser.c}, \hyperpage{246}
+    \subitem {strategyParser.c}, \hyperpage{281}, \hyperpage{290}
+  \item {YYNNTS}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{281}
+  \item {YYNOMEM}
+    \subitem {parser.c}, \hyperpage{236}
+    \subitem {strategyParser.c}, \hyperpage{281}
+  \item {yynoreturn}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{317}
+  \item {YYNRULES}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{281}
+  \item {YYNSTATES}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {YYNTOKENS}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {yyout}
+    \subitem {scanner.c}, \hyperpage{270}
+    \subitem {strategyScanner.c}, \hyperpage{317}, \hyperpage{324}
+  \item {YYPACT\_NINF}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {yypact\_value\_is\_default}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {yyparse}
+    \subitem {ModelParser.cc}, \hyperpage{224}
+    \subitem {parser.c}, \hyperpage{245}
+    \subitem {parser.h}, \hyperpage{249}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {yypop\_buffer\_state}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{317}
+  \item {YYPOPSTACK}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {YYPTRDIFF\_MAXIMUM}
+    \subitem {parser.c}, \hyperpage{237}
+    \subitem {strategyParser.c}, \hyperpage{282}
+  \item {YYPTRDIFF\_T}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {YYPULL}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {YYPURE}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {YYPUSH}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {yypush\_buffer\_state}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{317}, \hyperpage{322}
+  \item {yyrealloc}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{317}, \hyperpage{322}
+  \item {YYRECOVERING}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {yyrestart}
+    \subitem {ModelParser.cc}, \hyperpage{225}
+    \subitem {parser.c}, \hyperpage{245}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{317}, \hyperpage{322}
+  \item {yyset\_debug}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{318}, \hyperpage{322}
+  \item {yyset\_extra}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{318}, \hyperpage{323}
+  \item {yyset\_in}
+    \subitem {scanner.c}, \hyperpage{268}
+    \subitem {strategyScanner.c}, \hyperpage{318}, \hyperpage{323}
+  \item {yyset\_lineno}
+    \subitem {scanner.c}, \hyperpage{269}
+    \subitem {strategyScanner.c}, \hyperpage{318}, \hyperpage{323}
+  \item {yyset\_out}
+    \subitem {scanner.c}, \hyperpage{269}
+    \subitem {strategyScanner.c}, \hyperpage{318}, \hyperpage{323}
+  \item {YYSIZE\_MAXIMUM}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {YYSIZE\_T}
+    \subitem {parser.c}, \hyperpage{238}
+    \subitem {strategyParser.c}, \hyperpage{283}
+  \item {YYSIZEOF}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {YYSKELETON\_NAME}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {yyss\_alloc}
+    \subitem {yyalloc}, \hyperpage{201}
+  \item {YYSTACK\_ALLOC}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {YYSTACK\_ALLOC\_MAXIMUM}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {YYSTACK\_BYTES}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {YYSTACK\_FREE}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {YYSTACK\_GAP\_MAXIMUM}
+    \subitem {parser.c}, \hyperpage{239}
+    \subitem {strategyParser.c}, \hyperpage{284}
+  \item {YYSTACK\_RELOCATE}
+    \subitem {parser.c}, \hyperpage{240}
+    \subitem {strategyParser.c}, \hyperpage{285}
+  \item {YYSTATE}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{318}
+  \item {YYSTYPE}, \hyperpage{202}
+    \subitem {agent}, \hyperpage{202}
+    \subitem {assign}, \hyperpage{202}
+    \subitem {assignSet}, \hyperpage{202}
+    \subitem {condList}, \hyperpage{203}
+    \subitem {expr}, \hyperpage{203}
+    \subitem {floatno}, \hyperpage{203}
+    \subitem {ident}, \hyperpage{203}
+    \subitem {identSet}, \hyperpage{203}
+    \subitem {model}, \hyperpage{203}
+    \subitem {parser.h}, \hyperpage{248}
+    \subitem {prob}, \hyperpage{203}
+    \subitem {strategyParser.c}, \hyperpage{285}
+    \subitem {trans}, \hyperpage{203}
+    \subitem {val}, \hyperpage{204}
+  \item {YYSTYPE\_IS\_DECLARED}
+    \subitem {parser.h}, \hyperpage{247}
+  \item {YYSTYPE\_IS\_TRIVIAL}
+    \subitem {parser.h}, \hyperpage{247}
+  \item {YYSYMBOL\_17\_}
+    \subitem {parser.c}, \hyperpage{244}
+    \subitem {strategyParser.c}, \hyperpage{289}
+  \item {YYSYMBOL\_27\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_28\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_29\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_30\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_31\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_32\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_33\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_34\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_35\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_36\_}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_37\_}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_38\_}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_agent}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_assign\_list}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_assignment}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_assignments}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_coalition}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_cond}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_cond\_and}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_cond\_elem}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_cond\_list}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_condition}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_description}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_formula}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_ident\_list}
+    \subitem {parser.c}, \hyperpage{243, 244}
+    \subitem {strategyParser.c}, \hyperpage{288, 289}
+  \item {YYSYMBOL\_initial}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {yysymbol\_kind\_t}
+    \subitem {parser.c}, \hyperpage{241, 242}
+    \subitem {strategyParser.c}, \hyperpage{286, 287}
+  \item {YYSYMBOL\_local}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_model}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_num\_elem}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_num\_exp}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_num\_mul}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_persistent}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_prob\_elem}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_prob\_exp}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_prob\_mul}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_probability\_equality}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_query}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_shared}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_spec}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_strat}
+    \subitem {parser.c}, \hyperpage{244}
+    \subitem {strategyParser.c}, \hyperpage{289}
+  \item {YYSYMBOL\_T\_AGENT}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_AND}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_ASSIGN}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_EQ}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_FLOAT}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_FORMULA}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_GE}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_GT}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_HARTLEY}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_IDENT}
+    \subitem {parser.c}, \hyperpage{242}, \hyperpage{244}
+    \subitem {strategyParser.c}, \hyperpage{287}, \hyperpage{289}
+  \item {YYSYMBOL\_T\_INIT}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_INITIAL}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_KNOW}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_LE}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_LOCAL}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_LT}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_NE}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_NUM}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_OR}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_PERSISTENT}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_PROB}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_REST}
+    \subitem {parser.c}, \hyperpage{242}
+    \subitem {strategyParser.c}, \hyperpage{287}
+  \item {YYSYMBOL\_T\_SHARED}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_T\_TO}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_transition}
+    \subitem {parser.c}, \hyperpage{243}
+    \subitem {strategyParser.c}, \hyperpage{288}
+  \item {YYSYMBOL\_YYACCEPT}
+    \subitem {parser.c}, \hyperpage{243, 244}
+    \subitem {strategyParser.c}, \hyperpage{288, 289}
+  \item {YYSYMBOL\_YYEMPTY}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_YYEOF}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_YYerror}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYSYMBOL\_YYUNDEF}
+    \subitem {parser.c}, \hyperpage{242, 243}
+    \subitem {strategyParser.c}, \hyperpage{287, 288}
+  \item {YYTABLE\_NINF}
+    \subitem {parser.c}, \hyperpage{240}
+    \subitem {strategyParser.c}, \hyperpage{285}
+  \item {yytable\_value\_is\_error}
+    \subitem {parser.c}, \hyperpage{240}
+    \subitem {strategyParser.c}, \hyperpage{285}
+  \item {YYTABLES\_NAME}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{318}
+  \item {yyterminate}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{318}
+  \item {yytext}
+    \subitem {parser.c}, \hyperpage{246}
+    \subitem {scanner.c}, \hyperpage{270}
+    \subitem {strategyScanner.c}, \hyperpage{319}, \hyperpage{325}
+  \item {yytext\_ptr}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{319}
+  \item {yytoken\_kind\_t}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {YYTOKENTYPE}
+    \subitem {parser.h}, \hyperpage{247}
+  \item {yytokentype}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {YYTRANSLATE}
+    \subitem {parser.c}, \hyperpage{240}
+    \subitem {strategyParser.c}, \hyperpage{285}
+  \item {yytype\_int16}
+    \subitem {parser.c}, \hyperpage{241}
+    \subitem {strategyParser.c}, \hyperpage{286}
+  \item {yytype\_int8}
+    \subitem {parser.c}, \hyperpage{241}
+    \subitem {strategyParser.c}, \hyperpage{286}
+  \item {yytype\_uint16}
+    \subitem {parser.c}, \hyperpage{241}
+    \subitem {strategyParser.c}, \hyperpage{286}
+  \item {yytype\_uint8}
+    \subitem {parser.c}, \hyperpage{241}
+    \subitem {strategyParser.c}, \hyperpage{286}
+  \item {YYUNDEF}
+    \subitem {parser.h}, \hyperpage{248}
+  \item {yyvs\_alloc}
+    \subitem {yyalloc}, \hyperpage{201}
+  \item {yywrap}
+    \subitem {scanner.c}, \hyperpage{263}
+    \subitem {strategyScanner.c}, \hyperpage{319}
 
 \end{theindex}

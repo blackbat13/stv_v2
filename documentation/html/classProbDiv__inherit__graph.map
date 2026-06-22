@@ -1,0 +1,4 @@
+<map id="ProbDiv" name="ProbDiv">
+<area shape="rect" id="node1" title="Node for division." alt="" coords="5,145,104,252"/>
+<area shape="rect" id="node2" href="$classProbNode.html" title="Base node for probability calculations." alt="" coords="12,5,97,97"/>
+</map>

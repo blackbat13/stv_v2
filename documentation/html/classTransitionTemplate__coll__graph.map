@@ -1,0 +1,8 @@
+<map id="TransitionTemplate" name="TransitionTemplate">
+<area shape="rect" id="node1" title="Represents a meta&#45;transition." alt="" coords="225,204,396,281"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,176,90"/>
+<area shape="rect" id="node3" title=" " alt="" coords="201,13,239,90"/>
+<area shape="rect" id="node4" href="$classExprNode.html" title="Base node for expressions." alt="" coords="268,5,353,97"/>
+<area shape="rect" id="node5" title=" " alt="" coords="388,13,447,90"/>
+<area shape="rect" id="node6" href="$classProbNode.html" title="Base node for probability calculations." alt="" coords="503,5,588,97"/>
+</map>

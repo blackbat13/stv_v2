@@ -1,39 +1,78 @@
-\doxysection{Model\+Parser.\+cc File Reference}
-\hypertarget{ModelParser_8cc}{}\label{ModelParser_8cc}\index{ModelParser.cc@{ModelParser.cc}}
+\hypertarget{ModelParser_8cc}{}\doxysection{Model\+Parser.\+cc File Reference}
+\label{ModelParser_8cc}\index{ModelParser.cc@{ModelParser.cc}}
 
 
 A model parser. A parser for converting a text file into a model.  
 
 
-{\ttfamily \#include "{}Model\+Parser.\+hpp"{}}\newline
-{\ttfamily \#include "{}reader/nodes.\+hpp"{}}\newline
+{\ttfamily \#include \char`\"{}Model\+Parser.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reader/nodes.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
 {\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$tuple$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
-\doxysubsubsection*{Functions}
+Include dependency graph for Model\+Parser.\+cc\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ModelParser_8cc__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{ModelParser_8cc_acd8617a8f2ac0de8bc1cc032cf449e19}\label{ModelParser_8cc_acd8617a8f2ac0de8bc1cc032cf449e19} 
-int {\bfseries yyparse} ()
+int \mbox{\hyperlink{ModelParser_8cc_acd8617a8f2ac0de8bc1cc032cf449e19}{yyparse}} ()
 \item 
-\Hypertarget{ModelParser_8cc_aaefa7be34bfd03cd1e250f9f418b63e9}\label{ModelParser_8cc_aaefa7be34bfd03cd1e250f9f418b63e9} 
-void {\bfseries yyrestart} (FILE \texorpdfstring{$\ast$}{*})
+void \mbox{\hyperlink{ModelParser_8cc_aaefa7be34bfd03cd1e250f9f418b63e9}{yyrestart}} (FILE $\ast$)
 \item 
-\Hypertarget{ModelParser_8cc_aa3c74f7b1ba0d643aaebbefbd1105802}\label{ModelParser_8cc_aa3c74f7b1ba0d643aaebbefbd1105802} 
-void {\bfseries set\+\_\+input\+\_\+string} (const char \texorpdfstring{$\ast$}{*}in)
+void \mbox{\hyperlink{ModelParser_8cc_aa3c74f7b1ba0d643aaebbefbd1105802}{set\+\_\+input\+\_\+string}} (const char $\ast$in)
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{ModelParser_8cc_a6a91dfd2edf1914f51fd9a1dd2c7aa60}\label{ModelParser_8cc_a6a91dfd2edf1914f51fd9a1dd2c7aa60} 
-set$<$ \mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} \texorpdfstring{$\ast$}{*} $>$ \texorpdfstring{$\ast$}{*} {\bfseries model\+Description}
+set$<$ \mbox{\hyperlink{classAgentTemplate}{Agent\+Template}} $\ast$ $>$ $\ast$ \mbox{\hyperlink{ModelParser_8cc_a6a91dfd2edf1914f51fd9a1dd2c7aa60}{model\+Description}}
 \item 
-\Hypertarget{ModelParser_8cc_aa5d69e09fe518fe001c627140340026f}\label{ModelParser_8cc_aa5d69e09fe518fe001c627140340026f} 
-\mbox{\hyperlink{structFormulaTemplate}{Formula\+Template}} {\bfseries formula\+Description}
+\mbox{\hyperlink{structFormulaTemplate}{Formula\+Template}} \mbox{\hyperlink{ModelParser_8cc_aa5d69e09fe518fe001c627140340026f}{formula\+Description}}
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 A model parser. A parser for converting a text file into a model. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ModelParser_8cc_aa3c74f7b1ba0d643aaebbefbd1105802}\label{ModelParser_8cc_aa3c74f7b1ba0d643aaebbefbd1105802}} 
+\index{ModelParser.cc@{ModelParser.cc}!set\_input\_string@{set\_input\_string}}
+\index{set\_input\_string@{set\_input\_string}!ModelParser.cc@{ModelParser.cc}}
+\doxysubsubsection{\texorpdfstring{set\_input\_string()}{set\_input\_string()}}
+{\footnotesize\ttfamily void set\+\_\+input\+\_\+string (\begin{DoxyParamCaption}\item[{const char $\ast$}]{in }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ModelParser_8cc_acd8617a8f2ac0de8bc1cc032cf449e19}\label{ModelParser_8cc_acd8617a8f2ac0de8bc1cc032cf449e19}} 
+\index{ModelParser.cc@{ModelParser.cc}!yyparse@{yyparse}}
+\index{yyparse@{yyparse}!ModelParser.cc@{ModelParser.cc}}
+\doxysubsubsection{\texorpdfstring{yyparse()}{yyparse()}}
+{\footnotesize\ttfamily int yyparse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ModelParser_8cc_aaefa7be34bfd03cd1e250f9f418b63e9}\label{ModelParser_8cc_aaefa7be34bfd03cd1e250f9f418b63e9}} 
+\index{ModelParser.cc@{ModelParser.cc}!yyrestart@{yyrestart}}
+\index{yyrestart@{yyrestart}!ModelParser.cc@{ModelParser.cc}}
+\doxysubsubsection{\texorpdfstring{yyrestart()}{yyrestart()}}
+{\footnotesize\ttfamily void yyrestart (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ModelParser_8cc_aa5d69e09fe518fe001c627140340026f}\label{ModelParser_8cc_aa5d69e09fe518fe001c627140340026f}} 
+\index{ModelParser.cc@{ModelParser.cc}!formulaDescription@{formulaDescription}}
+\index{formulaDescription@{formulaDescription}!ModelParser.cc@{ModelParser.cc}}
+\doxysubsubsection{\texorpdfstring{formulaDescription}{formulaDescription}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structFormulaTemplate}{Formula\+Template}} formula\+Description}
+
+\mbox{\Hypertarget{ModelParser_8cc_a6a91dfd2edf1914f51fd9a1dd2c7aa60}\label{ModelParser_8cc_a6a91dfd2edf1914f51fd9a1dd2c7aa60}} 
+\index{ModelParser.cc@{ModelParser.cc}!modelDescription@{modelDescription}}
+\index{modelDescription@{modelDescription}!ModelParser.cc@{ModelParser.cc}}
+\doxysubsubsection{\texorpdfstring{modelDescription}{modelDescription}}
+{\footnotesize\ttfamily set$<$\mbox{\hyperlink{classAgentTemplate}{Agent\+Template}}$\ast$$>$$\ast$ model\+Description}
 

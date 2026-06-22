@@ -1,32 +1,38 @@
-\doxysection{Verification.\+cpp File Reference}
-\hypertarget{Verification_8cpp}{}\label{Verification_8cpp}\index{Verification.cpp@{Verification.cpp}}
+\hypertarget{Verification_8cpp}{}\doxysection{Verification.\+cpp File Reference}
+\label{Verification_8cpp}\index{Verification.cpp@{Verification.cpp}}
 
 
 Class for verification of the formula on a model. Class for verification of the specified formula on a specified model.  
 
 
-{\ttfamily \#include "{}Verification.\+hpp"{}}\newline
+{\ttfamily \#include \char`\"{}Verification.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$bits/stdc++.\+h$>$}\newline
-\doxysubsubsection*{Macros}
+Include dependency graph for Verification.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Verification_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{Verification_8cpp_abbc1d7be3c61021a54685b36e7fde70e}\label{Verification_8cpp_abbc1d7be3c61021a54685b36e7fde70e} 
-\#define {\bfseries DEPTH\+\_\+\+PREFIX}~string(depth \texorpdfstring{$\ast$}{*} 4, \textquotesingle{} \textquotesingle{})
+\#define \mbox{\hyperlink{Verification_8cpp_abbc1d7be3c61021a54685b36e7fde70e}{DEPTH\+\_\+\+PREFIX}}~string(depth $\ast$ 4, \textquotesingle{} \textquotesingle{})
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Functions}
+\doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-string \mbox{\hyperlink{Verification_8cpp_a359b96afed1805b959d60e2c69b373f5}{ver\+Status\+To\+Str}} (Global\+State\+Verification\+Status status)
+string \mbox{\hyperlink{Verification_8cpp_a359b96afed1805b959d60e2c69b373f5}{ver\+Status\+To\+Str}} (\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} status)
 \begin{DoxyCompactList}\small\item\em Converts global verification status into a string. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{Verification_8cpp_a35e269105f15554762c493e8bf719de1}{dbg\+Verif\+Status}} (string prefix, \mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}gs, Global\+State\+Verification\+Status st, string reason)
+void \mbox{\hyperlink{Verification_8cpp_a35e269105f15554762c493e8bf719de1}{dbg\+Verif\+Status}} (string prefix, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$gs, \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} st, string reason)
 \begin{DoxyCompactList}\small\item\em Print a debug message of a verification status to the console. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{Verification_8cpp_a04ba9594e95a7b95db3b0ddd508a0e97}{dbg\+Hist\+Ent}} (string prefix, \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} \texorpdfstring{$\ast$}{*}h)
+void \mbox{\hyperlink{Verification_8cpp_a04ba9594e95a7b95db3b0ddd508a0e97}{dbg\+Hist\+Ent}} (string prefix, \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$h)
 \begin{DoxyCompactList}\small\item\em Print a single debug message with a history entry to the console. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Variables}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{Verification_8cpp_a60c044c2a5df43767065485c56db9a75}\label{Verification_8cpp_a60c044c2a5df43767065485c56db9a75} 
-\mbox{\hyperlink{structCfg}{Cfg}} {\bfseries config}
+\mbox{\hyperlink{structCfg}{Cfg}} \mbox{\hyperlink{Verification_8cpp_a60c044c2a5df43767065485c56db9a75}{config}}
 \end{DoxyCompactItemize}
 
 
@@ -35,12 +41,21 @@ Class for verification of the formula on a model. Class for verification of the 
 
 
 
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Verification_8cpp_abbc1d7be3c61021a54685b36e7fde70e}\label{Verification_8cpp_abbc1d7be3c61021a54685b36e7fde70e}} 
+\index{Verification.cpp@{Verification.cpp}!DEPTH\_PREFIX@{DEPTH\_PREFIX}}
+\index{DEPTH\_PREFIX@{DEPTH\_PREFIX}!Verification.cpp@{Verification.cpp}}
+\doxysubsubsection{\texorpdfstring{DEPTH\_PREFIX}{DEPTH\_PREFIX}}
+{\footnotesize\ttfamily \#define DEPTH\+\_\+\+PREFIX~string(depth $\ast$ 4, \textquotesingle{} \textquotesingle{})}
+
+
+
 \doxysubsection{Function Documentation}
-\Hypertarget{Verification_8cpp_a04ba9594e95a7b95db3b0ddd508a0e97}\label{Verification_8cpp_a04ba9594e95a7b95db3b0ddd508a0e97} 
+\mbox{\Hypertarget{Verification_8cpp_a04ba9594e95a7b95db3b0ddd508a0e97}\label{Verification_8cpp_a04ba9594e95a7b95db3b0ddd508a0e97}} 
 \index{Verification.cpp@{Verification.cpp}!dbgHistEnt@{dbgHistEnt}}
 \index{dbgHistEnt@{dbgHistEnt}!Verification.cpp@{Verification.cpp}}
 \doxysubsubsection{\texorpdfstring{dbgHistEnt()}{dbgHistEnt()}}
-{\footnotesize\ttfamily void dbg\+Hist\+Ent (\begin{DoxyParamCaption}\item[{string}]{prefix,  }\item[{\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} \texorpdfstring{$\ast$}{*}}]{h }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void dbg\+Hist\+Ent (\begin{DoxyParamCaption}\item[{string}]{prefix,  }\item[{\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$}]{h }\end{DoxyParamCaption})}
 
 
 
@@ -50,14 +65,14 @@ Print a single debug message with a history entry to the console.
 \begin{DoxyParams}{Parameters}
 {\em prefix} & A prefix string to append to the front of the entry. \\
 \hline
-{\em h} & A pointer to the \doxylink{structHistoryEntry}{History\+Entry} struct which will be printed out. \\
+{\em h} & A pointer to the \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} struct which will be printed out. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{Verification_8cpp_a35e269105f15554762c493e8bf719de1}\label{Verification_8cpp_a35e269105f15554762c493e8bf719de1} 
+\mbox{\Hypertarget{Verification_8cpp_a35e269105f15554762c493e8bf719de1}\label{Verification_8cpp_a35e269105f15554762c493e8bf719de1}} 
 \index{Verification.cpp@{Verification.cpp}!dbgVerifStatus@{dbgVerifStatus}}
 \index{dbgVerifStatus@{dbgVerifStatus}!Verification.cpp@{Verification.cpp}}
 \doxysubsubsection{\texorpdfstring{dbgVerifStatus()}{dbgVerifStatus()}}
-{\footnotesize\ttfamily void dbg\+Verif\+Status (\begin{DoxyParamCaption}\item[{string}]{prefix,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*}}]{gs,  }\item[{Global\+State\+Verification\+Status}]{st,  }\item[{string}]{reason }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void dbg\+Verif\+Status (\begin{DoxyParamCaption}\item[{string}]{prefix,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{gs,  }\item[{\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{st,  }\item[{string}]{reason }\end{DoxyParamCaption})}
 
 
 
@@ -67,18 +82,18 @@ Print a debug message of a verification status to the console.
 \begin{DoxyParams}{Parameters}
 {\em prefix} & A prefix string to append to the front of every entry. \\
 \hline
-{\em gs} & Pointer to a \doxylink{structGlobalState}{Global\+State}. \\
+{\em gs} & Pointer to a \mbox{\hyperlink{structGlobalState}{Global\+State}}. \\
 \hline
 {\em st} & Enum with a verification status of a global state. \\
 \hline
-{\em reason} & String with a reason why the function was called, e.\+g. "{}entered state"{}, "{}all passed"{}. \\
+{\em reason} & String with a reason why the function was called, e.\+g. \char`\"{}entered state\char`\"{}, \char`\"{}all passed\char`\"{}. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{Verification_8cpp_a359b96afed1805b959d60e2c69b373f5}\label{Verification_8cpp_a359b96afed1805b959d60e2c69b373f5} 
+\mbox{\Hypertarget{Verification_8cpp_a359b96afed1805b959d60e2c69b373f5}\label{Verification_8cpp_a359b96afed1805b959d60e2c69b373f5}} 
 \index{Verification.cpp@{Verification.cpp}!verStatusToStr@{verStatusToStr}}
 \index{verStatusToStr@{verStatusToStr}!Verification.cpp@{Verification.cpp}}
 \doxysubsubsection{\texorpdfstring{verStatusToStr()}{verStatusToStr()}}
-{\footnotesize\ttfamily string ver\+Status\+To\+Str (\begin{DoxyParamCaption}\item[{Global\+State\+Verification\+Status}]{status }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily string ver\+Status\+To\+Str (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{status }\end{DoxyParamCaption})}
 
 
 
@@ -90,5 +105,14 @@ Converts global verification status into a string.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-\doxylink{classVerification}{Verification} status converted into a string. 
+\mbox{\hyperlink{classVerification}{Verification}} status converted into a string. 
 \end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{Verification_8cpp_a60c044c2a5df43767065485c56db9a75}\label{Verification_8cpp_a60c044c2a5df43767065485c56db9a75}} 
+\index{Verification.cpp@{Verification.cpp}!config@{config}}
+\index{config@{config}!Verification.cpp@{Verification.cpp}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCfg}{Cfg}} config\hspace{0.3cm}{\ttfamily [extern]}}
+

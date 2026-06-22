@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['restore_0',['RESTORE',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a12f3955776faf06252c403542f7ed380',1,'Verification.hpp']]],
-  ['restore_5fstates_1',['RESTORE_STATES',['../VerificationIterative_8hpp.html#aadb3676cc2d7979be9d96ac7685622c6a3416153d10de6e14520ee8bf3cb6aa35',1,'VerificationIterative.hpp']]],
-  ['revert_2',['REVERT',['../Verification_8hpp.html#ac6db21a1425cd1834558047794fc8872a0ad105830a21e547b8f07c8d466b77bf',1,'Verification.hpp']]]
+  ['pending_1416',['PENDING',['../GlobalStateVerificationStatus_8hpp.html#a18958de5ed2efcae03a00cac4d4a5048a1869818fd53ff519eb8e429301bdff73',1,'GlobalStateVerificationStatus.hpp']]],
+  ['probability_1417',['PROBABILITY',['../TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a75e0d9a230aa82a7e53939b27afc576a',1,'TypesDependency.hpp']]]
 ];

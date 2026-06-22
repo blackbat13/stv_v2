@@ -1,5 +1,5 @@
-\doxysection{History\+Entry Struct Reference}
-\hypertarget{structHistoryEntry}{}\label{structHistoryEntry}\index{HistoryEntry@{HistoryEntry}}
+\hypertarget{structHistoryEntry}{}\doxysection{History\+Entry Struct Reference}
+\label{structHistoryEntry}\index{HistoryEntry@{HistoryEntry}}
 
 
 Structure used to save model traversal history.  
@@ -9,51 +9,51 @@ Structure used to save model traversal history.
 
 {\ttfamily \#include $<$Verification.\+hpp$>$}
 
-\doxysubsubsection*{Public Member Functions}
+
+
+Collaboration diagram for History\+Entry\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structHistoryEntry__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 string \mbox{\hyperlink{structHistoryEntry_a44345c13fd5c5cb8f11da70c77fbb5b2}{to\+String}} ()
-\begin{DoxyCompactList}\small\item\em Converts \doxylink{structHistoryEntry}{History\+Entry} to string. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactList}\small\item\em Converts \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} to string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{structHistoryEntry_a3fb938eeb3de923af065177da0d4248a}\label{structHistoryEntry_a3fb938eeb3de923af065177da0d4248a} 
-\mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} {\bfseries type}
+\mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} \mbox{\hyperlink{structHistoryEntry_a3fb938eeb3de923af065177da0d4248a}{type}}
 \begin{DoxyCompactList}\small\item\em Type of the history record. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_a40cf881a40a89a6af6cc1783872de7e1}\label{structHistoryEntry_a40cf881a40a89a6af6cc1783872de7e1} 
-\mbox{\hyperlink{structGlobalState}{Global\+State}} \texorpdfstring{$\ast$}{*} {\bfseries global\+State}
+\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{structHistoryEntry_a40cf881a40a89a6af6cc1783872de7e1}{global\+State}}
 \begin{DoxyCompactList}\small\item\em Saved global state. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_a5570c69b5d6534ae417916e78982aa87}\label{structHistoryEntry_a5570c69b5d6534ae417916e78982aa87} 
-\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} \texorpdfstring{$\ast$}{*} {\bfseries decision}
+\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$ \mbox{\hyperlink{structHistoryEntry_a5570c69b5d6534ae417916e78982aa87}{decision}}
 \begin{DoxyCompactList}\small\item\em Selected transition. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_a315b7c1c00f62c64f2266a6331df65d6}\label{structHistoryEntry_a315b7c1c00f62c64f2266a6331df65d6} 
-bool {\bfseries global\+Transition\+Controlled}
+bool \mbox{\hyperlink{structHistoryEntry_a315b7c1c00f62c64f2266a6331df65d6}{global\+Transition\+Controlled}}
 \begin{DoxyCompactList}\small\item\em Is the transition controlled by an agent in coalition. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_a99e34ecadba76fd7a1d47e8e47891df5}\label{structHistoryEntry_a99e34ecadba76fd7a1d47e8e47891df5} 
-Global\+State\+Verification\+Status {\bfseries prev\+Status}
+\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} \mbox{\hyperlink{structHistoryEntry_a99e34ecadba76fd7a1d47e8e47891df5}{prev\+Status}}
 \begin{DoxyCompactList}\small\item\em Previous model verification state. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_ab7388bace64bfd9bbd0fd757fd6146f6}\label{structHistoryEntry_ab7388bace64bfd9bbd0fd757fd6146f6} 
-Global\+State\+Verification\+Status {\bfseries new\+Status}
+\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} \mbox{\hyperlink{structHistoryEntry_ab7388bace64bfd9bbd0fd757fd6146f6}{new\+Status}}
 \begin{DoxyCompactList}\small\item\em Next model verification state. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_a383cd6b5aa170e0d003916ea6d22078d}\label{structHistoryEntry_a383cd6b5aa170e0d003916ea6d22078d} 
-int {\bfseries depth}
+int \mbox{\hyperlink{structHistoryEntry_a383cd6b5aa170e0d003916ea6d22078d}{depth}}
 \begin{DoxyCompactList}\small\item\em Recursion depth. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_a8f700f8a1ce9fc19b01c583dd11948a8}\label{structHistoryEntry_a8f700f8a1ce9fc19b01c583dd11948a8} 
-\mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} {\bfseries strategy}
+\mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} \mbox{\hyperlink{structHistoryEntry_a8f700f8a1ce9fc19b01c583dd11948a8}{strategy}}
 \begin{DoxyCompactList}\small\item\em Holds currently processed strategy for the current state. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_aa07d62eba982b1671b3abcbf0ce9ba9c}\label{structHistoryEntry_aa07d62eba982b1671b3abcbf0ce9ba9c} 
-\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} \texorpdfstring{$\ast$}{*} {\bfseries prev}
-\begin{DoxyCompactList}\small\item\em Pointer to the previous \doxylink{structHistoryEntry}{History\+Entry}. \end{DoxyCompactList}\item 
-\Hypertarget{structHistoryEntry_afc4af16dec656acfa1cf86945b70b1a0}\label{structHistoryEntry_afc4af16dec656acfa1cf86945b70b1a0} 
-\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} \texorpdfstring{$\ast$}{*} {\bfseries next}
-\begin{DoxyCompactList}\small\item\em Pointer to the next \doxylink{structHistoryEntry}{History\+Entry}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ \mbox{\hyperlink{structHistoryEntry_aa07d62eba982b1671b3abcbf0ce9ba9c}{prev}}
+\begin{DoxyCompactList}\small\item\em Pointer to the previous \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$ \mbox{\hyperlink{structHistoryEntry_afc4af16dec656acfa1cf86945b70b1a0}{next}}
+\begin{DoxyCompactList}\small\item\em Pointer to the next \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Structure used to save model traversal history. 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{structHistoryEntry_a44345c13fd5c5cb8f11da70c77fbb5b2}\label{structHistoryEntry_a44345c13fd5c5cb8f11da70c77fbb5b2} 
+\mbox{\Hypertarget{structHistoryEntry_a44345c13fd5c5cb8f11da70c77fbb5b2}\label{structHistoryEntry_a44345c13fd5c5cb8f11da70c77fbb5b2}} 
 \index{HistoryEntry@{HistoryEntry}!toString@{toString}}
 \index{toString@{toString}!HistoryEntry@{HistoryEntry}}
 \doxysubsubsection{\texorpdfstring{toString()}{toString()}}
@@ -61,11 +61,114 @@ Structure used to save model traversal history.
 
 
 
-Converts \doxylink{structHistoryEntry}{History\+Entry} to string. 
+Converts \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} to string. 
 
 \begin{DoxyReturn}{Returns}
 A string with the descriprion of this history record. 
 \end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structHistoryEntry_a5570c69b5d6534ae417916e78982aa87}\label{structHistoryEntry_a5570c69b5d6534ae417916e78982aa87}} 
+\index{HistoryEntry@{HistoryEntry}!decision@{decision}}
+\index{decision@{decision}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{decision}{decision}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}}$\ast$ History\+Entry\+::decision}
+
+
+
+Selected transition. 
+
+\mbox{\Hypertarget{structHistoryEntry_a383cd6b5aa170e0d003916ea6d22078d}\label{structHistoryEntry_a383cd6b5aa170e0d003916ea6d22078d}} 
+\index{HistoryEntry@{HistoryEntry}!depth@{depth}}
+\index{depth@{depth}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{depth}{depth}}
+{\footnotesize\ttfamily int History\+Entry\+::depth}
+
+
+
+Recursion depth. 
+
+\mbox{\Hypertarget{structHistoryEntry_a40cf881a40a89a6af6cc1783872de7e1}\label{structHistoryEntry_a40cf881a40a89a6af6cc1783872de7e1}} 
+\index{HistoryEntry@{HistoryEntry}!globalState@{globalState}}
+\index{globalState@{globalState}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{globalState}{globalState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$ History\+Entry\+::global\+State}
+
+
+
+Saved global state. 
+
+\mbox{\Hypertarget{structHistoryEntry_a315b7c1c00f62c64f2266a6331df65d6}\label{structHistoryEntry_a315b7c1c00f62c64f2266a6331df65d6}} 
+\index{HistoryEntry@{HistoryEntry}!globalTransitionControlled@{globalTransitionControlled}}
+\index{globalTransitionControlled@{globalTransitionControlled}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{globalTransitionControlled}{globalTransitionControlled}}
+{\footnotesize\ttfamily bool History\+Entry\+::global\+Transition\+Controlled}
+
+
+
+Is the transition controlled by an agent in coalition. 
+
+\mbox{\Hypertarget{structHistoryEntry_ab7388bace64bfd9bbd0fd757fd6146f6}\label{structHistoryEntry_ab7388bace64bfd9bbd0fd757fd6146f6}} 
+\index{HistoryEntry@{HistoryEntry}!newStatus@{newStatus}}
+\index{newStatus@{newStatus}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{newStatus}{newStatus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} History\+Entry\+::new\+Status}
+
+
+
+Next model verification state. 
+
+\mbox{\Hypertarget{structHistoryEntry_afc4af16dec656acfa1cf86945b70b1a0}\label{structHistoryEntry_afc4af16dec656acfa1cf86945b70b1a0}} 
+\index{HistoryEntry@{HistoryEntry}!next@{next}}
+\index{next@{next}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}$\ast$ History\+Entry\+::next}
+
+
+
+Pointer to the next \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}. 
+
+\mbox{\Hypertarget{structHistoryEntry_aa07d62eba982b1671b3abcbf0ce9ba9c}\label{structHistoryEntry_aa07d62eba982b1671b3abcbf0ce9ba9c}} 
+\index{HistoryEntry@{HistoryEntry}!prev@{prev}}
+\index{prev@{prev}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{prev}{prev}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}$\ast$ History\+Entry\+::prev}
+
+
+
+Pointer to the previous \mbox{\hyperlink{structHistoryEntry}{History\+Entry}}. 
+
+\mbox{\Hypertarget{structHistoryEntry_a99e34ecadba76fd7a1d47e8e47891df5}\label{structHistoryEntry_a99e34ecadba76fd7a1d47e8e47891df5}} 
+\index{HistoryEntry@{HistoryEntry}!prevStatus@{prevStatus}}
+\index{prevStatus@{prevStatus}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{prevStatus}{prevStatus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} History\+Entry\+::prev\+Status}
+
+
+
+Previous model verification state. 
+
+\mbox{\Hypertarget{structHistoryEntry_a8f700f8a1ce9fc19b01c583dd11948a8}\label{structHistoryEntry_a8f700f8a1ce9fc19b01c583dd11948a8}} 
+\index{HistoryEntry@{HistoryEntry}!strategy@{strategy}}
+\index{strategy@{strategy}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{strategy}{strategy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structStrategyEntry}{Strategy\+Entry}} History\+Entry\+::strategy}
+
+
+
+Holds currently processed strategy for the current state. 
+
+\mbox{\Hypertarget{structHistoryEntry_a3fb938eeb3de923af065177da0d4248a}\label{structHistoryEntry_a3fb938eeb3de923af065177da0d4248a}} 
+\index{HistoryEntry@{HistoryEntry}!type@{type}}
+\index{type@{type}!HistoryEntry@{HistoryEntry}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{TypesDependency_8hpp_a9b12ccf7d3168e272beda78cf68328a4}{History\+Entry\+Type}} History\+Entry\+::type}
+
+
+
+Type of the history record. 
+
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
