@@ -47,6 +47,7 @@ CLI configuration overwrite:
 # --PARTIAL_REDUCTION        select variables that should be reduced from the initial model
 # --PARTIAL_REDUCTION_AGENT  select agents for whom the reduction from --PARTIAL_REDUCTION should happen
 # --SERIALIZE_MODEL          convert the local models back into an input file
+# --RECOMMEND_REDUCTION_VARIABLES recommend which variables could be reduced in --PARTIAL_REDUCTION
 ```
 
 ## Tests

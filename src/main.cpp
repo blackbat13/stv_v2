@@ -52,6 +52,36 @@ int main(int argc, char* argv[]) {
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
+    if (config.recommend_reduction_variables) {
+        set<string> formulaVars;
+        for (auto var : *formula->p) {
+            set<string> varNames = var->getVariableNames();
+            formulaVars.insert(varNames.begin(), varNames.end());
+        }
+
+        cout << "Recommended reduction variables:" << endl;
+        for (const auto& agent : localModels->agents) {
+            cout << "Agent: " << agent->name << endl;
+            map<string, int> varParticipatingCounts;
+            for (const auto& varCountPair : agent->recommendedReductionVariableCounts) {
+                const string& varName = varCountPair.first;
+                if (formulaVars.find(varName) == formulaVars.end()) {
+                    continue; // Skip variables not in the formula
+                }
+                for (const auto& guardVariableOccurrence : varCountPair.second) {
+                    if (varParticipatingCounts.find(guardVariableOccurrence.first) == varParticipatingCounts.end()) {
+                        varParticipatingCounts[guardVariableOccurrence.first] = 0;
+                    }
+                    varParticipatingCounts[guardVariableOccurrence.first] += guardVariableOccurrence.second;
+                }
+            }
+            for (const auto& varCountPair : varParticipatingCounts) {
+                cout << "  Variable: " << varCountPair.first << " (" << varCountPair.second << ")" << endl;
+            }
+            cout << endl;
+        }
+    }
+
     if (config.partial_reduction) {
         cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
         for (const auto& item : config.partial_reduction_args) {

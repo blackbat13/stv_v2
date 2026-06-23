@@ -148,7 +148,10 @@ class AgentTemplate {
 
       /// @brief Map of local states needed to generate a model.
       map<string,LocalStateTemplate*> localStateTemplates;  // [YK]: maps location name to location obj
-            
+      
+      /// @brief Stores recommended variable counts for reduction analysis
+      map<string, map<string, int>> recommendedReductionVariableCounts;
+
       // metoda wyznaczająca węzeł kolejny do danego, zależnie od tranzycji
 
       virtual LocalState* genNextState(LocalState *state, TransitionTemplate *trans);
@@ -204,6 +207,10 @@ class AgentTemplate {
       /// @param id Identification number defining a new Agent.
       /// @return Returns a pointer to a new Agent.
       virtual Agent* generateAgent(int id) ;
+
+      set<string> getConditionVars(TransitionTemplate *_transition);
+
+      set<string> getAssignmentVars(TransitionTemplate *_transition);
 
       friend class DotGraph;
 };

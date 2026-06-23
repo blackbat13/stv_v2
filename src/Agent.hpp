@@ -35,6 +35,9 @@ class Agent {
         /// @brief Local transitions for this agent.
         vector<LocalTransition*> localTransitions; // localTransitions[i].id == i
         
+        /// @brief Stores recommended variable counts for reduction analysis
+        
+        map<string, map<string, int>> recommendedReductionVariableCounts;
         // sprawdź, czy stan nie został już wygenerowany.
         
         LocalState* includesState(LocalState *state);

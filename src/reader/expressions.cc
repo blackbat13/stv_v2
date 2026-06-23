@@ -8,6 +8,99 @@
 #include "../GlobalModelGenerator.hpp"
 #include <bits/stdc++.h>
 
+set<string> ExprNode::getVariableNames() const {
+   set<string> result;
+   collectVariableNames(result);
+   return result;
+}
+
+void ExprConst::collectVariableNames(set<string>& out) const {
+   (void) out;
+}
+
+void ExprIdent::collectVariableNames(set<string>& out) const {
+   out.insert(ident);
+}
+
+void ExprAdd::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprSub::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprMul::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprDiv::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprRem::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprAnd::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprOr::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprNot::collectVariableNames(set<string>& out) const {
+   arg->collectVariableNames(out);
+}
+
+void ExprEq::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprNe::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprLt::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprLe::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprGt::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprGe::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprKnow::collectVariableNames(set<string>& out) const {
+   arg->collectVariableNames(out);
+}
+
+void ExprHart::collectVariableNames(set<string>& out) const {
+   for (auto* expr : *arg) {
+      expr->collectVariableNames(out);
+   }
+}
+
 /// @brief 
 /// @param env 
 /// @return 

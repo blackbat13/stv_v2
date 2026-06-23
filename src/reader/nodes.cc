@@ -121,6 +121,23 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
       probabilityCache -= _transition->probability->eval();
    }
    
+   if (config.recommend_reduction_variables == true) {
+      set<string> assignmentVars = getAssignmentVars(_transition);
+      set<string> conditionVars = getConditionVars(_transition);
+
+      for (auto assVar : assignmentVars) {
+         if (recommendedReductionVariableCounts.count(assVar) == 0) {
+            recommendedReductionVariableCounts[assVar] = map<string, int>();
+         }
+         for (auto condVar : conditionVars) {
+            if (recommendedReductionVariableCounts[assVar].count(condVar) == 0) {
+               recommendedReductionVariableCounts[assVar][condVar] = 0;
+            }
+            recommendedReductionVariableCounts[assVar][condVar]++;
+         }
+      }
+   }
+
    transitions->insert(_transition);
 
    /* 
@@ -285,8 +302,26 @@ Agent * AgentTemplate::generateAgent(int id) {
          state->localTransitions.insert(transition);
       }
    }
-   
+   // copy recommendedReductionVariableCounts to the generated Agent
+   result->recommendedReductionVariableCounts = recommendedReductionVariableCounts;
    
    return result;
 }
 
+set<string> AgentTemplate::getConditionVars(TransitionTemplate *_transition) {
+   set<string> vars;
+   if (_transition->condition != nullptr) {
+      vars = _transition->condition->getVariableNames();
+   }
+   return vars;
+}
+
+set<string> AgentTemplate::getAssignmentVars(TransitionTemplate *_transition) {
+   set<string> vars;
+   if (_transition->assignments != nullptr) {
+      for(set<Assignment*>::iterator it=_transition->assignments->begin(); it != _transition->assignments->end(); it++) {
+         vars.insert((*it)->ident);
+      }
+   }
+   return vars;
+}
