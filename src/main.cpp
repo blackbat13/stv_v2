@@ -82,6 +82,36 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    if (config.cone_of_influence) {
+        set<string> formulaVars;
+        for (auto var : *formula->p) {
+            set<string> varNames = var->getVariableNames();
+            formulaVars.insert(varNames.begin(), varNames.end());
+        }
+        
+        cout << "Checking cone of influence with radius: " << config.cone_radius << endl;
+        for (const auto& agent : localModels->agents) {
+            cout << "Agent: " << agent->name << endl;
+            map<string, int> varParticipatingCounts;
+            for (const auto& varCountPair : agent->recommendedReductionVariableCounts) {
+                const string& varName = varCountPair.first;
+                if (formulaVars.find(varName) == formulaVars.end()) {
+                    continue; // Skip variables not in the formula
+                }
+                for (const auto& guardVariableOccurrence : varCountPair.second) {
+                    if (varParticipatingCounts.find(guardVariableOccurrence.first) == varParticipatingCounts.end()) {
+                        varParticipatingCounts[guardVariableOccurrence.first] = 0;
+                    }
+                    varParticipatingCounts[guardVariableOccurrence.first] += guardVariableOccurrence.second;
+                }
+            }
+            for (const auto& varCountPair : varParticipatingCounts) {
+                cout << "  Variable: " << varCountPair.first << " (" << varCountPair.second << ")" << endl;
+            }
+            cout << endl;
+        }
+    }
+
     if (config.partial_reduction) {
         cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
         for (const auto& item : config.partial_reduction_args) {

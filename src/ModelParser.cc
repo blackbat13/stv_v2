@@ -47,6 +47,12 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    // w pętli przetwórz wszystkie modele i wygeneruj docelowe modele lokalne
    LocalModels models;
    
+   if (config.cone_of_influence) {
+       for (auto agentTemplate : *modelDescription) {
+           agentTemplate->checkConeOfInfluence(config.cone_radius);
+       }
+   }
+
    int i = 0;
    for(set<AgentTemplate*>::iterator it=modelDescription->begin(); it != modelDescription->end(); it++, i++) {
       models.agents.push_back((*it)->generateAgent(i));

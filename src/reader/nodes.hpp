@@ -212,6 +212,8 @@ class AgentTemplate {
 
       set<string> getAssignmentVars(TransitionTemplate *_transition);
 
+      void checkConeOfInfluence(int radius);
+
       friend class DotGraph;
 };
 

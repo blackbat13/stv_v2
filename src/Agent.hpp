@@ -24,7 +24,7 @@ class Agent {
         /// @brief Constructor for the Agent class, assigning it an id and name.
         /// @param _id Identifier of the new agent.
         /// @param _name Name of the new agent.
-        Agent(int _id, string _name):id(_id), name(_name) {};
+        Agent(int _id, string _name):id(_id), name(_name), initState(nullptr) {};
         
         /// @brief Initial state of the agent.
         LocalState* initState;

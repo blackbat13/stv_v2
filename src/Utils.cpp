@@ -291,6 +291,13 @@ void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default con
                 config.serialize_model = true;
             } else if (arg == "-RECOMMEND_REDUCTION_VARIABLES" || arg == "--RECOMMEND_REDUCTION_VARIABLES") {
                 config.recommend_reduction_variables = true;
+            } else if (arg == "-CONE_OF_INFLUENCE" || arg == "--CONE_OF_INFLUENCE") {
+                config.cone_of_influence = 1;
+                if (i + 1 < argc) {
+                    config.cone_radius = atoi(argv[++i]);
+                } else {
+                    printf("ERR: no radius was specified!\n");
+                }
             }
         }
     }

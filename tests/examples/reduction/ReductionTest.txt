@@ -1,0 +1,13 @@
+Agent Tester:
+LOCAL: [Var1, Var2]
+PERSISTENT: [Var1, Var2]
+INITIAL: [Var1:=0, Var2:=0]
+init q0
+act1: q0 [Var1==0] -> q1 [Var2:=1]
+act2a: q1 -> q2
+act2b: q1 -> q3 [Var2:=0]
+act3a: q2 -> q4
+act3b: q3 -> q4
+actMerge: q4 -> q5 [Var2:=2]
+
+FORMULA: <<Tester>>[](Var1 == 1 || Var2 == 1)
