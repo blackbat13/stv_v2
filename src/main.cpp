@@ -147,6 +147,19 @@ int main(int argc, char* argv[]) {
     }
 
     if (config.partial_reduction) {
+        set<string> formulaVars;
+        for (auto var : *formula->p) {
+            set<string> varNames = var->getVariableNames();
+            formulaVars.insert(varNames.begin(), varNames.end());
+        }
+
+        for (auto item : config.partial_reduction_args) {
+            if (formulaVars.find(item) != formulaVars.end()) {
+                printf("ERR: variable '%s' is present in the formula!\n", item.c_str());
+                return 1;
+            }
+        }
+
         cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
         for (const auto& item : config.partial_reduction_args) {
             cout << "Partial reduction variable: " << item << endl;
