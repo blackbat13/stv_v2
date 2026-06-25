@@ -75,7 +75,24 @@ int main(int argc, char* argv[]) {
                     varParticipatingCounts[guardVariableOccurrence.first] += guardVariableOccurrence.second;
                 }
             }
-            for (const auto& varCountPair : varParticipatingCounts) {
+
+            // Add variables that are not in the formula but are part of the agent's variables
+            for (const auto& item : agent->vars) {
+                if (formulaVars.find(item->name) != formulaVars.end()) {
+                    continue; // Skip variables in the formula
+                } 
+                if (varParticipatingCounts.find(item->name) == varParticipatingCounts.end()) {
+                    varParticipatingCounts[item->name] = 0;
+                }
+            }
+            
+            vector<pair<string, int>> varParticipatingCountsVec(varParticipatingCounts.begin(), varParticipatingCounts.end());
+            sort(varParticipatingCountsVec.begin(), varParticipatingCountsVec.end(), [](const pair<string, int>& a, const pair<string, int>& b) {
+                return a.second < b.second; // Sort in ascending order of counts
+            });
+
+            // Output the variables and their counts
+            for (const auto& varCountPair : varParticipatingCountsVec) {
                 cout << "  Variable: " << varCountPair.first << " (" << varCountPair.second << ")" << endl;
             }
             cout << endl;
@@ -105,7 +122,24 @@ int main(int argc, char* argv[]) {
                     varParticipatingCounts[guardVariableOccurrence.first] += guardVariableOccurrence.second;
                 }
             }
-            for (const auto& varCountPair : varParticipatingCounts) {
+
+            // Add variables that are not in the formula but are part of the agent's variables
+            for (const auto& item : agent->vars) {
+                if (formulaVars.find(item->name) != formulaVars.end()) {
+                    continue; // Skip variables in the formula
+                } 
+                if (varParticipatingCounts.find(item->name) == varParticipatingCounts.end()) {
+                    varParticipatingCounts[item->name] = 0;
+                }
+            }
+
+            vector<pair<string, int>> varParticipatingCountsVec(varParticipatingCounts.begin(), varParticipatingCounts.end());
+            sort(varParticipatingCountsVec.begin(), varParticipatingCountsVec.end(), [](const pair<string, int>& a, const pair<string, int>& b) {
+                return a.second < b.second; // Sort in ascending order of counts
+            });
+
+            // Output the variables and their counts
+            for (const auto& varCountPair : varParticipatingCountsVec) {
                 cout << "  Variable: " << varCountPair.first << " (" << varCountPair.second << ")" << endl;
             }
             cout << endl;
