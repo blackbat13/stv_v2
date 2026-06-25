@@ -68,7 +68,11 @@ string agentToString(Agent* agt) {
                 }
                 first = false;
                 auto c = *_c;
-                res += c->var->name + (c->conditionOperator == ConditionOperator::Equals ? "==" : "!=") + to_string(c->comparedValue);
+                if (c->expression != nullptr) {
+                    res += c->expression->toString(false);
+                } else if (c->var != nullptr) {
+                    res += c->var->name + (c->conditionOperator == ConditionOperator::Equals ? "==" : "!=") + to_string(c->comparedValue);
+                }
             }
             res += "]";
         }
@@ -125,7 +129,11 @@ void outputGlobalModel(GlobalModel* globalModel) {
                     printf(" not shared;");
                 }
                 for (const auto condition : localTransition->conditions) {
-                    printf(" <if %s%s%i>", condition->var->name.c_str(), condition->conditionOperator == ConditionOperator::Equals ? "==" : "!=", condition->comparedValue);
+                    if (condition->expression != nullptr) {
+                        printf(" <if %s>", condition->expression->toString(false).c_str());
+                    } else if (condition->var != nullptr) {
+                        printf(" <if %s%s%i>", condition->var->name.c_str(), condition->conditionOperator == ConditionOperator::Equals ? "==" : "!=", condition->comparedValue);
+                    }
                 }
 
                 printf("\n");

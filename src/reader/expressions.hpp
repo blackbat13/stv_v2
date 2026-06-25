@@ -33,7 +33,7 @@ class ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) = 0;
       virtual int eval( Environment& env ) = 0;
-      virtual string toString() const = 0;
+      virtual string toString(bool addBrackets = true) const = 0;
 
       /// @brief Returns all variable names used in this expression subtree.
       set<string> getVariableNames() const;
@@ -62,7 +62,7 @@ class ExprConst: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -86,7 +86,7 @@ class ExprIdent: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -111,7 +111,7 @@ class ExprAdd: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -136,7 +136,7 @@ class ExprSub: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -161,7 +161,7 @@ class ExprMul: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -186,7 +186,7 @@ class ExprDiv: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -211,7 +211,7 @@ class ExprRem: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -236,7 +236,7 @@ class ExprAnd: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -261,7 +261,7 @@ class ExprOr: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -285,7 +285,7 @@ class ExprNot: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -310,7 +310,7 @@ class ExprEq: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addOuterParens = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -335,7 +335,7 @@ class ExprNe: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -360,7 +360,7 @@ class ExprLt: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -385,7 +385,7 @@ class ExprLe: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -410,7 +410,7 @@ class ExprGt: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -435,7 +435,7 @@ class ExprGe: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -461,7 +461,7 @@ class ExprKnow: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addOuterParens = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 
@@ -491,7 +491,7 @@ class ExprHart: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
-      virtual string toString() const;
+      virtual string toString(bool addBrackets = true) const;
       virtual void collectVariableNames(set<string>& out) const;
 };
 

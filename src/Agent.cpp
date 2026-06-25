@@ -52,6 +52,30 @@ void Agent::partialReduceModel(const vector<string>& variableNames) {
       for (const auto& variableName : variableNames) {
          state->environment.erase(variableName);
       }
+      for (auto transition : state->localTransitions) {
+         for (auto it = transition->conditions.begin(); it != transition->conditions.end();) {
+            Condition* condition = *it;
+            bool removeCondition = false;
+
+            if (condition->expression != nullptr) {
+               set<string> vars = condition->expression->getVariableNames();
+               for (const auto& varName : vars) {
+                  if (forgottenVariables.find(varName) != forgottenVariables.end()) {
+                     removeCondition = true;
+                     break;
+                  }
+               }
+            } else if (condition->var != nullptr) {
+               removeCondition = forgottenVariables.find(condition->var->name) != forgottenVariables.end();
+            }
+
+            if (removeCondition) {
+               it = transition->conditions.erase(it);
+            } else {
+               ++it;
+            }
+         }
+      }
    }
 
    // Build representative states for equivalent states after forgetting variables.

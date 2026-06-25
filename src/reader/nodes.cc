@@ -297,6 +297,11 @@ Agent * AgentTemplate::generateAgent(int id) {
          transition->from = state;
          transition->to = newState;
          transition->probability = (*it)->probability->eval();
+         if ((*it)->condition != nullptr) {
+            Condition *condition = new Condition;
+            condition->expression = (*it)->condition;
+            transition->conditions.insert(condition);
+         }
          
          // zapamiętaj w węźle
          state->localTransitions.insert(transition);

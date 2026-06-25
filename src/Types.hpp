@@ -62,14 +62,18 @@ struct Var {
 
 /// @brief Represents a condition for LocalTransition.
 struct Condition {
+    /// @brief Optional full expression condition.
+    /// If set, this condition should be evaluated/serialized via this expression.
+    ExprNode* expression = nullptr;
+
     /// @brief Pointer to a variable.
-    Var* var;
+    Var* var = nullptr;
 
     /// @brief Conditional operator for the variable.
-    ConditionOperator conditionOperator;
+    ConditionOperator conditionOperator = ConditionOperator::Equals;
 
     /// @brief Condition value to be met.
-    int comparedValue;
+    int comparedValue = 0;
 };
 
 /// @brief Contains a template for coalition of Agent as string from the formula. 

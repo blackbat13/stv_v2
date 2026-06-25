@@ -337,32 +337,71 @@ float ProbDiv::eval( GlobalModelGenerator *generator, GlobalState *globalState )
 
 // ---- ExprNode::toString() implementations ----
 
-string ExprConst::toString() const { return to_string(val); }
-string ExprIdent::toString() const { return ident; }
-string ExprAdd::toString() const { return "(" + larg->toString() + " + " + rarg->toString() + ")"; }
-string ExprSub::toString() const { return "(" + larg->toString() + " - " + rarg->toString() + ")"; }
-string ExprMul::toString() const { return "(" + larg->toString() + " * " + rarg->toString() + ")"; }
-string ExprDiv::toString() const { return "(" + larg->toString() + " / " + rarg->toString() + ")"; }
-string ExprRem::toString() const { return "(" + larg->toString() + " % " + rarg->toString() + ")"; }
-string ExprAnd::toString() const { return "(" + larg->toString() + " && " + rarg->toString() + ")"; }
-string ExprOr::toString()  const { return "(" + larg->toString() + " || " + rarg->toString() + ")"; }
-string ExprNot::toString() const { return "!" + arg->toString(); }
-string ExprEq::toString()  const { return "(" + larg->toString() + " == " + rarg->toString() + ")"; }
-string ExprNe::toString()  const { return "(" + larg->toString() + " != " + rarg->toString() + ")"; }
-string ExprLt::toString()  const { return "(" + larg->toString() + " < "  + rarg->toString() + ")"; }
-string ExprLe::toString()  const { return "(" + larg->toString() + " <= " + rarg->toString() + ")"; }
-string ExprGt::toString()  const { return "(" + larg->toString() + " > "  + rarg->toString() + ")"; }
-string ExprGe::toString()  const { return "(" + larg->toString() + " >= " + rarg->toString() + ")"; }
-
-string ExprKnow::toString() const {
-   return "&K_" + agentName + "(" + arg->toString() + ")";
+string ExprConst::toString(bool addBrackets) const { return to_string(val); }
+string ExprIdent::toString(bool addBrackets) const { return ident; }
+string ExprAdd::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " + " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprSub::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " - " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprMul::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " * " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprDiv::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " / " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprRem::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " % " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprAnd::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " && " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprOr::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " || " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprNot::toString(bool addBrackets) const { return "!" + arg->toString(true); }
+string ExprEq::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " == " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprNe::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " != " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprLt::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " < " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprLe::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " <= " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprGt::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " > " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprGe::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " >= " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
 }
 
-string ExprHart::toString() const {
+string ExprKnow::toString(bool addBrackets) const {
+   return "&K_" + agentName + "(" + arg->toString(true) + ")";
+}
+
+string ExprHart::toString(bool addBrackets) const {
    string result = "&H_" + agentName + "[" + (le ? "<=" : ">=") + to_string(val) + "](";
    for (size_t i = 0; i < arg->size(); ++i) {
       if (i > 0) result += ", ";
-      result += "(" + (*arg)[i]->toString() + ")";
+      result += "(" + (*arg)[i]->toString(true) + ")";
    }
    result += ")";
    return result;

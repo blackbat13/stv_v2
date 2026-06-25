@@ -269,10 +269,24 @@ string ModelSerializer::serializeAgent(Agent* agent) {
 
         string fromName = stateName(first_t->from);
 
+        string conditionStr = "";
+        if (first_t->conditions.size() > 0) {
+            for (const auto& c : first_t->conditions) {
+                if (!conditionStr.empty()) {
+                    conditionStr += ", ";
+                }
+                if (c->expression != nullptr) {
+                    conditionStr += c->expression->toString(false);
+                } else if (c->var != nullptr) {
+                    conditionStr += c->var->name + (c->conditionOperator == ConditionOperator::Equals ? "==" : "!=") + to_string(c->comparedValue);
+                }
+            }
+        }
+
         if (!probabilistic) {
             // Non-probabilistic: single outcome, single line.
             string assigns = assignmentString(first_t, persistentVarNames);
-            string line = prefix + ": " + fromName + " -> " + stateName(first_t->to);
+            string line = prefix + ": " + fromName + (conditionStr.empty() ? "" : " [" + conditionStr + "]") + " -> " + stateName(first_t->to);
             if (!assigns.empty()) line += " " + assigns;
             ss << line << "\n";
         } else {
@@ -282,7 +296,7 @@ string ModelSerializer::serializeAgent(Agent* agent) {
             //                     0.3 : outcome2 [assigns]
             //                     &REST : outcome3 [assigns]    <-- last branch uses &REST
             // The indent aligns continuation lines under the first "->".
-            string indent(prefix.size() + fromName.size() + 6, ' ');
+            string indent(prefix.size() + fromName.size() + (conditionStr.empty() ? 0 : conditionStr.size() + 3) + 6, ' ');
 
             for (size_t i = 0; i < uniqueTransitions.size(); ++i) {
                 auto* ti = uniqueTransitions[i];
@@ -290,7 +304,7 @@ string ModelSerializer::serializeAgent(Agent* agent) {
 
                 if (i == 0) {
                     // First branch: full action header with explicit probability.
-                    ss << prefix << ": " << fromName << " -> "
+                    ss << prefix << ": " << fromName << (conditionStr.empty() ? "" : " [" + conditionStr + "]") << " -> "
                        << formatProbability(ti->probability) << "   : "
                        << stateName(ti->to);
                 } else {
@@ -353,13 +367,13 @@ string ModelSerializer::serializeFormula(Formula* formula) {
     // Formula body from the ExprNode tree.
     if (formula->p != nullptr && !formula->p->empty()) {
         if (formula->p->size() == 1) {
-            ss << "(" << (*formula->p)[0]->toString() << ")";
+            ss << "(" << (*formula->p)[0]->toString(false) << ")";
         } else {
             // Multiple top-level expressions — join with &&.
             ss << "(";
             for (size_t i = 0; i < formula->p->size(); ++i) {
                 if (i > 0) ss << " && ";
-                ss << (*formula->p)[i]->toString();
+                ss << (*formula->p)[i]->toString(false);
             }
             ss << ")";
         }
