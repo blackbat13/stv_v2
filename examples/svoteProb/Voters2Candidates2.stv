@@ -1,0 +1,95 @@
+
+Agent Voter1:
+LOCAL: [v1_1, v2_1, vc_1]
+PERSISTENT: [v1_1, v2_1, vc_1]
+INITIAL: [v1_1:=0, v2_1:=0, vc_1:=0]
+init q0
+shared[2] regm_1[regm_1]: q0 -> q1
+shared[2] regi_1[regi_1]: q0 -> q2
+shared[2] regp_1[regp_1]: q0 -> q3
+shared[2] packm_1[packm_1]: q1 -> q4
+shared[2] packi_1[packi_1]: q2 -> q5
+shared[2] packp_1[packp_1]: q3 -> q6
+shared[2] vote1m_1[vote1m_1]: q4 -> 0.9   : q7 [v1_1:=1]
+                                &REST : q13 [vc_1:=1]
+shared[2] vote2m_1[vote2m_1]: q4 -> 0.9   : q8 [v2_1:=1]
+                                &REST : q13 [vc_1:=1]
+shared[2] vote1i_1[vote1i_1]: q5 -> 0.6   : q9 [v1_1:=1]
+                                &REST : q13 [vc_1:=1]
+shared[2] vote2i_1[vote2i_1]: q5 -> 0.6   : q10 [v2_1:=1]
+                                &REST : q13 [vc_1:=1]
+shared[2] vote1p_1[vote1p_1]: q6 -> 0.99  : q11 [v1_1:=1]
+                                &REST : q13 [vc_1:=1]
+shared[2] vote2p_1[vote2p_1]: q6 -> 0.99  : q12 [v2_1:=1]
+                                &REST : q13 [vc_1:=1]
+idle: q7 -> q7
+idle: q8 -> q8
+idle: q9 -> q9
+idle: q10 -> q10
+idle: q11 -> q11
+idle: q12 -> q12
+idle: q13 -> q13
+
+Agent Voter2:
+LOCAL: [v1_2, v2_2, vc_2]
+PERSISTENT: [v1_2, v2_2, vc_2]
+INITIAL: [v1_2:=0, v2_2:=0, vc_2:=0]
+init q0
+shared[2] regm_2[regm_2]: q0 -> q1
+shared[2] regi_2[regi_2]: q0 -> q2
+shared[2] regp_2[regp_2]: q0 -> q3
+shared[2] packm_2[packm_2]: q1 -> q4
+shared[2] packi_2[packi_2]: q2 -> q5
+shared[2] packp_2[packp_2]: q3 -> q6
+shared[2] vote1m_2[vote1m_2]: q4 -> 0.9   : q7 [v1_2:=1]
+                                &REST : q13 [vc_2:=1]
+shared[2] vote2m_2[vote2m_2]: q4 -> 0.9   : q8 [v2_2:=1]
+                                &REST : q13 [vc_2:=1]
+shared[2] vote1i_2[vote1i_2]: q5 -> 0.6   : q9 [v1_2:=1]
+                                &REST : q13 [vc_2:=1]
+shared[2] vote2i_2[vote2i_2]: q5 -> 0.6   : q10 [v2_2:=1]
+                                &REST : q13 [vc_2:=1]
+shared[2] vote1p_2[vote1p_2]: q6 -> 0.99  : q11 [v1_2:=1]
+                                &REST : q13 [vc_2:=1]
+shared[2] vote2p_2[vote2p_2]: q6 -> 0.99  : q12 [v2_2:=1]
+                                &REST : q13 [vc_2:=1]
+idle: q7 -> q7
+idle: q8 -> q8
+idle: q9 -> q9
+idle: q10 -> q10
+idle: q11 -> q11
+idle: q12 -> q12
+idle: q13 -> q13
+
+Agent EA:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init q0
+shared[2] regm_1[reg_1]: q0 -> q1
+shared[2] regi_1[reg_1]: q0 -> q2
+shared[2] regp_1[reg_1]: q0 -> q3
+shared[2] packm_1[pack_1]: q1 -> q0
+shared[2] packi_1[pack_1]: q2 -> q0
+shared[2] packp_1[pack_1]: q3 -> q0
+shared[2] vote1m_1[votem_1]: q0 -> q0
+shared[2] vote2m_1[votem_1]: q0 -> q0
+shared[2] vote1i_1[votei_1]: q0 -> q0
+shared[2] vote2i_1[votei_1]: q0 -> q0
+shared[2] vote1p_1[votep_1]: q0 -> q0
+shared[2] vote2p_1[votep_1]: q0 -> q0
+shared[2] regm_2[reg_2]: q0 -> q4
+shared[2] regi_2[reg_2]: q0 -> q5
+shared[2] regp_2[reg_2]: q0 -> q6
+shared[2] packm_2[pack_2]: q4 -> q0
+shared[2] packi_2[pack_2]: q5 -> q0
+shared[2] packp_2[pack_2]: q6 -> q0
+shared[2] vote1m_2[votem_2]: q0 -> q0
+shared[2] vote2m_2[votem_2]: q0 -> q0
+shared[2] vote1i_2[votei_2]: q0 -> q0
+shared[2] vote2i_2[votei_2]: q0 -> q0
+shared[2] vote1p_2[votep_2]: q0 -> q0
+shared[2] vote2p_2[votep_2]: q0 -> q0
+idle: q0 -> q0
+
+FORMULA: <<Voter1>><>&P[>=0.99] (v1_1==1)
