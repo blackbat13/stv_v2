@@ -237,6 +237,7 @@ int main(int argc, char* argv[]) {
         } else {
             generator->expandAllStates(true);
         }
+        cout << "Number of global states: " << generator->getCurrentGlobalModel()->globalStates.size() << endl;
     }
     
     if(config.stv_mode & (1 << 1)){     // mode.binary = /[0,1]*1[0,1]/ (verify)
