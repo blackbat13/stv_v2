@@ -1,0 +1,6 @@
+ /usr/bin/time -v ./stv -m 1 -f ../examples/vvote_variable_reduction/vvote_1voters.stv --PARTIAL_REDUCTION Voter1_vote1 Voter1_vote2 Voter1_end Voter1_requested1 Voter1_requested2  --PARTIAL_REDUCTION_AGENT Voter1 --SERIALIZE_MODEL > ../examples/vvote_variable_reduction/vvote_1voters_reduced1.stv 
+/usr/bin/time -v ./stv -m 3 -f ../examples/vvote_variable_reduction/vvote_1voters.stv 
+
+ /usr/bin/time -v ./stv -m 1 -f ../examples/vvote_variable_reduction/vvote_5voters.stv --PARTIAL_REDUCTION Voter1_vote1 Voter1_vote2 Voter1_requested1 Voter1_requested2 Voter1_wbb_ok Voter1_wbb_fail  --PARTIAL_REDUCTION_AGENT Voter1 --SERIALIZE_MODEL > ../examples/vvote_variable_reduction/vvote_5voters_reduced2.stv 
+
+ /usr/bin/time -v ./stv -m 1 -f ../examples/vvote_variable_reduction/vvote_5voters_reduced2.stv --PARTIAL_REDUCTION Coercer_requested1 Coercer_requested2 Coercer_Voter1_vote2 Coercer_Voter1_novote --PARTIAL_REDUCTION_AGENT Coercer --SERIALIZE_MODEL > ../examples/vvote_variable_reduction/vvote_5voters_reduced3.stv 
