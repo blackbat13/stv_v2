@@ -7,8 +7,8 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 CRAAMFLAGS += -I$(CRAAM_DIR) -I$(CRAAM_INCLUDE_DIR)
 	
-main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o DotGraph.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
-	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
+main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
+	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
  
 main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/StrategyParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
 	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/main.cpp
@@ -45,6 +45,9 @@ VerificationIterative.o: ../src/VerificationIterative.hpp ../src/VerificationIte
 
 DotGraph.o: ../src/DotGraph.hpp ../src/DotGraph.cpp
 	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/DotGraph.cpp
+
+ModelSerializer.o: ../src/ModelSerializer.hpp ../src/ModelSerializer.cpp
+	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/ModelSerializer.cpp
 
 parser.o: ../src/reader/parser.c
 	$(CC) $(CPPFLAGS) -c ../src/reader/parser.c

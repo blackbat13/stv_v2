@@ -24,7 +24,7 @@ class Agent {
         /// @brief Constructor for the Agent class, assigning it an id and name.
         /// @param _id Identifier of the new agent.
         /// @param _name Name of the new agent.
-        Agent(int _id, string _name):id(_id), name(_name) {};
+        Agent(int _id, string _name):id(_id), name(_name), initState(nullptr) {};
         
         /// @brief Initial state of the agent.
         LocalState* initState;
@@ -35,9 +35,17 @@ class Agent {
         /// @brief Local transitions for this agent.
         vector<LocalTransition*> localTransitions; // localTransitions[i].id == i
         
+        /// @brief Stores recommended variable counts for reduction analysis
+        
+        map<string, map<string, int>> recommendedReductionVariableCounts;
         // sprawdź, czy stan nie został już wygenerowany.
         
         LocalState* includesState(LocalState *state);
+
+        /// @brief Reduces this agent local model by forgetting selected variables
+        ///        and merging equivalent local states.
+        /// @param variableNames Variables to forget from local-state environments.
+        void partialReduceModel(const vector<string>& variableNames);
 };
 
 #endif // AGENT_H

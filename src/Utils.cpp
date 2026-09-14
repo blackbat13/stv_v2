@@ -68,7 +68,11 @@ string agentToString(Agent* agt) {
                 }
                 first = false;
                 auto c = *_c;
-                res += c->var->name + (c->conditionOperator == ConditionOperator::Equals ? "==" : "!=") + to_string(c->comparedValue);
+                if (c->expression != nullptr) {
+                    res += c->expression->toString(false);
+                } else if (c->var != nullptr) {
+                    res += c->var->name + (c->conditionOperator == ConditionOperator::Equals ? "==" : "!=") + to_string(c->comparedValue);
+                }
             }
             res += "]";
         }
@@ -125,7 +129,11 @@ void outputGlobalModel(GlobalModel* globalModel) {
                     printf(" not shared;");
                 }
                 for (const auto condition : localTransition->conditions) {
-                    printf(" <if %s%s%i>", condition->var->name.c_str(), condition->conditionOperator == ConditionOperator::Equals ? "==" : "!=", condition->comparedValue);
+                    if (condition->expression != nullptr) {
+                        printf(" <if %s>", condition->expression->toString(false).c_str());
+                    } else if (condition->var != nullptr) {
+                        printf(" <if %s%s%i>", condition->var->name.c_str(), condition->conditionOperator == ConditionOperator::Equals ? "==" : "!=", condition->comparedValue);
+                    }
                 }
 
                 printf("\n");
@@ -214,8 +222,7 @@ void loadConfigFromFile(string filename) {
     }
 };
 
-void loadConfigFromArgs(int argc, char** argv) {
-    // overwrite the default config values (if provided on the input)
+void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default config values (if provided on the input)
     if (argc >= 2) {
         for (int i = 1; i < argc; i++) {
             string arg = argv[i];
@@ -273,6 +280,31 @@ void loadConfigFromArgs(int argc, char** argv) {
                     config.strategy_file_path = argv[++i];
                 } else {
                     printf("ERR: no file path was specified!\n");
+                }
+            } else if (arg == "-PARTIAL_REDUCTION" || arg == "--PARTIAL_REDUCTION") {
+                config.partial_reduction = 1;
+                config.partial_reduction_args.clear();
+                int j = i + 1;
+                while (j < argc && argv[j][0] != '-') {
+                    config.partial_reduction_args.push_back(argv[j]);
+                    ++j;
+                }
+                i = j - 1;
+                if (config.partial_reduction_args.empty()) {
+                    printf("ERR: no variable names were specified for PARTIAL_REDUCTION!\n");
+                }
+            } else if (arg == "-PARTIAL_REDUCTION_AGENT" || arg == "--PARTIAL_REDUCTION_AGENT") {
+                config.partial_reduction_agent = argv[++i];
+            } else if (arg == "-SERIALIZE_MODEL" || arg == "--SERIALIZE_MODEL") {
+                config.serialize_model = true;
+            } else if (arg == "-RECOMMEND_REDUCTION_VARIABLES" || arg == "--RECOMMEND_REDUCTION_VARIABLES") {
+                config.recommend_reduction_variables = true;
+            } else if (arg == "-CONE_OF_INFLUENCE" || arg == "--CONE_OF_INFLUENCE") {
+                config.cone_of_influence = 1;
+                if (i + 1 < argc) {
+                    config.cone_radius = atoi(argv[++i]);
+                } else {
+                    printf("ERR: no radius was specified!\n");
                 }
             }
         }

@@ -423,7 +423,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
 /// @param viaLocalTransitions Pointer to a set of pointers to LocalTransition from which the changes in variables, as a result of traversing through the transition, will be made in a new GlobalState.
 /// @param prevGlobalState Pointer to GlobalState from which all persistent variables will be copied over from to the new GlobalState.
 /// @return Returns a pointer to a new or already existing in the same epistemic class GlobalModel.
-GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {   
+GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {
     // Find/create EpistemicClass, check if an identical GlobalState is already present in that EpistemicClass
     auto agent = *this->formula->coalition.begin();
     auto epistemicClass = this->findOrCreateEpistemicClass(localStates, agent);
@@ -445,7 +445,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
 
     // Reserve vector capacity
     globalState->localStatesProjection.reserve(localStates->size());
-    
+
     // globalState->localStates: copy from localStates argument
     for (const auto localState : *localStates) {
         globalState->localStatesProjection.push_back(localState);
