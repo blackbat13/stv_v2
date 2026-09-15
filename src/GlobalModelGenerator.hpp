@@ -37,6 +37,7 @@ public:
     GlobalModel *getCurrentGlobalModel();
     Formula* getFormula();
     int getFormulaSize();
+    bool getFormulaCorrectness();
     set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);
     Agent* getAgentInstanceByName(string agentName);
     void markFormulaAsIncorrect();
@@ -86,6 +87,7 @@ protected:
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
+    bool hasDeadlockCombination(vector<LocalState*>* localStates);
     set<tuple<string, string>> currentStrategy;  // Current strategy being built
     
     // For iterative strategy generation: track which action choice (0, 1, 2, ...) at each epistemic class
