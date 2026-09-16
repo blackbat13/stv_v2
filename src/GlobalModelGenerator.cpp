@@ -525,16 +525,11 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     return globalState;
 }
 
-/// @brief Checks whether there is a way for every agent to pick one of its currently available local actions
-/// (identified by localName) such that none of the global names reachable through those picks reaches its
-/// required sharedCount - a simultaneous choice combination exists from which no global transition can actually
-/// execute (deadlock).
+/// @brief Checks whether there is a way for every agent to pick one of its currently available local actions (identified by localName) such that none of the global names reachable through those picks reaches its required sharedCount - a simultaneous choice combination exists from which no global transition can actually execute (deadlock).
 /// @param localStates Current local states (one per agent) to check for a deadlock combination.
 /// @return True if such a combination exists.
 bool GlobalModelGenerator::hasDeadlockCombination(vector<LocalState*>* localStates) {
-    // Per agent, every available local transition (shared and private) grouped by localName (not a unique key:
-    // unrelated shared actions can reuse the same localName with a different global name). Picking a localName
-    // means every global name grouped under it is a candidate outcome of that local action.
+    // Per agent, every available local transition (shared and private) grouped by localName (not a unique key: unrelated shared actions can reuse the same localName with a different global name). Picking a localName means every global name grouped under it is a candidate outcome of that local action.
     vector<map<string, set<LocalTransition*>>> namesPerLocalName;
     for (const auto localState : *localStates) {
         if (localState->localTransitions.empty()) {
