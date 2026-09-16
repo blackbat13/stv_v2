@@ -94,6 +94,18 @@ $(document).ready(function(){initNavTree('expressions_8hpp.html',''); initResiza
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for expressions.hpp:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="expressions_8hpp__incl.svg" width="232" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="expressions_8hpp__dep__incl.svg" width="2480" height="486"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 </div>
 <p><a href="expressions_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -156,17 +168,51 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExprHart.html">ExprHart</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node for a Hartley operator.  <a href="classExprHart.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classProbNode.html">ProbNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base node for probability calculations.  <a href="classProbNode.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classProbConst.html">ProbConst</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node for a constant.  <a href="classProbConst.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classProbAdd.html">ProbAdd</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node for addition.  <a href="classProbAdd.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classProbSub.html">ProbSub</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node for subtraction.  <a href="classProbSub.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classProbMul.html">ProbMul</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node for multiplication.  <a href="classProbMul.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classProbDiv.html">ProbDiv</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node for division.  <a href="classProbDiv.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a8a6f1b2a287c010b90a38b54cc90d3e4"><td class="memItemLeft" align="right" valign="top"><a id="a8a6f1b2a287c010b90a38b54cc90d3e4"></a>
-typedef map&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a></td></tr>
-<tr class="memdesc:a8a6f1b2a287c010b90a38b54cc90d3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable names with their values. <br /></td></tr>
+<tr class="memitem:a8a6f1b2a287c010b90a38b54cc90d3e4"><td class="memItemLeft" align="right" valign="top">typedef map&lt; string, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a></td></tr>
+<tr class="memdesc:a8a6f1b2a287c010b90a38b54cc90d3e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Variable names with their values.  <a href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">More...</a><br /></td></tr>
 <tr class="separator:a8a6f1b2a287c010b90a38b54cc90d3e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Eval and helper class for expressions. Eval and helper class for expressions. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a8a6f1b2a287c010b90a38b54cc90d3e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a6f1b2a287c010b90a38b54cc90d3e4">&#9670;&nbsp;</a></span>Environment</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef map&lt;string, int&gt; <a class="el" href="expressions_8hpp.html#a8a6f1b2a287c010b90a38b54cc90d3e4">Environment</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Variable names with their values. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

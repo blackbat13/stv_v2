@@ -1,21 +1,16 @@
 /**
  * @file Verification.hpp
  */
+#define STRATEGY_BITS 64
 
 #ifndef SELENE_VERIFICATION
 #define SELENE_VERIFICATION
 
 #include <stack>
 #include "Types.hpp"
+#include "TypesDependency.hpp"
 #include "GlobalModelGenerator.hpp"
-
-/// @brief HistoryEntry entry type.
-enum HistoryEntryType {
-    DECISION, ///< Made the decision to go to a state using a transition.
-    STATE_STATUS, ///< Changed verification status.
-    CONTEXT, ///< Recursion has gone deeper.
-    MARK_DECISION_AS_INVALID, ///< Marking a transition as invalid.
-};
+#include <bitset>
 
 string verStatusToStr(GlobalStateVerificationStatus status);
 
@@ -35,6 +30,8 @@ struct HistoryEntry {
     GlobalStateVerificationStatus newStatus;
     /// @brief Recursion depth.
     int depth;
+    /// @brief Holds currently processed strategy for the current state.
+    StrategyEntry strategy;
     /// @brief Pointer to the previous HistoryEntry.
     HistoryEntry* prev;
     /// @brief Pointer to the next HistoryEntry.
@@ -54,6 +51,9 @@ struct HistoryEntry {
         }
         else if (this->type == HistoryEntryType::MARK_DECISION_AS_INVALID) {
             snprintf(buff, sizeof(buff), "markInvalid in %s: to %s", this->globalState->hash.c_str(), this->decision->to->hash.c_str());
+        }
+        else if (this->type == HistoryEntryType::UNCONTROLLED_DECISION) {
+            snprintf(buff, sizeof(buff), "uncontrolledDecision in %s at depth %i: to %s (%s)", this->globalState->hash.c_str(), this->depth, this->decision->to->hash.c_str(), this->globalTransitionControlled ? "controlled" : "uncontrolled");
         }
         return string(buff);
     };
@@ -88,6 +88,11 @@ public:
     bool verify();
     bool fixpointVerify();
     void historyDecisionsERR();
+    map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> getNaturalStrategy();
+    vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
+    int getStrategyComplexity();
+    Result verifyStrategy();
+    Result verifyMDP();
 protected:
     /// @brief Current mode of model traversal.
     TraversalMode mode;
@@ -101,27 +106,41 @@ protected:
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.
     HistoryEntry* historyEnd;
+    /// @brief A table of actions paired vith globalState internal variables state for natural strategy construction.
+    map<bitset<STRATEGY_BITS>, string, StrategyBitsComparator> naturalStrategy;
+    /// @brief Max strategy variables found.
+    short strategyVariableLimit;
+    /// @brief Easily readable variable names for natural strategy generation.
+    vector<string> variableNames;
+    /// @brief Natural strategy complexity before reduction
+    int reductionComplexityBefore;
+
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
     bool isAgentInCoalition(Agent* agent);
     EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
     bool areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2);
-    void addHistoryDecision(GlobalState* globalState, GlobalTransition* ecision);
+    void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
     void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
-    void addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
+    bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
     void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
+    void addHistoryUncontrolledDecision(GlobalState* globalState, GlobalTransition* decision);
     HistoryEntry* newHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
     bool revertLastDecision(int depth);
     void undoLastHistoryEntry(bool freeMemory);
     void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
-    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions);
-    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode);
+    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
     bool minFixpointVerify();
     bool maxFixpointVerify();
+    bitset<STRATEGY_BITS> globalStateToValueBits(GlobalState* globalState);
+    vector<tuple<vector<tuple<bool, string>>, string>> reduceStrategy(vector<tuple<vector<tuple<bool, string>>, string>> strategyEntries, short lockedColumn = 0, bool upperHalf = false);
+    void increaseProbability(GlobalState* currentState, GlobalTransition* decision);
+    void lowerProbability(GlobalState* currentStateFrom, GlobalState* currentStateTo, set<LocalTransition*> decision);
 };
 
 #endif // SELENE_VERIFICATION

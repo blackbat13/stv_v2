@@ -1,0 +1,17 @@
+Agent Player1:
+LOCAL: [score, coins]
+PERSISTENT: [score, coins]
+INITIAL: [score:=0, coins:=3]
+init s0
+flip: s0 -> s1 [coins:=coins-1]
+heads: s1 -> 0.5 : s2 [score:=score+1]
+         &REST : s3
+tails: s1 -> 0.5 : s3
+         &REST : s2 [score:=score+1]
+continue: s2 [coins>=1] -> s0
+continue: s3 [coins>=1] -> s0
+stop: s2 -> s4
+stop: s3 -> s4
+loop: s4 -> s4
+
+FORMULA: <<Player1>><>&P[>=0.5](score>=1)

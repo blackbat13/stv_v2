@@ -201,3 +201,43 @@ int ExprHart::eval( Environment& env, GlobalModelGenerator *generator, GlobalSta
 
    return (allEpistemicOk ? 1 : 0);
 }
+
+float ProbConst::eval() {
+   return val;
+}
+
+float ProbAdd::eval() {   
+   return larg->eval() + rarg->eval();
+}
+
+float ProbSub::eval() {
+   return larg->eval() - rarg->eval();
+}
+
+float ProbMul::eval() {
+   return larg->eval() * rarg->eval();
+}
+
+float ProbDiv::eval() {
+   return larg->eval() / rarg->eval();
+}
+
+float ProbConst::eval( GlobalModelGenerator *generator, GlobalState *globalState ) {
+   return val;
+}
+
+float ProbAdd::eval( GlobalModelGenerator *generator, GlobalState *globalState) {   
+   return larg->eval(generator, globalState) + rarg->eval(generator, globalState);
+}
+
+float ProbSub::eval( GlobalModelGenerator *generator, GlobalState *globalState ) {
+   return larg->eval(generator, globalState) - rarg->eval(generator, globalState);
+}
+
+float ProbMul::eval( GlobalModelGenerator *generator, GlobalState *globalState ) {
+   return larg->eval(generator, globalState) * rarg->eval(generator, globalState);
+}
+
+float ProbDiv::eval( GlobalModelGenerator *generator, GlobalState *globalState ) {
+   return larg->eval(generator, globalState) / rarg->eval(generator, globalState);
+}

@@ -1,0 +1,11 @@
+<map id="nodes.hpp" name="nodes.hpp">
+<area shape="rect" id="node1" title="Parser templates. Class for setting up a new objects from a parser." alt="" coords="357,5,447,32"/>
+<area shape="rect" id="node2" href="$DotGraph_8hpp.html" title="Class for drawing graphs of input models. Class used for making graph files of input models created b..." alt="" coords="33,80,145,107"/>
+<area shape="rect" id="node4" href="$main_8cpp.html" title=" " alt="" coords="141,155,223,181"/>
+<area shape="rect" id="node5" href="$ModelParser_8cc.html" title="A model parser. A parser for converting a text file into a model." alt="" coords="220,80,339,107"/>
+<area shape="rect" id="node6" href="$nodes_8cc.html" title="Parser templates. Class for setting up a new objects from a parser." alt="" coords="363,80,441,107"/>
+<area shape="rect" id="node7" href="$parser_8c.html" title=" " alt="" coords="465,80,539,107"/>
+<area shape="rect" id="node8" href="$scanner_8c.html" title=" " alt="" coords="563,80,646,107"/>
+<area shape="rect" id="node9" href="$test_8cpp.html" title=" " alt="" coords="670,80,745,107"/>
+<area shape="rect" id="node3" href="$DotGraph_8cpp.html" title="Class for drawing graphs of input models. Class used for making graph files of input models created b..." alt="" coords="5,155,116,181"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="ProbNode" name="ProbNode">
+<area shape="rect" id="node1" title="Base node for probability calculations." alt="" coords="276,5,361,97"/>
+<area shape="rect" id="node2" href="$classProbAdd.html" title="Node for addition." alt="" coords="5,145,107,252"/>
+<area shape="rect" id="node3" href="$classProbConst.html" title="Node for a constant." alt="" coords="131,145,245,252"/>
+<area shape="rect" id="node4" href="$classProbDiv.html" title="Node for division." alt="" coords="269,145,368,252"/>
+<area shape="rect" id="node5" href="$classProbMul.html" title="Node for multiplication." alt="" coords="393,145,493,252"/>
+<area shape="rect" id="node6" href="$classProbSub.html" title="Node for subtraction." alt="" coords="517,145,617,252"/>
+</map>

@@ -14,7 +14,7 @@ using namespace std;
 /* funkcje i zmienne z flexa */
 extern "C" int yylex();
 void yyrestart( FILE* );
-void yyerror( char* );
+void yyerror( const char* );
 extern char* yytext;
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern YY_BUFFER_STATE yy_scan_string(const char * str);
@@ -26,6 +26,7 @@ extern FormulaTemplate formulaDescription;
 %union {
        set<class AgentTemplate*>*  model;
        class ExprNode*             expr;
+       class ProbNode*             prob;
        class Assignment*           assign;
        class TransitionTemplate*   trans;
        class AgentTemplate*        agent;
@@ -33,6 +34,7 @@ extern FormulaTemplate formulaDescription;
        char*                       ident;
        set<string>*                identSet;
        int                         val;
+       float                       floatno;
        vector<class ExprNode*>*    condList;
 }
 
@@ -40,11 +42,13 @@ extern FormulaTemplate formulaDescription;
 %token   T_PERSISTENT T_TO T_ASSIGN T_OR T_AND T_EQ
 %token   T_NE T_GT T_GE T_LT T_LE 
 %token   <val> T_NUM T_SHARED
+%token   <floatno> T_FLOAT
 %token   <ident> T_IDENT
-%token   T_KNOW T_HARTLEY
+%token   T_KNOW T_HARTLEY T_PROB T_REST
 
-%type  <val>  shared
+%type  <val> shared
 %type  <expr> num_exp num_mul num_elem
+%type  <prob> prob_exp prob_mul prob_elem
 %type  <expr> condition cond cond_and cond_elem
 %type  <trans> transition
 %type  <identSet> local persistent ident_list coalition
@@ -53,7 +57,8 @@ extern FormulaTemplate formulaDescription;
 %type  <agent> description agent
 %type  <model> spec model
 %type  <condList> cond_list
-
+%type  <ident> probability_equality
+ 
 %%
 model: spec { modelDescription = $1; }
      ;
@@ -70,7 +75,19 @@ formula: coalition '[' ']' cond_list { formulaDescription.coalition=$1; formulaD
        | coalition T_LT T_GT cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$4; }
        | '[' ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=false; formulaDescription.formula=$3; }
        | T_LT T_GT cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$3; }
+       | coalition '[' ']' T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=false; formulaDescription.formula=$9; formulaDescription.probability=$7; formulaDescription.probabilitySign=$6; }
+       | coalition T_LT T_GT T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=$1; formulaDescription.isF=true; formulaDescription.formula=$9; formulaDescription.probability=$7; formulaDescription.probabilitySign=$6; }
+       | '[' ']' T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=false; formulaDescription.formula=$8; formulaDescription.probability=$6; formulaDescription.probabilitySign=$5; }
+       | T_LT T_GT T_PROB '[' probability_equality prob_exp ']' cond_list { formulaDescription.coalition=new set<string>; formulaDescription.isF=true; formulaDescription.formula=$8; formulaDescription.probability=$6; formulaDescription.probabilitySign=$5; }
        ;
+
+probability_equality: T_EQ { $$ = const_cast<char*>("=="); }
+                    | T_NE { $$ = const_cast<char*>("!="); }
+                    | T_GT { $$ = const_cast<char*>(">"); }
+                    | T_GE { $$ = const_cast<char*>(">="); }
+                    | T_LT { $$ = const_cast<char*>("<"); }
+                    | T_LE { $$ = const_cast<char*>("<="); }
+                    ;
 
 cond_list: cond_list ',' cond { $$=$1; $$->push_back($3); }
          | cond { $$=new vector<ExprNode*>; $$->push_back($1); }
@@ -114,17 +131,34 @@ assignment: T_IDENT T_ASSIGN num_exp { $$=new Assignment($1, $3); }
           ;
           
 transition: shared T_IDENT '[' T_IDENT ']' ':' T_IDENT condition T_TO T_IDENT assignments {
-              $$=new TransitionTemplate($1, $2, $4, $7, $10, $8, $11); 
+              $$=new TransitionTemplate($1, $2, $4, $7, $10, $8, $11, new ProbConst(1)); 
               delete $2;
               delete $4;
               delete $7;
               delete $10;
             }
           | shared T_IDENT ':' T_IDENT condition T_TO T_IDENT assignments {
-              $$=new TransitionTemplate($1, $2, $2, $4, $7, $5, $8);
+              $$=new TransitionTemplate($1, $2, $2, $4, $7, $5, $8, new ProbConst(1));
               delete $2;
               delete $4;
               delete $7;
+            }
+          | shared T_IDENT '[' T_IDENT ']' ':' T_IDENT condition T_TO prob_exp ':' T_IDENT assignments {
+              $$=new TransitionTemplate($1, $2, $4, $7, $12, $8, $13, $10); 
+              delete $2;
+              delete $4;
+              delete $7;
+              delete $12;
+            }
+          | shared T_IDENT ':' T_IDENT condition T_TO prob_exp ':' T_IDENT assignments {
+              $$=new TransitionTemplate($1, $2, $2, $4, $9, $5, $10, $7);
+              delete $2;
+              delete $4;
+              delete $9;
+            }
+          | prob_exp ':' T_IDENT assignments {
+              $$=new TransitionTemplate(0, "", "", "", $3, new ExprConst(1), $4, $1); 
+              delete $3;
             }
           ;
 
@@ -148,7 +182,22 @@ num_mul: num_mul '*' num_elem { $$=new ExprMul($1, $3);}
 num_elem: T_IDENT { $$=new ExprIdent($1); delete $1; }
         | '-'T_NUM { $$=new ExprConst(-$2); }
         | T_NUM { $$=new ExprConst($1); }
-        | '(' num_exp ')' {$$ = $2; }
+        | '(' num_exp ')' { $$ = $2; }
+        ;
+
+prob_exp: prob_exp '-' prob_mul { $$=new ProbSub($1, $3);}
+       | prob_exp '+' prob_mul { $$=new ProbAdd($1, $3);}
+       | prob_mul { $$=$1; }
+       | T_REST { $$=new ProbConst(1000.0); }
+       ;
+prob_mul: prob_mul '*' prob_elem { $$=new ProbMul($1, $3);}
+       | prob_mul '/' prob_elem { $$=new ProbDiv($1, $3);}
+       | prob_elem { $$=$1; }
+       ;
+prob_elem: T_NUM { $$=new ProbConst($1); }
+        | '-'T_FLOAT { $$=new ProbConst(-$2); }
+        | T_FLOAT { $$=new ProbConst($1); }
+        | '(' prob_exp ')' { $$ = $2; }
         ;
 
 condition: '[' cond ']' { $$=$2; }
@@ -183,7 +232,7 @@ void set_input_string(const char* in) {
 }
 
 // Chwilowa funkcja błędu
-void yyerror( char* s ) {
+void yyerror( const char* s ) {
   fprintf(stderr,"niespodziewany token: '%s'\n",yytext);
   exit(1);
 }

@@ -18,15 +18,16 @@ ident [a-zA-Z][_a-zA-Z0-9]*
 single [\[\]():!,+\-*/%]
 comment #[^\n]*
 blank [ \n\t]
+floatno [0-9]*\.[0-9]+
 %%
 
 "Agent"        { return T_AGENT; }
 "shared"       { return T_SHARED; }
 "init"         { return T_INIT;}
-"LOCAL:"        { return T_LOCAL; }
-"INITIAL:"      { return T_INITIAL; }
-"PERSISTENT:"   { return T_PERSISTENT; }
-"FORMULA:"      { return T_FORMULA; }
+"LOCAL:"       { return T_LOCAL; }
+"INITIAL:"     { return T_INITIAL; }
+"PERSISTENT:"  { return T_PERSISTENT; }
+"FORMULA:"     { return T_FORMULA; }
 "->"           { return T_TO; }
 ":="           { return T_ASSIGN; }
 "||"           { return T_OR; }
@@ -37,11 +38,14 @@ blank [ \n\t]
 ">"            { return T_GT; }
 "<="           { return T_LE; }
 "<"            { return T_LT; }
-[0-9]+       { yylval.val = atoi(yytext); return T_NUM; }
+{floatno}      { yylval.floatno = atof(yytext); return T_FLOAT; }
+[0-9]+         { yylval.val = atoi(yytext); return T_NUM; }
 {ident}        { yylval.ident = strdup(yytext); return T_IDENT; }
 {single}       { return yytext[0]; }
-"&K_"           { return T_KNOW; }
-"&H_"           { return T_HARTLEY; }
+"&K_"          { return T_KNOW; }
+"&H_"          { return T_HARTLEY; }
+"&P"           { return T_PROB; }
+"&REST"        { return T_REST; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
 %%

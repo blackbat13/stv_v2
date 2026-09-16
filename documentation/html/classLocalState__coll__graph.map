@@ -1,0 +1,13 @@
+<map id="LocalState" name="LocalState">
+<area shape="rect" id="node1" title="Represents a single LocalState, containing id, name and internal variables." alt="" coords="333,145,437,237"/>
+<area shape="rect" id="node2" href="$classAgent.html" title="Contains all data for a single Agent, including id, name and all of the agents&#39; variables." alt="" coords="396,300,531,392"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,153,207,230"/>
+<area shape="rect" id="node4" title=" " alt="" coords="221,5,279,83"/>
+<area shape="rect" id="node5" title=" " alt="" coords="461,153,633,230"/>
+<area shape="rect" id="node6" title=" " alt="" coords="658,153,762,230"/>
+<area shape="rect" id="node7" title=" " alt="" coords="787,153,825,230"/>
+<area shape="rect" id="node8" title=" " alt="" coords="304,5,463,83"/>
+<area shape="rect" id="node9" title=" " alt="" coords="487,5,667,83"/>
+<area shape="rect" id="node10" title=" " alt="" coords="691,5,766,83"/>
+<area shape="rect" id="node11" title=" " alt="" coords="791,5,933,83"/>
+</map>

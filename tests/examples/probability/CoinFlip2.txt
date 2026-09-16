@@ -1,0 +1,19 @@
+Agent Player1:
+LOCAL: [counter, success]
+PERSISTENT: [counter, success]
+INITIAL: [counter:=0, success:=0]
+init s0
+attempt: s0 [counter < 5] -> 0.8 : s1 [counter:=counter+1]
+                             &REST : s4
+attempt: s0 [counter >= 5] -> s3
+succeed: s1 -> 0.6 : s2 [success:=success+1]
+               &REST : s3
+retry: s2 [counter < 5] -> 0.8 : s0
+                           &REST : s3
+retry: s2 [counter == 5] -> s3
+loop: s3 -> s3
+error: s4 -> 0.9 : s5
+             &REST : s3
+fix: s5 -> s0
+
+FORMULA: <<Player1>><>&P[>=0.2](success>=2)

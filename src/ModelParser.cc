@@ -35,6 +35,9 @@ ModelParser::~ModelParser() {
 tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
+   if (f == nullptr) {
+      throw std::runtime_error("Failed to open model file: " + fileName);
+   }
    // zamapuj go jako wejście dla Fleksa
    yyrestart(f);
    // uruchom parsowanie
@@ -53,6 +56,24 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
    formula.isCTL = false;
+   if (formulaDescription.probability != NULL) {
+      formula.probability = formulaDescription.probability->eval();
+      if (formulaDescription.probabilitySign == "==") {
+         formula.probabilitySign = ProbabilitySign::EQ;
+      } else if (formulaDescription.probabilitySign == "!=") {
+         formula.probabilitySign = ProbabilitySign::NE;
+      } else if (formulaDescription.probabilitySign == ">") {
+         formula.probabilitySign = ProbabilitySign::GT;
+      } else if (formulaDescription.probabilitySign == ">=") {
+         formula.probabilitySign = ProbabilitySign::GE;
+      } else if (formulaDescription.probabilitySign == "<") {
+         formula.probabilitySign = ProbabilitySign::LT;
+      } else if (formulaDescription.probabilitySign == "<=") {
+         formula.probabilitySign = ProbabilitySign::LE;
+      } 
+   }
+
+   // cout << "Formula probability: " << formula.probabilitySign << " " << formula.probability << endl;
 
    if (formula.p != nullptr) {
       for (const auto agent : models.agents) {
@@ -76,6 +97,10 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    return tuple<LocalModels, Formula>{models, formula};
 }
 
+/// @brief Parses a text file in the given file path and internally replaces the verification formula with the given one.
+/// @param fileName Path to the text file.
+/// @param s New formula.
+/// @return Returns a new model generation structure with a replaced formula.
 tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileName, string s) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");

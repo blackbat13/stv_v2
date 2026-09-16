@@ -1,0 +1,31 @@
+Agent Coercer:
+LOCAL: [a1, a2]
+PERSISTENT: [a1, a2]
+INITIAL: [a1:=0, a2:=0]
+init q0
+shared[2] action1[action1]: q0 -> q1
+shared[2] action2[action2]: q0 -> q2
+
+Agent Voter1:
+LOCAL: [direction, ok]
+PERSISTENT: [direction, ok]
+INITIAL: [direction:=0, ok:=0]
+init q0
+
+shared[2] action1[action]: q0 -> q1 [direction:=1]
+shared[2] action2[action]: q0 -> q1 [direction:=2]
+
+do1: q1 [direction==1] -> 0.1 : q3 [ok:=1]
+do1: q1 [direction==1] -> 0.9 : q4 [ok:=1]
+do1: q1 [direction==2] -> 0.1 : q3 [ok:=-1]
+do1: q1 [direction==2] -> 0.9 : q4 [ok:=-1]
+
+do2: q1 [direction==1] -> 0.1 : q3 [ok:=2]
+do2: q1 [direction==1] -> 0.9 : q4 [ok:=2]
+do2: q1 [direction==2] -> 0.1 : q3 [ok:=2]
+do2: q1 [direction==2] -> 0.9 : q4 [ok:=2]
+
+loop: q3 -> q3
+loop: q4 -> q4
+
+FORMULA: <<Voter1>>[]&P[>=0.1](ok>=0)

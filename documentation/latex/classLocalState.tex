@@ -9,6 +9,16 @@ Represents a single \mbox{\hyperlink{classLocalState}{Local\+State}}, containing
 
 {\ttfamily \#include $<$Local\+State.\+hpp$>$}
 
+
+
+Collaboration diagram for Local\+State\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLocalState__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,22 +29,16 @@ string \mbox{\hyperlink{classLocalState_ad2be0f4ff5c8972f63c9bd7af439ff23}{to\+S
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}\label{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}} 
 uint32\+\_\+t \mbox{\hyperlink{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}{id}}
 \begin{DoxyCompactList}\small\item\em State identifier. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classLocalState_a8f147438a2008244801118ed93009a6d}\label{classLocalState_a8f147438a2008244801118ed93009a6d}} 
 string \mbox{\hyperlink{classLocalState_a8f147438a2008244801118ed93009a6d}{name}}
 \begin{DoxyCompactList}\small\item\em State name. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classLocalState_a34bdc2e97427c07b102d81034df14c17}\label{classLocalState_a34bdc2e97427c07b102d81034df14c17}} 
 map$<$ string, int $>$ \mbox{\hyperlink{classLocalState_a34bdc2e97427c07b102d81034df14c17}{environment}}
 \begin{DoxyCompactList}\small\item\em Local variables as a name and their current values. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}\label{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}} 
 \mbox{\hyperlink{classAgent}{Agent}} $\ast$ \mbox{\hyperlink{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}{agent}}
 \begin{DoxyCompactList}\small\item\em Binding to an \mbox{\hyperlink{classAgent}{Agent}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classLocalState_a13e96c06cf28959be8e87e4045d33265}\label{classLocalState_a13e96c06cf28959be8e87e4045d33265}} 
 set$<$ \mbox{\hyperlink{structLocalTransition}{Local\+Transition}} $\ast$ $>$ \mbox{\hyperlink{classLocalState_a13e96c06cf28959be8e87e4045d33265}{local\+Transitions}}
 \begin{DoxyCompactList}\small\item\em Binding to the set of \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}\label{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}} 
 set$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ \mbox{\hyperlink{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}{epistemic\+Global\+States}}
 \begin{DoxyCompactList}\small\item\em Binding to the set of \mbox{\hyperlink{structGlobalState}{Global\+State}} that this \mbox{\hyperlink{classLocalState}{Local\+State}} belongs to. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -81,6 +85,69 @@ Debug information on the given \mbox{\hyperlink{classLocalState}{Local\+State}}.
 
 \mbox{\hyperlink{classLocalState}{Local\+State}} data 
 \end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}\label{classLocalState_ab30bcd35d7b42bdea54df7be732f2009}} 
+\index{LocalState@{LocalState}!agent@{agent}}
+\index{agent@{agent}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{agent}{agent}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classAgent}{Agent}}$\ast$ Local\+State\+::agent}
+
+
+
+Binding to an \mbox{\hyperlink{classAgent}{Agent}}. 
+
+\mbox{\Hypertarget{classLocalState_a34bdc2e97427c07b102d81034df14c17}\label{classLocalState_a34bdc2e97427c07b102d81034df14c17}} 
+\index{LocalState@{LocalState}!environment@{environment}}
+\index{environment@{environment}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{environment}{environment}}
+{\footnotesize\ttfamily map$<$string, int$>$ Local\+State\+::environment}
+
+
+
+Local variables as a name and their current values. 
+
+\mbox{\Hypertarget{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}\label{classLocalState_a0ac51a9b090f2de4c412410d63d32f68}} 
+\index{LocalState@{LocalState}!epistemicGlobalStates@{epistemicGlobalStates}}
+\index{epistemicGlobalStates@{epistemicGlobalStates}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{epistemicGlobalStates}{epistemicGlobalStates}}
+{\footnotesize\ttfamily set$<$\mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$$>$ Local\+State\+::epistemic\+Global\+States}
+
+
+
+Binding to the set of \mbox{\hyperlink{structGlobalState}{Global\+State}} that this \mbox{\hyperlink{classLocalState}{Local\+State}} belongs to. 
+
+\mbox{\Hypertarget{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}\label{classLocalState_a1d1b3e3cb13308d208822c22e4af8f41}} 
+\index{LocalState@{LocalState}!id@{id}}
+\index{id@{id}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily uint32\+\_\+t Local\+State\+::id}
+
+
+
+State identifier. 
+
+\mbox{\Hypertarget{classLocalState_a13e96c06cf28959be8e87e4045d33265}\label{classLocalState_a13e96c06cf28959be8e87e4045d33265}} 
+\index{LocalState@{LocalState}!localTransitions@{localTransitions}}
+\index{localTransitions@{localTransitions}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{localTransitions}{localTransitions}}
+{\footnotesize\ttfamily set$<$\mbox{\hyperlink{structLocalTransition}{Local\+Transition}}$\ast$$>$ Local\+State\+::local\+Transitions}
+
+
+
+Binding to the set of \mbox{\hyperlink{structLocalTransition}{Local\+Transition}}. 
+
+\mbox{\Hypertarget{classLocalState_a8f147438a2008244801118ed93009a6d}\label{classLocalState_a8f147438a2008244801118ed93009a6d}} 
+\index{LocalState@{LocalState}!name@{name}}
+\index{name@{name}!LocalState@{LocalState}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily string Local\+State\+::name}
+
+
+
+State name. 
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

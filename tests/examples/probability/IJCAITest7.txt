@@ -1,0 +1,39 @@
+Agent Voter:
+LOCAL: [p]
+PERSISTENT: [p]
+INITIAL: [p:=0]
+init q0
+shared[2] A[A]: q0 -> q1
+B: q0 -> q2
+C: q1 -> 0.90 : q3
+         &REST : q4 [p:=1]
+G: q1 -> q8
+loop: q8 -> q8
+D: q2 -> 0.80 : q5
+         0.10 : q2
+         &REST : q6 [p:=1]
+H: q3 -> q10
+I: q3 -> q11
+loop: q10 -> q10
+loop: q11 -> q11
+loop: q4 -> q4
+J: q6 -> q12
+loop: q12 -> q12
+E: q5 -> 0.5 : q7
+         &REST : q9
+F: q5 -> 0.5 : q7
+         &REST : q9 [p:=1]
+loop: q7 -> q7
+loop: q9 -> q9
+
+Agent Voter2:
+LOCAL: [q]
+PERSISTENT: [q]
+INITIAL: [q:=0]
+init q0
+shared[2] A[X]: q0 -> 0.5 : q1 [q:=1]
+         &REST : q2
+Y: q2 -> q3
+Z: q2 -> q4
+
+FORMULA: <<Voter>><>&P[>=0.54](p==1)

@@ -1,0 +1,16 @@
+Agent Voter:
+LOCAL: [start, has_ballot, scanned, voted, cast, not_cast, send, shred, check_request, finished]
+PERSISTENT: [start, has_ballot, scanned, voted, cast, not_cast, send, shred, check_request, finished]
+INITIAL: [start:=1]
+init start
+move_next: start -> polling_station [start:=0]
+give_document: polling_station -> has_ballot [has_ballot:=1]
+scan_ballot: has_ballot [has_ballot==1] -> scanned [scanned:=1]
+cast_vote: scanned -> cast [cast:=1]
+send_vote: cast -> voted [send:=1]
+shred_vote: voted -> outside [shred:=1, has_ballot:=0, start:=0]
+check_request: outside -> end [check_request:=1]
+ano_check: outside -> end [finished:=1]
+idle: end->end
+
+FORMULA: <<Voter>><>(check_request==1)

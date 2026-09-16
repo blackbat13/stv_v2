@@ -1,0 +1,1576 @@
+\hypertarget{strategyScanner_8c}{}\doxysection{strategy\+Scanner.\+c File Reference}
+\label{strategyScanner_8c}\index{strategyScanner.c@{strategyScanner.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}strategy\+Parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}strategy\+Nodes.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for strategy\+Scanner.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{strategyScanner_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structyy__buffer__state}{yy\+\_\+buffer\+\_\+state}}
+\item 
+struct \mbox{\hyperlink{structyy__trans__info}{yy\+\_\+trans\+\_\+info}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a1ae16e642a197fa4948998525813c6f5}{YY\+\_\+\+INT\+\_\+\+ALIGNED}}~short int
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac86ea8173dfcfc5c989d3295a77e2f95}{yy\+\_\+create\+\_\+buffer}}~strat\+\_\+create\+\_\+buffer
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad1868c6b38b45af25a4a0f449912a808}{yy\+\_\+delete\+\_\+buffer}}~strat\+\_\+delete\+\_\+buffer
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a6849452203fd033f103556fdf858fd33}{yy\+\_\+scan\+\_\+buffer}}~strat\+\_\+scan\+\_\+buffer
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a6c5cf8c3b7a69bf60a87dd6eb00fe579}{yy\+\_\+scan\+\_\+string}}~\mbox{\hyperlink{strategyParser_8c_ac2af328c4709a796210d52d48950a290}{strat\+\_\+scan\+\_\+string}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a3b70699ea880c5d25a1c75f4ad96c315}{yy\+\_\+scan\+\_\+bytes}}~strat\+\_\+scan\+\_\+bytes
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa14efad9f9c24106a3e3398a4f6621c2}{yy\+\_\+init\+\_\+buffer}}~strat\+\_\+init\+\_\+buffer
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab01a4c7245136f22a63acac7c0ceb343}{yy\+\_\+flush\+\_\+buffer}}~strat\+\_\+flush\+\_\+buffer
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_af59010f39becd2a037cb1ccf0523f5d1}{yy\+\_\+load\+\_\+buffer\+\_\+state}}~strat\+\_\+load\+\_\+buffer\+\_\+state
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a968d5b9e7e06a38bfca977b343d47d5c}{yy\+\_\+switch\+\_\+to\+\_\+buffer}}~strat\+\_\+switch\+\_\+to\+\_\+buffer
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a498ea96bb65e39b1eab5c51cf16ead13}{yypush\+\_\+buffer\+\_\+state}}~stratpush\+\_\+buffer\+\_\+state
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa6416fe813d70fe9b2febdc776174577}{yypop\+\_\+buffer\+\_\+state}}~stratpop\+\_\+buffer\+\_\+state
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a95b647b6ab42aa91ec5407a3276ad8cf}{yyensure\+\_\+buffer\+\_\+stack}}~stratensure\+\_\+buffer\+\_\+stack
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a7411c3bab9eca1afee90113c2d22da37}{yy\+\_\+flex\+\_\+debug}}~strat\+\_\+flex\+\_\+debug
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}}~stratin
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}{yyleng}}~stratleng
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a5611300548b2030d86b6ab9168132b88}{yylex}}~\mbox{\hyperlink{strategyScanner_8c_a08a128e0df020f8e53736ee7e9f9f0f1}{stratlex}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a5e36364965360da7b7cdfc2188e0af84}{yylineno}}~stratlineno
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}{yyout}}~stratout
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a2259355ac49295f72feab070a34a9b11}{yyrestart}}~\mbox{\hyperlink{strategyParser_8c_a527eb7dcccdad03d206de58a40c85cd7}{stratrestart}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a35b96d819f6a8f8638894c429e68b02a}{yytext}}~\mbox{\hyperlink{strategyParser_8c_a961e23da8684a48fc4a3b308812230b9}{strattext}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a5be541efdb129f7cefb2437f52fe7359}{yywrap}}~\mbox{\hyperlink{strategyScanner_8c_add160889044fa1ea679cd2060f645887}{stratwrap}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a803397ab738ee8630166680646a2d913}{yyalloc}}~stratalloc
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab1eba250555ca003eb39387bb1a41d39}{yyrealloc}}~stratrealloc
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a4fa4368d47620ea80150b516e8884f6b}{yyfree}}~stratfree
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a3c3d1ef92e93b0bc81d7760a73d5c3b6}{FLEX\+\_\+\+SCANNER}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a243ca1d30872935faf05ea5118ed6fdc}{YY\+\_\+\+FLEX\+\_\+\+MAJOR\+\_\+\+VERSION}}~2
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a90f9d458829400869e47efb68a865677}{YY\+\_\+\+FLEX\+\_\+\+MINOR\+\_\+\+VERSION}}~6
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac676bd06869180ea493e9b6d7c078dbb}{YY\+\_\+\+FLEX\+\_\+\+SUBMINOR\+\_\+\+VERSION}}~4
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a9465c9986fdda27730c9dff8d16a0887}{FLEX\+\_\+\+BETA}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_af2cb25afb56f920d4b8f814394b84a81}{strat\+\_\+create\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_abe32d6c0511e22e16c2f802c8f291c00}{strat\+\_\+delete\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a818c67c94b8747f80b0254cad47cce14}{strat\+\_\+scan\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_af067349b6dfb0c6006849ce15846df6c}{strat\+\_\+scan\+\_\+string\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab266eaa0167cd1f0e15d8d00a2ddfb7b}{strat\+\_\+scan\+\_\+bytes\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa49a5869023371f4d5b48ac3a2182b61}{strat\+\_\+init\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a835fbe507a92b86fa8a2210718d540c2}{strat\+\_\+flush\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa2faadf6ed6372fbd637b2442f5b885e}{strat\+\_\+load\+\_\+buffer\+\_\+state\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab148166472178146c4f7108a1513e4c1}{strat\+\_\+switch\+\_\+to\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae4d95636bee4c8fb5400e6b7776a6a6c}{stratpush\+\_\+buffer\+\_\+state\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a78052d1e4acdbcaf8b1a2c12498757b4}{stratpop\+\_\+buffer\+\_\+state\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a6816d1db91be4d6b4d8673ac95a96d49}{stratensure\+\_\+buffer\+\_\+stack\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa8139c9bf210b3d68a4a5e41ac60e749}{stratlex\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a495c3040e6ab769384f093a0b375e67a}{stratrestart\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a1abe53179d3512124a969f758a7e8008}{yylex\+\_\+init}}~stratlex\+\_\+init
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a3e35658077c5654d17265289032c8911}{yylex\+\_\+init\+\_\+extra}}~stratlex\+\_\+init\+\_\+extra
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a0180d5b750112a6cfb27817966e99fff}{yylex\+\_\+destroy}}~stratlex\+\_\+destroy
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a81c1f6c4ad68be7dbf300e73961f38cf}{yyget\+\_\+debug}}~stratget\+\_\+debug
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a254eae02eef471e53fba6c926f9ea9af}{yyset\+\_\+debug}}~stratset\+\_\+debug
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a0484e07fe35238d8031c34f287a9b749}{yyget\+\_\+extra}}~stratget\+\_\+extra
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a04fd4c8badc07e7080dbd371b6bc4811}{yyset\+\_\+extra}}~stratset\+\_\+extra
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa6f5243e96af1d42bd6f3d6b3299bffa}{yyget\+\_\+in}}~stratget\+\_\+in
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_afca8968a4317529bdbdc6ed77cd1e479}{yyset\+\_\+in}}~stratset\+\_\+in
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac269c11a8e1e7488ec43d1dee26db8a1}{yyget\+\_\+out}}~stratget\+\_\+out
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_add96a0e9a95289d7fc2a45adfaf0f9ef}{yyset\+\_\+out}}~stratset\+\_\+out
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a07590ba42ef871984a197d5104a4a9e0}{yyget\+\_\+leng}}~stratget\+\_\+leng
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a456cd16577fb85716b25d43deb56eaff}{yyget\+\_\+text}}~stratget\+\_\+text
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a5b042f5ec81dac297969a70684a7cb1b}{yyget\+\_\+lineno}}~stratget\+\_\+lineno
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a10055b24aa335a47aec5deaac1a47603}{yyset\+\_\+lineno}}~stratset\+\_\+lineno
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a721e3a8fd6b26d0466367d019e94e435}{stratwrap\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a9d7cbd3c6ec848241a27bc8102c4e257}{stratalloc\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a45e9f896f23078eaabcfa7223c6d6288}{stratrealloc\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_abe2f1f9f820bb4f23cbc8c0425b696a9}{stratfree\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad1a88d1644cf17885f05302d58f3f1da}{strattext\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad2c7ab3a08c6eb7382d3155b3c34fb7f}{stratleng\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a2388738c018802599284a49e912a3425}{stratin\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad216fd3c6c13b18959df09f318aa0779}{stratout\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_adfc2fe8038be03a63a8e435057e94179}{strat\+\_\+flex\+\_\+debug\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad00680a1ca01cc9adc00e6ec07c382a6}{stratlineno\+\_\+\+ALREADY\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aec980b5a71bbe6d67931df20f0ebaec4}{FLEXINT\+\_\+H}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aadcf2a81af243df333b31efa6461ab8e}{INT8\+\_\+\+MIN}}~(-\/128)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad4e9955955b27624963643eac448118a}{INT16\+\_\+\+MIN}}~(-\/32767-\/1)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a688eb21a22db27c2b2bd5836943cdcbe}{INT32\+\_\+\+MIN}}~(-\/2147483647-\/1)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aaf7f29f45f1a513b4748a4e5014ddf6a}{INT8\+\_\+\+MAX}}~(127)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac58f2c111cc9989c86db2a7dc4fd84ca}{INT16\+\_\+\+MAX}}~(32767)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a181807730d4a375f848ba139813ce04f}{INT32\+\_\+\+MAX}}~(2147483647)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aeb4e270a084ee26fe73e799861bd0252}{UINT8\+\_\+\+MAX}}~(255U)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a3ea490c9b3617d4479bd80ef93cd5602}{UINT16\+\_\+\+MAX}}~(65535U)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab5eb23180f7cc12b7d6c04a8ec067fdd}{UINT32\+\_\+\+MAX}}~(4294967295U)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a3c75bb398badb69c7577b21486f9963f}{SIZE\+\_\+\+MAX}}~($\sim$(size\+\_\+t)0)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa2f1a918be586b44bf08126bde2d7cc9}{yyconst}}~const
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a452d0647f1848fea42589793f3e2d1f4}{yynoreturn}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a8e0bcf8f8a5b613ea583347f8bc31cbf}{YY\+\_\+\+NULL}}~0
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_af1185350b7a92cf8aa5324c68850c8a6}{YY\+\_\+\+SC\+\_\+\+TO\+\_\+\+UI}}(c)~((\mbox{\hyperlink{scanner_8c_acc1e625a829554ffed5e4307d4a5f6b7}{YY\+\_\+\+CHAR}}) (c))
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab766bbbee08d04b67e3fe599d6900873}{BEGIN}}~(yy\+\_\+start) = 1 + 2 $\ast$
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a8e14785f9eab7a997d659b25af9584c5}{YY\+\_\+\+START}}~(((yy\+\_\+start) -\/ 1) / 2)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a32b5b960944f946b192d54f672569cd9}{YYSTATE}}~\mbox{\hyperlink{strategyScanner_8c_a8e14785f9eab7a997d659b25af9584c5}{YY\+\_\+\+START}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab3077e60914fc54dcc55ecae1ce9700b}{YY\+\_\+\+STATE\+\_\+\+EOF}}(state)~(\mbox{\hyperlink{strategyScanner_8c_ab2708fd42cff29ce6a0a52b91bea40d1}{YY\+\_\+\+END\+\_\+\+OF\+\_\+\+BUFFER}} + state + 1)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a0406739e64fb5750cf995d2ae68ce69d}{YY\+\_\+\+NEW\+\_\+\+FILE}}~\mbox{\hyperlink{strategyScanner_8c_ab657ddef65d43cc3ab8dfc2cad0ac5b8}{yyrestart}}( \mbox{\hyperlink{strategyScanner_8c_a46af646807e0797e72b6e8945e7ea88b}{yyin}}  )
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab866a64da164ed2d4d444df1ef1fc9b3}{YY\+\_\+\+END\+\_\+\+OF\+\_\+\+BUFFER\+\_\+\+CHAR}}~0
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}{YY\+\_\+\+BUF\+\_\+\+SIZE}}~16384
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac2f8b6fccdc516d96b02ac09a4dc01bd}{YY\+\_\+\+STATE\+\_\+\+BUF\+\_\+\+SIZE}}~((\mbox{\hyperlink{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}{YY\+\_\+\+BUF\+\_\+\+SIZE}} + 2) $\ast$ sizeof(\mbox{\hyperlink{scanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}{yy\+\_\+state\+\_\+type}}))
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa79d63ed3ff8d2249baf1732a73089f5}{YY\+\_\+\+TYPEDEF\+\_\+\+YY\+\_\+\+BUFFER\+\_\+\+STATE}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae0f2b0b5f04b2338367826b5670774f9}{YY\+\_\+\+TYPEDEF\+\_\+\+YY\+\_\+\+SIZE\+\_\+T}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_adf4b0db227e07782e28ade353a7ba7a1}{EOB\+\_\+\+ACT\+\_\+\+CONTINUE\+\_\+\+SCAN}}~0
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a7f71d7fa2c403eb4b2f38cb9536f3c63}{EOB\+\_\+\+ACT\+\_\+\+END\+\_\+\+OF\+\_\+\+FILE}}~1
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad1a0b5ebcabffe388e9e9ebb2619c1fb}{EOB\+\_\+\+ACT\+\_\+\+LAST\+\_\+\+MATCH}}~2
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a12e5f3a76911433480bca7f4edba6119}{YY\+\_\+\+LESS\+\_\+\+LINENO}}(n)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a5206f64af3a299a0dc820c385cf0c489}{YY\+\_\+\+LINENO\+\_\+\+REWIND\+\_\+\+TO}}(ptr)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae65cb72d09db0abdc4b8e8c4d533ab14}{yyless}}(n)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a448a4e9041a09588332733c6846c770c}{unput}}(c)~yyunput( c, (\mbox{\hyperlink{strategyScanner_8c_a790a191a93ef4d3b8c0bb43fd7480052}{yytext\+\_\+ptr}})  )
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a8aaa9e1fa7f13d6954d045ef973a9c84}{YY\+\_\+\+STRUCT\+\_\+\+YY\+\_\+\+BUFFER\+\_\+\+STATE}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a53579db42834b88199458993912c646d}{YY\+\_\+\+BUFFER\+\_\+\+NEW}}~0
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a609d19f40900ecc2a5f812d9388c21fb}{YY\+\_\+\+BUFFER\+\_\+\+NORMAL}}~1
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ad689d97c15e807a6116ace7a420cea57}{YY\+\_\+\+BUFFER\+\_\+\+EOF\+\_\+\+PENDING}}~2
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}{YY\+\_\+\+CURRENT\+\_\+\+BUFFER}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a817a6a24af62508b5a35f4bed5f56a2e}{YY\+\_\+\+CURRENT\+\_\+\+BUFFER\+\_\+\+LVALUE}}~(yy\+\_\+buffer\+\_\+stack)\mbox{[}(yy\+\_\+buffer\+\_\+stack\+\_\+top)\mbox{]}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac5d478d90ea9a2ecd43d579067a2e89d}{YY\+\_\+\+FLUSH\+\_\+\+BUFFER}}~\mbox{\hyperlink{strategyScanner_8c_a2f59cc88e85e5455c62e4ef7ce095ea8}{yy\+\_\+flush\+\_\+buffer}}( \mbox{\hyperlink{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}{YY\+\_\+\+CURRENT\+\_\+\+BUFFER}} )
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab7eb911e18655f2f78e63afe5a8a4a12}{yy\+\_\+new\+\_\+buffer}}~\mbox{\hyperlink{strategyScanner_8c_a5bc6f1a5f7812508f425b08283f13ae8}{yy\+\_\+create\+\_\+buffer}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac56eb96366c08862bf0efe5d83d1fc4c}{yy\+\_\+set\+\_\+interactive}}(is\+\_\+interactive)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a12e30d13a76a94e78010db9996d39c50}{yy\+\_\+set\+\_\+bol}}(at\+\_\+bol)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a71ca89b3656acd0552f14949a571560b}{YY\+\_\+\+AT\+\_\+\+BOL}}()~(\mbox{\hyperlink{strategyScanner_8c_a817a6a24af62508b5a35f4bed5f56a2e}{YY\+\_\+\+CURRENT\+\_\+\+BUFFER\+\_\+\+LVALUE}}-\/$>$yy\+\_\+at\+\_\+bol)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_add160889044fa1ea679cd2060f645887}{stratwrap}}()~(/$\ast$CONSTCOND$\ast$/1)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae1ef5933028cbc587d31328e53d11a99}{YY\+\_\+\+SKIP\+\_\+\+YYWRAP}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a790a191a93ef4d3b8c0bb43fd7480052}{yytext\+\_\+ptr}}~\mbox{\hyperlink{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}{yytext}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_acc3486d769af4e4b2820346a0093cc79}{YY\+\_\+\+DO\+\_\+\+BEFORE\+\_\+\+ACTION}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae558785bb896e090901c2b905f6790c6}{YY\+\_\+\+NUM\+\_\+\+RULES}}~17
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ab2708fd42cff29ce6a0a52b91bea40d1}{YY\+\_\+\+END\+\_\+\+OF\+\_\+\+BUFFER}}~18
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a835f10dd1ab4bf9a80c4cd80ee6e3058}{REJECT}}~reject\+\_\+used\+\_\+but\+\_\+not\+\_\+detected
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a745d37b5e002b2e5f93ad42ea7b554be}{yymore}}()~yymore\+\_\+used\+\_\+but\+\_\+not\+\_\+detected
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a68792d73820bc46a71d3d4e613f0b977}{YY\+\_\+\+MORE\+\_\+\+ADJ}}~0
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a56858d18c7eda4f53664496ef566f651}{YY\+\_\+\+RESTORE\+\_\+\+YY\+\_\+\+MORE\+\_\+\+OFFSET}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aa3d063564f6ab16f6d408b8369d0e9ff}{INITIAL}}~0
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a26938d921de835f6183c02e54cf08828}{YY\+\_\+\+EXTRA\+\_\+\+TYPE}}~void $\ast$
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aab1491ceccb1c95c14320b2903773a1c}{YY\+\_\+\+READ\+\_\+\+BUF\+\_\+\+SIZE}}~8192
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aad1dc60a04a1d8cfc8b3ded13601e361}{ECHO}}~do \{ \mbox{\hyperlink{strategyScanner_8c_ad4a65b873df5c05570846b5413b41dfd}{if}} (fwrite( \mbox{\hyperlink{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}{yytext}}, (size\+\_\+t) \mbox{\hyperlink{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}{yyleng}}, 1, \mbox{\hyperlink{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}{yyout}} )) \{\} \} while (0)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_aacfdca45fa4beb8b06172525a53c424a}{YY\+\_\+\+INPUT}}(buf,  result,  max\+\_\+size)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac3286b18a2e91b4571b97df96a118e84}{yyterminate}}()~return \mbox{\hyperlink{strategyScanner_8c_a8e0bcf8f8a5b613ea583347f8bc31cbf}{YY\+\_\+\+NULL}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a227e75c43b9e0cd41529974230be7e75}{YY\+\_\+\+START\+\_\+\+STACK\+\_\+\+INCR}}~25
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ac0586b8b0b092d02f4ba7d45abe328f2}{YY\+\_\+\+FATAL\+\_\+\+ERROR}}(msg)~yy\+\_\+fatal\+\_\+error( msg )
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a7682c8d9cec0859408d2421fbe4a5570}{YY\+\_\+\+DECL\+\_\+\+IS\+\_\+\+OURS}}~1
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae5b01ac2fa5a6ad5fb97559638abe686}{YY\+\_\+\+DECL}}~int \mbox{\hyperlink{scanner_8c_aa40b27ae32d6d1ae7160bd6256e08eb8}{yylex}} (void)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a6198b2fcf96178b24ad4efff2a3debb0}{YY\+\_\+\+USER\+\_\+\+ACTION}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a3cc40a460ad7df816678bcc05241e84c}{YY\+\_\+\+BREAK}}~/$\ast$LINTED$\ast$/break;
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a690504b662e4281515bf12722df178ba}{YY\+\_\+\+RULE\+\_\+\+SETUP}}~ \mbox{\hyperlink{strategyScanner_8c_a6198b2fcf96178b24ad4efff2a3debb0}{YY\+\_\+\+USER\+\_\+\+ACTION}}
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae93e67b85c44f6bd31ead14a552a35c8}{YY\+\_\+\+EXIT\+\_\+\+FAILURE}}~2
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_ae65cb72d09db0abdc4b8e8c4d533ab14}{yyless}}(n)
+\item 
+\#define \mbox{\hyperlink{strategyScanner_8c_a828cc83270f8f5bb1688e14dd4e28128}{YYTABLES\+\_\+\+NAME}}~\char`\"{}yytables\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef signed char \mbox{\hyperlink{strategyScanner_8c_a7b0840dff4a2ef1702118aa12264b2a7}{flex\+\_\+int8\+\_\+t}}
+\item 
+typedef short int \mbox{\hyperlink{strategyScanner_8c_a2e73b2c75126814585525fb2e9d51159}{flex\+\_\+int16\+\_\+t}}
+\item 
+typedef int \mbox{\hyperlink{strategyScanner_8c_a838ce943cf44ef7769480714fc6c3ba9}{flex\+\_\+int32\+\_\+t}}
+\item 
+typedef unsigned char \mbox{\hyperlink{strategyScanner_8c_a0fac5ea484f64e75dbe6eba4aa61750c}{flex\+\_\+uint8\+\_\+t}}
+\item 
+typedef unsigned short int \mbox{\hyperlink{strategyScanner_8c_ac50cdb9eefbef83a1cec89e3a7f6e1d2}{flex\+\_\+uint16\+\_\+t}}
+\item 
+typedef unsigned int \mbox{\hyperlink{strategyScanner_8c_a36869712de12820c73aae736762e8e88}{flex\+\_\+uint32\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structyy__buffer__state}{yy\+\_\+buffer\+\_\+state}} $\ast$ \mbox{\hyperlink{strategyScanner_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}}
+\item 
+typedef size\+\_\+t \mbox{\hyperlink{strategyScanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}}
+\item 
+typedef \mbox{\hyperlink{scanner_8c_a0fac5ea484f64e75dbe6eba4aa61750c}{flex\+\_\+uint8\+\_\+t}} \mbox{\hyperlink{strategyScanner_8c_acc1e625a829554ffed5e4307d4a5f6b7}{YY\+\_\+\+CHAR}}
+\item 
+typedef int \mbox{\hyperlink{strategyScanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}{yy\+\_\+state\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_ab657ddef65d43cc3ab8dfc2cad0ac5b8}{yyrestart}} (FILE $\ast$input\+\_\+file)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_a3098c48a74ef8fd852f7dd4b3331cbce}{yy\+\_\+switch\+\_\+to\+\_\+buffer}} (\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} new\+\_\+buffer)
+\item 
+\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} \mbox{\hyperlink{strategyScanner_8c_a5bc6f1a5f7812508f425b08283f13ae8}{yy\+\_\+create\+\_\+buffer}} (FILE $\ast$file, int size)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_ae6ac796aa6c45d433a4b89bf45e6e9dc}{yy\+\_\+delete\+\_\+buffer}} (\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} b)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_a2f59cc88e85e5455c62e4ef7ce095ea8}{yy\+\_\+flush\+\_\+buffer}} (\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} b)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_a4bf8969e5234aef8b46cce9a67a62724}{yypush\+\_\+buffer\+\_\+state}} (\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} new\+\_\+buffer)
+\item 
+\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} \mbox{\hyperlink{strategyScanner_8c_af81595b30c0da73f9034ffb511db6388}{yy\+\_\+scan\+\_\+buffer}} (char $\ast$base, \mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}} size)
+\item 
+\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} \mbox{\hyperlink{strategyScanner_8c_aaba3a8c0a4caad352ee68b5742c4a9d1}{yy\+\_\+scan\+\_\+string}} (const char $\ast$yy\+\_\+str)
+\item 
+\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} \mbox{\hyperlink{strategyScanner_8c_acbf193b612e891a3fca6a810daa18c66}{yy\+\_\+scan\+\_\+bytes}} (const char $\ast$bytes, int len)
+\item 
+void $\ast$ \mbox{\hyperlink{strategyScanner_8c_a48e81b6f60f5f21fcaca3cc542e6c9f2}{yyalloc}} (\mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}})
+\item 
+void $\ast$ \mbox{\hyperlink{strategyScanner_8c_a843d874fed23c395a8f12c2d9c666557}{yyrealloc}} (void $\ast$, \mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}})
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_a70f82d43d4797bb2a50f7678ddbfbda5}{yyfree}} (void $\ast$)
+\item 
+int \mbox{\hyperlink{strategyScanner_8c_a08a128e0df020f8e53736ee7e9f9f0f1}{stratlex}} ()
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_ac571eade4cca933e8ccdf6759c527fe7}{yyset\+\_\+debug}} (int debug\+\_\+flag)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_a2df391b304dadab17608192b116af2a1}{yyset\+\_\+extra}} (\mbox{\hyperlink{strategyScanner_8c_a26938d921de835f6183c02e54cf08828}{YY\+\_\+\+EXTRA\+\_\+\+TYPE}} user\+\_\+defined)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_a14346b28ae39537ab27caacebfcb31a7}{yyset\+\_\+in}} (FILE $\ast$\+\_\+in\+\_\+str)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_ad8174301995e5a61ab330516ec081e35}{yyset\+\_\+out}} (FILE $\ast$\+\_\+out\+\_\+str)
+\item 
+void \mbox{\hyperlink{strategyScanner_8c_aca0fe76da7a277561738a9a14ab8cb0a}{yyset\+\_\+lineno}} (int \+\_\+line\+\_\+number)
+\item 
+\mbox{\hyperlink{strategyScanner_8c_ad4a65b873df5c05570846b5413b41dfd}{if}} (!(yy\+\_\+init))
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}{yyleng}}
+\item 
+FILE $\ast$ \mbox{\hyperlink{strategyScanner_8c_a46af646807e0797e72b6e8945e7ea88b}{yyin}} = NULL
+\item 
+FILE $\ast$ \mbox{\hyperlink{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}{yyout}} = NULL
+\item 
+int \mbox{\hyperlink{strategyScanner_8c_a5e36364965360da7b7cdfc2188e0af84}{yylineno}} = 1
+\item 
+char $\ast$ \mbox{\hyperlink{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}{yytext}}
+\item 
+int \mbox{\hyperlink{strategyScanner_8c_a7411c3bab9eca1afee90113c2d22da37}{yy\+\_\+flex\+\_\+debug}} = 0
+\item 
+\mbox{\hyperlink{strategyScanner_8c_abcefb20c54ce0f92452cfbb9cf657670}{YY\+\_\+\+DECL}}
+\item 
+char $\ast$ \mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\+\_\+cp}}
+\item 
+char $\ast$ \mbox{\hyperlink{strategyScanner_8c_aa749693ef7d0c10b137e887638fdc5b2}{yy\+\_\+bp}}
+\item 
+int \mbox{\hyperlink{strategyScanner_8c_a483da4c691e92dcb79c40a3514759b6b}{yy\+\_\+act}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{strategyScanner_8c_ab766bbbee08d04b67e3fe599d6900873}\label{strategyScanner_8c_ab766bbbee08d04b67e3fe599d6900873}} 
+\index{strategyScanner.c@{strategyScanner.c}!BEGIN@{BEGIN}}
+\index{BEGIN@{BEGIN}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{BEGIN}{BEGIN}}
+{\footnotesize\ttfamily \#define BEGIN~(yy\+\_\+start) = 1 + 2 $\ast$}
+
+\mbox{\Hypertarget{strategyScanner_8c_aad1dc60a04a1d8cfc8b3ded13601e361}\label{strategyScanner_8c_aad1dc60a04a1d8cfc8b3ded13601e361}} 
+\index{strategyScanner.c@{strategyScanner.c}!ECHO@{ECHO}}
+\index{ECHO@{ECHO}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{ECHO}{ECHO}}
+{\footnotesize\ttfamily \#define ECHO~do \{ \mbox{\hyperlink{strategyScanner_8c_ad4a65b873df5c05570846b5413b41dfd}{if}} (fwrite( \mbox{\hyperlink{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}{yytext}}, (size\+\_\+t) \mbox{\hyperlink{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}{yyleng}}, 1, \mbox{\hyperlink{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}{yyout}} )) \{\} \} while (0)}
+
+\mbox{\Hypertarget{strategyScanner_8c_adf4b0db227e07782e28ade353a7ba7a1}\label{strategyScanner_8c_adf4b0db227e07782e28ade353a7ba7a1}} 
+\index{strategyScanner.c@{strategyScanner.c}!EOB\_ACT\_CONTINUE\_SCAN@{EOB\_ACT\_CONTINUE\_SCAN}}
+\index{EOB\_ACT\_CONTINUE\_SCAN@{EOB\_ACT\_CONTINUE\_SCAN}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{EOB\_ACT\_CONTINUE\_SCAN}{EOB\_ACT\_CONTINUE\_SCAN}}
+{\footnotesize\ttfamily \#define EOB\+\_\+\+ACT\+\_\+\+CONTINUE\+\_\+\+SCAN~0}
+
+\mbox{\Hypertarget{strategyScanner_8c_a7f71d7fa2c403eb4b2f38cb9536f3c63}\label{strategyScanner_8c_a7f71d7fa2c403eb4b2f38cb9536f3c63}} 
+\index{strategyScanner.c@{strategyScanner.c}!EOB\_ACT\_END\_OF\_FILE@{EOB\_ACT\_END\_OF\_FILE}}
+\index{EOB\_ACT\_END\_OF\_FILE@{EOB\_ACT\_END\_OF\_FILE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{EOB\_ACT\_END\_OF\_FILE}{EOB\_ACT\_END\_OF\_FILE}}
+{\footnotesize\ttfamily \#define EOB\+\_\+\+ACT\+\_\+\+END\+\_\+\+OF\+\_\+\+FILE~1}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad1a0b5ebcabffe388e9e9ebb2619c1fb}\label{strategyScanner_8c_ad1a0b5ebcabffe388e9e9ebb2619c1fb}} 
+\index{strategyScanner.c@{strategyScanner.c}!EOB\_ACT\_LAST\_MATCH@{EOB\_ACT\_LAST\_MATCH}}
+\index{EOB\_ACT\_LAST\_MATCH@{EOB\_ACT\_LAST\_MATCH}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{EOB\_ACT\_LAST\_MATCH}{EOB\_ACT\_LAST\_MATCH}}
+{\footnotesize\ttfamily \#define EOB\+\_\+\+ACT\+\_\+\+LAST\+\_\+\+MATCH~2}
+
+\mbox{\Hypertarget{strategyScanner_8c_a9465c9986fdda27730c9dff8d16a0887}\label{strategyScanner_8c_a9465c9986fdda27730c9dff8d16a0887}} 
+\index{strategyScanner.c@{strategyScanner.c}!FLEX\_BETA@{FLEX\_BETA}}
+\index{FLEX\_BETA@{FLEX\_BETA}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{FLEX\_BETA}{FLEX\_BETA}}
+{\footnotesize\ttfamily \#define FLEX\+\_\+\+BETA}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3c3d1ef92e93b0bc81d7760a73d5c3b6}\label{strategyScanner_8c_a3c3d1ef92e93b0bc81d7760a73d5c3b6}} 
+\index{strategyScanner.c@{strategyScanner.c}!FLEX\_SCANNER@{FLEX\_SCANNER}}
+\index{FLEX\_SCANNER@{FLEX\_SCANNER}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{FLEX\_SCANNER}{FLEX\_SCANNER}}
+{\footnotesize\ttfamily \#define FLEX\+\_\+\+SCANNER}
+
+\mbox{\Hypertarget{strategyScanner_8c_aec980b5a71bbe6d67931df20f0ebaec4}\label{strategyScanner_8c_aec980b5a71bbe6d67931df20f0ebaec4}} 
+\index{strategyScanner.c@{strategyScanner.c}!FLEXINT\_H@{FLEXINT\_H}}
+\index{FLEXINT\_H@{FLEXINT\_H}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{FLEXINT\_H}{FLEXINT\_H}}
+{\footnotesize\ttfamily \#define FLEXINT\+\_\+H}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa3d063564f6ab16f6d408b8369d0e9ff}\label{strategyScanner_8c_aa3d063564f6ab16f6d408b8369d0e9ff}} 
+\index{strategyScanner.c@{strategyScanner.c}!INITIAL@{INITIAL}}
+\index{INITIAL@{INITIAL}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INITIAL}{INITIAL}}
+{\footnotesize\ttfamily \#define INITIAL~0}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac58f2c111cc9989c86db2a7dc4fd84ca}\label{strategyScanner_8c_ac58f2c111cc9989c86db2a7dc4fd84ca}} 
+\index{strategyScanner.c@{strategyScanner.c}!INT16\_MAX@{INT16\_MAX}}
+\index{INT16\_MAX@{INT16\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INT16\_MAX}{INT16\_MAX}}
+{\footnotesize\ttfamily \#define INT16\+\_\+\+MAX~(32767)}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad4e9955955b27624963643eac448118a}\label{strategyScanner_8c_ad4e9955955b27624963643eac448118a}} 
+\index{strategyScanner.c@{strategyScanner.c}!INT16\_MIN@{INT16\_MIN}}
+\index{INT16\_MIN@{INT16\_MIN}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INT16\_MIN}{INT16\_MIN}}
+{\footnotesize\ttfamily \#define INT16\+\_\+\+MIN~(-\/32767-\/1)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a181807730d4a375f848ba139813ce04f}\label{strategyScanner_8c_a181807730d4a375f848ba139813ce04f}} 
+\index{strategyScanner.c@{strategyScanner.c}!INT32\_MAX@{INT32\_MAX}}
+\index{INT32\_MAX@{INT32\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INT32\_MAX}{INT32\_MAX}}
+{\footnotesize\ttfamily \#define INT32\+\_\+\+MAX~(2147483647)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a688eb21a22db27c2b2bd5836943cdcbe}\label{strategyScanner_8c_a688eb21a22db27c2b2bd5836943cdcbe}} 
+\index{strategyScanner.c@{strategyScanner.c}!INT32\_MIN@{INT32\_MIN}}
+\index{INT32\_MIN@{INT32\_MIN}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INT32\_MIN}{INT32\_MIN}}
+{\footnotesize\ttfamily \#define INT32\+\_\+\+MIN~(-\/2147483647-\/1)}
+
+\mbox{\Hypertarget{strategyScanner_8c_aaf7f29f45f1a513b4748a4e5014ddf6a}\label{strategyScanner_8c_aaf7f29f45f1a513b4748a4e5014ddf6a}} 
+\index{strategyScanner.c@{strategyScanner.c}!INT8\_MAX@{INT8\_MAX}}
+\index{INT8\_MAX@{INT8\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INT8\_MAX}{INT8\_MAX}}
+{\footnotesize\ttfamily \#define INT8\+\_\+\+MAX~(127)}
+
+\mbox{\Hypertarget{strategyScanner_8c_aadcf2a81af243df333b31efa6461ab8e}\label{strategyScanner_8c_aadcf2a81af243df333b31efa6461ab8e}} 
+\index{strategyScanner.c@{strategyScanner.c}!INT8\_MIN@{INT8\_MIN}}
+\index{INT8\_MIN@{INT8\_MIN}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{INT8\_MIN}{INT8\_MIN}}
+{\footnotesize\ttfamily \#define INT8\+\_\+\+MIN~(-\/128)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a835f10dd1ab4bf9a80c4cd80ee6e3058}\label{strategyScanner_8c_a835f10dd1ab4bf9a80c4cd80ee6e3058}} 
+\index{strategyScanner.c@{strategyScanner.c}!REJECT@{REJECT}}
+\index{REJECT@{REJECT}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{REJECT}{REJECT}}
+{\footnotesize\ttfamily \#define REJECT~reject\+\_\+used\+\_\+but\+\_\+not\+\_\+detected}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3c75bb398badb69c7577b21486f9963f}\label{strategyScanner_8c_a3c75bb398badb69c7577b21486f9963f}} 
+\index{strategyScanner.c@{strategyScanner.c}!SIZE\_MAX@{SIZE\_MAX}}
+\index{SIZE\_MAX@{SIZE\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{SIZE\_MAX}{SIZE\_MAX}}
+{\footnotesize\ttfamily \#define SIZE\+\_\+\+MAX~($\sim$(size\+\_\+t)0)}
+
+\mbox{\Hypertarget{strategyScanner_8c_af2cb25afb56f920d4b8f814394b84a81}\label{strategyScanner_8c_af2cb25afb56f920d4b8f814394b84a81}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_create\_buffer\_ALREADY\_DEFINED@{strat\_create\_buffer\_ALREADY\_DEFINED}}
+\index{strat\_create\_buffer\_ALREADY\_DEFINED@{strat\_create\_buffer\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_create\_buffer\_ALREADY\_DEFINED}{strat\_create\_buffer\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+create\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_abe32d6c0511e22e16c2f802c8f291c00}\label{strategyScanner_8c_abe32d6c0511e22e16c2f802c8f291c00}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_delete\_buffer\_ALREADY\_DEFINED@{strat\_delete\_buffer\_ALREADY\_DEFINED}}
+\index{strat\_delete\_buffer\_ALREADY\_DEFINED@{strat\_delete\_buffer\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_delete\_buffer\_ALREADY\_DEFINED}{strat\_delete\_buffer\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+delete\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_adfc2fe8038be03a63a8e435057e94179}\label{strategyScanner_8c_adfc2fe8038be03a63a8e435057e94179}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_flex\_debug\_ALREADY\_DEFINED@{strat\_flex\_debug\_ALREADY\_DEFINED}}
+\index{strat\_flex\_debug\_ALREADY\_DEFINED@{strat\_flex\_debug\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_flex\_debug\_ALREADY\_DEFINED}{strat\_flex\_debug\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+flex\+\_\+debug\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a835fbe507a92b86fa8a2210718d540c2}\label{strategyScanner_8c_a835fbe507a92b86fa8a2210718d540c2}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_flush\_buffer\_ALREADY\_DEFINED@{strat\_flush\_buffer\_ALREADY\_DEFINED}}
+\index{strat\_flush\_buffer\_ALREADY\_DEFINED@{strat\_flush\_buffer\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_flush\_buffer\_ALREADY\_DEFINED}{strat\_flush\_buffer\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+flush\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa49a5869023371f4d5b48ac3a2182b61}\label{strategyScanner_8c_aa49a5869023371f4d5b48ac3a2182b61}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_init\_buffer\_ALREADY\_DEFINED@{strat\_init\_buffer\_ALREADY\_DEFINED}}
+\index{strat\_init\_buffer\_ALREADY\_DEFINED@{strat\_init\_buffer\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_init\_buffer\_ALREADY\_DEFINED}{strat\_init\_buffer\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+init\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa2faadf6ed6372fbd637b2442f5b885e}\label{strategyScanner_8c_aa2faadf6ed6372fbd637b2442f5b885e}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_load\_buffer\_state\_ALREADY\_DEFINED@{strat\_load\_buffer\_state\_ALREADY\_DEFINED}}
+\index{strat\_load\_buffer\_state\_ALREADY\_DEFINED@{strat\_load\_buffer\_state\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_load\_buffer\_state\_ALREADY\_DEFINED}{strat\_load\_buffer\_state\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+load\+\_\+buffer\+\_\+state\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a818c67c94b8747f80b0254cad47cce14}\label{strategyScanner_8c_a818c67c94b8747f80b0254cad47cce14}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_scan\_buffer\_ALREADY\_DEFINED@{strat\_scan\_buffer\_ALREADY\_DEFINED}}
+\index{strat\_scan\_buffer\_ALREADY\_DEFINED@{strat\_scan\_buffer\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_scan\_buffer\_ALREADY\_DEFINED}{strat\_scan\_buffer\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+scan\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab266eaa0167cd1f0e15d8d00a2ddfb7b}\label{strategyScanner_8c_ab266eaa0167cd1f0e15d8d00a2ddfb7b}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_scan\_bytes\_ALREADY\_DEFINED@{strat\_scan\_bytes\_ALREADY\_DEFINED}}
+\index{strat\_scan\_bytes\_ALREADY\_DEFINED@{strat\_scan\_bytes\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_scan\_bytes\_ALREADY\_DEFINED}{strat\_scan\_bytes\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+scan\+\_\+bytes\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_af067349b6dfb0c6006849ce15846df6c}\label{strategyScanner_8c_af067349b6dfb0c6006849ce15846df6c}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_scan\_string\_ALREADY\_DEFINED@{strat\_scan\_string\_ALREADY\_DEFINED}}
+\index{strat\_scan\_string\_ALREADY\_DEFINED@{strat\_scan\_string\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_scan\_string\_ALREADY\_DEFINED}{strat\_scan\_string\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+scan\+\_\+string\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab148166472178146c4f7108a1513e4c1}\label{strategyScanner_8c_ab148166472178146c4f7108a1513e4c1}} 
+\index{strategyScanner.c@{strategyScanner.c}!strat\_switch\_to\_buffer\_ALREADY\_DEFINED@{strat\_switch\_to\_buffer\_ALREADY\_DEFINED}}
+\index{strat\_switch\_to\_buffer\_ALREADY\_DEFINED@{strat\_switch\_to\_buffer\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strat\_switch\_to\_buffer\_ALREADY\_DEFINED}{strat\_switch\_to\_buffer\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strat\+\_\+switch\+\_\+to\+\_\+buffer\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a9d7cbd3c6ec848241a27bc8102c4e257}\label{strategyScanner_8c_a9d7cbd3c6ec848241a27bc8102c4e257}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratalloc\_ALREADY\_DEFINED@{stratalloc\_ALREADY\_DEFINED}}
+\index{stratalloc\_ALREADY\_DEFINED@{stratalloc\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratalloc\_ALREADY\_DEFINED}{stratalloc\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratalloc\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a6816d1db91be4d6b4d8673ac95a96d49}\label{strategyScanner_8c_a6816d1db91be4d6b4d8673ac95a96d49}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratensure\_buffer\_stack\_ALREADY\_DEFINED@{stratensure\_buffer\_stack\_ALREADY\_DEFINED}}
+\index{stratensure\_buffer\_stack\_ALREADY\_DEFINED@{stratensure\_buffer\_stack\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratensure\_buffer\_stack\_ALREADY\_DEFINED}{stratensure\_buffer\_stack\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratensure\+\_\+buffer\+\_\+stack\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_abe2f1f9f820bb4f23cbc8c0425b696a9}\label{strategyScanner_8c_abe2f1f9f820bb4f23cbc8c0425b696a9}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratfree\_ALREADY\_DEFINED@{stratfree\_ALREADY\_DEFINED}}
+\index{stratfree\_ALREADY\_DEFINED@{stratfree\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratfree\_ALREADY\_DEFINED}{stratfree\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratfree\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a2388738c018802599284a49e912a3425}\label{strategyScanner_8c_a2388738c018802599284a49e912a3425}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratin\_ALREADY\_DEFINED@{stratin\_ALREADY\_DEFINED}}
+\index{stratin\_ALREADY\_DEFINED@{stratin\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratin\_ALREADY\_DEFINED}{stratin\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratin\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad2c7ab3a08c6eb7382d3155b3c34fb7f}\label{strategyScanner_8c_ad2c7ab3a08c6eb7382d3155b3c34fb7f}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratleng\_ALREADY\_DEFINED@{stratleng\_ALREADY\_DEFINED}}
+\index{stratleng\_ALREADY\_DEFINED@{stratleng\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratleng\_ALREADY\_DEFINED}{stratleng\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratleng\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa8139c9bf210b3d68a4a5e41ac60e749}\label{strategyScanner_8c_aa8139c9bf210b3d68a4a5e41ac60e749}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratlex\_ALREADY\_DEFINED@{stratlex\_ALREADY\_DEFINED}}
+\index{stratlex\_ALREADY\_DEFINED@{stratlex\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratlex\_ALREADY\_DEFINED}{stratlex\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratlex\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad00680a1ca01cc9adc00e6ec07c382a6}\label{strategyScanner_8c_ad00680a1ca01cc9adc00e6ec07c382a6}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratlineno\_ALREADY\_DEFINED@{stratlineno\_ALREADY\_DEFINED}}
+\index{stratlineno\_ALREADY\_DEFINED@{stratlineno\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratlineno\_ALREADY\_DEFINED}{stratlineno\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratlineno\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad216fd3c6c13b18959df09f318aa0779}\label{strategyScanner_8c_ad216fd3c6c13b18959df09f318aa0779}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratout\_ALREADY\_DEFINED@{stratout\_ALREADY\_DEFINED}}
+\index{stratout\_ALREADY\_DEFINED@{stratout\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratout\_ALREADY\_DEFINED}{stratout\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratout\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a78052d1e4acdbcaf8b1a2c12498757b4}\label{strategyScanner_8c_a78052d1e4acdbcaf8b1a2c12498757b4}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratpop\_buffer\_state\_ALREADY\_DEFINED@{stratpop\_buffer\_state\_ALREADY\_DEFINED}}
+\index{stratpop\_buffer\_state\_ALREADY\_DEFINED@{stratpop\_buffer\_state\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratpop\_buffer\_state\_ALREADY\_DEFINED}{stratpop\_buffer\_state\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratpop\+\_\+buffer\+\_\+state\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae4d95636bee4c8fb5400e6b7776a6a6c}\label{strategyScanner_8c_ae4d95636bee4c8fb5400e6b7776a6a6c}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratpush\_buffer\_state\_ALREADY\_DEFINED@{stratpush\_buffer\_state\_ALREADY\_DEFINED}}
+\index{stratpush\_buffer\_state\_ALREADY\_DEFINED@{stratpush\_buffer\_state\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratpush\_buffer\_state\_ALREADY\_DEFINED}{stratpush\_buffer\_state\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratpush\+\_\+buffer\+\_\+state\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a45e9f896f23078eaabcfa7223c6d6288}\label{strategyScanner_8c_a45e9f896f23078eaabcfa7223c6d6288}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratrealloc\_ALREADY\_DEFINED@{stratrealloc\_ALREADY\_DEFINED}}
+\index{stratrealloc\_ALREADY\_DEFINED@{stratrealloc\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratrealloc\_ALREADY\_DEFINED}{stratrealloc\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratrealloc\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a495c3040e6ab769384f093a0b375e67a}\label{strategyScanner_8c_a495c3040e6ab769384f093a0b375e67a}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratrestart\_ALREADY\_DEFINED@{stratrestart\_ALREADY\_DEFINED}}
+\index{stratrestart\_ALREADY\_DEFINED@{stratrestart\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratrestart\_ALREADY\_DEFINED}{stratrestart\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratrestart\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad1a88d1644cf17885f05302d58f3f1da}\label{strategyScanner_8c_ad1a88d1644cf17885f05302d58f3f1da}} 
+\index{strategyScanner.c@{strategyScanner.c}!strattext\_ALREADY\_DEFINED@{strattext\_ALREADY\_DEFINED}}
+\index{strattext\_ALREADY\_DEFINED@{strattext\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{strattext\_ALREADY\_DEFINED}{strattext\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define strattext\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_add160889044fa1ea679cd2060f645887}\label{strategyScanner_8c_add160889044fa1ea679cd2060f645887}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratwrap@{stratwrap}}
+\index{stratwrap@{stratwrap}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratwrap}{stratwrap}}
+{\footnotesize\ttfamily \#define stratwrap(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~(/$\ast$CONSTCOND$\ast$/1)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a721e3a8fd6b26d0466367d019e94e435}\label{strategyScanner_8c_a721e3a8fd6b26d0466367d019e94e435}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratwrap\_ALREADY\_DEFINED@{stratwrap\_ALREADY\_DEFINED}}
+\index{stratwrap\_ALREADY\_DEFINED@{stratwrap\_ALREADY\_DEFINED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratwrap\_ALREADY\_DEFINED}{stratwrap\_ALREADY\_DEFINED}}
+{\footnotesize\ttfamily \#define stratwrap\+\_\+\+ALREADY\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3ea490c9b3617d4479bd80ef93cd5602}\label{strategyScanner_8c_a3ea490c9b3617d4479bd80ef93cd5602}} 
+\index{strategyScanner.c@{strategyScanner.c}!UINT16\_MAX@{UINT16\_MAX}}
+\index{UINT16\_MAX@{UINT16\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{UINT16\_MAX}{UINT16\_MAX}}
+{\footnotesize\ttfamily \#define UINT16\+\_\+\+MAX~(65535U)}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab5eb23180f7cc12b7d6c04a8ec067fdd}\label{strategyScanner_8c_ab5eb23180f7cc12b7d6c04a8ec067fdd}} 
+\index{strategyScanner.c@{strategyScanner.c}!UINT32\_MAX@{UINT32\_MAX}}
+\index{UINT32\_MAX@{UINT32\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{UINT32\_MAX}{UINT32\_MAX}}
+{\footnotesize\ttfamily \#define UINT32\+\_\+\+MAX~(4294967295U)}
+
+\mbox{\Hypertarget{strategyScanner_8c_aeb4e270a084ee26fe73e799861bd0252}\label{strategyScanner_8c_aeb4e270a084ee26fe73e799861bd0252}} 
+\index{strategyScanner.c@{strategyScanner.c}!UINT8\_MAX@{UINT8\_MAX}}
+\index{UINT8\_MAX@{UINT8\_MAX}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{UINT8\_MAX}{UINT8\_MAX}}
+{\footnotesize\ttfamily \#define UINT8\+\_\+\+MAX~(255U)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a448a4e9041a09588332733c6846c770c}\label{strategyScanner_8c_a448a4e9041a09588332733c6846c770c}} 
+\index{strategyScanner.c@{strategyScanner.c}!unput@{unput}}
+\index{unput@{unput}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{unput}{unput}}
+{\footnotesize\ttfamily \#define unput(\begin{DoxyParamCaption}\item[{}]{c }\end{DoxyParamCaption})~yyunput( c, (\mbox{\hyperlink{strategyScanner_8c_a790a191a93ef4d3b8c0bb43fd7480052}{yytext\+\_\+ptr}})  )}
+
+\mbox{\Hypertarget{strategyScanner_8c_a71ca89b3656acd0552f14949a571560b}\label{strategyScanner_8c_a71ca89b3656acd0552f14949a571560b}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_AT\_BOL@{YY\_AT\_BOL}}
+\index{YY\_AT\_BOL@{YY\_AT\_BOL}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_AT\_BOL}{YY\_AT\_BOL}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+AT\+\_\+\+BOL(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~(\mbox{\hyperlink{strategyScanner_8c_a817a6a24af62508b5a35f4bed5f56a2e}{YY\+\_\+\+CURRENT\+\_\+\+BUFFER\+\_\+\+LVALUE}}-\/$>$yy\+\_\+at\+\_\+bol)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3cc40a460ad7df816678bcc05241e84c}\label{strategyScanner_8c_a3cc40a460ad7df816678bcc05241e84c}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_BREAK@{YY\_BREAK}}
+\index{YY\_BREAK@{YY\_BREAK}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_BREAK}{YY\_BREAK}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+BREAK~/$\ast$LINTED$\ast$/break;}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}\label{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_BUF\_SIZE@{YY\_BUF\_SIZE}}
+\index{YY\_BUF\_SIZE@{YY\_BUF\_SIZE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_BUF\_SIZE}{YY\_BUF\_SIZE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+BUF\+\_\+\+SIZE~16384}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad689d97c15e807a6116ace7a420cea57}\label{strategyScanner_8c_ad689d97c15e807a6116ace7a420cea57}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_BUFFER\_EOF\_PENDING@{YY\_BUFFER\_EOF\_PENDING}}
+\index{YY\_BUFFER\_EOF\_PENDING@{YY\_BUFFER\_EOF\_PENDING}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_BUFFER\_EOF\_PENDING}{YY\_BUFFER\_EOF\_PENDING}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+BUFFER\+\_\+\+EOF\+\_\+\+PENDING~2}
+
+\mbox{\Hypertarget{strategyScanner_8c_a53579db42834b88199458993912c646d}\label{strategyScanner_8c_a53579db42834b88199458993912c646d}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_BUFFER\_NEW@{YY\_BUFFER\_NEW}}
+\index{YY\_BUFFER\_NEW@{YY\_BUFFER\_NEW}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_BUFFER\_NEW}{YY\_BUFFER\_NEW}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+BUFFER\+\_\+\+NEW~0}
+
+\mbox{\Hypertarget{strategyScanner_8c_a609d19f40900ecc2a5f812d9388c21fb}\label{strategyScanner_8c_a609d19f40900ecc2a5f812d9388c21fb}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_BUFFER\_NORMAL@{YY\_BUFFER\_NORMAL}}
+\index{YY\_BUFFER\_NORMAL@{YY\_BUFFER\_NORMAL}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_BUFFER\_NORMAL}{YY\_BUFFER\_NORMAL}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+BUFFER\+\_\+\+NORMAL~1}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac86ea8173dfcfc5c989d3295a77e2f95}\label{strategyScanner_8c_ac86ea8173dfcfc5c989d3295a77e2f95}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_create\_buffer@{yy\_create\_buffer}}
+\index{yy\_create\_buffer@{yy\_create\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_create\_buffer}{yy\_create\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+create\+\_\+buffer~strat\+\_\+create\+\_\+buffer}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}\label{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_CURRENT\_BUFFER@{YY\_CURRENT\_BUFFER}}
+\index{YY\_CURRENT\_BUFFER@{YY\_CURRENT\_BUFFER}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_CURRENT\_BUFFER}{YY\_CURRENT\_BUFFER}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+CURRENT\+\_\+\+BUFFER}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                          ( (yy\_buffer\_stack) \(\backslash\)}
+\DoxyCodeLine{                          ? (yy\_buffer\_stack)[(yy\_buffer\_stack\_top)] \(\backslash\)}
+\DoxyCodeLine{                          : NULL)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_a817a6a24af62508b5a35f4bed5f56a2e}\label{strategyScanner_8c_a817a6a24af62508b5a35f4bed5f56a2e}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_CURRENT\_BUFFER\_LVALUE@{YY\_CURRENT\_BUFFER\_LVALUE}}
+\index{YY\_CURRENT\_BUFFER\_LVALUE@{YY\_CURRENT\_BUFFER\_LVALUE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_CURRENT\_BUFFER\_LVALUE}{YY\_CURRENT\_BUFFER\_LVALUE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+CURRENT\+\_\+\+BUFFER\+\_\+\+LVALUE~(yy\+\_\+buffer\+\_\+stack)\mbox{[}(yy\+\_\+buffer\+\_\+stack\+\_\+top)\mbox{]}}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae5b01ac2fa5a6ad5fb97559638abe686}\label{strategyScanner_8c_ae5b01ac2fa5a6ad5fb97559638abe686}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_DECL@{YY\_DECL}}
+\index{YY\_DECL@{YY\_DECL}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_DECL}{YY\_DECL}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+DECL~int \mbox{\hyperlink{scanner_8c_aa40b27ae32d6d1ae7160bd6256e08eb8}{yylex}} (void)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a7682c8d9cec0859408d2421fbe4a5570}\label{strategyScanner_8c_a7682c8d9cec0859408d2421fbe4a5570}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_DECL\_IS\_OURS@{YY\_DECL\_IS\_OURS}}
+\index{YY\_DECL\_IS\_OURS@{YY\_DECL\_IS\_OURS}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_DECL\_IS\_OURS}{YY\_DECL\_IS\_OURS}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+DECL\+\_\+\+IS\+\_\+\+OURS~1}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad1868c6b38b45af25a4a0f449912a808}\label{strategyScanner_8c_ad1868c6b38b45af25a4a0f449912a808}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_delete\_buffer@{yy\_delete\_buffer}}
+\index{yy\_delete\_buffer@{yy\_delete\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_delete\_buffer}{yy\_delete\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+delete\+\_\+buffer~strat\+\_\+delete\+\_\+buffer}
+
+\mbox{\Hypertarget{strategyScanner_8c_acc3486d769af4e4b2820346a0093cc79}\label{strategyScanner_8c_acc3486d769af4e4b2820346a0093cc79}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_DO\_BEFORE\_ACTION@{YY\_DO\_BEFORE\_ACTION}}
+\index{YY\_DO\_BEFORE\_ACTION@{YY\_DO\_BEFORE\_ACTION}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_DO\_BEFORE\_ACTION}{YY\_DO\_BEFORE\_ACTION}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+DO\+\_\+\+BEFORE\+\_\+\+ACTION}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    (\mbox{\hyperlink{strategyScanner_8c_a790a191a93ef4d3b8c0bb43fd7480052}{yytext\_ptr}}) = \mbox{\hyperlink{strategyScanner_8c_aa749693ef7d0c10b137e887638fdc5b2}{yy\_bp}}; \(\backslash\)}
+\DoxyCodeLine{    yyleng = (int) (\mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\_cp}} -\/ \mbox{\hyperlink{strategyScanner_8c_aa749693ef7d0c10b137e887638fdc5b2}{yy\_bp}}); \(\backslash\)}
+\DoxyCodeLine{    (yy\_hold\_char) = *\mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\_cp}}; \(\backslash\)}
+\DoxyCodeLine{    *\mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\_cp}} = \textcolor{charliteral}{'\(\backslash\)0'}; \(\backslash\)}
+\DoxyCodeLine{    (yy\_c\_buf\_p) = \mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\_cp}};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_ab2708fd42cff29ce6a0a52b91bea40d1}\label{strategyScanner_8c_ab2708fd42cff29ce6a0a52b91bea40d1}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_END\_OF\_BUFFER@{YY\_END\_OF\_BUFFER}}
+\index{YY\_END\_OF\_BUFFER@{YY\_END\_OF\_BUFFER}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_END\_OF\_BUFFER}{YY\_END\_OF\_BUFFER}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+END\+\_\+\+OF\+\_\+\+BUFFER~18}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab866a64da164ed2d4d444df1ef1fc9b3}\label{strategyScanner_8c_ab866a64da164ed2d4d444df1ef1fc9b3}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_END\_OF\_BUFFER\_CHAR@{YY\_END\_OF\_BUFFER\_CHAR}}
+\index{YY\_END\_OF\_BUFFER\_CHAR@{YY\_END\_OF\_BUFFER\_CHAR}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_END\_OF\_BUFFER\_CHAR}{YY\_END\_OF\_BUFFER\_CHAR}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+END\+\_\+\+OF\+\_\+\+BUFFER\+\_\+\+CHAR~0}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae93e67b85c44f6bd31ead14a552a35c8}\label{strategyScanner_8c_ae93e67b85c44f6bd31ead14a552a35c8}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_EXIT\_FAILURE@{YY\_EXIT\_FAILURE}}
+\index{YY\_EXIT\_FAILURE@{YY\_EXIT\_FAILURE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_EXIT\_FAILURE}{YY\_EXIT\_FAILURE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+EXIT\+\_\+\+FAILURE~2}
+
+\mbox{\Hypertarget{strategyScanner_8c_a26938d921de835f6183c02e54cf08828}\label{strategyScanner_8c_a26938d921de835f6183c02e54cf08828}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_EXTRA\_TYPE@{YY\_EXTRA\_TYPE}}
+\index{YY\_EXTRA\_TYPE@{YY\_EXTRA\_TYPE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_EXTRA\_TYPE}{YY\_EXTRA\_TYPE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+EXTRA\+\_\+\+TYPE~void $\ast$}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac0586b8b0b092d02f4ba7d45abe328f2}\label{strategyScanner_8c_ac0586b8b0b092d02f4ba7d45abe328f2}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_FATAL\_ERROR@{YY\_FATAL\_ERROR}}
+\index{YY\_FATAL\_ERROR@{YY\_FATAL\_ERROR}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_FATAL\_ERROR}{YY\_FATAL\_ERROR}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+FATAL\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~yy\+\_\+fatal\+\_\+error( msg )}
+
+\mbox{\Hypertarget{strategyScanner_8c_a7411c3bab9eca1afee90113c2d22da37}\label{strategyScanner_8c_a7411c3bab9eca1afee90113c2d22da37}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_flex\_debug@{yy\_flex\_debug}}
+\index{yy\_flex\_debug@{yy\_flex\_debug}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_flex\_debug}{yy\_flex\_debug}}
+{\footnotesize\ttfamily int yy\+\_\+flex\+\_\+debug~strat\+\_\+flex\+\_\+debug}
+
+\mbox{\Hypertarget{strategyScanner_8c_a243ca1d30872935faf05ea5118ed6fdc}\label{strategyScanner_8c_a243ca1d30872935faf05ea5118ed6fdc}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_FLEX\_MAJOR\_VERSION@{YY\_FLEX\_MAJOR\_VERSION}}
+\index{YY\_FLEX\_MAJOR\_VERSION@{YY\_FLEX\_MAJOR\_VERSION}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_FLEX\_MAJOR\_VERSION}{YY\_FLEX\_MAJOR\_VERSION}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+FLEX\+\_\+\+MAJOR\+\_\+\+VERSION~2}
+
+\mbox{\Hypertarget{strategyScanner_8c_a90f9d458829400869e47efb68a865677}\label{strategyScanner_8c_a90f9d458829400869e47efb68a865677}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_FLEX\_MINOR\_VERSION@{YY\_FLEX\_MINOR\_VERSION}}
+\index{YY\_FLEX\_MINOR\_VERSION@{YY\_FLEX\_MINOR\_VERSION}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_FLEX\_MINOR\_VERSION}{YY\_FLEX\_MINOR\_VERSION}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+FLEX\+\_\+\+MINOR\+\_\+\+VERSION~6}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac676bd06869180ea493e9b6d7c078dbb}\label{strategyScanner_8c_ac676bd06869180ea493e9b6d7c078dbb}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_FLEX\_SUBMINOR\_VERSION@{YY\_FLEX\_SUBMINOR\_VERSION}}
+\index{YY\_FLEX\_SUBMINOR\_VERSION@{YY\_FLEX\_SUBMINOR\_VERSION}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_FLEX\_SUBMINOR\_VERSION}{YY\_FLEX\_SUBMINOR\_VERSION}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+FLEX\+\_\+\+SUBMINOR\+\_\+\+VERSION~4}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab01a4c7245136f22a63acac7c0ceb343}\label{strategyScanner_8c_ab01a4c7245136f22a63acac7c0ceb343}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_flush\_buffer@{yy\_flush\_buffer}}
+\index{yy\_flush\_buffer@{yy\_flush\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_flush\_buffer}{yy\_flush\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+flush\+\_\+buffer~strat\+\_\+flush\+\_\+buffer}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac5d478d90ea9a2ecd43d579067a2e89d}\label{strategyScanner_8c_ac5d478d90ea9a2ecd43d579067a2e89d}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_FLUSH\_BUFFER@{YY\_FLUSH\_BUFFER}}
+\index{YY\_FLUSH\_BUFFER@{YY\_FLUSH\_BUFFER}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_FLUSH\_BUFFER}{YY\_FLUSH\_BUFFER}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+FLUSH\+\_\+\+BUFFER~\mbox{\hyperlink{strategyScanner_8c_a2f59cc88e85e5455c62e4ef7ce095ea8}{yy\+\_\+flush\+\_\+buffer}}( \mbox{\hyperlink{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}{YY\+\_\+\+CURRENT\+\_\+\+BUFFER}} )}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa14efad9f9c24106a3e3398a4f6621c2}\label{strategyScanner_8c_aa14efad9f9c24106a3e3398a4f6621c2}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_init\_buffer@{yy\_init\_buffer}}
+\index{yy\_init\_buffer@{yy\_init\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_init\_buffer}{yy\_init\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+init\+\_\+buffer~strat\+\_\+init\+\_\+buffer}
+
+\mbox{\Hypertarget{strategyScanner_8c_aacfdca45fa4beb8b06172525a53c424a}\label{strategyScanner_8c_aacfdca45fa4beb8b06172525a53c424a}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_INPUT@{YY\_INPUT}}
+\index{YY\_INPUT@{YY\_INPUT}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_INPUT}{YY\_INPUT}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+INPUT(\begin{DoxyParamCaption}\item[{}]{buf,  }\item[{}]{result,  }\item[{}]{max\+\_\+size }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} ( \mbox{\hyperlink{strategyScanner_8c_a817a6a24af62508b5a35f4bed5f56a2e}{YY\_CURRENT\_BUFFER\_LVALUE}}-\/>yy\_is\_interactive ) \(\backslash\)}
+\DoxyCodeLine{        \{ \(\backslash\)}
+\DoxyCodeLine{        int c = \textcolor{charliteral}{'*'}; \(\backslash\)}
+\DoxyCodeLine{        int n; \(\backslash\)}
+\DoxyCodeLine{        for ( n = 0; n < max\_size \&\& \(\backslash\)}
+\DoxyCodeLine{                 (c = getc( \mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}} )) != EOF \&\& c != \textcolor{charliteral}{'\(\backslash\)n'}; ++n ) \(\backslash\)}
+\DoxyCodeLine{            buf[n] = (\textcolor{keywordtype}{char}) c; \(\backslash\)}
+\DoxyCodeLine{        if ( c == \textcolor{charliteral}{'\(\backslash\)n'} ) \(\backslash\)}
+\DoxyCodeLine{            buf[n++] = (char) c; \(\backslash\)}
+\DoxyCodeLine{        if ( c == EOF \&\& ferror( \mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}} ) ) \(\backslash\)}
+\DoxyCodeLine{            YY\_FATAL\_ERROR( \textcolor{stringliteral}{"{}input in flex scanner failed"{}} ); \(\backslash\)}
+\DoxyCodeLine{        result = n; \(\backslash\)}
+\DoxyCodeLine{        \} \(\backslash\)}
+\DoxyCodeLine{    else \(\backslash\)}
+\DoxyCodeLine{        \{ \(\backslash\)}
+\DoxyCodeLine{        errno=0; \(\backslash\)}
+\DoxyCodeLine{        while ( (result = (\textcolor{keywordtype}{int}) fread(buf, 1, (\mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\_size\_t}}) max\_size, \mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}})) == 0 \&\& ferror(\mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}})) \(\backslash\)}
+\DoxyCodeLine{            \{ \(\backslash\)}
+\DoxyCodeLine{            if( errno != EINTR) \(\backslash\)}
+\DoxyCodeLine{                \{ \(\backslash\)}
+\DoxyCodeLine{                YY\_FATAL\_ERROR( \textcolor{stringliteral}{"{}input in flex scanner failed"{}} ); \(\backslash\)}
+\DoxyCodeLine{                break; \(\backslash\)}
+\DoxyCodeLine{                \} \(\backslash\)}
+\DoxyCodeLine{            errno=0; \(\backslash\)}
+\DoxyCodeLine{            clearerr(\mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}}); \(\backslash\)}
+\DoxyCodeLine{            \} \(\backslash\)}
+\DoxyCodeLine{        \}\(\backslash\)}
+\DoxyCodeLine{\(\backslash\)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_a1ae16e642a197fa4948998525813c6f5}\label{strategyScanner_8c_a1ae16e642a197fa4948998525813c6f5}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_INT\_ALIGNED@{YY\_INT\_ALIGNED}}
+\index{YY\_INT\_ALIGNED@{YY\_INT\_ALIGNED}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_INT\_ALIGNED}{YY\_INT\_ALIGNED}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+INT\+\_\+\+ALIGNED~short int}
+
+\mbox{\Hypertarget{strategyScanner_8c_a12e5f3a76911433480bca7f4edba6119}\label{strategyScanner_8c_a12e5f3a76911433480bca7f4edba6119}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_LESS\_LINENO@{YY\_LESS\_LINENO}}
+\index{YY\_LESS\_LINENO@{YY\_LESS\_LINENO}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_LESS\_LINENO}{YY\_LESS\_LINENO}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+LESS\+\_\+\+LINENO(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a5206f64af3a299a0dc820c385cf0c489}\label{strategyScanner_8c_a5206f64af3a299a0dc820c385cf0c489}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_LINENO\_REWIND\_TO@{YY\_LINENO\_REWIND\_TO}}
+\index{YY\_LINENO\_REWIND\_TO@{YY\_LINENO\_REWIND\_TO}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_LINENO\_REWIND\_TO}{YY\_LINENO\_REWIND\_TO}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+LINENO\+\_\+\+REWIND\+\_\+\+TO(\begin{DoxyParamCaption}\item[{}]{ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_af59010f39becd2a037cb1ccf0523f5d1}\label{strategyScanner_8c_af59010f39becd2a037cb1ccf0523f5d1}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_load\_buffer\_state@{yy\_load\_buffer\_state}}
+\index{yy\_load\_buffer\_state@{yy\_load\_buffer\_state}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_load\_buffer\_state}{yy\_load\_buffer\_state}}
+{\footnotesize\ttfamily static void yy\+\_\+load\+\_\+buffer\+\_\+state~strat\+\_\+load\+\_\+buffer\+\_\+state}
+
+\mbox{\Hypertarget{strategyScanner_8c_a68792d73820bc46a71d3d4e613f0b977}\label{strategyScanner_8c_a68792d73820bc46a71d3d4e613f0b977}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_MORE\_ADJ@{YY\_MORE\_ADJ}}
+\index{YY\_MORE\_ADJ@{YY\_MORE\_ADJ}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_MORE\_ADJ}{YY\_MORE\_ADJ}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+MORE\+\_\+\+ADJ~0}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab7eb911e18655f2f78e63afe5a8a4a12}\label{strategyScanner_8c_ab7eb911e18655f2f78e63afe5a8a4a12}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_new\_buffer@{yy\_new\_buffer}}
+\index{yy\_new\_buffer@{yy\_new\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_new\_buffer}{yy\_new\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+new\+\_\+buffer~\mbox{\hyperlink{strategyScanner_8c_a5bc6f1a5f7812508f425b08283f13ae8}{yy\+\_\+create\+\_\+buffer}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a0406739e64fb5750cf995d2ae68ce69d}\label{strategyScanner_8c_a0406739e64fb5750cf995d2ae68ce69d}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_NEW\_FILE@{YY\_NEW\_FILE}}
+\index{YY\_NEW\_FILE@{YY\_NEW\_FILE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_NEW\_FILE}{YY\_NEW\_FILE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+NEW\+\_\+\+FILE~\mbox{\hyperlink{strategyScanner_8c_ab657ddef65d43cc3ab8dfc2cad0ac5b8}{yyrestart}}( \mbox{\hyperlink{strategyScanner_8c_a46af646807e0797e72b6e8945e7ea88b}{yyin}}  )}
+
+\mbox{\Hypertarget{strategyScanner_8c_a8e0bcf8f8a5b613ea583347f8bc31cbf}\label{strategyScanner_8c_a8e0bcf8f8a5b613ea583347f8bc31cbf}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_NULL@{YY\_NULL}}
+\index{YY\_NULL@{YY\_NULL}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_NULL}{YY\_NULL}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+NULL~0}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae558785bb896e090901c2b905f6790c6}\label{strategyScanner_8c_ae558785bb896e090901c2b905f6790c6}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_NUM\_RULES@{YY\_NUM\_RULES}}
+\index{YY\_NUM\_RULES@{YY\_NUM\_RULES}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_NUM\_RULES}{YY\_NUM\_RULES}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+NUM\+\_\+\+RULES~17}
+
+\mbox{\Hypertarget{strategyScanner_8c_aab1491ceccb1c95c14320b2903773a1c}\label{strategyScanner_8c_aab1491ceccb1c95c14320b2903773a1c}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_READ\_BUF\_SIZE@{YY\_READ\_BUF\_SIZE}}
+\index{YY\_READ\_BUF\_SIZE@{YY\_READ\_BUF\_SIZE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_READ\_BUF\_SIZE}{YY\_READ\_BUF\_SIZE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+READ\+\_\+\+BUF\+\_\+\+SIZE~8192}
+
+\mbox{\Hypertarget{strategyScanner_8c_a56858d18c7eda4f53664496ef566f651}\label{strategyScanner_8c_a56858d18c7eda4f53664496ef566f651}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_RESTORE\_YY\_MORE\_OFFSET@{YY\_RESTORE\_YY\_MORE\_OFFSET}}
+\index{YY\_RESTORE\_YY\_MORE\_OFFSET@{YY\_RESTORE\_YY\_MORE\_OFFSET}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_RESTORE\_YY\_MORE\_OFFSET}{YY\_RESTORE\_YY\_MORE\_OFFSET}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+RESTORE\+\_\+\+YY\+\_\+\+MORE\+\_\+\+OFFSET}
+
+\mbox{\Hypertarget{strategyScanner_8c_a690504b662e4281515bf12722df178ba}\label{strategyScanner_8c_a690504b662e4281515bf12722df178ba}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_RULE\_SETUP@{YY\_RULE\_SETUP}}
+\index{YY\_RULE\_SETUP@{YY\_RULE\_SETUP}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_RULE\_SETUP}{YY\_RULE\_SETUP}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+RULE\+\_\+\+SETUP~ \mbox{\hyperlink{strategyScanner_8c_a6198b2fcf96178b24ad4efff2a3debb0}{YY\+\_\+\+USER\+\_\+\+ACTION}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_af1185350b7a92cf8aa5324c68850c8a6}\label{strategyScanner_8c_af1185350b7a92cf8aa5324c68850c8a6}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_SC\_TO\_UI@{YY\_SC\_TO\_UI}}
+\index{YY\_SC\_TO\_UI@{YY\_SC\_TO\_UI}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_SC\_TO\_UI}{YY\_SC\_TO\_UI}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+SC\+\_\+\+TO\+\_\+\+UI(\begin{DoxyParamCaption}\item[{}]{c }\end{DoxyParamCaption})~((\mbox{\hyperlink{scanner_8c_acc1e625a829554ffed5e4307d4a5f6b7}{YY\+\_\+\+CHAR}}) (c))}
+
+\mbox{\Hypertarget{strategyScanner_8c_a6849452203fd033f103556fdf858fd33}\label{strategyScanner_8c_a6849452203fd033f103556fdf858fd33}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_scan\_buffer@{yy\_scan\_buffer}}
+\index{yy\_scan\_buffer@{yy\_scan\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_scan\_buffer}{yy\_scan\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+scan\+\_\+buffer~strat\+\_\+scan\+\_\+buffer}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3b70699ea880c5d25a1c75f4ad96c315}\label{strategyScanner_8c_a3b70699ea880c5d25a1c75f4ad96c315}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_scan\_bytes@{yy\_scan\_bytes}}
+\index{yy\_scan\_bytes@{yy\_scan\_bytes}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_scan\_bytes}{yy\_scan\_bytes}}
+{\footnotesize\ttfamily \#define yy\+\_\+scan\+\_\+bytes~strat\+\_\+scan\+\_\+bytes}
+
+\mbox{\Hypertarget{strategyScanner_8c_a6c5cf8c3b7a69bf60a87dd6eb00fe579}\label{strategyScanner_8c_a6c5cf8c3b7a69bf60a87dd6eb00fe579}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_scan\_string@{yy\_scan\_string}}
+\index{yy\_scan\_string@{yy\_scan\_string}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_scan\_string}{yy\_scan\_string}}
+{\footnotesize\ttfamily \#define yy\+\_\+scan\+\_\+string~\mbox{\hyperlink{strategyParser_8c_ac2af328c4709a796210d52d48950a290}{strat\+\_\+scan\+\_\+string}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a12e30d13a76a94e78010db9996d39c50}\label{strategyScanner_8c_a12e30d13a76a94e78010db9996d39c50}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_set\_bol@{yy\_set\_bol}}
+\index{yy\_set\_bol@{yy\_set\_bol}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_set\_bol}{yy\_set\_bol}}
+{\footnotesize\ttfamily \#define yy\+\_\+set\+\_\+bol(\begin{DoxyParamCaption}\item[{}]{at\+\_\+bol }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ \(\backslash\)}
+\DoxyCodeLine{    if ( ! \mbox{\hyperlink{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}{YY\_CURRENT\_BUFFER}} )\{\(\backslash\)}
+\DoxyCodeLine{        yyensure\_buffer\_stack (); \(\backslash\)}
+\DoxyCodeLine{        YY\_CURRENT\_BUFFER\_LVALUE =    \(\backslash\)}
+\DoxyCodeLine{            yy\_create\_buffer( \mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}}, \mbox{\hyperlink{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}{YY\_BUF\_SIZE}} ); \(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{    YY\_CURRENT\_BUFFER\_LVALUE-\/>yy\_at\_bol = at\_bol; \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_ac56eb96366c08862bf0efe5d83d1fc4c}\label{strategyScanner_8c_ac56eb96366c08862bf0efe5d83d1fc4c}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_set\_interactive@{yy\_set\_interactive}}
+\index{yy\_set\_interactive@{yy\_set\_interactive}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_set\_interactive}{yy\_set\_interactive}}
+{\footnotesize\ttfamily \#define yy\+\_\+set\+\_\+interactive(\begin{DoxyParamCaption}\item[{}]{is\+\_\+interactive }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ \(\backslash\)}
+\DoxyCodeLine{    if ( ! \mbox{\hyperlink{strategyScanner_8c_aa093d500a6330d06d8e4760c494fac33}{YY\_CURRENT\_BUFFER}} )\{ \(\backslash\)}
+\DoxyCodeLine{        yyensure\_buffer\_stack (); \(\backslash\)}
+\DoxyCodeLine{        YY\_CURRENT\_BUFFER\_LVALUE =    \(\backslash\)}
+\DoxyCodeLine{            yy\_create\_buffer( \mbox{\hyperlink{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}{yyin}}, \mbox{\hyperlink{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}{YY\_BUF\_SIZE}} ); \(\backslash\)}
+\DoxyCodeLine{    \} \(\backslash\)}
+\DoxyCodeLine{    YY\_CURRENT\_BUFFER\_LVALUE-\/>yy\_is\_interactive = is\_interactive; \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_ae1ef5933028cbc587d31328e53d11a99}\label{strategyScanner_8c_ae1ef5933028cbc587d31328e53d11a99}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_SKIP\_YYWRAP@{YY\_SKIP\_YYWRAP}}
+\index{YY\_SKIP\_YYWRAP@{YY\_SKIP\_YYWRAP}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_SKIP\_YYWRAP}{YY\_SKIP\_YYWRAP}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+SKIP\+\_\+\+YYWRAP}
+
+\mbox{\Hypertarget{strategyScanner_8c_a8e14785f9eab7a997d659b25af9584c5}\label{strategyScanner_8c_a8e14785f9eab7a997d659b25af9584c5}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_START@{YY\_START}}
+\index{YY\_START@{YY\_START}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_START}{YY\_START}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+START~(((yy\+\_\+start) -\/ 1) / 2)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a227e75c43b9e0cd41529974230be7e75}\label{strategyScanner_8c_a227e75c43b9e0cd41529974230be7e75}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_START\_STACK\_INCR@{YY\_START\_STACK\_INCR}}
+\index{YY\_START\_STACK\_INCR@{YY\_START\_STACK\_INCR}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_START\_STACK\_INCR}{YY\_START\_STACK\_INCR}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+START\+\_\+\+STACK\+\_\+\+INCR~25}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac2f8b6fccdc516d96b02ac09a4dc01bd}\label{strategyScanner_8c_ac2f8b6fccdc516d96b02ac09a4dc01bd}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_STATE\_BUF\_SIZE@{YY\_STATE\_BUF\_SIZE}}
+\index{YY\_STATE\_BUF\_SIZE@{YY\_STATE\_BUF\_SIZE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_STATE\_BUF\_SIZE}{YY\_STATE\_BUF\_SIZE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+STATE\+\_\+\+BUF\+\_\+\+SIZE~((\mbox{\hyperlink{strategyScanner_8c_ae7e51116e747d3390e7a6cfc6532834c}{YY\+\_\+\+BUF\+\_\+\+SIZE}} + 2) $\ast$ sizeof(\mbox{\hyperlink{scanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}{yy\+\_\+state\+\_\+type}}))}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab3077e60914fc54dcc55ecae1ce9700b}\label{strategyScanner_8c_ab3077e60914fc54dcc55ecae1ce9700b}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_STATE\_EOF@{YY\_STATE\_EOF}}
+\index{YY\_STATE\_EOF@{YY\_STATE\_EOF}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_STATE\_EOF}{YY\_STATE\_EOF}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+STATE\+\_\+\+EOF(\begin{DoxyParamCaption}\item[{}]{state }\end{DoxyParamCaption})~(\mbox{\hyperlink{strategyScanner_8c_ab2708fd42cff29ce6a0a52b91bea40d1}{YY\+\_\+\+END\+\_\+\+OF\+\_\+\+BUFFER}} + state + 1)}
+
+\mbox{\Hypertarget{strategyScanner_8c_a8aaa9e1fa7f13d6954d045ef973a9c84}\label{strategyScanner_8c_a8aaa9e1fa7f13d6954d045ef973a9c84}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_STRUCT\_YY\_BUFFER\_STATE@{YY\_STRUCT\_YY\_BUFFER\_STATE}}
+\index{YY\_STRUCT\_YY\_BUFFER\_STATE@{YY\_STRUCT\_YY\_BUFFER\_STATE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_STRUCT\_YY\_BUFFER\_STATE}{YY\_STRUCT\_YY\_BUFFER\_STATE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+STRUCT\+\_\+\+YY\+\_\+\+BUFFER\+\_\+\+STATE}
+
+\mbox{\Hypertarget{strategyScanner_8c_a968d5b9e7e06a38bfca977b343d47d5c}\label{strategyScanner_8c_a968d5b9e7e06a38bfca977b343d47d5c}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_switch\_to\_buffer@{yy\_switch\_to\_buffer}}
+\index{yy\_switch\_to\_buffer@{yy\_switch\_to\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_switch\_to\_buffer}{yy\_switch\_to\_buffer}}
+{\footnotesize\ttfamily \#define yy\+\_\+switch\+\_\+to\+\_\+buffer~strat\+\_\+switch\+\_\+to\+\_\+buffer}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa79d63ed3ff8d2249baf1732a73089f5}\label{strategyScanner_8c_aa79d63ed3ff8d2249baf1732a73089f5}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_TYPEDEF\_YY\_BUFFER\_STATE@{YY\_TYPEDEF\_YY\_BUFFER\_STATE}}
+\index{YY\_TYPEDEF\_YY\_BUFFER\_STATE@{YY\_TYPEDEF\_YY\_BUFFER\_STATE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_TYPEDEF\_YY\_BUFFER\_STATE}{YY\_TYPEDEF\_YY\_BUFFER\_STATE}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+TYPEDEF\+\_\+\+YY\+\_\+\+BUFFER\+\_\+\+STATE}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae0f2b0b5f04b2338367826b5670774f9}\label{strategyScanner_8c_ae0f2b0b5f04b2338367826b5670774f9}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_TYPEDEF\_YY\_SIZE\_T@{YY\_TYPEDEF\_YY\_SIZE\_T}}
+\index{YY\_TYPEDEF\_YY\_SIZE\_T@{YY\_TYPEDEF\_YY\_SIZE\_T}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_TYPEDEF\_YY\_SIZE\_T}{YY\_TYPEDEF\_YY\_SIZE\_T}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+TYPEDEF\+\_\+\+YY\+\_\+\+SIZE\+\_\+T}
+
+\mbox{\Hypertarget{strategyScanner_8c_a6198b2fcf96178b24ad4efff2a3debb0}\label{strategyScanner_8c_a6198b2fcf96178b24ad4efff2a3debb0}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_USER\_ACTION@{YY\_USER\_ACTION}}
+\index{YY\_USER\_ACTION@{YY\_USER\_ACTION}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_USER\_ACTION}{YY\_USER\_ACTION}}
+{\footnotesize\ttfamily \#define YY\+\_\+\+USER\+\_\+\+ACTION}
+
+\mbox{\Hypertarget{strategyScanner_8c_a803397ab738ee8630166680646a2d913}\label{strategyScanner_8c_a803397ab738ee8630166680646a2d913}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyalloc@{yyalloc}}
+\index{yyalloc@{yyalloc}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyalloc}{yyalloc}}
+{\footnotesize\ttfamily \#define \mbox{\hyperlink{unionyyalloc}{yyalloc}}~stratalloc}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa2f1a918be586b44bf08126bde2d7cc9}\label{strategyScanner_8c_aa2f1a918be586b44bf08126bde2d7cc9}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyconst@{yyconst}}
+\index{yyconst@{yyconst}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyconst}{yyconst}}
+{\footnotesize\ttfamily \#define yyconst~const}
+
+\mbox{\Hypertarget{strategyScanner_8c_a95b647b6ab42aa91ec5407a3276ad8cf}\label{strategyScanner_8c_a95b647b6ab42aa91ec5407a3276ad8cf}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyensure\_buffer\_stack@{yyensure\_buffer\_stack}}
+\index{yyensure\_buffer\_stack@{yyensure\_buffer\_stack}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyensure\_buffer\_stack}{yyensure\_buffer\_stack}}
+{\footnotesize\ttfamily static void yyensure\+\_\+buffer\+\_\+stack~stratensure\+\_\+buffer\+\_\+stack}
+
+\mbox{\Hypertarget{strategyScanner_8c_a4fa4368d47620ea80150b516e8884f6b}\label{strategyScanner_8c_a4fa4368d47620ea80150b516e8884f6b}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyfree@{yyfree}}
+\index{yyfree@{yyfree}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyfree}{yyfree}}
+{\footnotesize\ttfamily \#define yyfree~stratfree}
+
+\mbox{\Hypertarget{strategyScanner_8c_a81c1f6c4ad68be7dbf300e73961f38cf}\label{strategyScanner_8c_a81c1f6c4ad68be7dbf300e73961f38cf}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_debug@{yyget\_debug}}
+\index{yyget\_debug@{yyget\_debug}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_debug}{yyget\_debug}}
+{\footnotesize\ttfamily int yyget\+\_\+debug~stratget\+\_\+debug}
+
+\mbox{\Hypertarget{strategyScanner_8c_a0484e07fe35238d8031c34f287a9b749}\label{strategyScanner_8c_a0484e07fe35238d8031c34f287a9b749}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_extra@{yyget\_extra}}
+\index{yyget\_extra@{yyget\_extra}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_extra}{yyget\_extra}}
+{\footnotesize\ttfamily \mbox{\hyperlink{strategyScanner_8c_a26938d921de835f6183c02e54cf08828}{YY\+\_\+\+EXTRA\+\_\+\+TYPE}} yyget\+\_\+extra~stratget\+\_\+extra}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa6f5243e96af1d42bd6f3d6b3299bffa}\label{strategyScanner_8c_aa6f5243e96af1d42bd6f3d6b3299bffa}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_in@{yyget\_in}}
+\index{yyget\_in@{yyget\_in}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_in}{yyget\_in}}
+{\footnotesize\ttfamily FILE $\ast$ yyget\+\_\+in~stratget\+\_\+in}
+
+\mbox{\Hypertarget{strategyScanner_8c_a07590ba42ef871984a197d5104a4a9e0}\label{strategyScanner_8c_a07590ba42ef871984a197d5104a4a9e0}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_leng@{yyget\_leng}}
+\index{yyget\_leng@{yyget\_leng}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_leng}{yyget\_leng}}
+{\footnotesize\ttfamily int yyget\+\_\+leng~stratget\+\_\+leng}
+
+\mbox{\Hypertarget{strategyScanner_8c_a5b042f5ec81dac297969a70684a7cb1b}\label{strategyScanner_8c_a5b042f5ec81dac297969a70684a7cb1b}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_lineno@{yyget\_lineno}}
+\index{yyget\_lineno@{yyget\_lineno}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_lineno}{yyget\_lineno}}
+{\footnotesize\ttfamily int yyget\+\_\+lineno~stratget\+\_\+lineno}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac269c11a8e1e7488ec43d1dee26db8a1}\label{strategyScanner_8c_ac269c11a8e1e7488ec43d1dee26db8a1}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_out@{yyget\_out}}
+\index{yyget\_out@{yyget\_out}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_out}{yyget\_out}}
+{\footnotesize\ttfamily FILE $\ast$ yyget\+\_\+out~stratget\+\_\+out}
+
+\mbox{\Hypertarget{strategyScanner_8c_a456cd16577fb85716b25d43deb56eaff}\label{strategyScanner_8c_a456cd16577fb85716b25d43deb56eaff}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyget\_text@{yyget\_text}}
+\index{yyget\_text@{yyget\_text}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyget\_text}{yyget\_text}}
+{\footnotesize\ttfamily char $\ast$ yyget\+\_\+text~stratget\+\_\+text}
+
+\mbox{\Hypertarget{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}\label{strategyScanner_8c_a87a127afa8f6c307fbfba10390675406}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyin@{yyin}}
+\index{yyin@{yyin}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyin}{yyin}}
+{\footnotesize\ttfamily FILE $\ast$ yyin~stratin}
+
+\mbox{\Hypertarget{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}\label{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyleng@{yyleng}}
+\index{yyleng@{yyleng}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyleng}{yyleng}}
+{\footnotesize\ttfamily int yyleng~stratleng}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae65cb72d09db0abdc4b8e8c4d533ab14}\label{strategyScanner_8c_ae65cb72d09db0abdc4b8e8c4d533ab14}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyless@{yyless}}
+\index{yyless@{yyless}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyless}{yyless}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define yyless(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \(\backslash\)}
+\DoxyCodeLine{        \{ \(\backslash\)}
+\DoxyCodeLine{        \textcolor{comment}{/* Undo effects of setting up yytext. */} \(\backslash\)}
+\DoxyCodeLine{        int yyless\_macro\_arg = (n); \(\backslash\)}
+\DoxyCodeLine{        YY\_LESS\_LINENO(yyless\_macro\_arg);\(\backslash\)}
+\DoxyCodeLine{        *\mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\_cp}} = (yy\_hold\_char); \(\backslash\)}
+\DoxyCodeLine{        YY\_RESTORE\_YY\_MORE\_OFFSET \(\backslash\)}
+\DoxyCodeLine{        (yy\_c\_buf\_p) = \mbox{\hyperlink{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}{yy\_cp}} = \mbox{\hyperlink{strategyScanner_8c_aa749693ef7d0c10b137e887638fdc5b2}{yy\_bp}} + yyless\_macro\_arg -\/ \mbox{\hyperlink{strategyScanner_8c_a68792d73820bc46a71d3d4e613f0b977}{YY\_MORE\_ADJ}}; \(\backslash\)}
+\DoxyCodeLine{        YY\_DO\_BEFORE\_ACTION; \textcolor{comment}{/* set up yytext again */} \(\backslash\)}
+\DoxyCodeLine{        \} \(\backslash\)}
+\DoxyCodeLine{    while ( 0 )}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_ae65cb72d09db0abdc4b8e8c4d533ab14}\label{strategyScanner_8c_ae65cb72d09db0abdc4b8e8c4d533ab14}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyless@{yyless}}
+\index{yyless@{yyless}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyless}{yyless}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define yyless(\begin{DoxyParamCaption}\item[{}]{n }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \(\backslash\)}
+\DoxyCodeLine{        \{ \(\backslash\)}
+\DoxyCodeLine{        \textcolor{comment}{/* Undo effects of setting up yytext. */} \(\backslash\)}
+\DoxyCodeLine{        int yyless\_macro\_arg = (n); \(\backslash\)}
+\DoxyCodeLine{        YY\_LESS\_LINENO(yyless\_macro\_arg);\(\backslash\)}
+\DoxyCodeLine{        yytext[\mbox{\hyperlink{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}{yyleng}}] = (yy\_hold\_char); \(\backslash\)}
+\DoxyCodeLine{        (yy\_c\_buf\_p) = \mbox{\hyperlink{strategyScanner_8c_a35b96d819f6a8f8638894c429e68b02a}{yytext}} + yyless\_macro\_arg; \(\backslash\)}
+\DoxyCodeLine{        (yy\_hold\_char) = *(yy\_c\_buf\_p); \(\backslash\)}
+\DoxyCodeLine{        *(yy\_c\_buf\_p) = \textcolor{charliteral}{'\(\backslash\)0'}; \(\backslash\)}
+\DoxyCodeLine{        yyleng = yyless\_macro\_arg; \(\backslash\)}
+\DoxyCodeLine{        \} \(\backslash\)}
+\DoxyCodeLine{    while ( 0 )}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{strategyScanner_8c_a5611300548b2030d86b6ab9168132b88}\label{strategyScanner_8c_a5611300548b2030d86b6ab9168132b88}} 
+\index{strategyScanner.c@{strategyScanner.c}!yylex@{yylex}}
+\index{yylex@{yylex}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yylex}{yylex}}
+{\footnotesize\ttfamily \#define yylex(\begin{DoxyParamCaption}\item[{}]{void }\end{DoxyParamCaption})~\mbox{\hyperlink{strategyScanner_8c_a08a128e0df020f8e53736ee7e9f9f0f1}{stratlex}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a0180d5b750112a6cfb27817966e99fff}\label{strategyScanner_8c_a0180d5b750112a6cfb27817966e99fff}} 
+\index{strategyScanner.c@{strategyScanner.c}!yylex\_destroy@{yylex\_destroy}}
+\index{yylex\_destroy@{yylex\_destroy}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yylex\_destroy}{yylex\_destroy}}
+{\footnotesize\ttfamily int yylex\+\_\+destroy~stratlex\+\_\+destroy}
+
+\mbox{\Hypertarget{strategyScanner_8c_a1abe53179d3512124a969f758a7e8008}\label{strategyScanner_8c_a1abe53179d3512124a969f758a7e8008}} 
+\index{strategyScanner.c@{strategyScanner.c}!yylex\_init@{yylex\_init}}
+\index{yylex\_init@{yylex\_init}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yylex\_init}{yylex\_init}}
+{\footnotesize\ttfamily \#define yylex\+\_\+init~stratlex\+\_\+init}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3e35658077c5654d17265289032c8911}\label{strategyScanner_8c_a3e35658077c5654d17265289032c8911}} 
+\index{strategyScanner.c@{strategyScanner.c}!yylex\_init\_extra@{yylex\_init\_extra}}
+\index{yylex\_init\_extra@{yylex\_init\_extra}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yylex\_init\_extra}{yylex\_init\_extra}}
+{\footnotesize\ttfamily \#define yylex\+\_\+init\+\_\+extra~stratlex\+\_\+init\+\_\+extra}
+
+\mbox{\Hypertarget{strategyScanner_8c_a5e36364965360da7b7cdfc2188e0af84}\label{strategyScanner_8c_a5e36364965360da7b7cdfc2188e0af84}} 
+\index{strategyScanner.c@{strategyScanner.c}!yylineno@{yylineno}}
+\index{yylineno@{yylineno}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yylineno}{yylineno}}
+{\footnotesize\ttfamily int yylineno~stratlineno}
+
+\mbox{\Hypertarget{strategyScanner_8c_a745d37b5e002b2e5f93ad42ea7b554be}\label{strategyScanner_8c_a745d37b5e002b2e5f93ad42ea7b554be}} 
+\index{strategyScanner.c@{strategyScanner.c}!yymore@{yymore}}
+\index{yymore@{yymore}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yymore}{yymore}}
+{\footnotesize\ttfamily \#define yymore(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~yymore\+\_\+used\+\_\+but\+\_\+not\+\_\+detected}
+
+\mbox{\Hypertarget{strategyScanner_8c_a452d0647f1848fea42589793f3e2d1f4}\label{strategyScanner_8c_a452d0647f1848fea42589793f3e2d1f4}} 
+\index{strategyScanner.c@{strategyScanner.c}!yynoreturn@{yynoreturn}}
+\index{yynoreturn@{yynoreturn}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yynoreturn}{yynoreturn}}
+{\footnotesize\ttfamily \#define yynoreturn}
+
+\mbox{\Hypertarget{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}\label{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyout@{yyout}}
+\index{yyout@{yyout}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyout}{yyout}}
+{\footnotesize\ttfamily FILE $\ast$ yyout~stratout}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa6416fe813d70fe9b2febdc776174577}\label{strategyScanner_8c_aa6416fe813d70fe9b2febdc776174577}} 
+\index{strategyScanner.c@{strategyScanner.c}!yypop\_buffer\_state@{yypop\_buffer\_state}}
+\index{yypop\_buffer\_state@{yypop\_buffer\_state}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yypop\_buffer\_state}{yypop\_buffer\_state}}
+{\footnotesize\ttfamily void yypop\+\_\+buffer\+\_\+state~stratpop\+\_\+buffer\+\_\+state}
+
+\mbox{\Hypertarget{strategyScanner_8c_a498ea96bb65e39b1eab5c51cf16ead13}\label{strategyScanner_8c_a498ea96bb65e39b1eab5c51cf16ead13}} 
+\index{strategyScanner.c@{strategyScanner.c}!yypush\_buffer\_state@{yypush\_buffer\_state}}
+\index{yypush\_buffer\_state@{yypush\_buffer\_state}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yypush\_buffer\_state}{yypush\_buffer\_state}}
+{\footnotesize\ttfamily \#define yypush\+\_\+buffer\+\_\+state~stratpush\+\_\+buffer\+\_\+state}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab1eba250555ca003eb39387bb1a41d39}\label{strategyScanner_8c_ab1eba250555ca003eb39387bb1a41d39}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyrealloc@{yyrealloc}}
+\index{yyrealloc@{yyrealloc}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyrealloc}{yyrealloc}}
+{\footnotesize\ttfamily \#define yyrealloc~stratrealloc}
+
+\mbox{\Hypertarget{strategyScanner_8c_a2259355ac49295f72feab070a34a9b11}\label{strategyScanner_8c_a2259355ac49295f72feab070a34a9b11}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyrestart@{yyrestart}}
+\index{yyrestart@{yyrestart}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyrestart}{yyrestart}}
+{\footnotesize\ttfamily \#define yyrestart~\mbox{\hyperlink{strategyParser_8c_a527eb7dcccdad03d206de58a40c85cd7}{stratrestart}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a254eae02eef471e53fba6c926f9ea9af}\label{strategyScanner_8c_a254eae02eef471e53fba6c926f9ea9af}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_debug@{yyset\_debug}}
+\index{yyset\_debug@{yyset\_debug}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_debug}{yyset\_debug}}
+{\footnotesize\ttfamily \#define yyset\+\_\+debug~stratset\+\_\+debug}
+
+\mbox{\Hypertarget{strategyScanner_8c_a04fd4c8badc07e7080dbd371b6bc4811}\label{strategyScanner_8c_a04fd4c8badc07e7080dbd371b6bc4811}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_extra@{yyset\_extra}}
+\index{yyset\_extra@{yyset\_extra}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_extra}{yyset\_extra}}
+{\footnotesize\ttfamily \#define yyset\+\_\+extra~stratset\+\_\+extra}
+
+\mbox{\Hypertarget{strategyScanner_8c_afca8968a4317529bdbdc6ed77cd1e479}\label{strategyScanner_8c_afca8968a4317529bdbdc6ed77cd1e479}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_in@{yyset\_in}}
+\index{yyset\_in@{yyset\_in}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_in}{yyset\_in}}
+{\footnotesize\ttfamily \#define yyset\+\_\+in~stratset\+\_\+in}
+
+\mbox{\Hypertarget{strategyScanner_8c_a10055b24aa335a47aec5deaac1a47603}\label{strategyScanner_8c_a10055b24aa335a47aec5deaac1a47603}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_lineno@{yyset\_lineno}}
+\index{yyset\_lineno@{yyset\_lineno}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_lineno}{yyset\_lineno}}
+{\footnotesize\ttfamily \#define yyset\+\_\+lineno~stratset\+\_\+lineno}
+
+\mbox{\Hypertarget{strategyScanner_8c_add96a0e9a95289d7fc2a45adfaf0f9ef}\label{strategyScanner_8c_add96a0e9a95289d7fc2a45adfaf0f9ef}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_out@{yyset\_out}}
+\index{yyset\_out@{yyset\_out}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_out}{yyset\_out}}
+{\footnotesize\ttfamily \#define yyset\+\_\+out~stratset\+\_\+out}
+
+\mbox{\Hypertarget{strategyScanner_8c_a32b5b960944f946b192d54f672569cd9}\label{strategyScanner_8c_a32b5b960944f946b192d54f672569cd9}} 
+\index{strategyScanner.c@{strategyScanner.c}!YYSTATE@{YYSTATE}}
+\index{YYSTATE@{YYSTATE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YYSTATE}{YYSTATE}}
+{\footnotesize\ttfamily \#define YYSTATE~\mbox{\hyperlink{strategyScanner_8c_a8e14785f9eab7a997d659b25af9584c5}{YY\+\_\+\+START}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a828cc83270f8f5bb1688e14dd4e28128}\label{strategyScanner_8c_a828cc83270f8f5bb1688e14dd4e28128}} 
+\index{strategyScanner.c@{strategyScanner.c}!YYTABLES\_NAME@{YYTABLES\_NAME}}
+\index{YYTABLES\_NAME@{YYTABLES\_NAME}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YYTABLES\_NAME}{YYTABLES\_NAME}}
+{\footnotesize\ttfamily \#define YYTABLES\+\_\+\+NAME~\char`\"{}yytables\char`\"{}}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac3286b18a2e91b4571b97df96a118e84}\label{strategyScanner_8c_ac3286b18a2e91b4571b97df96a118e84}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyterminate@{yyterminate}}
+\index{yyterminate@{yyterminate}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyterminate}{yyterminate}}
+{\footnotesize\ttfamily \#define yyterminate(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~return \mbox{\hyperlink{strategyScanner_8c_a8e0bcf8f8a5b613ea583347f8bc31cbf}{YY\+\_\+\+NULL}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a35b96d819f6a8f8638894c429e68b02a}\label{strategyScanner_8c_a35b96d819f6a8f8638894c429e68b02a}} 
+\index{strategyScanner.c@{strategyScanner.c}!yytext@{yytext}}
+\index{yytext@{yytext}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yytext}{yytext}}
+{\footnotesize\ttfamily char $\ast$ yytext~\mbox{\hyperlink{strategyParser_8c_a961e23da8684a48fc4a3b308812230b9}{strattext}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a790a191a93ef4d3b8c0bb43fd7480052}\label{strategyScanner_8c_a790a191a93ef4d3b8c0bb43fd7480052}} 
+\index{strategyScanner.c@{strategyScanner.c}!yytext\_ptr@{yytext\_ptr}}
+\index{yytext\_ptr@{yytext\_ptr}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yytext\_ptr}{yytext\_ptr}}
+{\footnotesize\ttfamily \#define yytext\+\_\+ptr~\mbox{\hyperlink{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}{yytext}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a5be541efdb129f7cefb2437f52fe7359}\label{strategyScanner_8c_a5be541efdb129f7cefb2437f52fe7359}} 
+\index{strategyScanner.c@{strategyScanner.c}!yywrap@{yywrap}}
+\index{yywrap@{yywrap}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yywrap}{yywrap}}
+{\footnotesize\ttfamily \#define yywrap~\mbox{\hyperlink{strategyScanner_8c_add160889044fa1ea679cd2060f645887}{stratwrap}}}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{strategyScanner_8c_a2e73b2c75126814585525fb2e9d51159}\label{strategyScanner_8c_a2e73b2c75126814585525fb2e9d51159}} 
+\index{strategyScanner.c@{strategyScanner.c}!flex\_int16\_t@{flex\_int16\_t}}
+\index{flex\_int16\_t@{flex\_int16\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{flex\_int16\_t}{flex\_int16\_t}}
+{\footnotesize\ttfamily typedef short int \mbox{\hyperlink{scanner_8c_a2e73b2c75126814585525fb2e9d51159}{flex\+\_\+int16\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a838ce943cf44ef7769480714fc6c3ba9}\label{strategyScanner_8c_a838ce943cf44ef7769480714fc6c3ba9}} 
+\index{strategyScanner.c@{strategyScanner.c}!flex\_int32\_t@{flex\_int32\_t}}
+\index{flex\_int32\_t@{flex\_int32\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{flex\_int32\_t}{flex\_int32\_t}}
+{\footnotesize\ttfamily typedef int \mbox{\hyperlink{scanner_8c_a838ce943cf44ef7769480714fc6c3ba9}{flex\+\_\+int32\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a7b0840dff4a2ef1702118aa12264b2a7}\label{strategyScanner_8c_a7b0840dff4a2ef1702118aa12264b2a7}} 
+\index{strategyScanner.c@{strategyScanner.c}!flex\_int8\_t@{flex\_int8\_t}}
+\index{flex\_int8\_t@{flex\_int8\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{flex\_int8\_t}{flex\_int8\_t}}
+{\footnotesize\ttfamily typedef signed char \mbox{\hyperlink{scanner_8c_a7b0840dff4a2ef1702118aa12264b2a7}{flex\+\_\+int8\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac50cdb9eefbef83a1cec89e3a7f6e1d2}\label{strategyScanner_8c_ac50cdb9eefbef83a1cec89e3a7f6e1d2}} 
+\index{strategyScanner.c@{strategyScanner.c}!flex\_uint16\_t@{flex\_uint16\_t}}
+\index{flex\_uint16\_t@{flex\_uint16\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{flex\_uint16\_t}{flex\_uint16\_t}}
+{\footnotesize\ttfamily typedef unsigned short int \mbox{\hyperlink{scanner_8c_ac50cdb9eefbef83a1cec89e3a7f6e1d2}{flex\+\_\+uint16\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a36869712de12820c73aae736762e8e88}\label{strategyScanner_8c_a36869712de12820c73aae736762e8e88}} 
+\index{strategyScanner.c@{strategyScanner.c}!flex\_uint32\_t@{flex\_uint32\_t}}
+\index{flex\_uint32\_t@{flex\_uint32\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{flex\_uint32\_t}{flex\_uint32\_t}}
+{\footnotesize\ttfamily typedef unsigned int \mbox{\hyperlink{scanner_8c_a36869712de12820c73aae736762e8e88}{flex\+\_\+uint32\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a0fac5ea484f64e75dbe6eba4aa61750c}\label{strategyScanner_8c_a0fac5ea484f64e75dbe6eba4aa61750c}} 
+\index{strategyScanner.c@{strategyScanner.c}!flex\_uint8\_t@{flex\_uint8\_t}}
+\index{flex\_uint8\_t@{flex\_uint8\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{flex\_uint8\_t}{flex\_uint8\_t}}
+{\footnotesize\ttfamily typedef unsigned char \mbox{\hyperlink{scanner_8c_a0fac5ea484f64e75dbe6eba4aa61750c}{flex\+\_\+uint8\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a4e5bd2d129903df83f3d13effaf8f3e4}\label{strategyScanner_8c_a4e5bd2d129903df83f3d13effaf8f3e4}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_BUFFER\_STATE@{YY\_BUFFER\_STATE}}
+\index{YY\_BUFFER\_STATE@{YY\_BUFFER\_STATE}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_BUFFER\_STATE}{YY\_BUFFER\_STATE}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structyy__buffer__state}{yy\+\_\+buffer\+\_\+state}}$\ast$ \mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_acc1e625a829554ffed5e4307d4a5f6b7}\label{strategyScanner_8c_acc1e625a829554ffed5e4307d4a5f6b7}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_CHAR@{YY\_CHAR}}
+\index{YY\_CHAR@{YY\_CHAR}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_CHAR}{YY\_CHAR}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{scanner_8c_a0fac5ea484f64e75dbe6eba4aa61750c}{flex\+\_\+uint8\+\_\+t}} \mbox{\hyperlink{scanner_8c_acc1e625a829554ffed5e4307d4a5f6b7}{YY\+\_\+\+CHAR}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad557845057f187eec4be07e2717d2afa}\label{strategyScanner_8c_ad557845057f187eec4be07e2717d2afa}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_size\_t@{yy\_size\_t}}
+\index{yy\_size\_t@{yy\_size\_t}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_size\_t}{yy\_size\_t}}
+{\footnotesize\ttfamily typedef size\+\_\+t \mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}}}
+
+\mbox{\Hypertarget{strategyScanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}\label{strategyScanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_state\_type@{yy\_state\_type}}
+\index{yy\_state\_type@{yy\_state\_type}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_state\_type}{yy\_state\_type}}
+{\footnotesize\ttfamily typedef int \mbox{\hyperlink{scanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}{yy\+\_\+state\+\_\+type}}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{strategyScanner_8c_ad4a65b873df5c05570846b5413b41dfd}\label{strategyScanner_8c_ad4a65b873df5c05570846b5413b41dfd}} 
+\index{strategyScanner.c@{strategyScanner.c}!if@{if}}
+\index{if@{if}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{if()}{if()}}
+{\footnotesize\ttfamily if (\begin{DoxyParamCaption}\item[{!}]{yy\+\_\+init }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a08a128e0df020f8e53736ee7e9f9f0f1}\label{strategyScanner_8c_a08a128e0df020f8e53736ee7e9f9f0f1}} 
+\index{strategyScanner.c@{strategyScanner.c}!stratlex@{stratlex}}
+\index{stratlex@{stratlex}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{stratlex()}{stratlex()}}
+{\footnotesize\ttfamily int stratlex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a5bc6f1a5f7812508f425b08283f13ae8}\label{strategyScanner_8c_a5bc6f1a5f7812508f425b08283f13ae8}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_create\_buffer@{yy\_create\_buffer}}
+\index{yy\_create\_buffer@{yy\_create\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_create\_buffer()}{yy\_create\_buffer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} yy\+\_\+create\+\_\+buffer (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{file,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_ae6ac796aa6c45d433a4b89bf45e6e9dc}\label{strategyScanner_8c_ae6ac796aa6c45d433a4b89bf45e6e9dc}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_delete\_buffer@{yy\_delete\_buffer}}
+\index{yy\_delete\_buffer@{yy\_delete\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_delete\_buffer()}{yy\_delete\_buffer()}}
+{\footnotesize\ttfamily void yy\+\_\+delete\+\_\+buffer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a2f59cc88e85e5455c62e4ef7ce095ea8}\label{strategyScanner_8c_a2f59cc88e85e5455c62e4ef7ce095ea8}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_flush\_buffer@{yy\_flush\_buffer}}
+\index{yy\_flush\_buffer@{yy\_flush\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_flush\_buffer()}{yy\_flush\_buffer()}}
+{\footnotesize\ttfamily void yy\+\_\+flush\+\_\+buffer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_af81595b30c0da73f9034ffb511db6388}\label{strategyScanner_8c_af81595b30c0da73f9034ffb511db6388}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_scan\_buffer@{yy\_scan\_buffer}}
+\index{yy\_scan\_buffer@{yy\_scan\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_scan\_buffer()}{yy\_scan\_buffer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} yy\+\_\+scan\+\_\+buffer (\begin{DoxyParamCaption}\item[{char $\ast$}]{base,  }\item[{\mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}}}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_acbf193b612e891a3fca6a810daa18c66}\label{strategyScanner_8c_acbf193b612e891a3fca6a810daa18c66}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_scan\_bytes@{yy\_scan\_bytes}}
+\index{yy\_scan\_bytes@{yy\_scan\_bytes}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_scan\_bytes()}{yy\_scan\_bytes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} yy\+\_\+scan\+\_\+bytes (\begin{DoxyParamCaption}\item[{const char $\ast$}]{bytes,  }\item[{int}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_aaba3a8c0a4caad352ee68b5742c4a9d1}\label{strategyScanner_8c_aaba3a8c0a4caad352ee68b5742c4a9d1}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_scan\_string@{yy\_scan\_string}}
+\index{yy\_scan\_string@{yy\_scan\_string}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_scan\_string()}{yy\_scan\_string()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}} yy\+\_\+scan\+\_\+string (\begin{DoxyParamCaption}\item[{const char $\ast$}]{yy\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a3098c48a74ef8fd852f7dd4b3331cbce}\label{strategyScanner_8c_a3098c48a74ef8fd852f7dd4b3331cbce}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_switch\_to\_buffer@{yy\_switch\_to\_buffer}}
+\index{yy\_switch\_to\_buffer@{yy\_switch\_to\_buffer}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_switch\_to\_buffer()}{yy\_switch\_to\_buffer()}}
+{\footnotesize\ttfamily void yy\+\_\+switch\+\_\+to\+\_\+buffer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}}}]{new\+\_\+buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a48e81b6f60f5f21fcaca3cc542e6c9f2}\label{strategyScanner_8c_a48e81b6f60f5f21fcaca3cc542e6c9f2}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyalloc@{yyalloc}}
+\index{yyalloc@{yyalloc}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyalloc()}{yyalloc()}}
+{\footnotesize\ttfamily void$\ast$ \mbox{\hyperlink{unionyyalloc}{yyalloc}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a70f82d43d4797bb2a50f7678ddbfbda5}\label{strategyScanner_8c_a70f82d43d4797bb2a50f7678ddbfbda5}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyfree@{yyfree}}
+\index{yyfree@{yyfree}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyfree()}{yyfree()}}
+{\footnotesize\ttfamily void yyfree (\begin{DoxyParamCaption}\item[{void $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a4bf8969e5234aef8b46cce9a67a62724}\label{strategyScanner_8c_a4bf8969e5234aef8b46cce9a67a62724}} 
+\index{strategyScanner.c@{strategyScanner.c}!yypush\_buffer\_state@{yypush\_buffer\_state}}
+\index{yypush\_buffer\_state@{yypush\_buffer\_state}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yypush\_buffer\_state()}{yypush\_buffer\_state()}}
+{\footnotesize\ttfamily void yypush\+\_\+buffer\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{parser_8c_a4e5bd2d129903df83f3d13effaf8f3e4}{YY\+\_\+\+BUFFER\+\_\+\+STATE}}}]{new\+\_\+buffer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a843d874fed23c395a8f12c2d9c666557}\label{strategyScanner_8c_a843d874fed23c395a8f12c2d9c666557}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyrealloc@{yyrealloc}}
+\index{yyrealloc@{yyrealloc}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyrealloc()}{yyrealloc()}}
+{\footnotesize\ttfamily void$\ast$ yyrealloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{,  }\item[{\mbox{\hyperlink{scanner_8c_ad557845057f187eec4be07e2717d2afa}{yy\+\_\+size\+\_\+t}}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_ab657ddef65d43cc3ab8dfc2cad0ac5b8}\label{strategyScanner_8c_ab657ddef65d43cc3ab8dfc2cad0ac5b8}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyrestart@{yyrestart}}
+\index{yyrestart@{yyrestart}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyrestart()}{yyrestart()}}
+{\footnotesize\ttfamily void yyrestart (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{input\+\_\+file }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_ac571eade4cca933e8ccdf6759c527fe7}\label{strategyScanner_8c_ac571eade4cca933e8ccdf6759c527fe7}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_debug@{yyset\_debug}}
+\index{yyset\_debug@{yyset\_debug}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_debug()}{yyset\_debug()}}
+{\footnotesize\ttfamily void yyset\+\_\+debug (\begin{DoxyParamCaption}\item[{int}]{debug\+\_\+flag }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a2df391b304dadab17608192b116af2a1}\label{strategyScanner_8c_a2df391b304dadab17608192b116af2a1}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_extra@{yyset\_extra}}
+\index{yyset\_extra@{yyset\_extra}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_extra()}{yyset\_extra()}}
+{\footnotesize\ttfamily void yyset\+\_\+extra (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{strategyScanner_8c_a26938d921de835f6183c02e54cf08828}{YY\+\_\+\+EXTRA\+\_\+\+TYPE}}}]{user\+\_\+defined }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_a14346b28ae39537ab27caacebfcb31a7}\label{strategyScanner_8c_a14346b28ae39537ab27caacebfcb31a7}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_in@{yyset\_in}}
+\index{yyset\_in@{yyset\_in}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_in()}{yyset\_in()}}
+{\footnotesize\ttfamily void yyset\+\_\+in (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{\+\_\+in\+\_\+str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_aca0fe76da7a277561738a9a14ab8cb0a}\label{strategyScanner_8c_aca0fe76da7a277561738a9a14ab8cb0a}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_lineno@{yyset\_lineno}}
+\index{yyset\_lineno@{yyset\_lineno}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_lineno()}{yyset\_lineno()}}
+{\footnotesize\ttfamily void yyset\+\_\+lineno (\begin{DoxyParamCaption}\item[{int}]{\+\_\+line\+\_\+number }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad8174301995e5a61ab330516ec081e35}\label{strategyScanner_8c_ad8174301995e5a61ab330516ec081e35}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyset\_out@{yyset\_out}}
+\index{yyset\_out@{yyset\_out}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyset\_out()}{yyset\_out()}}
+{\footnotesize\ttfamily void yyset\+\_\+out (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{\+\_\+out\+\_\+str }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{strategyScanner_8c_a483da4c691e92dcb79c40a3514759b6b}\label{strategyScanner_8c_a483da4c691e92dcb79c40a3514759b6b}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_act@{yy\_act}}
+\index{yy\_act@{yy\_act}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_act}{yy\_act}}
+{\footnotesize\ttfamily int yy\+\_\+act}
+
+\mbox{\Hypertarget{strategyScanner_8c_aa749693ef7d0c10b137e887638fdc5b2}\label{strategyScanner_8c_aa749693ef7d0c10b137e887638fdc5b2}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_bp@{yy\_bp}}
+\index{yy\_bp@{yy\_bp}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_bp}{yy\_bp}}
+{\footnotesize\ttfamily char $\ast$ yy\+\_\+bp}
+
+\mbox{\Hypertarget{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}\label{strategyScanner_8c_a61b01b6b236b05090b972f8fd95da539}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_cp@{yy\_cp}}
+\index{yy\_cp@{yy\_cp}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_cp}{yy\_cp}}
+{\footnotesize\ttfamily char$\ast$ yy\+\_\+cp}
+
+\mbox{\Hypertarget{strategyScanner_8c_abcefb20c54ce0f92452cfbb9cf657670}\label{strategyScanner_8c_abcefb20c54ce0f92452cfbb9cf657670}} 
+\index{strategyScanner.c@{strategyScanner.c}!YY\_DECL@{YY\_DECL}}
+\index{YY\_DECL@{YY\_DECL}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{YY\_DECL}{YY\_DECL}}
+{\footnotesize\ttfamily YY\+\_\+\+DECL}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \mbox{\hyperlink{scanner_8c_a9ba7c416f135b0f0c1f4addded4616b5}{yy\_state\_type}} yy\_current\_state}
+
+\end{DoxyCode}
+The main scanner function which does all the work. \mbox{\Hypertarget{strategyScanner_8c_a7411c3bab9eca1afee90113c2d22da37}\label{strategyScanner_8c_a7411c3bab9eca1afee90113c2d22da37}} 
+\index{strategyScanner.c@{strategyScanner.c}!yy\_flex\_debug@{yy\_flex\_debug}}
+\index{yy\_flex\_debug@{yy\_flex\_debug}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yy\_flex\_debug}{yy\_flex\_debug}}
+{\footnotesize\ttfamily int yy\+\_\+flex\+\_\+debug = 0}
+
+\mbox{\Hypertarget{strategyScanner_8c_a46af646807e0797e72b6e8945e7ea88b}\label{strategyScanner_8c_a46af646807e0797e72b6e8945e7ea88b}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyin@{yyin}}
+\index{yyin@{yyin}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyin}{yyin}}
+{\footnotesize\ttfamily FILE$\ast$ yyin = NULL}
+
+\mbox{\Hypertarget{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}\label{strategyScanner_8c_a1b5865350b5ca5c1d69f429c2a652953}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyleng@{yyleng}}
+\index{yyleng@{yyleng}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyleng}{yyleng}}
+{\footnotesize\ttfamily int yyleng}
+
+\mbox{\Hypertarget{strategyScanner_8c_a5e36364965360da7b7cdfc2188e0af84}\label{strategyScanner_8c_a5e36364965360da7b7cdfc2188e0af84}} 
+\index{strategyScanner.c@{strategyScanner.c}!yylineno@{yylineno}}
+\index{yylineno@{yylineno}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yylineno}{yylineno}}
+{\footnotesize\ttfamily int yylineno = 1}
+
+\mbox{\Hypertarget{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}\label{strategyScanner_8c_a296847b42b0baa62e2af36cb79f3c0eb}} 
+\index{strategyScanner.c@{strategyScanner.c}!yyout@{yyout}}
+\index{yyout@{yyout}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yyout}{yyout}}
+{\footnotesize\ttfamily FILE $\ast$ yyout = NULL}
+
+\mbox{\Hypertarget{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}\label{strategyScanner_8c_ad9264b77d56b6971f29739e2bda77f51}} 
+\index{strategyScanner.c@{strategyScanner.c}!yytext@{yytext}}
+\index{yytext@{yytext}!strategyScanner.c@{strategyScanner.c}}
+\doxysubsubsection{\texorpdfstring{yytext}{yytext}}
+{\footnotesize\ttfamily char$\ast$ yytext}
+

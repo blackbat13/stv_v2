@@ -1,0 +1,23 @@
+Agent Voter:
+LOCAL: [p]
+PERSISTENT: [p]
+INITIAL: [p:=0]
+init q0
+A: q0 -> q1 [p:=0]
+B: q0 -> q2 [p:=0]
+C: q1 -> 0.90 : q3
+         &REST : q4 [p:=1]
+D: q2 -> 0.80 : q5
+         0.10 : q0 [p:=1]
+         0.10 : q6 [p:=1]
+loop: q3 -> q3
+loop: q4 -> q4
+loop: q6 -> q6
+E: q5 -> 0.5 : q7
+         &REST : q9
+F: q5 -> 0.5 : q7
+         &REST : q9 [p:=1]
+loop: q7 -> q7
+loop: q9 -> q9
+
+FORMULA: <<Voter>><>&P[>=0.54](p==1)

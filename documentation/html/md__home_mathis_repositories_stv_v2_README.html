@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>stv_v2: STV2 - StraTegic Verifier 2</title>
+<title>stv_v2: STV2 - StraTegic Verifier version 2</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,7 +82,7 @@ $(document).ready(function(){initNavTree('md__home_mathis_repositories_stv_v2_RE
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">STV2 - StraTegic Verifier 2 </div>  </div>
+<div class="title">STV2 - StraTegic Verifier version 2 </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
@@ -114,6 +114,9 @@ Usage</h1>
 <div class="line"># --COUNTEREXAMPLE           output counterexample path if the formula verification returns an ERR</div>
 <div class="line"># --REDUCE                   reduce the amount of states and transitions using a DFS-POR algorithm and select the first correct transition</div>
 <div class="line"># --REDUCE_ALL               reduce the amount of states and transitions using a DFS-POR algorithm and select all avaliable transitions</div>
+<div class="line"># --FIXPOINT                 enables fixpoint approximation</div>
+<div class="line"># --NATURAL_STRATEGY         generate a natural strategy for the given model</div>
+<div class="line"># --STRATEGY_FROM_FILE       set a strategy to the one given in a file</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Tests</h1>
 <p>To run tests:</p>
@@ -154,8 +157,7 @@ Performance estimation</h1>
 <div class="line">&gt; /usr/bin/time -v ./stv</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md4"></a>
 Specification</h1>
-<p>The specification language was inspired by ISPL (Interpreted Systems Programming Language) from <a href="https://vas.doc.ic.ac.uk/software/mcmas/">MCMAS</a>. <br  />
- The detailed syntax for the input format can be derived from *./src/reader/{parser.y,scanner.l}*, which intrinsically make up an EBNF grammar. <br  />
+<p>The specification language was inspired by ISPL (Interpreted Systems Programming Language) from <a href="https://vas.doc.ic.ac.uk/software/mcmas/">MCMAS</a>. The detailed syntax for the input format can be derived from *./src/reader/{parser.y,<a class="el" href="scanner_8l.html">scanner.l</a>}*, which intrinsically make up an EBNF grammar. <br  />
  For the most parts, it is simple enough to get intuition just from looking at example's source code and the program's output.</p>
 <p>IMPORTANTS NOTES:</p><ol type="1">
 <li>the (local) action names must be unique;</li>
@@ -165,11 +167,10 @@ Specification</h1>
 Examples and templates</h1>
 <p>In *./examples* and *./tests/examples* there are several ready-to-use MAS specification files together with a proposed property (captured by ATL formula) for verification.</p>
 <p>Often, we would want to reason about different (data-)configurations of the same system. <br  />
- Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behaviour. <br  />
+ Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behavior. <br  />
  A template can be fed with a configuration data to generate a concrete instance of a system. <br  />
  Moreover, their use is independent from the tool: one can choose any templating engine (of the myriads available) or even write a custom one from the scratch.</p>
-<p>Here, we utilize the <a href="https://ejs.co/">EJS</a> templating engine. <br  />
- It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.</p>
+<p>Here, we utilize the <a href="https://ejs.co/">EJS</a> templating engine. It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.</p>
 <div class="fragment"><div class="line"># EJS feeds the data (as a list of key:val pairs) to the template file to generate the output:</div>
 <div class="line">&gt; npm exec -- ejs TEMPLATE_FILE.ejs -i &quot;{PARAM1:VAL1,PARAM2:VAL2,...}&quot; -o OUTPUT_FILE.txt</div>
 <div class="line"> </div>
@@ -189,7 +190,16 @@ Misc</h1>
 <p>Use Graphviz <a href="https://www.graphviz.org/">(link)</a> to view in other format (eps, pdf, jpeg, etc.): </p><div class="fragment"><div class="line"># Analogously for other formats</div>
 <div class="line">dot -Tpng lts_of_AGENT.dot &gt; lts_of_AGENT.png</div>
 </div><!-- fragment --><p>For the smaller graphs use <em>dot2png.sh</em> script, which converts all *.dot* files from a current folder to *.png*. <br  />
- For bigger ones use <code>svg</code> format (may be viewed in Inkscape) and <em>dot2svg.sh</em>. </p>
+ For bigger ones use <code>svg</code> format (may be viewed in Inkscape) and <em>dot2svg.sh</em>.</p>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Web interface</h1>
+<p>The web interface is available at <a href="http://stv.cs-htiew.com/">http://stv.cs-htiew.com/</a>.</p>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Credits</h1>
+<p>Lead developer: Mateusz Kamiński (@Mathisplay)</p>
+<p>Project supervisor: Damian Kurpiewski (@blackbat13)</p>
+<p>Initial codebase: Witold Pazderski</p>
+<p>Additional features: Yan Kim </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

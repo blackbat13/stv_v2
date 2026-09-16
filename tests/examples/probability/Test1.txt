@@ -1,0 +1,24 @@
+Agent Player1:
+LOCAL: [T]
+PERSISTENT: [T]
+INITIAL: [T:=0]
+init q0
+action1: q0 -> q1
+shared[2] action2[act2]: q1 -> q2
+shared[2] action3[act3]: q1 -> q3 [T:=1]
+action4: q2 -> 0.3 : q4
+               &REST : q5 [T:=1]
+loop1: q4 -> q4
+action5: q5 -> q6
+shared[2] restart[restart]: q6 -> q1
+
+Agent Player2:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init q0
+shared[2] action2[action2]: q0 -> q1
+shared[2] action3[action3]: q0 -> q1
+shared[2] restart[rest]: q1 -> q0
+
+FORMULA: <<Player1>><>&P[>=0.2](T==1)

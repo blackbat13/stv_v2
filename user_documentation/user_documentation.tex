@@ -153,6 +153,14 @@ Avaliable flags:
   \begin{lstlisting}[title={Example reduction with 2 specified agents.}]
     --REDUCE_ALL "Agent1 Agent2"
   \end{lstlisting}
+  \item Generate a natural strategy for the given model:
+  \begin{lstlisting}
+    --NATURAL_STRATEGY
+  \end{lstlisting}
+  \item Set a strategy to the one given in a file:
+  \begin{lstlisting}
+    --STRATEGY_FROM_FILE [file path]
+  \end{lstlisting}
 \end{itemize}
 
 \section{Creating a model}
@@ -194,12 +202,20 @@ First we enter the action name, then after a colon we specify the avaliable acti
 \end{lstlisting}
 
 \subsubsection{Shared actions}
-If the action will be shared with another agent he have to start the action by writing a keyword $shared$. Then in square brackets we have to write and integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual.
+If the action will be shared with another agent it has to start the action by writing a keyword $shared$. Then in square brackets we have to write an integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual.
 \begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent. The current agent will be the one performing the sync.}]
   shared[2] action1[action1]: q0 -> q1
 \end{lstlisting}
 \begin{lstlisting}[title={Creating an action that will synchronize with 2 other agents. The current agent will be the one waiting for sync.}]
   shared[3] action1[someAction]: q0 -> q1
+\end{lstlisting}
+
+\subsubsection{Probabilistic actions}
+If the action is supposed to yield different results in a probabilistic manner, we need to write them similarly to the normal actions but with the addition of the probability as a number with a decimal dot and a colon, which should be between the arrow and the state that we want to reach. Then in each new line we can only use the probability, colon and the state that we want to reach. The precise syntax is as in the following example:
+\begin{lstlisting}[title={Action A that leads from a state q0 to q1 with a probability of 0.8, to q2 with a probability of 0.15 and to q3 with a probability signified by a keyword $\&REST$ which signifies the leftover probability, which in this case would be equal to 0.05.}]
+  A: q0 -> 0.80 : q1
+           0.15 : q2
+           &REST : q3
 \end{lstlisting}
 
 \subsubsection{Conditions}
@@ -235,8 +251,21 @@ Formula description starts in a new line with a keyword $FORMULA$. After a colon
 Additionally you can specify the following knowledge operators:
 \begin{itemize}
   \item $\&K{\_}agent(formula)$ -- Knowledge (Agent name needed after the "{\_}". Lastly, you write the formula that you want to check in round brackets.)
-  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy (Agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Lastly, you write the formulas that you want to check in round brackets. Allows for listing more than one formula, separated with commas, each formula encapsulated within round brackets.)
+  \item $\&H{\_}agent[<=k/>=k]((formula1), (formula2), ...)$ -- Hartley entropy (Agent name needed after the "{\_}". Then a $<=$ or $>=$ followed by an integer are required, wrapped in square brackets. Lastly, you write the formulas that you want to check in round brackets. Allows for listing more than one formula, separated with commas, each formula encapsulated within round brackets.)
 \end{itemize}
+
+\subsubsection{Probabilistic formulas}
+Probabilistic verification is enabled automatically when the formula contains a probability constraint. Use the \verb|&P[op value]| fragment between the temporal operator and the formula body, where \verb|op| is one of:
+\begin{lstlisting}
+>  >=  <  <=
+\end{lstlisting}
+
+\begin{lstlisting}[title={Examples of probabilistic formulas.}]
+FORMULA: <<Agent1>><>&P[>=0.75](goal==1)
+FORMULA: <<Agent1>>[]&P[<0.20](error==1)
+\end{lstlisting}
+
+Probabilistic formulas are evaluated over probabilistic transitions (see Probabilistic actions). For a satisfied query, the tool prints both the boolean verdict and the computed value (\verb|p=...|).
 \begin{lstlisting}[title={A formula that checks if there is a strategy that globally Agent1 could take such actions that the value will be always equal to 1 or 7777.}]
   FORMULA: <<Agent1>>[](value==1 || value==7777)
 \end{lstlisting}
@@ -267,7 +296,8 @@ List of avaliable operators for conditions, variable changes and formula descrip
   \item \verb+/+ -- Division of two variables, returns an integer.
   \item \verb+%+ -- Modulo of two variables.
   \item $\&K{\_}agent(formula)$ -- Knowledge
-  \item $\&H{\_}agent[<=k/>=k]((fromula1), (fromula2), ...)$ -- Hartley entropy
+  \item $\&H{\_}agent[<=k/>=k]((formula1), (formula2), ...)$ -- Hartley entropy
+  \item $\&P[==/!=/>/>=/</<=value]$ -- Probability threshold for a formula
 \end{itemize}
 
 

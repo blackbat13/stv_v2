@@ -9,5 +9,6 @@ var structHistoryEntry =
     [ "next", "structHistoryEntry.html#afc4af16dec656acfa1cf86945b70b1a0", null ],
     [ "prev", "structHistoryEntry.html#aa07d62eba982b1671b3abcbf0ce9ba9c", null ],
     [ "prevStatus", "structHistoryEntry.html#a99e34ecadba76fd7a1d47e8e47891df5", null ],
+    [ "strategy", "structHistoryEntry.html#a8f700f8a1ce9fc19b01c583dd11948a8", null ],
     [ "type", "structHistoryEntry.html#a3fb938eeb3de923af065177da0d4248a", null ]
 ];

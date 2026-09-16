@@ -1,6 +1,7 @@
 var structGlobalTransition =
 [
     [ "GlobalTransition", "structGlobalTransition.html#ad4dd0dec2a4428d0b6d149ee73f6c3d0", null ],
+    [ "getProbability", "structGlobalTransition.html#a26cacb7d7f596e3dc40ff2ee73e17d01", null ],
     [ "joinLocalTransitionNames", "structGlobalTransition.html#ae35df90140166dec569474ee28c6d81f", null ],
     [ "from", "structGlobalTransition.html#afddc8aac033d574baa819a491e5c7e44", null ],
     [ "id", "structGlobalTransition.html#a0091cb21aedcbc1811591fe3cdfcc2a0", null ],

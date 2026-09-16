@@ -451,4 +451,102 @@ class ExprHart: public ExprNode {
       virtual int eval( Environment& env );
 };
 
+/// @brief Base node for probability calculations.
+class ProbNode {
+   public:
+      /// @brief Calculates the expression value.
+      /// @return Returns a float.
+      virtual float eval( GlobalModelGenerator *generator, GlobalState *globalState ) = 0;
+      virtual float eval() = 0;
+};
+
+/// @brief Node for a constant.
+class ProbConst: public ProbNode {
+   /// @brief Expression argument.
+   float val;
+   
+   public:
+      /// @brief Constant expression constructor.
+      /// @param _val ProbConst value.
+      ProbConst(float _val): val(_val) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns a float.
+      virtual float eval( GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual float eval();
+};
+
+/// @brief Node for addition.
+class ProbAdd: public ProbNode {
+   /// @brief Expression argument.
+   ProbNode *larg, *rarg;
+
+   public:
+      /// @brief Addition expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
+      ProbAdd(ProbNode *_larg, ProbNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns a float.
+      virtual float eval( GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual float eval();
+};
+
+/// @brief Node for subtraction.
+class ProbSub: public ProbNode {
+   /// @brief Expression argument.
+   ProbNode *larg, *rarg;
+
+   public:
+      /// @brief Subtraction expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
+      ProbSub(ProbNode *_larg, ProbNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns a float.
+      virtual float eval( GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual float eval();
+};
+
+/// @brief Node for multiplication.
+class ProbMul: public ProbNode {
+   /// @brief Expression argument.
+   ProbNode *larg, *rarg;
+
+   public:
+      /// @brief Multiplication expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
+      ProbMul(ProbNode *_larg, ProbNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns a float.
+      virtual float eval( GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual float eval();
+};
+
+/// @brief Node for division.
+class ProbDiv: public ProbNode {
+   /// @brief Expression argument.
+   ProbNode *larg, *rarg;
+
+   public:
+      /// @brief Division expression constructor.
+      /// @param _larg Left argument of the expression.
+      /// @param _rarg Right argument of the expression.
+      ProbDiv(ProbNode *_larg, ProbNode *_rarg): larg(_larg), rarg(_rarg) {};
+
+      /// @brief Calculates the expression value.
+      /// @param env Environment values.
+      /// @return Returns a float.
+      virtual float eval( GlobalModelGenerator *generator, GlobalState *globalState );
+      virtual float eval();
+};
+
 #endif

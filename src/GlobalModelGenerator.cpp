@@ -12,6 +12,13 @@
 #include <string.h>
 #include <iostream>
 #include <sstream>
+#include <functional>
+
+#include "craam/RMDP.hpp"
+#include "craam/algorithms/values.hpp"
+#include "craam/modeltools.hpp"
+
+using namespace craam;
 
 extern Cfg config;
 
@@ -59,6 +66,10 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
         a = agt;
         set<GlobalState*>* states = this->findOrCreateEpistemicClassForKnowledge(&this->globalModel->initState->localStatesProjection, this->globalModel->initState, a);
         this->globalModel->initState->epistemicClassesAllAgents[a] = states;
+    }
+
+    if(this->formula->probabilitySign != ProbabilitySign::NONE) {
+        config.probability = true;
     }
 
     return this->globalModel->initState;
@@ -142,8 +153,6 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
             vector<LocalState*> localStates = state->localStatesProjection;
             for (const auto localTransition : globalTransition->localTransitions) {
                 localStates[agentIndex[localTransition->from->agent]]=localTransition->to;
-                // localStates.erase(localTransition->from);
-                // localStates.insert(localTransition->to);
             }
             cardinalityBefore = this->globalModel->globalStates.size();
             // either returns a new state OR an existing one
@@ -160,7 +169,7 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
 }
 
 /// @brief Expands the states starting from the initial GlobalState and continues until there are no more states to expand.
-void GlobalModelGenerator::expandAllStates() {
+void GlobalModelGenerator::expandAllStates(bool additionalProbSplit) {
     if(this->globalModel->initState->isExpanded){
         #if VERBOSE
             printf("\nInitial state %s was already expanded\n", this->globalModel->initState->hash.c_str());
@@ -177,6 +186,34 @@ void GlobalModelGenerator::expandAllStates() {
         #endif
         this->expandState(globalState);
         for (auto transition : globalState->globalTransitions) {
+            // sort transitions into two buckets for probability model generation
+            if (additionalProbSplit) {
+                // // transition switches from a FALSE state to a TRUE state or is from a state that was somewhere correct along the line
+                // bool goodTransition = false;
+                // if (transition->from->goodState || (checkLocalStates(&transition->from->localStatesProjection, transition->from) == false && checkLocalStates(&transition->to->localStatesProjection, transition->to) == true)) {
+                //     goodTransition = true;
+                //     // create a new state here?
+                //     transition->to->goodState = true;
+                // }
+
+                bool isControlled = false;
+                for (const auto localTransition : transition->localTransitions) {
+                    if (formula->coalition.find(localTransition->agent) != formula->coalition.end()) {
+                        if (!localTransition->isShared || localTransition->name == localTransition->localName) {
+                            isControlled = true;
+                            break;
+                        }
+                    }
+                }
+                // Index by coalition identifier for coalition transitions, by global hash for opponents
+                if (isControlled) {
+                    string coalitionId = getCoalitionIdentifier(&globalState->localStatesProjection);
+                    string actionSig = getCoalitionActionSignature(transition);
+                    coalitionTransitions[coalitionId][actionSig].insert(transition);
+                } else {
+                    opponentsTransitions[globalState->hash][transition->joinLocalTransitionNames()].insert(transition);
+                }
+            }
             auto targetGlobalState = transition->to;
             if (!targetGlobalState->isExpanded) {
                 statesToExpand.insert(targetGlobalState);
@@ -252,13 +289,11 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
                     cout << "candidate " << localTransitionsInCandidate->from->name << " => " << localTransitionsInCandidate->to->name << endl;
                     auto coalitionAgents = this->getFormula()->coalition;
                     for(auto agent : coalitionAgents) { //11.2 (Checks if any agent from coalition didn't change the place)
-                        if(agent->name == localTransitionsInCandidate->agent->name) { // to change when there's more agents in a coalition
+                        if(agent == localTransitionsInCandidate->agent) {
                             string stateFrom = localTransitionsInCandidate->from->name;
                             string stateTo = localTransitionsInCandidate->to->name;
                             if(stateFrom != stateTo) {
                                 isOk = false;
-                                cout << "[!]state changed[!] ";
-                                cout << agent->name << ": " << stateFrom << " -> " << stateTo << endl;
                                 break;
                             }
                         }
@@ -338,7 +373,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
             globalModelCandidates.push(newGlobalState);
             auto candidateDepthPtr = candidateStateDepths.find(newGlobalState);
             if(candidateDepthPtr == candidateStateDepths.end()) {
-                candidateStateDepths.insert({newGlobalState, unordered_set<int>({globalModelCandidates.size() - 1})});
+                candidateStateDepths.insert({newGlobalState, unordered_set<int>({static_cast<int>(globalModelCandidates.size() - 1)})});
             } else {
                 candidateDepthPtr->second.insert(globalModelCandidates.size() - 1);
             }
@@ -379,16 +414,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
         localStates.push_back(agt->initState);
     }
     auto initState = this->generateStateFromLocalStates(&localStates, nullptr, nullptr);
-
-    // Agent* a;
-    // for (auto agt : globalModel->agents) {
-    //     a = agt;
-    //     set<GlobalState*>* states;
-    //     states->insert(initState);
-    //     initState->epistemicClassesAllAgents[a] = states;
-    // }
-    // cout << "----------" << endl;
-
+    initState->probability = 1.0;
     return initState;
 }
 
@@ -402,6 +428,7 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     auto agent = *this->formula->coalition.begin();
     auto epistemicClass = this->findOrCreateEpistemicClass(localStates, agent);
     auto identicalGlobalState = this->findGlobalStateInEpistemicClass(localStates, epistemicClass);
+    
     if (identicalGlobalState != nullptr) {
         // The state already exists: return GlobalState that was created earlier
         #if VERBOSE
@@ -615,4 +642,515 @@ void GlobalModelGenerator::markFormulaAsIncorrect() {
 /// @return True if formula is written correctly, false otherwise.
 bool GlobalModelGenerator::getFormulaCorectness() {
     return correctModel;
+}
+
+/// @brief Initiates the strategy with a given StrategyCollection.
+/// @param strat StrategyCollection to initialize the strategy.
+void GlobalModelGenerator::initStrategy(StrategyCollection* strat)
+{
+    this->strategyCollection = strat;
+}
+
+bool GlobalModelGenerator::checkLocalStates(vector<LocalState*>* localStates, GlobalState* globalState) {
+    map<string, int> currEnv;
+
+    for (const auto localState : *localStates) {
+        for(auto it = localState->environment.begin(); it!=localState->environment.end(); ++it){
+            currEnv[it->first] = it->second;
+        }
+    }
+    auto val = *formula->p;
+
+    if (val[0]->eval(currEnv, this, globalState)==1) {
+        return true;
+    }
+    return false;
+}
+
+/// @brief Prepares the strategy generating structures for the probabilistic verification.
+/// @param localModels LocalModels to generate the coalition transition buckets from.
+set<set<tuple<string, string>>> GlobalModelGenerator::createProbabilityStrategy(LocalModels* localModels)
+{
+    set<Agent*> coalition = formula->coalition;
+    set<Agent*> opponents;
+    for (Agent* agent : localModels->agents) {
+        if (coalition.find(agent) == coalition.end()) {
+            opponents.emplace(agent);
+        }
+    }
+    // Just initialize the state for incremental generation
+    strategyGenerationInit = false;
+    strategiesExhausted = false;
+    choiceIndices.clear();
+    actionCounts.clear();
+    
+    #if DEBUG_ON
+        cout << "[DEBUG] createProbabilityStrategy: Initialized for incremental generation" << endl;
+    #endif
+    return set<set<tuple<string, string>>>();  // Empty, will generate incrementally
+}
+
+/// @brief Retrieves the next strategy one at a time (iteratively).
+/// Systematically tries all combinations of action choices at each epistemic class.
+/// @return Pointer to next strategy, or nullptr if all exhausted.
+set<tuple<string, string>>* GlobalModelGenerator::getNextPath() {
+    // Initialize choice tracking on first call
+    if (!strategyGenerationInit) {
+        #if DEBUG_ON
+            cout << "[DEBUG] getNextPath: First call, initializing" << endl;
+        #endif
+        strategyGenerationInit = true;
+        choiceIndices.clear();
+        actionCounts.clear();
+        stateHashMapCache.clear();
+        for (auto *gs : this->globalModel->globalStates) {
+            stateHashMapCache[gs->hash] = gs;
+        }
+    }
+    
+    if (strategiesExhausted) {
+        #if DEBUG_ON
+            cout << "[DEBUG] getNextPath: All strategies exhausted" << endl;
+        #endif
+        return nullptr;
+    }
+
+    // Build one complete strategy using current choice indices
+    currentStrategy.clear();
+    unordered_set<string> visitingStates;
+    unordered_set<string> visitedAndDecided;  // States where we've already made a decision
+    
+    function<bool(const string&)> buildStrategy = [&](const string& stateHash) -> bool {
+        #if DEBUG_ON
+            cout << "Entered " << stateHash << endl;
+        #endif
+        
+        // If we've already visited and made a decision at this state, we're done
+        if (visitedAndDecided.count(stateHash)) {
+            return true;
+        }
+        
+        // Cycle detection
+        if (visitingStates.count(stateHash)) {
+            return true;  // Cycle is OK, complete this path
+        }
+        
+        visitingStates.insert(stateHash);
+        
+        // Get coalition ID for this state
+        string coalitionId;
+        
+        for (auto *gs : this->globalModel->globalStates) {
+            if (gs->hash == stateHash) {
+                coalitionId = getCoalitionIdentifier(&gs->localStatesProjection);
+                break;
+            }
+        }
+        
+        // Collect available coalition actions for this epistemic class
+        vector<string> coalitionActions;
+        auto coalIt = coalitionTransitions.find(coalitionId);
+        if (coalIt != coalitionTransitions.end()) {
+            for (const auto& actionPair : coalIt->second) {
+                coalitionActions.push_back(actionPair.first);
+            }
+        }
+        
+        // Track total actions at this coalition for mixed-radix counting
+        if (actionCounts.find(coalitionId) == actionCounts.end()) {
+            actionCounts[coalitionId] = coalitionActions.size();
+        }
+        
+        // Determine which action choice to use
+        size_t choiceIdx = 0;
+        if (choiceIndices.find(coalitionId) != choiceIndices.end()) {
+            choiceIdx = choiceIndices[coalitionId];
+        } else {
+            // First time encountering this coalition - record choice 0
+            choiceIndices[coalitionId] = 0;
+        }
+        
+        // Pick action based on choice index
+        if (!coalitionActions.empty()) {
+            if (choiceIdx < coalitionActions.size()) {
+                string actionName = coalitionActions[choiceIdx];
+                // Only insert if not already in strategy (avoid redundant decisions)
+                auto alreadyInStrategy = false;
+                for (const auto& decision : currentStrategy) {
+                    if (get<0>(decision) == coalitionId) {
+                        alreadyInStrategy = true;
+                        break;
+                    }
+                }
+                
+                if (!alreadyInStrategy) {
+                    currentStrategy.insert(make_tuple(coalitionId, actionName));
+                    #if DEBUG_ON
+                        cout << "[DEBUG] Choice for " << coalitionId << ": action " << actionName << " (choice " << choiceIdx << ")" << endl;
+                    #endif
+                }
+                
+                // Mark this state as visited and decided
+                visitedAndDecided.insert(stateHash);
+                
+                // Explore ALL branches of this action
+                auto& transitions = coalitionTransitions[coalitionId][actionName];
+                for (auto* transition : transitions) {
+                    if (!buildStrategy(transition->to->hash)) {
+                        visitingStates.erase(stateHash);
+                        return false;  // Failed to build
+                    }
+                }
+                
+                visitingStates.erase(stateHash);
+                return true;
+            } else {
+                // No valid choice at this epistemic class
+                #if DEBUG_ON
+                    cout << "[DEBUG] No valid choice for " << coalitionId << " at index " << choiceIdx << endl;
+                #endif
+                visitingStates.erase(stateHash);
+                return false;
+            }
+        }
+        
+        // No coalition actions - try opponent actions
+        auto oppIt = opponentsTransitions.find(stateHash);
+        if (oppIt != opponentsTransitions.end()) {
+            for (const auto& actionPair : oppIt->second) {
+                // Explore first branch as representative (opponent choices don't affect strategy)
+                if (!actionPair.second.empty()) {
+                    auto* firstTransition = *actionPair.second.begin();
+                    if (!buildStrategy(firstTransition->to->hash)) {
+                        visitingStates.erase(stateHash);
+                        return false;
+                    }
+                }
+            }
+        }
+        
+        visitingStates.erase(stateHash);
+        return true;
+    };
+
+    // Build strategy from initial state
+    bool succeeded = buildStrategy(this->globalModel->initState->hash);
+    
+    if (succeeded && !currentStrategy.empty()) {
+        #if DEBUG_ON
+            cout << "[DEBUG] getNextPath: Generated strategy with " << currentStrategy.size() << " decisions" << endl;
+
+            // Debug: print action counts
+            cout << "[DEBUG] Action counts: ";
+        
+            for (const auto& p : actionCounts) {
+                cout << p.first << "=" << p.second << " ";
+            }
+            cout << endl;
+            cout << "[DEBUG] Choice indices before increment: ";
+            for (const auto& p : choiceIndices) {
+                cout << p.first << ":" << p.second << " ";
+            }
+            cout << endl;
+        #endif
+        
+        // Increment choice indices for next strategy (like mixed-radix counting)
+        // Find rightmost epistemic class and increment its choice
+        bool incremented = false;
+        for (auto it = choiceIndices.rbegin(); it != choiceIndices.rend(); ++it) {
+            it->second++;
+            // Check if this is still valid
+            if (it->second < actionCounts[it->first]) {
+                incremented = true;
+                #if DEBUG_ON
+                    cout << "[DEBUG] Incremented choice for " << it->first << " to " << it->second << endl;
+                #endif
+                break;
+            } else {
+                // Reset this choice and carry over
+                it->second = 0;
+            }
+        }
+        
+        if (!incremented) {
+            // No more combinations - exhausted
+            #if DEBUG_ON
+                cout << "[DEBUG] All choice combinations exhausted" << endl;
+            #endif
+            strategiesExhausted = true;
+        }
+        
+        static set<tuple<string, string>> resultPath;
+        resultPath = currentStrategy;
+        return &resultPath;
+    }
+    
+    // First call didn't generate strategy
+    #if DEBUG_ON
+        cout << "[DEBUG] Failed to generate strategy" << endl;
+    #endif
+    strategiesExhausted = true;
+    return nullptr;
+}
+
+MDP GlobalModelGenerator::generateNextMDP(bool makeOpponentGoMax) {
+    MDP newMdp(0);
+    int actionId = 0;
+
+    // Get next strategy iteratively
+    auto strategyIt = getNextPath();
+    if (strategyIt == nullptr) {
+        #if DEBUG_ON
+            cout << "[DEBUG] generateNextMDP: All strategies exhausted" << endl;
+        #endif
+        return newMdp;
+    }
+
+    #if DEBUG_ON
+        cout << "Strategy:" << endl;
+        for (auto item : *strategyIt) {
+            cout << get<0>(item) << "; " << get<1>(item) << ";" << endl;
+        }
+    #endif
+
+    // map of coalition identifier to action name that appear in strategy (allowed coalition actions)
+    map<string, string> allowedCoalitionActions;
+    for (const auto &tuple : *strategyIt) {
+        // cout << "(" << get<0>(tuple) << " - " << get<1>(tuple) << ") ";
+        allowedCoalitionActions[get<0>(tuple)] = get<1>(tuple); // map coalition_id to action name
+    }
+    // cout << endl;
+
+    // Start with only the initial state in the id map and expand states on the fly
+    map<string, int> stateIdMap;
+    string initHash = this->globalModel->initState->hash;
+    stateIdMap[initHash] = 0;
+    int nextNewStateId = 1;
+
+    // BFS/queue of raw state hashes to process (may include 'T' suffixed terminal duplicates)
+    queue<string> q;
+    q.push(initHash);
+    unordered_set<string> processed; // avoid reprocessing same raw hash
+
+    while (!q.empty()) {
+        string rawStateHash = q.front();
+        q.pop();
+        // skip already processed states
+        if (processed.find(rawStateHash) != processed.end()) {
+            continue;
+        }
+        processed.insert(rawStateHash);
+
+        // check if state is in a chain where the answer was correct somewhere down the line and strip the additional marking if it is the case
+        bool stateWasT = false;
+        string stateHash = rawStateHash;
+        if (!stateHash.empty() && stateHash.back() == 'T') {
+            stateWasT = true;
+            stateHash.pop_back();
+        }
+        string baseHash = stateHash;
+
+        // compute coalition identifier for this baseHash to look up coalition transitions
+        string currentCoalitionId = "";
+        for (auto *gs : this->globalModel->globalStates) {
+            if (gs->hash == baseHash) {
+                currentCoalitionId = getCoalitionIdentifier(&gs->localStatesProjection);
+                break;
+            }
+        }
+
+        auto coalitionIt = coalitionTransitions.find(currentCoalitionId);
+        auto opponentsIt  = opponentsTransitions.find(baseHash);
+
+        // gather action names available in this state
+        set<string> actionNames;
+        if (coalitionIt != coalitionTransitions.end()) {
+            for (const auto &p : coalitionIt->second) actionNames.insert(p.first);
+        }
+        if (opponentsIt != opponentsTransitions.end()) {
+            for (const auto &p : opponentsIt->second) actionNames.insert(p.first);
+        }
+
+        // ensure fromStateId exists (we populate stateIdMap as we enqueue)
+        auto fromIt = stateIdMap.find(rawStateHash);
+        if (fromIt == stateIdMap.end()) {
+            // Shouldn't happen because we push only mapped states, but guard anyway
+            stateIdMap[rawStateHash] = nextNewStateId++;
+            fromIt = stateIdMap.find(rawStateHash);
+        }
+        int fromStateId = fromIt->second;
+
+        for (const auto &actionName : actionNames) {
+            // Coalition actions are naturally filtered by coalition identifier lookup
+            bool isCoalitionAction = (coalitionIt != coalitionTransitions.end() && coalitionIt->second.count(actionName));
+            if (isCoalitionAction) {
+                auto allowedIt = allowedCoalitionActions.find(currentCoalitionId);
+                if (allowedIt == allowedCoalitionActions.end() || allowedIt->second != actionName) {
+                    continue;
+                }
+            }
+
+            // collect all transitions (coalition + opponents) for this action at this state
+            vector<GlobalTransition*> transitionList;
+            bool hasCoalitionAction = false;
+            if (coalitionIt != coalitionTransitions.end()) {
+                auto coalitionActionIt = coalitionIt->second.find(actionName);
+                if (coalitionActionIt != coalitionIt->second.end()) {
+                    hasCoalitionAction = true;
+                    for (auto *t : coalitionActionIt->second) {
+                        // Only include transitions that actually start from this state
+                        // (coalitionTransitions is indexed only by coalitionId/action, not by source state)
+                        if (t && t->to && t->from->hash == baseHash) {
+                            transitionList.push_back(t);
+                        }
+                    }
+                }
+            }
+            // Only add opponent transitions if there are NO coalition transitions for this action
+            if (!hasCoalitionAction && opponentsIt != opponentsTransitions.end()) {
+                auto opponentActionIt = opponentsIt->second.find(actionName);
+                if (opponentActionIt != opponentsIt->second.end()) {
+                    for (auto *t : opponentActionIt->second) {
+                        if (t && t->to) {
+                            transitionList.push_back(t);
+                        }
+                    }
+                }
+            }
+            if (transitionList.empty()) continue;
+
+            // add all transitions under a single action id
+            bool transitionsAdded = false;
+            for (auto *transition : transitionList) {
+                auto toHash = transition->to->hash;
+                bool checkToStateResult = checkLocalStates(&transition->to->localStatesProjection, transition->to);
+                if (formula->isF == false) {
+                    checkToStateResult = !checkToStateResult;
+                }
+                // If both the source raw state and the target would be the same 'T'-suffixed hash, skip this transition.
+                // This avoids adding trivial T->T self-transitions.
+                if (stateWasT) {
+                    if (toHash + string("T") == rawStateHash && checkToStateResult == true) {
+                        continue;
+                    }
+                }
+
+                // ensure target state has an id and is scheduled for processing (if unseen)
+                if (stateIdMap.find(toHash) == stateIdMap.end() && checkToStateResult == false) {
+                    stateIdMap[toHash] = nextNewStateId++;
+                    q.push(toHash);
+                }
+                int toStateId;
+                if (stateIdMap.find(toHash) != stateIdMap.end()) {
+                    toStateId = stateIdMap[toHash];
+                } else {
+                    // State will be added as terminal, so create ID now
+                    stateIdMap[toHash] = nextNewStateId++;
+                    toStateId = stateIdMap[toHash];
+                }
+                double prob = transition->getProbability();
+
+                // skip self-loops with probability 0 or 1 that won't change the state to TRUE
+                if (baseHash == transition->to->hash && (prob == 0.0 || prob == 1.0) && checkToStateResult == false) {
+                    continue;
+                }
+
+                bool isTerminalByCheck = false;
+                // If the currently processed state had a trailing 'T', assume terminal (no need to call checkLocalStates)
+                if (stateWasT) {
+                    isTerminalByCheck = true;
+                } else {
+                    if (checkToStateResult == true) {
+                        isTerminalByCheck = true;
+                    }
+                }
+
+                double reward = 0.0;
+                if (isTerminalByCheck) {
+                    // duplicate target state with 'T' appended and map it if not present
+                    string toHashT = toHash + "T";
+                    if (stateIdMap.find(toHashT) == stateIdMap.end()) {
+                        stateIdMap[toHashT] = nextNewStateId++;
+                        q.push(toHashT);
+                    }
+                    toStateId = stateIdMap[toHashT];
+                    // if the current processed state had 'T', reward must be 0.0
+                    reward = (!stateWasT) ? ((makeOpponentGoMax || opponentsTransitions.size() == 0) ? 1.0 : -1.0) : 0.0;
+                }
+
+                // cout << "[DEBUG] MDP Transition: from=" << fromStateId << " action=" << actionId << " to=" << toStateId << " prob=" << prob << " reward=" << reward << endl;
+                add_transition(newMdp, fromStateId, actionId, toStateId, prob, reward);
+                transitionsAdded = true;
+            }
+            if (transitionsAdded) {
+                ++actionId;
+            }
+        }
+    }
+
+    return newMdp;
+}
+
+/// @brief Gives next action's name from a given state.
+/// @param state GlobalState from which an action name would be retrieved if a set strategy is present.
+/// @return String containing the action name ending on a semicolon.
+string GlobalModelGenerator::getActionNameFromStateInStrategy(GlobalState* state) {
+    string coalitionLocalStateName = getCoalitionIdentifier(&(state->localStatesProjection));
+    try {
+        auto match = this->strategyCollection->getStrategy()[coalitionLocalStateName];
+        return match.actionName + ";";
+    }
+    catch (const std::out_of_range& e) {
+        cout << "No action name found for coalition local state: " << coalitionLocalStateName << endl;
+        return "";
+    }
+    return "";
+}
+
+/// @brief Returns a concatenated epistemic class ID of all coalition members in given LocalStates.
+/// @param localStates Vector of LocalStates to extract coalition IDs from.
+/// @return LocalState IDs for coalition members separated with semicolons, ending on a semicolon.
+string GlobalModelGenerator::getCoalitionIdentifier(vector<LocalState*>* localStates) {
+    // Build coalition ID in canonical coalition agent order (by agentIndex)
+    vector<pair<size_t,int>> ordered;
+    ordered.reserve(formula->coalition.size());
+    for (auto *agt : formula->coalition) {
+        // find local state for this agent
+        for (const auto ls : *localStates) {
+            if (ls->agent == agt) {
+                auto idxIt = agentIndex.find(agt);
+                size_t idx = (idxIt != agentIndex.end()) ? idxIt->second : 0;
+                ordered.emplace_back(idx, ls->id);
+                break;
+            }
+        }
+    }
+    sort(ordered.begin(), ordered.end(), [](const auto& a, const auto& b){ return a.first < b.first; });
+    string hash;
+    for (const auto &p : ordered) {
+        hash.append(to_string(p.second));
+        hash.push_back(';');
+    }
+    return hash;
+}
+
+/// @brief Returns coalition-only action signature, ordered by agentIndex and using localName when available
+string GlobalModelGenerator::getCoalitionActionSignature(GlobalTransition* transition, char sep) {
+    vector<pair<size_t,string>> parts;
+    parts.reserve(transition->localTransitions.size());
+    for (const auto lt : transition->localTransitions) {
+        if (formula->coalition.find(lt->agent) != formula->coalition.end()) {
+            auto idxIt = agentIndex.find(lt->agent);
+            size_t idx = (idxIt != agentIndex.end()) ? idxIt->second : 0;
+            const string &nm = (lt->localName.size() > 0 ? lt->localName : lt->name);
+            parts.emplace_back(idx, nm);
+        }
+    }
+    sort(parts.begin(), parts.end(), [](const auto& a, const auto& b){ return a.first < b.first; });
+    string res;
+    for (const auto &p : parts) {
+        res.append(p.second);
+        res.push_back(sep);
+    }
+    return res;
 }

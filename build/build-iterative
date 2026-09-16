@@ -1,0 +1,1 @@
+clear && make clean && make iterative_tests && clear && ./iterative_tests

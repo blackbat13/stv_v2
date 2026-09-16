@@ -1,0 +1,7 @@
+<map id="strategyNodes.hpp" name="strategyNodes.hpp">
+<area shape="rect" id="node1" title="Strategy parser templates. Class for setting up a new objects from a parser." alt="" coords="236,5,381,32"/>
+<area shape="rect" id="node2" href="$StrategyParser_8cc.html" title="A strategy file parser. A parser for converting a text file into a strategy." alt="" coords="5,80,140,107"/>
+<area shape="rect" id="node3" href="$strategyNodes_8cc.html" title=" " alt="" coords="164,80,299,107"/>
+<area shape="rect" id="node4" href="$strategyParser_8c.html" title=" " alt="" coords="323,80,449,107"/>
+<area shape="rect" id="node5" href="$strategyScanner_8c.html" title=" " alt="" coords="474,80,613,107"/>
+</map>

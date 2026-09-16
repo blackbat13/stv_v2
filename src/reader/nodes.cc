@@ -8,6 +8,7 @@
 #include "nodes.hpp"
 #include <queue>
 #include <fstream>
+#include <cstring>
 
 
 /* --------------------------------------------------------------------- */
@@ -15,6 +16,7 @@
 
 /// @brief Constructor for an AgentTemplate.
 AgentTemplate::AgentTemplate() {
+   probabilityCache = 0.0;
    ident="";
    initState="";
    localVars = new set<string>;
@@ -103,6 +105,22 @@ AgentTemplate& AgentTemplate::addInitial(set<Assignment*> *assigns) {
 /// @param _transition Transition to be added.
 /// @return Returns itself.
 AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
+   if (strcmp(transitionCache.patternName.c_str(), "") == 0 || (strcmp(transitionCache.patternName.c_str(), _transition->patternName.c_str()) != 0 && strcmp(_transition->patternName.c_str(), "") != 0)) { 
+      probabilityCache = 1.0;
+      transitionCache = TransitionTemplate(*_transition);
+   } else if (strcmp(_transition->patternName.c_str(), "") == 0) {
+      _transition->shared = transitionCache.shared;
+      _transition->patternName = transitionCache.patternName;
+      _transition->matchName = transitionCache.matchName;
+      _transition->startState = transitionCache.startState;
+      _transition->condition = transitionCache.condition;
+   }
+   if (_transition->probability->eval() > 999.0) {
+      _transition->probability = new ProbConst(probabilityCache);
+   } else {
+      probabilityCache -= _transition->probability->eval();
+   }
+   
    transitions->insert(_transition);
 
    /* 
@@ -261,6 +279,7 @@ Agent * AgentTemplate::generateAgent(int id) {
          transition->agent = result;
          transition->from = state;
          transition->to = newState;
+         transition->probability = (*it)->probability->eval();
          
          // zapamiętaj w węźle
          state->localTransitions.insert(transition);

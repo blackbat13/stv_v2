@@ -10,8 +10,6 @@ shared[2] gv_2_Voter1[gv_2_Voter1]: q1 [Voter1_vote==2] -> q2
 shared[2] ng_Voter1[ng_Voter1]: q1 -> q2
 shared[2] pun_Voter1[pn_Voter1]: q2 -> q3 [Voter1_run:=0]
 shared[2] npun_Voter1[pn_Voter1]: q2 -> q3 [Voter1_run:=0]
-run1: q2 -> q3
-Voter1_idle: q3 -> q3
 
 Agent Voter2:
 LOCAL: [Voter2_vote, Voter2_run]
