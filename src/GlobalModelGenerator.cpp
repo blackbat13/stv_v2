@@ -525,55 +525,72 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     return globalState;
 }
 
-/// @brief Checks whether there is a way for every agent to pick one of its currently available local transition such that all picked transitions are shared actions and none of them reaches its required sharedCount - a simultaneous choice combination exists from which no global transition can actually execute (deadlock).
+/// @brief Checks whether there is a way for every agent to pick one of its currently available local actions
+/// (identified by localName) such that none of the global names reachable through those picks reaches its
+/// required sharedCount - a simultaneous choice combination exists from which no global transition can actually
+/// execute (deadlock).
 /// @param localStates Current local states (one per agent) to check for a deadlock combination.
 /// @return True if such a combination exists.
 bool GlobalModelGenerator::hasDeadlockCombination(vector<LocalState*>* localStates) {
-    vector<vector<LocalTransition*>> avaliableTransitions; // agentIndex -> localTransitions
+    // Per agent, every available local transition (shared and private) grouped by localName (not a unique key:
+    // unrelated shared actions can reuse the same localName with a different global name). Picking a localName
+    // means every global name grouped under it is a candidate outcome of that local action.
+    vector<map<string, set<LocalTransition*>>> namesPerLocalName;
     for (const auto localState : *localStates) {
-        if (!localState->localTransitions.empty()) {
-            avaliableTransitions.emplace_back(localState->localTransitions.begin(), localState->localTransitions.end());
+        if (localState->localTransitions.empty()) {
+            continue;
         }
+        map<string, set<LocalTransition*>> localNameToTransition;
+        for (auto* t : localState->localTransitions) {
+            localNameToTransition[t->localName].insert(t);
+        }
+        namesPerLocalName.push_back(localNameToTransition);
     }
-    if (avaliableTransitions.empty()) {
-        return false;
+    if (namesPerLocalName.empty()) {
+        return true;  // no transitions at all -> deadlock
     }
 
-    vector<size_t> selectedTransitions(avaliableTransitions.size(), 0);
+    vector<vector<string>> perAgentLocalNames(namesPerLocalName.size());
+    for (size_t i = 0; i < namesPerLocalName.size(); i++) {
+        for (const auto& kv : namesPerLocalName[i]) {
+            perAgentLocalNames[i].push_back(kv.first);
+        }
+    }
+
+    vector<size_t> selectedLocalNames(perAgentLocalNames.size(), 0);
     while (true) {
         map<string, int> nameCounts;
         map<string, int> nameSharedCount;
-        bool allShared = true;
-        for (size_t i = 0; i < avaliableTransitions.size(); i++) {
-            LocalTransition* t = avaliableTransitions[i][selectedTransitions[i]];
-            if (!t->isShared) {
-                allShared = false;
+        for (size_t i = 0; i < perAgentLocalNames.size(); i++) {
+            const string& localName = perAgentLocalNames[i][selectedLocalNames[i]];
+            set<string> namesReachedByThisAgent;
+            for (const auto* t : namesPerLocalName[i].at(localName)) {
+                namesReachedByThisAgent.insert(t->name);
+                nameSharedCount[t->name] = t->sharedCount;
+            }
+            for (const auto& name : namesReachedByThisAgent) {
+                nameCounts[name]++;
+            }
+        }
+        bool blocked = true;
+        for (const auto& kv : nameCounts) {
+            if (kv.second >= nameSharedCount[kv.first]) {
+                blocked = false;
                 break;
             }
-            nameCounts[t->name]++;
-            nameSharedCount[t->name] = t->sharedCount;
         }
-        if (allShared) {
-            bool blocked = true;
-            for (const auto& kv : nameCounts) {
-                if (kv.second >= nameSharedCount[kv.first]) {
-                    blocked = false;
-                    break;
-                }
-            }
-            if (blocked) {
-                return true;
-            }
+        if (blocked) {
+            return true;
         }
 
         // increment over the cartesian product of options
-        int pos = static_cast<int>(avaliableTransitions.size()) - 1;
+        int pos = static_cast<int>(perAgentLocalNames.size()) - 1;
         while (pos >= 0) {
-            selectedTransitions[pos]++;
-            if (selectedTransitions[pos] < avaliableTransitions[pos].size()) {
+            selectedLocalNames[pos]++;
+            if (selectedLocalNames[pos] < perAgentLocalNames[pos].size()) {
                 break;
             }
-            selectedTransitions[pos] = 0;
+            selectedLocalNames[pos] = 0;
             pos--;
         }
         if (pos < 0) {
@@ -582,6 +599,7 @@ bool GlobalModelGenerator::hasDeadlockCombination(vector<LocalState*>* localStat
     }
     return false;
 }
+
 
 /// @brief Adds all shared global transitions to a GlobalState.
 /// @param fromGlobalState Global state to add transitions to.
