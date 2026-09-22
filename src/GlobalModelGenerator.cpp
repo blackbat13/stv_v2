@@ -119,6 +119,7 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
         transition->agent = agent;
         transition->from = localState;
         transition->to = localState;
+        transition->probability = 1.0;
         epsilon.insert(transition);
 
         auto globalTransition = new GlobalTransition();
@@ -488,10 +489,112 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
         this->generateGlobalTransitions(globalState, set<LocalTransition*>(), transitionsByAgent);
     }
 
+    // 3) add an epsilon (self-loop) transition if there exists a combination of one action per agent, all of them shared, that jointly cannot execute because none of the chosen names reaches its required sharedCount (deadlock is possible).
+    if (config.add_epsilon_transitions && this->hasDeadlockCombination(localStates)) {
+        set<LocalTransition*> epsilon;
+        Agent* agent = *this->formula->coalition.begin();
+        LocalState* epsilonLocalState = nullptr;
+        for (auto localState : *localStates) {
+            if (localState->agent->name == agent->name) {
+                epsilonLocalState = localState;
+            }
+        }
+
+        LocalTransition* transition = new LocalTransition;
+        transition->id = -1;
+        transition->isShared = 0;
+        transition->name = "ɛ";
+        transition->localName = "ɛ";
+        transition->sharedCount = 0;
+        transition->agent = agent;
+        transition->from = epsilonLocalState;
+        transition->to = epsilonLocalState;
+        transition->probability = 1.0;
+        epsilon.insert(transition);
+
+        auto globalTransition = new GlobalTransition();
+        globalTransition->isInvalidDecision = false;
+        globalTransition->from = globalState;
+        globalTransition->to = globalState;
+        globalTransition->localTransitions = epsilon;
+        globalState->globalTransitions.insert(globalTransition);
+    }
+
     this->globalModel->globalStates.push_back(globalState);
 
     return globalState;
 }
+
+/// @brief Checks whether there is a way for every agent to pick one of its currently available local actions (identified by localName) such that none of the global names reachable through those picks reaches its required sharedCount - a simultaneous choice combination exists from which no global transition can actually execute (deadlock).
+/// @param localStates Current local states (one per agent) to check for a deadlock combination.
+/// @return True if such a combination exists.
+bool GlobalModelGenerator::hasDeadlockCombination(vector<LocalState*>* localStates) {
+    // Per agent, every available local transition (shared and private) grouped by localName (not a unique key: unrelated shared actions can reuse the same localName with a different global name). Picking a localName means every global name grouped under it is a candidate outcome of that local action.
+    vector<map<string, set<LocalTransition*>>> namesPerLocalName;
+    for (const auto localState : *localStates) {
+        if (localState->localTransitions.empty()) {
+            continue;
+        }
+        map<string, set<LocalTransition*>> localNameToTransition;
+        for (auto* t : localState->localTransitions) {
+            localNameToTransition[t->localName].insert(t);
+        }
+        namesPerLocalName.push_back(localNameToTransition);
+    }
+    if (namesPerLocalName.empty()) {
+        return true;  // no transitions at all -> deadlock
+    }
+
+    vector<vector<string>> perAgentLocalNames(namesPerLocalName.size());
+    for (size_t i = 0; i < namesPerLocalName.size(); i++) {
+        for (const auto& kv : namesPerLocalName[i]) {
+            perAgentLocalNames[i].push_back(kv.first);
+        }
+    }
+
+    vector<size_t> selectedLocalNames(perAgentLocalNames.size(), 0);
+    while (true) {
+        map<string, int> nameCounts;
+        map<string, int> nameSharedCount;
+        for (size_t i = 0; i < perAgentLocalNames.size(); i++) {
+            const string& localName = perAgentLocalNames[i][selectedLocalNames[i]];
+            set<string> namesReachedByThisAgent;
+            for (const auto* t : namesPerLocalName[i].at(localName)) {
+                namesReachedByThisAgent.insert(t->name);
+                nameSharedCount[t->name] = t->sharedCount;
+            }
+            for (const auto& name : namesReachedByThisAgent) {
+                nameCounts[name]++;
+            }
+        }
+        bool blocked = true;
+        for (const auto& kv : nameCounts) {
+            if (kv.second >= nameSharedCount[kv.first]) {
+                blocked = false;
+                break;
+            }
+        }
+        if (blocked) {
+            return true;
+        }
+
+        // increment over the cartesian product of options
+        int pos = static_cast<int>(perAgentLocalNames.size()) - 1;
+        while (pos >= 0) {
+            selectedLocalNames[pos]++;
+            if (selectedLocalNames[pos] < perAgentLocalNames[pos].size()) {
+                break;
+            }
+            selectedLocalNames[pos] = 0;
+            pos--;
+        }
+        if (pos < 0) {
+            break;
+        }
+    }
+    return false;
+}
+
 
 /// @brief Adds all shared global transitions to a GlobalState.
 /// @param fromGlobalState Global state to add transitions to.
@@ -506,26 +609,6 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
         auto currentLocalTransitions = localTransitions;
         currentLocalTransitions.insert(transition);
         if (hasOtherAgents) {
-            if (config.add_epsilon_transitions == 1) {
-                for (auto agentCheck : transitionsByOtherAgents) {
-                    auto state = **find(agentCheck.first->localStates.begin(), agentCheck.first->localStates.end(), agentCheck.second[0]->from);
-                    if (state.localTransitions.size() > 1) {
-                        for (auto possibility : state.localTransitions) {
-                            if (transition->name != possibility->name) {
-                                set<LocalTransition*> sumTransitions = currentLocalTransitions;
-                                sumTransitions.insert(possibility);
-                                auto globalTransition = new GlobalTransition();
-                                // globalTransition->id = this->globalModel->globalTransitions.size();
-                                globalTransition->isInvalidDecision = false;
-                                globalTransition->from = fromGlobalState;
-                                globalTransition->to = fromGlobalState;
-                                globalTransition->localTransitions = sumTransitions;
-                                fromGlobalState->globalTransitions.insert(globalTransition);
-                            }
-                        }
-                    }
-                }
-            }
             this->generateGlobalTransitions(fromGlobalState, currentLocalTransitions, transitionsByOtherAgents);
         }
         else {
