@@ -61,6 +61,7 @@ struct Cfg{
     bool recommend_reduction_variables = false; ///< recommend variables for reduction based on analysis
     bool cone_of_influence = false;   ///< enable cone of influence analysis
     int cone_radius = 0;              ///< radius for cone of influence analysis
+    bool merge_coalition = false; ///< merge coalition agents into a single agent for analysis
 };
 
 #endif 

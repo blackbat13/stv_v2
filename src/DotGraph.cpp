@@ -77,6 +77,7 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
             to_string(t->to->id), 
             t->name + (t->isShared ? "\", color=\"blue" : "")
         );
+        cout << "Added edge from " << t->from->name << " to " << t->to->name << " with label " << t->name << endl;
     }
 }
 

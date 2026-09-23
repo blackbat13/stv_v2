@@ -306,6 +306,8 @@ void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default con
                 } else {
                     printf("ERR: no radius was specified!\n");
                 }
+            } else if (arg == "-MERGE_COALITION" || arg == "--MERGE_COALITION") {
+                config.merge_coalition = true;
             }
         }
     }
