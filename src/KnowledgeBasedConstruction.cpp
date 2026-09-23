@@ -24,7 +24,7 @@ void ModelDotDump(GlobalModel *const gm, string prefix){
 void KBCprojection(GlobalModel *const gm, int agent_id){
 	int c = 0;
 	for(GlobalState* gs : gm->globalStates){
-		set<GlobalTransition*> globalTransitionsProjected;
+		//set<GlobalTransition*> globalTransitionsProjected;
 		
 		for(auto gt : gs->globalTransitions){//identify epsilon transitions
 			int relevance = 0;
@@ -37,18 +37,18 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 					lt->localName.assign(EPSILON);
 				}
 				
-				bool isDuplicate = false;//if current element is a duplicate, don't insert it
-				for(GlobalTransition* gtc : globalTransitionsProjected)
-					if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions){
-						isDuplicate = true;
-						break;
-					}
-				if(isDuplicate) continue;
+				//bool isDuplicate = false;//if current element is a duplicate, don't insert it
+				//for(GlobalTransition* gtc : globalTransitionsProjected)
+					//if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions){
+						//isDuplicate = true;
+						//break;
+					//}
+				//if(isDuplicate) continue;
 			}
-			globalTransitionsProjected.insert(gt);
+			//globalTransitionsProjected.insert(gt);
 		}
-		gs->globalTransitions.clear();
-		gs->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
+		//gs->globalTransitions.clear();
+		//gs->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
 	}
 	
 	DotGraph(gm, true).saveToFile("KBCDOT", "global-epsilon-"+to_string(rand())+"-");
@@ -268,8 +268,14 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 				t->id = lt_id;
 				t->name.assign(rd.first);
 				t->localName.assign(get<2>(tr));
-				t->isShared = false;
-				t->sharedCount = 0;
+				// Znajdź pierwszą lokalną tranzycję u Agenta a i przekopiuj zawartość isShared i sharedCount
+				for(int lti=0; lti<gm->agents[agent_id]->localTransitions.size(); lti++){
+					if(gm->agents[agent_id]->localTransitions[lti]->name == t->name){
+						t->isShared = gm->agents[agent_id]->localTransitions[lti]->isShared;
+						t->sharedCount = gm->agents[agent_id]->localTransitions[lti]->sharedCount;
+						break;
+					}
+				}
 				/*for(Condition* c : localTransitions[i]->conditions){
 					Condition* cc;
 					cc->var->name = c->var->name;
@@ -320,4 +326,68 @@ GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
 	GlobalModel *out = cloneGenerator->getCurrentGlobalModel();
 	
 	return out;
+}
+
+std::string Agent2Specification(Agent* a, bool locNums){
+	std::stringstream buffer, local, persistent, initial;
+	
+	buffer << "Agent " << a->name << ":" << endl;
+	
+	if(a->vars.size()>0){
+		int c=0;
+		bool localEmpty = true;
+		bool persistentEmpty = true;
+		bool initialEmpty = true;
+		
+		for(Var* v : a->vars){
+			if(v->persistent){
+				if(persistentEmpty) persistent << "PERSISTENT: [" << v->name;
+				else persistent << ", " << v->name;
+				persistentEmpty = false;
+				
+				if(initialEmpty) initial << "INITIAL: [" << v->name << ":=" << v->initialValue;
+				else initial << ", " << v->name << ":=" << v->initialValue;
+				initialEmpty = false;
+			}else{
+				if(localEmpty) local << "LOCAL: [" << v->name;
+				else local << ", " << v->name;
+				localEmpty = false;
+			}
+		}
+		if(!localEmpty)			local		<< "]" << endl;
+		if(!persistentEmpty)	persistent	<< "]" << endl;
+		if(!initialEmpty)		initial		<< "]" << endl;
+	}
+	
+	buffer << local.str() << persistent.str() << initial.str();
+	
+	buffer << "init " << a->initState->name;
+	if(locNums) buffer << "_" << a->initState->id << endl;
+	
+	if(a->localTransitions.size()>0){
+		for(LocalTransition* lt : a->localTransitions){
+			if(lt->isShared) buffer << "shared[" << lt->sharedCount << "] ";
+			
+			buffer << std::regex_replace(lt -> name, regex("\\[\\d+]_"), "") << ": " << lt->from->name; 
+			if(locNums) buffer << "_" << lt->from->id;
+			
+			buffer << " -> " << lt->to->name;
+			if(locNums) buffer << "_" << lt->to->id;
+			
+			bool conditionsEmpty = true;
+			for(Condition* c : lt->conditions){
+				if(conditionsEmpty) buffer << " [";
+				else buffer << ", ";
+				buffer << c->var->name;
+				if(c->conditionOperator == ConditionOperator::Equals) buffer << "==";
+				else buffer << "!=";
+				conditionsEmpty = false;
+			}
+			if(!conditionsEmpty) buffer << "]";
+			
+			buffer << endl;
+		}
+	}
+	
+	return buffer.str();
 }

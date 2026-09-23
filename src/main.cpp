@@ -298,10 +298,11 @@ int main(int argc, char* argv[]) {
             for(int j=0; j<gm->agents.size(); j++){
                 if(selectedAgents.count(j)>0){
                     GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
+                    DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-CLONE"+to_string(j)+"-");
                     KBCprojection(cloneModel, j);
                     Agent* a = KBCexpansion(cloneModel, j);
                     KBCdLM.agents.push_back(a);
-                    //DotGraph(a).saveToFile("", "kbc-");
+                    DotGraph(a).saveToFile(config.dotdir, "kbc-");
                     cout << "Created a KBC'd version of Agent #" << j << " " << a->name << endl;
                     //cout << "Stats for Agent #" << j << ": States: " << a->localStates.size() << " Transitions: " << a->localTransitions.size() << endl;
                     delete cloneModel;
@@ -310,6 +311,26 @@ int main(int argc, char* argv[]) {
                     cout << "Copied Agent #" << j << " verbatim\n";
                 }
             }cout << "Finished KBC iteration\n";
+            
+            ofstream ofs;
+            ifstream ifs;
+            string line;
+            ofs.open("./kbc_out.stv");
+            ifs.open(config.fname);
+            
+            for(Agent* a : KBCdLM.agents){
+                ofs << Agent2Specification(a, true) << endl;
+            }
+            
+            while(getline(ifs, line))
+                if(line.rfind("FORMULA", 0) == 0)
+                    ofs << line << endl;
+            
+            ofs << endl;
+            
+            ofs.close();
+            ifs.close();
+            
             GlobalModelGenerator* KBCdGenerator = new GlobalModelGenerator();
             //cout << ".\n";
             KBCdGenerator->initModel(&KBCdLM, formula);

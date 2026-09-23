@@ -27,8 +27,10 @@ LocalState* Agent::includesState(LocalState* state) {
 }
 
 Agent* Agent::clone(){
+	//Create a new blank Agent
 	Agent* a = new Agent(id, name);
 	
+	//Copy local states
 	for(LocalState* l : localStates){
 		LocalState* lc = new LocalState();
 		lc->id = l->id;
@@ -38,30 +40,51 @@ Agent* Agent::clone(){
 		a->localStates.push_back(lc);
 	}
 	a->initState = a->localStates[initState->id];
-	//asm("INT3");
-	//a->localTransitions.clear();
+
+	//Copy variables
+	for(Var* v : vars){
+		Var *o = new Var;
+		o->name.assign(""+v->name);
+		o->initialValue = v->initialValue;
+		o->persistent = v->persistent;
+		o->agent = a;
+		a->vars.insert(o);
+	}
+
+	//Copy local transitions
 	for(int i=0; i<localTransitions.size(); i++){
 		LocalTransition* t = new LocalTransition();
-		t->id = i;
+		t->id = localTransitions[i]->id;//i;
 		t->name.assign(localTransitions[i]->name);
 		t->localName.assign(localTransitions[i]->localName);
 		t->isShared = localTransitions[i]->isShared;
 		t->sharedCount = localTransitions[i]->sharedCount;
+
+		//Copy condition data
 		for(Condition* c : localTransitions[i]->conditions){
 			Condition* cc;
-			cc->var->name = c->var->name;
+			for(Var* v : a->vars){
+				if(v->name == c->var->name){
+					cc->var = v;
+				}
+			}
+			/*cc->var->name = c->var->name;
 			cc->var->initialValue = c->var->initialValue;
 			cc->var->persistent = c->var->persistent;
-			cc->var->agent = a;
+			cc->var->agent = a;*/
 			cc->conditionOperator = c->conditionOperator;
 			cc->comparedValue = c->comparedValue;
 			t->conditions.insert(cc);
 		}
+
+		//Link the transitions to the states in the agent
 		t->agent = a;
 		t->from = a->localStates[localTransitions[i]->from->id];
 		t->to = a->localStates[localTransitions[i]->to->id];
 		a->localTransitions.push_back(t);
 		a->localStates[t->from->id]->localTransitions.insert(t);
 	}
+
+	//Return the finished Agent
 	return a;
 }
