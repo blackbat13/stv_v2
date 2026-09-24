@@ -212,13 +212,6 @@ int main(int argc, char* argv[]) {
         }
         // save LocalModels
         for (const auto& agt : localModels->agents) {
-            cout << "Agent: " << agt->name << endl;
-            for (auto state : agt->localStates) {
-                cout << "  LocalState: " << state->name << endl;
-                for (auto transition : state->localTransitions) {
-                    cout << "    LocalTransition: " << transition->name << " to " << transition->to->name << endl;
-                }
-            }
             DotGraph(agt, true).saveToFile(config.dotdir, fbasename+"-");
         }
         // save GlobalModel

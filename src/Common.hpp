@@ -43,6 +43,7 @@ struct Cfg{
     std::string dotdir;           ///< pathprefix for .dot files export
     int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula); has lower priority than `fname`
     bool add_epsilon_transitions; ///< add epsilon transitions to the states in the model when it's blocked for some reason
+    bool add_local_epsilon_transitions; ///< add epsilon transitions to the local states in the model when merging coalition agents
     bool formula_from_parameter;      ///< set if formula is provided directly via command-line, not from file
     std::string formula;              ///< the formula string to verify (from parameter, if specified)
     bool counterexample;              ///< output a counterexample if verification fails

@@ -24,6 +24,7 @@ extern Cfg config;
 
 /// @brief Constructor for GlobalModelGenerator class.
 GlobalModelGenerator::GlobalModelGenerator() {
+    this->globalModel = nullptr;
     while(!this->stateDepths.empty()){
         this->stateDepths.pop();
     }
@@ -538,6 +539,14 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
 /// @param localStates Current local states (one per agent) to check for a deadlock combination.
 /// @return True if such a combination exists.
 bool GlobalModelGenerator::hasDeadlockCombination(vector<LocalState*>* localStates) {
+    for (const auto localState : *localStates) {
+        for (const auto localTransition : localState->localTransitions) {
+            if (!(localTransition->isShared)) {
+                return false;
+            }
+        }
+    }
+    
     // Per agent, every available local transition (shared and private) grouped by localName (not a unique key: unrelated shared actions can reuse the same localName with a different global name). Picking a localName means every global name grouped under it is a candidate outcome of that local action.
     vector<map<string, set<LocalTransition*>>> namesPerLocalName;
     for (const auto localState : *localStates) {

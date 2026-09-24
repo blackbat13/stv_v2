@@ -12,6 +12,7 @@
 
 #include <tuple>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -282,9 +283,31 @@ void ModelParser::mergeCoalition(set<string>* coalitionNames, LocalModels* local
          }
       }
 
-      // If the merged state has no outgoing transitions, check if we should add an epsilon self-loop to avoid deadlock.
+      // Propagate the reduced sharedCount to every other agent's transitions sharing that name, so the requirement stays consistent for whoever still needs to synchronize with them.
+      map<string, int>* sharedCountMapToChange = resolveSharedTransitions(mergedAgent, mergedState, tuple, mergedStatesByKey, tupleOfMergedState, pendingStates);
+      
+      if (!sharedCountMapToChange->empty()) {
+         for (auto& nameAndCount : *sharedCountMapToChange) {
+            for (auto* model : localModels->agents) {
+               if (coalitionNames->count(model->name) > 0) {
+                  continue;
+               }
+               for (auto* transition : model->localTransitions) {
+                  if (transition->name == nameAndCount.first) {
+                     transition->sharedCount = nameAndCount.second;
+                  }
+               }
+            }
+         }
+      }
+      delete sharedCountMapToChange;
+   }
+
+   // For every merged state, check if we should add an epsilon self-loop to avoid deadlock.
+   for (auto* mergedState : mergedAgent->localStates) {
+      vector<LocalState*>* tuple = &tupleOfMergedState[mergedState];
       GlobalModelGenerator* tempGenerator = new GlobalModelGenerator();
-      if (config.add_epsilon_transitions && tempGenerator->hasDeadlockCombination(&tuple)) {
+      if (config.add_local_epsilon_transitions && tempGenerator->hasDeadlockCombination(tuple)) {
          Agent* agent = mergedAgent;
          LocalState* epsilonLocalState = mergedState;
 
@@ -303,22 +326,6 @@ void ModelParser::mergeCoalition(set<string>* coalitionNames, LocalModels* local
          agent->localTransitions.push_back(transition);
       }
       delete tempGenerator;
-
-      // Propagate the reduced sharedCount to every other agent's transitions sharing that name, so the requirement stays consistent for whoever still needs to synchronize with them.
-      map<string, int>* sharedCountMapToChange = resolveSharedTransitions(mergedAgent, mergedState, tuple, mergedStatesByKey, tupleOfMergedState, pendingStates);
-      
-      if (!sharedCountMapToChange->empty()) {
-         for (auto& nameAndCount : *sharedCountMapToChange) {
-            for (auto* model : localModels->agents) {
-               for (auto* transition : model->localTransitions) {
-                  if (transition->name == nameAndCount.first) {
-                     transition->sharedCount = nameAndCount.second;
-                  }
-               }
-            }
-         }
-      }
-      delete sharedCountMapToChange;
    }
 
    // Replace the coalition agents with the merged agent and clear the now unnecessary original data.
@@ -386,16 +393,19 @@ map<string, int>* ModelParser::resolveSharedTransitions(Agent* mergedAgent, Loca
             }
          }
          representative->to = findOrCreateMergedState(mergedAgent, jointTargetTuple, mergedStatesByKey, tupleOfMergedState, pendingStates);
-         // Remove all other transitions from the set and delete them
+         // Remove all other transitions from the set and delete them (also dropping them from the owning mergedAgent->localTransitions vector, otherwise it would keep a dangling pointer).
          int removedCount = 0;
          for (auto* transition : transitionSet) {
             if (transition != representative) {
                representative->sharedCount -= 1;
                if(representative->sharedCount == 1) {
-                  representative->isShared = false;
+                  representative->isShared = true;
+                  representative->sharedCount = -1;
                }
                removedCount++;
                transitionsFromMergedState->erase(transition);
+               auto& owningVector = mergedAgent->localTransitions;
+               owningVector.erase(remove(owningVector.begin(), owningVector.end(), transition), owningVector.end());
                delete transition;
             }
          }

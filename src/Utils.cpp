@@ -308,6 +308,8 @@ void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default con
                 }
             } else if (arg == "-MERGE_COALITION" || arg == "--MERGE_COALITION") {
                 config.merge_coalition = true;
+            } else if (arg == "-ADD_LOCAL_EPSILON_TRANSITIONS" || arg == "--ADD_LOCAL_EPSILON_TRANSITIONS") {
+                config.add_local_epsilon_transitions = true;
             }
         }
     }
