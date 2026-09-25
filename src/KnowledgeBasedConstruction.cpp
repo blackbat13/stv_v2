@@ -263,7 +263,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	int lt_id=0;
 	for(auto tr : transitions){
 		for(auto rd : repertoireData[get<2>(tr)]){
-			if(true){//if(CheckCommon(rd.second, *get<1>(tr))){
+			//if(true){//
+			if(CheckCommon(rd.second, *get<1>(tr))){
 				LocalTransition* t = new LocalTransition();
 				t->id = lt_id;
 				t->name.assign(rd.first);
@@ -368,11 +369,13 @@ std::string Agent2Specification(Agent* a, bool locNums){
 		for(LocalTransition* lt : a->localTransitions){
 			if(lt->isShared) buffer << "shared[" << lt->sharedCount << "] ";
 			
-			buffer << std::regex_replace(lt -> name, regex("\\[\\d+]_"), "") << ": " << lt->from->name; 
+			//name
+			buffer << std::regex_replace(lt -> name, regex("\\[\\d+]_"), "");
+			//localname
+			if(lt->localName.size()>0)
+				buffer << "[" << std::regex_replace(lt -> localName, regex("\\[\\d+]_"), "") << "]";
+			buffer << ": " << lt->from->name;
 			if(locNums) buffer << "_" << lt->from->id;
-			
-			buffer << " -> " << lt->to->name;
-			if(locNums) buffer << "_" << lt->to->id;
 			
 			bool conditionsEmpty = true;
 			for(Condition* c : lt->conditions){
@@ -384,6 +387,9 @@ std::string Agent2Specification(Agent* a, bool locNums){
 				conditionsEmpty = false;
 			}
 			if(!conditionsEmpty) buffer << "]";
+			
+			buffer << " -> " << lt->to->name;
+			if(locNums) buffer << "_" << lt->to->id;
 			
 			buffer << endl;
 		}
