@@ -50,6 +50,7 @@ public:
     // Returns coalition-only action signature, ordered by agentIndex and using localName when available
     string getCoalitionActionSignature(GlobalTransition* transition, char sep=';');
     string getActionNameFromStateInStrategy(GlobalState* state);
+    bool hasDeadlockCombination(vector<LocalState*>* localStates);
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;
@@ -87,7 +88,6 @@ protected:
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
-    bool hasDeadlockCombination(vector<LocalState*>* localStates);
     set<tuple<string, string>> currentStrategy;  // Current strategy being built
     
     // For iterative strategy generation: track which action choice (0, 1, 2, ...) at each epistemic class

@@ -49,6 +49,7 @@ CLI configuration overwrite:
 # --SERIALIZE_MODEL          convert the local models back into an input file
 # --RECOMMEND_REDUCTION_VARIABLES recommend which variables could be reduced in --PARTIAL_REDUCTION
 # --CONE_OF_INFLUENCE        enable cone of influence to suggest variables to remove using --PARTIAL_REDUCTION
+# --MERGE_COALITION          merge coalition agents and their local models into a single agent
 ```
 
 ## Tests

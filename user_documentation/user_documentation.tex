@@ -161,6 +161,36 @@ Avaliable flags:
   \begin{lstlisting}
     --STRATEGY_FROM_FILE [file path]
   \end{lstlisting}
+  \item Select variables that should be reduced from the initial model using \texttt{--PARTIAL\_REDUCTION}:
+  \begin{lstlisting}
+    --PARTIAL_REDUCTION [variable name] ([variable name] ...)
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example reduction with 2 variables.}]
+    --PARTIAL_REDUCTION Var1 Var2
+  \end{lstlisting}
+  \item Select agents for whom the reduction from \texttt{--PARTIAL\_REDUCTION} should happen:
+  \begin{lstlisting}
+    --PARTIAL_REDUCTION_AGENT [agent name]
+  \end{lstlisting}
+  \begin{lstlisting}[title={Example reduction with 2 agents.}]
+    --PARTIAL_REDUCTION_AGENT Agent1
+  \end{lstlisting}
+  \item Convert the local models back into an input file:
+  \begin{lstlisting}
+    --SERIALIZE_MODEL
+  \end{lstlisting}
+  \item Recommend which variables could be reduced in \texttt{--PARTIAL\_REDUCTION}:
+  \begin{lstlisting}
+    --RECOMMEND_REDUCTION_VARIABLES
+  \end{lstlisting}
+  \item Enable cone of influence to suggest variables to remove using \texttt{--PARTIAL\_REDUCTION}:
+  \begin{lstlisting}
+    --CONE_OF_INFLUENCE
+  \end{lstlisting}
+  \item Merge coalition agents and their local models into a single agent:
+  \begin{lstlisting}
+    --MERGE_COALITION
+  \end{lstlisting}
 \end{itemize}
 
 \section{Creating a model}
