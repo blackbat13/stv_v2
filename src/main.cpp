@@ -2,6 +2,7 @@
 #include "Verification.hpp"
 #include "VerificationIterative.hpp"
 #include "ModelParser.hpp"
+#include "ModelSerializer.hpp"
 #include "StrategyParser.hpp"
 #include "Utils.hpp"
 #include <iostream>
@@ -51,9 +52,136 @@ int main(int argc, char* argv[]) {
     auto localModels = &(get<0>(desc));
     auto formula = &(get<1>(desc));
 
+    if (config.recommend_reduction_variables) {
+        set<string> formulaVars;
+        for (auto var : *formula->p) {
+            set<string> varNames = var->getVariableNames();
+            formulaVars.insert(varNames.begin(), varNames.end());
+        }
+
+        cout << "Recommended reduction variables:" << endl;
+        for (const auto& agent : localModels->agents) {
+            cout << "Agent: " << agent->name << endl;
+            map<string, int> varParticipatingCounts;
+            for (const auto& varCountPair : agent->recommendedReductionVariableCounts) {
+                const string& varName = varCountPair.first;
+                if (formulaVars.find(varName) == formulaVars.end()) {
+                    continue; // Skip variables not in the formula
+                }
+                for (const auto& guardVariableOccurrence : varCountPair.second) {
+                    if (varParticipatingCounts.find(guardVariableOccurrence.first) == varParticipatingCounts.end()) {
+                        varParticipatingCounts[guardVariableOccurrence.first] = 0;
+                    }
+                    varParticipatingCounts[guardVariableOccurrence.first] += guardVariableOccurrence.second;
+                }
+            }
+
+            // Add variables that are not in the formula but are part of the agent's variables
+            for (const auto& item : agent->vars) {
+                if (formulaVars.find(item->name) != formulaVars.end()) {
+                    continue; // Skip variables in the formula
+                } 
+                if (varParticipatingCounts.find(item->name) == varParticipatingCounts.end()) {
+                    varParticipatingCounts[item->name] = 0;
+                }
+            }
+            
+            vector<pair<string, int>> varParticipatingCountsVec(varParticipatingCounts.begin(), varParticipatingCounts.end());
+            sort(varParticipatingCountsVec.begin(), varParticipatingCountsVec.end(), [](const pair<string, int>& a, const pair<string, int>& b) {
+                return a.second < b.second; // Sort in ascending order of counts
+            });
+
+            // Output the variables and their counts
+            for (const auto& varCountPair : varParticipatingCountsVec) {
+                cout << "  Variable: " << varCountPair.first << " (" << varCountPair.second << ")" << endl;
+            }
+            cout << endl;
+        }
+    }
+
+    if (config.cone_of_influence) {
+        set<string> formulaVars;
+        for (auto var : *formula->p) {
+            set<string> varNames = var->getVariableNames();
+            formulaVars.insert(varNames.begin(), varNames.end());
+        }
+        
+        cout << "Checking cone of influence with radius: " << config.cone_radius << endl;
+        for (const auto& agent : localModels->agents) {
+            cout << "Agent: " << agent->name << endl;
+            map<string, int> varParticipatingCounts;
+            for (const auto& varCountPair : agent->recommendedReductionVariableCounts) {
+                const string& varName = varCountPair.first;
+                if (formulaVars.find(varName) == formulaVars.end()) {
+                    continue; // Skip variables not in the formula
+                }
+                for (const auto& guardVariableOccurrence : varCountPair.second) {
+                    if (varParticipatingCounts.find(guardVariableOccurrence.first) == varParticipatingCounts.end()) {
+                        varParticipatingCounts[guardVariableOccurrence.first] = 0;
+                    }
+                    varParticipatingCounts[guardVariableOccurrence.first] += guardVariableOccurrence.second;
+                }
+            }
+
+            // Add variables that are not in the formula but are part of the agent's variables
+            for (const auto& item : agent->vars) {
+                if (formulaVars.find(item->name) != formulaVars.end()) {
+                    continue; // Skip variables in the formula
+                } 
+                if (varParticipatingCounts.find(item->name) == varParticipatingCounts.end()) {
+                    varParticipatingCounts[item->name] = 0;
+                }
+            }
+
+            vector<pair<string, int>> varParticipatingCountsVec(varParticipatingCounts.begin(), varParticipatingCounts.end());
+            sort(varParticipatingCountsVec.begin(), varParticipatingCountsVec.end(), [](const pair<string, int>& a, const pair<string, int>& b) {
+                return a.second < b.second; // Sort in ascending order of counts
+            });
+
+            // Output the variables and their counts
+            for (const auto& varCountPair : varParticipatingCountsVec) {
+                cout << "  Variable: " << varCountPair.first << " (" << varCountPair.second << ")" << endl;
+            }
+            cout << endl;
+        }
+    }
+
+    if (config.partial_reduction) {
+        set<string> formulaVars;
+        for (auto var : *formula->p) {
+            set<string> varNames = var->getVariableNames();
+            formulaVars.insert(varNames.begin(), varNames.end());
+        }
+
+        for (auto item : config.partial_reduction_args) {
+            if (formulaVars.find(item) != formulaVars.end()) {
+                printf("ERR: variable '%s' is present in the formula!\n", item.c_str());
+                return 1;
+            }
+        }
+
+        cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
+        for (const auto& item : config.partial_reduction_args) {
+            cout << "Partial reduction variable: " << item << endl;
+        }
+
+        for (auto agent : localModels->agents) {
+            if (!config.partial_reduction_agent.empty() && agent->name != config.partial_reduction_agent) {
+                continue;
+            }
+            agent->partialReduceModel(config.partial_reduction_args);
+        }
+        if (config.serialize_model) {
+            ModelSerializer serializer;
+            serializer.print(localModels, formula);
+        }
+    }
+
+
     // Generate and output global model
     GlobalModelGenerator* generator = new GlobalModelGenerator();
     generator->initModel(localModels, formula);
+    
     if (config.verify_strategy) {
         generator->initStrategy(strat);
     }
@@ -109,6 +237,7 @@ int main(int argc, char* argv[]) {
         } else {
             generator->expandAllStates(true);
         }
+        cout << "Number of global states: " << generator->getCurrentGlobalModel()->globalStates.size() << endl;
     }
     
     if(config.stv_mode & (1 << 1)){     // mode.binary = /[0,1]*1[0,1]/ (verify)

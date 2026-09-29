@@ -43,17 +43,26 @@ struct Cfg{
     std::string dotdir;           ///< pathprefix for .dot files export
     int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula); has lower priority than `fname`
     bool add_epsilon_transitions; ///< add epsilon transitions to the states in the model when it's blocked for some reason
-    bool formula_from_parameter;
-    std::string formula;
-    bool counterexample;
-    bool reduce;
-    bool reduce_all;
-    std::string reduce_args;
-    bool fixpoint;
-    bool natural_strategy;
-    bool probability = false;
-    bool verify_strategy;
-    std::string strategy_file_path;
+    bool add_local_epsilon_transitions; ///< add epsilon transitions to the local states in the model when merging coalition agents
+    bool formula_from_parameter;      ///< set if formula is provided directly via command-line, not from file
+    std::string formula;              ///< the formula string to verify (from parameter, if specified)
+    bool counterexample;              ///< output a counterexample if verification fails
+    bool reduce;                      ///< enable state space reduction during model generation
+    bool reduce_all;                  ///< apply reduction to all states (stronger reduction)
+    std::string reduce_args;          ///< variable names for reduction (passed as argument)
+    bool fixpoint;                    ///< use fixpoint-based verification algorithm
+    bool natural_strategy;            ///< enable natural strategy mode (affects strategy reduction/printing)
+    bool probability = false;         ///< enable probabilistic model checking
+    bool verify_strategy;             ///< verify a strategy loaded from file
+    std::string strategy_file_path;   ///< path to strategy file for verification
+    bool partial_reduction = false;   ///< enable partial reduction (reduce only specified variables)
+    std::vector<std::string> partial_reduction_args; ///< variable names for partial reduction
+    std::string partial_reduction_agent; ///< agent name for partial reduction
+    bool serialize_model = false;     ///< serialize the model to a file (for debugging or analysis)
+    bool recommend_reduction_variables = false; ///< recommend variables for reduction based on analysis
+    bool cone_of_influence = false;   ///< enable cone of influence analysis
+    int cone_radius = 0;              ///< radius for cone of influence analysis
+    bool merge_coalition = false; ///< merge coalition agents into a single agent for analysis
 };
 
 #endif 

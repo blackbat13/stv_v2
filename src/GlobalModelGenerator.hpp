@@ -34,9 +34,10 @@ public:
     vector<GlobalState*> expandStateAndReturn(GlobalState* state, bool returnAnyway = false);
     void expandAllStates(bool additionalProbSplit = false);
     void expandAndReduceAllStates();
-    GlobalModel* getCurrentGlobalModel();
+    GlobalModel *getCurrentGlobalModel();
     Formula* getFormula();
     int getFormulaSize();
+    bool getFormulaCorrectness();
     set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);
     Agent* getAgentInstanceByName(string agentName);
     void markFormulaAsIncorrect();
@@ -49,6 +50,7 @@ public:
     // Returns coalition-only action signature, ordered by agentIndex and using localName when available
     string getCoalitionActionSignature(GlobalTransition* transition, char sep=';');
     string getActionNameFromStateInStrategy(GlobalState* state);
+    bool hasDeadlockCombination(vector<LocalState*>* localStates);
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;

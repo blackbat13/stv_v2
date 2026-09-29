@@ -121,6 +121,23 @@ AgentTemplate& AgentTemplate::addTransition(TransitionTemplate *_transition) {
       probabilityCache -= _transition->probability->eval();
    }
    
+   if (config.recommend_reduction_variables == true) {
+      set<string> assignmentVars = getAssignmentVars(_transition);
+      set<string> conditionVars = getConditionVars(_transition);
+
+      for (auto assVar : assignmentVars) {
+         if (recommendedReductionVariableCounts.count(assVar) == 0) {
+            recommendedReductionVariableCounts[assVar] = map<string, int>();
+         }
+         for (auto condVar : conditionVars) {
+            if (recommendedReductionVariableCounts[assVar].count(condVar) == 0) {
+               recommendedReductionVariableCounts[assVar][condVar] = 0;
+            }
+            recommendedReductionVariableCounts[assVar][condVar]++;
+         }
+      }
+   }
+
    transitions->insert(_transition);
 
    /* 
@@ -280,13 +297,148 @@ Agent * AgentTemplate::generateAgent(int id) {
          transition->from = state;
          transition->to = newState;
          transition->probability = (*it)->probability->eval();
+         if ((*it)->condition != nullptr) {
+            Condition *condition = new Condition;
+            condition->expression = (*it)->condition;
+            transition->conditions.insert(condition);
+         }
          
          // zapamiętaj w węźle
          state->localTransitions.insert(transition);
       }
    }
-   
+   // copy recommendedReductionVariableCounts to the generated Agent
+   result->recommendedReductionVariableCounts = recommendedReductionVariableCounts;
    
    return result;
 }
 
+set<string> AgentTemplate::getConditionVars(TransitionTemplate *_transition) {
+   set<string> vars;
+   if (_transition->condition != nullptr) {
+      vars = _transition->condition->getVariableNames();
+   }
+   return vars;
+}
+
+set<string> AgentTemplate::getAssignmentVars(TransitionTemplate *_transition) {
+   set<string> vars;
+   if (_transition->assignments != nullptr) {
+      for(set<Assignment*>::iterator it=_transition->assignments->begin(); it != _transition->assignments->end(); it++) {
+         vars.insert((*it)->ident);
+      }
+   }
+   return vars;
+}
+
+/// @brief Checks the cone of influence for the agent template
+/// @param radius The radius of the cone of influence
+void AgentTemplate::checkConeOfInfluence(int radius) {
+   recommendedReductionVariableCounts.clear();
+
+   // if the radius is less than or equal to 0, we don't need to check anything
+   if (radius <= 0) {
+      return;
+   }
+
+   // find the initial state template
+   map<string, LocalStateTemplate*>::iterator initIt = localStateTemplates.find(initState);
+   if (initIt == localStateTemplates.end() || initIt->second == NULL) {
+      return;
+   }
+
+   queue<LocalStateTemplate*> pendingStates;
+   set<string> visitedStates;
+   set<TransitionTemplate*> usedTransitions;
+
+   pendingStates.push(initIt->second);
+   visitedStates.insert(initState);
+
+   while (!pendingStates.empty()) {
+      LocalStateTemplate *stateTemplate = pendingStates.front();
+      pendingStates.pop();
+
+      // for each transition from the current state, check if it has been used before and process it if not
+      for (set<TransitionTemplate*>::iterator trIt = stateTemplate->transitions.begin(); trIt != stateTemplate->transitions.end(); trIt++) {
+         TransitionTemplate *transition = *trIt;
+         if (transition == NULL) {
+            continue;
+         }
+
+         // if the transition has not been used before, process it
+         if (usedTransitions.insert(transition).second) {
+            set<string> rootConditionVars = getConditionVars(transition);
+            if (!rootConditionVars.empty()) {
+               queue<pair<TransitionTemplate*, int>> coneQueue;
+               set<TransitionTemplate*> coneUsedTransitions;
+               set<TransitionTemplate*> coneQueuedTransitions;
+
+               coneQueue.push(make_pair(transition, 1));
+               coneQueuedTransitions.insert(transition);
+
+               // while the cone queue is not empty, process each transition in the cone of influence
+               while (!coneQueue.empty()) {
+                  TransitionTemplate *coneTransition = coneQueue.front().first;
+                  int coneDepth = coneQueue.front().second;
+                  coneQueue.pop();
+
+                  // skip transitions that were already used in this inner BFS
+                  if (!coneUsedTransitions.insert(coneTransition).second) {
+                     continue;
+                  }
+
+                  set<string> assignmentVars = getAssignmentVars(coneTransition);
+                  // if the assignment variables are not empty, update the recommended reduction variable counts
+                  if (!assignmentVars.empty()) {
+                     for (set<string>::iterator assIt = assignmentVars.begin(); assIt != assignmentVars.end(); assIt++) {
+                        if (recommendedReductionVariableCounts.count(*assIt) == 0) {
+                           recommendedReductionVariableCounts[*assIt] = map<string, int>();
+                        }
+
+                        for (set<string>::iterator condIt = rootConditionVars.begin(); condIt != rootConditionVars.end(); condIt++) {
+                           if (recommendedReductionVariableCounts[*assIt].count(*condIt) == 0) {
+                              recommendedReductionVariableCounts[*assIt][*condIt] = 0;
+                           }
+                           recommendedReductionVariableCounts[*assIt][*condIt]++;
+                        }
+                     }
+                  }
+
+                  if (coneDepth >= radius) {
+                     continue;
+                  }
+                  
+                  // don't process the next transitions if the end state of the current transition is not in the localStateTemplates
+                  map<string, LocalStateTemplate*>::iterator endStateIt = localStateTemplates.find(coneTransition->endState);
+                  if (endStateIt == localStateTemplates.end() || endStateIt->second == NULL) {
+                     continue;
+                  }
+
+                  // for each transition from the end state of the current transition, add it to the cone queue if it has not been visited before
+                  LocalStateTemplate *endStateTemplate = endStateIt->second;
+                  for (set<TransitionTemplate*>::iterator nextIt = endStateTemplate->transitions.begin(); nextIt != endStateTemplate->transitions.end(); nextIt++) {
+                     TransitionTemplate *nextTransition = *nextIt;
+                     if (nextTransition == NULL) {
+                        continue;
+                     }
+                     
+                     // if the next transition has not been used in this inner BFS and has not been queued before, add it to the cone queue
+                     if (coneUsedTransitions.count(nextTransition) == 0 && coneQueuedTransitions.insert(nextTransition).second) {
+                        coneQueue.push(make_pair(nextTransition, coneDepth + 1));
+                     }
+                  }
+               }
+            }
+         }
+
+         // if the end state of the transition has not been visited before, add it to the pending states queue
+         if (visitedStates.count(transition->endState) == 0) {
+            map<string, LocalStateTemplate*>::iterator nextStateIt = localStateTemplates.find(transition->endState);
+            if (nextStateIt != localStateTemplates.end() && nextStateIt->second != NULL) {
+               visitedStates.insert(transition->endState);
+               pendingStates.push(nextStateIt->second);
+            }
+         }
+      }
+   }
+}
