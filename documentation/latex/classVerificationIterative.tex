@@ -9,15 +9,24 @@ A class that verifies if the model fulfills the formula. Also can do some operat
 
 {\ttfamily \#include $<$Verification\+Iterative.\+hpp$>$}
 
+
+
+Collaboration diagram for Verification\+Iterative\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classVerificationIterative__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classVerificationIterative_af3dcd221e2fe7d234b00bf1c274e0451}{Verification\+Iterative}} (\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$\mbox{\hyperlink{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}{generator}})
 \begin{DoxyCompactList}\small\item\em Constructor for \mbox{\hyperlink{classVerification}{Verification}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}\label{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}} 
 \mbox{\hyperlink{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}{$\sim$\+Verification\+Iterative}} ()
 \begin{DoxyCompactList}\small\item\em Destructor for \mbox{\hyperlink{classVerification}{Verification}}. \end{DoxyCompactList}\item 
-map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerificationIterative_a9512371768e8ae1756aa333d9ac28307}{get\+Natural\+Strategy}} ()
+map$<$ bitset$<$ \mbox{\hyperlink{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}{STRATEGY\+\_\+\+BITS}} $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerificationIterative_a9512371768e8ae1756aa333d9ac28307}{get\+Natural\+Strategy}} ()
 \begin{DoxyCompactList}\small\item\em Get natural strategy map. \end{DoxyCompactList}\item 
 vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerificationIterative_a970ea74fcccb143de90c1e8b2427b078}{get\+Reduced\+Strategy}} ()
 \begin{DoxyCompactList}\small\item\em Takes natural strategy from memory and reduces it using \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy()}}. \end{DoxyCompactList}\item 
@@ -46,12 +55,11 @@ void \mbox{\hyperlink{classVerificationIterative_adc79d5885552f891d1365e97df5b64
 \begin{DoxyCompactList}\small\item\em Marks a loop as a transition to dissolve. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classVerificationIterative_a005b1d3e1d6c33109428ae4f623f0ea6}{add\+History\+Decision}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type DECISION and puts it on top of the stack of the decision history. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classVerificationIterative_a93924408d0ba6332b34905142f0be415}{add\+History\+State\+Status}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, Global\+State\+Verification\+Status prev\+Status, Global\+State\+Verification\+Status new\+Status)
+void \mbox{\hyperlink{classVerificationIterative_a93924408d0ba6332b34905142f0be415}{add\+History\+State\+Status}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} prev\+Status, \mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}} new\+Status)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type STATE\+\_\+\+STATUS and puts it to the top of the decision history. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerificationIterative_afcedf4ace129dc0b20b2a10bd400c2ef}{add\+History\+Context}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State, int depth, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision, bool global\+Transition\+Controlled)
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type CONTEXT and puts it to the top of the decision history. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a878970fa23f642298f662ee346befc3e}\label{classVerificationIterative_a878970fa23f642298f662ee346befc3e}} 
-void {\bfseries add\+History\+Probability} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
+void \mbox{\hyperlink{classVerificationIterative_a878970fa23f642298f662ee346befc3e}{add\+History\+Probability}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$decision)
 \item 
 void \mbox{\hyperlink{classVerificationIterative_ae4a9b1d6fd33a6e0549a9afae564b9a2}{add\+History\+Answer\+Probability}} (\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $\ast$global\+State, \mbox{\hyperlink{TypesDependency_8hpp_a3e5773d6efd4d487175ee990719009df}{Probability\+Calculation\+Type}} current\+Mode, \mbox{\hyperlink{structProbabilityTrueFalse}{Probability\+True\+False}} new\+Probability\+Values)
 \begin{DoxyCompactList}\small\item\em Adds a history entry for the change of probabilistic answer in a particular state. \end{DoxyCompactList}\item 
@@ -59,12 +67,11 @@ void \mbox{\hyperlink{classVerificationIterative_a958bdb0c0fd77467ef76289248d7ee
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK\+\_\+\+DECISION\+\_\+\+AS\+\_\+\+INVALID and puts it to the top of the decision history. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerificationIterative_a6a21926b6f8f0bb5c04ecded1a5e545c}{revert\+To\+Last\+Decision}} ()
 \begin{DoxyCompactList}\small\item\em Reverts the taken actions to the paint of the last decision. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}\label{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}} 
 void \mbox{\hyperlink{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}{undo\+Last\+History\+Entry}} ()
 \begin{DoxyCompactList}\small\item\em Removes the top entry of the history stack. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classVerificationIterative_adf6e8030b5b8f7be8d7903be8beaf768}{equivalent\+Global\+Transitions}} (\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition1, \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$global\+Transition2)
 \begin{DoxyCompactList}\small\item\em Checks if two global transitions are made up of the same local transitions. \end{DoxyCompactList}\item 
-bitset$<$ STRATEGY\+\_\+\+BITS $>$ \mbox{\hyperlink{classVerificationIterative_a2b8ab885429f393f39ed8484f42f355b}{global\+State\+To\+Value\+Bits}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
+bitset$<$ \mbox{\hyperlink{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}{STRATEGY\+\_\+\+BITS}} $>$ \mbox{\hyperlink{classVerificationIterative_a2b8ab885429f393f39ed8484f42f355b}{global\+State\+To\+Value\+Bits}} (\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
 \begin{DoxyCompactList}\small\item\em Changes global\+State variables to a bitset used in natural strategy synthesis. \end{DoxyCompactList}\item 
 vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$ $>$, string $>$ $>$ \mbox{\hyperlink{classVerificationIterative_a12ae6ba0727d8e03f2bab1046c1e98fc}{reduce\+Strategy}} (vector$<$ tuple$<$ vector$<$ tuple$<$ bool, string $>$$>$, string $>$$>$ strategy\+Entries, short locked\+Column=0, bool upper\+Half=false)
 \begin{DoxyCompactList}\small\item\em Natural strategy reduction algorithm. \end{DoxyCompactList}\item 
@@ -73,32 +80,23 @@ bool \mbox{\hyperlink{classVerificationIterative_a1816d9fd67679e5103c415f39285c7
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}\label{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}} 
 \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}{Graph\+Traversal\+Mode}} \mbox{\hyperlink{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}{mode}} = \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb}{Graph\+Traversal\+Mode\+::\+NORMAL\+\_\+\+TRAVERSAL}}
 \begin{DoxyCompactList}\small\item\em Current mode of model traversal. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}\label{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}} 
 \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ \mbox{\hyperlink{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}{revert\+To\+Global\+State}}
 \begin{DoxyCompactList}\small\item\em Global state to which revert will rollback to. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}\label{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}} 
 \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$ \mbox{\hyperlink{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}{generator}}
 \begin{DoxyCompactList}\small\item\em Holds current model and formula. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}\label{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}} 
 stack$<$ \mbox{\hyperlink{structDecisionEntry}{Decision\+Entry}} $>$ \mbox{\hyperlink{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}{history}}
 \begin{DoxyCompactList}\small\item\em Stack of decisions made. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}\label{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}} 
-map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}{natural\+Strategy}}
+map$<$ bitset$<$ \mbox{\hyperlink{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}{STRATEGY\+\_\+\+BITS}} $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ \mbox{\hyperlink{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}{natural\+Strategy}}
 \begin{DoxyCompactList}\small\item\em A table of actions paired vith global\+State internal variables state for natural strategy construction. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}\label{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}} 
 short \mbox{\hyperlink{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}{strategy\+Variable\+Limit}}
 \begin{DoxyCompactList}\small\item\em Max strategy variables found. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}\label{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}} 
 vector$<$ string $>$ \mbox{\hyperlink{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}{variable\+Names}}
 \begin{DoxyCompactList}\small\item\em Easily readable variable names for natural strategy generation. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}\label{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}} 
 int \mbox{\hyperlink{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}{reduction\+Complexity\+Before}}
 \begin{DoxyCompactList}\small\item\em Natural strategy complexity before reduction. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}\label{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}} 
-stack$<$ \mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $>$ {\bfseries states\+To\+Process}
+stack$<$ \mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}} $>$ \mbox{\hyperlink{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}{states\+To\+Process}}
 \end{DoxyCompactItemize}
 
 
@@ -121,6 +119,16 @@ Constructor for \mbox{\hyperlink{classVerification}{Verification}}.
 {\em generator} & Pointer to \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}\label{classVerificationIterative_aaf9099a5e5c8723525c25d3ebdfe51d1}} 
+\index{VerificationIterative@{VerificationIterative}!````~VerificationIterative@{$\sim$VerificationIterative}}
+\index{````~VerificationIterative@{$\sim$VerificationIterative}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{$\sim$VerificationIterative()}{~VerificationIterative()}}
+{\footnotesize\ttfamily Verification\+Iterative\+::$\sim$\+Verification\+Iterative (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor for \mbox{\hyperlink{classVerification}{Verification}}. 
+
 
 
 \doxysubsection{Member Function Documentation}
@@ -202,11 +210,17 @@ Creates a \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} of the type MARK
 {\em decision} & Pointer to a transition \mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} selected by the algorithm. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classVerificationIterative_a878970fa23f642298f662ee346befc3e}\label{classVerificationIterative_a878970fa23f642298f662ee346befc3e}} 
+\index{VerificationIterative@{VerificationIterative}!addHistoryProbability@{addHistoryProbability}}
+\index{addHistoryProbability@{addHistoryProbability}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{addHistoryProbability()}{addHistoryProbability()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+Probability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalTransition}{Global\+Transition}} $\ast$}]{decision }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
 \mbox{\Hypertarget{classVerificationIterative_a93924408d0ba6332b34905142f0be415}\label{classVerificationIterative_a93924408d0ba6332b34905142f0be415}} 
 \index{VerificationIterative@{VerificationIterative}!addHistoryStateStatus@{addHistoryStateStatus}}
 \index{addHistoryStateStatus@{addHistoryStateStatus}!VerificationIterative@{VerificationIterative}}
 \doxysubsubsection{\texorpdfstring{addHistoryStateStatus()}{addHistoryStateStatus()}}
-{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+State\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{Global\+State\+Verification\+Status}]{prev\+Status,  }\item[{Global\+State\+Verification\+Status}]{new\+Status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::add\+History\+State\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State,  }\item[{\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{prev\+Status,  }\item[{\mbox{\hyperlink{GlobalStateVerificationStatus_8hpp_a18958de5ed2efcae03a00cac4d4a5048}{Global\+State\+Verification\+Status}}}]{new\+Status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -333,7 +347,7 @@ Pointer to the \mbox{\hyperlink{structEpistemicClass}{Epistemic\+Class}} that a 
 \index{VerificationIterative@{VerificationIterative}!getNaturalStrategy@{getNaturalStrategy}}
 \index{getNaturalStrategy@{getNaturalStrategy}!VerificationIterative@{VerificationIterative}}
 \doxysubsubsection{\texorpdfstring{getNaturalStrategy()}{getNaturalStrategy()}}
-{\footnotesize\ttfamily map$<$ bitset$<$ STRATEGY\+\_\+\+BITS $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ Verification\+Iterative\+::get\+Natural\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily map$<$ bitset$<$ \mbox{\hyperlink{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}{STRATEGY\+\_\+\+BITS}} $>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}} $>$ Verification\+Iterative\+::get\+Natural\+Strategy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
@@ -372,7 +386,7 @@ Total sum of the natural strategy complexity before reduction.
 \index{VerificationIterative@{VerificationIterative}!globalStateToValueBits@{globalStateToValueBits}}
 \index{globalStateToValueBits@{globalStateToValueBits}!VerificationIterative@{VerificationIterative}}
 \doxysubsubsection{\texorpdfstring{globalStateToValueBits()}{globalStateToValueBits()}}
-{\footnotesize\ttfamily bitset$<$ STRATEGY\+\_\+\+BITS $>$ Verification\+Iterative\+::global\+State\+To\+Value\+Bits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily bitset$<$ \mbox{\hyperlink{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}{STRATEGY\+\_\+\+BITS}} $>$ Verification\+Iterative\+::global\+State\+To\+Value\+Bits (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
 
 
 
@@ -475,6 +489,16 @@ Fixes potentially blocking agent actions.
 \begin{DoxyReturn}{Returns}
 True if changed transitions into uncontrolled, false otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}\label{classVerificationIterative_aadbeb6a6fc31d45887af58cf40f2fac8}} 
+\index{VerificationIterative@{VerificationIterative}!undoLastHistoryEntry@{undoLastHistoryEntry}}
+\index{undoLastHistoryEntry@{undoLastHistoryEntry}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{undoLastHistoryEntry()}{undoLastHistoryEntry()}}
+{\footnotesize\ttfamily void Verification\+Iterative\+::undo\+Last\+History\+Entry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Removes the top entry of the history stack. 
+
 \mbox{\Hypertarget{classVerificationIterative_a193789572e730e954581ea99c727260c}\label{classVerificationIterative_a193789572e730e954581ea99c727260c}} 
 \index{VerificationIterative@{VerificationIterative}!verify@{verify}}
 \index{verify@{verify}!VerificationIterative@{VerificationIterative}}
@@ -506,6 +530,95 @@ Verifies a set of \mbox{\hyperlink{classLocalState}{Local\+State}} that a \mbox{
 \begin{DoxyReturn}{Returns}
 Returns true if there is a \mbox{\hyperlink{classLocalState}{Local\+State}} with a specific set of values, fulfilling the criteria, otherwise returns false. 
 \end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}\label{classVerificationIterative_a5764aceeecf79566a3ad3a9ec59fd5e2}} 
+\index{VerificationIterative@{VerificationIterative}!generator@{generator}}
+\index{generator@{generator}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{generator}{generator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}}$\ast$ Verification\+Iterative\+::generator\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Holds current model and formula. 
+
+\mbox{\Hypertarget{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}\label{classVerificationIterative_a9841344546c210c0cd2840cfb997fbac}} 
+\index{VerificationIterative@{VerificationIterative}!history@{history}}
+\index{history@{history}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{history}{history}}
+{\footnotesize\ttfamily stack$<$\mbox{\hyperlink{structDecisionEntry}{Decision\+Entry}}$>$ Verification\+Iterative\+::history\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stack of decisions made. 
+
+\mbox{\Hypertarget{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}\label{classVerificationIterative_ae0a5a6a14fbc94223839c327597d4e2c}} 
+\index{VerificationIterative@{VerificationIterative}!mode@{mode}}
+\index{mode@{mode}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6}{Graph\+Traversal\+Mode}} Verification\+Iterative\+::mode = \mbox{\hyperlink{VerificationIterative_8hpp_aadb3676cc2d7979be9d96ac7685622c6ab5fec390f000edf7f09306bb599ae6fb}{Graph\+Traversal\+Mode\+::\+NORMAL\+\_\+\+TRAVERSAL}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Current mode of model traversal. 
+
+\mbox{\Hypertarget{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}\label{classVerificationIterative_a6e46febb6365c1d82ac4b54e732b0853}} 
+\index{VerificationIterative@{VerificationIterative}!naturalStrategy@{naturalStrategy}}
+\index{naturalStrategy@{naturalStrategy}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{naturalStrategy}{naturalStrategy}}
+{\footnotesize\ttfamily map$<$bitset$<$\mbox{\hyperlink{Verification_8hpp_a1de2fc36289f8ee7e8341767723ddf49}{STRATEGY\+\_\+\+BITS}}$>$, string, \mbox{\hyperlink{structStrategyBitsComparator}{Strategy\+Bits\+Comparator}}$>$ Verification\+Iterative\+::natural\+Strategy\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+A table of actions paired vith global\+State internal variables state for natural strategy construction. 
+
+\mbox{\Hypertarget{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}\label{classVerificationIterative_a68bd908fce3bcb857c66235e3b0c1dcd}} 
+\index{VerificationIterative@{VerificationIterative}!reductionComplexityBefore@{reductionComplexityBefore}}
+\index{reductionComplexityBefore@{reductionComplexityBefore}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{reductionComplexityBefore}{reductionComplexityBefore}}
+{\footnotesize\ttfamily int Verification\+Iterative\+::reduction\+Complexity\+Before\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Natural strategy complexity before reduction. 
+
+\mbox{\Hypertarget{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}\label{classVerificationIterative_a870c2cd4b6ac51f4d9665d96857dd512}} 
+\index{VerificationIterative@{VerificationIterative}!revertToGlobalState@{revertToGlobalState}}
+\index{revertToGlobalState@{revertToGlobalState}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{revertToGlobalState}{revertToGlobalState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$ Verification\+Iterative\+::revert\+To\+Global\+State\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Global state to which revert will rollback to. 
+
+\mbox{\Hypertarget{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}\label{classVerificationIterative_a88cec90642cb979eb6ffdd5aacfebe70}} 
+\index{VerificationIterative@{VerificationIterative}!statesToProcess@{statesToProcess}}
+\index{statesToProcess@{statesToProcess}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{statesToProcess}{statesToProcess}}
+{\footnotesize\ttfamily stack$<$\mbox{\hyperlink{structStateVerificationInfo}{State\+Verification\+Info}}$>$ Verification\+Iterative\+::states\+To\+Process\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}\label{classVerificationIterative_a71cb2ebbe0c25cce01fc8e217ae954c5}} 
+\index{VerificationIterative@{VerificationIterative}!strategyVariableLimit@{strategyVariableLimit}}
+\index{strategyVariableLimit@{strategyVariableLimit}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{strategyVariableLimit}{strategyVariableLimit}}
+{\footnotesize\ttfamily short Verification\+Iterative\+::strategy\+Variable\+Limit\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Max strategy variables found. 
+
+\mbox{\Hypertarget{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}\label{classVerificationIterative_a62b943fb73979cc01771dc396e42181a}} 
+\index{VerificationIterative@{VerificationIterative}!variableNames@{variableNames}}
+\index{variableNames@{variableNames}!VerificationIterative@{VerificationIterative}}
+\doxysubsubsection{\texorpdfstring{variableNames}{variableNames}}
+{\footnotesize\ttfamily vector$<$string$>$ Verification\+Iterative\+::variable\+Names\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Easily readable variable names for natural strategy generation. 
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

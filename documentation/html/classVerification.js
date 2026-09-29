@@ -33,6 +33,7 @@ var classVerification =
     [ "verify", "classVerification.html#a2bcca3fd98e67e70b3861773221bbe0f", null ],
     [ "verifyGlobalState", "classVerification.html#a4c07b0f4ef0c6de86d1a84399adf344d", null ],
     [ "verifyLocalStates", "classVerification.html#ac08f7b02642396da661af921aa0857a1", null ],
+    [ "verifyMDP", "classVerification.html#a4431e7dd9bfae8aa69d97e06ca65e020", null ],
     [ "verifyStrategy", "classVerification.html#a0ab3ff1fac7ad2a7525cfc70630dc641", null ],
     [ "verifyTransitionSets", "classVerification.html#a995516fb8335e2a64c1ca9a988e41e96", null ],
     [ "generator", "classVerification.html#ab283068f07ee48981abcaa1787a98d08", null ],

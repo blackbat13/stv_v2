@@ -98,6 +98,12 @@ $(document).ready(function(){initNavTree('Utils_8cpp.html',''); initResizable();
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;cstdio&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for Utils.cpp:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="Utils_8cpp__incl.svg" width="2091" height="500"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -113,14 +119,11 @@ Functions</h2></td></tr>
 <tr class="memitem:ae45accf23ba6404b9b292d148e3eda27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#ae45accf23ba6404b9b292d148e3eda27">outputGlobalModel</a> (<a class="el" href="structGlobalModel.html">GlobalModel</a> *globalModel)</td></tr>
 <tr class="memdesc:ae45accf23ba6404b9b292d148e3eda27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the whole <a class="el" href="structGlobalModel.html" title="Represents a global model, containing agents and a formula.">GlobalModel</a> into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents.  <a href="Utils_8cpp.html#ae45accf23ba6404b9b292d148e3eda27">More...</a><br /></td></tr>
 <tr class="separator:ae45accf23ba6404b9b292d148e3eda27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memItemLeft" align="right" valign="top"><a id="a5cfa822422f5ca06a58b1d0443ac8b8b"></a>
-unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getMemCap</b> ()</td></tr>
+<tr class="memitem:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a5cfa822422f5ca06a58b1d0443ac8b8b">getMemCap</a> ()</td></tr>
 <tr class="separator:a5cfa822422f5ca06a58b1d0443ac8b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a024972bddde6f8ca273e590f32fa8a2a"><td class="memItemLeft" align="right" valign="top"><a id="a024972bddde6f8ca273e590f32fa8a2a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadConfigFromFile</b> (string filename)</td></tr>
+<tr class="memitem:a024972bddde6f8ca273e590f32fa8a2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a024972bddde6f8ca273e590f32fa8a2a">loadConfigFromFile</a> (string filename)</td></tr>
 <tr class="separator:a024972bddde6f8ca273e590f32fa8a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09a7988a2599103af311e927c494b8e1"><td class="memItemLeft" align="right" valign="top"><a id="a09a7988a2599103af311e927c494b8e1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadConfigFromArgs</b> (int argc, char **argv)</td></tr>
+<tr class="memitem:a09a7988a2599103af311e927c494b8e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a09a7988a2599103af311e927c494b8e1">loadConfigFromArgs</a> (int argc, char **argv)</td></tr>
 <tr class="separator:a09a7988a2599103af311e927c494b8e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31d4dbc4222c0740fc9b6911e129ea05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a31d4dbc4222c0740fc9b6911e129ea05">tarjanVisit</a> (<a class="el" href="classLocalState.html">LocalState</a> *v, map&lt; int, int &gt; *dindex, map&lt; int, int &gt; *lowlink, stack&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; *stack, map&lt; int, bool &gt; *onstack, int *depth, vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt;&gt; *comp)</td></tr>
 <tr class="memdesc:a31d4dbc4222c0740fc9b6911e129ea05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function for SCC-computatation.  <a href="Utils_8cpp.html#a31d4dbc4222c0740fc9b6911e129ea05">More...</a><br /></td></tr>
@@ -128,14 +131,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>loadConfigFromArgs</b
 <tr class="memitem:a4073ec29a638e918c58e44dfe345e842"><td class="memItemLeft" align="right" valign="top">vector&lt; set&lt; <a class="el" href="classLocalState.html">LocalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a4073ec29a638e918c58e44dfe345e842">getLocalStatesSCC</a> (<a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
 <tr class="memdesc:a4073ec29a638e918c58e44dfe345e842"><td class="mdescLeft">&#160;</td><td class="mdescRight">a quick implementation of a Tarjan SCC algorithm (based on DFS)  <a href="Utils_8cpp.html#a4073ec29a638e918c58e44dfe345e842">More...</a><br /></td></tr>
 <tr class="separator:a4073ec29a638e918c58e44dfe345e842"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf62caf9d6ec26c1047df6d6380d2111"><td class="memItemLeft" align="right" valign="top"><a id="adf62caf9d6ec26c1047df6d6380d2111"></a>
-map&lt; <a class="el" href="classLocalState.html">LocalState</a> *, vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getContextModel</b> (<a class="el" href="structFormula.html">Formula</a> *formula, <a class="el" href="structLocalModels.html">LocalModels</a> *localModels, <a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
+<tr class="memitem:adf62caf9d6ec26c1047df6d6380d2111"><td class="memItemLeft" align="right" valign="top">map&lt; <a class="el" href="classLocalState.html">LocalState</a> *, vector&lt; <a class="el" href="structGlobalState.html">GlobalState</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#adf62caf9d6ec26c1047df6d6380d2111">getContextModel</a> (<a class="el" href="structFormula.html">Formula</a> *formula, <a class="el" href="structLocalModels.html">LocalModels</a> *localModels, <a class="el" href="classAgent.html">Agent</a> *agt)</td></tr>
 <tr class="separator:adf62caf9d6ec26c1047df6d6380d2111"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a60c044c2a5df43767065485c56db9a75"><td class="memItemLeft" align="right" valign="top"><a id="a60c044c2a5df43767065485c56db9a75"></a>
-<a class="el" href="structCfg.html">Cfg</a>&#160;</td><td class="memItemRight" valign="bottom"><b>config</b></td></tr>
+<tr class="memitem:a60c044c2a5df43767065485c56db9a75"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structCfg.html">Cfg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utils_8cpp.html#a60c044c2a5df43767065485c56db9a75">config</a></td></tr>
 <tr class="separator:a60c044c2a5df43767065485c56db9a75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -195,6 +196,40 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="adf62caf9d6ec26c1047df6d6380d2111"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf62caf9d6ec26c1047df6d6380d2111">&#9670;&nbsp;</a></span>getContextModel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">map&lt;<a class="el" href="classLocalState.html">LocalState</a>*, vector&lt;<a class="el" href="structGlobalState.html">GlobalState</a>*&gt; &gt; getContextModel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structFormula.html">Formula</a> *&#160;</td>
+          <td class="paramname"><em>formula</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structLocalModels.html">LocalModels</a> *&#160;</td>
+          <td class="paramname"><em>localModels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classAgent.html">Agent</a> *&#160;</td>
+          <td class="paramname"><em>agt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4073ec29a638e918c58e44dfe345e842"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4073ec29a638e918c58e44dfe345e842">&#9670;&nbsp;</a></span>getLocalStatesSCC()</h2>
 
@@ -219,6 +254,69 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>localStates partition in a form of the vector, where each set correponds to a SCC </dd></dl>
+
+</div>
+</div>
+<a id="a5cfa822422f5ca06a58b1d0443ac8b8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cfa822422f5ca06a58b1d0443ac8b8b">&#9670;&nbsp;</a></span>getMemCap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long getMemCap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a09a7988a2599103af311e927c494b8e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a7988a2599103af311e927c494b8e1">&#9670;&nbsp;</a></span>loadConfigFromArgs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loadConfigFromArgs </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a024972bddde6f8ca273e590f32fa8a2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a024972bddde6f8ca273e590f32fa8a2a">&#9670;&nbsp;</a></span>loadConfigFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loadConfigFromFile </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -344,6 +442,29 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a60c044c2a5df43767065485c56db9a75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60c044c2a5df43767065485c56db9a75">&#9670;&nbsp;</a></span>config</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structCfg.html">Cfg</a> config</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">extern</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

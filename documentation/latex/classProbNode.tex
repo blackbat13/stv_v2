@@ -9,13 +9,32 @@ Base node for probability calculations.
 
 {\ttfamily \#include $<$expressions.\+hpp$>$}
 
+
+
+Inheritance diagram for Prob\+Node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classProbNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Prob\+Node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=144pt]{classProbNode__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual float \mbox{\hyperlink{classProbNode_ada1ac96e0bd8a8fd1f54d1caf865dc93}{eval}} (\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)=0
 \begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classProbNode_ab8ad15831270c5b622d19cc7a5a86bf3}\label{classProbNode_ab8ad15831270c5b622d19cc7a5a86bf3}} 
-virtual float {\bfseries eval} ()=0
+virtual float \mbox{\hyperlink{classProbNode_ab8ad15831270c5b622d19cc7a5a86bf3}{eval}} ()=0
 \end{DoxyCompactItemize}
 
 
@@ -23,10 +42,20 @@ virtual float {\bfseries eval} ()=0
 Base node for probability calculations. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classProbNode_ab8ad15831270c5b622d19cc7a5a86bf3}\label{classProbNode_ab8ad15831270c5b622d19cc7a5a86bf3}} 
+\index{ProbNode@{ProbNode}!eval@{eval}}
+\index{eval@{eval}!ProbNode@{ProbNode}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual float Prob\+Node\+::eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classProbDiv_a6bc57f528f12b0190c399ea35e84f4b2}{Prob\+Div}}, \mbox{\hyperlink{classProbMul_af5c1f1599debf544c4d9d165210c2bb5}{Prob\+Mul}}, \mbox{\hyperlink{classProbSub_a9bd8b5a2e292c1222978fb84a8bee078}{Prob\+Sub}}, \mbox{\hyperlink{classProbAdd_aebe0fd1d0c6d4f068a8a54cdf99643e8}{Prob\+Add}}, and \mbox{\hyperlink{classProbConst_a10553672c4aec696f02077ea172af77a}{Prob\+Const}}.
+
 \mbox{\Hypertarget{classProbNode_ada1ac96e0bd8a8fd1f54d1caf865dc93}\label{classProbNode_ada1ac96e0bd8a8fd1f54d1caf865dc93}} 
 \index{ProbNode@{ProbNode}!eval@{eval}}
 \index{eval@{eval}!ProbNode@{ProbNode}}
-\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily virtual float Prob\+Node\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 

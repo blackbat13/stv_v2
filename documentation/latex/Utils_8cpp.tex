@@ -12,6 +12,14 @@ Utility functions. A collection of utility functions to use in the project.
 {\ttfamily \#include $<$algorithm$>$}\newline
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$cstdio$>$}\newline
+Include dependency graph for Utils.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Utils_8cpp__incl}
+\end{center}
+\end{figure}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -23,27 +31,22 @@ string \mbox{\hyperlink{Utils_8cpp_a7eba8577045f3559f063d6327dcc7f30}{local\+Mod
 \begin{DoxyCompactList}\small\item\em Converts pointer to the \mbox{\hyperlink{structLocalModels}{Local\+Models}} into a string cointaining all \mbox{\hyperlink{classAgent}{Agent}} instances from the model, initial values of the variables and names of the persistent values. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{Utils_8cpp_ae45accf23ba6404b9b292d148e3eda27}{output\+Global\+Model}} (\mbox{\hyperlink{structGlobalModel}{Global\+Model}} $\ast$global\+Model)
 \begin{DoxyCompactList}\small\item\em Prints the whole \mbox{\hyperlink{structGlobalModel}{Global\+Model}} into the console. Contains global states with hashes, local states, variables inside those states, global variables, global transitions, local transitions and epistemic classes of agents. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}\label{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}} 
-unsigned long {\bfseries get\+Mem\+Cap} ()
+unsigned long \mbox{\hyperlink{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}{get\+Mem\+Cap}} ()
 \item 
-\mbox{\Hypertarget{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}\label{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}} 
-void {\bfseries load\+Config\+From\+File} (string filename)
+void \mbox{\hyperlink{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}{load\+Config\+From\+File}} (string filename)
 \item 
-\mbox{\Hypertarget{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}\label{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}} 
-void {\bfseries load\+Config\+From\+Args} (int argc, char $\ast$$\ast$argv)
+void \mbox{\hyperlink{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}{load\+Config\+From\+Args}} (int argc, char $\ast$$\ast$argv)
 \item 
 void \mbox{\hyperlink{Utils_8cpp_a31d4dbc4222c0740fc9b6911e129ea05}{tarjan\+Visit}} (\mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$v, map$<$ int, int $>$ $\ast$dindex, map$<$ int, int $>$ $\ast$lowlink, stack$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $\ast$stack, map$<$ int, bool $>$ $\ast$onstack, int $\ast$depth, vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$$>$ $\ast$comp)
 \begin{DoxyCompactList}\small\item\em Utility function for SCC-\/computatation. \end{DoxyCompactList}\item 
 vector$<$ set$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$ $>$ $>$ \mbox{\hyperlink{Utils_8cpp_a4073ec29a638e918c58e44dfe345e842}{get\+Local\+States\+SCC}} (\mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
 \begin{DoxyCompactList}\small\item\em a quick implementation of a Tarjan SCC algorithm (based on DFS) \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}\label{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}} 
-map$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$, vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $>$ {\bfseries get\+Context\+Model} (\mbox{\hyperlink{structFormula}{Formula}} $\ast$formula, \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$local\+Models, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
+map$<$ \mbox{\hyperlink{classLocalState}{Local\+State}} $\ast$, vector$<$ \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$ $>$ $>$ \mbox{\hyperlink{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}{get\+Context\+Model}} (\mbox{\hyperlink{structFormula}{Formula}} $\ast$formula, \mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$local\+Models, \mbox{\hyperlink{classAgent}{Agent}} $\ast$agt)
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{Utils_8cpp_a60c044c2a5df43767065485c56db9a75}\label{Utils_8cpp_a60c044c2a5df43767065485c56db9a75}} 
-\mbox{\hyperlink{structCfg}{Cfg}} {\bfseries config}
+\mbox{\hyperlink{structCfg}{Cfg}} \mbox{\hyperlink{Utils_8cpp_a60c044c2a5df43767065485c56db9a75}{config}}
 \end{DoxyCompactItemize}
 
 
@@ -89,6 +92,12 @@ Converts a map of string and int to a string.
 \begin{DoxyReturn}{Returns}
 Returns string \char`\"{} (first\+\_\+name, second\+\_\+name, ..., last\+\_\+name=int\+\_\+value)\char`\"{} 
 \end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}\label{Utils_8cpp_adf62caf9d6ec26c1047df6d6380d2111}} 
+\index{Utils.cpp@{Utils.cpp}!getContextModel@{getContextModel}}
+\index{getContextModel@{getContextModel}!Utils.cpp@{Utils.cpp}}
+\doxysubsubsection{\texorpdfstring{getContextModel()}{getContextModel()}}
+{\footnotesize\ttfamily map$<$\mbox{\hyperlink{classLocalState}{Local\+State}}$\ast$, vector$<$\mbox{\hyperlink{structGlobalState}{Global\+State}}$\ast$$>$ $>$ get\+Context\+Model (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structFormula}{Formula}} $\ast$}]{formula,  }\item[{\mbox{\hyperlink{structLocalModels}{Local\+Models}} $\ast$}]{local\+Models,  }\item[{\mbox{\hyperlink{classAgent}{Agent}} $\ast$}]{agt }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{Utils_8cpp_a4073ec29a638e918c58e44dfe345e842}\label{Utils_8cpp_a4073ec29a638e918c58e44dfe345e842}} 
 \index{Utils.cpp@{Utils.cpp}!getLocalStatesSCC@{getLocalStatesSCC}}
 \index{getLocalStatesSCC@{getLocalStatesSCC}!Utils.cpp@{Utils.cpp}}
@@ -107,6 +116,24 @@ a quick implementation of a Tarjan SCC algorithm (based on DFS)
 \begin{DoxyReturn}{Returns}
 local\+States partition in a form of the vector, where each set correponds to a SCC 
 \end{DoxyReturn}
+\mbox{\Hypertarget{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}\label{Utils_8cpp_a5cfa822422f5ca06a58b1d0443ac8b8b}} 
+\index{Utils.cpp@{Utils.cpp}!getMemCap@{getMemCap}}
+\index{getMemCap@{getMemCap}!Utils.cpp@{Utils.cpp}}
+\doxysubsubsection{\texorpdfstring{getMemCap()}{getMemCap()}}
+{\footnotesize\ttfamily unsigned long get\+Mem\+Cap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}\label{Utils_8cpp_a09a7988a2599103af311e927c494b8e1}} 
+\index{Utils.cpp@{Utils.cpp}!loadConfigFromArgs@{loadConfigFromArgs}}
+\index{loadConfigFromArgs@{loadConfigFromArgs}!Utils.cpp@{Utils.cpp}}
+\doxysubsubsection{\texorpdfstring{loadConfigFromArgs()}{loadConfigFromArgs()}}
+{\footnotesize\ttfamily void load\+Config\+From\+Args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}\label{Utils_8cpp_a024972bddde6f8ca273e590f32fa8a2a}} 
+\index{Utils.cpp@{Utils.cpp}!loadConfigFromFile@{loadConfigFromFile}}
+\index{loadConfigFromFile@{loadConfigFromFile}!Utils.cpp@{Utils.cpp}}
+\doxysubsubsection{\texorpdfstring{loadConfigFromFile()}{loadConfigFromFile()}}
+{\footnotesize\ttfamily void load\+Config\+From\+File (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{Utils_8cpp_a7eba8577045f3559f063d6327dcc7f30}\label{Utils_8cpp_a7eba8577045f3559f063d6327dcc7f30}} 
 \index{Utils.cpp@{Utils.cpp}!localModelsToString@{localModelsToString}}
 \index{localModelsToString@{localModelsToString}!Utils.cpp@{Utils.cpp}}
@@ -167,3 +194,12 @@ Utility function for SCC-\/computatation.
 {\em comp} & -\/ result of SCC partitioning \\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{Utils_8cpp_a60c044c2a5df43767065485c56db9a75}\label{Utils_8cpp_a60c044c2a5df43767065485c56db9a75}} 
+\index{Utils.cpp@{Utils.cpp}!config@{config}}
+\index{config@{config}!Utils.cpp@{Utils.cpp}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structCfg}{Cfg}} config\hspace{0.3cm}{\ttfamily [extern]}}
+

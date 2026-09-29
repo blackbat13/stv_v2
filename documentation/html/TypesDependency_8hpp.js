@@ -7,7 +7,6 @@ var TypesDependency_8hpp =
     [ "StateVerificationInfo", "structStateVerificationInfo.html", "structStateVerificationInfo" ],
     [ "Action", "structAction.html", "structAction" ],
     [ "StrategyCollection", "classStrategyCollection.html", "classStrategyCollection" ],
-    [ "ProbabilityStrategyDecisions", "classProbabilityStrategyDecisions.html", "classProbabilityStrategyDecisions" ],
     [ "STRATEGY_BITS", "TypesDependency_8hpp.html#a1de2fc36289f8ee7e8341767723ddf49", null ],
     [ "HistoryEntryType", "TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4", [
       [ "DECISION", "TypesDependency_8hpp.html#a9b12ccf7d3168e272beda78cf68328a4a0d31cd90b1053f89cbae83cfc8b2ed4e", null ],

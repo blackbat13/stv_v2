@@ -9,6 +9,26 @@ Node for a constant.
 
 {\ttfamily \#include $<$expressions.\+hpp$>$}
 
+
+
+Inheritance diagram for Expr\+Const\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{classExprConst__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Expr\+Const\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{classExprConst__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,8 +36,7 @@ Node for a constant.
 \begin{DoxyCompactList}\small\item\em Constant expression constructor. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classExprConst_a4d5ccda478e76fa886537116027a8faa}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
 \begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}\label{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}} 
-virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+virtual int \mbox{\hyperlink{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
 \end{DoxyCompactItemize}
 
 
@@ -43,10 +62,20 @@ Constant expression constructor.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}\label{classExprConst_a607cf412bc90f263a4c79b9204b9b4d6}} 
+\index{ExprConst@{ExprConst}!eval@{eval}}
+\index{eval@{eval}!ExprConst@{ExprConst}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int Expr\+Const\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+
 \mbox{\Hypertarget{classExprConst_a4d5ccda478e76fa886537116027a8faa}\label{classExprConst_a4d5ccda478e76fa886537116027a8faa}} 
 \index{ExprConst@{ExprConst}!eval@{eval}}
 \index{eval@{eval}!ExprConst@{ExprConst}}
-\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily int Expr\+Const\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 

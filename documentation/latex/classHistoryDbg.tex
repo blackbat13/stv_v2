@@ -9,13 +9,21 @@ Stores history and allows displaying it to the console.
 
 {\ttfamily \#include $<$Verification.\+hpp$>$}
 
+
+
+Collaboration diagram for History\+Dbg\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classHistoryDbg__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classHistoryDbg_a5dd006716d8389df4313ac9b8996f132}\label{classHistoryDbg_a5dd006716d8389df4313ac9b8996f132}} 
 \mbox{\hyperlink{classHistoryDbg_a5dd006716d8389df4313ac9b8996f132}{History\+Dbg}} ()
 \begin{DoxyCompactList}\small\item\em A constructor for \mbox{\hyperlink{classHistoryDbg}{History\+Dbg}}. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classHistoryDbg_a4babfc0b2bac49fc968ea4c831cbf192}\label{classHistoryDbg_a4babfc0b2bac49fc968ea4c831cbf192}} 
 \mbox{\hyperlink{classHistoryDbg_a4babfc0b2bac49fc968ea4c831cbf192}{$\sim$\+History\+Dbg}} ()
 \begin{DoxyCompactList}\small\item\em A destructor for \mbox{\hyperlink{classHistoryDbg}{History\+Dbg}}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classHistoryDbg_a71e384214004c96c5837c62d41fd4767}{add\+Entry}} (\mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$entry)
@@ -29,13 +37,35 @@ void \mbox{\hyperlink{classHistoryDbg_a7c916b56b83969b47037892e2545e613}{print}}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classHistoryDbg_ac1c7548a15925754b18b60202a71fba0}\label{classHistoryDbg_ac1c7548a15925754b18b60202a71fba0}} 
 vector$<$ pair$<$ \mbox{\hyperlink{structHistoryEntry}{History\+Entry}} $\ast$, char $>$ $>$ \mbox{\hyperlink{classHistoryDbg_ac1c7548a15925754b18b60202a71fba0}{entries}}
 \begin{DoxyCompactList}\small\item\em A pair of history entries and a char marking history type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Stores history and allows displaying it to the console. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classHistoryDbg_a5dd006716d8389df4313ac9b8996f132}\label{classHistoryDbg_a5dd006716d8389df4313ac9b8996f132}} 
+\index{HistoryDbg@{HistoryDbg}!HistoryDbg@{HistoryDbg}}
+\index{HistoryDbg@{HistoryDbg}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{HistoryDbg()}{HistoryDbg()}}
+{\footnotesize\ttfamily History\+Dbg\+::\+History\+Dbg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A constructor for \mbox{\hyperlink{classHistoryDbg}{History\+Dbg}}. 
+
+\mbox{\Hypertarget{classHistoryDbg_a4babfc0b2bac49fc968ea4c831cbf192}\label{classHistoryDbg_a4babfc0b2bac49fc968ea4c831cbf192}} 
+\index{HistoryDbg@{HistoryDbg}!````~HistoryDbg@{$\sim$HistoryDbg}}
+\index{````~HistoryDbg@{$\sim$HistoryDbg}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{$\sim$HistoryDbg()}{~HistoryDbg()}}
+{\footnotesize\ttfamily History\+Dbg\+::$\sim$\+History\+Dbg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+A destructor for \mbox{\hyperlink{classHistoryDbg}{History\+Dbg}}. 
+
+
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classHistoryDbg_a71e384214004c96c5837c62d41fd4767}\label{classHistoryDbg_a71e384214004c96c5837c62d41fd4767}} 
@@ -103,6 +133,19 @@ Prints every entry from the algorithm\textquotesingle{}s path.
 {\em prefix} & A prefix string to append to the front of every entry. \\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classHistoryDbg_ac1c7548a15925754b18b60202a71fba0}\label{classHistoryDbg_ac1c7548a15925754b18b60202a71fba0}} 
+\index{HistoryDbg@{HistoryDbg}!entries@{entries}}
+\index{entries@{entries}!HistoryDbg@{HistoryDbg}}
+\doxysubsubsection{\texorpdfstring{entries}{entries}}
+{\footnotesize\ttfamily vector$<$pair$<$\mbox{\hyperlink{structHistoryEntry}{History\+Entry}}$\ast$, char$>$ $>$ History\+Dbg\+::entries}
+
+
+
+A pair of history entries and a char marking history type. 
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

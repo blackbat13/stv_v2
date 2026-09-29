@@ -9,6 +9,26 @@ Node for OR operator.
 
 {\ttfamily \#include $<$expressions.\+hpp$>$}
 
+
+
+Inheritance diagram for Expr\+Or\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classExprOr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Expr\+Or\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classExprOr__coll__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,8 +36,7 @@ Node for OR operator.
 \begin{DoxyCompactList}\small\item\em Logic OR expression constructor. \end{DoxyCompactList}\item 
 virtual int \mbox{\hyperlink{classExprOr_a87c02c337f8c1831cd2076dac0b23bc0}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env, \mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$generator, \mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$global\+State)
 \begin{DoxyCompactList}\small\item\em Calculates the expression value. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classExprOr_af5f728674932ef4e7033cd6f625f775c}\label{classExprOr_af5f728674932ef4e7033cd6f625f775c}} 
-virtual int {\bfseries eval} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
+virtual int \mbox{\hyperlink{classExprOr_af5f728674932ef4e7033cd6f625f775c}{eval}} (\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&env)
 \end{DoxyCompactItemize}
 
 
@@ -45,10 +64,20 @@ Logic OR expression constructor.
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExprOr_af5f728674932ef4e7033cd6f625f775c}\label{classExprOr_af5f728674932ef4e7033cd6f625f775c}} 
+\index{ExprOr@{ExprOr}!eval@{eval}}
+\index{eval@{eval}!ExprOr@{ExprOr}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int Expr\+Or\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classExprNode_a5f155835c446271416ed3eb4f1d34f1f}{Expr\+Node}}.
+
 \mbox{\Hypertarget{classExprOr_a87c02c337f8c1831cd2076dac0b23bc0}\label{classExprOr_a87c02c337f8c1831cd2076dac0b23bc0}} 
 \index{ExprOr@{ExprOr}!eval@{eval}}
 \index{eval@{eval}!ExprOr@{ExprOr}}
-\doxysubsubsection{\texorpdfstring{eval()}{eval()}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily int Expr\+Or\+::eval (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{expressions_8hpp_a8a6f1b2a287c010b90a38b54cc90d3e4}{Environment}} \&}]{env,  }\item[{\mbox{\hyperlink{classGlobalModelGenerator}{Global\+Model\+Generator}} $\ast$}]{generator,  }\item[{\mbox{\hyperlink{structGlobalState}{Global\+State}} $\ast$}]{global\+State }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 

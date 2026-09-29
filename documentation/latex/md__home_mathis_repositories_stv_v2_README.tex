@@ -48,6 +48,7 @@ CLI configuration overwrite\+: ~\newline
 \DoxyCodeLine{\# -\/-\/REDUCE\_ALL               reduce the amount of states and transitions using a DFS-\/POR algorithm and select all avaliable transitions}
 \DoxyCodeLine{\# -\/-\/FIXPOINT                 enables fixpoint approximation}
 \DoxyCodeLine{\# -\/-\/NATURAL\_STRATEGY         generate a natural strategy for the given model}
+\DoxyCodeLine{\# -\/-\/STRATEGY\_FROM\_FILE       set a strategy to the one given in a file}
 
 \end{DoxyCode}
 \hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md2}{}\doxysection{Tests}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md2}
@@ -117,8 +118,7 @@ Ubuntu/\+WSL\+: ~\newline
 
 \end{DoxyCode}
 \hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md4}{}\doxysection{Specification}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md4}
-The specification language was inspired by ISPL (Interpreted Systems Programming Language) from \href{https://vas.doc.ic.ac.uk/software/mcmas/}{\texttt{ MCMAS}}. ~\newline
- The detailed syntax for the input format can be derived from $\ast$./src/reader/\{parser.\+y,scanner.\+l\}$\ast$, which intrinsically make up an EBNF grammar. ~\newline
+The specification language was inspired by ISPL (Interpreted Systems Programming Language) from \href{https://vas.doc.ic.ac.uk/software/mcmas/}{\texttt{ MCMAS}}. The detailed syntax for the input format can be derived from $\ast$./src/reader/\{parser.\+y,\mbox{\hyperlink{scanner_8l}{scanner.\+l}}\}$\ast$, which intrinsically make up an EBNF grammar. ~\newline
  For the most parts, it is simple enough to get intuition just from looking at example\textquotesingle{}s source code and the program\textquotesingle{}s output.
 
 IMPORTANTS NOTES\+:
@@ -129,12 +129,11 @@ IMPORTANTS NOTES\+:
 In $\ast$./examples$\ast$ and $\ast$./tests/examples$\ast$ there are several ready-\/to-\/use MAS specification files together with a proposed property (captured by ATL formula) for verification.
 
 Often, we would want to reason about different (data-\/)configurations of the same system. ~\newline
- Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behaviour. ~\newline
+ Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behavior. ~\newline
  A template can be fed with a configuration data to generate a concrete instance of a system. ~\newline
  Moreover, their use is independent from the tool\+: one can choose any templating engine (of the myriads available) or even write a custom one from the scratch.
 
-Here, we utilize the \href{https://ejs.co/}{\texttt{ EJS}} templating engine. ~\newline
- It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.
+Here, we utilize the \href{https://ejs.co/}{\texttt{ EJS}} templating engine. It has a CLI support, which is comes in handy for the tests/benchmarks that involve systems in multiple configurations.
 
 
 \begin{DoxyCode}{0}
@@ -166,4 +165,12 @@ Use Graphviz \href{https://www.graphviz.org/}{\texttt{ (link)}} to view in other
 
 
 For the smaller graphs use {\itshape dot2png.\+sh} script, which converts all $\ast$.dot$\ast$ files from a current folder to $\ast$.png$\ast$. ~\newline
- For bigger ones use {\ttfamily svg} format (may be viewed in Inkscape) and {\itshape dot2svg.\+sh}. 
+ For bigger ones use {\ttfamily svg} format (may be viewed in Inkscape) and {\itshape dot2svg.\+sh}.\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md7}{}\doxysection{Web interface}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md7}
+The web interface is available at \href{http://stv.cs-htiew.com/}{\texttt{ http\+://stv.\+cs-\/htiew.\+com/}}.\hypertarget{md__home_mathis_repositories_stv_v2_README_autotoc_md8}{}\doxysection{Credits}\label{md__home_mathis_repositories_stv_v2_README_autotoc_md8}
+Lead developer\+: Mateusz Kamiński (@\+Mathisplay)
+
+Project supervisor\+: Damian Kurpiewski (@blackbat13)
+
+Initial codebase\+: Witold Pazderski
+
+Additional features\+: Yan Kim 
