@@ -9,6 +9,7 @@
 
 #include <string>
 #include <map>
+#include <set>
 #include <vector>
 
 using namespace std;
@@ -32,6 +33,13 @@ class ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) = 0;
       virtual int eval( Environment& env ) = 0;
+      virtual string toString(bool addBrackets = true) const = 0;
+
+      /// @brief Returns all variable names used in this expression subtree.
+      set<string> getVariableNames() const;
+
+      /// @brief Inserts variable names from this expression subtree into @p out.
+      virtual void collectVariableNames(set<string>& out) const = 0;
 };
 
 // węzeł dla stałej
@@ -54,6 +62,8 @@ class ExprConst: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla identyfikatora
@@ -76,6 +86,8 @@ class ExprIdent: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla dodawań
@@ -99,6 +111,8 @@ class ExprAdd: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla odejmowań
@@ -122,6 +136,8 @@ class ExprSub: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla mnożeń
@@ -145,6 +161,8 @@ class ExprMul: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla dzieleń
@@ -168,6 +186,8 @@ class ExprDiv: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla reszty z dzielenia
@@ -191,6 +211,8 @@ class ExprRem: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora AND
@@ -214,6 +236,8 @@ class ExprAnd: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora OR
@@ -237,6 +261,8 @@ class ExprOr: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora NOT
@@ -259,6 +285,8 @@ class ExprNot: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora "=="
@@ -282,6 +310,8 @@ class ExprEq: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addOuterParens = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora "!="
@@ -305,6 +335,8 @@ class ExprNe: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora "<"
@@ -328,6 +360,8 @@ class ExprLt: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora "<="
@@ -351,6 +385,8 @@ class ExprLe: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora ">"
@@ -374,6 +410,8 @@ class ExprGt: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla operatora ">="
@@ -397,6 +435,8 @@ class ExprGe: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla wiedzy
@@ -421,6 +461,8 @@ class ExprKnow: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addOuterParens = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 // węzeł dla Hartleya
@@ -449,6 +491,8 @@ class ExprHart: public ExprNode {
       /// @return Returns an integer.
       virtual int eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState );
       virtual int eval( Environment& env );
+      virtual string toString(bool addBrackets = true) const;
+      virtual void collectVariableNames(set<string>& out) const;
 };
 
 /// @brief Base node for probability calculations.

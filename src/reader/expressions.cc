@@ -8,6 +8,99 @@
 #include "../GlobalModelGenerator.hpp"
 #include <bits/stdc++.h>
 
+set<string> ExprNode::getVariableNames() const {
+   set<string> result;
+   collectVariableNames(result);
+   return result;
+}
+
+void ExprConst::collectVariableNames(set<string>& out) const {
+   (void) out;
+}
+
+void ExprIdent::collectVariableNames(set<string>& out) const {
+   out.insert(ident);
+}
+
+void ExprAdd::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprSub::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprMul::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprDiv::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprRem::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprAnd::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprOr::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprNot::collectVariableNames(set<string>& out) const {
+   arg->collectVariableNames(out);
+}
+
+void ExprEq::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprNe::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprLt::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprLe::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprGt::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprGe::collectVariableNames(set<string>& out) const {
+   larg->collectVariableNames(out);
+   rarg->collectVariableNames(out);
+}
+
+void ExprKnow::collectVariableNames(set<string>& out) const {
+   arg->collectVariableNames(out);
+}
+
+void ExprHart::collectVariableNames(set<string>& out) const {
+   for (auto* expr : *arg) {
+      expr->collectVariableNames(out);
+   }
+}
+
 /// @brief 
 /// @param env 
 /// @return 
@@ -240,4 +333,76 @@ float ProbMul::eval( GlobalModelGenerator *generator, GlobalState *globalState )
 
 float ProbDiv::eval( GlobalModelGenerator *generator, GlobalState *globalState ) {
    return larg->eval(generator, globalState) / rarg->eval(generator, globalState);
+}
+
+// ---- ExprNode::toString() implementations ----
+
+string ExprConst::toString(bool addBrackets) const { return to_string(val); }
+string ExprIdent::toString(bool addBrackets) const { return ident; }
+string ExprAdd::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " + " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprSub::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " - " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprMul::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " * " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprDiv::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " / " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprRem::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " % " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprAnd::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " && " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprOr::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " || " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprNot::toString(bool addBrackets) const { return "!" + arg->toString(true); }
+string ExprEq::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " == " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprNe::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " != " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprLt::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " < " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprLe::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " <= " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprGt::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " > " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+string ExprGe::toString(bool addBrackets) const { 
+   string result = larg->toString(true) + " >= " + rarg->toString(true);
+   return addBrackets ? "(" + result + ")" : result;
+}
+
+string ExprKnow::toString(bool addBrackets) const {
+   return "&K_" + agentName + "(" + arg->toString(true) + ")";
+}
+
+string ExprHart::toString(bool addBrackets) const {
+   string result = "&H_" + agentName + "[" + (le ? "<=" : ">=") + to_string(val) + "](";
+   for (size_t i = 0; i < arg->size(); ++i) {
+      if (i > 0) result += ", ";
+      result += "(" + (*arg)[i]->toString(true) + ")";
+   }
+   result += ")";
+   return result;
 }
