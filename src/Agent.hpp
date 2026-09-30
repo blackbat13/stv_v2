@@ -8,6 +8,7 @@
 #define AGENT_H
 
 #include "Common.hpp"
+#include "Types.hpp"
 
 /// @brief Contains all data for a single Agent, including id, name and all of the agents' variables.
 class Agent {
@@ -46,6 +47,9 @@ class Agent {
         ///        and merging equivalent local states.
         /// @param variableNames Variables to forget from local-state environments.
         void partialReduceModel(const vector<string>& variableNames);
+		
+		    /// @brief Creates a complete, independent copy of the current Agent and its resources, including the ones located at pointers
+		    Agent* clone();
 };
 
 #endif // AGENT_H

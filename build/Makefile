@@ -7,10 +7,10 @@ CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 CRAAMFLAGS += -I$(CRAAM_DIR) -I$(CRAAM_INCLUDE_DIR)
 	
-main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
-	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
+main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o KnowledgeBasedConstruction.o
+	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o KnowledgeBasedConstruction.o
  
-main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/StrategyParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
+main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/StrategyParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/KnowledgeBasedConstruction.hpp
 	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/main.cpp
  
 GlobalModelGenerator.o: ../src/GlobalModelGenerator.hpp ../src/GlobalModelGenerator.cpp
@@ -48,6 +48,9 @@ DotGraph.o: ../src/DotGraph.hpp ../src/DotGraph.cpp
 
 ModelSerializer.o: ../src/ModelSerializer.hpp ../src/ModelSerializer.cpp
 	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/ModelSerializer.cpp
+  
+KnowledgeBasedConstruction.o: ../src/KnowledgeBasedConstruction.hpp ../src/KnowledgeBasedConstruction.cpp
+	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/KnowledgeBasedConstruction.cpp
 
 parser.o: ../src/reader/parser.c
 	$(CC) $(CPPFLAGS) -c ../src/reader/parser.c

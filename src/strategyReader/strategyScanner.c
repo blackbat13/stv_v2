@@ -1,6 +1,6 @@
-#line 2 "../src/strategyReader/strategyScanner.c"
+#line 1 "../src/strategyReader/strategyScanner.c"
 
-#line 4 "../src/strategyReader/strategyScanner.c"
+#line 3 "../src/strategyReader/strategyScanner.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -732,8 +732,8 @@ using namespace std;
 #include "strategyNodes.hpp"
 
 extern "C" int stratlex();
+#line 735 "../src/strategyReader/strategyScanner.c"
 #line 736 "../src/strategyReader/strategyScanner.c"
-#line 737 "../src/strategyReader/strategyScanner.c"
 
 #define INITIAL 0
 
@@ -953,7 +953,7 @@ YY_DECL
 #line 22 "../src/strategyReader/strategyScanner.l"
 
 
-#line 957 "../src/strategyReader/strategyScanner.c"
+#line 956 "../src/strategyReader/strategyScanner.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1096,7 +1096,7 @@ YY_RULE_SETUP
 #line 40 "../src/strategyReader/strategyScanner.l"
 ECHO;
 	YY_BREAK
-#line 1100 "../src/strategyReader/strategyScanner.c"
+#line 1099 "../src/strategyReader/strategyScanner.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
