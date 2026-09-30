@@ -193,9 +193,9 @@ Agent* Agent::clone(){
 
 		//Copy condition data
 		for(Condition* c : localTransitions[i]->conditions){
-			Condition* cc;
+			Condition* cc = new Condition();
 			for(Var* v : a->vars){
-				if(v->name == c->var->name){
+				if(c->var != nullptr && v->name == c->var->name){
 					cc->var = v;
 				}
 			}

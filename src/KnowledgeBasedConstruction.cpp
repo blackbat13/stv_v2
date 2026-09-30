@@ -379,6 +379,7 @@ std::string Agent2Specification(Agent* a, bool locNums){
 			
 			bool conditionsEmpty = true;
 			for(Condition* c : lt->conditions){
+				if(c->var == nullptr) continue;
 				if(conditionsEmpty) buffer << " [";
 				else buffer << ", ";
 				buffer << c->var->name;
