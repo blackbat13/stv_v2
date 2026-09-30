@@ -263,7 +263,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	int lt_id=0;
 	for(auto tr : transitions){
 		for(auto rd : repertoireData[get<2>(tr)]){
-			//if(true){//
+			//if(true){
 			if(CheckCommon(rd.second, *get<1>(tr))){
 				LocalTransition* t = new LocalTransition();
 				t->id = lt_id;
