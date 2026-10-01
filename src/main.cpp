@@ -442,24 +442,26 @@ int main(int argc, char* argv[]) {
                 }
             }cout << "Finished KBC iteration\n";
             
-            ofstream ofs;
-            ifstream ifs;
-            string line;
-            ofs.open("./kbc_out.stv");
-            ifs.open(config.fname);
-            
-            for(Agent* a : KBCdLM.agents){
-                ofs << Agent2Specification(a, true) << endl;
+            if(config.kbc_out_fname.size()>0){
+                ofstream ofs;
+                ifstream ifs;
+                string line;
+                ofs.open(config.kbc_out_fname);
+                ifs.open(config.fname);
+                
+                for(Agent* a : KBCdLM.agents){
+                    ofs << Agent2Specification(a, true) << endl;
+                }
+                
+                while(getline(ifs, line))
+                    if(line.rfind("FORMULA", 0) == 0)
+                        ofs << line << endl;
+                
+                ofs << endl;
+                
+                ofs.close();
+                ifs.close();
             }
-            
-            while(getline(ifs, line))
-                if(line.rfind("FORMULA", 0) == 0)
-                    ofs << line << endl;
-            
-            ofs << endl;
-            
-            ofs.close();
-            ifs.close();
             
             GlobalModelGenerator* KBCdGenerator = new GlobalModelGenerator();
             //cout << ".\n";

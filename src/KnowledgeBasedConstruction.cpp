@@ -357,15 +357,14 @@ std::string Agent2Specification(Agent* a, bool locNums){
 				if(persistentEmpty) persistent << "PERSISTENT: [" << v->name;
 				else persistent << ", " << v->name;
 				persistentEmpty = false;
-				
-				if(initialEmpty) initial << "INITIAL: [" << v->name << ":=" << v->initialValue;
-				else initial << ", " << v->name << ":=" << v->initialValue;
-				initialEmpty = false;
 			}else{
 				if(localEmpty) local << "LOCAL: [" << v->name;
 				else local << ", " << v->name;
 				localEmpty = false;
 			}
+			if(initialEmpty) initial << "INITIAL: [" << v->name << ":=" << v->initialValue;
+			else initial << ", " << v->name << ":=" << v->initialValue;
+			initialEmpty = false;
 		}
 		if(!localEmpty)			local		<< "]" << endl;
 		if(!persistentEmpty)	persistent	<< "]" << endl;

@@ -252,6 +252,12 @@ void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default con
                 config.kbc = 1;
             } else if (arg == "-KBC_COALITION_ONLY" || arg == "--KBC_COALITION_ONLY") {
                 config.kbc_coalition_only = 1;
+            } else if (arg == "-KBC_OUT_FILE" || arg == "--KBC_OUT_FILE") {
+                if (i + 1 < argc) {
+                    config.kbc_out_fname = argv[++i];
+                } else {
+                    printf("ERR: no KBC output filename was specified!\n");
+                }
             } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
                 config.add_epsilon_transitions = 1;
             } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {
