@@ -24,8 +24,6 @@ void ModelDotDump(GlobalModel *const gm, string prefix){
 void KBCprojection(GlobalModel *const gm, int agent_id){
 	int c = 0;
 	for(GlobalState* gs : gm->globalStates){
-		//set<GlobalTransition*> globalTransitionsProjected;
-		
 		for(auto gt : gs->globalTransitions){//identify epsilon transitions
 			int relevance = 0;
 			for(LocalTransition* lt : gt->localTransitions){
@@ -41,19 +39,16 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 					lt->name.assign(EPSILON);
 					lt->localName.assign(EPSILON);
 				}
-				
-				//bool isDuplicate = false;//if current element is a duplicate, don't insert it
-				//for(GlobalTransition* gtc : globalTransitionsProjected)
-					//if(gtc->from == gt->from && gtc->to == gt->to && gtc->localTransitions == gt->localTransitions){
-						//isDuplicate = true;
-						//break;
-					//}
-				//if(isDuplicate) continue;
 			}
-			//globalTransitionsProjected.insert(gt);
 		}
-		//gs->globalTransitions.clear();
-		//gs->globalTransitions.insert(globalTransitionsProjected.begin(), globalTransitionsProjected.end());
+		
+		//Remove transitions that loop to ther same state
+		// for (auto gt = gs->globalTransitions.begin(); gt != gs->globalTransitions.end(); ) {
+		// 	if((*gt)->from->hash == (*gt)->to->hash)
+		// 		gt = gs->globalTransitions.erase(gt);
+		// 	else
+		// 		++gt;
+		// }
 	}
 	
 	DotGraph(gm, true).saveToFile("KBCDOT", "global-epsilon-"+to_string(rand())+"-");
