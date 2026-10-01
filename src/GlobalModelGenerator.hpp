@@ -84,9 +84,10 @@ protected:
     GlobalState* generateInitState();
     GlobalState* generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState);
     void generateGlobalTransitions(GlobalState* fromGlobalState, set<LocalTransition*> localTransitions, map<Agent*, vector<LocalTransition*>> transitionsByAgent);
+    string computeEpistemicClassHash(vector<LocalState*>* localStates);
     string computeEpistemicClassHash(vector<LocalState*>* localStates, Agent* agent);
     string computeGlobalStateHash(vector<LocalState*>* localStates);
-    EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
+    EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
     set<tuple<string, string>> currentStrategy;  // Current strategy being built
     

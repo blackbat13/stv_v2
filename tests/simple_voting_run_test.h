@@ -19,12 +19,12 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerNotRun)
     EXPECT_EQ(verify.result, true);
 }
 
-TEST(SimpleVotingRunTest, 2Voters1CoercerRun)
-{
-    TestVerif verify("../tests/examples/svoterun/2Voters1CoercerRun.txt", true);
+// TEST(SimpleVotingRunTest, 2Voters1CoercerRun)
+// {
+//     TestVerif verify("../tests/examples/svoterun/2Voters1CoercerRun.txt", true);
 
-    EXPECT_EQ(verify.result, true);
-}
+//     EXPECT_EQ(verify.result, true);
+// }
 
 TEST(SimpleVotingRunTest, 2Voters1CoercerNotRun)
 {

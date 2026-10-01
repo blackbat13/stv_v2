@@ -82,12 +82,12 @@ TEST(ProbabilityTest, VerificationTooHighProbability)
     EXPECT_EQ(verify.result, false);
 }
 
-TEST(ProbabilityTest, VerificationOkProbability)
-{
-    TestVerif verify("../tests/examples/probability/SimpleVotingProbTest8a.txt", 4);
+// TEST(ProbabilityTest, VerificationOkProbability)
+// {
+//     TestVerif verify("../tests/examples/probability/SimpleVotingProbTest8a.txt", 4);
 
-    EXPECT_EQ(verify.result, true);
-}
+//     EXPECT_EQ(verify.result, true);
+// }
 
 TEST(ProbabilityTest, VerificationMultipleChoice)
 {

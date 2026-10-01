@@ -427,8 +427,7 @@ GlobalState* GlobalModelGenerator::generateInitState() {
 /// @return Returns a pointer to a new or already existing in the same epistemic class GlobalModel.
 GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalState*>* localStates, set<LocalTransition*>* viaLocalTransitions, GlobalState* prevGlobalState) {
     // Find/create EpistemicClass, check if an identical GlobalState is already present in that EpistemicClass
-    auto agent = *this->formula->coalition.begin();
-    auto epistemicClass = this->findOrCreateEpistemicClass(localStates, agent);
+    auto epistemicClass = this->findOrCreateEpistemicClass(localStates);
     auto identicalGlobalState = this->findGlobalStateInEpistemicClass(localStates, epistemicClass);
     
     if (identicalGlobalState != nullptr) {
@@ -456,7 +455,9 @@ GlobalState* GlobalModelGenerator::generateStateFromLocalStates(vector<LocalStat
     
     // Bind globalState with epistemicClass
     epistemicClass->globalStates.insert({ globalState->hash, globalState });
-    globalState->epistemicClasses[agent] = epistemicClass;
+    for (auto agent : this->formula->coalition) {
+        globalState->epistemicClasses[agent] = epistemicClass;
+    }
 
     Agent* a;
     for (auto agt : globalModel->agents) {
@@ -644,15 +645,17 @@ void GlobalModelGenerator::generateGlobalTransitions(GlobalState* fromGlobalStat
 /// @brief Creates a hash from a set of LocalState and an Agent.
 /// @param localStates Pointer to a vector of pointers of LocalState and pointer to and Agent to turn into a hash.
 /// @return Returns a string with a hash.
+string GlobalModelGenerator::computeEpistemicClassHash(vector<LocalState*>* localStates) {
+    return this->getCoalitionIdentifier(localStates);
+}
+
 string GlobalModelGenerator::computeEpistemicClassHash(vector<LocalState*>* localStates, Agent* agent) {
-    string hash = "";
     for (const auto localState : *localStates) {
         if (localState->agent == agent) {
-            hash = to_string(localState->id);
-            break;
+            return to_string(localState->id);
         }
     }
-    return hash;
+    return "";
 }
 
 /// @brief Creates a hash from a set of LocalState.
@@ -670,19 +673,29 @@ string GlobalModelGenerator::computeGlobalStateHash(vector<LocalState*>* localSt
 /// @param localStates Local states from agent.
 /// @param agent Agent for which to check the existence of an epistemic class.
 /// @return A pointer to a new or existing EpistemicClass.
-EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent) {
-    string hash = this->computeEpistemicClassHash(localStates, agent);
-    if (this->globalModel->epistemicClasses.find(agent) == this->globalModel->epistemicClasses.end()) {
-        this->globalModel->epistemicClasses.insert({ agent, map<string, EpistemicClass*>() });
+EpistemicClass* GlobalModelGenerator::findOrCreateEpistemicClass(vector<LocalState*>* localStates) {
+    string hash = this->computeEpistemicClassHash(localStates);
+    EpistemicClass* epistemicClass = nullptr;
+    for (auto agent : this->formula->coalition) {
+        auto agentClasses = this->globalModel->epistemicClasses.find(agent);
+        if (agentClasses != this->globalModel->epistemicClasses.end()) {
+            auto classIt = agentClasses->second.find(hash);
+            if (classIt != agentClasses->second.end()) {
+                epistemicClass = classIt->second;
+                break;
+            }
+        }
     }
-    auto epistemicClassesForAgent = &this->globalModel->epistemicClasses[agent];
-    if (epistemicClassesForAgent->find(hash) == epistemicClassesForAgent->end()) {
-        EpistemicClass* epistemicClass = new EpistemicClass();
+
+    if (epistemicClass == nullptr) {
+        epistemicClass = new EpistemicClass();
         epistemicClass->hash = hash;
         epistemicClass->fixedCoalitionTransition = nullptr;
-        epistemicClassesForAgent->insert({ hash, epistemicClass });
     }
-    return epistemicClassesForAgent->at(hash);
+    for (auto agent : this->formula->coalition) {
+        this->globalModel->epistemicClasses[agent].insert({ hash, epistemicClass });
+    }
+    return epistemicClass;
 }
 
 /// @brief Checks if a vector of LocalState is already an epistemic class for a given Agent, if not, creates a new one.
