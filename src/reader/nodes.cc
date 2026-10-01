@@ -9,6 +9,7 @@
 #include <queue>
 #include <fstream>
 #include <cstring>
+#include <algorithm>
 
 
 /* --------------------------------------------------------------------- */
@@ -226,11 +227,17 @@ Agent * AgentTemplate::generateAgent(int id) {
       result->vars.insert(var);
    }
    for(set<string>::iterator it=persistentVars->begin(); it != persistentVars->end(); it++) {
-      Var *var = new Var;
-      var->agent = result;
-      var->name = *it;
-      var->persistent = true;
-      result->vars.insert(var);
+      // Look for the variable in the agent's vars set and mark it as persistent if found, otherwise insert a new persistent variable
+      auto varIt = find_if(result->vars.begin(), result->vars.end(), [&](Var* var) { return var->name == *it; });
+      if (varIt != result->vars.end()) {
+         (*varIt)->persistent = true;
+      } else {
+         Var *var = new Var;
+         var->agent = result;
+         var->name = *it;
+         var->persistent = true;
+         result->vars.insert(var);
+      }
    }
      
    // na podstawie nazwy utwórz stan startowy
