@@ -429,6 +429,7 @@ int main(int argc, char* argv[]) {
                     GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
                     DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-CLONE"+to_string(j)+"-");
                     KBCprojection(cloneModel, j);
+                    DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-PROJECTED"+to_string(j)+"-");
                     Agent* a = KBCexpansion(cloneModel, j);
                     KBCdLM.agents.push_back(a);
                     DotGraph(a).saveToFile(config.dotdir, "kbc-");

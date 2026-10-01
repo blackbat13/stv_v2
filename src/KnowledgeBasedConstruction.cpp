@@ -28,8 +28,13 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 		
 		for(auto gt : gs->globalTransitions){//identify epsilon transitions
 			int relevance = 0;
-			for(LocalTransition* lt : gt->localTransitions)
+			for(LocalTransition* lt : gt->localTransitions){
+				if(lt->name == EPSILON || lt->name == EPSILON_UNICODE || lt->localName == EPSILON || lt->localName == EPSILON_UNICODE){
+					relevance = 0;
+					break;
+				}
 				if(lt->agent->id == agent_id) relevance++;
+			}
 			if(relevance==0){
 				c++;
 				for(LocalTransition* lt : gt->localTransitions){
@@ -159,7 +164,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						if(gs->globalTransitions.size()<=0) break;
 						for(GlobalTransition* gt : gs->globalTransitions){
 							j++;
-							for(LocalTransition* lt : gt->localTransitions) if(lt->name==EPSILON){
+							for(LocalTransition* lt : gt->localTransitions) if(lt->name==EPSILON || lt->name==EPSILON_UNICODE){
 								//a local transition is only relevant if it belongs to both the agent in question, and represents the currently searched action
 								succeedingRaw.insert(gt->to);
 								break;
@@ -238,6 +243,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 		ls->id = ls_id;
 		//Generate a name for the new state
 		ls->name = "";
+		ls->environment = {};
 		for(GlobalState* gs : obs){
 			//Find the local state in the observation that belongs to the agent in focus and set the name of ls as the found state's name
 			for(LocalState* x : gs->localStatesProjection){
@@ -245,7 +251,8 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 					//Copy over the name...
 					ls->name+=x->name;
 					//... and the variables while we're at it as well! (No need to search again! :D)
-					ls->environment = x->environment;
+					for(auto const& pair : x->environment)
+						ls->environment[pair.first] = pair.second;
 					break;
 				}
 			}
@@ -300,6 +307,16 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	
 	//Tell the agent what it's initial state is
 	o->initState = o->localStates[0];
+	
+	//Copy variables
+	for(Var* v : gm->agents[agent_id]->vars){
+		Var *w = new Var;
+		w->name.assign(""+v->name);
+		w->initialValue = v->initialValue;
+		w->persistent = v->persistent;
+		w->agent = o;
+		o->vars.insert(w);
+	}
 	
 	for(auto p : allObservationPointers) delete p;
 	return o;
@@ -391,6 +408,15 @@ std::string Agent2Specification(Agent* a, bool locNums){
 			
 			buffer << " -> " << lt->to->name;
 			if(locNums) buffer << "_" << lt->to->id;
+			
+			bool variableUpdatesEmpty = true;
+			for(auto const& pair : lt->to->environment){
+				if(variableUpdatesEmpty) buffer << " [";
+				else buffer << ", ";
+				buffer << pair.first << ":=" << pair.second;
+				variableUpdatesEmpty = false;
+			}
+			if(!variableUpdatesEmpty) buffer << "]";
 			
 			buffer << endl;
 		}

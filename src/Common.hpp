@@ -8,6 +8,7 @@
 #define COMMON
 
 #define EPSILON "&epsilon;"//"STV KBC RESERVED CONST 'Epsilon'"
+#define EPSILON_UNICODE "ɛ"
 
 #include <map>
 #include <set>

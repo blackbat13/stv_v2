@@ -189,7 +189,8 @@ Agent* Agent::clone(){
 		t->name.assign(localTransitions[i]->name);
 		t->localName.assign(localTransitions[i]->localName);
 		t->isShared = localTransitions[i]->isShared;
-		t->sharedCount = localTransitions[i]->sharedCount;
+        t->sharedCount = localTransitions[i]->sharedCount;
+        t->probability = localTransitions[i]->probability;
 
 		//Copy condition data
 		for(Condition* c : localTransitions[i]->conditions){
