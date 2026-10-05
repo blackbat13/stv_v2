@@ -420,19 +420,19 @@ int main(int argc, char* argv[]) {
         // Perform KBC the expected number of times
         for(i=0; i<maxKBCIterations; i++){
             //ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
-            cout << "Attempting KBC Iteration #" << i+1 << endl;
+            //cout << "Attempting KBC Iteration #" << i+1 << endl;
             LocalModels KBCdLM;
 
             // Perform KBC for the selected agents
             for(int j=0; j<gm->agents.size(); j++){
                 if(selectedAgents.count(j)>0){
                     GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
-                    DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-CLONE"+to_string(j)+"-");
+                    //DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-CLONE"+to_string(j)+"-");
                     KBCprojection(cloneModel, j);
-                    DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-PROJECTED"+to_string(j)+"-");
+                    //DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-PROJECTED"+to_string(j)+"-");
                     Agent* a = KBCexpansion(cloneModel, j);
                     KBCdLM.agents.push_back(a);
-                    DotGraph(a).saveToFile(config.dotdir, "kbc-");
+                    //DotGraph(a).saveToFile(config.dotdir, "kbc-");
                     cout << "Created a KBC'd version of Agent #" << j << " " << a->name << endl;
                     //cout << "Stats for Agent #" << j << ": States: " << a->localStates.size() << " Transitions: " << a->localTransitions.size() << endl;
                     delete cloneModel;
@@ -461,6 +461,7 @@ int main(int argc, char* argv[]) {
                 
                 ofs.close();
                 ifs.close();
+                cout << "KBC output written to " << config.kbc_out_fname << endl;
             }
             
             GlobalModelGenerator* KBCdGenerator = new GlobalModelGenerator();
@@ -478,14 +479,16 @@ int main(int argc, char* argv[]) {
                 //generator->expandAllStates();   // todo: add allExpanded flag?
                 DotGraph(KBCdGenerator->getCurrentGlobalModel(), true).saveToFile(config.dotdir, fbasename+"-KBC-");
             }
-
+            
+            /*
             cout << "Attempting verification\n";
             auto KBCverif = new Verification(KBCdGenerator);
             printf("Post-KBC verification result: %s\n", KBCverif->verify() ? "TRUE" : "FALSE");
+            */
             delete gm;
             gm = KBCdGenerator->getCurrentGlobalModel();
             //cout << "Stats for Global Model after KBC iteration #" << i << ": States: " << gm->globalStates.size() << endl;
-            delete KBCverif;
+            //delete KBCverif;
         }
         //ModelDotDump(gm, "KBC-iter-"+to_string(i)+"-");
 	}

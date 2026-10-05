@@ -51,7 +51,7 @@ void KBCprojection(GlobalModel *const gm, int agent_id){
 		// }
 	}
 	
-	DotGraph(gm, true).saveToFile("KBCDOT", "global-epsilon-"+to_string(rand())+"-");
+	//DotGraph(gm, true).saveToFile("KBCDOT", "global-epsilon-"+to_string(rand())+"-");
 }
 
 bool CheckCommon(std::set<GlobalState*> const& inSetA, std::set<GlobalState*> const& inSetB){
