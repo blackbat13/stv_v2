@@ -142,6 +142,7 @@ Verification::~Verification() {
 bool Verification::verify() {
     this->mode = TraversalMode::NORMAL;
     this->revertToGlobalState = nullptr;
+    this->activeGlobalStates.clear();
     const auto initState = this->generator->getCurrentGlobalModel()->initState;
     return this->verifyGlobalState(initState, 0);
 }
@@ -359,6 +360,20 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             return true;
         }
     }
+    // History rollback can clear PENDING while a state is still on the call stack.
+    if (this->activeGlobalStates.find(globalState) != this->activeGlobalStates.end()) {
+        return !isFMode;
+    }
+
+    this->activeGlobalStates.insert(globalState);
+    struct ActiveStateGuard {
+        set<GlobalState*>& states;
+        GlobalState* state;
+        ~ActiveStateGuard() {
+            states.erase(state);
+        }
+    } activeStateGuard{this->activeGlobalStates, globalState};
+
     if (this->historyEnd != nullptr && this->historyEnd->type == HistoryEntryType::STATE_STATUS && this->historyEnd->globalState == globalState && this->historyEnd->prevStatus == GlobalStateVerificationStatus::PENDING && this->historyEnd->newStatus == GlobalStateVerificationStatus::UNVERIFIED) {
         dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::PENDING, "entered state w/ undo");
         this->undoLastHistoryEntry(true);
@@ -860,7 +875,8 @@ bool Verification::revertLastDecision(int depth) {
         auto newHistoryEntry = this->newHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
         this->historyToRestore.push(newHistoryEntry);
     }
-    while (this->historyEnd != this->historyStart && this->historyEnd->globalState != shallowestGlobalState) {
+    // A state may recur at different depths; resume at the exact context occurrence.
+    while (this->historyEnd != this->historyStart && !(this->historyEnd->type == HistoryEntryType::CONTEXT && this->historyEnd->globalState == shallowestGlobalState && this->historyEnd->depth == shallowestDepth)) {
         auto entry = this->historyEnd;
         this->undoLastHistoryEntry(false);
         if (entry->type == HistoryEntryType::CONTEXT) {
@@ -1082,6 +1098,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
                 }
                 this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
                 globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                this->activeGlobalStates.erase(globalState);
                 return this->verifyGlobalState(globalState, depth); // Same state, same depth
             }
             else {
@@ -1219,6 +1236,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                     }
                     this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
                     globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                    this->activeGlobalStates.erase(globalState);
                     return this->verifyGlobalState(globalState, depth); // Same state, same depth
                 }
                 else {
@@ -1306,6 +1324,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                         }
                         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
                         globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                        this->activeGlobalStates.erase(globalState);
                         return this->verifyGlobalState(globalState, depth); // Same state, same depth
                     }
                     else {

@@ -17,6 +17,7 @@
 #include "ctl_test.h"
 #include "input_error_test.h"
 #include "reduction_test.h"
+#include "svote_variable_reduction_test.h"
 #include "natural_strategy_test.h" // run last, idk why
 
 int main(int argc, char **argv) {

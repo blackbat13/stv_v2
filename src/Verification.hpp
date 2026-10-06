@@ -102,6 +102,8 @@ protected:
     stack<HistoryEntry*> historyToRestore;
     /// @brief Holds current model and formula.
     GlobalModelGenerator* generator;
+    /// @brief States currently being verified on the active recursion path.
+    set<GlobalState*> activeGlobalStates;
     /// @brief Pointer to the start of model traversal history.
     HistoryEntry* historyStart;
     /// @brief Pointer to the end of model traversal history.

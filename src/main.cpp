@@ -404,5 +404,3 @@ int main(int argc, char* argv[]) {
     delete strat;
     return 0;
 }
-
-
