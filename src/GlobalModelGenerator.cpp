@@ -43,6 +43,7 @@ GlobalModelGenerator::~GlobalModelGenerator() {
 GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* formula) {
     this->localModels = localModels;
     this->formula = formula;
+    config.probability = formula->probabilitySign != ProbabilitySign::NONE;
     this->globalModel = new GlobalModel();
     this->globalModel->agents = localModels->agents;
 
@@ -67,10 +68,6 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
         a = agt;
         set<GlobalState*>* states = this->findOrCreateEpistemicClassForKnowledge(&this->globalModel->initState->localStatesProjection, this->globalModel->initState, a);
         this->globalModel->initState->epistemicClassesAllAgents[a] = states;
-    }
-
-    if(this->formula->probabilitySign != ProbabilitySign::NONE) {
-        config.probability = true;
     }
 
     return this->globalModel->initState;

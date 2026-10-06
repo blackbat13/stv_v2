@@ -1552,6 +1552,9 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrat
             this->reductionComplexityBefore += (get<0>(values) ? 1 : 2);
         }
     }
+    if (result.empty()) {
+        return result;
+    }
     auto reduceResult = reduceStrategy(result);
     auto temp = &get<0>(reduceResult[reduceResult.size() - 1]);
     tuple<bool, string> t = {true, "T"};

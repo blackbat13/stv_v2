@@ -185,9 +185,10 @@ class TestVerif
         generator->initModel(localModels, formula);
         bool result = false;
 
-        generator->expandAllStates();
+        generator->expandAllStates(true);
         auto verification = new Verification(generator);
-        result = verification->verify();
+        generator->createProbabilityStrategy(localModels);
+        result = verification->verifyMDP().verificationResult;
 
         return result;
     }
