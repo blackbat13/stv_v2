@@ -19,10 +19,10 @@ struct EpistemicClass {
     // GlobalState->hash => GlobalState*
 
     /// @brief Transition that was already selected in this epistemic class. Model has to choose this transition if it is already set.
-    GlobalTransition* fixedCoalitionTransition;
+    GlobalTransition* fixedCoalitionTransition = nullptr;
 
     /// @brief Local transition selected by this agent for the local state represented by this class.
-    LocalTransition* fixedCoalitionLocalTransition;
+    LocalTransition* fixedCoalitionLocalTransition = nullptr;
 };
 
 #endif // EPISTEMICCLASS_H

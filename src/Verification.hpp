@@ -19,27 +19,27 @@ struct HistoryEntry {
     /// @brief Type of the history record.
     HistoryEntryType type;
     /// @brief Saved global state.
-    GlobalState* globalState;
+    GlobalState* globalState = nullptr;
     /// @brief Selected transition.
-    GlobalTransition* decision;
+    GlobalTransition* decision = nullptr;
     /// @brief Agent whose local transition was selected.
-    Agent* decisionAgent;
+    Agent* decisionAgent = nullptr;
     /// @brief Local transition selected for the agent's current local state.
-    LocalTransition* localDecision;
+    LocalTransition* localDecision = nullptr;
     /// @brief Is the transition controlled by an agent in coalition.
-    bool globalTransitionControlled;
+    bool globalTransitionControlled = false;
     /// @brief Previous model verification state.
-    GlobalStateVerificationStatus prevStatus;
+    GlobalStateVerificationStatus prevStatus = GlobalStateVerificationStatus::UNVERIFIED;
     /// @brief Next model verification state.
-    GlobalStateVerificationStatus newStatus;
+    GlobalStateVerificationStatus newStatus = GlobalStateVerificationStatus::UNVERIFIED;
     /// @brief Recursion depth.
-    int depth;
+    int depth = 0;
     /// @brief Holds currently processed strategy for the current state.
     StrategyEntry strategy;
     /// @brief Pointer to the previous HistoryEntry.
-    HistoryEntry* prev;
+    HistoryEntry* prev = nullptr;
     /// @brief Pointer to the next HistoryEntry.
-    HistoryEntry* next;
+    HistoryEntry* next = nullptr;
     /// @brief Converts HistoryEntry to string.
     /// @return A string with the descriprion of this history record.
     string toString() {
@@ -145,8 +145,8 @@ protected:
     void undoHistoryUntil(HistoryEntry* historyEntry, bool inclusive, int depth);
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
-    bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
-    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, set<GlobalTransition*> mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
+    bool checkUncontrolledSet(const set<GlobalTransition*>& uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
     bool minFixpointVerify();
     bool maxFixpointVerify();

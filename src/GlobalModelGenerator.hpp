@@ -45,7 +45,7 @@ public:
     void initStrategy(StrategyCollection* strat);
     /// Initializes incremental strategy generation for probabilistic verification.
     void createProbabilityStrategy();
-    set<tuple<string, string>>* getNextPath();  // Returns next strategy iteratively (one per call)
+    const map<string, string>* getNextPath();  // Returns next strategy iteratively (one per call)
     MDP generateNextMDP(bool makeOpponentGoMax = false);
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
     string getCoalitionLocalStateIdentifier(Agent* agent, LocalState* localState);
@@ -89,7 +89,6 @@ protected:
     string computeEpistemicClassHash(vector<LocalState*>* localStates, Agent* agent);
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
-    GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
     map<string, string> currentStrategy;  // Agent-local-state identifier to selected action
     
     // Track each coalition agent's action choice at each of its local states.
