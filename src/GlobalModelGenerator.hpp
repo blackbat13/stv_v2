@@ -43,10 +43,12 @@ public:
     void markFormulaAsIncorrect();
     bool getFormulaCorectness();
     void initStrategy(StrategyCollection* strat);
-    set<set<tuple<string, string>>> createProbabilityStrategy(LocalModels* localModels);
+    /// Initializes incremental strategy generation for probabilistic verification.
+    void createProbabilityStrategy();
     set<tuple<string, string>>* getNextPath();  // Returns next strategy iteratively (one per call)
     MDP generateNextMDP(bool makeOpponentGoMax = false);
     string getCoalitionIdentifier(vector<LocalState *> *localStates);
+    string getCoalitionLocalStateIdentifier(Agent* agent, LocalState* localState);
     // Returns coalition-only action signature, ordered by agentIndex and using localName when available
     string getCoalitionActionSignature(GlobalTransition* transition, char sep=';');
     string getActionNameFromStateInStrategy(GlobalState* state);
@@ -88,19 +90,21 @@ protected:
     string computeGlobalStateHash(vector<LocalState*>* localStates);
     EpistemicClass* findOrCreateEpistemicClass(vector<LocalState*>* localStates, Agent* agent);
     GlobalState* findGlobalStateInEpistemicClass(vector<LocalState*>* localStates, EpistemicClass* epistemicClass);
-    set<tuple<string, string>> currentStrategy;  // Current strategy being built
+    map<string, string> currentStrategy;  // Agent-local-state identifier to selected action
     
-    // For iterative strategy generation: track which action choice (0, 1, 2, ...) at each epistemic class
-    map<string, size_t> choiceIndices;  // coalitionId -> which action choice to try (0-indexed)
-    map<string, size_t> actionCounts;   // coalitionId -> total number of actions available
+    // Track each coalition agent's action choice at each of its local states.
+    map<string, size_t> choiceIndices;  // agent-local-state identifier -> action choice (0-indexed)
+    map<string, size_t> actionCounts;   // agent-local-state identifier -> number of actions available
     bool strategyGenerationInit = false;
     bool strategiesExhausted = false;
 
     // Cache for efficient state hash lookups
     unordered_map<string, GlobalState*> stateHashMapCache;
 
-    map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // state, actionName, actual transitions
-    map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // state, actionName, actual transitions
+    map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // Global coalition state -> action -> transitions
+    map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // Global state -> action -> transitions
+    map<string, set<string>> coalitionLocalActions; // Agent-local state -> available actions
+    bool isCoalitionTransitionCompatibleWithStrategy(GlobalTransition* transition, const map<string, string>& decisions);
     bool checkLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
 };
 

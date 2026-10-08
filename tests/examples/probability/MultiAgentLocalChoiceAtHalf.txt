@@ -1,0 +1,19 @@
+Agent AgentA:
+LOCAL: [goal]
+PERSISTENT: [goal]
+INITIAL: [goal:=0]
+init q
+shared[2] choose0[choose0]: q -> done [goal:=1]
+shared[2] choose1[choose1]: q -> done [goal:=1]
+
+Agent AgentB:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init initial
+branch: initial -> 50/100 : state0
+                   50/100 : state1
+shared[2] choose0[choose0]: state0 -> done
+shared[2] choose1[choose1]: state1 -> done
+
+FORMULA: <<AgentA,AgentB>><>&P[>=0.5](goal==1)

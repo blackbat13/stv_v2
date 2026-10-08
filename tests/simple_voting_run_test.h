@@ -9,7 +9,7 @@ TEST(SimpleVotingRunTest, 1Voter1CoercerRun)
 {
     TestVerif verify("../tests/examples/svoterun/1Voter1CoercerRun.txt", true);
 
-    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.result, false);
 }
 
 TEST(SimpleVotingRunTest, 1Voter1CoercerNotRun)
@@ -37,7 +37,7 @@ TEST(SimpleVotingRunTest, 1Voter2CoercersRun)
 {
     TestVerif verify("../tests/examples/svoterun/1Voter2CoercersRun.txt", true);
 
-    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.result, false);
 }
 
 TEST(SimpleVotingRunTest, 1Voter2CoercersNotRun)
@@ -51,7 +51,7 @@ TEST(SimpleVotingRunTest, 1Voter2CoercersRunHide)
 {
     TestVerif verify("../tests/examples/svoterun/1Voter2CoercersRunHide.txt", true);
 
-    EXPECT_EQ(verify.result, true);
+    EXPECT_EQ(verify.result, false);
 }
 
 TEST(SimpleVotingRunTestF, 2Voters1CoercerRun)

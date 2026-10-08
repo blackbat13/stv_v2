@@ -187,7 +187,7 @@ class TestVerif
 
         generator->expandAllStates(true);
         auto verification = new Verification(generator);
-        generator->createProbabilityStrategy(localModels);
+        generator->createProbabilityStrategy();
         result = verification->verifyMDP().verificationResult;
 
         return result;

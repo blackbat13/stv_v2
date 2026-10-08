@@ -22,6 +22,10 @@ struct HistoryEntry {
     GlobalState* globalState;
     /// @brief Selected transition.
     GlobalTransition* decision;
+    /// @brief Agent whose local transition was selected.
+    Agent* decisionAgent;
+    /// @brief Local transition selected for the agent's current local state.
+    LocalTransition* localDecision;
     /// @brief Is the transition controlled by an agent in coalition.
     bool globalTransitionControlled;
     /// @brief Previous model verification state.
@@ -41,7 +45,11 @@ struct HistoryEntry {
     string toString() {
         char buff[1024] = { 0 };
         if (this->type == HistoryEntryType::DECISION) {
-            snprintf(buff, sizeof(buff), "decision in %s: to %s", this->globalState->hash.c_str(), this->decision->to->hash.c_str());
+            if (this->decisionAgent != nullptr && this->localDecision != nullptr) {
+                snprintf(buff, sizeof(buff), "decision by %s in local state %s: %s", this->decisionAgent->name.c_str(), this->localDecision->from->name.c_str(), this->localDecision->localName.c_str());
+            } else {
+                snprintf(buff, sizeof(buff), "decision in %s: to %s", this->globalState->hash.c_str(), this->decision->to->hash.c_str());
+            }
         }
         else if (this->type == HistoryEntryType::STATE_STATUS) {
             snprintf(buff, sizeof(buff), "stateVerifStatus of %s: %s -> %s", this->globalState->hash.c_str(), verStatusToStr(this->prevStatus).c_str(), verStatusToStr(this->newStatus).c_str());
@@ -120,10 +128,13 @@ protected:
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
+    bool isGlobalTransitionCompatibleWithCoalitionDecisions(GlobalTransition* globalTransition);
+    bool hasUnfixedCoalitionDecision(GlobalTransition* globalTransition);
+    void addCoalitionDecisionHistory(GlobalState* globalState, GlobalTransition* decision);
     bool isAgentInCoalition(Agent* agent);
     EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
     bool areGlobalStatesInTheSameEpistemicClass(GlobalState* globalState1, GlobalState* globalState2);
-    void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision);
+    void addHistoryDecision(GlobalState* globalState, GlobalTransition* decision, Agent* decisionAgent = nullptr, LocalTransition* localDecision = nullptr);
     void addHistoryStateStatus(GlobalState* globalState, GlobalStateVerificationStatus prevStatus, GlobalStateVerificationStatus newStatus);
     bool addHistoryContext(GlobalState* globalState, int depth, GlobalTransition* decision, bool globalTransitionControlled);
     void addHistoryMarkDecisionAsInvalid(GlobalState* globalState, GlobalTransition* decision);
@@ -135,7 +146,7 @@ protected:
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
     bool checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
-    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, set<GlobalTransition*> mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
     bool minFixpointVerify();
     bool maxFixpointVerify();

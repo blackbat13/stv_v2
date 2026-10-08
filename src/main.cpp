@@ -256,7 +256,7 @@ int main(int argc, char* argv[]) {
             verifResult = verificationIt->verify().verificationResult;
         } else if (config.probability) {
             // generator->createIterativeStrategy(localModels);
-            generator->createProbabilityStrategy(localModels);
+            generator->createProbabilityStrategy();
             verifResult2 = verification->verifyMDP();
             verifResult = verifResult2.verificationResult;
             // config.verify_strategy = true;
