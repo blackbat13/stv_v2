@@ -1254,6 +1254,15 @@ bool Verification::checkUncontrolledSet(const set<GlobalTransition*>& uncontroll
 bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+    auto getCompatibleOpponentTransitions = [this, &mandatoryOpponentTransitions]() {
+        set<GlobalTransition*> compatibleTransitions;
+        for (const auto transition : mandatoryOpponentTransitions) {
+            if (this->isGlobalTransitionCompatibleWithCoalitionDecisions(transition)) {
+                compatibleTransitions.insert(transition);
+            }
+        }
+        return compatibleTransitions;
+    };
     bool isMixedControlTransitions = false;
 
     if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
@@ -1334,7 +1343,11 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
             // If the coalition has a valid choice, then the opponent-triggered transitions must be valid too.
             if (hasValidControlledTransition && !mandatoryOpponentTransitions.empty()) {
-                hasValidControlledTransition = this->checkUncontrolledSet(mandatoryOpponentTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions);
+                const auto compatibleTransitions = getCompatibleOpponentTransitions();
+                if (!compatibleTransitions.empty()) {
+                    hasValidControlledTransition = this->checkUncontrolledSet(
+                        compatibleTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions);
+                }
             }
             if (config.natural_strategy && !okStrategy) {
                 hasValidControlledTransition = false;
@@ -1487,13 +1500,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         // If there are no valid controlled or choice transitions, check if any mandatory opponent-triggered transitions are compatible with the coalition's decisions
         if (!hasValidControlledTransition && !hasValidChoiceTransition &&
             !mandatoryOpponentTransitions.empty()) {
-            set<GlobalTransition*> compatibleOpponentChoices;
-            // Check if any of the mandatory opponent-triggered transitions are compatible with the coalition's decisions
-            for (const auto opponentTransition : mandatoryOpponentTransitions) {
-                if (this->isGlobalTransitionCompatibleWithCoalitionDecisions(opponentTransition)) {
-                    compatibleOpponentChoices.insert(opponentTransition);
-                }
-            }
+            const auto compatibleOpponentChoices = getCompatibleOpponentTransitions();
             if (!compatibleOpponentChoices.empty()) {
                 // Only an uncommitted, compatible synchronization can be a coalition choice.
                 hasValidChoiceTransition = this->checkUncontrolledSet(

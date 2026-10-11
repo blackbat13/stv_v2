@@ -29,3 +29,10 @@ TEST(TrainsTest, MultiAgentCoalitionDecisionsAreLocalStateBased)
 
     EXPECT_FALSE(verify.result);
 }
+
+TEST(TrainsTest, CoalitionChoiceDisablesIncompatibleOpponentSynchronization)
+{
+    TestVerif verify("../tests/examples/trains/CoalitionOpponentCompatibility.txt", 0);
+
+    EXPECT_TRUE(verify.result);
+}
