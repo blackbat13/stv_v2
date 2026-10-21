@@ -102,3 +102,17 @@ TEST(ProbabilityTest, FVerificationEndEarly)
 
     EXPECT_EQ(verify.result, true);
 }
+
+TEST(ProbabilityTest, MultiAgentLocalStateChoices)
+{
+    TestVerif verify("../tests/examples/probability/MultiAgentLocalChoice.txt", 4);
+
+    EXPECT_FALSE(verify.result);
+}
+
+TEST(ProbabilityTest, MultiAgentLocalStateChoicesReachableAtHalfProbability)
+{
+    TestVerif verify("../tests/examples/probability/MultiAgentLocalChoiceAtHalf.txt", 4);
+
+    EXPECT_TRUE(verify.result);
+}
