@@ -62,3 +62,7 @@ build/*.csv
 
 # IDE snippets
 !.vscode/cpp.code-snippets
+ 
+# Graphify generated files
+graphify-out
+.github/copilot-instructions.md

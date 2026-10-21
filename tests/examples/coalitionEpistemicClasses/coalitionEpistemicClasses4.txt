@@ -1,0 +1,29 @@
+Agent CoalitionA:
+LOCAL: [A_end]
+PERSISTENT: [A_end]
+INITIAL: [A_end:=0]
+init a0
+advance_a: a0 -> a1 [A_end:=1]
+shared[2] finish[finish_a]: a0 -> a2 [A_end:=2]
+stay_a1: a1 -> a1
+stay_a2: a2 -> a2
+
+Agent CoalitionB:
+LOCAL: [B_end]
+PERSISTENT: [B_end]
+INITIAL: [B_end:=0]
+init b0
+shared[2] finish[finish]: b0 -> b1 [B_end:=1]
+branch_b: b0 -> b2 [B_end:=2]
+stay_b1: b1 -> b1
+stay_b2: b2 -> b2
+
+Agent Outside:
+LOCAL: [Outside_end]
+PERSISTENT: [Outside_end]
+INITIAL: [Outside_end:=0]
+init c0
+advance_c: c0 -> c1 [Outside_end:=1]
+stay_c: c1 -> c1
+
+FORMULA: <<CoalitionA, CoalitionB>><>(A_end == 2 && B_end == 1 && Outside_end == 1)

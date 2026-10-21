@@ -23,6 +23,16 @@ void set_input_string(const char* in);
 set<AgentTemplate*>* modelDescription;
 FormulaTemplate formulaDescription;
 
+namespace {
+void resetFormulaDescription() {
+   formulaDescription.coalition = nullptr;
+   formulaDescription.formula = nullptr;
+   formulaDescription.isF = false;
+   formulaDescription.probability = nullptr;
+   formulaDescription.probabilitySign.clear();
+}
+}
+
 /// @brief ModelParser constructor.
 ModelParser::ModelParser() {
 }
@@ -41,6 +51,7 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
       throw std::runtime_error("Failed to open model file: " + fileName);
    }
    // zamapuj go jako wejście dla Fleksa
+   resetFormulaDescription();
    yyrestart(f);
    // uruchom parsowanie
    yyparse();
@@ -117,6 +128,7 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    // zamapuj go jako wejście dla Fleksa
+   resetFormulaDescription();
    yyrestart(f);
    // uruchom parsowanie
    yyparse();
@@ -138,6 +150,7 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
 
    char* ch = strdup(s.c_str());
    set_input_string(ch);
+   resetFormulaDescription();
    yyparse();
 
    Formula formula;

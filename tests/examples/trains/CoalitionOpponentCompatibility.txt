@@ -1,0 +1,26 @@
+Agent CoalitionA:
+LOCAL: [goal]
+PERSISTENT: [goal]
+INITIAL: [goal:=0]
+init q
+shared[2] go[go]: q -> done [goal:=1]
+shared[2] lose[wait]: q -> bad [goal:=0]
+stay_bad: bad -> bad
+
+Agent CoalitionB:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init b
+shared[2] go[go]: b -> done
+loop: done -> done
+
+Agent Opponent:
+LOCAL: []
+PERSISTENT: []
+INITIAL: []
+init o
+shared[2] lose[lose]: o -> done
+loop2: done -> done
+
+FORMULA: <<CoalitionA,CoalitionB>><>(goal==1)

@@ -1,0 +1,50 @@
+Agent Voter1:
+LOCAL: [Voter1_vote, Voter1_obeyed, Voter1_disobeyed]
+PERSISTENT: [Voter1_vote, Voter1_obeyed, Voter1_disobeyed]
+INITIAL: []
+init start
+vote1: start -> voted [Voter1_vote := 1]
+shared[2] Voter1_gv1[Voter1_gv1]: voted [Voter1_vote == 1] -> obeyed [Voter1_obeyed := 1]
+vote2: start -> voted [Voter1_vote := 2]
+shared[2] Voter1_gv2[Voter1_gv2]: voted [Voter1_vote == 2] -> obeyed [Voter1_obeyed := 1]
+vote3: start -> voted [Voter1_vote := 3]
+shared[2] Voter1_gv3[Voter1_gv3]: voted [Voter1_vote == 3] -> obeyed [Voter1_obeyed := 1]
+shared[2] Voter1_ng[Voter1_ng]: voted -> disobeyed [Voter1_disobeyed := 1]
+shared[3] idle[idle]: obeyed -> obeyed
+shared[3] idle[idle]: disobeyed -> disobeyed
+
+Agent Voter2:
+LOCAL: [Voter2_vote, Voter2_obeyed, Voter2_disobeyed]
+PERSISTENT: [Voter2_vote, Voter2_obeyed, Voter2_disobeyed]
+INITIAL: []
+init start
+vote1: start -> voted [Voter2_vote := 1]
+shared[2] Voter2_gv1[Voter2_gv1]: voted [Voter2_vote == 1] -> obeyed [Voter2_obeyed := 1]
+vote2: start -> voted [Voter2_vote := 2]
+shared[2] Voter2_gv2[Voter2_gv2]: voted [Voter2_vote == 2] -> obeyed [Voter2_obeyed := 1]
+vote3: start -> voted [Voter2_vote := 3]
+shared[2] Voter2_gv3[Voter2_gv3]: voted [Voter2_vote == 3] -> obeyed [Voter2_obeyed := 1]
+shared[2] Voter2_ng[Voter2_ng]: voted -> disobeyed [Voter2_disobeyed := 1]
+shared[3] idle[idle]: obeyed -> obeyed
+shared[3] idle[idle]: disobeyed -> disobeyed
+
+Agent Coercer:
+LOCAL: [Coercer_cert1, Coercer_pun1, Coercer_dec1, Coercer_end1, Coercer_cert2, Coercer_pun2, Coercer_dec2, Coercer_end2]
+PERSISTENT: [Coercer_cert1, Coercer_pun1, Coercer_dec1, Coercer_end1, Coercer_cert2, Coercer_pun2, Coercer_dec2, Coercer_end2]
+INITIAL: []
+init start
+shared[2] Voter1_ng[Voter1_g]: start -> start [Coercer_cert1 := 0, Coercer_dec1 := 1]
+shared[2] Voter1_gv1[Voter1_g]: start -> start [Coercer_cert1 := 1, Coercer_dec1 := 1]
+shared[2] Voter1_gv2[Voter1_g]: start -> start [Coercer_cert1 := 1, Coercer_dec1 := 1]
+shared[2] Voter1_gv3[Voter1_g]: start -> start [Coercer_cert1 := 1, Coercer_dec1 := 1]
+np1: start [Coercer_dec1 == 1 && Coercer_end1 != 1] -> start [Coercer_pun1 := 0, Coercer_end1 := 1]
+pun1: start [Coercer_dec1 == 1 && Coercer_end1 != 1] -> start [Coercer_pun1 := 1, Coercer_end1 := 1]
+shared[2] Voter2_ng[Voter2_g]: start -> start [Coercer_cert2 := 0, Coercer_dec2 := 1]
+shared[2] Voter2_gv1[Voter2_g]: start -> start [Coercer_cert2 := 1, Coercer_dec2 := 1]
+shared[2] Voter2_gv2[Voter2_g]: start -> start [Coercer_cert2 := 1, Coercer_dec2 := 1]
+shared[2] Voter2_gv3[Voter2_g]: start -> start [Coercer_cert2 := 1, Coercer_dec2 := 1]
+np2: start [Coercer_dec2 == 1 && Coercer_end2 != 1] -> start [Coercer_pun2 := 0, Coercer_end2 := 1]
+pun2: start [Coercer_dec2 == 1 && Coercer_end2 != 1] -> start [Coercer_pun2 := 1, Coercer_end2 := 1]
+shared[3] idle[idle]: start [Coercer_end1 == 1 && Coercer_end2 == 1] -> start
+
+FORMULA: <<Coercer>>[](Coercer_end1 == 0 || (Coercer_pun1 == 0 && Voter1_obeyed == 1) || (Coercer_pun1 == 5 && Voter1_disobeyed == 1))

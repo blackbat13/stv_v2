@@ -359,6 +359,20 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             return true;
         }
     }
+    // History rollback can clear PENDING while a state is still on the call stack.
+    if (this->activeGlobalStates.find(globalState) != this->activeGlobalStates.end()) {
+        return !isFMode;
+    }
+
+    this->activeGlobalStates.insert(globalState);
+    struct ActiveStateGuard {
+        set<GlobalState*>& states;
+        GlobalState* state;
+        ~ActiveStateGuard() {
+            states.erase(state);
+        }
+    } activeStateGuard{this->activeGlobalStates, globalState};
+
     if (this->historyEnd != nullptr && this->historyEnd->type == HistoryEntryType::STATE_STATUS && this->historyEnd->globalState == globalState && this->historyEnd->prevStatus == GlobalStateVerificationStatus::PENDING && this->historyEnd->newStatus == GlobalStateVerificationStatus::UNVERIFIED) {
         dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::PENDING, "entered state w/ undo");
         this->undoLastHistoryEntry(true);
@@ -504,8 +518,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     // 3) group transitions: controlled and uncontrolled by the coalition
     set<GlobalTransition*> controlledGlobalTransitions;
     set<GlobalTransition*> uncontrolledGlobalTransitions;
-    auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
-    auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+    set<GlobalTransition*> mandatoryOpponentTransitions;
     bool hasOmittedTransitions = false;
     bool hasMergedTransitionsIntoUncontrolled = false;
 
@@ -516,39 +529,75 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             continue;
         }
 
-        if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
-            if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
-                controlledGlobalTransitions.insert(globalTransition);
-            } else if (fixedGlobalTransition == nullptr) {
-                // the decision is invalid, skip it
-            } else if (this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
-                // controlled transition that is fixed should be treated as an uncontrolled transition 
-                #if VERBOSE
-                    printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-                #endif
-                if (!config.probability) {
-                    uncontrolledGlobalTransitions.insert(globalTransition);
-                } else {
-                    string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
-                    for (auto globalTransition2 : globalState->globalTransitions) {
-                        if (globalTransition2->joinLocalTransitionNames(',') == globalTransitionName) {
-                            uncontrolledGlobalTransitions.insert(globalTransition2);
+        // if F then treat controlled and uncontrolled transitions differently
+        if (config.probability) {
+            const auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
+            const auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+            if (this->isGlobalTransitionControlledByCoalition(globalTransition)) {
+                if (fixedGlobalTransition == nullptr && !globalTransition->isInvalidDecision) {
+                    // if the transition is controlled and not fixed, then it should be treated as a controlled transition
+                    controlledGlobalTransitions.insert(globalTransition);
+                } else if (fixedGlobalTransition != nullptr && this->areGlobalStatesInTheSameEpistemicClass(fixedGlobalTransition->to, globalTransition->to) && this->equivalentGlobalTransitions(fixedGlobalTransition, globalTransition)) {
+                    // if the transition is controlled and fixed, then all transitions that are equivalent to it should be treated as uncontrolled
+                    const string globalTransitionName = globalTransition->joinLocalTransitionNames(',');
+                    for (auto candidate : globalState->globalTransitions) {
+                        if (candidate->joinLocalTransitionNames(',') == globalTransitionName) {
+                            uncontrolledGlobalTransitions.insert(candidate);
                         }
                     }
+                } else if (fixedGlobalTransition != nullptr) {
+                    // if the transition is controlled and fixed, then all transitions that are not equivalent to it should be treated as omitted
+                    hasOmittedTransitions = true;
+                }
+            } else {
+                uncontrolledGlobalTransitions.insert(globalTransition);
+            }
+            continue;
+        }
+
+        if (globalTransition->isInvalidDecision) {
+            continue;
+        }
+
+        // check if the global transition is controlled by the coalition or involves coalition agents
+        bool controlledByCoalition = false;
+        bool includesCoalitionAgent = false;
+        for (const auto localTransition : globalTransition->localTransitions) {
+            if (this->isAgentInCoalition(localTransition->agent)) {
+                includesCoalitionAgent = true;
+                if (!localTransition->isShared || localTransition->name == localTransition->localName) {
+                    controlledByCoalition = true;
+                    break;
                 }
             }
-            else {
-                // omit controlled transition that is != fixedGlobalTransition
-                #if VERBOSE
-                    printf("%somit controlled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-                #endif
-                hasOmittedTransitions = true;
-            }
         }
-        else {
+
+        if (!controlledByCoalition) {
+            if (includesCoalitionAgent) {
+                // Opponents can trigger this synchronization despite coalition participation.
+                mandatoryOpponentTransitions.insert(globalTransition);
+            } else {
+                uncontrolledGlobalTransitions.insert(globalTransition);
+            }
+            continue;
+        }
+
+        if (!this->isGlobalTransitionCompatibleWithCoalitionDecisions(globalTransition)) {
+            hasOmittedTransitions = true;
+            continue;
+        }
+
+        if (this->hasUnfixedCoalitionDecision(globalTransition)) {
+            controlledGlobalTransitions.insert(globalTransition);
+        } else {
+            // controlled transition that is fixed should be treated as an uncontrolled transition
+            #if VERBOSE
+                printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
+            #endif
             uncontrolledGlobalTransitions.insert(globalTransition);
         }
     }
+
     // solve the uncontrolled transition blocking the controlled transition, making it uncontrolled
     if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
         set<Agent*> agents = generator->getFormula()->coalition;
@@ -572,12 +621,14 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
                     potentiallyBrokenAgents.insert(glob->agent);
                 }
             }
+
             // if the global transition can fire without any of the coalition agents, mark the agents participating as a definitely faulty ones
             if (!agentTest) {
                 brokenAgents.insert(potentiallyBrokenAgents.begin(), potentiallyBrokenAgents.end());
                 potentiallyBrokenAgents.clear();
             }
         }
+
         // if it turns out that there are bad blocking agents, turn every controlled action with those agents into an uncontrolled one
         if (brokenAgents.size() > 0) {
             stack<GlobalTransition*> transitionsToBeMoved;
@@ -610,7 +661,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, mandatoryOpponentTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled)) {
         return false;
     }
     
@@ -635,6 +686,74 @@ bool Verification::isGlobalTransitionControlledByCoalition(GlobalTransition* glo
         }
     }
     return isControlled;
+}
+
+/// @brief Checks if a global transition is compatible with the decisions made by the coalition.
+/// @param globalTransition Pointer to a GlobalTransition in a model.
+/// @return Returns true if the global transition is compatible with the coalition's decisions, otherwise returns false.
+bool Verification::isGlobalTransitionCompatibleWithCoalitionDecisions(GlobalTransition* globalTransition) {
+    for (const auto localTransition : globalTransition->localTransitions) {
+        // if the agent is not in the coalition, then it does not affect the compatibility
+        if (!this->isAgentInCoalition(localTransition->agent)) {
+            continue;
+        }
+
+        const auto classIt = globalTransition->from->epistemicClasses.find(localTransition->agent);
+        if (classIt == globalTransition->from->epistemicClasses.end()) {
+            throw logic_error("Missing coalition epistemic class for transition agent");
+        }
+
+        // if the fixed coalition local transition is not null and is different from the current local transition, then it is not compatible
+        const auto fixedTransition = classIt->second->fixedCoalitionLocalTransition;
+        if (fixedTransition != nullptr && fixedTransition != localTransition) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// @brief Checks if a global transition has an unfixed decision made by the coalition.
+/// @param globalTransition Pointer to a GlobalTransition in a model.
+/// @return Returns true if the global transition has an unfixed decision, otherwise returns false.
+bool Verification::hasUnfixedCoalitionDecision(GlobalTransition* globalTransition) {
+    for (const auto localTransition : globalTransition->localTransitions) {
+        if (!this->isAgentInCoalition(localTransition->agent) ||
+            (localTransition->isShared && localTransition->name != localTransition->localName)) {
+            continue;
+        }
+        const auto classIt = globalTransition->from->epistemicClasses.find(localTransition->agent);
+        if (classIt == globalTransition->from->epistemicClasses.end()) {
+            throw logic_error("Missing coalition epistemic class for transition agent");
+        }
+        if (classIt->second->fixedCoalitionLocalTransition == nullptr) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// @brief Adds a coalition decision to the history of decisions made by the coalition in a given GlobalState.
+/// @param globalState Pointer to a GlobalState in a model.
+/// @param decision Pointer to a GlobalTransition that represents the decision.
+void Verification::addCoalitionDecisionHistory(GlobalState* globalState, GlobalTransition* decision) {
+    for (const auto localTransition : decision->localTransitions) {
+        // if the agent is not in the coalition, then it does not affect the decision history
+        if (!this->isAgentInCoalition(localTransition->agent)) {
+            continue;
+        }
+
+        const auto classIt = globalState->epistemicClasses.find(localTransition->agent);
+        if (classIt == globalState->epistemicClasses.end()) {
+            throw logic_error("Missing coalition epistemic class for decision agent");
+        }
+
+        // if the fixed coalition local transition is null, then add the decision to the history
+        auto epistemicClass = classIt->second;
+        if (epistemicClass->fixedCoalitionLocalTransition == nullptr) {
+            epistemicClass->fixedCoalitionLocalTransition = localTransition;
+            this->addHistoryDecision(globalState, decision, localTransition->agent, localTransition);
+        }
+    }
 }
 
 /// @brief Checks if the Agent is in a coalition based on the formula in a GlobalModelGenerator.
@@ -675,11 +794,13 @@ bool Verification::areGlobalStatesInTheSameEpistemicClass(GlobalState* globalSta
 /// @brief Creates a HistoryEntry of the type DECISION and puts it on top of the stack of the decision history. 
 /// @param globalState Pointer to a GlobalState of the model.
 /// @param decision Pointer to a GlobalTransition that is to be recorded in the decision history.
-void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition* decision) {
+void Verification::addHistoryDecision(GlobalState* globalState, GlobalTransition* decision, Agent* decisionAgent, LocalTransition* localDecision) {
     auto newHistoryEntry = new HistoryEntry();
     newHistoryEntry->type = HistoryEntryType::DECISION;
     newHistoryEntry->globalState = globalState;
     newHistoryEntry->decision = decision;
+    newHistoryEntry->decisionAgent = decisionAgent;
+    newHistoryEntry->localDecision = localDecision;
     newHistoryEntry->prev = this->historyEnd;
     newHistoryEntry->next = nullptr;
     newHistoryEntry->depth = 10;
@@ -860,7 +981,8 @@ bool Verification::revertLastDecision(int depth) {
         auto newHistoryEntry = this->newHistoryMarkDecisionAsInvalid(invalidDecisionGlobalState, invalidDecision);
         this->historyToRestore.push(newHistoryEntry);
     }
-    while (this->historyEnd != this->historyStart && this->historyEnd->globalState != shallowestGlobalState) {
+    // A state may recur at different depths; resume at the exact context occurrence.
+    while (this->historyEnd != this->historyStart && !(this->historyEnd->type == HistoryEntryType::CONTEXT && this->historyEnd->globalState == shallowestGlobalState && this->historyEnd->depth == shallowestDepth)) {
         auto entry = this->historyEnd;
         this->undoLastHistoryEntry(false);
         if (entry->type == HistoryEntryType::CONTEXT) {
@@ -931,8 +1053,18 @@ void Verification::undoLastHistoryEntry(bool freeMemory) {
         return;
     }
     if (this->historyEnd->type == HistoryEntryType::DECISION) {
-        auto epistemicClass = this->getEpistemicClassForGlobalState(this->historyEnd->globalState);
-        epistemicClass->fixedCoalitionTransition = nullptr;
+        // Remove the coalition decision from the epistemic class
+        if (this->historyEnd->decisionAgent != nullptr) {
+            const auto classIt = this->historyEnd->globalState->epistemicClasses.find(this->historyEnd->decisionAgent);
+            if (classIt != this->historyEnd->globalState->epistemicClasses.end() && classIt->second->fixedCoalitionLocalTransition == this->historyEnd->localDecision) {
+                classIt->second->fixedCoalitionLocalTransition = nullptr;
+            }
+        } else {
+            auto epistemicClass = this->getEpistemicClassForGlobalState(this->historyEnd->globalState);
+            if (epistemicClass != nullptr) {
+                epistemicClass->fixedCoalitionTransition = nullptr;
+            }
+        }
     }
     else if (this->historyEnd->type == HistoryEntryType::STATE_STATUS) {
         this->historyEnd->globalState->verificationStatus = this->historyEnd->prevStatus;
@@ -1038,7 +1170,7 @@ bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransitio
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return Returns true if every transition yields a correct result, false otherwise.
-bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
+bool Verification::checkUncontrolledSet(const set<GlobalTransition*>& uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed) {
     for (const auto globalTransition : uncontrolledGlobalTransitions) {
         if (this->mode == TraversalMode::RESTORE) {
             // Skip loop iterations performed before the one from historyToRestore
@@ -1082,6 +1214,7 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
                 }
                 this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
                 globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                this->activeGlobalStates.erase(globalState);
                 return this->verifyGlobalState(globalState, depth); // Same state, same depth
             }
             else {
@@ -1113,13 +1246,23 @@ bool Verification::checkUncontrolledSet(set<GlobalTransition*> uncontrolledGloba
 /// @brief Checks if given transition sets are able to fulfill the formula for its given epistemic class.
 /// @param controlledGlobalTransitions Set of controlled transitions in the current global state.
 /// @param uncontrolledGlobalTransitions Set of uncontrolled transitions in the current global state.
+/// @param mandatoryOpponentTransitions Opponent-triggered synchronized transitions that must be accounted for in this global state.
 /// @param globalState Currently processed global state.
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, set<GlobalTransition*> uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
+    auto getCompatibleOpponentTransitions = [this, &mandatoryOpponentTransitions]() {
+        set<GlobalTransition*> compatibleTransitions;
+        for (const auto transition : mandatoryOpponentTransitions) {
+            if (this->isGlobalTransitionCompatibleWithCoalitionDecisions(transition)) {
+                compatibleTransitions.insert(transition);
+            }
+        }
+        return compatibleTransitions;
+    };
     bool isMixedControlTransitions = false;
 
     if (controlledGlobalTransitions.size() > 0 && uncontrolledGlobalTransitions.size() > 0) {
@@ -1151,8 +1294,8 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     }
 
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
+    bool hasValidControlledTransition = false;
     if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
-        bool hasValidControlledTransition = false;
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
             if (this->mode == TraversalMode::RESTORE) {
@@ -1174,12 +1317,13 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             
             auto prevHistoryEnd = this->historyEnd;
             
-            if (epistemicClass && fixedGlobalTransition == nullptr) {
-                epistemicClass->fixedCoalitionTransition = globalTransition; 
-                #if VERBOSE
-                    printf("%sDECIDE %s -[%s]-> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->joinLocalTransitionNames().c_str(),globalTransition->to->hash.c_str());
-                #endif
-                this->addHistoryDecision(globalState, globalTransition);
+            if (config.probability) {
+                if (epistemicClass && fixedGlobalTransition == nullptr) {
+                    epistemicClass->fixedCoalitionTransition = globalTransition;
+                    this->addHistoryDecision(globalState, globalTransition);
+                }
+            } else {
+                this->addCoalitionDecisionHistory(globalState, globalTransition);
             }
             
             // About to go deeper - add history entry with type=CONTEXT
@@ -1197,9 +1341,18 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 increaseProbability(globalState, globalTransition);
             }
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
+            // If the coalition has a valid choice, then the opponent-triggered transitions must be valid too.
+            if (hasValidControlledTransition && !mandatoryOpponentTransitions.empty()) {
+                const auto compatibleTransitions = getCompatibleOpponentTransitions();
+                if (!compatibleTransitions.empty()) {
+                    hasValidControlledTransition = this->checkUncontrolledSet(
+                        compatibleTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions);
+                }
+            }
             if (config.natural_strategy && !okStrategy) {
                 hasValidControlledTransition = false;
             }
+            
             if (this->mode == TraversalMode::REVERT) {
                 // Recursive verifyGlobalState caused REVERT mode
                 if (globalState == this->revertToGlobalState) {
@@ -1219,13 +1372,14 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                     }
                     this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
                     globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                    this->activeGlobalStates.erase(globalState);
                     return this->verifyGlobalState(globalState, depth); // Same state, same depth
                 }
                 else {
                     return false;
                 }
             }
-            if (epistemicClass && fixedGlobalTransition == nullptr && !hasValidControlledTransition) {
+            if ((!config.probability || (epistemicClass && fixedGlobalTransition == nullptr)) && !hasValidControlledTransition) {
                 this->undoHistoryUntil(prevHistoryEnd, false, depth); 
                 #if VERBOSE
                     printf("%sundoHistoryUntil (inside %s)\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str());
@@ -1306,6 +1460,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                         }
                         this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::UNVERIFIED);
                         globalState->verificationStatus = GlobalStateVerificationStatus::UNVERIFIED;
+                        this->activeGlobalStates.erase(globalState);
                         return this->verifyGlobalState(globalState, depth); // Same state, same depth
                     }
                     else {
@@ -1330,17 +1485,31 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 }
             }
         }
+
         // Maybe a controlled action is an option too
         if (uncontrolledGlobalTransitions.size() > 0) {
             hasValidChoiceTransition = true;
             if (!this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
                 hasValidChoiceTransition = false;
             }
-            if (epistemicClass && fixedGlobalTransition == nullptr) {
+            if (config.probability && epistemicClass && fixedGlobalTransition == nullptr) {
                 epistemicClass->fixedCoalitionTransition = *uncontrolledGlobalTransitions.begin();
             }
         }
-        if (!hasValidControlledTransition && !hasValidChoiceTransition && !hasValidControlledTransition) {
+
+        // If there are no valid controlled or choice transitions, check if any mandatory opponent-triggered transitions are compatible with the coalition's decisions
+        if (!hasValidControlledTransition && !hasValidChoiceTransition &&
+            !mandatoryOpponentTransitions.empty()) {
+            const auto compatibleOpponentChoices = getCompatibleOpponentTransitions();
+            if (!compatibleOpponentChoices.empty()) {
+                // Only an uncommitted, compatible synchronization can be a coalition choice.
+                hasValidChoiceTransition = this->checkUncontrolledSet(
+                    compatibleOpponentChoices, globalState, depth, hasOmittedTransitions, mixedTransitions);
+            }
+        }
+
+        // If there are no valid controlled or choice transitions, mark the global state as an error and revert the last decision
+        if (!hasValidControlledTransition && !hasValidChoiceTransition) {
             this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
             dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "!hasValidControlledTransition");
             globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
@@ -1357,8 +1526,16 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             return false;
         }
     }
+
+    // If there are no controlled transitions, but there are mandatory opponent-triggered transitions, check if they are valid
+    if (controlledGlobalTransitions.empty() && !mandatoryOpponentTransitions.empty()) {
+        if (!this->checkUncontrolledSet(mandatoryOpponentTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
+            return false;
+        }
+    }
     
     // 2) verify paths not controlled by the coalition (all must be OK)
+    // If there are no controlled transitions, but there are uncontrolled transitions, check if they are valid
     if (!isMixedControlTransitions && !this->checkUncontrolledSet(uncontrolledGlobalTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
         return false;
     }
@@ -1532,6 +1709,9 @@ vector<tuple<vector<tuple<bool, string>>, string>> Verification::getReducedStrat
         for (auto values : get<0>(item)) {
             this->reductionComplexityBefore += (get<0>(values) ? 1 : 2);
         }
+    }
+    if (result.empty()) {
+        return result;
     }
     auto reduceResult = reduceStrategy(result);
     auto temp = &get<0>(reduceResult[reduceResult.size() - 1]);
