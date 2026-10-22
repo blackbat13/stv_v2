@@ -119,7 +119,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						labels.insert(name);
 					}
 				}
-				if(i==observation->size()) break;
+				//if(i==observation->size()) break;
 			}
 			
 			//search results of each action separately
@@ -135,7 +135,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 							glabels.insert(name);
 						}
 					}
-					if(i==observation->size()) break;
+					//if(i==observation->size()) break;
 				}
 				
 				for(string glabel : glabels){
@@ -148,7 +148,6 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						i++;
 						int j = 0;
 
-						if(gs->globalTransitions.size()<=0) break;
 						for(GlobalTransition* gt : gs->globalTransitions){
 							j++;
 							for(LocalTransition* lt : gt->localTransitions) if(lt->agent->id==agent_id && lt->localName==label && lt->name==glabel){//(lt->name==label || lt->localName==label)){
@@ -157,9 +156,9 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 								localRepertoireData[lt->name].insert(gt->to);
 								break;
 							}
-							if(j==gs->globalTransitions.size()) break;
+							//if(j==gs->globalTransitions.size()) break;
 						}
-						if(i==observation->size()) break;
+						//if(i==observation->size()) break;
 					}
 					
 					//EPSILON greed
@@ -171,7 +170,6 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 							i++;
 							int j = 0;
 
-							if(gs->globalTransitions.size()<=0) break;
 							for(GlobalTransition* gt : gs->globalTransitions){
 								j++;
 								for(LocalTransition* lt : gt->localTransitions) if(lt->name==EPSILON || lt->name==EPSILON_UNICODE){
@@ -179,9 +177,9 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 									succeedingRaw.insert(gt->to);
 									break;
 								}
-								if(j==gs->globalTransitions.size()) break;
+								//if(j==gs->globalTransitions.size()) break;
 							}
-							if(i==succeedingRaw.size()) break;
+							//if(i==succeedingRaw.size()) break;
 						}
 					}
 
@@ -215,11 +213,12 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 
 						succeedingObservations.insert(nextObservation);
 						//register found transition
-						transitions.push_back(*(new tuple<set<GlobalState*>*, set<GlobalState*>*,string,string>()));
-						get<0>(transitions.back()) = observation;
-						get<1>(transitions.back()) = nextObservation;
-						get<2>(transitions.back()) = label;
-						get<3>(transitions.back()) = glabel;
+						transitions.push_back({observation, nextObservation, label, glabel});
+						// transitions.push_back(*(new tuple<set<GlobalState*>*, set<GlobalState*>*,string,string>()));
+						// get<0>(transitions.back()) = observation;
+						// get<1>(transitions.back()) = nextObservation;
+						// get<2>(transitions.back()) = label;
+						// get<3>(transitions.back()) = glabel;
 						observationQueue.push(nextObservation);
 						succeedingRawVector = succeedingRawVectorNext;
 					}
@@ -337,20 +336,20 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 }
 
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
-	LocalModels clonedLM;
-	Formula clonedF;
+	LocalModels* clonedLM = new LocalModels;
+	Formula* clonedF = new Formula;
 	
 	for(Agent* a : localModels->agents){
-		clonedLM.agents.push_back(a->clone());
+		clonedLM->agents.push_back(a->clone());
 	}
 	for(Agent* a : formula->coalition){
-		clonedF.coalition.insert(clonedLM.agents[a->id]);
+		clonedF->coalition.insert(clonedLM->agents[a->id]);
 	}
-	clonedF.p = formula->p;
-	clonedF.isF = formula->isF;
+	clonedF->p = formula->p;
+	clonedF->isF = formula->isF;
 	
 	GlobalModelGenerator* cloneGenerator = new GlobalModelGenerator();
-	cloneGenerator->initModel(&clonedLM, &clonedF);
+	cloneGenerator->initModel(clonedLM, clonedF);
 	cloneGenerator->expandAllStates();
 	//auto verification = new Verification(cloneGenerator);
 	//verification->verify();
@@ -393,7 +392,8 @@ std::string Agent2Specification(Agent* a, bool locNums){
 	buffer << local.str() << persistent.str() << initial.str();
 	
 	buffer << "init " << a->initState->name;
-	if(locNums) buffer << "_" << a->initState->id << endl;
+	if(locNums) buffer << "_" << a->initState->id;
+	buffer << endl;
 	
 	if(a->localTransitions.size()>0){
 		for(LocalTransition* lt : a->localTransitions){

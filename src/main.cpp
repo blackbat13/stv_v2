@@ -425,7 +425,7 @@ int main(int argc, char* argv[]) {
 
             // Perform KBC for the selected agents
             for(int j=0; j<gm->agents.size(); j++){
-                if(selectedAgents.count(j)>0){
+                if(selectedAgents.count(gm->agents[j]->id)>0){
                     GlobalModel* cloneModel = cloneGlobalModel(localModels, formula);
                     //DotGraph(cloneModel, true).saveToFile(config.dotdir, fbasename+"-CLONE"+to_string(j)+"-");
                     KBCprojection(cloneModel, j);
@@ -433,12 +433,12 @@ int main(int argc, char* argv[]) {
                     Agent* a = KBCexpansion(cloneModel, j);
                     KBCdLM.agents.push_back(a);
                     //DotGraph(a).saveToFile(config.dotdir, "kbc-");
-                    cout << "Created a KBC'd version of Agent #" << j << " " << a->name << endl;
+                    cout << "Created a KBC'd version of Agent #" << gm->agents[j]->id << " " << a->name << endl;
                     //cout << "Stats for Agent #" << j << ": States: " << a->localStates.size() << " Transitions: " << a->localTransitions.size() << endl;
                     delete cloneModel;
                 }else{
                     KBCdLM.agents.push_back(localModels->agents[j]->clone());
-                    cout << "Copied Agent #" << j << " verbatim\n";
+                    cout << "Copied Agent #" << gm->agents[j]->id << " verbatim\n";
                 }
             }cout << "Finished KBC iteration\n";
             
