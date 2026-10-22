@@ -171,10 +171,10 @@ int main(int argc, char* argv[]) {
             }
             agent->partialReduceModel(config.partial_reduction_args);
         }
-        if (config.serialize_model) {
-            ModelSerializer serializer;
-            serializer.print(localModels, formula);
-        }
+    }
+    if (config.serialize_model) {
+        ModelSerializer serializer;
+        serializer.print(localModels, formula);
     }
 
 
