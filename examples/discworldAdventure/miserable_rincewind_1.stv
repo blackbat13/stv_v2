@@ -1,0 +1,17 @@
+Agent Rincewind:
+PERSISTENT: [hungry, lost, wet]
+INITIAL: [hungry:=1, lost:=1, wet:=1]
+init wait
+shared[2] get_sandwich  : wait -> wait [hungry:=0]
+shared[2] get_robe      : wait -> wait [wet:=0]
+shared[2] get_staff     : wait -> wait
+shared[2] get_city_guide: wait -> wait [lost:=0]
+
+Agent Luggage:
+init wait
+shared[2] get_sandwich  [out]: wait -> wait
+shared[2] get_robe      [out]: wait -> wait
+shared[2] get_staff     [out]: wait -> wait
+shared[2] get_city_guide[out]: wait -> wait
+
+FORMULA: <<Rincewind>><>(hungry==0 && lost==0 && wet==0)
