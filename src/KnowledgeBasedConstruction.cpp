@@ -80,11 +80,12 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	vector<tuple<
 		set<GlobalState*>*,
 		set<GlobalState*>*,
-		string,string
+		string,
+		string,
+		map<string, set<GlobalState*>>
 		>> transitions;
 	//Buffer for holding information related to repertoires, similar as above
 	//Contents: (localLabel -> (globalLabel -> {outState1, outState2, ...}))
-	map<string, map<string, set<GlobalState*>>> repertoireData;
 	
 	
 	//initial state observation -> queue
@@ -213,7 +214,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 
 						succeedingObservations.insert(nextObservation);
 						//register found transition
-						transitions.push_back({observation, nextObservation, label, glabel});
+						transitions.push_back({observation, nextObservation, label, glabel, localRepertoireData});
 						// transitions.push_back(*(new tuple<set<GlobalState*>*, set<GlobalState*>*,string,string>()));
 						// get<0>(transitions.back()) = observation;
 						// get<1>(transitions.back()) = nextObservation;
@@ -223,7 +224,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						succeedingRawVector = succeedingRawVectorNext;
 					}
 					
-					repertoireData[label] = localRepertoireData;
+					//repertoireData[label] = localRepertoireData;
 				}
 			}
 		}
@@ -282,7 +283,7 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 	//Generate all local transitions and bind them transitons to their local states
 	int lt_id=0;
 	for(auto tr : transitions){
-		for(auto rd : repertoireData[get<2>(tr)]){
+		for(auto rd : get<4>(tr)){
 			//if(true){
 			if(CheckCommon(rd.second, *get<1>(tr))){
 				LocalTransition* t = new LocalTransition();
@@ -380,8 +381,12 @@ std::string Agent2Specification(Agent* a, bool locNums){
 				else local << ", " << v->name;
 				localEmpty = false;
 			}
-			if(initialEmpty) initial << "INITIAL: [" << v->name << ":=" << v->initialValue;
-			else initial << ", " << v->name << ":=" << v->initialValue;
+			if(initialEmpty) initial << "INITIAL: [" << v->name << ":=";
+			else initial << ", " << v->name << ":=";
+			// This should logically work, but for some reason initial values
+			// are not stored in the initialValue field. Odd.
+			//initial << v->initialValue;
+			initial << a->initState->environment[v->name];
 			initialEmpty = false;
 		}
 		if(!localEmpty)			local		<< "]" << endl;
