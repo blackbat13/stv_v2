@@ -191,6 +191,13 @@ Agent* KBCexpansion(GlobalModel *const gm, int agent_id){
 						succeedingRawVector = succeedingRawVectorNext;
 					}
 				}
+				if(glabels.size()==0){
+					cout << "Warning: local label " << label << " has 0 associated global labels in observation {";
+					for(GlobalState* gs : *observation) {
+						cout << gs->hash << " | ";
+					}
+					cout << "}" << endl;
+				}
 			}
 		}
 	}
