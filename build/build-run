@@ -1,1 +1,4 @@
 clear && make clean && make main
+status=$?
+rm -f -- *.o || exit $?
+exit "$status"

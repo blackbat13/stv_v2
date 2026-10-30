@@ -38,6 +38,7 @@ build/stv
 build/sample_test
 build/big_tests
 build/iterative_tests
+build/.sample_test_timings.tsv
 
 # Flex/bison
 src/reader/parser.c
