@@ -296,6 +296,16 @@ Agent * AgentTemplate::generateAgent(int id) {
          transition->agent = result;
          transition->from = state;
          transition->to = newState;
+         if ((*it)->shared == 999999) {
+            transition->isShared = true;
+            transition->emptyTransition = new EmptyTransition;
+            transition->emptyTransition->name = (*it)->patternName;
+            transition->emptyTransition->from = state;
+            transition->name = "[" + to_string(result->id) + "]_" + (*it)->patternName;
+            transition->localName = "[" + to_string(result->id) + "]_" + (*it)->matchName;
+            transition->from = state;
+            transition->to = state;
+         }
          transition->probability = (*it)->probability->eval();
          if ((*it)->condition != nullptr) {
             Condition *condition = new Condition;

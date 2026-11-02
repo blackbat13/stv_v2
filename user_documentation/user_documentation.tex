@@ -248,6 +248,12 @@ If the action is supposed to yield different results in a probabilistic manner, 
            &REST : q3
 \end{lstlisting}
 
+\subsubsection{Empty actions}
+If the action is supposed to be empty, we can use the keyword "empty" at the beginning of the action definition. It creates an action from a given state to itself. It does not change anything for the verification, but it can be used to create an epsilon transition in the global model. Empty actions support conditions and variable changes, but they are not required.
+\begin{lstlisting}[title={When an action is supposed to be empty, we can use the keyword "empty" at the beginning of the action definition. It creates an action1 from state q0 to q0.}]
+  empty action1: q0
+\end{lstlisting}
+
 \subsubsection{Conditions}
 To add a condition for an action to fire, we have to add the condition between the square brackets between the initial state name and the arrow operator.
 \begin{lstlisting}[title={Local action that can only fire if someLocalValue is equal to 1.}]

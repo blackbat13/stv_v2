@@ -9,6 +9,11 @@
 
 #include "Common.hpp"
 
+struct EmptyTransition {
+    string name;
+    LocalState* from;
+};
+
 /// @brief Represents a single local transition, containing id, global name, local name, is shared and count of the appearances.
 struct LocalTransition {
     // Data
@@ -45,6 +50,9 @@ struct LocalTransition {
 
     /// @brief Binding to a LocalState from which this transition goes to.
     LocalState* to;
+
+    /// @brief Data containing info about the empty transition, cleared.
+    EmptyTransition* emptyTransition = nullptr;
 };
 
 

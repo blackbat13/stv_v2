@@ -41,7 +41,7 @@ extern FormulaTemplate formulaDescription;
 %token   T_AGENT T_INIT T_LOCAL T_INITIAL T_FORMULA
 %token   T_PERSISTENT T_TO T_ASSIGN T_OR T_AND T_EQ
 %token   T_NE T_GT T_GE T_LT T_LE 
-%token   <val> T_NUM T_SHARED
+%token   <val> T_NUM T_SHARED T_EMPTY
 %token   <floatno> T_FLOAT
 %token   <ident> T_IDENT
 %token   T_KNOW T_HARTLEY T_PROB T_REST
@@ -159,6 +159,11 @@ transition: shared T_IDENT '[' T_IDENT ']' ':' T_IDENT condition T_TO T_IDENT as
           | prob_exp ':' T_IDENT assignments {
               $$=new TransitionTemplate(0, "", "", "", $3, new ExprConst(1), $4, $1); 
               delete $3;
+            }
+          | T_EMPTY T_IDENT ':' condition T_IDENT assignments {
+              $$=new TransitionTemplate(999999, $2, $2, $5, $5, $4, $6, new ProbConst(1)); 
+              delete $2;
+              delete $5;
             }
           ;
 
