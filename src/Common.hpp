@@ -33,6 +33,7 @@ struct GlobalTransition;
 struct LocalTransition;
 struct LocalModels;
 struct Var;
+struct EmptyTransition;
 
 struct Cfg{
     std::string fname;            ///< path to input file with system specification

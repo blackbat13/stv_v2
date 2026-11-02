@@ -23,6 +23,7 @@ floatno [0-9]*\.[0-9]+
 
 "Agent"        { return T_AGENT; }
 "shared"       { return T_SHARED; }
+"empty"        { return T_EMPTY; }
 "init"         { return T_INIT;}
 "LOCAL:"       { return T_LOCAL; }
 "INITIAL:"     { return T_INITIAL; }

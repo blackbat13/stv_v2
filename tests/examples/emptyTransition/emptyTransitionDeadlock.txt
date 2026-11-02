@@ -1,0 +1,13 @@
+Agent Coalition:
+init c0
+empty wait: c0
+shared[2] move: c0 -> c1
+
+Agent Outside:
+LOCAL: [finish]
+PERSISTENT: [finish]
+INITIAL: [finish:=0]
+init o0
+shared[2] move: o0 -> o1 [finish:=1]
+
+FORMULA: <<Coalition>><>(finish==1)
