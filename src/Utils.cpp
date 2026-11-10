@@ -258,6 +258,12 @@ void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default con
                 } else {
                     printf("ERR: no KBC output filename was specified!\n");
                 }
+            } else if (arg == "-KBC_ITERATION_TAG" || arg == "--KBC_ITERATION_TAG") {
+                if (i + 1 < argc) {
+                    config.kbc_iteration_tag = argv[++i];
+                } else {
+                    printf("ERR: no KBC iteration tag was specified!\n");
+                }
             } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
                 config.add_epsilon_transitions = 1;
             } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {

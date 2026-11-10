@@ -450,7 +450,7 @@ int main(int argc, char* argv[]) {
                 ifs.open(config.fname);
                 
                 for(Agent* a : KBCdLM.agents){
-                    ofs << Agent2Specification(a, true) << endl;
+                    ofs << Agent2Specification(a, config.kbc_iteration_tag) << endl;
                 }
                 
                 while(getline(ifs, line))

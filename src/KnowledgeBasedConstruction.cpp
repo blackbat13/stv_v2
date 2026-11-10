@@ -306,7 +306,22 @@ GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula){
 	return out;
 }
 
-std::string Agent2Specification(Agent* a, bool locNums){
+std::string Loc2Str(LocalState* s, string tag){
+	std::stringstream buffer;
+	
+	int nameCount = 0;
+	for(LocalState* ls : s->agent->localStates)
+		if(s->name==ls->name)
+			nameCount++;
+	
+	buffer << s->name;
+	if(nameCount>1 && tag.size()>0) buffer << "_" << tag;
+	if(nameCount>1) buffer << "_" << s->id;
+	
+	return buffer.str();
+}
+
+std::string Agent2Specification(Agent* a, string tag){
 	std::stringstream buffer, local, persistent, initial;
 	
 	buffer << "Agent " << a->name << ":" << endl;
@@ -342,9 +357,7 @@ std::string Agent2Specification(Agent* a, bool locNums){
 	
 	buffer << local.str() << persistent.str() << initial.str();
 	
-	buffer << "init " << a->initState->name;
-	if(locNums) buffer << "_" << a->initState->id;
-	buffer << endl;
+	buffer << "init " << Loc2Str(a->initState, tag) << endl;
 	
 	if(a->localTransitions.size()>0){
 		for(LocalTransition* lt : a->localTransitions){
@@ -355,8 +368,7 @@ std::string Agent2Specification(Agent* a, bool locNums){
 			//localname
 			if(lt->localName.size()>0 && lt->name!=lt->localName)
 				buffer << "[" << std::regex_replace(lt -> localName, regex("\\[\\d+]_"), "") << "]";
-			buffer << ": " << lt->from->name;
-			if(locNums) buffer << "_" << lt->from->id;
+			buffer << ": " << Loc2Str(lt->from, tag);
 			
 			bool conditionsEmpty = true;
 			for(Condition* c : lt->conditions){
@@ -370,8 +382,7 @@ std::string Agent2Specification(Agent* a, bool locNums){
 			}
 			if(!conditionsEmpty) buffer << "]";
 			
-			buffer << " -> " << lt->to->name;
-			if(locNums) buffer << "_" << lt->to->id;
+			buffer << " -> " << Loc2Str(lt->to, tag);
 			
 			bool variableUpdatesEmpty = true;
 			for(auto const& pair : lt->to->environment){

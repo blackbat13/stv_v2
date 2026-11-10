@@ -23,4 +23,5 @@ void KBCprojection(GlobalModel *const gm, int agent_id);
 Agent* KBCexpansion(GlobalModel *const gm, int agent_id);
 Agent* KBCexpansionold(GlobalModel *const gm, int agent_id);
 GlobalModel* cloneGlobalModel(LocalModels* localModels, Formula* formula);
-std::string Agent2Specification(Agent* a, bool locNums);
+std::string Loc2Str(LocalState* s, string tag);
+std::string Agent2Specification(Agent* a, string tag);

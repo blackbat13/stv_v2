@@ -46,6 +46,7 @@ struct Cfg{
     bool kbc;					  ///< flag for knowledge-based construction
     bool kbc_coalition_only;      ///< flag for targeting knowledge-based construction at agents in the formula coalition only; if unset, all agents are selected
     std::string kbc_out_fname;
+    std::string kbc_iteration_tag;
     std::string dotdir;           ///< pathprefix for .dot files export
     int model_id; // <-- this is temporary member (used in Verification.cpp for a hardcoded formula); has lower priority than `fname`
     bool add_epsilon_transitions; ///< add epsilon transitions to the states in the model when it's blocked for some reason
