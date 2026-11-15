@@ -248,7 +248,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     GlobalState* g = globalModelCandidates.top(); //1
     auto findIfCandidateExists = candidateStateDepths.find({g});
     if(findIfCandidateExists->second.size() >= 2) { //2
-        depth = stateDepths.top(); //3
+        depth = stateDepths.empty() ? -1 : stateDepths.top(); //3 (empty: no state on the path was fully expanded yet)
         int anotherDepth = -1;
         for(auto item : findIfCandidateExists->second){
             if(item != globalModelCandidates.size() - 1) {
@@ -399,8 +399,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
         }
     } //17
 
-    depth = stateDepths.top(); //18
-    if(depth == globalModelCandidates.size()) { //19
+    if(!stateDepths.empty() && stateDepths.top() == globalModelCandidates.size()) { //18, 19
         stateDepths.pop();
     }
     globalModelCandidates.pop(); //20

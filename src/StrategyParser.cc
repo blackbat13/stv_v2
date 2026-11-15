@@ -11,6 +11,7 @@
 
 #include <tuple>
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -34,6 +35,11 @@ StrategyParser::~StrategyParser() {
 StrategyCollection* StrategyParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
+   if (f == nullptr) {
+      throw std::runtime_error("Failed to open strategy file: " + fileName);
+   }
+   // the template is global, so drop the actions of a previously parsed file
+   strategyCollectionTemplate.selectedStrategy.clear();
    // zamapuj go jako wejście dla Fleksa
    stratrestart(f);
    // uruchom parsowanie

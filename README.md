@@ -124,7 +124,7 @@ IMPORTANTS NOTES:
 
 ## Examples and templates
 
-In *./examples* and *./tests/examples* there are several ready-to-use MAS specification files together with a proposed property (captured by ATL formula) for verification.
+In *./examples* and *./tests/integration/examples* there are several ready-to-use MAS specification files together with a proposed property (captured by ATL formula) for verification.
 
 Often, we would want to reason about different (data-)configurations of the same system.  
 Using the templates we can parameterize the system specification, such that we only need to describe its dynamic behavior.  

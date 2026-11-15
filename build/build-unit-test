@@ -1,0 +1,4 @@
+clear && make clean && make unit_test && clear && ./unit_test --gtest_color=yes
+status=$?
+rm -f -- *.o || exit $?
+exit "$status"

@@ -127,6 +127,9 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
 tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileName, string s) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
+   if (f == nullptr) {
+      throw std::runtime_error("Failed to open model file: " + fileName);
+   }
    // zamapuj go jako wejście dla Fleksa
    resetFormulaDescription();
    yyrestart(f);
@@ -160,7 +163,6 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    for (const auto agent : models.agents) {
       if (formulaDescription.coalition->count(agent->name)>0) {
          formula.coalition.insert(agent);
-         break;
       }
    }
 

@@ -2,7 +2,7 @@ CC = g++ --std=c++14
 GTEST_DIR = /usr/src/googletest/googletest
 CRAAM_DIR = ../craam
 CRAAM_INCLUDE_DIR = ../craam/craam/include
-USER_DIR = ../tests
+USER_DIR = ../tests/integration
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
 CRAAMFLAGS += -I$(CRAAM_DIR) -I$(CRAAM_INCLUDE_DIR)
@@ -85,6 +85,9 @@ strategyNodes.o: ../src/strategyReader/strategyNodes.cc
 # all test names here
 TESTS = sample_test
 
+UNIT_TESTS = unit_test
+UNIT_DIR = ../tests/unit
+
 BIG_TESTS = big_tests
 
 ITERATIVE_TESTS = iterative_tests
@@ -94,7 +97,7 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 GTEST_SRCS_ = $(GTEST_DIR)/src/*.cc $(GTEST_DIR)/src/*.h $(GTEST_HEADERS)
 
 clean:
-	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c ../src/strategyReader/strategyParser.h ../src/strategyReader/strategyParser.c ../src/strategyReader/strategyScanner.c $(TESTS) gtest.a gtest_main.a *.o
+	rm -f *.o stv ../src/reader/parser.h ../src/reader/parser.c ../src/reader/scanner.c ../src/strategyReader/strategyParser.h ../src/strategyReader/strategyParser.c ../src/strategyReader/strategyScanner.c $(TESTS) $(UNIT_TESTS) gtest.a gtest_main.a *.o
 
 all : $(TESTS) $(BIG_TESTS) $(ITERATIVE_TESTS)
 
@@ -131,3 +134,12 @@ iterative_tests : iterative_tests.o GlobalModelGenerator.o ModelParser.o Strateg
 
 iterative_tests.o : $(USER_DIR)/iterative_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/iterative_tests.cc
+
+# unit tests: every src object except main.o and VerificationIterative.o (unused)
+UNIT_OBJECTS = GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o stratParser.o strategyScanner.o strategyNodes.o
+
+unit_test : unit_test.o $(UNIT_OBJECTS) gtest_main.a
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
+
+unit_test.o : $(UNIT_DIR)/unit_test.cc $(UNIT_DIR)/*.h ../src/*.hpp ../src/reader/*.hpp ../src/strategyReader/*.hpp $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -I$(UNIT_DIR) -c $(UNIT_DIR)/unit_test.cc

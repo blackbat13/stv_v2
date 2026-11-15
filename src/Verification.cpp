@@ -251,6 +251,10 @@ bool Verification::maxFixpointVerify() {
             map<string, set<GlobalState*>> transitionResult;
             for(auto epistemicClassEl : state->epistemicClasses[agent]->globalStates) {
                 auto globalState = epistemicClassEl.second;
+                // states that already lose are never reached by a winning strategy, so they don't constrain the choice
+                if(winningStates.find(globalState) == winningStates.end()) {
+                    continue;
+                }
                 for(auto transition : globalState->globalTransitions) {
                     bool hasAction = false;
                     for(auto localTransition : transition->localTransitions) {
@@ -587,15 +591,8 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             continue;
         }
 
-        if (this->hasUnfixedCoalitionDecision(globalTransition)) {
-            controlledGlobalTransitions.insert(globalTransition);
-        } else {
-            // controlled transition that is fixed should be treated as an uncontrolled transition
-            #if VERBOSE
-                printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-            #endif
-            uncontrolledGlobalTransitions.insert(globalTransition);
-        }
+        // fixed decisions stay controlled, so the coalition keeps its priority on every visit of the class
+        controlledGlobalTransitions.insert(globalTransition);
     }
 
     // solve the uncontrolled transition blocking the controlled transition, making it uncontrolled
@@ -1146,9 +1143,9 @@ void Verification::printCurrentHistory(int depth) {
 /// @return True if the two global transitions have the same local transitions, false otherwise.
 bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2) {
     bool isEquivalent = true;
-    bool isMatchFound = false;
     for (const auto localTransition1 : globalTransition1->localTransitions) {
         if (isAgentInCoalition(localTransition1->agent)) {
+            bool isMatchFound = false;
             for (const auto localTransition2 : globalTransition2->localTransitions) {
                 if (isAgentInCoalition(localTransition2->agent) && localTransition1->localName == localTransition2->localName) {
                     isMatchFound = true;
@@ -1529,7 +1526,16 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
 
     // If there are no controlled transitions, but there are mandatory opponent-triggered transitions, check if they are valid
     if (controlledGlobalTransitions.empty() && !mandatoryOpponentTransitions.empty()) {
-        if (!this->checkUncontrolledSet(mandatoryOpponentTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
+        const auto compatibleTransitions = getCompatibleOpponentTransitions();
+        // fixed decisions block every transition: a deadlock, so F can no longer be reached
+        if (isFMode && compatibleTransitions.empty() && uncontrolledGlobalTransitions.empty()) {
+            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "deadlock under fixed decisions");
+            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+            this->revertLastDecision(depth);
+            return false;
+        }
+        if (!this->checkUncontrolledSet(compatibleTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
             return false;
         }
     }
@@ -1936,8 +1942,11 @@ Result Verification::verifyStrategy() {
                     currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::FALSE;
-                    // trigger revert until last decision
-                    // todo here
+                    if (currentState->fromState != nullptr) {
+                        currentState->fromState->verifResult = VerifResult::FALSE;
+                    }
+                    // initiate rollback
+                    statesToProcess.pop();
                     continue;
                 } else {
                     // cache the result for later

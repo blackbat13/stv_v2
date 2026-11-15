@@ -290,7 +290,7 @@ int ExprHart::eval( Environment& env, GlobalModelGenerator *generator, GlobalSta
       allEpistemicOk = (log2f((float)foundClasses->size()) >= (float)val);
    }
 
-   free(foundClasses);
+   delete foundClasses;
 
    return (allEpistemicOk ? 1 : 0);
 }

@@ -54,7 +54,9 @@ string LocalState::toString(string indent){
    for(const auto x : this->environment){
       res += "\n\t" + indent + x.first + "=" + to_string(x.second) + ",";
    }
-   res.pop_back();
+   if (!this->environment.empty()) {
+      res.pop_back();
+   }
    res+= + "\n" + indent + "]";
    return res;
 }
@@ -64,7 +66,7 @@ string LocalState::toString(string indent){
 string LocalState::environmentHash() const {
    string hash;
    for (const auto& item : this->environment) {
-      hash += to_string(item.second) + ";";
+      hash += item.first + "=" + to_string(item.second) + ";";
    }
    return hash;
 }
