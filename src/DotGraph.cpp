@@ -64,7 +64,11 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
             for(const auto x: s->environment){
                 tmp+=x.first+"="+to_string(x.second)+"\\n";
             }
-            tmp.resize(tmp.size()-2);
+            if (s->environment.empty()) {
+                tmp.pop_back();                 // no variables: drop the "|" separator
+            } else {
+                tmp.resize(tmp.size()-2);       // drop the trailing "\n"
+            }
             tmp+="}\", shape=\"record";
             this->addNode(to_string(s->id), tmp);
         }else{
