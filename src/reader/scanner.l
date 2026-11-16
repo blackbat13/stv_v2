@@ -1,9 +1,11 @@
 %option noyywrap
+%option yylineno
 %{
 #include <string.h>
 #include <string>
 #include <set>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 
@@ -49,5 +51,6 @@ floatno [0-9]*\.[0-9]+
 "&REST"        { return T_REST; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
+.              { throw std::runtime_error("Unexpected character '" + string(yytext) + "' at line " + to_string(yylineno)); }
 %%
 

@@ -490,8 +490,18 @@ TEST_F(VerificationCoalitionTest, VerifyLocalStatesEvaluatesTheFormula) {
     EXPECT_FALSE(verification.verifyLocalStates(&afterGood->localStatesProjection, afterGood));
 }
 
-TEST_F(VerificationCoalitionTest, VerifyLocalStatesRejectsUnknownVariables) {
-    GeneratedModel generated(goodBad("<<A>>[](nope==0)"));
+// The parser rejects undeclared formula variables; this covers a declared one that has no value in the state.
+TEST_F(VerificationCoalitionTest, VerifyLocalStatesRejectsVariablesMissingFromTheState) {
+    GeneratedModel generated(R"(
+Agent A:
+LOCAL: [x, unset]
+PERSISTENT: [x]
+INITIAL: [x:=0]
+init s0
+go: s0 -> s1 [unset:=1]
+
+FORMULA: <<A>>[](unset==0)
+)");
     VerificationProbe verification(&generated.generator);
     GlobalState* init = generated.model()->initState;
     EXPECT_THROW(verification.verifyLocalStates(&init->localStatesProjection, init), std::runtime_error);

@@ -1,0 +1,4 @@
+Agent Voter:
+LOCAL: [vote]
+init q0
+vote1: q0 ->

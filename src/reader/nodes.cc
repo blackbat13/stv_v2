@@ -9,6 +9,11 @@
 #include <queue>
 #include <fstream>
 #include <cstring>
+#include <cmath>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <tuple>
 
 
 /* --------------------------------------------------------------------- */
@@ -449,6 +454,119 @@ void AgentTemplate::checkConeOfInfluence(int radius) {
                pendingStates.push(nextStateIt->second);
             }
          }
+      }
+   }
+}
+
+/// @brief Returns the agent's name.
+const string& AgentTemplate::getIdent() const {
+   return ident;
+}
+
+/// @brief Returns the agent's transitions.
+const set<TransitionTemplate*>& AgentTemplate::getTransitions() const {
+   return *transitions;
+}
+
+/// @brief Returns every variable the agent declares (LOCAL, PERSISTENT, INITIAL) or assigns.
+set<string> AgentTemplate::getKnownVariables() const {
+   set<string> known(localVars->begin(), localVars->end());
+   known.insert(persistentVars->begin(), persistentVars->end());
+   for (const auto assignment : *initialAssignments) {
+      known.insert(assignment->ident);
+   }
+   for (const auto transition : *transitions) {
+      if (transition->assignments != nullptr) {
+         for (const auto assignment : *transition->assignments) {
+            known.insert(assignment->ident);
+         }
+      }
+   }
+   return known;
+}
+
+namespace {
+string formatNumber(float value) {
+   ostringstream out;
+   out << value;
+   return out.str();
+}
+}
+
+/// @brief Checks the agent description.
+/// @details Throws std::runtime_error on errors and prints warnings to stderr.
+void AgentTemplate::validate() const {
+   const string agent = "agent '" + ident + "'";
+   if (initState.empty()) {
+      throw runtime_error("The " + agent + " has no initial state (missing 'init <state>')");
+   }
+
+   bool initStateHasTransition = transitions->empty();
+   for (const auto transition : *transitions) {
+      if (transition->startState == initState) {
+         initStateHasTransition = true;
+         break;
+      }
+   }
+   if (!initStateHasTransition) {
+      throw runtime_error("No transition of " + agent + " starts in its initial state '" + initState + "'");
+   }
+
+   // outcomes of one probabilistic action share its start state, name and condition
+   map<tuple<string, string, string>, vector<float>> probabilitiesPerAction;
+   for (const auto transition : *transitions) {
+      if (transition->shared != -1 && transition->shared != 999999 && transition->shared < 2) {
+         throw runtime_error("Shared action '" + transition->patternName + "' of " + agent + " is declared as shared[" + to_string(transition->shared) + "], but a shared action needs at least 2 agents");
+      }
+      string condition = transition->condition != nullptr ? transition->condition->toString(false) : "";
+      probabilitiesPerAction[make_tuple(transition->startState, transition->patternName, condition)].push_back(transition->probability->eval());
+   }
+
+   const float tolerance = 1e-3f;
+   for (const auto& action : probabilitiesPerAction) {
+      const auto& probabilities = action.second;
+      bool isProbabilistic = false;
+      for (float probability : probabilities) {
+         isProbabilistic = isProbabilistic || fabs(probability - 1.0f) > tolerance;
+      }
+      if (!isProbabilistic) {
+         continue;
+      }
+      const string where = "action '" + get<1>(action.first) + "' in state '" + get<0>(action.first) + "' of " + agent;
+      float sum = 0.0f;
+      for (float probability : probabilities) {
+         if (probability < -tolerance || probability > 1.0f + tolerance) {
+            throw runtime_error("Probability " + formatNumber(probability) + " of " + where + " is not between 0 and 1");
+         }
+         sum += probability;
+      }
+      if (fabs(sum - 1.0f) > tolerance) {
+         throw runtime_error("Probabilities of " + where + " add up to " + formatNumber(sum) + " instead of 1");
+      }
+   }
+
+   // a variable the agent never declares or assigns always reads as -1, e.g. another agent's variable
+   const set<string> known = getKnownVariables();
+   set<string> read;
+   for (const auto assignment : *initialAssignments) {
+      set<string> names = assignment->value->getVariableNames();
+      read.insert(names.begin(), names.end());
+   }
+   for (const auto transition : *transitions) {
+      if (transition->condition != nullptr) {
+         set<string> names = transition->condition->getVariableNames();
+         read.insert(names.begin(), names.end());
+      }
+      if (transition->assignments != nullptr) {
+         for (const auto assignment : *transition->assignments) {
+            set<string> names = assignment->value->getVariableNames();
+            read.insert(names.begin(), names.end());
+         }
+      }
+   }
+   for (const auto& name : read) {
+      if (known.count(name) == 0) {
+         cerr << "Warning: " << agent << " reads variable '" << name << "', which it never declares or assigns, so it always evaluates to -1 (agents cannot read other agents' variables)" << endl;
       }
    }
 }

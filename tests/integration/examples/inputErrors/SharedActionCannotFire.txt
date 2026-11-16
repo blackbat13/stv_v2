@@ -1,0 +1,14 @@
+Agent Voter:
+LOCAL: [vote]
+PERSISTENT: [vote]
+INITIAL: [vote:=0]
+init q0
+vote1: q0 -> q1 [vote:=1]
+shared[2] give: q1 -> q2
+
+Agent Coercer:
+LOCAL: []
+init c0
+idle: c0 -> c0
+
+FORMULA: <<Voter>><>(vote==1)

@@ -1,10 +1,12 @@
 %option noyywrap
 %option prefix="strat"
+%option yylineno
 %{
 #include <string.h>
 #include <string>
 #include <set>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 
@@ -37,5 +39,6 @@ floatno [0-9]*\.[0-9]+
 {single}       { return strattext[0]; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
+.              { throw std::runtime_error("Unexpected character '" + string(strattext) + "' in strategy file at line " + to_string(stratlineno)); }
 %%
 

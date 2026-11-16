@@ -1,0 +1,2 @@
+# Voter strategy
+q0 -> vote1;

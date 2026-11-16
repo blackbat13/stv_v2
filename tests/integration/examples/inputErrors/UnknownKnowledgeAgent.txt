@@ -1,0 +1,8 @@
+Agent Voter:
+LOCAL: [vote]
+PERSISTENT: [vote]
+INITIAL: [vote:=0]
+init q0
+vote1: q0 -> q1 [vote:=1]
+
+FORMULA: <<Voter>>[]&K_Ghost(vote<=1)

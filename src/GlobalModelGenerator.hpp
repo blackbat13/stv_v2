@@ -40,8 +40,10 @@ public:
     bool getFormulaCorrectness();
     set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);
     Agent* getAgentInstanceByName(string agentName);
-    void markFormulaAsIncorrect();
+    void markFormulaAsIncorrect(const string& variable = "");
     bool getFormulaCorectness();
+    /// @brief Name of the formula variable that had no value when the formula was marked incorrect.
+    const string& getMissingFormulaVariable() const;
     void initStrategy(StrategyCollection* strat);
     /// Initializes incremental strategy generation for probabilistic verification.
     void createProbabilityStrategy();
@@ -73,6 +75,8 @@ protected:
     GlobalModel* globalModel;
     /// @brief Flag holding info if model is actually correct.
     bool correctModel;
+    /// @brief Formula variable that had no value when the formula was marked incorrect.
+    string missingFormulaVariable;
     /// @brief Lookup map containing global states and the depths that the global state is contained in. Used for reductions.
     unordered_map<GlobalState*, unordered_set<int>> candidateStateDepths;
     /// @brief Candidate states to be used in reductions. Used for reductions.

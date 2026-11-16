@@ -56,6 +56,7 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     this->globalModel->initState = this->generateInitState();
     this->globalModel->epistemicClassesKnowledge.clear();
     this->correctModel = true;
+    this->missingFormulaVariable.clear();
 
     globalModelCandidates.push(this->globalModel->initState);
     auto candidateDepthPtr = candidateStateDepths.find(this->globalModel->initState);
@@ -737,8 +738,17 @@ Agent* GlobalModelGenerator::getAgentInstanceByName(string agentName) {
 }
 
 /// @brief Sets formula to an incorrectly written state.
-void GlobalModelGenerator::markFormulaAsIncorrect() {
+/// @param variable Name of the variable that had no value, if known.
+void GlobalModelGenerator::markFormulaAsIncorrect(const string& variable) {
     correctModel = false;
+    if (missingFormulaVariable.empty()) {
+        missingFormulaVariable = variable;
+    }
+}
+
+/// @brief Name of the formula variable that had no value when the formula was marked incorrect.
+const string& GlobalModelGenerator::getMissingFormulaVariable() const {
+    return missingFormulaVariable;
 }
 
 /// @brief Gets formula status.

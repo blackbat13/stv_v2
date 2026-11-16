@@ -1,0 +1,10 @@
+Agent Coin:
+LOCAL: [side]
+PERSISTENT: [side]
+INITIAL: [side:=0]
+init q0
+flip: q0 -> 0.7 : heads [side:=1]
+            0.6 : tails [side:=2]
+            &REST : edge [side:=3]
+
+FORMULA: <<Coin>><>&P[>=0.5](side==1)

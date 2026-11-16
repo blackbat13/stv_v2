@@ -102,6 +102,15 @@ TEST_F(DotGraphTest, CorrectFlagColoursEdgesBetweenVerifiedStatesRed) {
     EXPECT_EQ(partlyCorrect.edges[0], "\"0;\"->\"1;\"[label=\"go\"]");
 }
 
+TEST_F(DotGraphTest, SaveToFileWarnsWhenTheFileCannotBeOpened) {
+    LocalState* s0 = arena.state(a, "s0");
+    arena.transition(s0, s0, "loop");
+    testing::internal::CaptureStderr();
+    DotGraph(a).saveToFile("/nonexistent/stv/dir", "model-");
+    string output = testing::internal::GetCapturedStderr();
+    EXPECT_NE(output.find("Warning: could not open '/nonexistent/stv/dir/model-LocalModel_A.dot' for writing"), string::npos) << output;
+}
+
 TEST_F(DotGraphTest, SaveToFileUsesGraphTypeInFileName) {
     LocalState* s0 = arena.state(a, "s0");
     arena.transition(s0, s0, "loop");

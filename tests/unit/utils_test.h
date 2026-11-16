@@ -200,11 +200,11 @@ TEST_F(UtilsTest, LoadConfigFromFileMapsModelIdsToExamples) {
 
 TEST_F(UtilsTest, LoadConfigFromMissingFileKeepsConfigAndWarns) {
     config.stv_mode = 7;
-    testing::internal::CaptureStdout();
+    testing::internal::CaptureStderr();
     loadConfigFromFile("/nonexistent/stv/config.txt");
-    string output = testing::internal::GetCapturedStdout();
+    string output = testing::internal::GetCapturedStderr();
     EXPECT_EQ(config.stv_mode, 7);
-    EXPECT_NE(output.find("Could not open the config file"), string::npos);
+    EXPECT_NE(output.find("could not open the config file"), string::npos);
 }
 
 TEST_F(UtilsTest, LoadConfigFromArgsFileAndMode) {
@@ -266,12 +266,79 @@ TEST_F(UtilsTest, LoadConfigFromArgsPartialReductionStopsAtNextFlag) {
     EXPECT_EQ(config.stv_mode, 3);
 }
 
-TEST_F(UtilsTest, LoadConfigFromArgsMissingValueKeepsDefaultAndWarns) {
+TEST_F(UtilsTest, LoadConfigFromArgsMissingValueThrowsAndKeepsDefault) {
     config.fname = "unchanged";
     ArgvBuilder args({"-f"});
-    testing::internal::CaptureStdout();
-    loadConfigFromArgs(args.argc(), args.argv());
-    string output = testing::internal::GetCapturedStdout();
+    EXPECT_THROW(loadConfigFromArgs(args.argc(), args.argv()), std::invalid_argument);
     EXPECT_EQ(config.fname, "unchanged");
-    EXPECT_NE(output.find("no filename was specified"), string::npos);
+}
+
+namespace {
+/// @brief Loads the arguments and returns the std::invalid_argument message, or "" if none.
+string argumentError(const vector<string>& arguments) {
+    ArgvBuilder args(arguments);
+    try {
+        loadConfigFromArgs(args.argc(), args.argv());
+    } catch (const std::invalid_argument& error) {
+        return error.what();
+    }
+    return "";
+}
+
+/// @brief Loads the config text and returns the std::invalid_argument message (or "") and the warnings.
+pair<string, string> configErrorAndWarnings(const string& text, string& path) {
+    path = writeTempFile(text);
+    string error;
+    testing::internal::CaptureStderr();
+    try {
+        loadConfigFromFile(path);
+    } catch (const std::invalid_argument& e) {
+        error = e.what();
+    }
+    string warnings = testing::internal::GetCapturedStderr();
+    std::remove(path.c_str());
+    return {error, warnings};
+}
+}
+
+TEST_F(UtilsTest, LoadConfigFromArgsReportsMissingValues) {
+    EXPECT_EQ(argumentError({"-f"}), "Missing filename after -f");
+    EXPECT_EQ(argumentError({"--mode"}), "Missing mode after --mode");
+    EXPECT_EQ(argumentError({"-OVERWRITE_FORMULA"}), "Missing formula after -OVERWRITE_FORMULA");
+    EXPECT_EQ(argumentError({"-REDUCE"}), "Missing variables after -REDUCE");
+    EXPECT_EQ(argumentError({"--REDUCE_ALL"}), "Missing variables after --REDUCE_ALL");
+    EXPECT_EQ(argumentError({"-STRATEGY_FROM_FILE"}), "Missing file path after -STRATEGY_FROM_FILE");
+    EXPECT_EQ(argumentError({"-PARTIAL_REDUCTION", "-m", "3"}), "Missing variable names after -PARTIAL_REDUCTION");
+    EXPECT_EQ(argumentError({"-PARTIAL_REDUCTION_AGENT"}), "Missing agent name after -PARTIAL_REDUCTION_AGENT");
+    EXPECT_EQ(argumentError({"-CONE_OF_INFLUENCE"}), "Missing radius after -CONE_OF_INFLUENCE");
+}
+
+TEST_F(UtilsTest, LoadConfigFromArgsReportsInvalidValues) {
+    EXPECT_EQ(argumentError({"--NOT_A_FLAG"}), "Unknown argument '--NOT_A_FLAG'");
+    EXPECT_EQ(argumentError({"-m", "x"}), "Invalid mode 'x' (expected an integer from 0 to 15)");
+    EXPECT_EQ(argumentError({"-m", "16"}), "Invalid mode '16' (expected an integer from 0 to 15)");
+    EXPECT_EQ(argumentError({"-m", "3x"}), "Invalid mode '3x' (expected an integer from 0 to 15)");
+    EXPECT_EQ(argumentError({"-CONE_OF_INFLUENCE", "-1"}),
+              "Invalid cone of influence radius '-1' (expected an integer from 0 to " + to_string(INT_MAX) + ")");
+}
+
+TEST_F(UtilsTest, LoadConfigFromFileReportsInvalidValues) {
+    string path;
+    auto mode = configErrorAndWarnings("MODE=x\n", path);
+    EXPECT_EQ(mode.first, "Invalid MODE 'x' on line 1 of config file '" + path + "' (expected an integer from 0 to 15)");
+
+    auto flag = configErrorAndWarnings("; comment\nOUTPUT_DOT_FILES=yes\n", path);
+    EXPECT_EQ(flag.first, "Invalid OUTPUT_DOT_FILES 'yes' on line 2 of config file '" + path + "' (expected 0 or 1)");
+
+    auto modelId = configErrorAndWarnings("MODEL_ID=abc\n", path);
+    EXPECT_EQ(modelId.first, "Invalid MODEL_ID 'abc' on line 1 of config file '" + path + "' (expected an integer from 0 to 9)");
+}
+
+TEST_F(UtilsTest, LoadConfigFromFileWarnsAboutSuspiciousLines) {
+    string path;
+    auto result = configErrorAndWarnings("COLOUR=blue\nno equals sign\nMODEL_ID=7\n", path);
+    EXPECT_EQ(result.first, "");
+    EXPECT_NE(result.second.find("Warning: unknown key 'COLOUR' on line 1 of config file '" + path + "'"), string::npos) << result.second;
+    EXPECT_NE(result.second.find("Warning: ignoring 'no equals sign' on line 2 of config file '" + path + "' (expected KEY=VALUE)"), string::npos) << result.second;
+    EXPECT_NE(result.second.find("Warning: MODEL_ID 7 on line 3 of config file '" + path + "' has no example model (use 1, 2 or 3)"), string::npos) << result.second;
 }

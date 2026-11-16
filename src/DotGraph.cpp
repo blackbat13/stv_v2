@@ -209,7 +209,8 @@ void DotGraph::saveToFile(std::string pathprefix, std::string nameprefix, std::s
         pathprefix.pop_back();
     }
     
-    ofs.open(pathprefix+'/'+nameprefix+basename);
+    const string path = pathprefix+'/'+nameprefix+basename;
+    ofs.open(path);
 
     if(ofs.is_open()){
         ofs << "digraph \"" << graphName << "\"{\n";
@@ -224,7 +225,7 @@ void DotGraph::saveToFile(std::string pathprefix, std::string nameprefix, std::s
         ofs << "}";
         ofs.close();
     }else{
-        cout << "Could not open the file: " << pathprefix+'/'+basename <<  endl;
+        cerr << "Warning: could not open '" << path << "' for writing, so the dot file was not saved" << endl;
     }
 };
 

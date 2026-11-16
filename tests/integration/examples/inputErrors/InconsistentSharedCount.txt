@@ -1,0 +1,11 @@
+Agent Voter:
+LOCAL: []
+init q0
+shared[2] give: q0 -> q1
+
+Agent Coercer:
+LOCAL: []
+init c0
+shared[3] give: c0 -> c1
+
+FORMULA: <<Voter>>[](1==1)

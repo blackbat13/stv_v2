@@ -21,12 +21,22 @@ Cfg config;
 extern set<AgentTemplate*>* modelDescription;
 extern FormulaTemplate formulaDescription;
 
-int main(int argc, char* argv[]) {
+/// @brief Runs the verifier; main() reports any exception it throws.
+static int run(int argc, char* argv[]) {
     unsigned long mem1 = getMemCap();
     struct timeval tb, te;
     gettimeofday(&tb, NULL);
-    loadConfigFromFile("config.txt");
-    loadConfigFromArgs(argc,argv);
+    try {
+        loadConfigFromFile("config.txt");
+        loadConfigFromArgs(argc,argv);
+    } catch (const std::exception& ex) {
+        cerr << "Configuration error: " << ex.what() << endl;
+        return 1;
+    }
+    if (config.fname.empty()) {
+        cerr << "Configuration error: No model file was given (use -f <file> or MODEL_ID in config.txt)" << endl;
+        return 1;
+    }
 
     auto tp = new ModelParser();
     auto sp = new StrategyParser();
@@ -46,7 +56,12 @@ int main(int argc, char* argv[]) {
     }
 
     if (config.verify_strategy) {
-        strat = sp->parse(config.strategy_file_path);
+        try {
+            strat = sp->parse(config.strategy_file_path);
+        } catch (const std::exception& ex) {
+            cerr << "Strategy parse error: " << ex.what() << endl;
+            return 1;
+        }
     }
 
     auto localModels = &(get<0>(desc));
@@ -155,9 +170,15 @@ int main(int argc, char* argv[]) {
 
         for (auto item : config.partial_reduction_args) {
             if (formulaVars.find(item) != formulaVars.end()) {
-                printf("ERR: variable '%s' is present in the formula!\n", item.c_str());
+                cerr << "Configuration error: Variable '" << item << "' given with --PARTIAL_REDUCTION is used in the formula, so it cannot be reduced" << endl;
                 return 1;
             }
+        }
+
+        if (!config.partial_reduction_agent.empty() &&
+            none_of(localModels->agents.begin(), localModels->agents.end(), [](Agent* agent) { return agent->name == config.partial_reduction_agent; })) {
+            cerr << "Configuration error: Incorrect agent name '" << config.partial_reduction_agent << "' given with --PARTIAL_REDUCTION_AGENT" << endl;
+            return 1;
         }
 
         cout << "Partial reduction agent: " << config.partial_reduction_agent << endl;
@@ -403,4 +424,13 @@ int main(int argc, char* argv[]) {
     delete sp;
     delete strat;
     return 0;
+}
+
+int main(int argc, char* argv[]) {
+    try {
+        return run(argc, argv);
+    } catch (const std::exception& ex) {
+        cerr << "Error: " << ex.what() << endl;
+        return 1;
+    }
 }

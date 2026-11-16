@@ -41,3 +41,20 @@ TEST_F(StrategyParserTest, MissingFileThrows) {
     StrategyParser parser;
     EXPECT_THROW(parser.parse("/nonexistent/stv/strategy.txt"), std::runtime_error);
 }
+
+TEST_F(StrategyParserTest, SyntaxErrorsReportTheLine) {
+    StrategyParser parser;
+    auto messageOf = [&](const string& text) {
+        string path = writeTempFile(text);
+        string message;
+        try {
+            parser.parse(path);
+        } catch (const std::runtime_error& error) {
+            message = error.what();
+        }
+        std::remove(path.c_str());
+        return message;
+    };
+    EXPECT_NE(messageOf("qa0 -> vote\nqa1 -> -> give\n").find("Syntax error in strategy file at line 2 near '->'"), string::npos);
+    EXPECT_NE(messageOf("qa0 -> vote;\n").find("Unexpected character ';' in strategy file at line 1"), string::npos);
+}

@@ -147,6 +147,92 @@ TEST_F(ModelParserTest, UnknownCoalitionAgentThrows) {
     EXPECT_THROW(parseModelText(withFormula("FORMULA: <<Nobody>>[](x==0)")), std::runtime_error);
 }
 
+namespace {
+/// @brief Expects parsing the model text to throw std::runtime_error whose message contains expected.
+void expectModelError(const string& text, const string& expected) {
+    try {
+        parseModelText(text);
+        ADD_FAILURE() << "no error, expected: " << expected;
+    } catch (const std::runtime_error& error) {
+        EXPECT_NE(string(error.what()).find(expected), string::npos) << error.what();
+    }
+}
+
+/// @brief Parses the model text and returns what it printed to stderr.
+string parseWarnings(const string& text) {
+    testing::internal::CaptureStderr();
+    parseModelText(text);
+    return testing::internal::GetCapturedStderr();
+}
+}
+
+TEST_F(ModelParserTest, SyntaxErrorReportsTheLine) {
+    expectModelError("Agent A:\nLOCAL: [x]\ninit s0\ngo: s0 -> -> s1\n", "Syntax error at line 4 near '->'");
+    expectModelError("Agent A:\ninit s0\ngo: s0 ->", "Syntax error at line 3 at the end of the file");
+}
+
+TEST_F(ModelParserTest, UnexpectedCharacterReportsTheLine) {
+    expectModelError("Agent A:\ninit s0\ngo: s0 -> s1 @\n", "Unexpected character '@' at line 3");
+}
+
+TEST_F(ModelParserTest, ParserWorksAgainAfterAnError) {
+    expectModelError("Agent A:\ninit s0\ngo: s0 -> -> s1\n", "Syntax error at line 3");
+    ParsedModel parsed = parseModelText(withFormula("FORMULA: <<A>>[](x==0)"));
+    EXPECT_EQ(parsed.models.agents.size(), 1u);
+}
+
+TEST_F(ModelParserTest, MissingAgentsOrFormulaThrow) {
+    expectModelError("FORMULA: <<>>[](1==1)\n", "The model does not define any agents");
+    expectModelError(withFormula(""), "The model has no FORMULA");
+}
+
+TEST_F(ModelParserTest, AgentStructureErrorsThrow) {
+    expectModelError("Agent A:\ngo: s0 -> s1\nFORMULA: <<A>>[](1==1)\n", "agent 'A' has no initial state");
+    expectModelError("Agent A:\ninit q0\ngo: s0 -> s1\nFORMULA: <<A>>[](1==1)\n",
+                     "No transition of agent 'A' starts in its initial state 'q0'");
+    expectModelError("Agent A:\ninit s0\ngo: s0 -> s1\nAgent A:\ninit s0\ngo: s0 -> s1\nFORMULA: <<A>>[](1==1)\n",
+                     "Agent 'A' is defined more than once");
+}
+
+TEST_F(ModelParserTest, SharedActionErrorsThrow) {
+    expectModelError("Agent A:\ninit s0\nshared[1] go: s0 -> s1\nFORMULA: <<A>>[](1==1)\n",
+                     "is declared as shared[1], but a shared action needs at least 2 agents");
+    expectModelError("Agent A:\ninit s0\nshared[2] go: s0 -> s1\nAgent B:\ninit s0\nshared[3] go: s0 -> s1\nFORMULA: <<A>>[](1==1)\n",
+                     "Shared action 'go' is declared as shared[");
+}
+
+TEST_F(ModelParserTest, ProbabilityErrorsThrow) {
+    expectModelError("Agent A:\ninit s0\nflip: s0 -> 0.5 : s1\n0.4 : s2\nFORMULA: <<A>>[](1==1)\n",
+                     "Probabilities of action 'flip' in state 's0' of agent 'A' add up to 0.9 instead of 1");
+    expectModelError("Agent A:\ninit s0\nflip: s0 -> 0.7 : s1\n0.6 : s2\n&REST : s3\nFORMULA: <<A>>[](1==1)\n",
+                     "of action 'flip' in state 's0' of agent 'A' is not between 0 and 1");
+}
+
+TEST_F(ModelParserTest, UnknownFormulaVariableThrows) {
+    expectModelError(withFormula("FORMULA: <<A>>[](nope==0)"), "Incorrect variable name 'nope' in the formula");
+}
+
+TEST_F(ModelParserTest, SuspiciousModelsOnlyWarn) {
+    string readsUnknown = parseWarnings("Agent A:\nLOCAL: [x]\ninit s0\ngo: s0 [other==1] -> s1 [x:=1]\nFORMULA: <<A>>[](1==1)\n");
+    EXPECT_NE(readsUnknown.find("agent 'A' reads variable 'other'"), string::npos) << readsUnknown;
+
+    string lonelyShared = parseWarnings("Agent A:\ninit s0\nshared[2] go: s0 -> s1\nFORMULA: <<A>>[](1==1)\n");
+    EXPECT_NE(lonelyShared.find("shared action 'go' needs 2 agents, but only 1 agent(s) define it"), string::npos) << lonelyShared;
+}
+
+TEST_F(ModelParserTest, InvalidOverwriteFormulaThrows) {
+    string path = writeTempFile(TWO_AGENT_MODEL);
+    ModelParser parser;
+    try {
+        parser.parseAndOverwriteFormula(path, "FORMULA: <<Voter>>[](vote==)");
+        ADD_FAILURE() << "no error";
+    } catch (const std::runtime_error& error) {
+        EXPECT_NE(string(error.what()).find("Invalid formula given with --OVERWRITE_FORMULA: Syntax error"), string::npos) << error.what();
+    }
+    EXPECT_THROW(parser.parseAndOverwriteFormula(path, "FORMULA: <<Voter>>[](nope==0)"), std::runtime_error);
+    std::remove(path.c_str());
+}
+
 TEST_F(ModelParserTest, ParseAndOverwriteFormulaKeepsAgentsAndReplacesFormula) {
     string path = writeTempFile(TWO_AGENT_MODEL);
     ModelParser parser;

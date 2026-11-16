@@ -17,6 +17,7 @@ using namespace std;
 
 extern int stratparse();
 extern void stratrestart(FILE*);
+extern int stratlineno;
 void set_input_string_strat(const char* in);
 
 StrategyCollectionTemplate strategyCollectionTemplate;
@@ -36,14 +37,20 @@ StrategyCollection* StrategyParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    if (f == nullptr) {
-      throw std::runtime_error("Failed to open strategy file: " + fileName);
+      throw std::runtime_error("Failed to open strategy file '" + fileName + "'");
    }
    // the template is global, so drop the actions of a previously parsed file
    strategyCollectionTemplate.selectedStrategy.clear();
    // zamapuj go jako wejście dla Fleksa
    stratrestart(f);
+   stratlineno = 1;
    // uruchom parsowanie
-   stratparse();
+   try {
+      stratparse();
+   } catch (...) {
+      fclose(f);
+      throw;
+   }
 
    StrategyCollection* strategyCollection = new StrategyCollection();
 

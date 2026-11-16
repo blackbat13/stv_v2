@@ -13,12 +13,16 @@
 #include <tuple>
 #include <iostream>
 #include <algorithm>
+#include <map>
+#include <stdexcept>
 
 using namespace std;
 
 extern int yyparse();
 extern void yyrestart(FILE*);
+extern int yylineno;
 void set_input_string(const char* in);
+void clear_input_string();
 
 set<AgentTemplate*>* modelDescription;
 FormulaTemplate formulaDescription;
@@ -30,6 +34,83 @@ void resetFormulaDescription() {
    formulaDescription.isF = false;
    formulaDescription.probability = nullptr;
    formulaDescription.probabilitySign.clear();
+}
+
+/// @brief Parses the current flex input; resets the line counter and closes the file on errors.
+void parseInput(FILE* file) {
+   yylineno = 1;
+   try {
+      yyparse();
+   } catch (...) {
+      if (file != nullptr) {
+         fclose(file);
+      }
+      throw;
+   }
+}
+
+/// @brief Checks the parsed agents: throws std::runtime_error on errors, prints warnings to stderr.
+void checkModelDescription() {
+   if (modelDescription == nullptr || modelDescription->empty()) {
+      throw runtime_error("The model does not define any agents");
+   }
+
+   set<string> agentNames;
+   map<string, pair<int, string>> sharedCounts;   // shared action -> (declared count, first agent declaring it)
+   map<string, set<string>> sharedAgents;         // shared action -> agents defining it
+   for (const auto agentTemplate : *modelDescription) {
+      const string& agent = agentTemplate->getIdent();
+      if (!agentNames.insert(agent).second) {
+         throw runtime_error("Agent '" + agent + "' is defined more than once");
+      }
+      agentTemplate->validate();
+
+      for (const auto transition : agentTemplate->getTransitions()) {
+         if (transition->shared < 2 || transition->shared == 999999) {
+            continue;
+         }
+         const string& action = transition->patternName;
+         auto declared = sharedCounts.find(action);
+         if (declared == sharedCounts.end()) {
+            sharedCounts[action] = {transition->shared, agent};
+         } else if (declared->second.first != transition->shared) {
+            throw runtime_error("Shared action '" + action + "' is declared as shared[" + to_string(declared->second.first) + "] in agent '" + declared->second.second + "' but as shared[" + to_string(transition->shared) + "] in agent '" + agent + "'");
+         }
+         sharedAgents[action].insert(agent);
+      }
+   }
+
+   for (const auto& action : sharedCounts) {
+      const size_t defining = sharedAgents[action.first].size();
+      if (defining < static_cast<size_t>(action.second.first)) {
+         cerr << "Warning: shared action '" << action.first << "' needs " << action.second.first << " agents, but only " << defining << " agent(s) define it, so it can never fire" << endl;
+      }
+   }
+}
+
+/// @brief Collects the agent names and all variables of the parsed agents.
+void collectModelNames(set<string>& agentNames, set<string>& variables) {
+   for (const auto agentTemplate : *modelDescription) {
+      agentNames.insert(agentTemplate->getIdent());
+      set<string> known = agentTemplate->getKnownVariables();
+      variables.insert(known.begin(), known.end());
+   }
+}
+
+/// @brief Checks that the parsed formula only names existing agents and variables.
+void checkFormula(const set<string>& agentNames, const set<string>& variables) {
+   for (const auto& agent : *formulaDescription.coalition) {
+      if (agentNames.count(agent) == 0) {
+         throw runtime_error("Incorrect agent name '" + agent + "' in the formula coalition");
+      }
+   }
+   for (const auto expression : *formulaDescription.formula) {
+      for (const auto& name : expression->getVariableNames()) {
+         if (variables.count(name) == 0) {
+            throw runtime_error("Incorrect variable name '" + name + "' in the formula");
+         }
+      }
+   }
 }
 }
 
@@ -48,18 +129,26 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    if (f == nullptr) {
-      throw std::runtime_error("Failed to open model file: " + fileName);
+      throw std::runtime_error("Failed to open model file '" + fileName + "'");
    }
    // zamapuj go jako wejście dla Fleksa
    resetFormulaDescription();
    yyrestart(f);
    // uruchom parsowanie
-   yyparse();
+   parseInput(f);
+   fclose(f);
    // na modelDescription jest opis modeli agentów
-   
+   checkModelDescription();
+   if (formulaDescription.formula == nullptr) {
+      throw runtime_error("The model has no FORMULA");
+   }
+   set<string> agentNames, variables;
+   collectModelNames(agentNames, variables);
+   checkFormula(agentNames, variables);
+
    // w pętli przetwórz wszystkie modele i wygeneruj docelowe modele lokalne
    LocalModels models;
-   
+
    if (config.cone_of_influence) {
        for (auto agentTemplate : *modelDescription) {
            agentTemplate->checkConeOfInfluence(config.cone_radius);
@@ -105,10 +194,6 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
          }
       }
    }
-   if (formula.coalition.size() != formulaDescription.coalition->size()) {
-      throw std::runtime_error("Incorrect agent name");
-   }
-
    if (formulaDescription.coalition->size() == 0) {
       formula.isCTL = true;
       for (const auto agent : models.agents) {
@@ -116,7 +201,6 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
       }
    }
 
-   fclose(f);
    return tuple<LocalModels, Formula>{models, formula};
 }
 
@@ -128,18 +212,22 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    // otwórz plik wejściowy
    FILE *f=fopen(fileName.c_str(), "r");
    if (f == nullptr) {
-      throw std::runtime_error("Failed to open model file: " + fileName);
+      throw std::runtime_error("Failed to open model file '" + fileName + "'");
    }
    // zamapuj go jako wejście dla Fleksa
    resetFormulaDescription();
    yyrestart(f);
    // uruchom parsowanie
-   yyparse();
+   parseInput(f);
    // na modelDescription jest opis modeli agentów
-   
+   checkModelDescription();
+   // parsing the formula string below replaces modelDescription, so collect the names first
+   set<string> agentNames, variables;
+   collectModelNames(agentNames, variables);
+
    // w pętli przetwórz wszystkie modele i wygeneruj docelowe modele lokalne
    LocalModels models;
-   
+
    int i = 0;
    for(set<AgentTemplate*>::iterator it=modelDescription->begin(); it != modelDescription->end(); it++, i++) {
       models.agents.push_back((*it)->generateAgent(i));
@@ -154,7 +242,19 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    char* ch = strdup(s.c_str());
    set_input_string(ch);
    resetFormulaDescription();
-   yyparse();
+   try {
+      parseInput(nullptr);
+   } catch (const exception& ex) {
+      clear_input_string();
+      free(ch);
+      throw runtime_error(string("Invalid formula given with --OVERWRITE_FORMULA: ") + ex.what());
+   }
+   clear_input_string();
+   free(ch);
+   if (formulaDescription.formula == nullptr) {
+      throw runtime_error("The formula given with --OVERWRITE_FORMULA is empty (it must start with 'FORMULA:')");
+   }
+   checkFormula(agentNames, variables);
 
    Formula formula;
    formula.p = formulaDescription.formula;
@@ -166,8 +266,6 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
       }
    }
 
-   free(ch);
-   
    return tuple<LocalModels, Formula>{models, formula};
 }
 

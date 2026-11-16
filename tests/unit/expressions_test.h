@@ -196,6 +196,7 @@ TEST_F(ExprGeneratorEval, IdentOnUnknownVariableMarksFormulaIncorrect) {
 
     EXPECT_EQ(ExprIdent("nope").eval(env, &generated.generator, init), -1);
     EXPECT_FALSE(generated.generator.getFormulaCorectness());
+    EXPECT_EQ(generated.generator.getMissingFormulaVariable(), "nope");
 }
 
 TEST_F(ExprGeneratorEval, ArithmeticOverloadMatchesPlainEval) {
