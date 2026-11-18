@@ -9,7 +9,7 @@ return_1: idle [Train1_pos==3] -> idle [Train1_pos:=1]
 Agent Controller:
 LOCAL: []
 init green
-shared[2] in_Train1: green -> red
-shared[2] out_Train1: red -> green
+shared[2] in_Train1[wait_in_Train1]: green -> red
+shared[2] out_Train1[wait_out_Train1]: red -> green
 
 FORMULA: <<Train1>>[](Train1_pos==2)

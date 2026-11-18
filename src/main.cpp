@@ -333,8 +333,14 @@ static int run(int argc, char* argv[]) {
             }
         }
         if(config.output_dot_files && verifResult){
-            // save GlobalModel solution
-            DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
+            // save GlobalModel solution; after DFS synthesis highlight the outcome of the found strategy
+            const bool usedDFSSynthesis = !config.fixpoint && !config.verify_strategy && !config.probability;
+            if (usedDFSSynthesis) {
+                const set<GlobalTransition*> strategyOutcome = verification->getStrategyOutcome();
+                DotGraph(generator->getCurrentGlobalModel(), true, true, &strategyOutcome).saveToFile(config.dotdir, fbasename+"-");
+            } else {
+                DotGraph(generator->getCurrentGlobalModel(), true, true).saveToFile(config.dotdir, fbasename+"-");
+            }
         }
         delete verification;
     }

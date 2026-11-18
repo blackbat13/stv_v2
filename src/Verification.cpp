@@ -1293,6 +1293,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
     bool hasValidControlledTransition = false;
     if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
+        // true if the state is won by letting the opponents move (all their own moves and compatible syncs are OK); false also when they have no moves
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
             if (this->mode == TraversalMode::RESTORE) {
@@ -1494,12 +1495,11 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
         }
 
-        // If there are no valid controlled or choice transitions, check if any mandatory opponent-triggered transitions are compatible with the coalition's decisions
-        if (!hasValidControlledTransition && !hasValidChoiceTransition &&
-            !mandatoryOpponentTransitions.empty()) {
+        // Without a valid controlled transition, the opponents decide what happens next: their own moves and the compatible opponent-triggered synchronizations must all be valid. A failed opponent move can't be compensated by another one, so the synchronizations are only checked if the opponents' own moves passed.
+        if (!hasValidControlledTransition && !mandatoryOpponentTransitions.empty() &&
+            (hasValidChoiceTransition || uncontrolledGlobalTransitions.empty())) {
             const auto compatibleOpponentChoices = getCompatibleOpponentTransitions();
             if (!compatibleOpponentChoices.empty()) {
-                // Only an uncommitted, compatible synchronization can be a coalition choice.
                 hasValidChoiceTransition = this->checkUncontrolledSet(
                     compatibleOpponentChoices, globalState, depth, hasOmittedTransitions, mixedTransitions);
             }
@@ -1683,6 +1683,38 @@ bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalSt
         strategyVariableLimit = it;
     }
     return currentValues;
+}
+
+/// @brief Collects the transitions that can fire when the coalition follows the strategy fixed by verify(). Walks forward from the initial state, keeping every transition compatible with the coalition's fixed local choices; opponents may take any move. For F formulas the walk stops at goal states, because the path is already won there. A coalition class that verify() left unfixed allows all of its actions.
+/// @return Set of GlobalTransition pointers forming the outcome of the strategy.
+set<GlobalTransition*> Verification::getStrategyOutcome() {
+    set<GlobalTransition*> outcome;
+    const bool isFMode = this->generator->getFormula()->isF;
+    GlobalState* initState = this->generator->getCurrentGlobalModel()->initState;
+    set<GlobalState*> visited = {initState};
+    queue<GlobalState*> toVisit;
+    toVisit.push(initState);
+
+    while (!toVisit.empty()) {
+        GlobalState* globalState = toVisit.front();
+        toVisit.pop();
+        if (isFMode && this->verifyLocalStates(&globalState->localStatesProjection, globalState)) {
+            continue;
+        }
+        if (!globalState->isExpanded) {
+            this->generator->expandState(globalState);
+        }
+        for (const auto globalTransition : globalState->globalTransitions) {
+            if (!this->isGlobalTransitionCompatibleWithCoalitionDecisions(globalTransition)) {
+                continue;
+            }
+            outcome.insert(globalTransition);
+            if (visited.insert(globalTransition->to).second) {
+                toVisit.push(globalTransition->to);
+            }
+        }
+    }
+    return outcome;
 }
 
 /// @brief Get natural strategy map.

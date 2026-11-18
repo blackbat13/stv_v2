@@ -10,8 +10,8 @@ shared[2] Voter1_gv2[Voter1_gv2]: voted [Voter1_vote == 2] -> obeyed [Voter1_obe
 vote3: start -> voted [Voter1_vote := 3]
 shared[2] Voter1_gv3[Voter1_gv3]: voted [Voter1_vote == 3] -> obeyed [Voter1_obeyed := 1]
 shared[2] Voter1_ng[Voter1_ng]: voted -> disobeyed [Voter1_disobeyed := 1]
-shared[3] idle[idle]: obeyed -> obeyed
-shared[3] idle[idle]: disobeyed -> disobeyed
+shared[3] idle[wait_idle]: obeyed -> obeyed
+shared[3] idle[wait_idle]: disobeyed -> disobeyed
 
 Agent Voter2:
 LOCAL: [Voter2_vote, Voter2_obeyed, Voter2_disobeyed]
@@ -25,8 +25,8 @@ shared[2] Voter2_gv2[Voter2_gv2]: voted [Voter2_vote == 2] -> obeyed [Voter2_obe
 vote3: start -> voted [Voter2_vote := 3]
 shared[2] Voter2_gv3[Voter2_gv3]: voted [Voter2_vote == 3] -> obeyed [Voter2_obeyed := 1]
 shared[2] Voter2_ng[Voter2_ng]: voted -> disobeyed [Voter2_disobeyed := 1]
-shared[3] idle[idle]: obeyed -> obeyed
-shared[3] idle[idle]: disobeyed -> disobeyed
+shared[3] idle[wait_idle]: obeyed -> obeyed
+shared[3] idle[wait_idle]: disobeyed -> disobeyed
 
 Agent Coercer:
 LOCAL: [Coercer_cert1, Coercer_pun1, Coercer_dec1, Coercer_end1, Coercer_cert2, Coercer_pun2, Coercer_dec2, Coercer_end2]

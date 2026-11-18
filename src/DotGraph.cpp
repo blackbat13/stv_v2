@@ -85,7 +85,11 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
 }
 
 /// @brief parses the transitions/states templates into nodes/edges
-DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
+/// @param gm global model to draw
+/// @param extended add local states' variable values to the state labels
+/// @param correct colour red the transitions between verified-OK states (used when highlightedTransitions is null)
+/// @param highlightedTransitions if given, colour red exactly these transitions (e.g. the outcome of the found strategy)
+DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct, const set<GlobalTransition*>* highlightedTransitions){
     nodes.clear();
     edges.clear();
     const std::string sep="||";              // (async) agent names separator
@@ -143,7 +147,10 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
             if (!t->from || !t->to) {
                 continue;
             }
-            if (correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
+            const bool highlighted = highlightedTransitions != nullptr
+                ? highlightedTransitions->count(t) > 0
+                : correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK;
+            if (highlighted) {
                 this->addEdge(
                     '"'+t->from->hash+'"', 
                     '"'+t->to->hash+'"', 

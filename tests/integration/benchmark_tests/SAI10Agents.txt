@@ -20,7 +20,7 @@ stop_learning: learn [2 <= AI1_information && AI1_model_quality <= 0] -> educate
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
 shared[2] share_1_with_2: sharing -> sharing2
-shared[2] share_10_with_1: sharing2 -> sharing3 [AI1_model_quality:=AI10_model_quality]
+shared[2] share_10_with_1[wait_share_10_with_1]: sharing2 -> sharing3 [AI1_model_quality:=AI10_model_quality]
 end_sharing: sharing3 -> end
 wait: end -> end
 repeat: end -> learn
@@ -46,7 +46,7 @@ stop_learning: learn [2 <= AI2_information && AI2_model_quality > 0] -> educated
 stop_learning: learn [2 <= AI2_information && AI2_model_quality <= 0] -> educated [AI2_information:=0, AI2_model_status:=3]
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
-shared[2] share_1_with_2: sharing -> sharing2 [AI2_model_quality:=AI1_model_quality]
+shared[2] share_1_with_2[wait_share_1_with_2]: sharing -> sharing2 [AI2_model_quality:=AI1_model_quality]
 shared[2] share_2_with_3: sharing2 -> sharing3
 end_sharing: sharing3 -> end
 wait: end -> end
@@ -74,7 +74,7 @@ stop_learning: learn [2 <= AI3_information && AI3_model_quality <= 0] -> educate
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
 shared[2] share_3_with_4: sharing -> sharing2
-shared[2] share_2_with_3: sharing2 -> sharing3 [AI3_model_quality:=AI2_model_quality]
+shared[2] share_2_with_3[wait_share_2_with_3]: sharing2 -> sharing3 [AI3_model_quality:=AI2_model_quality]
 end_sharing: sharing3 -> end
 wait: end -> end
 repeat: end -> learn
@@ -100,7 +100,7 @@ stop_learning: learn [2 <= AI4_information && AI4_model_quality > 0] -> educated
 stop_learning: learn [2 <= AI4_information && AI4_model_quality <= 0] -> educated [AI4_information:=0, AI4_model_status:=3]
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
-shared[2] share_3_with_4: sharing -> sharing2 [AI4_model_quality:=AI3_model_quality]
+shared[2] share_3_with_4[wait_share_3_with_4]: sharing -> sharing2 [AI4_model_quality:=AI3_model_quality]
 shared[2] share_4_with_5: sharing2 -> sharing3
 end_sharing: sharing3 -> end
 wait: end -> end
@@ -128,7 +128,7 @@ stop_learning: learn [2 <= AI5_information && AI5_model_quality <= 0] -> educate
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
 shared[2] share_5_with_6: sharing -> sharing2
-shared[2] share_4_with_5: sharing2 -> sharing3 [AI5_model_quality:=AI4_model_quality]
+shared[2] share_4_with_5[wait_share_4_with_5]: sharing2 -> sharing3 [AI5_model_quality:=AI4_model_quality]
 end_sharing: sharing3 -> end
 wait: end -> end
 repeat: end -> learn
@@ -154,7 +154,7 @@ stop_learning: learn [2 <= AI6_information && AI6_model_quality > 0] -> educated
 stop_learning: learn [2 <= AI6_information && AI6_model_quality <= 0] -> educated [AI6_information:=0, AI6_model_status:=3]
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
-shared[2] share_5_with_6: sharing -> sharing2 [AI6_model_quality:=AI5_model_quality]
+shared[2] share_5_with_6[wait_share_5_with_6]: sharing -> sharing2 [AI6_model_quality:=AI5_model_quality]
 shared[2] share_6_with_7: sharing2 -> sharing3
 end_sharing: sharing3 -> end
 wait: end -> end
@@ -182,7 +182,7 @@ stop_learning: learn [2 <= AI7_information && AI7_model_quality <= 0] -> educate
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
 shared[2] share_7_with_8: sharing -> sharing2
-shared[2] share_6_with_7: sharing2 -> sharing3 [AI7_model_quality:=AI6_model_quality]
+shared[2] share_6_with_7[wait_share_6_with_7]: sharing2 -> sharing3 [AI7_model_quality:=AI6_model_quality]
 end_sharing: sharing3 -> end
 wait: end -> end
 repeat: end -> learn
@@ -208,7 +208,7 @@ stop_learning: learn [2 <= AI8_information && AI8_model_quality > 0] -> educated
 stop_learning: learn [2 <= AI8_information && AI8_model_quality <= 0] -> educated [AI8_information:=0, AI8_model_status:=3]
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
-shared[2] share_7_with_8: sharing -> sharing2 [AI8_model_quality:=AI7_model_quality]
+shared[2] share_7_with_8[wait_share_7_with_8]: sharing -> sharing2 [AI8_model_quality:=AI7_model_quality]
 shared[2] share_8_with_9: sharing2 -> sharing3
 end_sharing: sharing3 -> end
 wait: end -> end
@@ -236,7 +236,7 @@ stop_learning: learn [2 <= AI9_information && AI9_model_quality <= 0] -> educate
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
 shared[2] share_9_with_10: sharing -> sharing2
-shared[2] share_8_with_9: sharing2 -> sharing3 [AI9_model_quality:=AI8_model_quality]
+shared[2] share_8_with_9[wait_share_8_with_9]: sharing2 -> sharing3 [AI9_model_quality:=AI8_model_quality]
 end_sharing: sharing3 -> end
 wait: end -> end
 repeat: end -> learn
@@ -262,7 +262,7 @@ stop_learning: learn [2 <= AI10_information && AI10_model_quality > 0] -> educat
 stop_learning: learn [2 <= AI10_information && AI10_model_quality <= 0] -> educated [AI10_information:=0, AI10_model_status:=3]
 skip_learning: data_ready -> sharing
 start_sharing: educated -> sharing
-shared[2] share_9_with_10: sharing -> sharing2 [AI10_model_quality:=AI9_model_quality]
+shared[2] share_9_with_10[wait_share_9_with_10]: sharing -> sharing2 [AI10_model_quality:=AI9_model_quality]
 shared[2] share_10_with_1: sharing2 -> sharing3
 end_sharing: sharing3 -> end
 wait: end -> end

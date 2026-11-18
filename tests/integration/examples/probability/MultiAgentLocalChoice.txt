@@ -13,7 +13,7 @@ INITIAL: []
 init initial
 branch: initial -> 50/100 : state0
                    50/100 : state1
-shared[2] choose0[choose0]: state0 -> done
-shared[2] choose1[choose1]: state1 -> done
+shared[2] choose0[wait_choose0]: state0 -> done
+shared[2] choose1[wait_choose1]: state1 -> done
 
 FORMULA: <<AgentA,AgentB>><>&P[>=0.75](goal==1)

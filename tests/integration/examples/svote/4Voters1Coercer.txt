@@ -36,7 +36,7 @@ shared[2] gv_1_Voter3[gv_1_Voter3]: q1 [Voter3_vote==1] -> q2
 voter3vote2: q0 -> q1 [Voter3_vote:=2]
 shared[2] gv_2_Voter3[gv_2_Voter3]: q1 [Voter3_vote==2] -> q2
 shared[2] ng_Voter3[ng_Voter3]: q1 -> q2
-shared[2] pun_Voter3[pun_Voter3]: q2 -> q3
+shared[2] pun_Voter3[pn_Voter3]: q2 -> q3
 shared[2] npun_Voter3[pn_Voter3]: q2 -> q3
 idle: q3->q3
 
@@ -50,7 +50,7 @@ shared[2] gv_1_Voter4[gv_1_Voter4]: q1 [Voter4_vote==1] -> q2
 voter4vote2: q0 -> q1 [Voter4_vote:=2]
 shared[2] gv_2_Voter4[gv_2_Voter4]: q1 [Voter4_vote==2] -> q2
 shared[2] ng_Voter4[ng_Voter4]: q1 -> q2
-shared[2] pun_Voter4[pun_Voter4]: q2 -> q3
+shared[2] pun_Voter4[pn_Voter4]: q2 -> q3
 shared[2] npun_Voter4[pn_Voter4]: q2 -> q3
 idle: q3->q3
 

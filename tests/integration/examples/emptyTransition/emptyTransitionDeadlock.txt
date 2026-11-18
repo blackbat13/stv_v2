@@ -8,6 +8,6 @@ LOCAL: [finish]
 PERSISTENT: [finish]
 INITIAL: [finish:=0]
 init o0
-shared[2] move: o0 -> o1 [finish:=1]
+shared[2] move[wait_move]: o0 -> o1 [finish:=1]
 
 FORMULA: <<Coalition>><>(finish==1)

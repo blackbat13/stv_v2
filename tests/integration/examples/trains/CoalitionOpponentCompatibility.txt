@@ -12,7 +12,7 @@ LOCAL: []
 PERSISTENT: []
 INITIAL: []
 init b
-shared[2] go[go]: b -> done
+shared[2] go[wait_go]: b -> done
 loop: done -> done
 
 Agent Opponent:

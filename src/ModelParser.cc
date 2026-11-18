@@ -58,6 +58,7 @@ void checkModelDescription() {
    set<string> agentNames;
    map<string, pair<int, string>> sharedCounts;   // shared action -> (declared count, first agent declaring it)
    map<string, set<string>> sharedAgents;         // shared action -> agents defining it
+   map<string, set<string>> performingAgents;     // shared action -> agents performing the sync (local name == shared name)
    for (const auto agentTemplate : *modelDescription) {
       const string& agent = agentTemplate->getIdent();
       if (!agentNames.insert(agent).second) {
@@ -77,6 +78,19 @@ void checkModelDescription() {
             throw runtime_error("Shared action '" + action + "' is declared as shared[" + to_string(declared->second.first) + "] in agent '" + declared->second.second + "' but as shared[" + to_string(transition->shared) + "] in agent '" + agent + "'");
          }
          sharedAgents[action].insert(agent);
+         if (transition->matchName == action) {
+            performingAgents[action].insert(agent);
+         }
+      }
+   }
+
+   for (const auto& action : performingAgents) {
+      if (action.second.size() > 1) {
+         string agents;
+         for (const auto& agent : action.second) {
+            agents += (agents.empty() ? "'" : ", '") + agent + "'";
+         }
+         throw runtime_error("Shared action '" + action.first + "' is performed by more than one agent (" + agents + "): only one agent may perform it, written as " + action.first + " or " + action.first + "[" + action.first + "]; the agents that only wait for it must write " + action.first + "[localName] with a different local name");
       }
    }
 
