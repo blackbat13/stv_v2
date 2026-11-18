@@ -518,6 +518,14 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     if (!globalState->isExpanded) {
         this->generator->expandState(globalState);
     }
+
+    // a state without successors is a deadlock: the system stays there forever, so an F goal not reached yet is lost (G keeps holding)
+    if (isFMode && globalState->globalTransitions.empty()) {
+        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "deadlock");
+        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+        return false;
+    }
     
     // 3) group transitions: controlled and uncontrolled by the coalition
     set<GlobalTransition*> controlledGlobalTransitions;

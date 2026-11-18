@@ -31,3 +31,19 @@ TEST(GeneralCorrectness, SimpleVoting)
 
     EXPECT_EQ((verify.generator->getCurrentGlobalModel())->globalStates.size(), 15);
 }
+
+TEST(GeneralCorrectness, DeadEndDoesNotReachFGoal)
+{
+    // the Dealer performs every sync and every path ends in a state without successors, so the coalition can't force win==1
+    TestVerif verify("../tests/integration/examples/deadlock/DeadEndBeforeGoalF.txt", 0);
+
+    EXPECT_FALSE(verify.result);
+}
+
+TEST(GeneralCorrectness, DeadEndKeepsGHolding)
+{
+    // a state without successors stays put forever, so a G property that held there keeps holding
+    TestVerif verify("../tests/integration/examples/deadlock/DeadEndKeepsG.txt", 0);
+
+    EXPECT_TRUE(verify.result);
+}

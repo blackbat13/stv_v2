@@ -168,6 +168,12 @@ TEST(InputErrorTest, SharedActionPerformedTwice)
               "Shared action 'give' is performed by more than one agent ('Coercer', 'Voter'): only one agent may perform it, written as give or give[give]; the agents that only wait for it must write give[localName] with a different local name");
 }
 
+TEST(InputErrorTest, AmbiguousFormulaVariable)
+{
+    EXPECT_EQ(verificationError("AmbiguousFormulaVariable.txt"),
+              "Variable 'win' in the formula is declared by more than one agent ('Controller', 'Train'), so it is ambiguous: give each agent's variable a unique name");
+}
+
 TEST(InputErrorTest, ProbabilityOutOfRange)
 {
     EXPECT_EQ(verificationError("ProbabilityOutOfRange.txt"),

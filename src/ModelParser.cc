@@ -102,17 +102,19 @@ void checkModelDescription() {
    }
 }
 
-/// @brief Collects the agent names and all variables of the parsed agents.
-void collectModelNames(set<string>& agentNames, set<string>& variables) {
+/// @brief Collects the agent names and, for every variable, the agents declaring it.
+void collectModelNames(set<string>& agentNames, map<string, set<string>>& variableOwners) {
    for (const auto agentTemplate : *modelDescription) {
-      agentNames.insert(agentTemplate->getIdent());
-      set<string> known = agentTemplate->getKnownVariables();
-      variables.insert(known.begin(), known.end());
+      const string& agent = agentTemplate->getIdent();
+      agentNames.insert(agent);
+      for (const auto& variable : agentTemplate->getKnownVariables()) {
+         variableOwners[variable].insert(agent);
+      }
    }
 }
 
-/// @brief Checks that the parsed formula only names existing agents and variables.
-void checkFormula(const set<string>& agentNames, const set<string>& variables) {
+/// @brief Checks that the parsed formula only names existing agents and variables, and no variable declared by several agents.
+void checkFormula(const set<string>& agentNames, const map<string, set<string>>& variableOwners) {
    for (const auto& agent : *formulaDescription.coalition) {
       if (agentNames.count(agent) == 0) {
          throw runtime_error("Incorrect agent name '" + agent + "' in the formula coalition");
@@ -120,8 +122,17 @@ void checkFormula(const set<string>& agentNames, const set<string>& variables) {
    }
    for (const auto expression : *formulaDescription.formula) {
       for (const auto& name : expression->getVariableNames()) {
-         if (variables.count(name) == 0) {
+         const auto owners = variableOwners.find(name);
+         if (owners == variableOwners.end()) {
             throw runtime_error("Incorrect variable name '" + name + "' in the formula");
+         }
+         // the formula sees one value per variable name, so a name declared by several agents would silently pick one of them
+         if (owners->second.size() > 1) {
+            string agents;
+            for (const auto& agent : owners->second) {
+               agents += (agents.empty() ? "'" : ", '") + agent + "'";
+            }
+            throw runtime_error("Variable '" + name + "' in the formula is declared by more than one agent (" + agents + "), so it is ambiguous: give each agent's variable a unique name");
          }
       }
    }
@@ -156,9 +167,10 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
    if (formulaDescription.formula == nullptr) {
       throw runtime_error("The model has no FORMULA");
    }
-   set<string> agentNames, variables;
-   collectModelNames(agentNames, variables);
-   checkFormula(agentNames, variables);
+   set<string> agentNames;
+   map<string, set<string>> variableOwners;
+   collectModelNames(agentNames, variableOwners);
+   checkFormula(agentNames, variableOwners);
 
    // w pętli przetwórz wszystkie modele i wygeneruj docelowe modele lokalne
    LocalModels models;
@@ -236,8 +248,9 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    // na modelDescription jest opis modeli agentów
    checkModelDescription();
    // parsing the formula string below replaces modelDescription, so collect the names first
-   set<string> agentNames, variables;
-   collectModelNames(agentNames, variables);
+   set<string> agentNames;
+   map<string, set<string>> variableOwners;
+   collectModelNames(agentNames, variableOwners);
 
    // w pętli przetwórz wszystkie modele i wygeneruj docelowe modele lokalne
    LocalModels models;
@@ -268,7 +281,7 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    if (formulaDescription.formula == nullptr) {
       throw runtime_error("The formula given with --OVERWRITE_FORMULA is empty (it must start with 'FORMULA:')");
    }
-   checkFormula(agentNames, variables);
+   checkFormula(agentNames, variableOwners);
 
    Formula formula;
    formula.p = formulaDescription.formula;

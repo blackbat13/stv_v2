@@ -1,0 +1,25 @@
+Agent Dealer:
+LOCAL: []
+init loc_i
+shared[2] setC0: loc_i -> loc_i
+shared[2] setC1: loc_i -> loc_i
+shared[2] setT0: loc_i -> loc_i
+shared[2] setT1: loc_i -> loc_i
+
+Agent Train:
+LOCAL: [trainWin]
+PERSISTENT: [trainWin]
+INITIAL: [trainWin:=0]
+init loc_i
+shared[2] setT0[set]: loc_i -> loc_0
+shared[2] setT1[set]: loc_i -> loc_1 [trainWin:=2]
+
+Agent Controller:
+LOCAL: [win]
+PERSISTENT: [win]
+INITIAL: [win:=0]
+init loc_i
+shared[2] setC0[set]: loc_i -> loc_0
+shared[2] setC1[set]: loc_i -> loc_1 [win:=1]
+
+FORMULA: <<Train,Controller>><>(win==1)
