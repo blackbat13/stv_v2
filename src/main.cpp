@@ -345,6 +345,16 @@ static int run(int argc, char* argv[]) {
         delete verification;
     }
 
+    // the README asks for a serial transition relation, so point out the dead ends that were found
+    const auto& deadEnds = generator->getDeadEndStates();
+    if (!deadEnds.empty()) {
+        string example;
+        for (const auto localState : deadEnds.front()->localStatesProjection) {
+            example += (example.empty() ? "" : ", ") + localState->name;
+        }
+        cerr << "Warning: found " << deadEnds.size() << " global state(s) without outgoing transitions, e.g. (" << example << "); the system stays there forever, so an F goal not reached by then is lost" << endl;
+    }
+
     if(config.stv_mode & (1 << 2)){     // mode.binary = /[0,1]*1[0,1]{2}/ (print metadata)
         // Print out model metadata
         for (const auto agent : localModels->agents) {

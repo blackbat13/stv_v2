@@ -133,7 +133,14 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
         // printf("added a state!\n");
     }
 
+    if (state->globalTransitions.empty()) {
+        this->deadEndStates.push_back(state);
+    }
     state->isExpanded = true;
+}
+
+const vector<GlobalState*>& GlobalModelGenerator::getDeadEndStates() const {
+    return this->deadEndStates;
 }
 
 /// @brief GlobalModelGenerator::expandState that also additionally returns a vector of newly created states
@@ -165,6 +172,9 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
             }
             globalTransition->to = targetState;
         }
+    }
+    if (state->globalTransitions.empty()) {
+        this->deadEndStates.push_back(state);
     }
     state->isExpanded = true;
     return res;

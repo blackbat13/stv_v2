@@ -55,11 +55,15 @@ public:
     string getCoalitionActionSignature(GlobalTransition* transition, char sep=';');
     string getActionNameFromStateInStrategy(GlobalState* state);
     bool hasDeadlockCombination(vector<LocalState*>* localStates);
+    /// @brief Expanded global states without outgoing transitions (dead ends), in the order they were found.
+    const vector<GlobalState*>& getDeadEndStates() const;
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;
 
 protected:
+    /// @brief Expanded global states without outgoing transitions, see getDeadEndStates().
+    vector<GlobalState*> deadEndStates;
     struct GlobalStateTupleHash {
         size_t operator()(const tuple<GlobalState*, int>& t) const {
             auto gsHash = hash<string>()(get<0>(t)->hash);
