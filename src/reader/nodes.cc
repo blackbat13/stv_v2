@@ -196,6 +196,8 @@ LocalState * AgentTemplate::genNextState(LocalState* state, TransitionTemplate* 
    LocalState *newState = new LocalState;
    newState->name = trans->endState;
    newState->agent = state->agent;
+   // non-persistent variables are not remembered: they go back to their initial value unless the transition assigns them
+   newState->environment = state->agent->initState->environment;
    // najpierw przepisz zmienne stałe
    for(set<string>::iterator it=persistentVars->begin(); it != persistentVars->end(); it++) {
       // wartości powinny być w środowisku, inaczej coś jest nie halo
@@ -207,7 +209,6 @@ LocalState * AgentTemplate::genNextState(LocalState* state, TransitionTemplate* 
             newState->environment[(*it)->ident] = (*it)->value->eval(state->environment);
         }
    }
-   // zmienne ulotne automatycznie wyparowały
    // zwróć nowy stan
    return newState;
 }
@@ -245,6 +246,10 @@ Agent * AgentTemplate::generateAgent(int id) {
    // result->localStates[0] = result->initState;
    result->localStates.push_back(result->initState);
    result->initState->agent = result;
+   // every variable of the agent has a value in every state; it starts at 0 unless INITIAL says otherwise
+   for (const auto& variable : getKnownVariables()) {
+      result->initState->environment[variable] = 0;
+   }
    // wylicz mu wartości zmiennych na podstawie inicjalnego przypisania
    for(set<Assignment*>::iterator it = initialAssignments->begin(); it != initialAssignments->end(); it++) {
       // wylicz wartość i wstaw do środowiska. Posiłkuj się tym samym środowiskiem (zaślepka)

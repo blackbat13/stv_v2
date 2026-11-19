@@ -67,3 +67,46 @@ TEST(GeneralCorrectness, DeadEndKeepsGHolding)
 
     EXPECT_TRUE(verify.result);
 }
+
+static LocalState* variablesTestFindLocalState(GlobalModel* model, const string& agentName, const string& stateName) {
+    for (auto* agent : model->agents) {
+        if (agent->name != agentName) {
+            continue;
+        }
+        for (auto* localState : agent->localStates) {
+            if (localState->name == stateName) {
+                return localState;
+            }
+        }
+    }
+    return nullptr;
+}
+
+TEST(GeneralCorrectness, NonPersistentVariableGoesBackToInitialValue)
+{
+    // x is not persistent: set to 1 by 'set', back to its initial 5 after 'step'; y is persistent and keeps 1
+    TestVerif verify("../tests/integration/examples/variables/NonPersistentReset.txt", 1);
+    EXPECT_TRUE(verify.result);
+
+    auto* model = verify.generator->getCurrentGlobalModel();
+    auto* q0 = variablesTestFindLocalState(model, "A", "q0");
+    auto* q1 = variablesTestFindLocalState(model, "A", "q1");
+    auto* q2 = variablesTestFindLocalState(model, "A", "q2");
+    ASSERT_NE(q0, nullptr);
+    ASSERT_NE(q1, nullptr);
+    ASSERT_NE(q2, nullptr);
+    EXPECT_EQ(q0->environment, (map<string, int>{{"x", 5}, {"y", 0}}));
+    EXPECT_EQ(q1->environment, (map<string, int>{{"x", 1}, {"y", 1}}));
+    EXPECT_EQ(q2->environment, (map<string, int>{{"x", 5}, {"y", 1}}));
+}
+
+TEST(GeneralCorrectness, NonPersistentVariableHasValueInEveryState)
+{
+    // the Controller's win is only assigned by setC1, but it still has a value after setC0
+    TestVerif verify("../tests/integration/examples/variables/NonPersistentInEveryState.txt", 1);
+    EXPECT_TRUE(verify.result);
+
+    for (auto* state : verify.generator->getCurrentGlobalModel()->globalStates) {
+        EXPECT_EQ(state->getGlobalStateEnvironment().count("win"), 1u) << state->hash;
+    }
+}

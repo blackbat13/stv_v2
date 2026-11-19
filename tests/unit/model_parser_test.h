@@ -74,7 +74,7 @@ TEST_F(ModelParserTest, ParsesAgentsVariablesAndStates) {
     EXPECT_TRUE(persistence.at("vote"));
     EXPECT_FALSE(persistence.at("tmp"));
     EXPECT_EQ(voter->initState->name, "q0");
-    EXPECT_EQ(voter->initState->environment, (map<string, int>{{"vote", 0}}));
+    EXPECT_EQ(voter->initState->environment, (map<string, int>{{"tmp", 0}, {"vote", 0}}));
     EXPECT_EQ(voter->localStates.size(), 3u);
     EXPECT_EQ(voter->localTransitions.size(), 2u);
 

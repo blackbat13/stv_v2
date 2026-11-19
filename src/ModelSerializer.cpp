@@ -59,25 +59,29 @@ static string formatProbability(float probability) {
     return result;
 }
 
-string ModelSerializer::assignmentString(LocalTransition* t, const set<string>& persistentVarNames) {
+/// @brief Recovers the assignments of a transition from the variable values before and after it.
+/// @return One "name:=value" entry for every variable the transition must assign to reach its target state.
+static vector<string> assignmentParts(LocalTransition* t, const set<string>& persistentVarNames) {
     vector<string> parts;
+    const map<string, int>& initialEnvironment = t->agent->initState->environment;
 
     for (const auto& kv : t->to->environment) {
         const string& varName = kv.first;
         int toVal = kv.second;
 
-        if (persistentVarNames.count(varName)) {
-            // Persistent variable: only emit if it changed.
-            auto fromIt = t->from->environment.find(varName);
-            int fromVal = (fromIt != t->from->environment.end()) ? fromIt->second : 0;
-            if (fromVal != toVal) {
-                parts.push_back(varName + ":=" + to_string(toVal));
-            }
-        } else {
-            // Local variable: appears in destination only when explicitly assigned.
+        // without an assignment a persistent variable keeps its value, and any other one goes back to its initial value
+        const map<string, int>& unassigned = persistentVarNames.count(varName) ? t->from->environment : initialEnvironment;
+        auto unassignedIt = unassigned.find(varName);
+        int unassignedVal = (unassignedIt != unassigned.end()) ? unassignedIt->second : 0;
+        if (unassignedVal != toVal) {
             parts.push_back(varName + ":=" + to_string(toVal));
         }
     }
+    return parts;
+}
+
+string ModelSerializer::assignmentString(LocalTransition* t, const set<string>& persistentVarNames) {
+    vector<string> parts = assignmentParts(t, persistentVarNames);
 
     if (parts.empty()) return "";
     string result = "[";
@@ -105,20 +109,7 @@ static string transitionSignature(LocalTransition* t, const set<string>& persist
     signature << t->from->name << "|" << environmentSignature(t->from->environment) << "|";
     signature << t->to->name << "|" << environmentSignature(t->to->environment) << "|";
 
-    vector<string> parts;
-    for (const auto& kv : t->to->environment) {
-        const string& varName = kv.first;
-        int toVal = kv.second;
-        if (persistentVarNames.count(varName)) {
-            auto fromIt = t->from->environment.find(varName);
-            int fromVal = (fromIt != t->from->environment.end()) ? fromIt->second : 0;
-            if (fromVal != toVal) {
-                parts.push_back(varName + ":=" + to_string(toVal));
-            }
-        } else {
-            parts.push_back(varName + ":=" + to_string(toVal));
-        }
-    }
+    vector<string> parts = assignmentParts(t, persistentVarNames);
     for (size_t i = 0; i < parts.size(); ++i) {
         if (i > 0) signature << ",";
         signature << parts[i];

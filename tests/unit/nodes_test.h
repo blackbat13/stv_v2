@@ -99,7 +99,7 @@ TEST_F(AgentTemplateTest, GenerateAgentBuildsVariablesAndInitialState) {
     EXPECT_EQ(agent->initState->id, 0u);
     EXPECT_EQ(agent->initState->name, "s0");
     EXPECT_EQ(agent->initState->agent, agent);
-    EXPECT_EQ(agent->initState->environment, (map<string, int>{{"vote", 3}}));
+    EXPECT_EQ(agent->initState->environment, (map<string, int>{{"tmp", 0}, {"vote", 3}}));  // tmp has no INITIAL value: 0
 
     map<string, bool> persistence;
     for (auto var : agent->vars) {
@@ -132,19 +132,19 @@ TEST_F(AgentTemplateTest, GenerateAgentExploresStatesBreadthFirst) {
     EXPECT_EQ(outgoingNames(stateNamed(agent, "s0")), (std::multiset<string>{"[0]_a", "[0]_c"}));
 }
 
-TEST_F(AgentTemplateTest, PersistentVariablesSurviveAndLocalVariablesVanish) {
-    // s0 [p:=1, l:=1] -> s1 -> s2 : p is persistent and stays 1, l is local and disappears after the next step.
+TEST_F(AgentTemplateTest, PersistentVariablesSurviveAndLocalVariablesGoBackToInitialValue) {
+    // s0 [p:=1, l:=1] -> s1 -> s2 : p is persistent and stays 1, l is not persistent and goes back to its initial 7.
     AgentTemplate agentTemplate;
     agentTemplate.setIdent("A").setInitState("s0");
     agentTemplate.addLocal(new set<string>{"l"});
     agentTemplate.addPersistent(new set<string>{"p"});
-    agentTemplate.addInitial(assigns({{"p", new ExprConst(0)}}));
+    agentTemplate.addInitial(assigns({{"p", new ExprConst(0)}, {"l", new ExprConst(7)}}));
     agentTemplate.addTransition(plain("set", "s0", "s1", nullptr, assigns({{"p", new ExprConst(1)}, {"l", new ExprConst(1)}})));
     agentTemplate.addTransition(plain("next", "s1", "s2"));
 
     Agent* agent = agentTemplate.generateAgent(0);
     EXPECT_EQ(stateNamed(agent, "s1")->environment, (map<string, int>{{"l", 1}, {"p", 1}}));
-    EXPECT_EQ(stateNamed(agent, "s2")->environment, (map<string, int>{{"p", 1}}));
+    EXPECT_EQ(stateNamed(agent, "s2")->environment, (map<string, int>{{"l", 7}, {"p", 1}}));
 }
 
 TEST_F(AgentTemplateTest, AssignmentsAreEvaluatedInTheSourceState) {

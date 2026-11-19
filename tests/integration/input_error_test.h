@@ -198,10 +198,10 @@ TEST(InputErrorTest, UnknownHartleyAgent)
     EXPECT_EQ(verificationError("UnknownHartleyAgent.txt"), "Incorrect agent name 'Ghost' in the &H_ operator");
 }
 
-TEST(InputErrorTest, VariableWithoutValueInTheState)
+TEST(InputErrorTest, DeclaredVariableWithoutInitialValueStartsAtZero)
 {
-    // 'receipt' is declared, but has no value in the initial state
-    EXPECT_EQ(verificationError("UnsetVariable.txt"), "Variable 'receipt' of the formula has no value in the checked state");
+    // 'receipt' has no INITIAL value, so it starts at the default 0 instead of having no value
+    EXPECT_EQ(verificationError("UnsetVariable.txt"), "");
 }
 
 TEST(InputErrorTest, InvalidOverwriteFormula)

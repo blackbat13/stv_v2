@@ -490,8 +490,8 @@ TEST_F(VerificationCoalitionTest, VerifyLocalStatesEvaluatesTheFormula) {
     EXPECT_FALSE(verification.verifyLocalStates(&afterGood->localStatesProjection, afterGood));
 }
 
-// The parser rejects undeclared formula variables; this covers a declared one that has no value in the state.
-TEST_F(VerificationCoalitionTest, VerifyLocalStatesRejectsVariablesMissingFromTheState) {
+// A declared variable without an INITIAL value starts at 0, so the formula can always read it.
+TEST_F(VerificationCoalitionTest, VerifyLocalStatesReadsDeclaredVariableWithoutInitialValueAsZero) {
     GeneratedModel generated(R"(
 Agent A:
 LOCAL: [x, unset]
@@ -504,7 +504,7 @@ FORMULA: <<A>>[](unset==0)
 )");
     VerificationProbe verification(&generated.generator);
     GlobalState* init = generated.model()->initState;
-    EXPECT_THROW(verification.verifyLocalStates(&init->localStatesProjection, init), std::runtime_error);
+    EXPECT_TRUE(verification.verifyLocalStates(&init->localStatesProjection, init));
 }
 
 TEST_F(VerificationCoalitionTest, ProbabilityIsPropagatedAndRemoved) {
