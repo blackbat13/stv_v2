@@ -258,6 +258,21 @@ TEST_F(ModelParserTest, ParseAndOverwriteFormulaKeepsWholeCoalition) {
     EXPECT_EQ(formula.coalition.size(), 2u);
 }
 
+TEST_F(ModelParserTest, ParseAndOverwriteFormulaSetsCTLFlag) {
+    string path = writeTempFile(TWO_AGENT_MODEL);
+    ModelParser parser;
+    LocalModels models;
+    Formula formula;
+    std::tie(models, formula) = parser.parseAndOverwriteFormula(path, "FORMULA: <<Coercer>>[](vote==0)");
+    EXPECT_FALSE(formula.isCTL);
+
+    // without a coalition the overwritten formula is CTL over all agents, as in parse()
+    std::tie(models, formula) = parser.parseAndOverwriteFormula(path, "FORMULA: [](vote==0)");
+    std::remove(path.c_str());
+    EXPECT_TRUE(formula.isCTL);
+    EXPECT_EQ(formula.coalition.size(), 2u);
+}
+
 TEST_F(ModelParserTest, ConeOfInfluenceFillsRecommendedVariables) {
     config.cone_of_influence = true;
     config.cone_radius = 2;

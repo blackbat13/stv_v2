@@ -892,8 +892,6 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
         strategyEntry.globalValues = (*existingStrategy).first;
         newHistoryEntry->strategy = strategyEntry;
         // cout << "ADDED " << strategyEntry.type << " " << strategyEntry.actionName->c_str() << " " << strategyEntry.globalValues << endl;
-        this->historyEnd->next = newHistoryEntry;
-        this->historyEnd = newHistoryEntry;
     }
     return true;
 }
@@ -925,7 +923,7 @@ void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, Glo
 
 /// @brief Reverts GlobalState and history to the previous decision state.
 /// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
-/// @return Returns true if rollback is successful, otherwise returns false.
+/// @return Returns true if rollback is successful, otherwise returns false and leaves the history untouched.
 bool Verification::revertLastDecision(int depth) {
     // History: (based on selene-ver2.png)
     // X -> Y -> T<decision> -> Y -> Z<ERR>
@@ -941,18 +939,40 @@ bool Verification::revertLastDecision(int depth) {
             x = x->next;
         }
     #endif
-    
-    // Undo Z->T (including Z, excluding T); find Y while doing that
+
+    // Find T and Y, and check that Y's context also exists before T, before undoing anything.
+    // The callers keep relying on the fixed decisions, so a failed revert must not drop any of them.
+    HistoryEntry* lastDecisionEntry = nullptr;
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
-    while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION) {
-        auto entry = this->historyEnd;
+    for (auto entry = this->historyEnd; entry != this->historyStart; entry = entry->prev) {
+        if (entry->type == HistoryEntryType::DECISION) {
+            lastDecisionEntry = entry;
+            break;
+        }
         if (entry->type == HistoryEntryType::CONTEXT && entry->depth < shallowestDepth) {
             shallowestDepth = entry->depth;
             shallowestGlobalState = entry->globalState;
         }
+    }
+    if (lastDecisionEntry == nullptr || shallowestGlobalState == nullptr) {
+        return false;
+    }
+    bool hasResumeContext = false;
+    for (auto entry = lastDecisionEntry->prev; entry != this->historyStart; entry = entry->prev) {
+        if (entry->type == HistoryEntryType::CONTEXT && entry->globalState == shallowestGlobalState && entry->depth == shallowestDepth) {
+            hasResumeContext = true;
+            break;
+        }
+    }
+    if (!hasResumeContext) {
+        return false;
+    }
+
+    // Undo Z->T (including Z, excluding T)
+    while (this->historyEnd != lastDecisionEntry) {
         #if VERBOSE
-            histDbg.markEntry(entry, '-');
+            histDbg.markEntry(this->historyEnd, '-');
         #endif
         this->undoLastHistoryEntry(true);
     }
@@ -967,12 +987,7 @@ bool Verification::revertLastDecision(int depth) {
             }
         }
     #endif
-    
-    // Ensure all ok
-    if (this->historyEnd == this->historyStart || this->historyEnd->type != HistoryEntryType::DECISION || shallowestGlobalState == nullptr) {
-        return false;
-    }
-    
+
     // Undo T->Y (including T, excluding Y); build path to repeat while doing that
     auto invalidDecisionGlobalState = this->historyEnd->globalState;
     auto invalidDecision = this->historyEnd->decision;
@@ -1017,15 +1032,6 @@ bool Verification::revertLastDecision(int depth) {
             #endif
             delete entry;
         }
-    }
-    
-    // Ensure all ok
-    if (this->historyEnd == this->historyStart || this->historyEnd->globalState != shallowestGlobalState) {
-        while (!this->historyToRestore.empty()) {
-            delete this->historyToRestore.top();
-            this->historyToRestore.pop();
-        }
-        return false;
     }
     
     #if VERBOSE

@@ -53,3 +53,14 @@ TEST(TrainsTest, FailedOpponentMoveIsNotCompensatedByOpponentSynchronization)
 
     EXPECT_FALSE(verify.result);
 }
+
+TEST(TrainsTest, FailedRevertKeepsControllerGreenDecision)
+{
+    // Controller sees only green/red, so at green it lets in either Train1 or Train2, never both.
+    // A failed revertLastDecision used to wipe the fixed green decision, letting the DFS pick both.
+    TestVerif onTheFly("../tests/integration/examples/trains/Trains2ControllerUniformGreen.txt", 0);
+    EXPECT_FALSE(onTheFly.result);
+
+    TestVerif full("../tests/integration/examples/trains/Trains2ControllerUniformGreen.txt", 1);
+    EXPECT_FALSE(full.result);
+}

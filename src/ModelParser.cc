@@ -190,6 +190,13 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
       mergeCoalition(formulaDescription.coalition, &models);
    }
 
+   return tuple<LocalModels, Formula>{models, buildFormula(models)};
+}
+
+/// @brief Builds the Formula from the parsed formulaDescription, linking coalition names to the agents.
+/// @param models Local models whose agents the coalition refers to.
+/// @return The processed formula; with an empty coalition it is a CTL formula over all agents.
+Formula ModelParser::buildFormula(const LocalModels& models) {
    Formula formula;
    formula.p = formulaDescription.formula;
    formula.isF = formulaDescription.isF;
@@ -227,7 +234,7 @@ tuple<LocalModels, Formula> ModelParser::parse(string fileName) {
       }
    }
 
-   return tuple<LocalModels, Formula>{models, formula};
+   return formula;
 }
 
 /// @brief Parses a text file in the given file path and internally replaces the verification formula with the given one.
@@ -283,17 +290,7 @@ tuple<LocalModels, Formula> ModelParser::parseAndOverwriteFormula(string fileNam
    }
    checkFormula(agentNames, variableOwners);
 
-   Formula formula;
-   formula.p = formulaDescription.formula;
-   formula.isF = formulaDescription.isF;
-   
-   for (const auto agent : models.agents) {
-      if (formulaDescription.coalition->count(agent->name)>0) {
-         formula.coalition.insert(agent);
-      }
-   }
-
-   return tuple<LocalModels, Formula>{models, formula};
+   return tuple<LocalModels, Formula>{models, buildFormula(models)};
 }
 
 /// @brief Builds a key identifying local states (order-dependent).
