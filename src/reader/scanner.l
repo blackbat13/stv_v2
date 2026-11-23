@@ -14,12 +14,20 @@ using namespace std;
 #include "nodes.hpp"
 
 extern "C" int yylex();
+
+static string describeCharacter(unsigned char ch) {
+    if (ch >= 0x20 && ch <= 0x7e) {
+        return string(1, static_cast<char>(ch));
+    }
+    const char* hex = "0123456789ABCDEF";
+    return string("\\x") + hex[ch >> 4] + hex[ch & 0x0f];
+}
 %}
 
 ident [a-zA-Z][_a-zA-Z0-9]*
 single [\[\]():!,+\-*/%]
 comment #[^\n]*
-blank [ \n\t]
+blank [ \r\n\t]
 floatno [0-9]*\.[0-9]+
 %%
 
@@ -51,6 +59,6 @@ floatno [0-9]*\.[0-9]+
 "&REST"        { return T_REST; }
 {comment}      { /* puste - pomiń */ }
 {blank}        { /* puste - pomiń */ }
-.              { throw std::runtime_error("Unexpected character '" + string(yytext) + "' at line " + to_string(yylineno)); }
+.              { throw std::runtime_error("Unexpected character '" + describeCharacter(static_cast<unsigned char>(yytext[0])) + "' at line " + to_string(yylineno)); }
 %%
 

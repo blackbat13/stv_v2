@@ -173,6 +173,15 @@ TEST_F(ModelParserTest, SyntaxErrorReportsTheLine) {
 
 TEST_F(ModelParserTest, UnexpectedCharacterReportsTheLine) {
     expectModelError("Agent A:\ninit s0\ngo: s0 -> s1 @\n", "Unexpected character '@' at line 3");
+    expectModelError("Agent A:\r\ninit s0\r\ngo: s0 -> s1 @\r\n", "Unexpected character '@' at line 3");
+    expectModelError("Agent A:\ninit s0\n\x1b", "Unexpected character '\\x1B' at line 3");
+}
+
+TEST_F(ModelParserTest, ParsesWindowsLineEndings) {
+    ParsedModel parsed = parseModelText(
+        "Agent A:\r\nLOCAL: []\r\ninit s0\r\ngo: s0 -> s1\r\n"
+        "FORMULA: <<A>>[](1==1)\r\n");
+    EXPECT_EQ(parsed.models.agents.size(), 1u);
 }
 
 TEST_F(ModelParserTest, ParserWorksAgainAfterAnError) {
