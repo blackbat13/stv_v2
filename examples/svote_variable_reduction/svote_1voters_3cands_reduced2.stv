@@ -1,0 +1,29 @@
+Agent Voter1:
+LOCAL: [Voter1_disobeyed, Voter1_obeyed]
+PERSISTENT: [Voter1_disobeyed, Voter1_obeyed]
+INITIAL: []
+init start
+vote1: start -> voted
+vote2: start -> voted
+vote3: start -> voted
+shared[2] Voter1_gv1[Voter1_gv1]: voted -> obeyed [Voter1_obeyed:=1]
+shared[2] Voter1_ng[Voter1_ng]: voted -> disobeyed [Voter1_disobeyed:=1]
+shared[2] Voter1_gv2[Voter1_gv2]: voted -> obeyed [Voter1_obeyed:=1]
+shared[2] Voter1_gv3[Voter1_gv3]: voted -> obeyed [Voter1_obeyed:=1]
+shared[2] idle[idle]: obeyed -> obeyed
+shared[2] idle[idle]: disobeyed -> disobeyed
+
+Agent Coercer:
+LOCAL: [Coercer_end1, Coercer_pun1]
+PERSISTENT: [Coercer_end1, Coercer_pun1]
+INITIAL: []
+init start
+shared[2] Voter1_ng[Voter1_g]: start -> start
+shared[2] Voter1_gv1[Voter1_g]: start -> start
+shared[2] Voter1_gv2[Voter1_g]: start -> start
+shared[2] Voter1_gv3[Voter1_g]: start -> start
+np1: start -> start [Coercer_end1:=1]
+pun1: start -> start [Coercer_end1:=1, Coercer_pun1:=1]
+shared[2] idle[idle]: start [Coercer_end1 == 1] -> start
+
+FORMULA: <<Coercer>>[]((Coercer_end1 == 0) || (((Coercer_pun1 == 0) && (Voter1_obeyed == 1)) || ((Coercer_pun1 == 1) && (Voter1_disobeyed == 1))))
