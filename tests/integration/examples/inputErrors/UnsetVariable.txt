@@ -1,0 +1,8 @@
+Agent Voter:
+LOCAL: [vote, receipt]
+PERSISTENT: [vote]
+INITIAL: [vote:=0]
+init q0
+vote1: q0 -> q1 [vote:=1, receipt:=1]
+
+FORMULA: <<Voter>>[](receipt==0)

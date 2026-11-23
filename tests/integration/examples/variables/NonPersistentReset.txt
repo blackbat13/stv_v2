@@ -1,0 +1,10 @@
+Agent A:
+LOCAL: [x, y]
+PERSISTENT: [y]
+INITIAL: [x:=5]
+init q0
+set: q0 -> q1 [x:=1, y:=1]
+step: q1 -> q2
+idle: q2 -> q2
+
+FORMULA: <<A>>[](x==5 || x==1)

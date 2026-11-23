@@ -1,0 +1,6 @@
+Agent Voter:
+LOCAL: []
+init q0
+shared[1] give: q0 -> q1
+
+FORMULA: <<Voter>>[](1==1)

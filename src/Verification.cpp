@@ -251,6 +251,10 @@ bool Verification::maxFixpointVerify() {
             map<string, set<GlobalState*>> transitionResult;
             for(auto epistemicClassEl : state->epistemicClasses[agent]->globalStates) {
                 auto globalState = epistemicClassEl.second;
+                // states that already lose are never reached by a winning strategy, so they don't constrain the choice
+                if(winningStates.find(globalState) == winningStates.end()) {
+                    continue;
+                }
                 for(auto transition : globalState->globalTransitions) {
                     bool hasAction = false;
                     for(auto localTransition : transition->localTransitions) {
@@ -317,7 +321,7 @@ bool Verification::verifyLocalStates(vector<LocalState*>* localStates, GlobalSta
     if (val[0]->eval(currEnv, generator, globalState)==1 && generator->getFormulaCorectness()) {
         return true;
     } else if (!generator->getFormulaCorectness()) {
-        throw std::runtime_error("Incorrect variable name");
+        throw std::runtime_error("Variable '" + generator->getMissingFormulaVariable() + "' of the formula has no value in the checked state");
     }
     return false;
 }
@@ -514,6 +518,14 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     if (!globalState->isExpanded) {
         this->generator->expandState(globalState);
     }
+
+    // a state without successors is a deadlock: the system stays there forever, so an F goal not reached yet is lost (G keeps holding)
+    if (isFMode && globalState->globalTransitions.empty()) {
+        this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+        dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "deadlock");
+        globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+        return false;
+    }
     
     // 3) group transitions: controlled and uncontrolled by the coalition
     set<GlobalTransition*> controlledGlobalTransitions;
@@ -587,15 +599,8 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             continue;
         }
 
-        if (this->hasUnfixedCoalitionDecision(globalTransition)) {
-            controlledGlobalTransitions.insert(globalTransition);
-        } else {
-            // controlled transition that is fixed should be treated as an uncontrolled transition
-            #if VERBOSE
-                printf("%streat controlled as uncontrolled: %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
-            #endif
-            uncontrolledGlobalTransitions.insert(globalTransition);
-        }
+        // fixed decisions stay controlled, so the coalition keeps its priority on every visit of the class
+        controlledGlobalTransitions.insert(globalTransition);
     }
 
     // solve the uncontrolled transition blocking the controlled transition, making it uncontrolled
@@ -887,8 +892,6 @@ bool Verification::addHistoryContext(GlobalState* globalState, int depth, Global
         strategyEntry.globalValues = (*existingStrategy).first;
         newHistoryEntry->strategy = strategyEntry;
         // cout << "ADDED " << strategyEntry.type << " " << strategyEntry.actionName->c_str() << " " << strategyEntry.globalValues << endl;
-        this->historyEnd->next = newHistoryEntry;
-        this->historyEnd = newHistoryEntry;
     }
     return true;
 }
@@ -920,7 +923,7 @@ void Verification::addHistoryMarkDecisionAsInvalid(GlobalState* globalState, Glo
 
 /// @brief Reverts GlobalState and history to the previous decision state.
 /// @param depth Integer that will be multiplied by 4 and appended as a prefix to the optional debug log.
-/// @return Returns true if rollback is successful, otherwise returns false.
+/// @return Returns true if rollback is successful, otherwise returns false and leaves the history untouched.
 bool Verification::revertLastDecision(int depth) {
     // History: (based on selene-ver2.png)
     // X -> Y -> T<decision> -> Y -> Z<ERR>
@@ -936,18 +939,40 @@ bool Verification::revertLastDecision(int depth) {
             x = x->next;
         }
     #endif
-    
-    // Undo Z->T (including Z, excluding T); find Y while doing that
+
+    // Find T and Y, and check that Y's context also exists before T, before undoing anything.
+    // The callers keep relying on the fixed decisions, so a failed revert must not drop any of them.
+    HistoryEntry* lastDecisionEntry = nullptr;
     int shallowestDepth = 99999999;
     GlobalState* shallowestGlobalState = nullptr;
-    while (this->historyEnd != this->historyStart && this->historyEnd->type != HistoryEntryType::DECISION) {
-        auto entry = this->historyEnd;
+    for (auto entry = this->historyEnd; entry != this->historyStart; entry = entry->prev) {
+        if (entry->type == HistoryEntryType::DECISION) {
+            lastDecisionEntry = entry;
+            break;
+        }
         if (entry->type == HistoryEntryType::CONTEXT && entry->depth < shallowestDepth) {
             shallowestDepth = entry->depth;
             shallowestGlobalState = entry->globalState;
         }
+    }
+    if (lastDecisionEntry == nullptr || shallowestGlobalState == nullptr) {
+        return false;
+    }
+    bool hasResumeContext = false;
+    for (auto entry = lastDecisionEntry->prev; entry != this->historyStart; entry = entry->prev) {
+        if (entry->type == HistoryEntryType::CONTEXT && entry->globalState == shallowestGlobalState && entry->depth == shallowestDepth) {
+            hasResumeContext = true;
+            break;
+        }
+    }
+    if (!hasResumeContext) {
+        return false;
+    }
+
+    // Undo Z->T (including Z, excluding T)
+    while (this->historyEnd != lastDecisionEntry) {
         #if VERBOSE
-            histDbg.markEntry(entry, '-');
+            histDbg.markEntry(this->historyEnd, '-');
         #endif
         this->undoLastHistoryEntry(true);
     }
@@ -962,12 +987,7 @@ bool Verification::revertLastDecision(int depth) {
             }
         }
     #endif
-    
-    // Ensure all ok
-    if (this->historyEnd == this->historyStart || this->historyEnd->type != HistoryEntryType::DECISION || shallowestGlobalState == nullptr) {
-        return false;
-    }
-    
+
     // Undo T->Y (including T, excluding Y); build path to repeat while doing that
     auto invalidDecisionGlobalState = this->historyEnd->globalState;
     auto invalidDecision = this->historyEnd->decision;
@@ -1012,15 +1032,6 @@ bool Verification::revertLastDecision(int depth) {
             #endif
             delete entry;
         }
-    }
-    
-    // Ensure all ok
-    if (this->historyEnd == this->historyStart || this->historyEnd->globalState != shallowestGlobalState) {
-        while (!this->historyToRestore.empty()) {
-            delete this->historyToRestore.top();
-            this->historyToRestore.pop();
-        }
-        return false;
     }
     
     #if VERBOSE
@@ -1146,9 +1157,9 @@ void Verification::printCurrentHistory(int depth) {
 /// @return True if the two global transitions have the same local transitions, false otherwise.
 bool Verification::equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2) {
     bool isEquivalent = true;
-    bool isMatchFound = false;
     for (const auto localTransition1 : globalTransition1->localTransitions) {
         if (isAgentInCoalition(localTransition1->agent)) {
+            bool isMatchFound = false;
             for (const auto localTransition2 : globalTransition2->localTransitions) {
                 if (isAgentInCoalition(localTransition2->agent) && localTransition1->localName == localTransition2->localName) {
                     isMatchFound = true;
@@ -1296,6 +1307,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     // 1) verify paths controlled by the coalition (no controlled transitions || at least one is OK)
     bool hasValidControlledTransition = false;
     if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
+        // true if the state is won by letting the opponents move (all their own moves and compatible syncs are OK); false also when they have no moves
         bool hasValidChoiceTransition = false;
         for (const auto globalTransition : controlledGlobalTransitions) {
             if (this->mode == TraversalMode::RESTORE) {
@@ -1497,12 +1509,11 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
         }
 
-        // If there are no valid controlled or choice transitions, check if any mandatory opponent-triggered transitions are compatible with the coalition's decisions
-        if (!hasValidControlledTransition && !hasValidChoiceTransition &&
-            !mandatoryOpponentTransitions.empty()) {
+        // Without a valid controlled transition, the opponents decide what happens next: their own moves and the compatible opponent-triggered synchronizations must all be valid. A failed opponent move can't be compensated by another one, so the synchronizations are only checked if the opponents' own moves passed.
+        if (!hasValidControlledTransition && !mandatoryOpponentTransitions.empty() &&
+            (hasValidChoiceTransition || uncontrolledGlobalTransitions.empty())) {
             const auto compatibleOpponentChoices = getCompatibleOpponentTransitions();
             if (!compatibleOpponentChoices.empty()) {
-                // Only an uncommitted, compatible synchronization can be a coalition choice.
                 hasValidChoiceTransition = this->checkUncontrolledSet(
                     compatibleOpponentChoices, globalState, depth, hasOmittedTransitions, mixedTransitions);
             }
@@ -1529,7 +1540,16 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
 
     // If there are no controlled transitions, but there are mandatory opponent-triggered transitions, check if they are valid
     if (controlledGlobalTransitions.empty() && !mandatoryOpponentTransitions.empty()) {
-        if (!this->checkUncontrolledSet(mandatoryOpponentTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
+        const auto compatibleTransitions = getCompatibleOpponentTransitions();
+        // fixed decisions block every transition: a deadlock, so F can no longer be reached
+        if (isFMode && compatibleTransitions.empty() && uncontrolledGlobalTransitions.empty()) {
+            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "deadlock under fixed decisions");
+            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+            this->revertLastDecision(depth);
+            return false;
+        }
+        if (!this->checkUncontrolledSet(compatibleTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
             return false;
         }
     }
@@ -1677,6 +1697,38 @@ bitset<STRATEGY_BITS> Verification::globalStateToValueBits(GlobalState* globalSt
         strategyVariableLimit = it;
     }
     return currentValues;
+}
+
+/// @brief Collects the transitions that can fire when the coalition follows the strategy fixed by verify(). Walks forward from the initial state, keeping every transition compatible with the coalition's fixed local choices; opponents may take any move. For F formulas the walk stops at goal states, because the path is already won there. A coalition class that verify() left unfixed allows all of its actions.
+/// @return Set of GlobalTransition pointers forming the outcome of the strategy.
+set<GlobalTransition*> Verification::getStrategyOutcome() {
+    set<GlobalTransition*> outcome;
+    const bool isFMode = this->generator->getFormula()->isF;
+    GlobalState* initState = this->generator->getCurrentGlobalModel()->initState;
+    set<GlobalState*> visited = {initState};
+    queue<GlobalState*> toVisit;
+    toVisit.push(initState);
+
+    while (!toVisit.empty()) {
+        GlobalState* globalState = toVisit.front();
+        toVisit.pop();
+        if (isFMode && this->verifyLocalStates(&globalState->localStatesProjection, globalState)) {
+            continue;
+        }
+        if (!globalState->isExpanded) {
+            this->generator->expandState(globalState);
+        }
+        for (const auto globalTransition : globalState->globalTransitions) {
+            if (!this->isGlobalTransitionCompatibleWithCoalitionDecisions(globalTransition)) {
+                continue;
+            }
+            outcome.insert(globalTransition);
+            if (visited.insert(globalTransition->to).second) {
+                toVisit.push(globalTransition->to);
+            }
+        }
+    }
+    return outcome;
 }
 
 /// @brief Get natural strategy map.
@@ -1936,8 +1988,11 @@ Result Verification::verifyStrategy() {
                     currentState->globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
                     // cache the result for later
                     currentState->globalState->stateVerifResult = VerifResult::FALSE;
-                    // trigger revert until last decision
-                    // todo here
+                    if (currentState->fromState != nullptr) {
+                        currentState->fromState->verifResult = VerifResult::FALSE;
+                    }
+                    // initiate rollback
+                    statesToProcess.pop();
                     continue;
                 } else {
                     // cache the result for later

@@ -64,7 +64,11 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
             for(const auto x: s->environment){
                 tmp+=x.first+"="+to_string(x.second)+"\\n";
             }
-            tmp.resize(tmp.size()-2);
+            if (s->environment.empty()) {
+                tmp.pop_back();                 // no variables: drop the "|" separator
+            } else {
+                tmp.resize(tmp.size()-2);       // drop the trailing "\n"
+            }
             tmp+="}\", shape=\"record";
             this->addNode(to_string(s->id), tmp);
         }else{
@@ -81,7 +85,11 @@ DotGraph::DotGraph(Agent *const ag, bool extended){
 }
 
 /// @brief parses the transitions/states templates into nodes/edges
-DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
+/// @param gm global model to draw
+/// @param extended add local states' variable values to the state labels
+/// @param correct colour red the transitions between verified-OK states (used when highlightedTransitions is null)
+/// @param highlightedTransitions if given, colour red exactly these transitions (e.g. the outcome of the found strategy)
+DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct, const set<GlobalTransition*>* highlightedTransitions){
     nodes.clear();
     edges.clear();
     const std::string sep="||";              // (async) agent names separator
@@ -139,7 +147,10 @@ DotGraph::DotGraph(GlobalModel *const gm, bool extended, bool correct){
             if (!t->from || !t->to) {
                 continue;
             }
-            if (correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK ) {
+            const bool highlighted = highlightedTransitions != nullptr
+                ? highlightedTransitions->count(t) > 0
+                : correct && t->to->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK && t->from->verificationStatus == GLOBAL_STATE_VERIFICATION_STATUS::VERIFIED_OK;
+            if (highlighted) {
                 this->addEdge(
                     '"'+t->from->hash+'"', 
                     '"'+t->to->hash+'"', 
@@ -205,7 +216,8 @@ void DotGraph::saveToFile(std::string pathprefix, std::string nameprefix, std::s
         pathprefix.pop_back();
     }
     
-    ofs.open(pathprefix+'/'+nameprefix+basename);
+    const string path = pathprefix+'/'+nameprefix+basename;
+    ofs.open(path);
 
     if(ofs.is_open()){
         ofs << "digraph \"" << graphName << "\"{\n";
@@ -220,7 +232,7 @@ void DotGraph::saveToFile(std::string pathprefix, std::string nameprefix, std::s
         ofs << "}";
         ofs.close();
     }else{
-        cout << "Could not open the file: " << pathprefix+'/'+basename <<  endl;
+        cerr << "Warning: could not open '" << path << "' for writing, so the dot file was not saved" << endl;
     }
 };
 

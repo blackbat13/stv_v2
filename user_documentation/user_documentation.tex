@@ -35,6 +35,7 @@
 \author{Institute of Computer Science of Polish Academy of Sciences}
 \date{\today}
 \maketitle
+\thispagestyle{empty}
 \vspace*{12cm}
 
 \pagenumbering{roman}
@@ -208,7 +209,7 @@ Then a few agent description lines follow.
   \begin{lstlisting}[title={Creating local variables named "variableName1", "variableName2".}]
     LOCAL: [variableName1, variableName2, ...]
   \end{lstlisting}
-  \item In a new line starting with a keyword $PERSISTENT$, we add variable names of the variables, which value should be remembered at all times. As previously, we add the names in square brackets, separated by a comma if there's more than one variable. We can also leave the brackets empty.
+  \item In a new line starting with a keyword $PERSISTENT$, we add variable names of the variables, which value should be remembered at all times. As previously, we add the names in square brackets, separated by a comma if there's more than one variable. We can also leave the brackets empty. When a variable is not persistent, its value will be reset to its initial value after each action.
   \begin{lstlisting}[title={Making local variables named "variableName1", "variableName2" and so on, persistent.}]
     PERSISTENT: [variableName1, variableName2, ...]
   \end{lstlisting}
@@ -232,9 +233,12 @@ First we enter the action name, then after a colon we specify the avaliable acti
 \end{lstlisting}
 
 \subsubsection{Shared actions}
-If the action will be shared with another agent it has to start the action by writing a keyword $shared$. Then in square brackets we have to write an integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual.
+If the action will be shared with another agent it has to start the action by writing a keyword $shared$. Then in square brackets we have to write an integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual. There is a possibility to use a single name only, that is, the shared action name will be the same as the local action name. In that case, the current agent will be the one performing a synchronization.
 \begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent. The current agent will be the one performing the sync.}]
   shared[2] action1[action1]: q0 -> q1
+\end{lstlisting}
+\begin{lstlisting}[title={A shared action equivalent to the previous one, but with a single name only.}]
+  shared[2] action1: q0 -> q1
 \end{lstlisting}
 \begin{lstlisting}[title={Creating an action that will synchronize with 2 other agents. The current agent will be the one waiting for sync.}]
   shared[3] action1[someAction]: q0 -> q1
@@ -256,6 +260,7 @@ If the action is supposed to be empty, we can use the keyword "empty" at the beg
 
 \subsubsection{Conditions}
 To add a condition for an action to fire, we have to add the condition between the square brackets between the initial state name and the arrow operator.
+\pagebreak
 \begin{lstlisting}[title={Local action that can only fire if someLocalValue is equal to 1.}]
   action1: q0 [someLocalValue==1] -> q1
 \end{lstlisting}

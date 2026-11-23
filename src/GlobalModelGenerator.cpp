@@ -56,6 +56,7 @@ GlobalState* GlobalModelGenerator::initModel(LocalModels* localModels, Formula* 
     this->globalModel->initState = this->generateInitState();
     this->globalModel->epistemicClassesKnowledge.clear();
     this->correctModel = true;
+    this->missingFormulaVariable.clear();
 
     globalModelCandidates.push(this->globalModel->initState);
     auto candidateDepthPtr = candidateStateDepths.find(this->globalModel->initState);
@@ -132,7 +133,14 @@ void GlobalModelGenerator::expandState(GlobalState* state) {
         // printf("added a state!\n");
     }
 
+    if (state->globalTransitions.empty()) {
+        this->deadEndStates.push_back(state);
+    }
     state->isExpanded = true;
+}
+
+const vector<GlobalState*>& GlobalModelGenerator::getDeadEndStates() const {
+    return this->deadEndStates;
 }
 
 /// @brief GlobalModelGenerator::expandState that also additionally returns a vector of newly created states
@@ -164,6 +172,9 @@ vector<GlobalState*> GlobalModelGenerator::expandStateAndReturn(GlobalState* sta
             }
             globalTransition->to = targetState;
         }
+    }
+    if (state->globalTransitions.empty()) {
+        this->deadEndStates.push_back(state);
     }
     state->isExpanded = true;
     return res;
@@ -248,7 +259,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
     GlobalState* g = globalModelCandidates.top(); //1
     auto findIfCandidateExists = candidateStateDepths.find({g});
     if(findIfCandidateExists->second.size() >= 2) { //2
-        depth = stateDepths.top(); //3
+        depth = stateDepths.empty() ? -1 : stateDepths.top(); //3 (empty: no state on the path was fully expanded yet)
         int anotherDepth = -1;
         for(auto item : findIfCandidateExists->second){
             if(item != globalModelCandidates.size() - 1) {
@@ -399,8 +410,7 @@ void GlobalModelGenerator::expandAndReduceAllStates() {
         }
     } //17
 
-    depth = stateDepths.top(); //18
-    if(depth == globalModelCandidates.size()) { //19
+    if(!stateDepths.empty() && stateDepths.top() == globalModelCandidates.size()) { //18, 19
         stateDepths.pop();
     }
     globalModelCandidates.pop(); //20
@@ -738,8 +748,17 @@ Agent* GlobalModelGenerator::getAgentInstanceByName(string agentName) {
 }
 
 /// @brief Sets formula to an incorrectly written state.
-void GlobalModelGenerator::markFormulaAsIncorrect() {
+/// @param variable Name of the variable that had no value, if known.
+void GlobalModelGenerator::markFormulaAsIncorrect(const string& variable) {
     correctModel = false;
+    if (missingFormulaVariable.empty()) {
+        missingFormulaVariable = variable;
+    }
+}
+
+/// @brief Name of the formula variable that had no value when the formula was marked incorrect.
+const string& GlobalModelGenerator::getMissingFormulaVariable() const {
+    return missingFormulaVariable;
 }
 
 /// @brief Gets formula status.

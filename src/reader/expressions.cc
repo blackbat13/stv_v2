@@ -5,6 +5,7 @@
  */
 
 #include "expressions.hpp"
+#include <stdexcept>
 #include "../GlobalModelGenerator.hpp"
 #include <bits/stdc++.h>
 
@@ -180,7 +181,7 @@ int ExprHart::eval( Environment& env ) {
 int ExprIdent::eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState) {
    auto res = env.find(ident);
    if (res == env.end()) {
-      generator->markFormulaAsIncorrect();
+      generator->markFormulaAsIncorrect(ident);
       return -1;
    }
    return (*res).second;
@@ -249,6 +250,9 @@ int ExprGe::eval( Environment& env, GlobalModelGenerator *generator, GlobalState
 int ExprKnow::eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) {
    bool allEpistemicOk = true;
    Agent* knowledgeAgentInstance = generator->getAgentInstanceByName(agentName);
+   if (knowledgeAgentInstance == nullptr) {
+      throw std::runtime_error("Incorrect agent name '" + agentName + "' in the &K_ operator");
+   }
    auto epistemicClassesForAgent = generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
    for (auto global : *epistemicClassesForAgent) {
       map<string, int> currEnv = global->getGlobalStateEnvironment();
@@ -263,6 +267,9 @@ int ExprKnow::eval( Environment& env, GlobalModelGenerator *generator, GlobalSta
 int ExprHart::eval( Environment& env, GlobalModelGenerator *generator, GlobalState *globalState ) {
    bool allEpistemicOk = true;
    Agent* knowledgeAgentInstance = generator->getAgentInstanceByName(agentName);
+   if (knowledgeAgentInstance == nullptr) {
+      throw std::runtime_error("Incorrect agent name '" + agentName + "' in the &H_ operator");
+   }
    auto epistemicClassesForAgent = generator->findOrCreateEpistemicClassForKnowledge(&globalState->localStatesProjection, globalState, knowledgeAgentInstance);
    
    set<int64_t>* foundClasses = new set<int64_t>();
@@ -290,7 +297,7 @@ int ExprHart::eval( Environment& env, GlobalModelGenerator *generator, GlobalSta
       allEpistemicOk = (log2f((float)foundClasses->size()) >= (float)val);
    }
 
-   free(foundClasses);
+   delete foundClasses;
 
    return (allEpistemicOk ? 1 : 0);
 }

@@ -12,6 +12,8 @@
 
 #include <iostream> 
 #include <cstdio>
+#include <climits>
+#include <stdexcept>
 
 extern Cfg config;
 
@@ -184,133 +186,159 @@ unsigned long getMemCap() {
 }
 
 
+namespace {
+/// @brief Parses the whole text as an integer from minValue to maxValue.
+/// @param text Text to parse.
+/// @param minValue Smallest allowed value.
+/// @param maxValue Largest allowed value.
+/// @param what Name of the value used in the error message.
+/// @param where Optional location appended to the error message.
+/// @return The parsed value; throws std::invalid_argument if the text is not such an integer.
+int parseIntValue(const string& text, int minValue, int maxValue, const string& what, const string& where = "") {
+    size_t used = 0;
+    long value = 0;
+    try {
+        value = stol(text, &used);
+    } catch (const exception&) {
+        used = 0;
+    }
+    if (text.empty() || used != text.size() || value < minValue || value > maxValue) {
+        throw invalid_argument("Invalid " + what + " '" + text + "'" + (where.empty() ? "" : " " + where) +
+                               " (expected an integer from " + to_string(minValue) + " to " + to_string(maxValue) + ")");
+    }
+    return static_cast<int>(value);
+}
+
+/// @brief Parses a 0/1 flag; throws std::invalid_argument for anything else.
+bool parseFlagValue(const string& text, const string& what, const string& where) {
+    if (text != "0" && text != "1") {
+        throw invalid_argument("Invalid " + what + " '" + text + "' " + where + " (expected 0 or 1)");
+    }
+    return text == "1";
+}
+}
+
 void loadConfigFromFile(string filename) {
     // read default values from config.txt
     ifstream ifs(filename, ifstream::in);
     if (ifs.is_open() == true) {
         string line;
+        int lineNumber = 0;
         while (getline(ifs, line)) {
+            lineNumber++;
+            if (!line.empty() && line.back() == '\r') {
+                line.pop_back();
+            }
             if (line.empty() || line[0] == ';') {
                 continue;
             }
+            const string where = "on line " + to_string(lineNumber) + " of config file '" + filename + "'";
             auto delimPos = line.find("=");
+            if (delimPos == string::npos) {
+                cerr << "Warning: ignoring '" << line << "' " << where << " (expected KEY=VALUE)" << endl;
+                continue;
+            }
             auto key = line.substr(0, delimPos);
             auto val = line.substr(delimPos + 1);
             if (key == "MODEL_ID") {
-                config.model_id = val[0] - '0';
+                config.model_id = parseIntValue(val, 0, 9, "MODEL_ID", where);
                 if (val == "1") {
                     config.fname = "../examples/trains/Trains2Controller1.txt";
                 } else if (val == "2") {
                     config.fname = "../examples/ssvr/Selene_Select_Vote_Revoting_1v_1cv_3c_3rev_share.txt";
                 } else if (val == "3") {
                     config.fname = "../examples/svote/Voters2Candidates2.txt";
+                } else {
+                    cerr << "Warning: MODEL_ID " << val << " " << where << " has no example model (use 1, 2 or 3)" << endl;
                 }
             } else if (key == "OUTPUT_LOCAL_MODELS") {
-                config.output_local_models = (val == "1");
+                config.output_local_models = parseFlagValue(val, "OUTPUT_LOCAL_MODELS", where);
             } else if (key == "OUTPUT_GLOBAL_MODEL") {
-                config.output_global_model = (val == "1");
+                config.output_global_model = parseFlagValue(val, "OUTPUT_GLOBAL_MODEL", where);
             } else if (key == "MODE") {
-                config.stv_mode = (val[0] - '0');
+                config.stv_mode = parseIntValue(val, 0, 15, "MODE", where);
             } else if (key == "OUTPUT_DOT_FILES") {
-                config.output_dot_files = (val == "1");
+                config.output_dot_files = parseFlagValue(val, "OUTPUT_DOT_FILES", where);
             } else if (key == "DOT_DIR") {
                 config.dotdir = val;
+            } else {
+                cerr << "Warning: unknown key '" << key << "' " << where << endl;
             }
         }
     } else {
-        printf("Could not open the config file \"%s\"...", filename.c_str());
+        cerr << "Warning: could not open the config file '" << filename << "', using the defaults" << endl;
     }
 };
 
 void loadConfigFromArgs(int argc, char** argv) {    // overwrite the default config values (if provided on the input)
-    if (argc >= 2) {
-        for (int i = 1; i < argc; i++) {
-            string arg = argv[i];
-            if ((arg == "-f") || (arg == "--file")) {
-                if (i + 1 < argc) {
-                    config.fname = argv[++i];
-                } else {
-                    printf("ERR: no filename was specified!\n");
-                }
-            } else if ((arg == "-m") || (arg == "--mode")) {
-                if (i + 1 < argc) {
-                    config.stv_mode = (argv[++i])[0] - '0';
-                } else {
-                    printf("ERR: no stv_mode was specified!\n");
-                }
-            } else if (arg == "-OUTPUT_GLOBAL_MODEL" || arg == "--OUTPUT_GLOBAL_MODEL") {
-                config.output_global_model = 1;
-            } else if (arg == "-OUTPUT_LOCAL_MODELS" || arg == "--OUTPUT_LOCAL_MODELS") {
-                config.output_local_models = 1;
-            } else if (arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES") {
-                config.output_dot_files = 1;
-            } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
-                config.add_epsilon_transitions = 1;
-            } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {
-                config.formula_from_parameter = 1;
-                if (i + 1 < argc) {
-                    config.formula = argv[++i];
-                } else {
-                    printf("ERR: no formula was specified!\n");
-                }
-            } else if (arg == "-COUNTEREXAMPLE" || arg == "--COUNTEREXAMPLE") {
-                config.counterexample = 1;
-            } else if (arg == "-REDUCE" || arg == "--REDUCE") {
-                config.reduce = 1;
-                if (i + 1 < argc) {
-                    config.reduce_args = argv[++i];
-                } else {
-                    printf("ERR: no variables were specified!\n");
-                }
-            } else if (arg == "-REDUCE_ALL" || arg == "--REDUCE_ALL") {
-                config.reduce = 1;
-                config.reduce_all = 1;
-                if (i + 1 < argc) {
-                    config.reduce_args = argv[++i];
-                } else {
-                    printf("ERR: no variables were specified!\n");
-                }
-            } else if (arg == "-FIXPOINT" || arg == "--FIXPOINT") {
-                config.fixpoint = 1;
-            } else if (arg == "-NATURAL_STRATEGY" || arg == "--NATURAL_STRATEGY") {
-                config.natural_strategy = 1;
-            } else if (arg == "-STRATEGY_FROM_FILE" || arg == "--STRATEGY_FROM_FILE") {
-                config.verify_strategy = 1;
-                if (i + 1 < argc) {
-                    config.strategy_file_path = argv[++i];
-                } else {
-                    printf("ERR: no file path was specified!\n");
-                }
-            } else if (arg == "-PARTIAL_REDUCTION" || arg == "--PARTIAL_REDUCTION") {
-                config.partial_reduction = 1;
-                config.partial_reduction_args.clear();
-                int j = i + 1;
-                while (j < argc && argv[j][0] != '-') {
-                    config.partial_reduction_args.push_back(argv[j]);
-                    ++j;
-                }
-                i = j - 1;
-                if (config.partial_reduction_args.empty()) {
-                    printf("ERR: no variable names were specified for PARTIAL_REDUCTION!\n");
-                }
-            } else if (arg == "-PARTIAL_REDUCTION_AGENT" || arg == "--PARTIAL_REDUCTION_AGENT") {
-                config.partial_reduction_agent = argv[++i];
-            } else if (arg == "-SERIALIZE_MODEL" || arg == "--SERIALIZE_MODEL") {
-                config.serialize_model = true;
-            } else if (arg == "-RECOMMEND_REDUCTION_VARIABLES" || arg == "--RECOMMEND_REDUCTION_VARIABLES") {
-                config.recommend_reduction_variables = true;
-            } else if (arg == "-CONE_OF_INFLUENCE" || arg == "--CONE_OF_INFLUENCE") {
-                config.cone_of_influence = 1;
-                if (i + 1 < argc) {
-                    config.cone_radius = atoi(argv[++i]);
-                } else {
-                    printf("ERR: no radius was specified!\n");
-                }
-            } else if (arg == "-MERGE_COALITION" || arg == "--MERGE_COALITION") {
-                config.merge_coalition = true;
-            } else if (arg == "-ADD_LOCAL_EPSILON_TRANSITIONS" || arg == "--ADD_LOCAL_EPSILON_TRANSITIONS") {
-                config.add_local_epsilon_transitions = true;
+    for (int i = 1; i < argc; i++) {
+        string arg = argv[i];
+        // value of a flag that needs one; throws std::invalid_argument if it is missing
+        auto nextValue = [&](const string& what) -> string {
+            if (i + 1 >= argc) {
+                throw invalid_argument("Missing " + what + " after " + arg);
             }
+            return argv[++i];
+        };
+
+        if ((arg == "-f") || (arg == "--file")) {
+            config.fname = nextValue("filename");
+        } else if ((arg == "-m") || (arg == "--mode")) {
+            config.stv_mode = parseIntValue(nextValue("mode"), 0, 15, "mode");
+        } else if (arg == "-OUTPUT_GLOBAL_MODEL" || arg == "--OUTPUT_GLOBAL_MODEL") {
+            config.output_global_model = 1;
+        } else if (arg == "-OUTPUT_LOCAL_MODELS" || arg == "--OUTPUT_LOCAL_MODELS") {
+            config.output_local_models = 1;
+        } else if (arg == "-OUTPUT_DOT_FILES" || arg == "--OUTPUT_DOT_FILES") {
+            config.output_dot_files = 1;
+        } else if (arg == "-ADD_EPSILON_TRANSITIONS" || arg == "--ADD_EPSILON_TRANSITIONS") {
+            config.add_epsilon_transitions = 1;
+        } else if (arg == "-OVERWRITE_FORMULA" || arg == "--OVERWRITE_FORMULA") {
+            config.formula = nextValue("formula");
+            config.formula_from_parameter = 1;
+        } else if (arg == "-COUNTEREXAMPLE" || arg == "--COUNTEREXAMPLE") {
+            config.counterexample = 1;
+        } else if (arg == "-REDUCE" || arg == "--REDUCE") {
+            config.reduce_args = nextValue("variables");
+            config.reduce = 1;
+        } else if (arg == "-REDUCE_ALL" || arg == "--REDUCE_ALL") {
+            config.reduce_args = nextValue("variables");
+            config.reduce = 1;
+            config.reduce_all = 1;
+        } else if (arg == "-FIXPOINT" || arg == "--FIXPOINT") {
+            config.fixpoint = 1;
+        } else if (arg == "-NATURAL_STRATEGY" || arg == "--NATURAL_STRATEGY") {
+            config.natural_strategy = 1;
+        } else if (arg == "-STRATEGY_FROM_FILE" || arg == "--STRATEGY_FROM_FILE") {
+            config.strategy_file_path = nextValue("file path");
+            config.verify_strategy = 1;
+        } else if (arg == "-PARTIAL_REDUCTION" || arg == "--PARTIAL_REDUCTION") {
+            config.partial_reduction = 1;
+            config.partial_reduction_args.clear();
+            int j = i + 1;
+            while (j < argc && argv[j][0] != '-') {
+                config.partial_reduction_args.push_back(argv[j]);
+                ++j;
+            }
+            i = j - 1;
+            if (config.partial_reduction_args.empty()) {
+                throw invalid_argument("Missing variable names after " + arg);
+            }
+        } else if (arg == "-PARTIAL_REDUCTION_AGENT" || arg == "--PARTIAL_REDUCTION_AGENT") {
+            config.partial_reduction_agent = nextValue("agent name");
+        } else if (arg == "-SERIALIZE_MODEL" || arg == "--SERIALIZE_MODEL") {
+            config.serialize_model = true;
+        } else if (arg == "-RECOMMEND_REDUCTION_VARIABLES" || arg == "--RECOMMEND_REDUCTION_VARIABLES") {
+            config.recommend_reduction_variables = true;
+        } else if (arg == "-CONE_OF_INFLUENCE" || arg == "--CONE_OF_INFLUENCE") {
+            config.cone_radius = parseIntValue(nextValue("radius"), 0, INT_MAX, "cone of influence radius");
+            config.cone_of_influence = 1;
+        } else if (arg == "-MERGE_COALITION" || arg == "--MERGE_COALITION") {
+            config.merge_coalition = true;
+        } else if (arg == "-ADD_LOCAL_EPSILON_TRANSITIONS" || arg == "--ADD_LOCAL_EPSILON_TRANSITIONS") {
+            config.add_local_epsilon_transitions = true;
+        } else {
+            throw invalid_argument("Unknown argument '" + arg + "'");
         }
     }
 };

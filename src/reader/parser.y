@@ -5,6 +5,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <stdexcept>
 
 #include "expressions.hpp"
 #include "nodes.hpp"
@@ -16,8 +17,10 @@ extern "C" int yylex();
 void yyrestart( FILE* );
 void yyerror( const char* );
 extern char* yytext;
+extern int yylineno;
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern YY_BUFFER_STATE yy_scan_string(const char * str);
+extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
 extern set<class AgentTemplate*>* modelDescription;
 extern FormulaTemplate formulaDescription;
@@ -232,14 +235,26 @@ cond_elem: num_exp T_EQ num_exp { $$=new ExprEq($1, $3);}
 
 %%
 
+// buffer created by set_input_string, deleted by clear_input_string
+static YY_BUFFER_STATE inputStringBuffer = nullptr;
+
+/// @brief Makes the scanner read the given string.
 void set_input_string(const char* in) {
-  yy_scan_string(in);
+  inputStringBuffer = yy_scan_string(in);
 }
 
-// Chwilowa funkcja błędu
+/// @brief Deletes the string buffer, so the next yyrestart() reads a file with a fresh full-size buffer.
+void clear_input_string() {
+  if (inputStringBuffer != nullptr) {
+    yy_delete_buffer(inputStringBuffer);
+    inputStringBuffer = nullptr;
+  }
+}
+
+/// @brief Reports a syntax error in the model file with its line number.
 void yyerror( const char* s ) {
-  fprintf(stderr,"niespodziewany token: '%s'\n",yytext);
-  exit(1);
+  string where = (yytext != nullptr && yytext[0] != '\0') ? string("near '") + yytext + "'" : string("at the end of the file");
+  throw std::runtime_error("Syntax error at line " + to_string(yylineno) + " " + where);
 }
 
 // Chwilowy main - do testów

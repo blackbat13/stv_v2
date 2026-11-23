@@ -1,0 +1,3 @@
+# Voter strategy
+q0 -> vote1
+q1 -> -> give

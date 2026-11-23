@@ -6,6 +6,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <stdexcept>
 
 #include "strategyNodes.hpp"
 
@@ -16,6 +17,7 @@ extern "C" int stratlex();
 void stratrestart( FILE* );
 void straterror( const char* );
 extern char* strattext;
+extern int stratlineno;
 typedef struct strat_buffer_state * YY_BUFFER_STATE;
 extern YY_BUFFER_STATE strat_scan_string(const char * str);
 
@@ -54,8 +56,8 @@ void set_input_string_strat(const char* in) {
   strat_scan_string(in);
 }
 
-// Chwilowa funkcja błędu
+/// @brief Reports a syntax error in the strategy file with its line number.
 void straterror( const char* s ) {
-  fprintf(stderr,"niespodziewany token: '%s'\n", strattext);
-  exit(1);
+  string where = (strattext != nullptr && strattext[0] != '\0') ? string("near '") + strattext + "'" : string("at the end of the file");
+  throw std::runtime_error("Syntax error in strategy file at line " + to_string(stratlineno) + " " + where);
 }

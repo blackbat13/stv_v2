@@ -40,8 +40,10 @@ public:
     bool getFormulaCorrectness();
     set<GlobalState*>* findOrCreateEpistemicClassForKnowledge(vector<LocalState*>* localStates, GlobalState* globalState, Agent* agent);
     Agent* getAgentInstanceByName(string agentName);
-    void markFormulaAsIncorrect();
+    void markFormulaAsIncorrect(const string& variable = "");
     bool getFormulaCorectness();
+    /// @brief Name of the formula variable that had no value when the formula was marked incorrect.
+    const string& getMissingFormulaVariable() const;
     void initStrategy(StrategyCollection* strat);
     /// Initializes incremental strategy generation for probabilistic verification.
     void createProbabilityStrategy();
@@ -53,11 +55,15 @@ public:
     string getCoalitionActionSignature(GlobalTransition* transition, char sep=';');
     string getActionNameFromStateInStrategy(GlobalState* state);
     bool hasDeadlockCombination(vector<LocalState*>* localStates);
+    /// @brief Expanded global states without outgoing transitions (dead ends), in the order they were found.
+    const vector<GlobalState*>& getDeadEndStates() const;
 
     /// @brief auxiliary variable mapping Agent pointer to its index (replace size_t with  if needed later)
     map<Agent*,size_t> agentIndex;
 
 protected:
+    /// @brief Expanded global states without outgoing transitions, see getDeadEndStates().
+    vector<GlobalState*> deadEndStates;
     struct GlobalStateTupleHash {
         size_t operator()(const tuple<GlobalState*, int>& t) const {
             auto gsHash = hash<string>()(get<0>(t)->hash);
@@ -73,6 +79,8 @@ protected:
     GlobalModel* globalModel;
     /// @brief Flag holding info if model is actually correct.
     bool correctModel;
+    /// @brief Formula variable that had no value when the formula was marked incorrect.
+    string missingFormulaVariable;
     /// @brief Lookup map containing global states and the depths that the global state is contained in. Used for reductions.
     unordered_map<GlobalState*, unordered_set<int>> candidateStateDepths;
     /// @brief Candidate states to be used in reductions. Used for reductions.

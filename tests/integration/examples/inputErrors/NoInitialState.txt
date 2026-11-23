@@ -1,0 +1,5 @@
+Agent Voter:
+LOCAL: [vote]
+vote1: q0 -> q1 [vote:=1]
+
+FORMULA: <<Voter>><>(vote==1)

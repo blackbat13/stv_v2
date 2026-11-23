@@ -314,7 +314,7 @@ bool VerificationIterative::verifyLocalStates(vector<LocalState*>* localStates, 
     if (val[0]->eval(currEnv, generator, globalState)==1 && generator->getFormulaCorectness()) {
         return true;
     } else if (!generator->getFormulaCorectness()) {
-        throw std::runtime_error("Incorrect variable name");
+        throw std::runtime_error("Variable '" + generator->getMissingFormulaVariable() + "' of the formula has no value in the checked state");
     }
     return false;
 }

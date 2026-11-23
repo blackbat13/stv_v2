@@ -38,6 +38,7 @@ build/stv
 build/sample_test
 build/big_tests
 build/iterative_tests
+build/unit_test
 build/.sample_test_timings.tsv
 
 # Flex/bison
@@ -67,3 +68,6 @@ build/*.csv
 # Graphify generated files
 graphify-out
 .github/copilot-instructions.md
+# Claude Code local files
+CLAUDE.md
+.claude/settings.local.json

@@ -214,6 +214,19 @@ class AgentTemplate {
 
       void checkConeOfInfluence(int radius);
 
+      /// @brief Returns the agent's name.
+      const string& getIdent() const;
+
+      /// @brief Returns the agent's transitions.
+      const set<TransitionTemplate*>& getTransitions() const;
+
+      /// @brief Returns every variable the agent declares (LOCAL, PERSISTENT, INITIAL) or assigns.
+      set<string> getKnownVariables() const;
+
+      /// @brief Checks the agent description.
+      /// @details Throws std::runtime_error on errors and prints warnings to stderr.
+      void validate() const;
+
       friend class DotGraph;
 };
 

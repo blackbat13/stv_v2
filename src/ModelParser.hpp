@@ -20,6 +20,7 @@ public:
     tuple<LocalModels, Formula> parse(string fileName);
     tuple<LocalModels, Formula> parseAndOverwriteFormula(string fileName, string s);
 private:
+    Formula buildFormula(const LocalModels& models);
     string localStateTupleKey(const vector<LocalState*>& tuple);
     map<string, int> mergeEnvironment(const vector<LocalState*>& tuple);
     string mergedStateName(const vector<LocalState*>& tuple);
