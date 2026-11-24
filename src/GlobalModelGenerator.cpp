@@ -186,18 +186,11 @@ void GlobalModelGenerator::expandAllStates(bool additionalProbSplit) {
     // Transition lookup uses the full coalition state; policy choices use each agent's local state.
     auto indexProbabilityTransitions = [this](GlobalState* globalState) {
         for (auto transition : globalState->globalTransitions) {
-            bool isControlled = false;
-            for (const auto localTransition : transition->localTransitions) {
-                // Check if the local transition is controlled by an agent in the coalition and is not a shared transition or has a local name.
-                if (this->formula->coalition.find(localTransition->agent) != this->formula->coalition.end() && (!localTransition->isShared || localTransition->name == localTransition->localName)) {
-                    isControlled = true;
-                    break;
-                }
-            }
-            if (isControlled) {
+            if (this->isCoalitionTransition(transition)) {
                 // index coalition transitions and local actions for strategy generation
                 const auto coalitionStateId = this->getCoalitionIdentifier(&globalState->localStatesProjection); // format: "localState1;localState2;...;localStateN;"
-                const auto actionSignature = this->getCoalitionActionSignature(transition); // format: "agentIndex1:actionName1;agentIndex2:actionName2;...;agentIndexN:actionNameN"
+                // a coalition local action can turn into several global transitions and the opponents pick which, so each one is a separate MDP action; the probabilistic outcomes of one transition share their names and stay together
+                const auto actionSignature = this->getCoalitionActionSignature(transition) + "|" + transition->joinLocalTransitionNames(); // format: "agentIndex1:actionName1;...;agentIndexN:actionNameN|globalName1;...;globalNameM;"
                 this->coalitionTransitions[coalitionStateId][actionSignature].insert(transition);
                 // index local actions for strategy generation
                 for (const auto localTransition : transition->localTransitions) {
@@ -900,15 +893,7 @@ const map<string, string>* GlobalModelGenerator::getNextPath() {
 
             // Opponent moves are unrestricted; coalition moves must match every local choice.
             for (auto transition : globalState->globalTransitions) {
-                bool isCoalitionAction = false;
-                for (const auto localTransition : transition->localTransitions) {
-                    if (formula->coalition.find(localTransition->agent) != formula->coalition.end() &&
-                        (!localTransition->isShared || localTransition->name == localTransition->localName)) {
-                        isCoalitionAction = true;
-                        break;
-                    }
-                }
-                if (isCoalitionAction && !this->isCoalitionTransitionCompatibleWithStrategy(transition, currentStrategy)) {
+                if (this->isCoalitionTransition(transition) && !this->isCoalitionTransitionCompatibleWithStrategy(transition, currentStrategy)) {
                     continue;
                 }
                 if (!buildStrategy(transition->to)) {
@@ -1227,6 +1212,18 @@ string GlobalModelGenerator::getCoalitionActionSignature(GlobalTransition* trans
 /// @param transition The global transition to check.
 /// @param decisions The current strategy decisions.
 /// @return True if the transition is compatible with the strategy, false otherwise.
+/// @brief Checks if a coalition agent takes part in a global transition. Every agent fires its local actions on its own, so such a transition only fires if the coalition agents choose their local actions in it; the epsilon self-loop is no choice of the coalition.
+/// @param transition Global transition to check.
+/// @return True if a coalition agent takes part, not counting the epsilon self-loop.
+bool GlobalModelGenerator::isCoalitionTransition(GlobalTransition* transition) {
+    for (const auto localTransition : transition->localTransitions) {
+        if (this->formula->coalition.count(localTransition->agent) > 0 && localTransition->name != "ɛ") {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool GlobalModelGenerator::isCoalitionTransitionCompatibleWithStrategy(GlobalTransition* transition, const map<string, string>& decisions) {
     for (const auto localTransition : transition->localTransitions) {
         if (formula->coalition.find(localTransition->agent) == formula->coalition.end()) {

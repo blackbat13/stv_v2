@@ -1,0 +1,20 @@
+Agent C:
+LOCAL: [c_bad]
+PERSISTENT: [c_bad]
+INITIAL: [c_bad:=0]
+init s
+shared[2] a[a]: s -> t [c_bad:=1]
+shared[2] b[b]: s -> t [c_bad:=1]
+idle: t -> t
+
+Agent O:
+init o
+shared[2] a[a]: o -> o2
+shared[2] b[b]: o -> o2
+idle: o2 -> o2
+
+Agent P:
+init p
+loopP: p -> p
+
+FORMULA: <<C>>[](c_bad==0)

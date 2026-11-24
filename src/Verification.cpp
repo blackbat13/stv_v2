@@ -53,6 +53,14 @@ void dbgHistEnt(string prefix, HistoryEntry *h) {
     #endif
 }
 
+/// @brief Checks if a local transition is the epsilon self-loop added by --ADD_EPSILON_TRANSITIONS.
+/// It only lets the system idle when the agents' local actions block each other, so it is never a choice of the coalition.
+/// @param localTransition Local transition to check.
+/// @return True for an epsilon transition.
+static bool isEpsilonTransition(const LocalTransition* localTransition) {
+    return localTransition->name == "ɛ";
+}
+
 /// @brief A constructor for HistoryDbg.
 HistoryDbg::HistoryDbg() {
 }
@@ -181,8 +189,9 @@ bool Verification::minFixpointVerify() {
                 for(auto transition : globalState->globalTransitions) {
                     bool hasAction = false;
                     for(auto localTransition : transition->localTransitions) {
-                        if(localTransition->from->agent == agent) {
-                            transitionResult[localTransition->name].insert(transition->to);
+                        // the agent chooses a local action; the opponents pick which of its global transitions happens
+                        if(localTransition->from->agent == agent && !isEpsilonTransition(localTransition)) {
+                            transitionResult[localTransition->localName].insert(transition->to);
                             hasAction = true;
                             break;
                         }
@@ -258,8 +267,9 @@ bool Verification::maxFixpointVerify() {
                 for(auto transition : globalState->globalTransitions) {
                     bool hasAction = false;
                     for(auto localTransition : transition->localTransitions) {
-                        if(localTransition->from->agent == agent) {
-                            transitionResult[localTransition->name].insert(transition->to);
+                        // the agent chooses a local action; the opponents pick which of its global transitions happens
+                        if(localTransition->from->agent == agent && !isEpsilonTransition(localTransition)) {
+                            transitionResult[localTransition->localName].insert(transition->to);
                             hasAction = true;
                             break;
                         }
@@ -527,10 +537,10 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         return false;
     }
     
-    // 3) group transitions: controlled and uncontrolled by the coalition
+    // 3) group transitions: every agent fires its own local action, so a transition with a coalition agent is a choice of the coalition, and one without is up to the opponents
     set<GlobalTransition*> controlledGlobalTransitions;
     set<GlobalTransition*> uncontrolledGlobalTransitions;
-    set<GlobalTransition*> mandatoryOpponentTransitions;
+    set<GlobalTransition*> unavoidableOpponentSyncs;
     bool hasOmittedTransitions = false;
     bool hasMergedTransitionsIntoUncontrolled = false;
 
@@ -571,27 +581,15 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
             continue;
         }
 
-        // check if the global transition is controlled by the coalition or involves coalition agents
-        bool controlledByCoalition = false;
-        bool includesCoalitionAgent = false;
-        for (const auto localTransition : globalTransition->localTransitions) {
-            if (this->isAgentInCoalition(localTransition->agent)) {
-                includesCoalitionAgent = true;
-                if (!localTransition->isShared || localTransition->name == localTransition->localName) {
-                    controlledByCoalition = true;
-                    break;
-                }
-            }
+        if (!this->isGlobalTransitionControlledByCoalition(globalTransition)) {
+            uncontrolledGlobalTransitions.insert(globalTransition);
+            continue;
         }
 
-        if (!controlledByCoalition) {
-            if (includesCoalitionAgent) {
-                // Opponents can trigger this synchronization despite coalition participation.
-                mandatoryOpponentTransitions.insert(globalTransition);
-            } else {
-                uncontrolledGlobalTransitions.insert(globalTransition);
-            }
-            continue;
+        // the coalition agents in it can't keep out of the opponents' synchronizations and the opponents can refuse it, so only the opponents decide whether it happens
+        const CoalitionChoice& choice = this->whatHappensIfCoalitionChooses(globalTransition);
+        if (choice.canBeBlocked && choice.noAgentCanStayOut) {
+            unavoidableOpponentSyncs.insert(globalTransition);
         }
 
         if (!this->isGlobalTransitionCompatibleWithCoalitionDecisions(globalTransition)) {
@@ -666,7 +664,7 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
         }
     }
 
-    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, mandatoryOpponentTransitions, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled)) {
+    if (!verifyTransitionSets(controlledGlobalTransitions, uncontrolledGlobalTransitions, unavoidableOpponentSyncs, globalState, depth, hasOmittedTransitions, isFMode, hasMergedTransitionsIntoUncontrolled)) {
         return false;
     }
     
@@ -677,29 +675,26 @@ bool Verification::verifyGlobalState(GlobalState* globalState, int depth) {
     return true;
 }
 
-/// @brief Checks if any of the LocalTransition in a given GlobalTransition has an Agent in a coalition in the formula.
+/// @brief Checks if a global transition needs a coalition agent. Every agent fires its local actions on its own, so such a transition only happens if the coalition agents taking part choose their local actions in it.
 /// @param globalTransition Pointer to a GlobalTransition in a model.
-/// @return Returns true if the Agent is in coalition in the formula, otherwise returns false.
+/// @return Returns true if an agent of the coalition takes part in the transition, otherwise returns false.
 bool Verification::isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition) {
-    bool isControlled = false;
     for (const auto localTransition : globalTransition->localTransitions) {
-        if (this->isAgentInCoalition(localTransition->agent)) {
-            if (!localTransition->isShared || localTransition->name == localTransition->localName) {
-                isControlled = true;
-                break;
-            }
+        if (this->isAgentInCoalition(localTransition->agent) && !isEpsilonTransition(localTransition)) {
+            return true;
         }
     }
-    return isControlled;
+    return false;
 }
 
 /// @brief Checks if a global transition is compatible with the decisions made by the coalition.
+/// A decision is a local action, so every global transition that the agent takes part in with that action stays possible.
 /// @param globalTransition Pointer to a GlobalTransition in a model.
 /// @return Returns true if the global transition is compatible with the coalition's decisions, otherwise returns false.
 bool Verification::isGlobalTransitionCompatibleWithCoalitionDecisions(GlobalTransition* globalTransition) {
     for (const auto localTransition : globalTransition->localTransitions) {
         // if the agent is not in the coalition, then it does not affect the compatibility
-        if (!this->isAgentInCoalition(localTransition->agent)) {
+        if (!this->isAgentInCoalition(localTransition->agent) || isEpsilonTransition(localTransition)) {
             continue;
         }
 
@@ -708,33 +703,150 @@ bool Verification::isGlobalTransitionCompatibleWithCoalitionDecisions(GlobalTran
             throw logic_error("Missing coalition epistemic class for transition agent");
         }
 
-        // if the fixed coalition local transition is not null and is different from the current local transition, then it is not compatible
         const auto fixedTransition = classIt->second->fixedCoalitionLocalTransition;
-        if (fixedTransition != nullptr && fixedTransition != localTransition) {
+        if (fixedTransition != nullptr && fixedTransition->localName != localTransition->localName) {
             return false;
         }
     }
     return true;
 }
 
-/// @brief Checks if a global transition has an unfixed decision made by the coalition.
-/// @param globalTransition Pointer to a GlobalTransition in a model.
-/// @return Returns true if the global transition has an unfixed decision, otherwise returns false.
-bool Verification::hasUnfixedCoalitionDecision(GlobalTransition* globalTransition) {
-    for (const auto localTransition : globalTransition->localTransitions) {
-        if (!this->isAgentInCoalition(localTransition->agent) ||
-            (localTransition->isShared && localTransition->name != localTransition->localName)) {
+/// @brief Checks if the coalition local actions a transition needs are all among those of a chosen transition: it has a coalition agent, and each of its coalition agents takes part in the chosen transition with the same local action.
+/// Such a transition can fire once the coalition fires the local actions of the chosen one. A local action can belong to several global transitions (e.g. a voter's single answer to the coercer punishing or not), and the opponents pick which of them happens.
+/// @param transition Transition to check.
+/// @param chosenTransition Transition picked by the coalition.
+/// @return True if the transition needs no coalition local action outside those of chosenTransition.
+bool Verification::needsOnlyCoalitionActionsOf(GlobalTransition* transition, GlobalTransition* chosenTransition) {
+    bool hasCoalitionAgent = false;
+    for (const auto localTransition : transition->localTransitions) {
+        if (!this->isAgentInCoalition(localTransition->agent) || isEpsilonTransition(localTransition)) {
             continue;
         }
-        const auto classIt = globalTransition->from->epistemicClasses.find(localTransition->agent);
-        if (classIt == globalTransition->from->epistemicClasses.end()) {
-            throw logic_error("Missing coalition epistemic class for transition agent");
+        hasCoalitionAgent = true;
+        bool isChosen = false;
+        for (const auto chosenLocalTransition : chosenTransition->localTransitions) {
+            if (chosenLocalTransition->agent == localTransition->agent && chosenLocalTransition->localName == localTransition->localName) {
+                isChosen = true;
+                break;
+            }
         }
-        if (classIt->second->fixedCoalitionLocalTransition == nullptr) {
+        if (!isChosen) {
+            return false;
+        }
+    }
+    return hasCoalitionAgent;
+}
+
+/// @brief Works out what can happen if the coalition chooses its local actions of a given transition. It is computed on the first call and cached.
+/// @param chosenTransition Transition picked by the coalition.
+/// @return The outcomes of the choice, whether the opponents can block all of them, and whether its coalition agents could keep out of the opponents' synchronizations.
+const CoalitionChoice& Verification::whatHappensIfCoalitionChooses(GlobalTransition* chosenTransition) {
+    // states are revisited many times during the search, and the answer never changes
+    const auto cached = this->coalitionChoiceCache.find(chosenTransition);
+    if (cached != this->coalitionChoiceCache.end()) {
+        return cached->second;
+    }
+    CoalitionChoice& choice = this->coalitionChoiceCache[chosenTransition];
+
+    // every transition of the state that the same local actions of the coalition can turn into
+    for (const auto transition : chosenTransition->from->globalTransitions) {
+        if (this->needsOnlyCoalitionActionsOf(transition, chosenTransition)) {
+            choice.outcomes.insert(transition);
+        }
+    }
+    choice.canBeBlocked = this->canOpponentsBlockChoice(choice.outcomes);
+
+    // for each coalition agent of the choice: could it pick a local action that the opponents can't complete?
+    for (const auto localTransition : chosenTransition->localTransitions) {
+        if (!this->isAgentInCoalition(localTransition->agent) || isEpsilonTransition(localTransition)) {
+            continue;
+        }
+        if (this->canStayOutOfOpponents(chosenTransition->from, localTransition)) {
+            choice.noAgentCanStayOut = false;
+        } else {
+            choice.everyAgentCanStayOut = false;
+        }
+    }
+    return choice;
+}
+
+/// @brief Checks if the opponents can stop every outcome of a coalition choice by choosing other local actions.
+/// @param outcomes All global transitions that the coalition's choice can turn into.
+/// @return True if the opponents can make sure that no outcome fires.
+bool Verification::canOpponentsBlockChoice(const set<GlobalTransition*>& outcomes) {
+    map<Agent*, set<string>> usedActions;   // opponent -> its local actions in the outcomes
+    for (const auto outcome : outcomes) {
+        bool hasOpponent = false;
+        for (const auto localTransition : outcome->localTransitions) {
+            if (!this->isAgentInCoalition(localTransition->agent)) {
+                usedActions[localTransition->agent].insert(localTransition->localName);
+                hasOpponent = true;
+            }
+        }
+        // an outcome without opponents always fires
+        if (!hasOpponent) {
+            return false;
+        }
+    }
+
+    // an opponent blocks every outcome it takes part in by choosing a local action that none of them uses
+    for (const auto outcome : outcomes) {
+        bool isBlocked = false;
+        for (const auto localTransition : outcome->localTransitions) {
+            if (this->isAgentInCoalition(localTransition->agent)) {
+                continue;
+            }
+            const set<string>& used = usedActions[localTransition->agent];
+            for (const auto otherTransition : localTransition->from->localTransitions) {
+                if (used.count(otherTransition->localName) == 0) {
+                    isBlocked = true;
+                    break;
+                }
+            }
+            if (isBlocked) {
+                break;
+            }
+        }
+        if (!isBlocked) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/// @brief Checks if a coalition agent could keep out of the opponents' synchronizations: it has a local action that no transition of the state shares with an opponent, i.e. a private action, a synchronization with coalition agents only, or one whose partners aren't ready.
+/// Otherwise every local action it chooses offers the opponents a synchronization that they can complete.
+/// @param globalState Current global state.
+/// @param localTransition Local transition of the coalition agent in this state.
+/// @return True if the agent has a local action that the opponents can't complete.
+bool Verification::canStayOutOfOpponents(GlobalState* globalState, LocalTransition* localTransition) {
+    set<string> offeredActions;   // the agent's local actions that the opponents can complete here
+    for (const auto transition : globalState->globalTransitions) {
+        const LocalTransition* agentPart = nullptr;
+        bool hasOpponent = false;
+        for (const auto part : transition->localTransitions) {
+            if (part->agent == localTransition->agent) {
+                agentPart = part;
+            } else if (!this->isAgentInCoalition(part->agent)) {
+                hasOpponent = true;
+            }
+        }
+        if (agentPart != nullptr && hasOpponent) {
+            offeredActions.insert(agentPart->localName);
+        }
+    }
+    for (const auto otherTransition : localTransition->from->localTransitions) {
+        if (offeredActions.count(otherTransition->localName) == 0) {
             return true;
         }
     }
     return false;
+}
+
+/// @brief Gets the deadlocks met during the search: global states where no global transition matched the agents' local actions.
+/// @return The deadlocked global states.
+const set<GlobalState*>& Verification::getDeadlockStates() {
+    return this->deadlockStates;
 }
 
 /// @brief Adds a coalition decision to the history of decisions made by the coalition in a given GlobalState.
@@ -1257,17 +1369,17 @@ bool Verification::checkUncontrolledSet(const set<GlobalTransition*>& uncontroll
 /// @brief Checks if given transition sets are able to fulfill the formula for its given epistemic class.
 /// @param controlledGlobalTransitions Set of controlled transitions in the current global state.
 /// @param uncontrolledGlobalTransitions Set of uncontrolled transitions in the current global state.
-/// @param mandatoryOpponentTransitions Opponent-triggered synchronized transitions that must be accounted for in this global state.
+/// @param unavoidableOpponentSyncs Synchronizations that the coalition agents in them can't keep out of and the opponents can refuse, so only the opponents decide whether they happen.
 /// @param globalState Currently processed global state.
 /// @param depth Current recursion depth.
 /// @param hasOmittedTransitions Flag with the information about skipped unneeded transitions.
 /// @return True if there is a correct choice for an agent to take, false otherwise.
-bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
+bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& unavoidableOpponentSyncs, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixedTransitions) {
     auto epistemicClass = this->getEpistemicClassForGlobalState(globalState);
     auto fixedGlobalTransition = epistemicClass != nullptr ? epistemicClass->fixedCoalitionTransition : nullptr;
-    auto getCompatibleOpponentTransitions = [this, &mandatoryOpponentTransitions]() {
+    auto getCompatibleUnavoidableSyncs = [this, &unavoidableOpponentSyncs]() {
         set<GlobalTransition*> compatibleTransitions;
-        for (const auto transition : mandatoryOpponentTransitions) {
+        for (const auto transition : unavoidableOpponentSyncs) {
             if (this->isGlobalTransitionCompatibleWithCoalitionDecisions(transition)) {
                 compatibleTransitions.insert(transition);
             }
@@ -1309,6 +1421,7 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
     if (controlledGlobalTransitions.size() > 0 || probabilityTransitions.size() > 0) {
         // true if the state is won by letting the opponents move (all their own moves and compatible syncs are OK); false also when they have no moves
         bool hasValidChoiceTransition = false;
+        set<GlobalTransition*> triedTransitions;   // transitions with the same choice as one already tried: a choice has the same outcomes whichever of its transitions is picked
         for (const auto globalTransition : controlledGlobalTransitions) {
             if (this->mode == TraversalMode::RESTORE) {
                 // Skip loop iterations performed before the one from historyToRestore
@@ -1325,6 +1438,23 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                     printf("%sIGNORE invalidDecision in %s -> %s\n", DEPTH_PREFIX.c_str(), globalState->hash.c_str(), globalTransition->to->hash.c_str());
                 #endif
                 continue;
+            }
+            const CoalitionChoice* choice = nullptr;
+            if (!config.probability) {
+                if (triedTransitions.count(globalTransition) > 0) {
+                    continue;
+                }
+                choice = &this->whatHappensIfCoalitionChooses(globalTransition);
+                // an outcome that needs exactly the same coalition local actions is the same choice
+                for (const auto outcome : choice->outcomes) {
+                    if (outcome != globalTransition && this->needsOnlyCoalitionActionsOf(globalTransition, outcome)) {
+                        triedTransitions.insert(outcome);
+                    }
+                }
+                // the opponents can refuse the choice; if its coalition agents could keep out of the opponents' synchronizations instead, letting the opponents move already covers it
+                if (choice->canBeBlocked && choice->everyAgentCanStayOut && (!uncontrolledGlobalTransitions.empty() || !getCompatibleUnavoidableSyncs().empty())) {
+                    continue;
+                }
             }
             
             auto prevHistoryEnd = this->historyEnd;
@@ -1353,12 +1483,26 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
                 increaseProbability(globalState, globalTransition);
             }
             hasValidControlledTransition = this->verifyGlobalState(globalTransition->to, depth + 1);
-            // If the coalition has a valid choice, then the opponent-triggered transitions must be valid too.
-            if (hasValidControlledTransition && !mandatoryOpponentTransitions.empty()) {
-                const auto compatibleTransitions = getCompatibleOpponentTransitions();
-                if (!compatibleTransitions.empty()) {
-                    hasValidControlledTransition = this->checkUncontrolledSet(
-                        compatibleTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions);
+            // the opponents may turn the choice into any of its other outcomes, or complete a synchronization the coalition can't keep out of, so those must be valid too
+            const bool canBeBlocked = choice != nullptr && choice->canBeBlocked;
+            if (hasValidControlledTransition && (canBeBlocked || !unavoidableOpponentSyncs.empty() || (choice != nullptr && choice->outcomes.size() > 1))) {
+                set<GlobalTransition*> opponentResponses = getCompatibleUnavoidableSyncs();
+                if (canBeBlocked) {
+                    // they may also refuse the choice and make their own moves; with nothing else to fire, that is a deadlock, which loses an F goal
+                    opponentResponses.insert(uncontrolledGlobalTransitions.begin(), uncontrolledGlobalTransitions.end());
+                    const bool hasMoveAfterRefusal = any_of(opponentResponses.begin(), opponentResponses.end(),
+                        [choice](GlobalTransition* response) { return choice->outcomes.count(response) == 0; });
+                    if (!hasMoveAfterRefusal) {
+                        this->deadlockStates.insert(globalState);
+                        hasValidControlledTransition = !isFMode;
+                    }
+                }
+                if (choice != nullptr) {
+                    opponentResponses.insert(choice->outcomes.begin(), choice->outcomes.end());
+                }
+                opponentResponses.erase(globalTransition);
+                if (hasValidControlledTransition && !opponentResponses.empty()) {
+                    hasValidControlledTransition = this->checkUncontrolledSet(opponentResponses, globalState, depth, hasOmittedTransitions, mixedTransitions);
                 }
             }
             if (config.natural_strategy && !okStrategy) {
@@ -1509,13 +1653,19 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
             }
         }
 
-        // Without a valid controlled transition, the opponents decide what happens next: their own moves and the compatible opponent-triggered synchronizations must all be valid. A failed opponent move can't be compensated by another one, so the synchronizations are only checked if the opponents' own moves passed.
-        if (!hasValidControlledTransition && !mandatoryOpponentTransitions.empty() &&
+        // Without a valid controlled transition, the opponents decide what happens next: their own moves and the compatible unavoidable synchronizations must all be valid. A failed opponent move can't be compensated by another one, so the synchronizations are only checked if the opponents' own moves passed.
+        if (!hasValidControlledTransition && !unavoidableOpponentSyncs.empty() &&
             (hasValidChoiceTransition || uncontrolledGlobalTransitions.empty())) {
-            const auto compatibleOpponentChoices = getCompatibleOpponentTransitions();
-            if (!compatibleOpponentChoices.empty()) {
-                hasValidChoiceTransition = this->checkUncontrolledSet(
-                    compatibleOpponentChoices, globalState, depth, hasOmittedTransitions, mixedTransitions);
+            const auto compatibleUnavoidableSyncs = getCompatibleUnavoidableSyncs();
+            if (!compatibleUnavoidableSyncs.empty()) {
+                if (isFMode && uncontrolledGlobalTransitions.empty()) {
+                    // without moves of their own, the opponents can refuse what the coalition offers: a deadlock, which loses an F goal
+                    this->deadlockStates.insert(globalState);
+                    hasValidChoiceTransition = false;
+                } else {
+                    hasValidChoiceTransition = this->checkUncontrolledSet(
+                        compatibleUnavoidableSyncs, globalState, depth, hasOmittedTransitions, mixedTransitions);
+                }
             }
         }
 
@@ -1538,16 +1688,19 @@ bool Verification::verifyTransitionSets(set<GlobalTransition*> controlledGlobalT
         }
     }
 
-    // If there are no controlled transitions, but there are mandatory opponent-triggered transitions, check if they are valid
-    if (controlledGlobalTransitions.empty() && !mandatoryOpponentTransitions.empty()) {
-        const auto compatibleTransitions = getCompatibleOpponentTransitions();
-        // fixed decisions block every transition: a deadlock, so F can no longer be reached
-        if (isFMode && compatibleTransitions.empty() && uncontrolledGlobalTransitions.empty()) {
-            this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
-            dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "deadlock under fixed decisions");
-            globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
-            this->revertLastDecision(depth);
-            return false;
+    // If there are no controlled transitions, the opponents may complete the synchronizations the coalition can't avoid, or nothing matches the coalition's decisions
+    if (controlledGlobalTransitions.empty() && (!unavoidableOpponentSyncs.empty() || hasOmittedTransitions)) {
+        const auto compatibleTransitions = getCompatibleUnavoidableSyncs();
+        // no global transition matches the agents' local actions: a deadlock, so F can no longer be reached
+        if (compatibleTransitions.empty() && uncontrolledGlobalTransitions.empty()) {
+            this->deadlockStates.insert(globalState);
+            if (isFMode) {
+                this->addHistoryStateStatus(globalState, globalState->verificationStatus, GlobalStateVerificationStatus::VERIFIED_ERR);
+                dbgVerifStatus(DEPTH_PREFIX, globalState, GlobalStateVerificationStatus::VERIFIED_ERR, "deadlock under fixed decisions");
+                globalState->verificationStatus = GlobalStateVerificationStatus::VERIFIED_ERR;
+                this->revertLastDecision(depth);
+                return false;
+            }
         }
         if (!this->checkUncontrolledSet(compatibleTransitions, globalState, depth, hasOmittedTransitions, mixedTransitions)) {
             return false;

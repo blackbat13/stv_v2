@@ -356,7 +356,7 @@ TEST_F(VerificationCoalitionTest, AgentAndTransitionControl) {
     EXPECT_TRUE(verification.isGlobalTransitionControlledByCoalition(transitionNamed(init, waitName)));
     EXPECT_FALSE(verification.isGlobalTransitionControlledByCoalition(transitionNamed(init, goodName)));
 
-    // A shared action is controlled only by the participant whose local name equals the global name.
+    // A shared action fires only if every participant chooses its local action, so the coalition takes part whatever the local name.
     LocalTransition shared;
     shared.agent = a;
     shared.isShared = true;
@@ -364,9 +364,15 @@ TEST_F(VerificationCoalitionTest, AgentAndTransitionControl) {
     shared.localName = "sync_A";
     GlobalTransition joint;
     joint.localTransitions = {&shared};
-    EXPECT_FALSE(verification.isGlobalTransitionControlledByCoalition(&joint));
+    EXPECT_TRUE(verification.isGlobalTransitionControlledByCoalition(&joint));
     shared.localName = "sync";
     EXPECT_TRUE(verification.isGlobalTransitionControlledByCoalition(&joint));
+
+    // The epsilon self-loop only lets the system idle, it is no choice of the coalition.
+    shared.isShared = false;
+    shared.name = "ɛ";
+    shared.localName = "ɛ";
+    EXPECT_FALSE(verification.isGlobalTransitionControlledByCoalition(&joint));
 }
 
 TEST_F(VerificationCoalitionTest, CompatibilityWithFixedDecisions) {
@@ -379,12 +385,17 @@ TEST_F(VerificationCoalitionTest, CompatibilityWithFixedDecisions) {
     EpistemicClass* initClass = init->epistemicClasses.at(generated.agent("A"));
 
     EXPECT_TRUE(verification.isGlobalTransitionCompatibleWithCoalitionDecisions(good));
-    EXPECT_TRUE(verification.hasUnfixedCoalitionDecision(good));
 
     initClass->fixedCoalitionLocalTransition = onlyLocal(good);
     EXPECT_TRUE(verification.isGlobalTransitionCompatibleWithCoalitionDecisions(good));
     EXPECT_FALSE(verification.isGlobalTransitionCompatibleWithCoalitionDecisions(bad));
-    EXPECT_FALSE(verification.hasUnfixedCoalitionDecision(good));
+
+    // A decision is a local action: another transition with the same local action stays possible.
+    LocalTransition sameAction = *onlyLocal(good);
+    GlobalTransition otherOutcome;
+    otherOutcome.from = init;
+    otherOutcome.localTransitions = {&sameAction};
+    EXPECT_TRUE(verification.isGlobalTransitionCompatibleWithCoalitionDecisions(&otherOutcome));
 }
 
 TEST_F(VerificationCoalitionTest, MissingEpistemicClassIsALogicError) {
@@ -398,7 +409,6 @@ TEST_F(VerificationCoalitionTest, MissingEpistemicClassIsALogicError) {
     transition.from = &orphan;
     transition.localTransitions = {&local};
     EXPECT_THROW(verification.isGlobalTransitionCompatibleWithCoalitionDecisions(&transition), std::logic_error);
-    EXPECT_THROW(verification.hasUnfixedCoalitionDecision(&transition), std::logic_error);
     EXPECT_THROW(verification.addCoalitionDecisionHistory(&orphan, &transition), std::logic_error);
 }
 

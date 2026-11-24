@@ -299,6 +299,15 @@ static int run(int argc, char* argv[]) {
             // verifResult = verificationIt->verify().verificationResult;
         }
         printf("Verification result: %s\n", verifResult ? "TRUE" : "FALSE");
+        // some local action choices had no global transition in common
+        const auto& deadlocks = verification->getDeadlockStates();
+        if (!deadlocks.empty()) {
+            string example;
+            for (const auto localState : (*deadlocks.begin())->localStatesProjection) {
+                example += (example.empty() ? "" : ", ") + localState->name;
+            }
+            cerr << "Warning: the search met " << deadlocks.size() << " deadlocked global state(s), e.g. (" << example << "): no global transition matched the agents' local actions; a deadlock loses an F goal and keeps a G property" << endl;
+        }
         if (verifResult == true && config.probability) {
             cout << "p=" << verifResult2.probabilityResult.probabilityTrue << endl;
         }

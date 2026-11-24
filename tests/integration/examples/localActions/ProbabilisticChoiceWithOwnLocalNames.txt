@@ -1,0 +1,17 @@
+Agent Voter:
+LOCAL: [helped]
+PERSISTENT: [helped]
+INITIAL: [helped:=0]
+init s
+shared[2] help[askHelp]: s -> 0.6 : t [helped:=1]
+                            &REST : t
+shared[2] ignore[askNothing]: s -> t
+idle: t -> t
+
+Agent Clerk:
+init c
+shared[2] help[serve]: c -> c2
+shared[2] ignore[serve]: c -> c2
+idle: c2 -> c2
+
+FORMULA: <<Voter>><>&P[>=0.5](helped==1)

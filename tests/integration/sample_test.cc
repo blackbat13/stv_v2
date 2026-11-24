@@ -6,6 +6,7 @@
 #include "simple_voting_run_test.h" //has to be on top, idk why
 #include "general_test.h"
 #include "trains_test.h"
+#include "local_action_test.h"
 #include "trains_with_bridge_test.h"
 #include "simple_voting_test.h"
 #include "simple_voting_with_fakes_test.h"

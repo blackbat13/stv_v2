@@ -111,6 +111,7 @@ protected:
     map<string, map<string, set<GlobalTransition*>>> coalitionTransitions; // Global coalition state -> action -> transitions
     map<string, map<string, set<GlobalTransition*>>> opponentsTransitions; // Global state -> action -> transitions
     map<string, set<string>> coalitionLocalActions; // Agent-local state -> available actions
+    bool isCoalitionTransition(GlobalTransition* transition);
     bool isCoalitionTransitionCompatibleWithStrategy(GlobalTransition* transition, const map<string, string>& decisions);
     bool checkLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
 };
