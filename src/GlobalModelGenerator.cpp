@@ -1208,10 +1208,6 @@ string GlobalModelGenerator::getCoalitionActionSignature(GlobalTransition* trans
     return res;
 }
 
-/// @brief Checks if a global transition is compatible with the current strategy for the coalition.
-/// @param transition The global transition to check.
-/// @param decisions The current strategy decisions.
-/// @return True if the transition is compatible with the strategy, false otherwise.
 /// @brief Checks if a coalition agent takes part in a global transition. Every agent fires its local actions on its own, so such a transition only fires if the coalition agents choose their local actions in it; the epsilon self-loop is no choice of the coalition.
 /// @param transition Global transition to check.
 /// @return True if a coalition agent takes part, not counting the epsilon self-loop.
@@ -1224,6 +1220,10 @@ bool GlobalModelGenerator::isCoalitionTransition(GlobalTransition* transition) {
     return false;
 }
 
+/// @brief Checks if a global transition is compatible with the current strategy for the coalition.
+/// @param transition The global transition to check.
+/// @param decisions The current strategy decisions.
+/// @return True if the transition is compatible with the strategy, false otherwise.
 bool GlobalModelGenerator::isCoalitionTransitionCompatibleWithStrategy(GlobalTransition* transition, const map<string, string>& decisions) {
     for (const auto localTransition : transition->localTransitions) {
         if (formula->coalition.find(localTransition->agent) == formula->coalition.end()) {
