@@ -5,10 +5,14 @@ CRAAM_INCLUDE_DIR = ../craam/craam/include
 USER_DIR = ../tests/integration
 CPPFLAGS += -isystem $(GTEST_DIR)/include
 CXXFLAGS += -g -Wall -Wextra -pthread
+STATIC ?= 0
+ifeq ($(STATIC),1)
+LDFLAGS += -static
+endif
 CRAAMFLAGS += -I$(CRAAM_DIR) -I$(CRAAM_INCLUDE_DIR)
 	
 main: main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
-	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
+	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) $(LDFLAGS) -o stv main.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o  Utils.o Verification.o VerificationIterative.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o  stratParser.o strategyScanner.o strategyNodes.o
  
 main.o: ../src/main.cpp ../src/GlobalModelGenerator.hpp ../src/ModelParser.hpp ../src/StrategyParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/DotGraph.hpp ../src/GlobalState.hpp ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp
 	$(CC) $(CPPFLAGS) $(CRAAMFLAGS) -c ../src/main.cpp
@@ -118,19 +122,19 @@ gtest_main.a : gtest-all.o gtest_main.o
 # tests here
 
 sample_test : sample_test.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o stratParser.o strategyScanner.o strategyNodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) $(LDFLAGS) -lpthread $^ -o $@
 
 sample_test.o : $(USER_DIR)/sample_test.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/sample_test.cc
 
 big_tests : big_tests.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o stratParser.o strategyScanner.o strategyNodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) $(LDFLAGS) -lpthread $^ -o $@
 
 big_tests.o : $(USER_DIR)/big_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/big_tests.cc
 
 iterative_tests : iterative_tests.o GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o VerificationIterative.o parser.o scanner.o expressions.o nodes.o stratParser.o strategyScanner.o strategyNodes.o gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) $(LDFLAGS) -lpthread $^ -o $@
 
 iterative_tests.o : $(USER_DIR)/iterative_tests.cc ../src/GlobalModelGenerator.hpp ../src/GlobalState.hpp  ../src/GlobalTransition.hpp ../src/Agent.hpp ../src/LocalState.hpp ../src/ModelParser.hpp ../src/Utils.hpp ../src/Verification.hpp ../src/VerificationIterative.hpp ../src/ModelParser.hpp $(GTEST_HEADERS) $(USER_DIR)/*.h
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -c $(USER_DIR)/iterative_tests.cc
@@ -139,7 +143,7 @@ iterative_tests.o : $(USER_DIR)/iterative_tests.cc ../src/GlobalModelGenerator.h
 UNIT_OBJECTS = GlobalModelGenerator.o ModelParser.o StrategyParser.o LocalState.o GlobalState.o GlobalTransition.o Agent.o Utils.o Verification.o DotGraph.o ModelSerializer.o parser.o scanner.o expressions.o nodes.o stratParser.o strategyScanner.o strategyNodes.o
 
 unit_test : unit_test.o $(UNIT_OBJECTS) gtest_main.a
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -lpthread $^ -o $@
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) $(LDFLAGS) -lpthread $^ -o $@
 
 unit_test.o : $(UNIT_DIR)/unit_test.cc $(UNIT_DIR)/*.h ../src/*.hpp ../src/reader/*.hpp ../src/strategyReader/*.hpp $(GTEST_HEADERS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(CRAAMFLAGS) -I../src -I$(UNIT_DIR) -c $(UNIT_DIR)/unit_test.cc

@@ -16,6 +16,14 @@ cd build
 ./build-run
 ```
 
+To compile with static linking, set the `STATIC` variable to 1:
+
+```
+cd build
+make clean
+make STATIC=1
+```
+
 Configuration file:
 
 ```
