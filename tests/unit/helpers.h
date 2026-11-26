@@ -275,7 +275,6 @@ struct VerificationProbe : public Verification {
     using Verification::verifyLocalStates;
     using Verification::isGlobalTransitionControlledByCoalition;
     using Verification::isGlobalTransitionCompatibleWithCoalitionDecisions;
-    using Verification::hasUnfixedCoalitionDecision;
     using Verification::addCoalitionDecisionHistory;
     using Verification::isAgentInCoalition;
     using Verification::getEpistemicClassForGlobalState;

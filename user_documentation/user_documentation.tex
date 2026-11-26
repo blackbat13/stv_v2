@@ -233,16 +233,26 @@ First we enter the action name, then after a colon we specify the avaliable acti
 \end{lstlisting}
 
 \subsubsection{Shared actions}
-If the action will be shared with another agent it has to start the action by writing a keyword $shared$. Then in square brackets we have to write an integer which will specify how many agents will use this action, current agent included. Then, after writing a shared action name, we write a local action name in square brackets. If the local action name will be the same as the shared name, it means that the current agent will be the one performing a synchronization. Otherwise, agent can only wait for the synchronization to use the shared action. After that, the action specification continues as usual. There is a possibility to use a single name only, that is, the shared action name will be the same as the local action name. In that case, the current agent will be the one performing a synchronization.
-\begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent. The current agent will be the one performing the sync.}]
+If the action will be shared with other agents it has to start with the keyword $shared$. Then in square brackets we have to write an integer which will specify how many agents take part in this action, current agent included. Each of these agents has to define an action with the same shared name. Then, after writing the shared action name, we write the local action name in square brackets. After that, the action specification continues as usual. The local action name can be left out, in which case it is the same as the shared name.
+\begin{lstlisting}[title={Creating an action that will synchronize with 1 other agent.}]
   shared[2] action1[action1]: q0 -> q1
 \end{lstlisting}
 \begin{lstlisting}[title={A shared action equivalent to the previous one, but with a single name only.}]
   shared[2] action1: q0 -> q1
 \end{lstlisting}
-\begin{lstlisting}[title={Creating an action that will synchronize with 2 other agents. The current agent will be the one waiting for sync.}]
+\begin{lstlisting}[title={Creating an action that will synchronize with 2 other agents. The current agent calls it someAction.}]
   shared[3] action1[someAction]: q0 -> q1
 \end{lstlisting}
+
+Every agent chooses its own local actions and a strategy chooses them by their local names. A shared action is executed only if every agent taking part in it is in a state where the action is available and has chosen the local action written for it. No agent performs the synchronization for the others: each of them can refuse it by choosing a different local action.
+
+Several shared actions of one agent can have the same local name. The agent then makes a single choice and the other agents taking part decide which of these shared actions is executed. In the example model at the end of this document, the voter has a single local action \verb+pn_Voter1+ for both \verb+pun_Voter1+ and \verb+npun_Voter1+ and the coercer decides whether the voter is punished.
+\begin{lstlisting}[title={The agent chooses answer and the other agent decides whether accept or reject is executed.}]
+  shared[2] accept[answer]: q0 -> q1
+  shared[2] reject[answer]: q0 -> q2
+\end{lstlisting}
+
+If the agents choose local actions that no shared action matches, nothing can be executed and the model is in a deadlock. The verifier prints a warning when it meets one. A deadlock means that a \verb+<>+ goal can no longer be reached, while a \verb+[]+ property keeps holding. With the \verb+--ADD_EPSILON_TRANSITIONS+ option, the global model gets an epsilon self-loop in the states where the agents' choices can block each other, so the system can idle there.
 
 \subsubsection{Probabilistic actions}
 If the action is supposed to yield different results in a probabilistic manner, we need to write them similarly to the normal actions but with the addition of the probability as a number with a decimal dot and a colon, which should be between the arrow and the state that we want to reach. Then in each new line we can only use the probability, colon and the state that we want to reach. The precise syntax is as in the following example:
@@ -260,7 +270,7 @@ If the action is supposed to be empty, we can use the keyword "empty" at the beg
 
 \subsubsection{Conditions}
 To add a condition for an action to fire, we have to add the condition between the square brackets between the initial state name and the arrow operator.
-\pagebreak
+
 \begin{lstlisting}[title={Local action that can only fire if someLocalValue is equal to 1.}]
   action1: q0 [someLocalValue==1] -> q1
 \end{lstlisting}

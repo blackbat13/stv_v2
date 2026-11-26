@@ -161,13 +161,6 @@ TEST(InputErrorTest, InconsistentSharedCount)
                 message == "Shared action 'give' is declared as shared[3] in agent 'Coercer' but as shared[2] in agent 'Voter'") << message;
 }
 
-TEST(InputErrorTest, SharedActionPerformedTwice)
-{
-    // a bare action name and name[name] both mean the agent performs the sync
-    EXPECT_EQ(verificationError("SharedActionPerformedTwice.txt"),
-              "Shared action 'give' is performed by more than one agent ('Coercer', 'Voter'): only one agent may perform it, written as give or give[give]; the agents that only wait for it must write give[localName] with a different local name");
-}
-
 TEST(InputErrorTest, AmbiguousFormulaVariable)
 {
     EXPECT_EQ(verificationError("AmbiguousFormulaVariable.txt"),

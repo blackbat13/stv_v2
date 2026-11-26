@@ -67,6 +67,14 @@ struct HistoryEntry {
     };
 };
 
+/// @brief The coalition's local actions behind a global transition, and what can happen once it picks them. It only depends on the model, so it is computed once per transition.
+struct CoalitionChoice {
+    set<GlobalTransition*> outcomes;    ///< Global transitions that the choice can turn into, the chosen one included.
+    bool canBeBlocked = false;          ///< The opponents can choose local actions so that none of them fires.
+    bool everyAgentCanStayOut = true;   ///< Every coalition agent of the choice could instead choose a local action that the opponents can't complete in this state.
+    bool noAgentCanStayOut = true;      ///< No coalition agent of the choice has such a local action: whatever it chooses, it offers the opponents a synchronization.
+};
+
 /// @brief Stores history and allows displaying it to the console.
 class HistoryDbg {
 public:
@@ -100,6 +108,7 @@ public:
     vector<tuple<vector<tuple<bool, string>>, string>> getReducedStrategy();
     int getStrategyComplexity();
     set<GlobalTransition*> getStrategyOutcome();
+    const set<GlobalState*>& getDeadlockStates();
     Result verifyStrategy();
     Result verifyMDP();
 protected:
@@ -125,12 +134,19 @@ protected:
     vector<string> variableNames;
     /// @brief Natural strategy complexity before reduction
     int reductionComplexityBefore;
+    /// @brief Global states met during the search where no global transition matched the agents' local actions.
+    set<GlobalState*> deadlockStates;
+    /// @brief Cache of whatHappensIfCoalitionChooses().
+    unordered_map<GlobalTransition*, CoalitionChoice> coalitionChoiceCache;
 
     bool verifyLocalStates(vector<LocalState*>* localStates, GlobalState* globalState);
     bool verifyGlobalState(GlobalState* globalState, int depth);
     bool isGlobalTransitionControlledByCoalition(GlobalTransition* globalTransition);
     bool isGlobalTransitionCompatibleWithCoalitionDecisions(GlobalTransition* globalTransition);
-    bool hasUnfixedCoalitionDecision(GlobalTransition* globalTransition);
+    bool needsOnlyCoalitionActionsOf(GlobalTransition* transition, GlobalTransition* chosenTransition);
+    const CoalitionChoice& whatHappensIfCoalitionChooses(GlobalTransition* chosenTransition);
+    bool canOpponentsBlockChoice(const set<GlobalTransition*>& outcomes);
+    bool canStayOutOfOpponents(GlobalState* globalState, LocalTransition* localTransition);
     void addCoalitionDecisionHistory(GlobalState* globalState, GlobalTransition* decision);
     bool isAgentInCoalition(Agent* agent);
     EpistemicClass* getEpistemicClassForGlobalState(GlobalState* globalState);
@@ -147,7 +163,7 @@ protected:
     void printCurrentHistory(int depth);
     bool equivalentGlobalTransitions(GlobalTransition* globalTransition1, GlobalTransition* globalTransition2);
     bool checkUncontrolledSet(const set<GlobalTransition*>& uncontrolledGlobalTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool mixed = false);
-    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& mandatoryOpponentTransitions, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
+    bool verifyTransitionSets(set<GlobalTransition*> controlledGlobalTransitions, const set<GlobalTransition*>& uncontrolledGlobalTransitions, const set<GlobalTransition*>& unavoidableOpponentSyncs, GlobalState* globalState, int depth, bool hasOmittedTransitions, bool isFMode, bool mixed = false);
     bool restoreHistory(GlobalState* globalState, GlobalTransition* globalTransition, int depth, bool controlled);
     bool minFixpointVerify();
     bool maxFixpointVerify();

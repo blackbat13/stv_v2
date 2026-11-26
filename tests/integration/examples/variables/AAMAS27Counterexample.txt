@@ -1,0 +1,23 @@
+Agent A1:
+    LOCAL: [w, g]
+    PERSISTENT: []
+    INITIAL: []
+    init s1
+    shared[2] a1[a]: s1 -> s2 [w:=0]
+    shared[2] a2[a]: s1 -> s2 [w:=1]
+    shared[2] b1[b]: s2 [w==0] -> s3 [g:=1]
+    shared[2] b2[b]: s2 [w==1] -> s3 [g:=1]
+    shared[2] b1[b]: s3 -> s3
+    shared[2] b2[b]: s3 -> s3
+
+Agent A2:
+    LOCAL: []
+    PERSISTENT: []
+    INITIAL: []
+    init s4
+    shared[2] a1[a1]: s4 -> s5
+    shared[2] a2[a2]: s4 -> s5
+    shared[2] b1[b1]: s5 -> s5
+    shared[2] b2[b2]: s5 -> s5
+
+FORMULA: <<A1>><>(g==1)

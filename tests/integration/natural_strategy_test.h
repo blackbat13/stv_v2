@@ -21,6 +21,7 @@ TEST(NaturalStrategyTest, Test2)
 
 TEST(NaturalStrategyTest, Test3)
 {
+    // the Voter picks one day and the Calendar can pick another one, so no sync fires: a deadlock loses the F goal
     TestVerif strategyVerify("../tests/integration/examples/naturalStrategy/naturalStrategyTest3.txt", 3);
 
     EXPECT_EQ(strategyVerify.result, false);
@@ -28,9 +29,10 @@ TEST(NaturalStrategyTest, Test3)
 
 TEST(NaturalStrategyTest, Test4)
 {
+    // every day leads outside, but the days are different local actions of the Voter: the Calendar can pick another day than the Voter, so no sync fires and the deadlock loses the F goal
     TestVerif strategyVerify("../tests/integration/examples/naturalStrategy/naturalStrategyTest4.txt", 3);
 
-    EXPECT_EQ(strategyVerify.result, true);
+    EXPECT_EQ(strategyVerify.result, false);
 }
 
 TEST(NaturalStrategyTest, Test5)
